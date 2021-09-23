@@ -1,0 +1,10 @@
+{
+  "properties": "租盤",
+  "@properties": {
+    "description": "找租盤"
+  },
+  "remodelling": "裝修",
+  "agreements": "租約",
+  "settings": "設定",
+  "darkMode": "深色模式"
+}

@@ -1,0 +1,10 @@
+{
+    "properties": "Properties",
+    "@properties": {
+      "description": "Search properties"
+    },
+    "remodelling": "Remodelling",
+    "agreements": "Agreements",
+    "settings": "Settings",
+    "darkMode": "Dark Mode"
+}

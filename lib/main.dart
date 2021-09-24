@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:tner_client/properties.dart';
 import 'package:tner_client/settings.dart';
+import 'package:tner_client/theme.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 
 void main() async {
@@ -57,8 +58,8 @@ class RootAppState extends State<RootApp> {
                 ],
                 home: const AppHome(),
                 theme: SharedPreferencesHelper().isDarkModeOn()
-                    ? ThemeData.dark()
-                    : ThemeData.light(),
+                    ? AppTheme.getDarkTheme()
+                    : AppTheme.getLightTheme(),
                 locale: SharedPreferencesHelper().getLocale());
           },
         );
@@ -126,7 +127,6 @@ class AppHomeState extends State<AppHome> {
         type: BottomNavigationBarType.fixed,
         items: options,
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: (index) {
           setState(() {
             _selectedIndex = index;

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:tner_client/properties.dart';
 import 'package:tner_client/settings.dart';
+import 'package:tner_client/shared_preferences_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
+  await Settings.init(cacheProvider: SharedPreferencesHelper());
 
   runApp(const RootApp());
 }
@@ -21,6 +24,7 @@ class RootApp extends StatefulWidget {
 class RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
+    debugPrint('rebuild:${SharedPreferencesHelper().getLocale()}');
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {
@@ -56,8 +60,7 @@ class RootAppState extends State<RootApp> {
                 theme: SharedPreferencesHelper().isDarkModeOn()
                     ? ThemeData.dark()
                     : ThemeData.light(),
-                locale: Locale.fromSubtags(
-                    languageCode: SharedPreferencesHelper().getLocale()));
+                locale: SharedPreferencesHelper().getLocale());
           },
         );
       },
@@ -108,7 +111,7 @@ class AppHomeState extends State<AppHome> {
         body = Text('Agreements');
         break;
       case 3:
-        body = const SettingsScreen();
+        body = const SettingsPage();
         break;
       default:
         body = const PropertiesScreen();

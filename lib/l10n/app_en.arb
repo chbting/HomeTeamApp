@@ -1,10 +1,17 @@
 {
-    "properties": "Properties",
-    "@properties": {
-      "description": "Search properties"
-    },
-    "remodelling": "Remodelling",
-    "agreements": "Agreements",
-    "settings": "Settings",
-    "darkMode": "Dark Mode"
+  "english": "English",
+  "traditional_chinese": "䌓体中文",
+  "simplified_chinese": "简体中文",
+  "properties": "Properties",
+  "@properties": {
+    "description": "Search properties"
+  },
+  "remodelling": "Remodelling",
+  "agreements": "Agreements",
+  "settings": "Settings",
+  "darkMode": "Dark Mode",
+  "language": "Language",
+  "choose_language": "Choose Language",
+  "cancel": "Cancel",
+  "ok": "OK"
 }

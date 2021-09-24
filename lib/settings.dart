@@ -2,25 +2,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tner_client/shared_preferences_helper.dart';
 
-class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsScreen> createState() => SettingsScreenState();
+  State<SettingsPage> createState() => SettingsPageState();
 }
 
-class SettingsScreenState extends State<SettingsScreen> {
+class SettingsPageState extends State<SettingsPage> {
   bool _darkMode = SharedPreferencesHelper().isDarkModeOn();
-  String locale = SharedPreferencesHelper().getLocale();
+  String localeString = SharedPreferencesHelper.localeToString(
+      SharedPreferencesHelper().getLocale());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
-      children: [
+    return ListView(
+      children: <Widget>[
         SwitchListTile(
           title: Text(AppLocalizations.of(context)!.darkMode),
           secondary: const Icon(Icons.dark_mode),
@@ -33,47 +32,99 @@ class SettingsScreenState extends State<SettingsScreen> {
           value: _darkMode,
         ),
         const Divider(
-          thickness: 1.2,
+          thickness: 1,
+        ),
+        ListTile(
+            title: Text(AppLocalizations.of(context)!.language),
+            subtitle: Text(localeStringToLanguage(localeString, context)),
+            leading: const Icon(Icons.language), //todo center
+            onTap: () {
+              showLanguageDialog(context);
+            }),
+        const Divider(
+          thickness: 1,
         ),
       ],
-    )) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+    ); // This trailing comma makes auto-formatting nicer for build methods.
+  }
+
+  void showLanguageDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Text(AppLocalizations.of(context)!.choose_language),
+              content: SizedBox(
+                  width: double.minPositive,
+                  child: RadioListView(
+                      const ['zh_Hant', 'zh_Hans', 'en'], localeString,
+                      (value) {
+                    localeString = value;
+                    SharedPreferencesHelper().setLocale(
+                        SharedPreferencesHelper.stringToLocale(value));
+                  })),
+              actions: <Widget>[
+                TextButton(
+                  child: Text(AppLocalizations.of(context)!.cancel),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ]);
+        });
+  }
+
+  static String localeStringToLanguage(String locale, BuildContext context) {
+    switch (locale) {
+      case 'en':
+        return AppLocalizations.of(context)!.english;
+      case 'zh_Hant':
+        return AppLocalizations.of(context)!.traditional_chinese;
+      case 'zh_Hans':
+        return AppLocalizations.of(context)!.simplified_chinese;
+      default:
+        return 'unknown';
+    }
   }
 }
 
-class SharedPreferencesHelper {
-  static const String darkModeOnKey = 'darkModeOn';
-  static const String localeKey = 'locale';
+class RadioListView extends StatefulWidget {
+  final List<String> list;
+  final Function(String) callback;
+  final String defaultValue;
 
-  static late SharedPreferences _prefs;
-  static late ValueNotifier themeNotifier, localeNotifier;
+  const RadioListView(this.list, this.defaultValue, this.callback, {Key? key})
+      : super(key: key);
 
-  static final SharedPreferencesHelper _helperInstance =
-      SharedPreferencesHelper._constructor();
+  @override
+  State<RadioListView> createState() => RadioListViewState();
+}
 
-  factory SharedPreferencesHelper() => _helperInstance;
+class RadioListViewState extends State<RadioListView> {
+  String currentValue = ''; //todo
+  //currentValue = widget.defaultValue;
 
-  SharedPreferencesHelper._constructor();
-
-  static ensureInitialized() async {
-    _prefs = await SharedPreferences.getInstance();
-    themeNotifier = ValueNotifier(_helperInstance.isDarkModeOn());
-    localeNotifier = ValueNotifier(_helperInstance.getLocale());
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: widget.list.length,
+      itemBuilder: (context, index) {
+        return RadioListTile(
+          title: Text(SettingsPageState.localeStringToLanguage(
+              widget.list[index], context)),
+          value: widget.list[index],
+          groupValue: currentValue,
+          // TODO onTap as well
+          onChanged: (String? value) {
+            setState(() {
+              currentValue = value!;
+              Navigator.of(context).pop();
+              widget.callback(value);
+            });
+          },
+        );
+      },
+    );
   }
-
-  setDarkModeOn(bool darkModeOn) {
-    _prefs.setBool(darkModeOnKey, darkModeOn);
-    themeNotifier.value = darkModeOn;
-  }
-
-  bool isDarkModeOn() =>
-      _prefs.getBool(darkModeOnKey) ?? false; //TODO get system default
-
-  setLocale(String locale) {
-    _prefs.setString(localeKey, locale);
-  }
-
-  String getLocale() =>
-      _prefs.getString(localeKey) ?? 'en'; //TODO get system default
-//  String locale = Localizations.localeOf(context).languageCode;
 }

@@ -24,7 +24,6 @@ class RootApp extends StatefulWidget {
 class RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
-    debugPrint('rebuild:${SharedPreferencesHelper().getLocale()}');
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {

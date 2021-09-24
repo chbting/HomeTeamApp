@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/settings_ui/radio_list_dialog.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -12,12 +13,28 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsPageState extends State<SettingsPage> {
+  List<String> localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
+  List<String> languageList = [];
+
   bool _darkMode = SharedPreferencesHelper().isDarkModeOn();
   String localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper().getLocale());
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      for (var element in localeStringList) {
+        languageList.add(localeStringToLanguage(element, context));
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    for (var element in localeStringList) {
+      languageList.add(localeStringToLanguage(element, context));
+    }
     return ListView(
       children: <Widget>[
         SwitchListTile(
@@ -39,7 +56,16 @@ class SettingsPageState extends State<SettingsPage> {
             subtitle: Text(localeStringToLanguage(localeString, context)),
             leading: const Icon(Icons.language), //todo center
             onTap: () {
-              showLanguageDialog(context);
+              RadioListDialog.show(
+                  context,
+                  localeStringList,
+                  languageList,
+                  localeString,
+                  AppLocalizations.of(context)!.choose_language, (value) {
+                localeString = value;
+                SharedPreferencesHelper()
+                    .setLocale(SharedPreferencesHelper.stringToLocale(value));
+              });
             }),
         const Divider(
           thickness: 1,
@@ -48,33 +74,7 @@ class SettingsPageState extends State<SettingsPage> {
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
 
-  void showLanguageDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.choose_language),
-              content: SizedBox(
-                  width: double.minPositive,
-                  child: RadioListView(
-                      const ['zh_Hant', 'zh_Hans', 'en'], localeString,
-                      (value) {
-                    localeString = value;
-                    SharedPreferencesHelper().setLocale(
-                        SharedPreferencesHelper.stringToLocale(value));
-                  })),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(AppLocalizations.of(context)!.cancel),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ]);
-        });
-  }
-
-  static String localeStringToLanguage(String locale, BuildContext context) {
+  String localeStringToLanguage(String locale, BuildContext context) {
     switch (locale) {
       case 'en':
         return AppLocalizations.of(context)!.english;
@@ -85,46 +85,5 @@ class SettingsPageState extends State<SettingsPage> {
       default:
         return 'unknown';
     }
-  }
-}
-
-class RadioListView extends StatefulWidget {
-  final List<String> list;
-  final Function(String) callback;
-  final String defaultValue;
-
-  const RadioListView(this.list, this.defaultValue, this.callback, {Key? key})
-      : super(key: key);
-
-  @override
-  State<RadioListView> createState() => RadioListViewState();
-}
-
-class RadioListViewState extends State<RadioListView> {
-  String currentValue = ''; //todo
-  //currentValue = widget.defaultValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: widget.list.length,
-      itemBuilder: (context, index) {
-        return RadioListTile(
-          title: Text(SettingsPageState.localeStringToLanguage(
-              widget.list[index], context)),
-          value: widget.list[index],
-          groupValue: currentValue,
-          // TODO onTap as well
-          onChanged: (String? value) {
-            setState(() {
-              currentValue = value!;
-              Navigator.of(context).pop();
-              widget.callback(value);
-            });
-          },
-        );
-      },
-    );
   }
 }

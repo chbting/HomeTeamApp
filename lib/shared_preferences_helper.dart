@@ -1,10 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesHelper extends CacheProvider {
+class SharedPreferencesHelper {
   static const String darkModeOnKey = 'darkModeOn';
   static const String localeKey = 'locale';
 
@@ -61,82 +60,4 @@ class SharedPreferencesHelper extends CacheProvider {
   }
 
   //  TODO System default Localizations.localeOf(context).languageCode;
-
-  @override
-  bool? containsKey(String key) {
-    return _prefs.containsKey(key);
-  }
-
-  @override
-  bool? getBool(String key) {
-    return _prefs.getBool(key);
-  }
-
-  @override
-  double? getDouble(String key) {
-    return _prefs.getDouble(key);
-  }
-
-  @override
-  int? getInt(String key) {
-    _prefs.getInt(key);
-  }
-
-  @override
-  Set? getKeys() {
-    return _prefs.getKeys();
-  }
-
-  @override
-  String? getString(String key) {
-    return _prefs.getString(key);
-  }
-
-  @override
-  T getValue<T>(String key, T defaultValue) {
-    return _prefs.get(key) as T;
-  }
-
-  @override
-  Future<void> init() async {}
-
-  @override
-  Future<void> remove(String key) async {
-    _prefs.remove(key);
-  }
-
-  @override
-  Future<void> removeAll() async {
-    Set<String> set = _prefs.getKeys();
-    for (var element in set) {
-      _prefs.remove(element);
-    }
-  }
-
-  @override
-  Future<void> setBool(String key, bool? value, {bool? defaultValue}) async {
-    _prefs.setBool(key, value!);
-  }
-
-  @override
-  Future<void> setDouble(String key, double? value,
-      {double? defaultValue}) async {
-    _prefs.setDouble(key, value!);
-  }
-
-  @override
-  Future<void> setInt(String key, int? value, {int? defaultValue}) async {
-    _prefs.setInt(key, value!);
-  }
-
-  @override
-  Future<void> setObject<T>(String key, T value) async {
-    // TODO json serialize
-  }
-
-  @override
-  Future<void> setString(String key, String? value,
-      {String? defaultValue}) async {
-    _prefs.setString(key, value!);
-  }
 }

@@ -5,14 +5,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/settings_ui/radio_list_dialog.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 
-class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<SettingsPage> createState() => SettingsPageState();
+  State<SettingsScreen> createState() => SettingsScreenState();
 }
 
-class SettingsPageState extends State<SettingsPage> {
+class SettingsScreenState extends State<SettingsScreen> {
   List<String> localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
   List<String> languageList = [];
 
@@ -54,7 +54,13 @@ class SettingsPageState extends State<SettingsPage> {
         ListTile(
             title: Text(AppLocalizations.of(context)!.language),
             subtitle: Text(localeStringToLanguage(localeString, context)),
-            leading: const Icon(Icons.language), //todo center
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                Icon(Icons.language),
+              ],
+            ),
             onTap: () {
               RadioListDialog.show(
                   context,

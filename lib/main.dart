@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:tner_client/properties.dart';
 import 'package:tner_client/settings.dart';
-import 'package:tner_client/theme.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
+import 'package:tner_client/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
-  await Settings.init(cacheProvider: SharedPreferencesHelper());
 
   runApp(const RootApp());
 }
@@ -111,7 +109,7 @@ class AppHomeState extends State<AppHome> {
         body = Text('Agreements');
         break;
       case 3:
-        body = const SettingsPage();
+        body = const SettingsScreen();
         break;
       default:
         body = const PropertiesScreen();

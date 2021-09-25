@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
@@ -46,7 +48,8 @@ class SharedPreferencesHelper {
   }
 
   bool isDarkModeOn() =>
-      _prefs.getBool(darkModeOnKey) ?? false; //TODO get system default
+      _prefs.getBool(darkModeOnKey) ??
+      (Brightness.dark == SchedulerBinding.instance!.window.platformBrightness);
 
   setLocale(Locale locale) {
     String newValue = localeToString(locale);
@@ -55,9 +58,20 @@ class SharedPreferencesHelper {
   }
 
   Locale getLocale() {
-    String value = _prefs.getString(localeKey) ?? 'en';
-    return stringToLocale(value);
+    String? savedValue = _prefs.getString(localeKey);
+    if (savedValue != null) {
+      return stringToLocale(savedValue);
+    } else {
+      String languageCode = Platform.localeName.split('_')[0];
+      switch (languageCode) {
+        case 'en':
+          return stringToLocale(languageCode);
+        case 'zh':
+          return stringToLocale(
+              '${languageCode}_${Platform.localeName.split('_')[1]}');
+        default:
+          return stringToLocale('en'); // Default to English
+      }
+    }
   }
-
-  //  TODO System default Localizations.localeOf(context).languageCode;
 }

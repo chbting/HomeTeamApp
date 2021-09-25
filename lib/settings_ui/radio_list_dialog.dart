@@ -19,7 +19,7 @@ class RadioListDialog {
               contentPadding: EdgeInsets.zero,
               content: SizedBox(
                   width: double.minPositive,
-                  child: RadioListView(valueList, titleList, defaultValue, (value) {
+                  child: _RadioListView(valueList, titleList, defaultValue, (value) {
                     callback(value);
                   })),
               actions: <Widget>[
@@ -35,27 +35,27 @@ class RadioListDialog {
   }
 }
 
-class RadioListView extends StatefulWidget {
-  final List<String> valueList, titleList;
-  final Function(String) callback;
-  final String defaultValue;
+class _RadioListView extends StatefulWidget {
+  final List<String> _valueList, _titleList;
+  final Function(String) _callback;
+  final String _defaultValue;
 
-  const RadioListView(
-      this.valueList, this.titleList, this.defaultValue, this.callback,
+  const _RadioListView(
+      this._valueList, this._titleList, this._defaultValue, this._callback,
       {Key? key})
       : super(key: key);
 
   @override
-  State<RadioListView> createState() => RadioListViewState();
+  State<_RadioListView> createState() => _RadioListViewState();
 }
 
-class RadioListViewState extends State<RadioListView> {
-  late String currentValue;
+class _RadioListViewState extends State<_RadioListView> {
+  late String _currentValue;
 
   @override
   void initState() {
     super.initState();
-    currentValue = widget.defaultValue;
+    _currentValue = widget._defaultValue;
   }
 
   @override
@@ -64,17 +64,17 @@ class RadioListViewState extends State<RadioListView> {
       padding: const EdgeInsets.only(top: 10.0),
       shrinkWrap: true,
       primary: false,
-      itemCount: widget.valueList.length,
+      itemCount: widget._valueList.length,
       itemBuilder: (context, index) {
         return RadioListTile(
-          title: Text(widget.titleList[index]),
-          value: widget.valueList[index],
-          groupValue: currentValue,
+          title: Text(widget._titleList[index]),
+          value: widget._valueList[index],
+          groupValue: _currentValue,
           onChanged: (String? value) {
             setState(() {
-              currentValue = value!;
+              _currentValue = value!;
               Navigator.of(context).pop();
-              widget.callback(value);
+              widget._callback(value);
             });
           },
         );

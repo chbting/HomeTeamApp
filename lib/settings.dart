@@ -14,31 +14,31 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
-  List<String> localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
-  List<String> languageList = [];
+  final List<String> _localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
+  final List<String> _languageList = [];
 
   bool _darkMode = SharedPreferencesHelper().isDarkModeOn();
-  String localeString = SharedPreferencesHelper.localeToString(
+  String _localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper().getLocale());
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      for (var element in localeStringList) {
-        languageList.add(_localeStringToLanguage(element, context));
+      for (var element in _localeStringList) {
+        _languageList.add(_localeStringToLanguage(element, context));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    for (var element in localeStringList) {
-      languageList.add(_localeStringToLanguage(element, context));
+    for (var element in _localeStringList) {
+      _languageList.add(_localeStringToLanguage(element, context));
     }
     return ListView(
       children: <Widget>[
-        getSettingsTitle(
+        SettingsUI.getSettingsTitle(
             context, AppLocalizations.of(context)!.general_settings),
         SwitchListTile(
           title: Text(AppLocalizations.of(context)!.darkMode),
@@ -53,7 +53,7 @@ class SettingsScreenState extends State<SettingsScreen> {
         ),
         ListTile(
             title: Text(AppLocalizations.of(context)!.language),
-            subtitle: Text(_localeStringToLanguage(localeString, context)),
+            subtitle: Text(_localeStringToLanguage(_localeString, context)),
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,11 +64,11 @@ class SettingsScreenState extends State<SettingsScreen> {
             onTap: () {
               RadioListDialog.show(
                   context,
-                  localeStringList,
-                  languageList,
-                  localeString,
+                  _localeStringList,
+                  _languageList,
+                  _localeString,
                   AppLocalizations.of(context)!.choose_language, (value) {
-                localeString = value;
+                _localeString = value;
                 SharedPreferencesHelper()
                     .setLocale(SharedPreferencesHelper.stringToLocale(value));
               });

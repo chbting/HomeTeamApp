@@ -61,7 +61,7 @@ class RadioListViewState extends State<RadioListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10.0),
       shrinkWrap: true,
       primary: false,
       itemCount: widget.valueList.length,

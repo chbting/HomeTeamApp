@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/settings_ui/radio_list_dialog.dart';
+import 'package:tner_client/settings_ui/settings_ui_elements.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       for (var element in localeStringList) {
-        languageList.add(localeStringToLanguage(element, context));
+        languageList.add(_localeStringToLanguage(element, context));
       }
     });
   }
@@ -33,10 +34,12 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     for (var element in localeStringList) {
-      languageList.add(localeStringToLanguage(element, context));
+      languageList.add(_localeStringToLanguage(element, context));
     }
     return ListView(
       children: <Widget>[
+        getSettingsTitle(
+            context, AppLocalizations.of(context)!.general_settings),
         SwitchListTile(
           title: Text(AppLocalizations.of(context)!.darkMode),
           secondary: const Icon(Icons.dark_mode),
@@ -48,12 +51,9 @@ class SettingsScreenState extends State<SettingsScreen> {
           },
           value: _darkMode,
         ),
-        const Divider(
-          thickness: 1,
-        ),
         ListTile(
             title: Text(AppLocalizations.of(context)!.language),
-            subtitle: Text(localeStringToLanguage(localeString, context)),
+            subtitle: Text(_localeStringToLanguage(localeString, context)),
             leading: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,17 +79,17 @@ class SettingsScreenState extends State<SettingsScreen> {
       ],
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
+}
 
-  String localeStringToLanguage(String locale, BuildContext context) {
-    switch (locale) {
-      case 'en':
-        return AppLocalizations.of(context)!.english;
-      case 'zh_Hant':
-        return AppLocalizations.of(context)!.traditional_chinese;
-      case 'zh_Hans':
-        return AppLocalizations.of(context)!.simplified_chinese;
-      default:
-        return 'unknown';
-    }
+String _localeStringToLanguage(String locale, BuildContext context) {
+  switch (locale) {
+    case 'en':
+      return AppLocalizations.of(context)!.english;
+    case 'zh_Hant':
+      return AppLocalizations.of(context)!.traditional_chinese;
+    case 'zh_Hans':
+      return AppLocalizations.of(context)!.simplified_chinese;
+    default:
+      return 'unknown';
   }
 }

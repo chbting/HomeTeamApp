@@ -11,12 +11,11 @@ class AppTheme {
             ThemeData.dark().colorScheme.copyWith(secondary: tnerLightBlue));
   }
 
-  // TODO not working
+  // TODO not working for top and bottom bars
   static ThemeData getLightTheme() {
     return ThemeData.light().copyWith(
-        toggleableActiveColor: Colors.redAccent,
-        colorScheme: ThemeData.light()
-            .colorScheme
-            .copyWith(secondary: Colors.redAccent));
+        toggleableActiveColor: tnerBlue,
+        colorScheme:
+            ThemeData.light().colorScheme.copyWith(secondary: tnerBlue));
   }
 }

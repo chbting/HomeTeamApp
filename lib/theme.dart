@@ -11,11 +11,11 @@ class AppTheme {
             ThemeData.dark().colorScheme.copyWith(secondary: tnerLightBlue));
   }
 
-  // TODO not working for top and bottom bars
   static ThemeData getLightTheme() {
     return ThemeData.light().copyWith(
         toggleableActiveColor: tnerBlue,
-        colorScheme:
-            ThemeData.light().colorScheme.copyWith(secondary: tnerBlue));
+        colorScheme: ThemeData.light()
+            .colorScheme
+            .copyWith(primary: tnerBlue, secondary: tnerBlue));
   }
 }

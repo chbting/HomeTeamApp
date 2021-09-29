@@ -14,5 +14,7 @@
   "language": "Language",
   "choose_language": "Choose Language",
   "cancel": "Cancel",
-  "ok": "OK"
+  "ok": "OK",
+  "search": "Search",
+  "visit_properties": "Visit"
 }

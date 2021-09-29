@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tner_client/properties.dart';
+import 'package:tner_client/properties/properties.dart';
 import 'package:tner_client/settings.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
@@ -81,7 +80,7 @@ class AppHomeState extends State<AppHome> {
   Widget build(BuildContext context) {
     List<BottomNavigationBarItem> options = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: const Icon(Icons.business),
+        icon: const Icon(Icons.apartment),
         label: AppLocalizations.of(context)!.properties,
       ),
       BottomNavigationBarItem(
@@ -89,7 +88,7 @@ class AppHomeState extends State<AppHome> {
         label: AppLocalizations.of(context)!.remodelling,
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.paste),
+        icon: const Icon(Icons.description),
         label: AppLocalizations.of(context)!.agreements,
       ),
       BottomNavigationBarItem(
@@ -118,9 +117,6 @@ class AppHomeState extends State<AppHome> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(options[_selectedIndex].label!),
-      ),
       body: body,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

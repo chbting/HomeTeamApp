@@ -33,9 +33,6 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    for (var element in _localeStringList) {
-      _languageList.add(_localeStringToLanguage(element, context));
-    }
     return Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.settings),

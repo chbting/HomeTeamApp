@@ -20,5 +20,12 @@
 	"remodeling_status": "工程進度",
 	"sign_agreement": "簽約",
 	"find_property": "搵樓",
-	"owner": "業主"
+	"owner": "業主",
+	"painting": "油潻",
+	"wallcoverings": "牆紙",
+	"pest_control": "滅蟲",
+	"ac_installation": "冷氣安裝",
+	"removal": "清拆",
+	"suspended_ceiling": "假天花",
+	"toilet_replacement": "坐廁更換"
 }

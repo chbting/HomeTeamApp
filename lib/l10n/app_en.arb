@@ -20,5 +20,12 @@
 	"remodeling_status": "Status",
 	"sign_agreement": "Sign",
 	"find_property": "Find",
-	"owner": "Owner"
+	"owner": "Owner",
+	"painting": "Painting",
+	"wallcoverings": "Wallcoverings",
+	"pest_control": "Pest Control",
+	"ac_installation": "AC Installation",
+	"removal": "Removal",
+	"suspended_ceiling": "Suspended Ceiling",
+	"toilet_replacement": "Toilet Replacement"
 }

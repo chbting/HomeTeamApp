@@ -82,56 +82,41 @@ class AppHomeState extends State<AppHome> {
 
   @override
   Widget build(BuildContext context) {
-    List<BottomNavigationBarItem> options = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.apartment),
-        label: AppLocalizations.of(context)!.properties,
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.construction),
-        label: AppLocalizations.of(context)!.remodeling,
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.description),
-        label: AppLocalizations.of(context)!.agreements,
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.perm_identity),
-        label: AppLocalizations.of(context)!.owner,
-      ),
-      BottomNavigationBarItem(
-        icon: const Icon(Icons.settings),
-        label: AppLocalizations.of(context)!.settings,
-      ),
-    ];
-
-    Widget body;
-    switch (_selectedIndex) {
-      case 0:
-        body = const PropertiesScreen();
-        break;
-      case 1:
-        body = const RemodelingScreen();
-        break;
-      case 2:
-        body = const AgreementsScreen();
-        break;
-      case 3:
-        body = const OwnerScreen();
-        break;
-      case 4:
-        body = const SettingsScreen();
-        break;
-      default:
-        body = const PropertiesScreen();
-        break;
-    }
-
     return Scaffold(
-      body: body,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: const <Widget>[
+          PropertiesScreen(),
+          RemodelingScreen(),
+          AgreementsScreen(),
+          OwnerScreen(),
+          SettingsScreen()
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        items: options,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.apartment),
+            label: AppLocalizations.of(context)!.properties,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.construction),
+            label: AppLocalizations.of(context)!.remodeling,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.description),
+            label: AppLocalizations.of(context)!.agreements,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.perm_identity),
+            label: AppLocalizations.of(context)!.owner,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context)!.settings,
+          ),
+        ],
         currentIndex: _selectedIndex,
         onTap: (index) {
           setState(() {

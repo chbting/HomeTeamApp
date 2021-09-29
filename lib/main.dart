@@ -6,6 +6,9 @@ import 'package:tner_client/settings.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
 
+import 'agreements/agreements.dart';
+import 'remodeling/remodeling.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
@@ -85,7 +88,7 @@ class AppHomeState extends State<AppHome> {
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.construction),
-        label: AppLocalizations.of(context)!.remodelling,
+        label: AppLocalizations.of(context)!.remodeling,
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.description),
@@ -103,10 +106,10 @@ class AppHomeState extends State<AppHome> {
         body = const PropertiesScreen();
         break;
       case 1:
-        body = Text('Remodelling');
+        body = const RemodelingScreen();
         break;
       case 2:
-        body = Text('Agreements');
+        body = const AgreementsScreen();
         break;
       case 3:
         body = const SettingsScreen();

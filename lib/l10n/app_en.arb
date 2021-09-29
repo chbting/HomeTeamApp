@@ -1,20 +1,23 @@
 {
-  "english": "English",
-  "traditional_chinese": "䌓体中文",
-  "simplified_chinese": "简体中文",
-  "properties": "Properties",
-  "@properties": {
-    "description": "Search properties"
-  },
-  "remodelling": "Remodelling",
-  "agreements": "Agreements",
-  "settings": "Settings",
-  "general_settings": "General Settings",
-  "darkMode": "Dark Mode",
-  "language": "Language",
-  "choose_language": "Choose Language",
-  "cancel": "Cancel",
-  "ok": "OK",
-  "search": "Search",
-  "visit_properties": "Visit"
+	"english": "English",
+	"traditional_chinese": "䌓体中文",
+	"simplified_chinese": "简体中文",
+	"properties": "Properties",
+	"@properties": {
+		"description": "Search properties"
+	},
+	"remodeling": "Remodeling",
+	"agreements": "Agreements",
+	"settings": "Settings",
+	"general_settings": "General Settings",
+	"darkMode": "Dark Mode",
+	"language": "Language",
+	"choose_language": "Choose Language",
+	"cancel": "Cancel",
+	"ok": "OK",
+	"visit_properties": "Visit",
+	"schedule_remodeling": "Scheduling",
+	"remodeling_status": "Status",
+	"sign_agreement": "Sign",
+	"find_property": "Find"
 }

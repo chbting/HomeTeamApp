@@ -19,5 +19,6 @@
 	"schedule_remodeling": "預約",
 	"remodeling_status": "工程進度",
 	"sign_agreement": "簽約",
-	"find_property": "搵樓"
+	"find_property": "搵樓",
+	"owner": "業主"
 }

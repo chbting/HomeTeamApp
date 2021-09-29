@@ -7,6 +7,7 @@ import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
 
 import 'agreements/agreements.dart';
+import 'owner/owner.dart';
 import 'remodeling/remodeling.dart';
 
 void main() async {
@@ -95,6 +96,10 @@ class AppHomeState extends State<AppHome> {
         label: AppLocalizations.of(context)!.agreements,
       ),
       BottomNavigationBarItem(
+        icon: const Icon(Icons.perm_identity),
+        label: AppLocalizations.of(context)!.owner,
+      ),
+      BottomNavigationBarItem(
         icon: const Icon(Icons.settings),
         label: AppLocalizations.of(context)!.settings,
       ),
@@ -112,6 +117,9 @@ class AppHomeState extends State<AppHome> {
         body = const AgreementsScreen();
         break;
       case 3:
+        body = const OwnerScreen();
+        break;
+      case 4:
         body = const SettingsScreen();
         break;
       default:

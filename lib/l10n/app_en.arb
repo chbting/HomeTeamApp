@@ -19,5 +19,6 @@
 	"schedule_remodeling": "Scheduling",
 	"remodeling_status": "Status",
 	"sign_agreement": "Sign",
-	"find_property": "Find"
+	"find_property": "Find",
+	"owner": "Owner"
 }

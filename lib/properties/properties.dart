@@ -18,11 +18,9 @@ class PropertiesScreen extends StatelessWidget {
             child: TabBar(
               tabs: <Widget>[
                 Tab(
-                  // icon: const Icon(Icons.search),
                   text: AppLocalizations.of(context)!.find_property,
                 ),
                 Tab(
-                  // icon: const Icon(Icons.tour),
                   text: AppLocalizations.of(context)!.visit_properties,
                 ),
                 Tab(

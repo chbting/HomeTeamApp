@@ -54,17 +54,23 @@ class RemodelingSchedulingTabState extends State<RemodelingSchedulingTab>
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: ListView.builder(
+            padding: const EdgeInsets.all(8.0),
+            primary: false, // TODO bottom padding
             itemCount: _keyList.length,
             itemBuilder: (context, index) {
-              return CheckboxListTile(
-                title: Text(_itemMap[_keyList[index]]!),
-                secondary: Icon(_keyList[index]),
-                value: _isSelectedList[index],
-                onChanged: (bool? value) {
-                  setState(() {
-                    _isSelectedList[index] = value!;
-                  });
-                },
+              return Card(
+                child: ListTile(
+                  leading: Icon(_keyList[index]),
+                  title: Text(_itemMap[_keyList[index]]!),
+                  trailing: _isSelectedList[index]
+                      ? Icon(Icons.check_circle,
+                          color: Theme.of(context).toggleableActiveColor)
+                      : const Icon(Icons.check_circle_outline),
+                  onTap: () {
+                    setState(() {});
+                    _isSelectedList[index] = !_isSelectedList[index];
+                  },
+                ),
               );
             }));
   }

@@ -16,7 +16,7 @@
 	"cancel": "取消",
 	"ok": "確認",
 	"visit_properties": "睇樓",
-	"schedule_remodeling": "預約",
+	"schedule_remodeling": "預約裝修",
 	"remodeling_status": "工程進度",
 	"sign_agreement": "簽約",
 	"find_property": "搵樓",
@@ -27,5 +27,6 @@
 	"ac_installation": "冷氣安裝",
 	"removal": "清拆",
 	"suspended_ceiling": "假天花",
-	"toilet_replacement": "坐廁更換"
+	"toilet_replacement": "坐廁更換",
+	"next": "下一步"
 }

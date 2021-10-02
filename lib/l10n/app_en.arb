@@ -16,7 +16,7 @@
 	"cancel": "Cancel",
 	"ok": "OK",
 	"visit_properties": "Visit",
-	"schedule_remodeling": "Scheduling",
+	"schedule_remodeling": "Schedule Remodeling",
 	"remodeling_status": "Status",
 	"sign_agreement": "Sign",
 	"find_property": "Find",
@@ -27,5 +27,6 @@
 	"ac_installation": "AC Installation",
 	"removal": "Removal",
 	"suspended_ceiling": "Suspended Ceiling",
-	"toilet_replacement": "Toilet Replacement"
+	"toilet_replacement": "Toilet Replacement",
+	"next": "Next"
 }

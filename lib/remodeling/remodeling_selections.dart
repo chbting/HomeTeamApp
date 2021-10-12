@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/assets/custom_icons_icons.dart';
+import 'package:tner_client/remodeling/remodeling_items.dart';
 
 class RemodelingOptionsScreen extends StatefulWidget {
   const RemodelingOptionsScreen({Key? key}) : super(key: key);
@@ -18,12 +20,6 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
 
   @override
   bool get wantKeepAlive => true;
-
-  //
-  // @override
-  // void didUpdateWidget() {
-  //
-  // }
 
   @override
   void initState() {
@@ -46,7 +42,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
         _isSelectedMap[key] = false;
       }
 
-      setState(() {});
+      setState(() {}); // make sure the list is populated
     });
   }
 
@@ -60,7 +56,22 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
             icon: const Icon(Icons.arrow_forward),
             label: Text(AppLocalizations.of(context)!.next),
             onPressed: () {
-              // TODO
+              Navigator.of(context).push(PageRouteBuilder(
+                  opaque: true,
+                  transitionDuration: const Duration(milliseconds: 250),
+                  pageBuilder: (BuildContext context, _, __) {
+                    return const RemodelingItemsScreen();
+                  },
+                  transitionsBuilder:
+                      (_, Animation<double> animation, __, Widget child) {
+                    return SlideTransition(
+                      child: child,
+                      position: Tween<Offset>(
+                        begin: const Offset(1.0, 0.0),
+                        end: Offset.zero,
+                      ).animate(animation),
+                    );
+                  }));
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: ListView.builder(

@@ -14,6 +14,9 @@ class RemodelingOptionsScreen extends StatefulWidget {
 
 class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
     with AutomaticKeepAliveClientMixin {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final Map<IconData, String> _itemMap = {};
   final List<IconData> _keyList = [];
   final Map<IconData, bool> _isSelectedMap = {};
@@ -44,11 +47,11 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
         _isSelectedMap[key] = false;
       }
     }
-    final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-        GlobalKey<ScaffoldMessengerState>();
+
     return ScaffoldMessenger(
-      key: scaffoldMessengerKey,
+      key: _scaffoldMessengerKey,
       child: Scaffold(
+          key: _scaffoldKey,
           floatingActionButton: FloatingActionButton.extended(
               icon: const Icon(Icons.schedule),
               label: Text(AppLocalizations.of(context)!.schedule),
@@ -56,7 +59,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
                 _isSelectedMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const RemodelingItemsScreen()))
-                    : scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
+                    : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                         content: Text(AppLocalizations.of(context)!
                             .msg_select_remodeling_item),
                         behavior: SnackBarBehavior.floating,
@@ -76,13 +79,10 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
                         vertical: 4.0, horizontal: 16.0),
                     leading: Icon(_keyList[index]),
                     title: Text(_itemMap[_keyList[index]]!),
-                    trailing: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        child: _isSelectedMap[_keyList[index]]!
-                            ? Icon(Icons.check_circle,
-                                color: Theme.of(context).toggleableActiveColor)
-                            : const Icon(Icons.check_circle_outline)),
-                    // TODO animation
+                    trailing: _isSelectedMap[_keyList[index]]!
+                        ? Icon(Icons.check_circle,
+                            color: Theme.of(context).toggleableActiveColor)
+                        : const Icon(Icons.check_circle_outline),
                     onTap: () {
                       setState(() {});
                       _isSelectedMap[_keyList[index]] =

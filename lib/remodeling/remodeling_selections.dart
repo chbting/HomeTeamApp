@@ -22,56 +22,36 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      _itemMap[Icons.imagesearch_roller] =
-          AppLocalizations.of(context)!.painting;
-      _itemMap[CustomIcons.wallcovering] =
-          AppLocalizations.of(context)!.wallcoverings;
-      _itemMap[Icons.ac_unit] = AppLocalizations.of(context)!.ac_installation;
-      _itemMap[Icons.delete_forever] = AppLocalizations.of(context)!.removal;
-      _itemMap[CustomIcons.suspendedCeiling] =
-          AppLocalizations.of(context)!.suspended_ceiling;
-      _itemMap[CustomIcons.toilet] =
-          AppLocalizations.of(context)!.toilet_replacement;
-      _itemMap[Icons.pest_control] = AppLocalizations.of(context)!.pest_control;
+  Widget build(BuildContext context) {
+    super.build(context);
 
+    // Rebuild _itemMap every time in case of language change
+    _itemMap[Icons.imagesearch_roller] = AppLocalizations.of(context)!.painting;
+    _itemMap[CustomIcons.wallcovering] =
+        AppLocalizations.of(context)!.wallcoverings;
+    _itemMap[Icons.ac_unit] = AppLocalizations.of(context)!.ac_installation;
+    _itemMap[Icons.delete_forever] = AppLocalizations.of(context)!.removal;
+    _itemMap[CustomIcons.suspendedCeiling] =
+        AppLocalizations.of(context)!.suspended_ceiling;
+    _itemMap[CustomIcons.toilet] =
+        AppLocalizations.of(context)!.toilet_replacement;
+    _itemMap[Icons.pest_control] = AppLocalizations.of(context)!.pest_control;
+
+    // Build _isSelectedMap only once
+    if (_keyList.isEmpty) {
       _keyList.addAll(_itemMap.keys);
       for (var key in _keyList) {
         _isSelectedMap[key] = false;
       }
+    }
 
-      setState(() {}); // make sure the list is populated
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
-        appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
         floatingActionButton: FloatingActionButton.extended(
-            icon: const Icon(Icons.arrow_forward),
-            label: Text(AppLocalizations.of(context)!.next),
+            icon: const Icon(Icons.schedule),
+            label: Text(AppLocalizations.of(context)!.schedule),
             onPressed: () {
-              Navigator.of(context).push(PageRouteBuilder(
-                  opaque: true,
-                  transitionDuration: const Duration(milliseconds: 250),
-                  pageBuilder: (BuildContext context, _, __) {
-                    return const RemodelingItemsScreen();
-                  },
-                  transitionsBuilder:
-                      (_, Animation<double> animation, __, Widget child) {
-                    return SlideTransition(
-                      child: child,
-                      position: Tween<Offset>(
-                        begin: const Offset(1.0, 0.0),
-                        end: Offset.zero,
-                      ).animate(animation),
-                    );
-                  }));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const RemodelingItemsScreen()));
             }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: ListView.builder(
@@ -90,13 +70,15 @@ class RemodelingSelectionsScreenState extends State<RemodelingOptionsScreen>
                       duration: const Duration(milliseconds: 250),
                       child: _isSelectedMap[_keyList[index]]!
                           ? Icon(Icons.check_circle,
-                              color: Theme.of(context).toggleableActiveColor)
+                          color: Theme
+                              .of(context)
+                              .toggleableActiveColor)
                           : const Icon(Icons.check_circle_outline)),
                   // TODO animation
                   onTap: () {
                     setState(() {});
                     _isSelectedMap[_keyList[index]] =
-                        !_isSelectedMap[_keyList[index]]!;
+                    !_isSelectedMap[_keyList[index]]!;
                   },
                 ),
               );

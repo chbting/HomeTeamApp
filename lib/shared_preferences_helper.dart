@@ -6,7 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
-  static const String darkModeOnKey = 'darkModeOn';
+  static const String darkModeOnKey = 'darkMode';
   static const String localeKey = 'locale';
 
   static late SharedPreferences _prefs;
@@ -21,7 +21,7 @@ class SharedPreferencesHelper {
 
   static ensureInitialized() async {
     _prefs = await SharedPreferences.getInstance();
-    themeNotifier = ValueNotifier(_helperInstance.isDarkModeOn());
+    themeNotifier = ValueNotifier(_helperInstance.isDarkMode());
     localeNotifier = ValueNotifier(localeToString(_helperInstance.getLocale()));
   }
 
@@ -47,7 +47,7 @@ class SharedPreferencesHelper {
     themeNotifier.value = darkModeOn;
   }
 
-  bool isDarkModeOn() =>
+  bool isDarkMode() =>
       _prefs.getBool(darkModeOnKey) ??
       (Brightness.dark == SchedulerBinding.instance!.window.platformBrightness);
 

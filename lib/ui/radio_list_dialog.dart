@@ -19,19 +19,21 @@ class RadioListDialog {
               contentPadding: EdgeInsets.zero,
               content: SizedBox(
                   width: double.minPositive,
-                  child: _RadioListView(valueList, titleList, defaultValue, (value) {
+                  child: _RadioListView(valueList, titleList, defaultValue,
+                      (value) {
                     callback(value);
                   })),
               actions: <Widget>[
                 TextButton(
-                  child: Text(AppLocalizations.of(context)!.cancel),
+                  child: Text(AppLocalizations.of(context)!.cancel,
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary)),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 )
               ]);
-        }
-    );
+        });
   }
 }
 

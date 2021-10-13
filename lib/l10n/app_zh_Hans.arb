@@ -25,9 +25,11 @@
 	"wallcoverings": "壁纸",
 	"pest_control": "灭虫",
 	"ac_installation": "冷气安装",
-	"removal": "清拆",
 	"suspended_ceiling": "假天花",
 	"toilet_replacement": "坐厕更换",
 	"next": "下一步",
-	"schedule": "预约"
+	"schedule": "预约",
+	"msg_select_remodeling_item": "请选择所需的装修项目",
+	"dismiss": "隐藏",
+	"removals": "清拆"
 }

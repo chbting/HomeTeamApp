@@ -15,7 +15,10 @@ class AppTheme {
         colorScheme:
             ThemeData.dark().colorScheme.copyWith(secondary: darkThemeAccent),
         checkboxTheme: ThemeData.dark().checkboxTheme.copyWith(
-            checkColor: MaterialStateProperty.all(darkThemeBackground)));
+            checkColor: MaterialStateProperty.all(darkThemeBackground)),
+        snackBarTheme: ThemeData.dark()
+            .snackBarTheme
+            .copyWith(actionTextColor: tnerBlue));
   }
 
   static ThemeData getLightTheme() {

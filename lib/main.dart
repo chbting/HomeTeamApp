@@ -59,7 +59,7 @@ class RootAppState extends State<RootApp> {
                       countryCode: 'HK'),
                 ],
                 home: const AppHome(),
-                theme: SharedPreferencesHelper().isDarkModeOn()
+                theme: SharedPreferencesHelper().isDarkMode()
                     ? AppTheme.getDarkTheme()
                     : AppTheme.getLightTheme(),
                 locale: SharedPreferencesHelper().getLocale());

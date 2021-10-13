@@ -17,7 +17,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   final List<String> _localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
   final List<String> _languageList = [];
 
-  bool _darkMode = SharedPreferencesHelper().isDarkModeOn();
+  bool _darkMode = SharedPreferencesHelper().isDarkMode();
   String _localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper().getLocale());
 

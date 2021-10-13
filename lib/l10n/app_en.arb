@@ -25,9 +25,11 @@
 	"wallcoverings": "Wallcoverings",
 	"pest_control": "Pest Control",
 	"ac_installation": "AC Installation",
-	"removal": "Removal",
 	"suspended_ceiling": "Suspended Ceiling",
 	"toilet_replacement": "Toilet Replacement",
 	"next": "Next",
-	"schedule": "Schedule"
+	"schedule": "Schedule",
+	"msg_select_remodeling_item": "Please select an remodeling item",
+	"dismiss": "Dismiss",
+	"removals": "Removals"
 }

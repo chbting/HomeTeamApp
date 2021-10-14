@@ -33,52 +33,59 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
+    return Column(
+      children: [
+        AppBar(
           title: Text(AppLocalizations.of(context)!.settings),
         ),
-        body: ListView(
-          children: <Widget>[
-            SettingsUI.getSettingsTitle(
-                context, AppLocalizations.of(context)!.general_settings),
-            SwitchListTile(
-              title: Text(AppLocalizations.of(context)!.darkMode),
-              secondary: const Icon(Icons.dark_mode),
-              onChanged: (value) {
-                setState(() {
-                  _darkMode = value;
-                  SharedPreferencesHelper().setDarkModeOn(value);
-                });
-              },
-              value: _darkMode,
-            ),
-            ListTile(
-                title: Text(AppLocalizations.of(context)!.language),
-                subtitle: Text(_localeStringToLanguage(_localeString, context)),
-                leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                    Icon(Icons.language),
-                  ],
-                ),
-                onTap: () {
-                  RadioListDialog.show(
-                      context,
-                      _localeStringList,
-                      _languageList,
-                      _localeString,
-                      AppLocalizations.of(context)!.choose_language, (value) {
-                    _localeString = value;
-                    SharedPreferencesHelper().setLocale(
-                        SharedPreferencesHelper.stringToLocale(value));
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              SettingsUI.getSettingsTitle(
+                  context, AppLocalizations.of(context)!.general_settings),
+              SwitchListTile(
+                title: Text(AppLocalizations.of(context)!.darkMode),
+                secondary: const Icon(Icons.dark_mode),
+                onChanged: (value) {
+                  setState(() {
+                    _darkMode = value;
+                    SharedPreferencesHelper().setDarkModeOn(value);
                   });
-                }),
-            const Divider(
-              thickness: 1,
-            ),
-          ],
-        )); // This trailing comma makes auto-formatting nicer for build methods.
+                },
+                value: _darkMode,
+              ),
+              ListTile(
+                  title: Text(AppLocalizations.of(context)!.language),
+                  subtitle:
+                      Text(_localeStringToLanguage(_localeString, context)),
+                  leading: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const <Widget>[
+                      Icon(Icons.language),
+                    ],
+                  ),
+                  onTap: () {
+                    RadioListDialog.show(
+                        context,
+                        _localeStringList,
+                        _languageList,
+                        _localeString,
+                        AppLocalizations.of(context)!.choose_language, (value) {
+                      _localeString = value;
+                      SharedPreferencesHelper().setLocale(
+                          SharedPreferencesHelper.stringToLocale(value));
+                    });
+                  }),
+              const Divider(
+                thickness: 1,
+              ),
+            ],
+          ),
+        ),
+      ],
+    ); // This trailing comma makes auto-formatting nicer for build methods.
   }
 }
 

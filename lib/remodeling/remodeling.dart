@@ -33,7 +33,7 @@ class RemodelingScreen extends StatelessWidget {
           const Expanded(
               child: TabBarView(
             children: <Widget>[
-              RemodelingOptionsScreen(),
+              RemodelingSelectionsScreen(),
               RemodelingStatusScreen(),
             ],
           )),

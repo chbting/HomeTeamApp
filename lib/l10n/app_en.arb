@@ -31,5 +31,7 @@
 	"schedule": "Schedule",
 	"msg_select_remodeling_item": "Please select an remodeling item",
 	"dismiss": "Dismiss",
-	"removals": "Removals"
+	"removals": "Removals",
+	"remodeling_options": "Remodeling Options",
+	"scrape_old_paint": "Scrape old paint"
 }

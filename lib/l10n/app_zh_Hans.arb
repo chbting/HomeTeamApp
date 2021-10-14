@@ -31,5 +31,7 @@
 	"schedule": "预约",
 	"msg_select_remodeling_item": "请选择所需的装修项目",
 	"dismiss": "隐藏",
-	"removals": "清拆"
+	"removals": "清拆",
+	"remodeling_options": "装修选项",
+	"scrape_old_paint": "铲底"
 }

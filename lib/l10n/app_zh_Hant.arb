@@ -31,5 +31,7 @@
 	"schedule": "預約",
 	"msg_select_remodeling_item": "請選擇所需的裝修項目",
 	"dismiss": "隱藏",
-	"removals": "清拆"
+	"removals": "清拆",
+	"remodeling_options": "裝修選項",
+	"scrape_old_paint": "剷底"
 }

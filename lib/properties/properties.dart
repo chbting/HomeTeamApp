@@ -8,10 +8,10 @@ class PropertiesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 0, // TODO remember state
+      initialIndex: 0,
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
+      child: Column(children: [
+        AppBar(
           titleSpacing: 0.0,
           title: SizedBox(
             height: kToolbarHeight,
@@ -30,20 +30,22 @@ class PropertiesScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: const TabBarView(
-          children: <Widget>[
-            Center(
-              child: Text("Search"), //TODO
-            ),
-            Center(
-              child: Text("Visit"),
-            ),
-            Center(
-              child: Text("Sign Agreement"),
-            ),
-          ],
-        ),
-      ),
+        const Expanded(
+          child: TabBarView(
+            children: <Widget>[
+              Center(
+                child: Text("Search"), //TODO
+              ),
+              Center(
+                child: Text("Visit"),
+              ),
+              Center(
+                child: Text("Sign Agreement"),
+              ),
+            ],
+          ),
+        )
+      ]),
     );
   }
 }

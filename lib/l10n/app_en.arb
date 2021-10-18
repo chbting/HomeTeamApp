@@ -33,5 +33,7 @@
 	"dismiss": "Dismiss",
 	"removals": "Removals",
 	"remodeling_options": "Remodeling Options",
-	"scrape_old_paint": "Scrape old paint"
+	"scrape_old_paint": "Scrape old paint",
+	"area_sq_ft": "Area (Sq. ft)",
+	"number_of_rooms": "No. of rooms"
 }

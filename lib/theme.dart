@@ -16,9 +16,15 @@ class AppTheme {
             ThemeData.dark().colorScheme.copyWith(secondary: darkThemeAccent),
         checkboxTheme: ThemeData.dark().checkboxTheme.copyWith(
             checkColor: MaterialStateProperty.all(darkThemeBackground)),
-        snackBarTheme: ThemeData.dark()
-            .snackBarTheme
-            .copyWith(actionTextColor: tnerBlue));
+        snackBarTheme:
+            ThemeData.dark().snackBarTheme.copyWith(actionTextColor: tnerBlue),
+        inputDecorationTheme: ThemeData.dark().inputDecorationTheme.copyWith(
+            // hintStyle: const InputDecorationTheme()
+            //     .hintStyle!
+            //     .copyWith(color: darkThemeAccent),
+            focusColor: darkThemeAccent,
+            focusedBorder: const OutlineInputBorder()
+                .copyWith(borderSide: BorderSide(color: darkThemeAccent))));
   }
 
   static ThemeData getLightTheme() {

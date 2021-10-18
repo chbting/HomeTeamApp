@@ -33,5 +33,7 @@
 	"dismiss": "隱藏",
 	"removals": "清拆",
 	"remodeling_options": "裝修選項",
-	"scrape_old_paint": "剷底"
+	"scrape_old_paint": "剷底",
+	"area_sq_ft": "面積 (平方呎)",
+	"number_of_rooms": "房間數"
 }

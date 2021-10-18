@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/remodeling/remodeling_selections.dart';
-
-import '../theme.dart';
 
 class RemodelingOptionsScreen extends StatefulWidget {
   const RemodelingOptionsScreen({Key? key, required this.selectionMap})
@@ -18,22 +17,15 @@ class RemodelingOptionsScreen extends StatefulWidget {
 
 class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
     with AutomaticKeepAliveClientMixin {
+  List<Widget> _optionsList = [];
+  bool? _scrapeOldPaint;
+
   @override
   bool get wantKeepAlive => true;
-
-  List<Widget> _optionsList = [];
-  late FocusNode myFocusNode;
 
   @override
   void initState() {
     super.initState();
-    myFocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    myFocusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,15 +44,20 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
                   child: Text(
                     AppLocalizations.of(context)!.painting,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary),// TODO use custom function
+                        color: Theme.of(context)
+                            .colorScheme
+                            .secondary), // TODO use custom function
                   )),
               Row(
                 children: [
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                        keyboardType: const TextInputType.numberWithOptions(),
+                    child: TextField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -70,9 +67,11 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
                   Expanded(
                       child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                        focusNode: myFocusNode,
-                        keyboardType: const TextInputType.numberWithOptions(),
+                    child: TextField(
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText:
@@ -81,15 +80,54 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
                   )),
                 ],
               ),
+              Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  child: Text(AppLocalizations.of(context)!.scrape_old_paint,
+                      style: Theme.of(context).textTheme.subtitle1)),
               Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile(
+                      title: Text(
+                          AppLocalizations.of(context)!.scrape_old_paint_yes),
+                      value: true,
+                      groupValue: _scrapeOldPaint,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _scrapeOldPaint = true;
+                        });
+                      },
+                    ),
+                  ),
+                  Expanded(
+                      child: RadioListTile(
+                    title:
+                        Text(AppLocalizations.of(context)!.scrape_old_paint_no),
+                    value: false,
+                    groupValue: _scrapeOldPaint,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _scrapeOldPaint = false;
+                      });
+                    },
+                  )),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 8.0),
-                      child: Text(
-                          AppLocalizations.of(context)!.scrape_old_paint,
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Text(AppLocalizations.of(context)!.estimate,
                           style: Theme.of(context).textTheme.subtitle1)),
-
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Text('\$1000',
+                          textAlign: TextAlign.right,
+                          style: Theme.of(context).textTheme.subtitle1)),
                 ],
               )
             ],

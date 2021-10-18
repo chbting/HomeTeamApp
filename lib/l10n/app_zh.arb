@@ -35,5 +35,8 @@
 	"remodeling_options": "装修选项",
 	"scrape_old_paint": "铲底",
 	"area_sq_ft": "面积 (平方呎)",
-	"number_of_rooms": "房间数"
+	"number_of_rooms": "房间数",
+	"scrape_old_paint_no": "不需要",
+	"scrape_old_paint_yes": "需要",
+	"estimate": "预算:"
 }

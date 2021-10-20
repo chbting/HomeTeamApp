@@ -6,33 +6,44 @@ class AppTheme {
   static const Color lightThemeAccent = Colors.white;
   static final Color? darkThemeBackground = Colors.grey[900];
   static final Color tnerBlue = Colors.lightBlueAccent[700]!;
-
+  static const MaterialColor lightBlue = MaterialColor(
+    0xFF29B6F6,
+    <int, Color>{
+      50: Color(0xFFE1F5FE),
+      100: Color(0xFFB3E5FC),
+      200: Color(0xFF81D4FA),
+      300: Color(0xFF4FC3F7),
+      400: Color(0xFF29B6F6),
+      500: Color(0xFF29B6F6),
+      600: Color(0xFF039BE5),
+      700: Color(0xFF0288D1),
+      800: Color(0xFF0277BD),
+      900: Color(0xFF01579B),
+    },
+  );
   static ThemeData getDarkTheme() {
-    return ThemeData.dark().copyWith(
-        indicatorColor: darkThemeAccent,
-        toggleableActiveColor: darkThemeAccent,
-        scaffoldBackgroundColor: darkThemeBackground,
-        colorScheme:
-            ThemeData.dark().colorScheme.copyWith(secondary: darkThemeAccent),
-        checkboxTheme: ThemeData.dark().checkboxTheme.copyWith(
-            checkColor: MaterialStateProperty.all(darkThemeBackground)),
-        snackBarTheme:
-            ThemeData.dark().snackBarTheme.copyWith(actionTextColor: tnerBlue),
-        inputDecorationTheme: ThemeData.dark().inputDecorationTheme.copyWith(
-            // hintStyle: const InputDecorationTheme()
-            //     .hintStyle!
-            //     .copyWith(color: darkThemeAccent),
-            focusColor: darkThemeAccent,
-            focusedBorder: const OutlineInputBorder()
-                .copyWith(borderSide: BorderSide(color: darkThemeAccent))));
+    return ThemeData(
+      brightness: Brightness.dark,
+      indicatorColor: darkThemeAccent,
+      toggleableActiveColor: darkThemeAccent,
+      colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.lightBlue, brightness: Brightness.dark)
+          .copyWith(secondary: darkThemeAccent),
+      scaffoldBackgroundColor: darkThemeBackground,
+      // inputDecorationTheme: ThemeData.dark().inputDecorationTheme.copyWith(
+      //     // labelStyle: const InputDecorationTheme()
+      //     //     .labelStyle!
+      //     //     .copyWith(color: darkThemeAccent),
+      //     focusColor: darkThemeAccent,
+      //     focusedBorder: const OutlineInputBorder()
+      //         .copyWith(borderSide: BorderSide(color: darkThemeAccent)))
+    );
   }
 
   static ThemeData getLightTheme() {
-    return ThemeData.light().copyWith(
-        indicatorColor: lightThemeAccent,
-        toggleableActiveColor: tnerBlue,
-        colorScheme: ThemeData.light()
-            .colorScheme
-            .copyWith(primary: tnerBlue, secondary: tnerBlue));
+    return ThemeData(
+      brightness: Brightness.light,
+      primarySwatch: Colors.blue,
+    );
   }
 }

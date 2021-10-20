@@ -32,6 +32,8 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
   Widget build(BuildContext context) {
     super.build(context);
     _optionsList = [];
+
+    // Painting Card
     if (widget.selectionMap[RemodelingOptions.paintingKey]!) {
       _optionsList.add(Card(
         child: Padding(
@@ -117,7 +119,7 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
+                  Padding(//todo color
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 16.0),
                       child: Text(AppLocalizations.of(context)!.estimate,

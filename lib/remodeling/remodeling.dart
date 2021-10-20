@@ -12,32 +12,29 @@ class RemodelingScreen extends StatelessWidget {
     return DefaultTabController(
       initialIndex: 0,
       length: 2,
-      child: Column(
-        children: [
-          AppBar(
-            titleSpacing: 0.0,
-            title: SizedBox(
-              height: kToolbarHeight,
-              child: TabBar(
-                tabs: <Widget>[
-                  Tab(
-                    text: AppLocalizations.of(context)!.schedule_remodeling,
-                  ),
-                  Tab(
-                    text: AppLocalizations.of(context)!.remodeling_status,
-                  ),
-                ],
-              ),
+      child: Scaffold(
+        appBar: AppBar(
+          titleSpacing: 0.0,
+          title: SizedBox(
+            height: kToolbarHeight,
+            child: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  text: AppLocalizations.of(context)!.schedule_remodeling,
+                ),
+                Tab(
+                  text: AppLocalizations.of(context)!.remodeling_status,
+                ),
+              ],
             ),
           ),
-          const Expanded(
-              child: TabBarView(
-            children: <Widget>[
-              RemodelingSelectionsScreen(),
-              RemodelingStatusScreen(),
-            ],
-          )),
-        ],
+        ),
+        body: const TabBarView(
+          children: <Widget>[
+            RemodelingSelectionsScreen(),
+            RemodelingStatusScreen(),
+          ],
+        ),
       ),
     );
   }

@@ -40,9 +40,9 @@
 	"estimate": "Estimate:",
 	"address_and_phone": "Address & phone",
 	"confirm": "Confirm",
-	"date": "Date",
 	"options": "Options",
 	"count": "Count",
 	"next_option": "Next",
-	"back": "Back"
+	"back": "Back",
+	"pick_a_day": "Pick a day"
 }

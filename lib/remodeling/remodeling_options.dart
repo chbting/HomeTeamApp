@@ -45,6 +45,151 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    _initOptionList();
+    // TODO backpressed warning: quit scheduling?
+    return Scaffold(
+        appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
+        floatingActionButton: AnimatedOpacity(
+            opacity: _activeOption == _optionList.length - 1 || _activeStep > 0
+                ? 1.0
+                : 0.0,
+            duration: const Duration(milliseconds: 250),
+            child: FloatingActionButton.extended(
+                icon: Icon(Icons.calendar_today),
+                label: Text(AppLocalizations.of(context)!.pick_a_day),
+                onPressed: () {
+                  if (_activeStep < 3) {
+                    setState(() {
+                      _activeStep++;
+                    });
+                  }
+                  //TODO do checking and go to next page
+                })),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconStepper(
+              icons: [
+                Icon(Icons.construction,
+                    color: Theme.of(context).colorScheme.onSecondary),
+                Icon(Icons.calendar_today,
+                    color: Theme.of(context).colorScheme.onSecondary),
+                Icon(Icons.contact_phone,
+                    color: Theme.of(context).colorScheme.onSecondary),
+                Icon(Icons.list,
+                    color: Theme.of(context).colorScheme.onSecondary)
+              ],
+              activeStep: _activeStep,
+              activeStepBorderWidth: 0,
+              activeStepBorderPadding: 0,
+              activeStepColor: Theme.of(context).colorScheme.secondary,
+              enableNextPreviousButtons: false,
+              stepRadius: 24.0,
+              steppingEnabled: true,
+              lineColor: Colors.grey,
+              //todo line color matches step circle
+              onStepReached: (index) {
+                setState(() {
+                  _activeStep = index;
+                });
+              },
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Text(_getStepTitle(),
+                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        color: Theme.of(context).colorScheme.secondary))),
+            Expanded(
+              child: _getActiveStepWidget(),
+            ),
+            // TODO back function
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     TextButton(
+            //       onPressed: () {
+            //         // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
+            //         if (_activeStep > 0) {
+            //           setState(() {
+            //             _activeStep--;
+            //           });
+            //         }
+            //       },
+            //       child: Text(AppLocalizations.of(context)!.back),
+            //     ),
+            //   ],
+            // ),
+          ],
+        ));
+  }
+
+  String _getStepTitle() {
+    switch (_activeStep) {
+      case 0:
+        return AppLocalizations.of(context)!.options;
+      case 1:
+        return AppLocalizations.of(context)!.pick_a_day;
+      case 2:
+        return AppLocalizations.of(context)!.address_and_phone;
+      case 3:
+        return AppLocalizations.of(context)!.confirm;
+      default:
+        return '';
+    }
+  }
+
+  Widget _getActiveStepWidget() {
+    switch (_activeStep) {
+      case 0: // TODO add total estimation
+        return Stepper(
+            currentStep: _activeOption,
+            controlsBuilder: (BuildContext context,
+                {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+              return Row(
+                children: <Widget>[
+                  _activeOption < _optionList.length - 1
+                      ? ElevatedButton(
+                          onPressed: onStepContinue,
+                          child:
+                              Text(AppLocalizations.of(context)!.next_option))
+                      : Container(),
+                  _activeOption > 0
+                      ? TextButton(
+                          onPressed: onStepCancel,
+                          child: Text(AppLocalizations.of(context)!.back),
+                        )
+                      : Container(),
+                ],
+              );
+            },
+            onStepCancel: () {
+              if (_activeOption > 0) {
+                setState(() {
+                  _activeOption -= 1;
+                });
+              }
+            },
+            onStepContinue: () {
+              if (_activeOption < _optionList.length - 1) {
+                setState(() {
+                  _activeOption += 1;
+                });
+              }
+            },
+            onStepTapped: (int index) {
+              setState(() {
+                _activeOption = index;
+              });
+            },
+            steps: _optionList);
+      default:
+        return Text('$_activeStep'); //TODO
+    }
+  }
+
+  void _initOptionList() {
     _optionList = [];
 
     // Painting Card
@@ -348,105 +493,6 @@ class RemodelingOptionsScreenState extends State<RemodelingOptionsScreen>
     if (widget.selectionMap[RemodelingOptions.pestControlKey]!) {
       //_optionsList.add(value);
     }
-
-    Stepper optionsStepper = Stepper(
-        currentStep: _activeOption,
-        //type: StepperType.horizontal,
-        controlsBuilder: (BuildContext context,
-            {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
-          return Row(
-            children: <Widget>[
-              TextButton(
-                onPressed: onStepContinue,
-                child: Text(_activeOption == _optionList.length - 1
-                    ? 'finish' //todo
-                    : AppLocalizations.of(context)!.next_option),
-              ),
-              TextButton(
-                onPressed: onStepCancel,
-                child: Text(_activeOption == 0 ? '' : AppLocalizations.of(context)!.back),
-              ),
-            ],
-          );
-        },
-        onStepCancel: () {
-          if (_activeOption > 0) {
-            setState(() {
-              _activeOption -= 1;
-            });
-          }
-        },
-        onStepContinue: () {
-          if (_activeOption < _optionList.length - 1) {
-            setState(() {
-              _activeOption += 1;
-            });
-          }
-        },
-        onStepTapped: (int index) {
-          setState(() {
-            _activeOption = index;
-          });
-        },
-        steps: _optionList);
-
-    return Scaffold(
-        appBar: AppBar(
-            title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
-        floatingActionButton: FloatingActionButton.extended(
-            icon: const Icon(Icons.arrow_forward),
-            label: Text(AppLocalizations.of(context)!.next),
-            onPressed: () {
-              //TODO do checking and go to next page
-            }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: Column(
-          children: [
-            NumberStepper(
-              numbers: const [1, 2, 3, 4],
-              activeStep: _activeStep,
-              stepRadius: 16.0,
-              stepReachedAnimationEffect: Curves.bounceOut,
-              //todo
-              enableNextPreviousButtons: false,
-              activeStepColor: Theme.of(context).colorScheme.secondary,
-              onStepReached: (index) {
-                setState(() {
-                  _activeStep = index;
-                });
-              },
-            ),
-            Expanded(
-                child: _activeStep == 0 ? optionsStepper : Text('$_activeStep'),
-            ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   children: [
-            //     FloatingActionButton.extended(
-            //       onPressed: () {
-            //         // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
-            //         if (_activeStep > 0) {
-            //           setState(() {
-            //             _activeStep--;
-            //           });
-            //         }
-            //       },
-            //       label: Text('Prev'),
-            //     ),
-            //     FloatingActionButton.extended(
-            //         onPressed: () {
-            //           // Increment activeStep, when the next button is tapped. However, check for upper bound.
-            //           if (_activeStep < 3) {
-            //             setState(() {
-            //               _activeStep++;
-            //             });
-            //           }
-            //         },
-            //         label: Text(AppLocalizations.of(context)!.next)),
-            //   ],
-            // ),
-          ],
-        ));
   }
 
   int? _getPaintingEstimate() {

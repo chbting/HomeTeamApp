@@ -40,9 +40,9 @@
 	"estimate": "预算:",
 	"address_and_phone": "地址电话",
 	"confirm": "确认",
-	"date": "日期",
 	"options": "选项",
 	"count": "数量",
 	"next_option": "下一项",
-	"back": "返回"
+	"back": "返回",
+	"pick_a_day": "选择日期"
 }

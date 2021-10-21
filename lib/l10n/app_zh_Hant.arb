@@ -40,9 +40,9 @@
 	"estimate": "預算:",
 	"address_and_phone": "地址電話",
 	"confirm": "確認",
-	"date": "日期",
 	"options": "選項",
 	"count": "數量",
 	"next_option": "下一項",
-	"back": "返回"
+	"back": "返回",
+	"pick_a_day": "選擇日期"
 }

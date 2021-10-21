@@ -32,11 +32,17 @@
 	"msg_select_remodeling_item": "Please select an remodeling item",
 	"dismiss": "Dismiss",
 	"removals": "Removals",
-	"remodeling_options": "Remodeling Options",
 	"scrape_old_paint": "Scrape old paint",
 	"area_sq_ft": "Area (Sq. ft)",
 	"number_of_rooms": "No. of rooms",
-	"scrape_old_paint_no": "No",
-	"scrape_old_paint_yes": "Yes",
-	"estimate": "Estimate:"
+	"scrape_old_paint_no": "Leave/No old paints",
+	"scrape_old_paint_yes": "Scrape old paints",
+	"estimate": "Estimate:",
+	"address_and_phone": "Address & phone",
+	"confirm": "Confirm",
+	"date": "Date",
+	"options": "Options",
+	"count": "Count",
+	"next_option": "Next",
+	"back": "Back"
 }

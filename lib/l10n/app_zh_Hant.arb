@@ -32,11 +32,17 @@
 	"msg_select_remodeling_item": "請選擇所需的裝修項目",
 	"dismiss": "隱藏",
 	"removals": "清拆",
-	"remodeling_options": "裝修選項",
 	"scrape_old_paint": "剷底",
 	"area_sq_ft": "面積 (平方呎)",
 	"number_of_rooms": "房間數",
-	"scrape_old_paint_no": "不需要",
-	"scrape_old_paint_yes": "需要",
-	"estimate": "預算:"
+	"scrape_old_paint_no": "不剷底",
+	"scrape_old_paint_yes": "剷底",
+	"estimate": "預算:",
+	"address_and_phone": "地址電話",
+	"confirm": "確認",
+	"date": "日期",
+	"options": "選項",
+	"count": "數量",
+	"next_option": "下一項",
+	"back": "返回"
 }

@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/assets/custom_icons_icons.dart';
-import 'package:tner_client/remodeling/remodeling_options.dart';
+import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/remodeling_steps.dart';
 
 class RemodelingSelectionsScreen extends StatefulWidget {
   const RemodelingSelectionsScreen({Key? key}) : super(key: key);
@@ -30,21 +31,27 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
     super.build(context);
 
     // Rebuild _titleMap every time, in case of language change
-    _titleMap[RemodelingOptions.paintingKey] =
-        AppLocalizations.of(context)!.painting;
-    _titleMap[RemodelingOptions.wallCoveringsKey] =
-        AppLocalizations.of(context)!.wallcoverings;
-    _titleMap[RemodelingOptions.acInstallationKey] =
-        AppLocalizations.of(context)!.ac_installation;
-    _titleMap[RemodelingOptions.removalsKey] =
-        AppLocalizations.of(context)!.removals;
-    _titleMap[RemodelingOptions.suspendedCeilingKey] =
-        AppLocalizations.of(context)!.suspended_ceiling;
-    _titleMap[RemodelingOptions.toiletReplacementKey] =
-        AppLocalizations.of(context)!.toilet_replacement;
-    _titleMap[RemodelingOptions.pestControlKey] =
-        AppLocalizations.of(context)!.pest_control;
-
+    _titleMap[RemodelingItems.paintingKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.paintingKey, context);
+    _titleMap[RemodelingItems.wallCoveringsKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.wallCoveringsKey, context);
+    _titleMap[RemodelingItems.acInstallationKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.acInstallationKey, context);
+    _titleMap[RemodelingItems.removalsKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.removalsKey, context);
+    _titleMap[RemodelingItems.suspendedCeilingKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.suspendedCeilingKey, context);
+    _titleMap[RemodelingItems.toiletReplacementKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.toiletReplacementKey, context);
+    _titleMap[RemodelingItems.pestControlKey] =
+        RemodelingItems.getRemodelingItemTitle(
+            RemodelingItems.pestControlKey, context);
     // Build only once
     if (_keyList.isEmpty) {
       _keyList.addAll(_titleMap.keys);
@@ -52,14 +59,14 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
         _isSelectedMap[key] = false;
       }
 
-      _iconMap[RemodelingOptions.paintingKey] = Icons.imagesearch_roller;
-      _iconMap[RemodelingOptions.wallCoveringsKey] = CustomIcons.wallcovering;
-      _iconMap[RemodelingOptions.acInstallationKey] = Icons.ac_unit;
-      _iconMap[RemodelingOptions.removalsKey] = Icons.delete_forever;
-      _iconMap[RemodelingOptions.suspendedCeilingKey] =
+      _iconMap[RemodelingItems.paintingKey] = Icons.imagesearch_roller;
+      _iconMap[RemodelingItems.wallCoveringsKey] = CustomIcons.wallcovering;
+      _iconMap[RemodelingItems.acInstallationKey] = Icons.ac_unit;
+      _iconMap[RemodelingItems.removalsKey] = Icons.delete_forever;
+      _iconMap[RemodelingItems.suspendedCeilingKey] =
           CustomIcons.suspendedCeiling;
-      _iconMap[RemodelingOptions.toiletReplacementKey] = CustomIcons.toilet;
-      _iconMap[RemodelingOptions.pestControlKey] = Icons.pest_control;
+      _iconMap[RemodelingItems.toiletReplacementKey] = CustomIcons.toilet;
+      _iconMap[RemodelingItems.pestControlKey] = Icons.pest_control;
     }
 
     return ScaffoldMessenger(
@@ -72,7 +79,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               onPressed: () {
                 _isSelectedMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RemodelingOptionsScreen(
+                        builder: (context) => RemodelingStepsScreen(
                             selectionMap: _isSelectedMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                         content: Text(AppLocalizations.of(context)!
@@ -108,14 +115,4 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               })),
     );
   }
-}
-
-class RemodelingOptions {
-  static const String paintingKey = 'painting';
-  static const String wallCoveringsKey = 'wallCoverings';
-  static const String acInstallationKey = 'acInstallation';
-  static const String removalsKey = 'removals';
-  static const String suspendedCeilingKey = 'suspendedCeiling';
-  static const String toiletReplacementKey = 'toiletReplacement';
-  static const String pestControlKey = 'pestControl';
 }

@@ -151,7 +151,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     return Container();
   }
 
-  Widget _getPaintingCardLayout() {
+  Widget _getPaintingCardLayout() {// todo overflow when keyboard shows
     return Wrap(
       children: [
         Padding(

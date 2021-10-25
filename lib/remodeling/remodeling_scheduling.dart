@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
@@ -141,40 +142,41 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
           )
         ]);
       case 2:
-        return Column(
+        return Wrap(
           children: [
             Card(
                 margin:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                  child: Column(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Wrap(
+                    runSpacing: 16.0,
                     children: [
-                      Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextField(
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: AppLocalizations.of(context)!
-                                      .remodeling_address,
-                                  icon: const Icon(Icons.location_pin)))),
+                      TextField(
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText: AppLocalizations.of(context)!
+                                  .remodeling_address,
+                              icon: const Icon(Icons.location_pin))),
                       // todo district selector
-                      Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextField(
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText: AppLocalizations.of(context)!
-                                      .contact_number,
-                                  hintText: '',
-                                  // todo and format
-                                  helperText: AppLocalizations.of(context)!
-                                      .hong_kong_number_only,
-                                  icon: const Icon(Icons.phone)))),
+                      TextField(
+                          keyboardType: TextInputType.phone,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            PhoneNumberTextInputFormatter()
+                          ],
+                          //maxLength: 8,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText:
+                                  AppLocalizations.of(context)!.contact_number,
+                              hintText: '',
+                              // todo and format
+                              helperText: AppLocalizations.of(context)!
+                                  .hong_kong_number_only,
+                              icon: const Icon(Icons.phone)))
                     ],
                   ),
                 ))
@@ -182,6 +184,42 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
         ); //TODO confirmation page
       default:
         return Container();
+    }
+  }
+}
+
+class PhoneNumberTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    const int maxLength = 8;
+    final int newTextLength = newValue.text.length;
+    final StringBuffer newText = StringBuffer();
+
+    if (newTextLength <= 4) {
+      return newValue;
+    }
+    if (newTextLength > maxLength) {
+      return oldValue;
+    }
+    if (newTextLength == 5 && newValue.text.length < oldValue.text.length) {
+      newText.write(newValue.text.substring(0, 4));
+      return TextEditingValue(
+          text: newText.toString(),
+          selection: oldValue.selection.baseOffset < 4
+              ? TextSelection.collapsed(offset: newValue.selection.baseOffset)
+              : TextSelection.collapsed(
+                  offset: newValue.selection.baseOffset - 1));
+    } else {
+      // Length between 6-9
+      newText.write(
+          '${newValue.text.substring(0, 4)}-${newValue.text.substring(4)}');
+      return TextEditingValue(
+          text: newText.toString(),
+          selection: oldValue.selection.baseOffset < 4
+              ? TextSelection.collapsed(offset: newValue.selection.baseOffset)
+              : TextSelection.collapsed(
+                  offset: newValue.selection.baseOffset + 1));
     }
   }
 }

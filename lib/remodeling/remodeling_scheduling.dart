@@ -5,17 +5,18 @@ import 'package:im_stepper/stepper.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/remodeling_options.dart';
 
-class RemodelingStepsScreen extends StatefulWidget {
-  const RemodelingStepsScreen({Key? key, required this.selectionMap})
+class RemodelingSchedulingScreen extends StatefulWidget {
+  const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
 
   @override
-  State<RemodelingStepsScreen> createState() => RemodelingStepsScreenState();
+  State<RemodelingSchedulingScreen> createState() =>
+      RemodelingSchedulingScreenState();
 }
 
-class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
+class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
     with AutomaticKeepAliveClientMixin {
   int _activeStep = 0;
 
@@ -101,7 +102,7 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
 
   Widget _getActiveStepWidget() {
     switch (_activeStep) {
-      case 0: // TODO add total estimation, use card only when there is only one item
+      case 0:
         return RemodelingOptionsWidget(selectionMap: widget.selectionMap);
       case 1:
         return Column(children: [
@@ -118,10 +119,6 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
                 children: [
                   OutlinedButton.icon(
                     icon: const Icon(Icons.arrow_back),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context).colorScheme.secondary),
-                    ),
                     label: Text(AppLocalizations.of(context)!.back),
                     onPressed: () {
                       setState(() {
@@ -133,10 +130,6 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
                     icon: const Icon(Icons.contact_phone),
                     label:
                         Text(AppLocalizations.of(context)!.address_and_phone),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Theme.of(context).colorScheme.secondary),
-                    ),
                     onPressed: () {
                       setState(() {
                         _activeStep++;

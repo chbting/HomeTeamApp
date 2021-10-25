@@ -9,21 +9,31 @@ class AppTheme {
 
   static ThemeData getDarkTheme() {
     return ThemeData(
-      brightness: Brightness.dark,
-      indicatorColor: darkThemeAccent,
-      toggleableActiveColor: darkThemeAccent,
-      colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: Colors.lightBlue, brightness: Brightness.dark)
-          .copyWith(secondary: darkThemeAccent),
-      scaffoldBackgroundColor: darkThemeBackground,
-      // inputDecorationTheme: ThemeData.dark().inputDecorationTheme.copyWith(
-      //     // labelStyle: const InputDecorationTheme()
-      //     //     .labelStyle!
-      //     //     .copyWith(color: darkThemeAccent),
-      //     focusColor: darkThemeAccent,
-      //     focusedBorder: const OutlineInputBorder()
-      //         .copyWith(borderSide: BorderSide(color: darkThemeAccent)))
-    );
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: darkThemeBackground,
+        indicatorColor: darkThemeAccent,
+        toggleableActiveColor: darkThemeAccent,
+        colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.lightBlue, brightness: Brightness.dark)
+            .copyWith(secondary: darkThemeAccent),
+        textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(primary: darkThemeAccent)),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+          primary: darkThemeAccent,
+        )),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: OutlinedButton.styleFrom(
+          primary: darkThemeAccent,
+        ))
+        // inputDecorationTheme: ThemeData.dark().inputDecorationTheme.copyWith(
+        //     // labelStyle: const InputDecorationTheme()
+        //     //     .labelStyle!
+        //     //     .copyWith(color: darkThemeAccent),
+        //     focusColor: darkThemeAccent,
+        //     focusedBorder: const OutlineInputBorder()
+        //         .copyWith(borderSide: BorderSide(color: darkThemeAccent)))
+        );
   }
 
   static ThemeData getLightTheme() {

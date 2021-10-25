@@ -21,7 +21,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   final List<RemodelingItem> _selectedItemList = [];
 
   // Painting Card
-  int? _paintArea, _paintRooms;
+  int? _paintArea;
   bool? _scrapeOldPaint;
 
   // Painting Card
@@ -47,6 +47,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       });
     }
 
+    // Return a Card for one item, a Stepper for multiple items
     if (_selectedItemList.length == 1) {
       return Column(children: [
         Padding(
@@ -58,7 +59,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       for (var item in _selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
-
+      // TODO add total estimation
       return Stepper(
           currentStep: _activeOption,
           controlsBuilder: (BuildContext context,
@@ -73,8 +74,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 _activeOption > 0
                     ? TextButton(
                         onPressed: onStepCancel,
-                        child: Text(AppLocalizations.of(context)!.back),
-                      )
+                        child: Text(AppLocalizations.of(context)!.back))
                     : Container(),
               ],
             );
@@ -150,46 +150,20 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.area_sq_ft,
-                ),
-                onChanged: (value) {
-                  value.isEmpty
-                      ? _paintArea = null
-                      : _paintArea = int.parse(value);
-                  setState(() {});
-                },
-              ),
-            )),
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.number_of_rooms,
-                ),
-                onChanged: (value) {
-                  value.isEmpty
-                      ? _paintRooms = null
-                      : _paintRooms = int.parse(value);
-                  setState(() {});
-                },
-              ),
-            )),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: AppLocalizations.of(context)!.area_sq_ft,
+            ),
+            onChanged: (value) {
+              value.isEmpty ? _paintArea = null : _paintArea = int.parse(value);
+              setState(() {});
+            },
+          ),
         ),
         Row(
           children: [
@@ -395,23 +369,46 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       Theme.of(context).textTheme.subtitle1!;
 
   int? _getPaintingEstimate() {
-    if (_paintArea == null || _paintRooms == null || _scrapeOldPaint == null) {
+    if (_paintArea == null || _scrapeOldPaint == null) {
       return null;
     } else {
-      // TODO
-      return _scrapeOldPaint!
-          ? (_paintArea! + _paintRooms!) * 2
-          : _paintArea! + _paintRooms!;
+      if (_scrapeOldPaint!) {
+        if (_paintArea! < 500) {
+          return 28000;
+        }
+        if (_paintArea! < 600) {
+          return 38000;
+        }
+        if (_paintArea! < 700) {
+          return 46000;
+        }
+        if (_paintArea! < 800) {
+          return 55000;
+        }
+      } else {
+        if (_paintArea! < 500) {
+          return 16000;
+        }
+        if (_paintArea! < 600) {
+          return 19000;
+        }
+        if (_paintArea! < 700) {
+          return 22000;
+        }
+        if (_paintArea! < 800) {
+          return 26500;
+        }
+      }
     }
   }
 
+  // TODO
   int? _getWallCoveringsEstimate() {
     if (_wallCoveringsArea == null ||
         _wallCoveringsRooms == null ||
         _removeOldWallCoverings == null) {
       return null;
     } else {
-      // TODO
       return _removeOldWallCoverings!
           ? (_wallCoveringsArea! + _wallCoveringsRooms!) * 2
           : _wallCoveringsArea! + _wallCoveringsRooms!;

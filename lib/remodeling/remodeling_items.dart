@@ -33,5 +33,5 @@ String getRemodelingItemTitle(RemodelingItem key, BuildContext context) {
   if (key == RemodelingItem.pestControl) {
     return AppLocalizations.of(context)!.pest_control;
   }
-  throw 'NoSuchRemodelingItemKey';
+  throw 'NoTitleCreatedForRemodelingItem';
 }

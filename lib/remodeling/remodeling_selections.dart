@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/assets/custom_icons_icons.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/remodeling_steps.dart';
+import 'package:tner_client/remodeling/remodeling_scheduling.dart';
 
 class RemodelingSelectionsScreen extends StatefulWidget {
   const RemodelingSelectionsScreen({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               onPressed: () {
                 _isSelectedMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RemodelingStepsScreen(
+                        builder: (context) => RemodelingSchedulingScreen(
                             selectionMap: _isSelectedMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                         content: Text(AppLocalizations.of(context)!

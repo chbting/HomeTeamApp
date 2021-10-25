@@ -44,5 +44,6 @@
 	"count": "数量",
 	"next_option": "下一项",
 	"back": "返回",
-	"pick_a_day": "选择日期"
+	"pick_a_day": "选择日期",
+	"confirm_remodeling": "确认预约"
 }

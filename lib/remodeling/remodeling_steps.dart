@@ -2,15 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/remodeling_options.dart';
-
-import '../theme.dart';
 
 class RemodelingStepsScreen extends StatefulWidget {
   const RemodelingStepsScreen({Key? key, required this.selectionMap})
       : super(key: key);
 
-  final Map<String, bool> selectionMap;
+  final Map<RemodelingItem, bool> selectionMap;
 
   @override
   State<RemodelingStepsScreen> createState() => RemodelingStepsScreenState();
@@ -33,13 +32,14 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
     super.build(context);
     // TODO backpressed warning: quit scheduling?
     return Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.confirm)),
+        appBar: AppBar(
+            title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
         floatingActionButton: AnimatedOpacity(
             opacity: _activeStep == 3 ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 250),
             child: FloatingActionButton.extended(
                 icon: const Icon(Icons.check),
-                label: Text(AppLocalizations.of(context)!.pick_a_day),
+                label: Text(AppLocalizations.of(context)!.confirm_remodeling),
                 onPressed: () {
                   //TODO send order
                 })),
@@ -120,9 +120,8 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
                     icon: const Icon(Icons.arrow_back),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all<Color>(
-                          AppTheme.darkThemeAccent),
+                          Theme.of(context).colorScheme.secondary),
                     ),
-                    // todo color in light mode
                     label: Text(AppLocalizations.of(context)!.back),
                     onPressed: () {
                       setState(() {
@@ -136,7 +135,7 @@ class RemodelingStepsScreenState extends State<RemodelingStepsScreen>
                         Text(AppLocalizations.of(context)!.address_and_phone),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                          AppTheme.darkThemeAccent),
+                          Theme.of(context).colorScheme.secondary),
                     ),
                     onPressed: () {
                       setState(() {

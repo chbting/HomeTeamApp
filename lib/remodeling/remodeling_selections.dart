@@ -18,10 +18,10 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final Map<String, String> _titleMap = {};
-  final Map<String, IconData> _iconMap = {};
-  final List<String> _keyList = [];
-  final Map<String, bool> _isSelectedMap = {};
+  final Map<RemodelingItem, String> _titleMap = {};
+  final Map<RemodelingItem, IconData> _iconMap = {};
+  final List<RemodelingItem> _keyList = [];
+  final Map<RemodelingItem, bool> _isSelectedMap = {};
 
   @override
   bool get wantKeepAlive => true;
@@ -31,27 +31,21 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
     super.build(context);
 
     // Rebuild _titleMap every time, in case of language change
-    _titleMap[RemodelingItems.paintingKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.paintingKey, context);
-    _titleMap[RemodelingItems.wallCoveringsKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.wallCoveringsKey, context);
-    _titleMap[RemodelingItems.acInstallationKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.acInstallationKey, context);
-    _titleMap[RemodelingItems.removalsKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.removalsKey, context);
-    _titleMap[RemodelingItems.suspendedCeilingKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.suspendedCeilingKey, context);
-    _titleMap[RemodelingItems.toiletReplacementKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.toiletReplacementKey, context);
-    _titleMap[RemodelingItems.pestControlKey] =
-        RemodelingItems.getRemodelingItemTitle(
-            RemodelingItems.pestControlKey, context);
+    _titleMap[RemodelingItem.painting] =
+        getRemodelingItemTitle(RemodelingItem.painting, context);
+    _titleMap[RemodelingItem.wallCoverings] =
+        getRemodelingItemTitle(RemodelingItem.wallCoverings, context);
+    _titleMap[RemodelingItem.acInstallation] =
+        getRemodelingItemTitle(RemodelingItem.acInstallation, context);
+    _titleMap[RemodelingItem.removals] =
+        getRemodelingItemTitle(RemodelingItem.removals, context);
+    _titleMap[RemodelingItem.suspendedCeiling] =
+        getRemodelingItemTitle(RemodelingItem.suspendedCeiling, context);
+    _titleMap[RemodelingItem.toiletReplacement] =
+        getRemodelingItemTitle(RemodelingItem.toiletReplacement, context);
+    _titleMap[RemodelingItem.pestControl] =
+        getRemodelingItemTitle(RemodelingItem.pestControl, context);
+
     // Build only once
     if (_keyList.isEmpty) {
       _keyList.addAll(_titleMap.keys);
@@ -59,14 +53,13 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
         _isSelectedMap[key] = false;
       }
 
-      _iconMap[RemodelingItems.paintingKey] = Icons.imagesearch_roller;
-      _iconMap[RemodelingItems.wallCoveringsKey] = CustomIcons.wallcovering;
-      _iconMap[RemodelingItems.acInstallationKey] = Icons.ac_unit;
-      _iconMap[RemodelingItems.removalsKey] = Icons.delete_forever;
-      _iconMap[RemodelingItems.suspendedCeilingKey] =
-          CustomIcons.suspendedCeiling;
-      _iconMap[RemodelingItems.toiletReplacementKey] = CustomIcons.toilet;
-      _iconMap[RemodelingItems.pestControlKey] = Icons.pest_control;
+      _iconMap[RemodelingItem.painting] = Icons.imagesearch_roller;
+      _iconMap[RemodelingItem.wallCoverings] = CustomIcons.wallcovering;
+      _iconMap[RemodelingItem.acInstallation] = Icons.ac_unit;
+      _iconMap[RemodelingItem.removals] = Icons.delete_forever;
+      _iconMap[RemodelingItem.suspendedCeiling] = CustomIcons.suspendedCeiling;
+      _iconMap[RemodelingItem.toiletReplacement] = CustomIcons.toilet;
+      _iconMap[RemodelingItem.pestControl] = Icons.pest_control;
     }
 
     return ScaffoldMessenger(

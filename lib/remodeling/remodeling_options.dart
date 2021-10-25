@@ -8,7 +8,7 @@ class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget({Key? key, required this.selectionMap})
       : super(key: key);
 
-  final Map<String, bool> selectionMap;
+  final Map<RemodelingItem, bool> selectionMap;
 
   @override
   State<RemodelingOptionsWidget> createState() =>
@@ -18,7 +18,7 @@ class RemodelingOptionsWidget extends StatefulWidget {
 class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
   int _activeOption = 0;
-  final List<String> _selectedKeyList = [];
+  final List<RemodelingItem> _selectedItemList = [];
 
   // Painting Card
   int? _paintArea, _paintRooms;
@@ -39,71 +39,25 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     super.build(context);
 
     // Initialize only once
-    if(_selectedKeyList.isEmpty) {
-      widget.selectionMap.forEach((key, value) {
+    if (_selectedItemList.isEmpty) {
+      widget.selectionMap.forEach((item, value) {
         if (value) {
-          _selectedKeyList.add(key);
+          _selectedItemList.add(item);
         }
       });
     }
 
-    if (_selectedKeyList.length == 1) {
-      Widget layout = Container(); // default case
-      if (_selectedKeyList[0] == RemodelingItems.paintingKey) {
-        layout = _getPaintingCardLayout();
-      }
-      if (_selectedKeyList[0] == RemodelingItems.wallCoveringsKey) {
-        layout = _getWallCoveringsCardLayout();
-      }
-      if (_selectedKeyList[0] == RemodelingItems.acInstallationKey) {
-        layout = _getAcInstallationCardLayout();
-      }
-      // TODO
-      // if (_selectedKeyList[0] == RemodelingItems.removalsKey) {
-      //   layout = _getPaintingCardLayout();
-      // }
-      // if (_selectedKeyList[0] == RemodelingItems.suspendedCeilingKey) {
-      //   layout = _getPaintingCardLayout();
-      // }
-      // if (_selectedKeyList[0] == RemodelingItems.toiletReplacementKey) {
-      //   layout = _getPaintingCardLayout();
-      // }
-      // if (_selectedKeyList[0] == RemodelingItems.pestControlKey) {
-      //   layout = _getPaintingCardLayout();
-      // }
+    if (_selectedItemList.length == 1) {
       return Column(children: [
         Padding(
             padding: const EdgeInsets.all(8.0),
-            child: _getSingleOptionCard(
-                RemodelingItems.getRemodelingItemTitle(
-                    _selectedKeyList[0], context),
-                layout))
+            child: _getSingleOptionCard(_selectedItemList[0]))
       ]);
     } else {
       List<Step> _stepList = [];
-      if (widget.selectionMap[RemodelingItems.paintingKey]!) {
-        _stepList.add(_getOptionStep(
-            RemodelingItems.getRemodelingItemTitle(
-                RemodelingItems.paintingKey, context),
-            _getPaintingCardLayout()));
+      for (var item in _selectedItemList) {
+        _stepList.add(_getOptionStep(item));
       }
-      if (widget.selectionMap[RemodelingItems.wallCoveringsKey]!) {
-        _stepList.add(_getOptionStep(
-            RemodelingItems.getRemodelingItemTitle(
-                RemodelingItems.wallCoveringsKey, context),
-            _getWallCoveringsCardLayout()));
-      }
-      if (widget.selectionMap[RemodelingItems.acInstallationKey]!) {
-        _stepList.add(_getOptionStep(
-            RemodelingItems.getRemodelingItemTitle(
-                RemodelingItems.acInstallationKey, context),
-            _getAcInstallationCardLayout()));
-      }
-
-      if (widget.selectionMap[RemodelingItems.removalsKey]!) {}
-      if (widget.selectionMap[RemodelingItems.suspendedCeilingKey]!) {}
-      if (widget.selectionMap[RemodelingItems.toiletReplacementKey]!) {}
-      if (widget.selectionMap[RemodelingItems.pestControlKey]!) {}
 
       return Stepper(
           currentStep: _activeOption,
@@ -148,7 +102,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     }
   }
 
-  Card _getSingleOptionCard(String title, Widget layout) {
+  Card _getSingleOptionCard(RemodelingItem item) {
+    String title = getRemodelingItemTitle(item, context);
     return Card(
         child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -158,16 +113,37 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(title, style: _getOptionTitleTextStyle())),
-                layout
+                _getLayoutByRemodelingItem(item)
               ],
             )));
   }
 
-  Step _getOptionStep(String title, Widget layout) {
+  Step _getOptionStep(RemodelingItem item) {
+    String title = getRemodelingItemTitle(item, context);
     return Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
-            child: Padding(padding: const EdgeInsets.all(8.0), child: layout)));
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _getLayoutByRemodelingItem(item))));
+  }
+
+  Widget _getLayoutByRemodelingItem(RemodelingItem item) {
+    if (item == RemodelingItem.painting) {
+      return _getPaintingCardLayout();
+    }
+    if (item == RemodelingItem.wallCoverings) {
+      return _getWallCoveringsCardLayout();
+    }
+    if (item == RemodelingItem.acInstallation) {
+      return _getAcInstallationCardLayout();
+    }
+    // todo
+    if (item == RemodelingItem.removals) {}
+    if (item == RemodelingItem.suspendedCeiling) {}
+    if (item == RemodelingItem.toiletReplacement) {}
+    if (item == RemodelingItem.pestControl) {}
+    return Container();
   }
 
   Widget _getPaintingCardLayout() {
@@ -370,55 +346,48 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getAcInstallationCardLayout() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: AppLocalizations.of(context)!.count,
+            ),
+            onChanged: (value) {
+              value.isEmpty
+                  ? _acInstallationCount = null
+                  : _acInstallationCount = int.parse(value);
+              setState(() {});
+            },
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.count,
-                ),
-                onChanged: (value) {
-                  value.isEmpty
-                      ? _acInstallationCount = null
-                      : _acInstallationCount = int.parse(value);
-                  setState(() {});
-                },
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Text(AppLocalizations.of(context)!.estimate,
-                        style: Theme.of(context).textTheme.subtitle1)),
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Text(
-                        _acInstallationCount == null
-                            ? '\$-'
-                            : NumberFormat.currency(
-                                    locale: 'zh_HK',
-                                    symbol: '\$',
-                                    decimalDigits: 0)
-                                .format(_acInstallationCount! * 800), //TODO
-                        textAlign: TextAlign.right,
-                        style: Theme.of(context).textTheme.subtitle1)),
-              ],
-            )
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Text(AppLocalizations.of(context)!.estimate,
+                    style: Theme.of(context).textTheme.subtitle1)),
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Text(
+                    _acInstallationCount == null
+                        ? '\$-'
+                        : NumberFormat.currency(
+                                locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
+                            .format(_acInstallationCount! * 800), //TODO
+                    textAlign: TextAlign.right,
+                    style: Theme.of(context).textTheme.subtitle1)),
           ],
-        ),
-      ),
+        )
+      ],
     );
   }
 

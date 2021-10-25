@@ -5,10 +5,12 @@ import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
-  const RemodelingOptionsWidget({Key? key, required this.selectionMap})
+  const RemodelingOptionsWidget(
+      {Key? key, required this.selectionMap, required this.callBack})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
+  final Function callBack;
 
   @override
   State<RemodelingOptionsWidget> createState() =>
@@ -49,11 +51,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
     // Return a Card for one item, a Stepper for multiple items
     if (_selectedItemList.length == 1) {
-      return Column(children: [
-        Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _getSingleOptionCard(_selectedItemList[0]))
-      ]);
+      return _getSingleOptionWidget(_selectedItemList[0]);
     } else {
       List<Step> _stepList = [];
       for (var item in _selectedItemList) {
@@ -102,20 +100,26 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     }
   }
 
-  Card _getSingleOptionCard(RemodelingItem item) {
+  Widget _getSingleOptionWidget(RemodelingItem item) {
     String title = getRemodelingItemTitle(item, context);
-    return Card(
-        child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // todo needed?
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(title, style: _getOptionTitleTextStyle())),
-                _getLayoutByRemodelingItem(item)
-              ],
-            )));
+    return Column(
+      children: [
+        Card(
+            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(title, style: _getOptionTitleTextStyle())),
+                    _getLayoutByRemodelingItem(item)
+                  ],
+                )))
+      ],
+    );
   }
 
   Step _getOptionStep(RemodelingItem item) {
@@ -124,7 +128,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
             child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: _getLayoutByRemodelingItem(item))));
   }
 
@@ -147,11 +152,10 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getPaintingCardLayout() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextField(
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -165,44 +169,35 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             },
           ),
         ),
-        Row(
-          children: [
-            Expanded(
-              child: RadioListTile(
-                title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
-                value: true,
-                groupValue: _scrapeOldPaint,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _scrapeOldPaint = true;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-                child: RadioListTile(
-              title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
-              value: false,
-              groupValue: _scrapeOldPaint,
-              onChanged: (bool? value) {
-                setState(() {
-                  _scrapeOldPaint = false;
-                });
-              },
-            )),
-          ],
+        RadioListTile(
+          title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
+          value: true,
+          groupValue: _scrapeOldPaint,
+          onChanged: (bool? value) {
+            setState(() {
+              _scrapeOldPaint = true;
+            });
+          },
+        ),
+        RadioListTile(
+          title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
+          value: false,
+          groupValue: _scrapeOldPaint,
+          onChanged: (bool? value) {
+            setState(() {
+              _scrapeOldPaint = false;
+            });
+          },
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(AppLocalizations.of(context)!.estimate,
                     style: Theme.of(context).textTheme.subtitle1)),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                     _getPaintingEstimate() == null
                         ? '\$-'

@@ -45,5 +45,8 @@
 	"next_option": "Next",
 	"back": "Back",
 	"pick_a_day": "Pick a day",
-	"confirm_remodeling": "Confirm Scheduling"
+	"confirm_remodeling": "Confirm Scheduling",
+	"contact_number": "Contact Number",
+	"remodeling_address": "Remodeling Address",
+	"hong_kong_number_only": "Hong Kong number only"
 }

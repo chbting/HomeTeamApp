@@ -45,5 +45,8 @@
 	"next_option": "下一項",
 	"back": "返回",
 	"pick_a_day": "選擇日期",
-	"confirm_remodeling": "確認預約"
+	"confirm_remodeling": "確認預約",
+	"contact_number": "聯絡電話",
+	"remodeling_address": "裝修地址",
+	"hong_kong_number_only": "只限香港電話號碼"
 }

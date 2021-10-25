@@ -80,6 +80,32 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
             Expanded(
               child: _getActiveStepWidget(),
             ),
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.arrow_back),
+                      label: Text(AppLocalizations.of(context)!.back),
+                      onPressed: () {
+                        setState(() {
+                          _activeStep--;
+                        });
+                      },
+                    ),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.contact_phone),
+                      label:
+                          Text(AppLocalizations.of(context)!.address_and_phone),
+                      onPressed: () {
+                        setState(() {
+                          _activeStep++;
+                        });
+                      },
+                    )
+                  ],
+                ))
           ],
         ));
   }
@@ -102,7 +128,9 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   Widget _getActiveStepWidget() {
     switch (_activeStep) {
       case 0:
-        return RemodelingOptionsWidget(selectionMap: widget.selectionMap);
+        return RemodelingOptionsWidget(
+            selectionMap: widget.selectionMap,
+            callBack: () {}); // TODO get options values
       case 1:
         return Column(children: [
           Expanded(
@@ -110,36 +138,50 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
               padding: const EdgeInsets.all(8.0),
               child: Text(AppLocalizations.of(context)!.pick_a_day),
             ),
-          ),
-          Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  OutlinedButton.icon(
-                    icon: const Icon(Icons.arrow_back),
-                    label: Text(AppLocalizations.of(context)!.back),
-                    onPressed: () {
-                      setState(() {
-                        _activeStep--;
-                      });
-                    },
-                  ),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.contact_phone),
-                    label:
-                        Text(AppLocalizations.of(context)!.address_and_phone),
-                    onPressed: () {
-                      setState(() {
-                        _activeStep++;
-                      });
-                    },
-                  )
-                ],
-              ))
+          )
         ]);
+      case 2:
+        return Column(
+          children: [
+            Card(
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextField(
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: AppLocalizations.of(context)!
+                                      .remodeling_address,
+                                  icon: const Icon(Icons.location_pin)))),
+                      // todo district selector
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextField(
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  labelText: AppLocalizations.of(context)!
+                                      .contact_number,
+                                  hintText: '',
+                                  // todo and format
+                                  helperText: AppLocalizations.of(context)!
+                                      .hong_kong_number_only,
+                                  icon: const Icon(Icons.phone)))),
+                    ],
+                  ),
+                ))
+          ],
+        ); //TODO confirmation page
       default:
-        return Text('$_activeStep'); //TODO
+        return Container();
     }
   }
 }

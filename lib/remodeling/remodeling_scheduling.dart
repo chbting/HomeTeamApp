@@ -142,7 +142,8 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
           )
         ]);
       case 2:
-        return Wrap(
+        return ListView(
+          primary: false,
           children: [
             Card(
                 margin:

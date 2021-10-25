@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/properties/properties.dart';
@@ -27,6 +28,8 @@ class RootApp extends StatefulWidget {
 class RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // TODO check to see if orientation works on ipads
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {

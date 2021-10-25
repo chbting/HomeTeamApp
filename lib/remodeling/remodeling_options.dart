@@ -102,7 +102,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
   Widget _getSingleOptionWidget(RemodelingItem item) {
     String title = getRemodelingItemTitle(item, context);
-    return Column(
+    return ListView(
+      primary: false,
       children: [
         Card(
             margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -151,7 +152,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     return Container();
   }
 
-  Widget _getPaintingCardLayout() {// todo overflow when keyboard shows
+  Widget _getPaintingCardLayout() {
     return Wrap(
       children: [
         Padding(

@@ -167,7 +167,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                           ],
-                          //maxLength: 8,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               labelText:

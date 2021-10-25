@@ -35,9 +35,8 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
     return Scaffold(
         appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
-        floatingActionButton: AnimatedOpacity(
-            opacity: _activeStep == 3 ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 250),
+        floatingActionButton: Visibility(
+            visible: _activeStep == 3 ? true : false,
             child: FloatingActionButton.extended(
                 icon: const Icon(Icons.check),
                 label: Text(AppLocalizations.of(context)!.confirm_remodeling),

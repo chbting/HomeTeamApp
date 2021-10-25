@@ -163,9 +163,9 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                       // todo district selector
                       TextField(
                           keyboardType: TextInputType.phone,
+                          maxLength: 8,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            PhoneNumberTextInputFormatter()
                           ],
                           //maxLength: 8,
                           decoration: InputDecoration(
@@ -184,42 +184,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
         ); //TODO confirmation page
       default:
         return Container();
-    }
-  }
-}
-
-class PhoneNumberTextInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    const int maxLength = 8;
-    final int newTextLength = newValue.text.length;
-    final StringBuffer newText = StringBuffer();
-
-    if (newTextLength <= 4) {
-      return newValue;
-    }
-    if (newTextLength > maxLength) {
-      return oldValue;
-    }
-    if (newTextLength == 5 && newValue.text.length < oldValue.text.length) {
-      newText.write(newValue.text.substring(0, 4));
-      return TextEditingValue(
-          text: newText.toString(),
-          selection: oldValue.selection.baseOffset < 4
-              ? TextSelection.collapsed(offset: newValue.selection.baseOffset)
-              : TextSelection.collapsed(
-                  offset: newValue.selection.baseOffset - 1));
-    } else {
-      // Length between 6-9
-      newText.write(
-          '${newValue.text.substring(0, 4)}-${newValue.text.substring(4)}');
-      return TextEditingValue(
-          text: newText.toString(),
-          selection: oldValue.selection.baseOffset < 4
-              ? TextSelection.collapsed(offset: newValue.selection.baseOffset)
-              : TextSelection.collapsed(
-                  offset: newValue.selection.baseOffset + 1));
     }
   }
 }

@@ -17,7 +17,8 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //final _scaffoldKey = GlobalKey<ScaffoldState>();
   final Map<RemodelingItem, String> _titleMap = {};
   final Map<RemodelingItem, IconData> _iconMap = {};
   final List<RemodelingItem> _keyList = [];
@@ -65,7 +66,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
       child: Scaffold(
-          key: _scaffoldKey,
+          //key: _scaffoldKey, // todo mark what it does
           floatingActionButton: FloatingActionButton.extended(
               icon: const Icon(Icons.schedule),
               label: Text(AppLocalizations.of(context)!.schedule),

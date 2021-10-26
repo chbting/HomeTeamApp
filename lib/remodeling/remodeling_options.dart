@@ -6,10 +6,11 @@ import 'package:tner_client/remodeling/remodeling_items.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
-      {Key? key, required this.selectionMap, required this.callBack})
+      {Key? key, required this.selectionMap, required this.restorationId, required this.callBack})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
+  final String restorationId;
   final Function callBack;
 
   @override
@@ -17,10 +18,19 @@ class RemodelingOptionsWidget extends StatefulWidget {
       RemodelingOptionsWidgetState();
 }
 
-class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
-    with AutomaticKeepAliveClientMixin {
+class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with RestorationMixin{
   int _activeOption = 0;
   final List<RemodelingItem> _selectedItemList = [];
+
+  @override
+  String? get restorationId => widget.restorationId;
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    // TODO: implement restoreState
+    registerForRestoration(RestorableInt(456), 'paint_area_textField');
+    debugPrint('restore');//
+  }
 
   // Painting Card
   int? _paintArea;
@@ -33,12 +43,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   int? _acInstallationCount;
 
   @override
-  bool get wantKeepAlive => true;
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     // Initialize only once
     if (_selectedItemList.isEmpty) {
       widget.selectionMap.forEach((item, value) {
@@ -159,6 +169,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextField(
+            restorationId: 'paint_area_textField',
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             decoration: InputDecoration(

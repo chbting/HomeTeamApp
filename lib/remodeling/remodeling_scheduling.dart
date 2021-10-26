@@ -10,12 +10,10 @@ import 'package:tner_client/remodeling/remodeling_options.dart';
 import '../shared_preferences_helper.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
-  const RemodelingSchedulingScreen(
-      {Key? key, required this.selectionMap, this.restorationId})
+  const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
-  final String? restorationId;
 
   @override
   State<RemodelingSchedulingScreen> createState() =>
@@ -26,10 +24,15 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
     with AutomaticKeepAliveClientMixin {
   int _activeStep = 0;
 
-  // For date picker step
+  // For date picker
   late DateTime _datePicked;
   final _firstAvailableDay = 2;
   final _schedulingRange = 30;
+
+  // For contacts
+  String address = '';
+  String _phoneNumber = '';
+  late TextEditingController _phoneNumberFieldController;
 
   @override
   bool get wantKeepAlive => true; //todo needed?
@@ -37,6 +40,7 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   @override
   void initState() {
     super.initState();
+    _phoneNumberFieldController  = TextEditingController(text: _phoneNumber);
     DateTime now = DateTime.now();
     _datePicked = DateTime(now.year, now.month, now.day + _firstAvailableDay);
   }
@@ -118,12 +122,13 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
 
   Widget _getActiveStepWidget() {
     switch (_activeStep) {
-      case 0:
+      case 0: //todo get destroy when tapped away
         return RemodelingOptionsWidget(
             selectionMap: widget.selectionMap,
+            restorationId: 'remodeling_options',
             callBack: () {
-              debugPrint('callback');
-            }); // TODO get options values
+              debugPrint('callback'); // TODO get input values
+            });
       case 1:
         final now = DateTime.now();
         final firstDate =
@@ -200,6 +205,10 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
                           ],
+                          controller: _phoneNumberFieldController,
+                          onChanged: (value) {
+                            _phoneNumber = value; //todo
+                          },
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               labelText:

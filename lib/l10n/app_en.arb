@@ -48,5 +48,6 @@
 	"confirm_remodeling": "Confirm Scheduling",
 	"contact_number": "Contact Number",
 	"remodeling_address": "Remodeling Address",
-	"hong_kong_number_only": "Hong Kong number only"
+	"hong_kong_number_only": "Hong Kong number only",
+	"remodeling_start_date": "Remodeling Start Date"
 }

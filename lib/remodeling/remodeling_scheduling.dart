@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/remodeling_options.dart';
+
+import '../shared_preferences_helper.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
   const RemodelingSchedulingScreen(
@@ -20,72 +23,22 @@ class RemodelingSchedulingScreen extends StatefulWidget {
 }
 
 class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
-    with AutomaticKeepAliveClientMixin, RestorationMixin {
+    with AutomaticKeepAliveClientMixin {
   int _activeStep = 0;
 
+  // For date picker step
+  late DateTime _datePicked;
+  final _firstAvailableDay = 2;
+  final _schedulingRange = 30;
+
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => true; //todo needed?
 
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  String? get restorationId => widget.restorationId;
-
-  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime(
-      DateTime.now().year, DateTime.now().month, DateTime.now().day + 2));
-  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
-      RestorableRouteFuture<DateTime?>(
-    onComplete: _selectDate,
-    onPresent: (NavigatorState navigator, Object? arguments) {
-      return navigator.restorablePush(
-        _datePickerRoute,
-        arguments: _selectedDate.value.millisecondsSinceEpoch,
-      );
-    },
-  );
-
-  static Route<DateTime> _datePickerRoute(
-    BuildContext context,
-    Object? arguments,
-  ) {
-    final DateTime now = DateTime.now();
-    final firstDate = DateTime(now.year, now.month, now.day + 2);
-    final lateDate =
-        DateTime(firstDate.year, firstDate.month, firstDate.day + 30);
-    return DialogRoute<DateTime>(
-      context: context,
-      builder: (BuildContext context) {
-        return DatePickerDialog(
-          restorationId: 'date_picker_dialog',
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: firstDate,
-          lastDate: lateDate,
-        );
-      },
-    );
-  }
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_selectedDate, 'selected_date');
-    registerForRestoration(
-        _restorableDatePickerRouteFuture, 'date_picker_route_future');
-  }
-
-  void _selectDate(DateTime? newSelectedDate) {
-    if (newSelectedDate != null) {
-      setState(() {
-        _selectedDate.value = newSelectedDate;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-              'Selected: ${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}'),
-        ));
-      });
-    }
+    DateTime now = DateTime.now();
+    _datePicked = DateTime(now.year, now.month, now.day + _firstAvailableDay);
   }
 
   @override
@@ -172,20 +125,54 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
               debugPrint('callback');
             }); // TODO get options values
       case 1:
-        // showDatePicker(
-        //     context: context,
-        //     initialDate: firstDate,
-        //     firstDate: firstDate,
-        //     lastDate: lateDate);
-
-        return Center(
-          child: OutlinedButton(
-            onPressed: () {
-              _restorableDatePickerRouteFuture.present();
-            },
-            child: const Text('Open Date Picker'),
-          ),
-        );
+        final now = DateTime.now();
+        final firstDate =
+            DateTime(now.year, now.month, now.day + _firstAvailableDay);
+        final lastDate = DateTime(
+            firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
+        if (_datePicked.isBefore(firstDate)) {
+          _datePicked = firstDate;
+        }
+        return ListView(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            children: [
+              Card(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: CalendarDatePicker(
+                        initialDate: _datePicked,
+                        firstDate: firstDate,
+                        lastDate: lastDate,
+                        onDateChanged: (DateTime value) {
+                          setState(() {
+                            _datePicked = value;
+                          });
+                        })),
+              ),
+              Card(
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 16.0),
+                    child: Wrap(
+                      direction: Axis.vertical,
+                      spacing: 16.0,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.remodeling_start_date,
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                        Text(
+                          DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
+                                  .getLocale()
+                                  .languageCode)
+                              .format(_datePicked),
+                          style: Theme.of(context).textTheme.subtitle1,
+                        )
+                      ],
+                    )),
+              )
+            ]);
       case 2:
         return ListView(
           primary: false,
@@ -226,7 +213,14 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                   ),
                 ))
           ],
-        ); //TODO confirmation page
+        );
+      case 3:
+        return ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          children: [
+            // TODO
+          ],
+        );
       default:
         return Container();
     }
@@ -249,7 +243,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                         MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
                     // 48.0 is the height of extended fab
                     shape: const StadiumBorder()),
-                // todo fab height
                 onPressed: () {
                   setState(() {
                     if (_activeStep > 0) {

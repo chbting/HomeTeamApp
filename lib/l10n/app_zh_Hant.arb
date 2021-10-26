@@ -48,5 +48,6 @@
 	"confirm_remodeling": "確認預約",
 	"contact_number": "聯絡電話",
 	"remodeling_address": "裝修地址",
-	"hong_kong_number_only": "只限香港電話號碼"
+	"hong_kong_number_only": "只限香港電話號碼",
+	"remodeling_start_date": "裝修開始日期"
 }

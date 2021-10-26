@@ -7,10 +7,12 @@ import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/remodeling_options.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
-  const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
+  const RemodelingSchedulingScreen(
+      {Key? key, required this.selectionMap, this.restorationId})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
+  final String? restorationId;
 
   @override
   State<RemodelingSchedulingScreen> createState() =>
@@ -18,7 +20,7 @@ class RemodelingSchedulingScreen extends StatefulWidget {
 }
 
 class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, RestorationMixin {
   int _activeStep = 0;
 
   @override
@@ -30,6 +32,63 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   }
 
   @override
+  String? get restorationId => widget.restorationId;
+
+  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime(
+      DateTime.now().year, DateTime.now().month, DateTime.now().day + 2));
+  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
+      RestorableRouteFuture<DateTime?>(
+    onComplete: _selectDate,
+    onPresent: (NavigatorState navigator, Object? arguments) {
+      return navigator.restorablePush(
+        _datePickerRoute,
+        arguments: _selectedDate.value.millisecondsSinceEpoch,
+      );
+    },
+  );
+
+  static Route<DateTime> _datePickerRoute(
+    BuildContext context,
+    Object? arguments,
+  ) {
+    final DateTime now = DateTime.now();
+    final firstDate = DateTime(now.year, now.month, now.day + 2);
+    final lateDate =
+        DateTime(firstDate.year, firstDate.month, firstDate.day + 30);
+    return DialogRoute<DateTime>(
+      context: context,
+      builder: (BuildContext context) {
+        return DatePickerDialog(
+          restorationId: 'date_picker_dialog',
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
+          initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
+          firstDate: firstDate,
+          lastDate: lateDate,
+        );
+      },
+    );
+  }
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_selectedDate, 'selected_date');
+    registerForRestoration(
+        _restorableDatePickerRouteFuture, 'date_picker_route_future');
+  }
+
+  void _selectDate(DateTime? newSelectedDate) {
+    if (newSelectedDate != null) {
+      setState(() {
+        _selectedDate.value = newSelectedDate;
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(
+              'Selected: ${_selectedDate.value.day}/${_selectedDate.value.month}/${_selectedDate.value.year}'),
+        ));
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
     // TODO backpressed warning: quit scheduling?
@@ -37,13 +96,16 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
         appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
         floatingActionButton: Visibility(
-            visible: _activeStep == 3 ? true : false,
+            visible: _activeStep == 0 ? true : false,
             child: FloatingActionButton.extended(
-                icon: const Icon(Icons.check),
-                label: Text(AppLocalizations.of(context)!.confirm_remodeling),
-                onPressed: () {
-                  //TODO send order
-                })),
+              onPressed: () {
+                setState(() {
+                  _activeStep++;
+                });
+              },
+              label: Text(AppLocalizations.of(context)!.next),
+              icon: const Icon(Icons.arrow_forward),
+            )),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,32 +143,7 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
             Expanded(
               child: _getActiveStepWidget(),
             ),
-            Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    OutlinedButton.icon(
-                      icon: const Icon(Icons.arrow_back),
-                      label: Text(AppLocalizations.of(context)!.back),
-                      onPressed: () {
-                        setState(() {
-                          _activeStep--;
-                        });
-                      },
-                    ),
-                    ElevatedButton.icon(
-                      icon: const Icon(Icons.contact_phone),
-                      label:
-                          Text(AppLocalizations.of(context)!.address_and_phone),
-                      onPressed: () {
-                        setState(() {
-                          _activeStep++;
-                        });
-                      },
-                    )
-                  ],
-                ))
+            _getBottomButtons()
           ],
         ));
   }
@@ -131,16 +168,24 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
       case 0:
         return RemodelingOptionsWidget(
             selectionMap: widget.selectionMap,
-            callBack: () {}); // TODO get options values
+            callBack: () {
+              debugPrint('callback');
+            }); // TODO get options values
       case 1:
-        return Column(children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(AppLocalizations.of(context)!.pick_a_day),
-            ),
-          )
-        ]);
+        // showDatePicker(
+        //     context: context,
+        //     initialDate: firstDate,
+        //     firstDate: firstDate,
+        //     lastDate: lateDate);
+
+        return Center(
+          child: OutlinedButton(
+            onPressed: () {
+              _restorableDatePickerRouteFuture.present();
+            },
+            child: const Text('Open Date Picker'),
+          ),
+        );
       case 2:
         return ListView(
           primary: false,
@@ -184,6 +229,59 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
         ); //TODO confirmation page
       default:
         return Container();
+    }
+  }
+
+  Widget _getBottomButtons() {
+    if (_activeStep == 0) {
+      return Container();
+    } else {
+      return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              OutlinedButton.icon(
+                icon: const Icon(Icons.arrow_back),
+                label: Text(AppLocalizations.of(context)!.back),
+                style: OutlinedButton.styleFrom(
+                    minimumSize: Size(
+                        MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                    // 48.0 is the height of extended fab
+                    shape: const StadiumBorder()),
+                // todo fab height
+                onPressed: () {
+                  setState(() {
+                    if (_activeStep > 0) {
+                      _activeStep--;
+                    }
+                  });
+                },
+              ),
+              ElevatedButton.icon(
+                icon: Icon(_activeStep < 3 ? Icons.arrow_forward : Icons.check),
+                label: Text(_activeStep < 3
+                    ? AppLocalizations.of(context)!.next
+                    : AppLocalizations.of(context)!.confirm_remodeling),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: Size(
+                        MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                    shape: const StadiumBorder()),
+                onPressed: () {
+                  setState(() {
+                    if (_activeStep != 0) {
+                      // prevent quick tab crashes
+                      if (_activeStep < 3) {
+                        _activeStep++;
+                      } else {
+                        // todo send order
+                      }
+                    }
+                  });
+                },
+              )
+            ],
+          ));
     }
   }
 }

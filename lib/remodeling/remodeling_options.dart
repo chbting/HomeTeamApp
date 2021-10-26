@@ -27,8 +27,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   bool? _scrapeOldPaint;
 
   // Painting Card
-  int? _wallCoveringsArea, _wallCoveringsRooms;
-  bool? _removeOldWallCoverings;
+  int? _wallCoveringsArea;
 
   // AC Installation Card
   int? _acInstallationCount;
@@ -80,20 +79,22 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onStepCancel: () {
             if (_activeOption > 0) {
               setState(() {
-                _activeOption -= 1;
+                _activeOption--;
               });
             }
           },
           onStepContinue: () {
             if (_activeOption < _stepList.length - 1) {
               setState(() {
-                _activeOption += 1;
+                _activeOption++;
+                widget.callBack;
               });
             }
           },
           onStepTapped: (int index) {
             setState(() {
               _activeOption = index;
+              widget.callBack;
             });
           },
           steps: _stepList);
@@ -217,78 +218,20 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.area_sq_ft,
-                ),
-                onChanged: (value) {
-                  value.isEmpty
-                      ? _wallCoveringsArea = null
-                      : _wallCoveringsArea = int.parse(value);
-                  setState(() {});
-                },
-              ),
-            )),
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: AppLocalizations.of(context)!.number_of_rooms,
-                ),
-                onChanged: (value) {
-                  value.isEmpty
-                      ? _wallCoveringsRooms = null
-                      : _wallCoveringsRooms = int.parse(value);
-                  setState(() {});
-                },
-              ),
-            )),
-          ],
-        ),
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text(AppLocalizations.of(context)!.scrape_old_paint,
-                style: Theme.of(context).textTheme.subtitle1)),
-        Row(
-          children: [
-            Expanded(
-              child: RadioListTile(
-                title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
-                value: true,
-                groupValue: _removeOldWallCoverings,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _removeOldWallCoverings = true;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-                child: RadioListTile(
-              title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
-              value: false,
-              groupValue: _removeOldWallCoverings,
-              onChanged: (bool? value) {
-                setState(() {
-                  _removeOldWallCoverings = false;
-                });
-              },
-            )),
-          ],
+        TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: AppLocalizations.of(context)!.area_sq_ft,
+          ),
+          onChanged: (value) {
+            value.isEmpty
+                ? _wallCoveringsArea = null
+                : _wallCoveringsArea = int.parse(value);
+            setState(() {});
+          },
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -400,14 +343,10 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
   // TODO
   int? _getWallCoveringsEstimate() {
-    if (_wallCoveringsArea == null ||
-        _wallCoveringsRooms == null ||
-        _removeOldWallCoverings == null) {
+    if (_wallCoveringsArea == null) {
       return null;
     } else {
-      return _removeOldWallCoverings!
-          ? (_wallCoveringsArea! + _wallCoveringsRooms!) * 2
-          : _wallCoveringsArea! + _wallCoveringsRooms!;
+      return 100;
     }
   }
 }

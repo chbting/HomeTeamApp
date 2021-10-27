@@ -20,7 +20,7 @@ class RemodelingOptionsWidget extends StatefulWidget {
 
 class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
-  int _activeOption = 0; // TODO do not show fab until reaching the last item
+  int _activeOption = 0;
   final List<RemodelingItem> _selectedItemList = [];
 
   // Painting Card

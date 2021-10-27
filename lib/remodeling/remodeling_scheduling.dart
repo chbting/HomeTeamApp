@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:intl/intl.dart';
+import 'package:tner_client/remodeling/remodeling_contacts.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/remodeling_options.dart';
 
@@ -33,13 +33,6 @@ class RemodelingSchedulingScreenState
   late DateTime _datePicked;
   final _firstAvailableDay = 2;
   final _schedulingRange = 30;
-
-  // For contacts
-  String _addressLine1 = '';
-  String _addressLine2 = '';
-  String _addressLine3 = '';
-  String _district = '';
-  String _phoneNumber = '';
 
   @override
   void initState() {
@@ -97,7 +90,6 @@ class RemodelingSchedulingScreenState
             Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                //todo 24 hori
                 child: Text(_getStepTitle(),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Theme.of(context).colorScheme.secondary))),
@@ -114,7 +106,7 @@ class RemodelingSchedulingScreenState
                         }); // TODO crashes at single item
                       }),
                   _remodelingDatePickerWidget(),
-                  _remodelingContactsWidget(),
+                  const RemodelingContactsWidget(),
                   _remodelingConfirmationWidget()
                 ],
               ),
@@ -131,7 +123,7 @@ class RemodelingSchedulingScreenState
       case 1:
         return AppLocalizations.of(context)!.pick_a_day;
       case 2:
-        return AppLocalizations.of(context)!.address_and_phone;
+        return AppLocalizations.of(context)!.remodeling_address_and_contacts;
       case 3:
         return AppLocalizations.of(context)!.confirm;
       default:
@@ -169,13 +161,13 @@ class RemodelingSchedulingScreenState
       _datePicked = firstDate;
     }
     return ListView(
-        // note: ListView has 4.0 internal padding on all sides,
-        // thus these values are offset
+        // note: ListView with CalendarDatePicker has 4.0 internal padding on
+        // all sides, thus these values are offset
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
         children: [
           Card(
             child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: CalendarDatePicker(
                     initialDate: _datePicked,
                     firstDate: firstDate,
@@ -186,84 +178,41 @@ class RemodelingSchedulingScreenState
                       });
                     })),
           ),
-          Card(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16.0, horizontal: 16.0),
-                child: Wrap(
-                  direction: Axis.vertical,
-                  spacing: 16.0,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.remodeling_start_date,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
-                              .getLocale()
-                              .languageCode)
-                          .format(_datePicked),
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )
-                  ],
-                )),
-          )
+          _remodelingDateCard(),
         ]);
-  }
-
-  Widget _remodelingContactsWidget() {
-    return ListView(
-      primary: false,
-      children: [
-        Card(
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Wrap(
-                runSpacing: 16.0,
-                children: [
-                  TextField(
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText:
-                              AppLocalizations.of(context)!.remodeling_address,
-                          icon: const Icon(Icons.location_pin))),
-                  // todo district selector
-                  TextField(
-                      keyboardType: TextInputType.phone,
-                      maxLength: 8,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      onChanged: (value) {
-                        _phoneNumber = value;
-                      },
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText:
-                              AppLocalizations.of(context)!.contact_number,
-                          helperText: AppLocalizations.of(context)!
-                              .hong_kong_number_only,
-                          icon: const Icon(Icons.phone)))
-                ],
-              ),
-            ))
-      ],
-    );
   }
 
   Widget _remodelingConfirmationWidget() {
     return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      children: [
-        // TODO
-      ],
+      children: [_remodelingDateCard()],
     );
   }
 
-  Widget _getBottomButtons() {
+  Widget _remodelingDateCard() {
+    return Card(
+      child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Wrap(
+            direction: Axis.vertical,
+            spacing: 8.0,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.remodeling_start_date,
+                style: Theme.of(context).textTheme.caption,
+              ),
+              Text(
+                DateFormat.yMMMMEEEEd(
+                        SharedPreferencesHelper().getLocale().languageCode)
+                    .format(_datePicked),
+                style: Theme.of(context).textTheme.subtitle1,
+              )
+            ],
+          )),
+    );
+  }
+
+  Widget _getBottomButtons() {// todo should not go up when keyboard shows
     if (_activeStep == 0) {
       return Container();
     } else {

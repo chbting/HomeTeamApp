@@ -25,6 +25,9 @@ class RemodelingSchedulingScreenState
   final PageController _pageController = PageController(initialPage: 0);
   int _activeStep = 0;
 
+  // For options
+  bool _remodelingOptionsAtBottom = false;
+
   // For date picker
   late DateTime _datePicked;
   final _firstAvailableDay = 2;
@@ -36,12 +39,10 @@ class RemodelingSchedulingScreenState
   String _addressLine3 = '';
   String _district = '';
   String _phoneNumber = '';
-  late TextEditingController _phoneNumberFieldController;
 
   @override
   void initState() {
     super.initState();
-    _phoneNumberFieldController = TextEditingController(text: _phoneNumber);
     DateTime now = DateTime.now();
     _datePicked = DateTime(now.year, now.month, now.day + _firstAvailableDay);
   }
@@ -53,7 +54,8 @@ class RemodelingSchedulingScreenState
         appBar: AppBar(
             title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
         floatingActionButton: Visibility(
-            visible: _activeStep == 0 ? true : false,
+            visible:
+                _activeStep == 0 && _remodelingOptionsAtBottom ? true : false,
             child: FloatingActionButton.extended(
               onPressed: () {
                 _nextStep();
@@ -103,8 +105,10 @@ class RemodelingSchedulingScreenState
                 children: [
                   RemodelingOptionsWidget(
                       selectionMap: widget.selectionMap,
-                      callBack: () {
-                        debugPrint('callback'); // TODO get input values
+                      callBack: (value) {
+                        setState(() {
+                          _remodelingOptionsAtBottom = value;
+                        }); // TODO crashes at single item
                       }),
                   _remodelingDatePickerWidget(),
                   _remodelingContactsWidget(),
@@ -228,7 +232,6 @@ class RemodelingSchedulingScreenState
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                       ],
-                      controller: _phoneNumberFieldController,
                       onChanged: (value) {
                         _phoneNumber = value; //todo
                       },

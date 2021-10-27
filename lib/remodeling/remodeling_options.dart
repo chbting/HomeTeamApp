@@ -24,7 +24,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   final List<RemodelingItem> _selectedItemList = [];
 
   // Painting Card
-  int? _paintArea;
+  int? paintArea;
   bool? _scrapeOldPaint;
 
   // Painting Card
@@ -55,6 +55,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
     // Return a Card for one item, a Stepper for multiple items
     if (_selectedItemList.length == 1) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        widget.callBack(true);
+      });
       return _getSingleOptionWidget(_selectedItemList[0]);
     } else {
       List<Step> _stepList = [];
@@ -85,6 +88,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             if (_activeOption > 0) {
               setState(() {
                 _activeOption--;
+                _notifyIsRemodelingOptionsAtBottom(_stepList.length);
               });
             }
           },
@@ -92,17 +96,25 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             if (_activeOption < _stepList.length - 1) {
               setState(() {
                 _activeOption++;
-                widget.callBack(); //todo
+                _notifyIsRemodelingOptionsAtBottom(_stepList.length);
               });
             }
           },
           onStepTapped: (int index) {
             setState(() {
               _activeOption = index;
-              widget.callBack(); //todo
+              _notifyIsRemodelingOptionsAtBottom(_stepList.length);
             });
           },
           steps: _stepList);
+    }
+  }
+
+  void _notifyIsRemodelingOptionsAtBottom(int numberOfSteps) {
+    if (_activeOption == numberOfSteps - 1) {
+      widget.callBack(true);
+    } else {
+      widget.callBack(false);
     }
   }
 
@@ -171,7 +183,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               labelText: AppLocalizations.of(context)!.area_sq_ft,
             ),
             onChanged: (value) {
-              value.isEmpty ? _paintArea = null : _paintArea = int.parse(value);
+              value.isEmpty ? paintArea = null : paintArea = int.parse(value);
               setState(() {});
             },
           ),
@@ -206,12 +218,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                    _paintArea == null || _scrapeOldPaint == null
+                    paintArea == null || _scrapeOldPaint == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
                             .format(RemodelingPricing.getPaintingEstimate(
-                                _paintArea!, _scrapeOldPaint!)),
+                                paintArea!, _scrapeOldPaint!)),
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],

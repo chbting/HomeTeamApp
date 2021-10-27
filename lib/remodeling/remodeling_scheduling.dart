@@ -111,7 +111,7 @@ class RemodelingSchedulingScreenState
                 ],
               ),
             ),
-            _getBottomButtons()
+            _bottomButtons()
           ],
         ));
   }
@@ -133,6 +133,7 @@ class RemodelingSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
+      FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep++;
       });
@@ -143,6 +144,7 @@ class RemodelingSchedulingScreenState
 
   void _previousStep() {
     if (_activeStep > 0) {
+      FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep--;
       });
@@ -164,6 +166,7 @@ class RemodelingSchedulingScreenState
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
         // all sides, thus these values are offset
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+        primary: false,
         children: [
           Card(
             child: Padding(
@@ -184,6 +187,7 @@ class RemodelingSchedulingScreenState
 
   Widget _remodelingConfirmationWidget() {
     return ListView(
+      primary: false,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       children: [_remodelingDateCard()],
     );
@@ -212,7 +216,7 @@ class RemodelingSchedulingScreenState
     );
   }
 
-  Widget _getBottomButtons() {// todo should not go up when keyboard shows
+  Widget _bottomButtons() {// todo should not go up when keyboard shows
     if (_activeStep == 0) {
       return Container();
     } else {

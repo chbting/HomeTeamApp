@@ -1,33 +1,37 @@
 class RemodelingPricing {
-  
-  static int getPaintingEstimate(int paintArea, bool scrapeOldPaint) {
+  static int getPaintingEstimate(int area, bool scrapeOldPaint) {
       if (scrapeOldPaint) {
-        if (paintArea < 500) {
+        if (area < 500) {
           return 28000;
         }
-        if (paintArea < 600) {
+        if (area < 600) {
           return 38000;
         }
-        if (paintArea < 700) {
+        if (area < 700) {
           return 46000;
         }
-        if (paintArea < 800) {
+        if (area < 800) {
           return 55000;
         }
       } else {
-        if (paintArea < 500) {
+        if (area < 500) {
           return 16000;
         }
-        if (paintArea < 600) {
+        if (area < 600) {
           return 19000;
         }
-        if (paintArea < 700) {
+        if (area < 700) {
           return 22000;
         }
-        if (paintArea < 800) {
+        if (area < 800) {
           return 26500;
         }
       }
       return -1; // todo
+  }
+
+  // TODO
+  static int getWallCoveringsEstimate(int area) {
+    return 100*area;
   }
 }

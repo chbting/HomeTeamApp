@@ -18,14 +18,14 @@ class RemodelingOptionsWidget extends StatefulWidget {
       RemodelingOptionsWidgetState();
 }
 
-class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
-  int _activeOption = 0;
+class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
+    with AutomaticKeepAliveClientMixin {
+  int _activeOption = 0; // TODO do not show fab until reaching the last item
   final List<RemodelingItem> _selectedItemList = [];
 
   // Painting Card
   int? _paintArea;
   bool? _scrapeOldPaint;
-  late TextEditingController _paintAreaFieldController;
 
   // Painting Card
   int? _wallCoveringsArea;
@@ -34,14 +34,16 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
   int? _acInstallationCount;
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   void initState() {
     super.initState();
-    _paintAreaFieldController = TextEditingController(
-        text: _paintArea == null ? '' : _paintArea.toString());
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     // Initialize only once
     if (_selectedItemList.isEmpty) {
       widget.selectionMap.forEach((item, value) {
@@ -90,14 +92,14 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
             if (_activeOption < _stepList.length - 1) {
               setState(() {
                 _activeOption++;
-                widget.callBack;
+                widget.callBack(); //todo
               });
             }
           },
           onStepTapped: (int index) {
             setState(() {
               _activeOption = index;
-              widget.callBack;
+              widget.callBack(); //todo
             });
           },
           steps: _stepList);
@@ -164,7 +166,6 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
           child: TextField(
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            controller: _paintAreaFieldController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: AppLocalizations.of(context)!.area_sq_ft,
@@ -250,11 +251,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Text(
-                    _getWallCoveringsEstimate() == null
+                    _wallCoveringsArea == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(_getWallCoveringsEstimate()),
+                            .format(RemodelingPricing.getWallCoveringsEstimate(
+                                _wallCoveringsArea!)),
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],
@@ -311,13 +313,4 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
 
   TextStyle _getOptionTitleTextStyle() =>
       Theme.of(context).textTheme.subtitle1!;
-
-  // TODO
-  int? _getWallCoveringsEstimate() {
-    if (_wallCoveringsArea == null) {
-      return null;
-    } else {
-      return 100;
-    }
-  }
 }

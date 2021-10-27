@@ -20,8 +20,9 @@ class RemodelingSchedulingScreen extends StatefulWidget {
       RemodelingSchedulingScreenState();
 }
 
-class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
-    with AutomaticKeepAliveClientMixin {
+class RemodelingSchedulingScreenState
+    extends State<RemodelingSchedulingScreen> {
+  final PageController _pageController = PageController(initialPage: 0);
   int _activeStep = 0;
 
   // For date picker
@@ -38,9 +39,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   late TextEditingController _phoneNumberFieldController;
 
   @override
-  bool get wantKeepAlive => true; //todo needed?
-
-  @override
   void initState() {
     super.initState();
     _phoneNumberFieldController = TextEditingController(text: _phoneNumber);
@@ -50,7 +48,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     // TODO backpressed warning: quit scheduling?
     return Scaffold(
         appBar: AppBar(
@@ -59,9 +56,8 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
             visible: _activeStep == 0 ? true : false,
             child: FloatingActionButton.extended(
               onPressed: () {
-                setState(() {
-                  _activeStep++;
-                });
+                _nextStep();
+                // todo perform check and retrieve data
               },
               label: Text(AppLocalizations.of(context)!.next),
               icon: const Icon(Icons.arrow_forward),
@@ -101,7 +97,20 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Theme.of(context).colorScheme.secondary))),
             Expanded(
-              child: _getActiveStepWidget(),
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  RemodelingOptionsWidget(
+                      selectionMap: widget.selectionMap,
+                      callBack: () {
+                        debugPrint('callback'); // TODO get input values
+                      }),
+                  _remodelingDatePickerWidget(),
+                  _remodelingContactsWidget(),
+                  _remodelingConfirmationWidget()
+                ],
+              ),
             ),
             _getBottomButtons()
           ],
@@ -123,118 +132,129 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
     }
   }
 
-  Widget _getActiveStepWidget() {
-    switch (_activeStep) {
-      case 0: //todo get destroy when tapped away
-        return RemodelingOptionsWidget(
-            selectionMap: widget.selectionMap,
-            callBack: () {
-              debugPrint('callback'); // TODO get input values
-            });
-      case 1:
-        final now = DateTime.now();
-        final firstDate =
-            DateTime(now.year, now.month, now.day + _firstAvailableDay);
-        final lastDate = DateTime(
-            firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
-        if (_datePicked.isBefore(firstDate)) {
-          _datePicked = firstDate;
-        }
-        return ListView(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            children: [
-              Card(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: CalendarDatePicker(
-                        initialDate: _datePicked,
-                        firstDate: firstDate,
-                        lastDate: lastDate,
-                        onDateChanged: (DateTime value) {
-                          setState(() {
-                            _datePicked = value;
-                          });
-                        })),
-              ),
-              Card(
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 16.0, horizontal: 16.0),
-                    child: Wrap(
-                      direction: Axis.vertical,
-                      spacing: 16.0,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.remodeling_start_date,
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                        Text(
-                          DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
-                                  .getLocale()
-                                  .languageCode)
-                              .format(_datePicked),
-                          style: Theme.of(context).textTheme.subtitle1,
-                        )
-                      ],
-                    )),
-              )
-            ]);
-      case 2:
-        return ListView(
-          primary: false,
-          children: [
-            Card(
-                margin:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Wrap(
-                    runSpacing: 16.0,
-                    children: [
-                      TextField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: AppLocalizations.of(context)!
-                                  .remodeling_address,
-                              icon: const Icon(Icons.location_pin))),
-                      // todo district selector
-                      TextField(
-                          keyboardType: TextInputType.phone,
-                          maxLength: 8,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          controller: _phoneNumberFieldController,
-                          onChanged: (value) {
-                            _phoneNumber = value; //todo
-                          },
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText:
-                                  AppLocalizations.of(context)!.contact_number,
-                              hintText: '',
-                              // todo and format
-                              helperText: AppLocalizations.of(context)!
-                                  .hong_kong_number_only,
-                              icon: const Icon(Icons.phone)))
-                    ],
-                  ),
-                ))
-          ],
-        );
-      case 3:
-        return ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          children: [
-            // TODO
-          ],
-        );
-      default:
-        return Container();
+  void _nextStep() {
+    if (_activeStep < 3) {
+      setState(() {
+        _activeStep++;
+      });
+      _pageController.nextPage(
+          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
     }
+  }
+
+  void _previousStep() {
+    if (_activeStep > 0) {
+      setState(() {
+        _activeStep--;
+      });
+      _pageController.previousPage(
+          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+    }
+  }
+
+  Widget _remodelingDatePickerWidget() {
+    final now = DateTime.now();
+    final firstDate =
+        DateTime(now.year, now.month, now.day + _firstAvailableDay);
+    final lastDate = DateTime(
+        firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
+    if (_datePicked.isBefore(firstDate)) {
+      _datePicked = firstDate;
+    }
+    return ListView(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        children: [
+          Card(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: CalendarDatePicker(
+                    initialDate: _datePicked,
+                    firstDate: firstDate,
+                    lastDate: lastDate,
+                    onDateChanged: (DateTime value) {
+                      setState(() {
+                        _datePicked = value;
+                      });
+                    })),
+          ),
+          Card(
+            child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 16.0, horizontal: 16.0),
+                child: Wrap(
+                  direction: Axis.vertical,
+                  spacing: 16.0,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.remodeling_start_date,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    Text(
+                      DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
+                              .getLocale()
+                              .languageCode)
+                          .format(_datePicked),
+                      style: Theme.of(context).textTheme.subtitle1,
+                    )
+                  ],
+                )),
+          )
+        ]);
+  }
+
+  Widget _remodelingContactsWidget() {
+    return ListView(
+      primary: false,
+      children: [
+        Card(
+            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Wrap(
+                runSpacing: 16.0,
+                children: [
+                  TextField(
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText:
+                              AppLocalizations.of(context)!.remodeling_address,
+                          icon: const Icon(Icons.location_pin))),
+                  // todo district selector
+                  TextField(
+                      keyboardType: TextInputType.phone,
+                      maxLength: 8,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      controller: _phoneNumberFieldController,
+                      onChanged: (value) {
+                        _phoneNumber = value; //todo
+                      },
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText:
+                              AppLocalizations.of(context)!.contact_number,
+                          hintText: '',
+                          // todo and format
+                          helperText: AppLocalizations.of(context)!
+                              .hong_kong_number_only,
+                          icon: const Icon(Icons.phone)))
+                ],
+              ),
+            ))
+      ],
+    );
+  }
+
+  Widget _remodelingConfirmationWidget() {
+    return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      children: [
+        // TODO
+      ],
+    );
   }
 
   Widget _getBottomButtons() {
@@ -255,11 +275,7 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                     // 48.0 is the height of extended fab
                     shape: const StadiumBorder()),
                 onPressed: () {
-                  setState(() {
-                    if (_activeStep > 0) {
-                      _activeStep--;
-                    }
-                  });
+                  _previousStep();
                 },
               ),
               ElevatedButton.icon(
@@ -273,13 +289,10 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
                     shape: const StadiumBorder()),
                 onPressed: () {
                   setState(() {
-                    if (_activeStep != 0) {
-                      // prevent quick tab crashes
-                      if (_activeStep < 3) {
-                        _activeStep++;
-                      } else {
-                        // todo send order
-                      }
+                    if (_activeStep == 3) {
+                      // todo send order
+                    } else {
+                      _nextStep();
                     }
                   });
                 },

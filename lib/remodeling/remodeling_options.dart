@@ -233,35 +233,34 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getWallCoveringsCardLayout() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
       children: [
-        TextField(
-          keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: AppLocalizations.of(context)!.area_sq_ft,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: TextField(
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: AppLocalizations.of(context)!.area_sq_ft,
+            ),
+            onChanged: (value) {
+              value.isEmpty
+                  ? _wallCoveringsArea = null
+                  : _wallCoveringsArea = int.parse(value);
+              setState(() {});
+            },
           ),
-          onChanged: (value) {
-            value.isEmpty
-                ? _wallCoveringsArea = null
-                : _wallCoveringsArea = int.parse(value);
-            setState(() {});
-          },
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(AppLocalizations.of(context)!.estimate,
                     style: Theme.of(context).textTheme.subtitle1)),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                     _wallCoveringsArea == null
                         ? '\$-'

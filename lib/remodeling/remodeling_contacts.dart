@@ -56,7 +56,6 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                     child: TextField(
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
-                        // todo doesn't go to district field without scrolling first
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: AppLocalizations.of(context)!

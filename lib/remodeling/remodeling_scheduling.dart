@@ -103,7 +103,7 @@ class RemodelingSchedulingScreenState
                       callBack: (value) {
                         setState(() {
                           _remodelingOptionsAtBottom = value;
-                        }); // TODO crashes at single item
+                        });
                       }),
                   _remodelingDatePickerWidget(),
                   const RemodelingContactsWidget(),
@@ -111,7 +111,7 @@ class RemodelingSchedulingScreenState
                 ],
               ),
             ),
-            _bottomButtons()
+            //_bottomButtons() //todo cause next focus scrolling to break
           ],
         ));
   }
@@ -216,7 +216,8 @@ class RemodelingSchedulingScreenState
     );
   }
 
-  Widget _bottomButtons() {// todo should not go up when keyboard shows
+  Widget _bottomButtons() {
+    // todo should not go up when keyboard shows
     if (_activeStep == 0) {
       return Container();
     } else {

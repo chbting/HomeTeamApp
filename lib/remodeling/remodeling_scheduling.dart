@@ -30,7 +30,10 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   final _schedulingRange = 30;
 
   // For contacts
-  String address = '';
+  String _addressLine1 = '';
+  String _addressLine2 = '';
+  String _addressLine3 = '';
+  String _district = '';
   String _phoneNumber = '';
   late TextEditingController _phoneNumberFieldController;
 
@@ -40,7 +43,7 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
   @override
   void initState() {
     super.initState();
-    _phoneNumberFieldController  = TextEditingController(text: _phoneNumber);
+    _phoneNumberFieldController = TextEditingController(text: _phoneNumber);
     DateTime now = DateTime.now();
     _datePicked = DateTime(now.year, now.month, now.day + _firstAvailableDay);
   }
@@ -84,7 +87,7 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
               activeStepColor: Theme.of(context).colorScheme.secondary,
               enableNextPreviousButtons: false,
               stepRadius: 24.0,
-              steppingEnabled: true,
+              steppingEnabled: false,
               lineColor: Colors.grey,
               onStepReached: (index) {
                 setState(() {
@@ -125,7 +128,6 @@ class RemodelingSchedulingScreenState extends State<RemodelingSchedulingScreen>
       case 0: //todo get destroy when tapped away
         return RemodelingOptionsWidget(
             selectionMap: widget.selectionMap,
-            restorationId: 'remodeling_options',
             callBack: () {
               debugPrint('callback'); // TODO get input values
             });

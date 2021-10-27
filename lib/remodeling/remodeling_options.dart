@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/remodeling_pricing.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
-      {Key? key, required this.selectionMap, required this.restorationId, required this.callBack})
+      {Key? key, required this.selectionMap, required this.callBack})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
-  final String restorationId;
   final Function callBack;
 
   @override
@@ -18,23 +18,14 @@ class RemodelingOptionsWidget extends StatefulWidget {
       RemodelingOptionsWidgetState();
 }
 
-class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with RestorationMixin{
+class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
   int _activeOption = 0;
   final List<RemodelingItem> _selectedItemList = [];
-
-  @override
-  String? get restorationId => widget.restorationId;
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    // TODO: implement restoreState
-    registerForRestoration(RestorableInt(456), 'paint_area_textField');
-    debugPrint('restore');//
-  }
 
   // Painting Card
   int? _paintArea;
   bool? _scrapeOldPaint;
+  late TextEditingController _paintAreaFieldController;
 
   // Painting Card
   int? _wallCoveringsArea;
@@ -45,6 +36,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with R
   @override
   void initState() {
     super.initState();
+    _paintAreaFieldController = TextEditingController(
+        text: _paintArea == null ? '' : _paintArea.toString());
   }
 
   @override
@@ -169,9 +162,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with R
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: TextField(
-            restorationId: 'paint_area_textField',
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            controller: _paintAreaFieldController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               labelText: AppLocalizations.of(context)!.area_sq_ft,
@@ -212,11 +205,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with R
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                    _getPaintingEstimate() == null
+                    _paintArea == null || _scrapeOldPaint == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(_getPaintingEstimate()),
+                            .format(RemodelingPricing.getPaintingEstimate(
+                                _paintArea!, _scrapeOldPaint!)),
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],
@@ -317,40 +311,6 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> with R
 
   TextStyle _getOptionTitleTextStyle() =>
       Theme.of(context).textTheme.subtitle1!;
-
-  int? _getPaintingEstimate() {
-    if (_paintArea == null || _scrapeOldPaint == null) {
-      return null;
-    } else {
-      if (_scrapeOldPaint!) {
-        if (_paintArea! < 500) {
-          return 28000;
-        }
-        if (_paintArea! < 600) {
-          return 38000;
-        }
-        if (_paintArea! < 700) {
-          return 46000;
-        }
-        if (_paintArea! < 800) {
-          return 55000;
-        }
-      } else {
-        if (_paintArea! < 500) {
-          return 16000;
-        }
-        if (_paintArea! < 600) {
-          return 19000;
-        }
-        if (_paintArea! < 700) {
-          return 22000;
-        }
-        if (_paintArea! < 800) {
-          return 26500;
-        }
-      }
-    }
-  }
 
   // TODO
   int? _getWallCoveringsEstimate() {

@@ -23,6 +23,7 @@ class RemodelingSchedulingScreen extends StatefulWidget {
 class RemodelingSchedulingScreenState
     extends State<RemodelingSchedulingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
+  final _totalSteps = 4;
   int _activeStep = 0;
 
   // For options
@@ -70,13 +71,13 @@ class RemodelingSchedulingScreenState
           children: [
             IconStepper(
               icons: [
-                Icon(Icons.construction,
+                Icon(Icons.style,
                     color: Theme.of(context).colorScheme.onSecondary),
                 Icon(Icons.calendar_today,
                     color: Theme.of(context).colorScheme.onSecondary),
                 Icon(Icons.contact_phone,
                     color: Theme.of(context).colorScheme.onSecondary),
-                Icon(Icons.list,
+                Icon(Icons.grading,
                     color: Theme.of(context).colorScheme.onSecondary)
               ],
               activeStep: _activeStep,
@@ -84,8 +85,8 @@ class RemodelingSchedulingScreenState
               activeStepBorderPadding: 0,
               activeStepColor: Theme.of(context).colorScheme.secondary,
               enableNextPreviousButtons: false,
+              enableStepTapping: false,
               stepRadius: 24.0,
-              steppingEnabled: false,
               lineColor: Colors.grey,
               onStepReached: (index) {
                 setState(() {
@@ -94,7 +95,9 @@ class RemodelingSchedulingScreenState
               },
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                //todo 24 hori
                 child: Text(_getStepTitle(),
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: Theme.of(context).colorScheme.secondary))),
@@ -124,7 +127,7 @@ class RemodelingSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return AppLocalizations.of(context)!.options;
+        return AppLocalizations.of(context)!.remodeling_options;
       case 1:
         return AppLocalizations.of(context)!.pick_a_day;
       case 2:
@@ -137,7 +140,7 @@ class RemodelingSchedulingScreenState
   }
 
   void _nextStep() {
-    if (_activeStep < 3) {
+    if (_activeStep < _totalSteps - 1) {
       setState(() {
         _activeStep++;
       });
@@ -166,7 +169,9 @@ class RemodelingSchedulingScreenState
       _datePicked = firstDate;
     }
     return ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        // note: ListView has 4.0 internal padding on all sides,
+        // thus these values are offset
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
         children: [
           Card(
             child: Padding(
@@ -233,14 +238,12 @@ class RemodelingSchedulingScreenState
                         FilteringTextInputFormatter.digitsOnly,
                       ],
                       onChanged: (value) {
-                        _phoneNumber = value; //todo
+                        _phoneNumber = value;
                       },
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
                           labelText:
                               AppLocalizations.of(context)!.contact_number,
-                          hintText: '',
-                          // todo and format
                           helperText: AppLocalizations.of(context)!
                               .hong_kong_number_only,
                           icon: const Icon(Icons.phone)))
@@ -282,8 +285,10 @@ class RemodelingSchedulingScreenState
                 },
               ),
               ElevatedButton.icon(
-                icon: Icon(_activeStep < 3 ? Icons.arrow_forward : Icons.check),
-                label: Text(_activeStep < 3
+                icon: Icon(_activeStep < _totalSteps - 1
+                    ? Icons.arrow_forward
+                    : Icons.check),
+                label: Text(_activeStep < _totalSteps - 1
                     ? AppLocalizations.of(context)!.next
                     : AppLocalizations.of(context)!.confirm_remodeling),
                 style: ElevatedButton.styleFrom(
@@ -292,7 +297,7 @@ class RemodelingSchedulingScreenState
                     shape: const StadiumBorder()),
                 onPressed: () {
                   setState(() {
-                    if (_activeStep == 3) {
+                    if (_activeStep == _totalSteps - 1) {
                       // todo send order
                     } else {
                       _nextStep();

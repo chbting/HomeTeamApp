@@ -38,9 +38,8 @@
 	"scrape_old_paint_no": "不剷底",
 	"scrape_old_paint_yes": "剷底",
 	"estimate": "預算:",
-	"address_and_phone": "地址電話",
+	"address_and_phone": "地址及聯絡電話",
 	"confirm": "確認",
-	"options": "選項",
 	"count": "數量",
 	"next_option": "下一項",
 	"back": "返回",
@@ -49,5 +48,6 @@
 	"contact_number": "聯絡電話",
 	"remodeling_address": "裝修地址",
 	"hong_kong_number_only": "只限香港電話號碼",
-	"remodeling_start_date": "裝修開始日期"
+	"remodeling_start_date": "裝修開始日期",
+	"remodeling_options": "裝修選項"
 }

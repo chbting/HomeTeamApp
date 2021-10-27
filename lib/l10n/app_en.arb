@@ -38,9 +38,8 @@
 	"scrape_old_paint_no": "Leave/No old paints",
 	"scrape_old_paint_yes": "Scrape old paints",
 	"estimate": "Estimate:",
-	"address_and_phone": "Address & phone",
+	"address_and_phone": "Address & Contact Number",
 	"confirm": "Confirm",
-	"options": "Options",
 	"count": "Count",
 	"next_option": "Next",
 	"back": "Back",
@@ -49,5 +48,6 @@
 	"contact_number": "Contact Number",
 	"remodeling_address": "Remodeling Address",
 	"hong_kong_number_only": "Hong Kong number only",
-	"remodeling_start_date": "Remodeling Start Date"
+	"remodeling_start_date": "Remodeling Start Date",
+	"remodeling_options": "Remodeling Options"
 }

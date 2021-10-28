@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
-import 'package:intl/intl.dart';
-import 'package:tner_client/remodeling/remodeling_contacts.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/remodeling_options.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_date_picker.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-
-import '../shared_preferences_helper.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
   const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
@@ -27,19 +27,14 @@ class RemodelingSchedulingScreenState
   final _totalSteps = 4;
   int _activeStep = 0;
 
+  final RemodelingSchedulingData _data = RemodelingSchedulingData();
+
   // For options
   bool _remodelingOptionsAtBottom = false;
-
-  // For date picker
-  late DateTime _datePicked;
-  final _firstAvailableDay = 2;
-  final _schedulingRange = 30;
 
   @override
   void initState() {
     super.initState();
-    DateTime now = DateTime.now();
-    _datePicked = DateTime(now.year, now.month, now.day + _firstAvailableDay);
   }
 
   @override
@@ -59,7 +54,7 @@ class RemodelingSchedulingScreenState
                 child: FloatingActionButton.extended(
                   onPressed: () {
                     _nextStep();
-                    // todo perform check and retrieve data
+                    // todo check data
                   },
                   label: Text(AppLocalizations.of(context)!.next),
                   icon: const Icon(Icons.arrow_forward),
@@ -107,14 +102,15 @@ class RemodelingSchedulingScreenState
                     children: [
                       RemodelingOptionsWidget(
                           selectionMap: widget.selectionMap,
+                          data: _data,
                           callBack: (value) {
                             setState(() {
                               _remodelingOptionsAtBottom = value;
                             });
                           }),
-                      _remodelingDatePickerWidget(),
-                      const RemodelingContactsWidget(),
-                      _remodelingConfirmationWidget()
+                      RemodelingDatePickerWidget(data: _data),
+                      RemodelingContactsWidget(data: _data),
+                      RemodelingConfirmationWidget(data: _data)
                     ],
                   ),
                 ),
@@ -160,69 +156,6 @@ class RemodelingSchedulingScreenState
       _pageController.previousPage(
           duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
     }
-  }
-
-  Widget _remodelingDatePickerWidget() {
-    final now = DateTime.now();
-    final firstDate =
-        DateTime(now.year, now.month, now.day + _firstAvailableDay);
-    final lastDate = DateTime(
-        firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
-    if (_datePicked.isBefore(firstDate)) {
-      _datePicked = firstDate;
-    }
-    return ListView(
-        // note: ListView with CalendarDatePicker has 4.0 internal padding on
-        // all sides, thus these values are offset
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
-        primary: false,
-        children: [
-          Card(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: CalendarDatePicker(
-                    initialDate: _datePicked,
-                    firstDate: firstDate,
-                    lastDate: lastDate,
-                    onDateChanged: (DateTime value) {
-                      setState(() {
-                        _datePicked = value;
-                      });
-                    })),
-          ),
-          _remodelingDateCard(),
-        ]);
-  }
-
-  Widget _remodelingConfirmationWidget() {
-    return ListView(
-      primary: false,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-      children: [_remodelingDateCard()],
-    );
-  }
-
-  Widget _remodelingDateCard() {
-    return Card(
-      child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Wrap(
-            direction: Axis.vertical,
-            spacing: 8.0,
-            children: [
-              Text(
-                AppLocalizations.of(context)!.remodeling_start_date,
-                style: Theme.of(context).textTheme.caption,
-              ),
-              Text(
-                DateFormat.yMMMMEEEEd(
-                        SharedPreferencesHelper().getLocale().languageCode)
-                    .format(_datePicked),
-                style: Theme.of(context).textTheme.subtitle1,
-              )
-            ],
-          )),
-    );
   }
 
   Widget _bottomButtons(bool isKeyboardVisible) {

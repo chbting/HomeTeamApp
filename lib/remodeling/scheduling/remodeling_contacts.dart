@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
-  const RemodelingContactsWidget({Key? key}) : super(key: key);
+  const RemodelingContactsWidget({Key? key, required this.data})
+      : super(key: key);
+
+  final RemodelingSchedulingData data;
 
   @override
   State<RemodelingContactsWidget> createState() =>
@@ -12,14 +16,6 @@ class RemodelingContactsWidget extends StatefulWidget {
 
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
-  String _addressLine1 = '';
-  String _addressLine2 = '';
-  String _district = '';
-  String? _region;
-  String _phoneNumber = '';
-  String _lastName = '';
-  String? _prefix;
-
   @override
   bool get wantKeepAlive => true;
 
@@ -48,7 +44,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                             AppLocalizations.of(context)!.address_line1_helper,
                         icon: const Icon(Icons.location_pin)),
                     onChanged: (value) {
-                      _addressLine1 = value;
+                      widget.data.addressLine1 = value;
                     },
                   ),
                   Padding(
@@ -63,7 +59,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                             helperText: AppLocalizations.of(context)!
                                 .address_line2_helper),
                         onChanged: (value) {
-                          _addressLine2 = value;
+                          widget.data.addressLine2 = value;
                         }),
                   ),
                   Padding(
@@ -79,7 +75,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                                   labelText:
                                       AppLocalizations.of(context)!.district),
                               onChanged: (value) {
-                                _district = value;
+                                widget.data.district = value;
                               }),
                         ),
                         Container(width: 16.0),
@@ -87,10 +83,10 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                           child: DropdownButton<String>(
                             hint: Text(AppLocalizations.of(context)!.region),
                             isExpanded: true,
-                            value: _region,
+                            value: widget.data.region,
                             onChanged: (String? newValue) {
                               setState(() {
-                                _region = newValue!;
+                                widget.data.region = newValue!;
                               });
                             },
                             items: <String>[
@@ -117,7 +113,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         FilteringTextInputFormatter.digitsOnly,
                       ],
                       onChanged: (value) {
-                        _phoneNumber = value;
+                        widget.data.phoneNumber = value;
                       },
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -139,7 +135,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                                   labelText:
                                       AppLocalizations.of(context)!.last_name),
                               onChanged: (value) {
-                                _lastName = value;
+                                widget.data.lastName = value;
                               }),
                         ),
                         Container(width: 16.0),
@@ -147,10 +143,10 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                           child: DropdownButton<String>(
                             hint: Text(AppLocalizations.of(context)!.prefix),
                             isExpanded: true,
-                            value: _prefix,
+                            value: widget.data.prefix,
                             onChanged: (String? newValue) {
                               setState(() {
-                                _prefix = newValue!;
+                                widget.data.prefix = newValue!;
                               });
                             },
                             items: <String>[

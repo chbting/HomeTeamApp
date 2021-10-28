@@ -3,14 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/remodeling_pricing.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
-      {Key? key, required this.selectionMap, required this.callBack})
+      {Key? key,
+      required this.selectionMap,
+      required this.data,
+      required this.callBack})
       : super(key: key);
 
   final Map<RemodelingItem, bool> selectionMap;
+  final RemodelingSchedulingData data;
   final Function callBack;
 
   @override
@@ -22,16 +27,6 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
   int _activeOption = 0;
   final List<RemodelingItem> _selectedItemList = [];
-
-  // Painting Card
-  int? paintArea;
-  bool? _scrapeOldPaint;
-
-  // Painting Card
-  int? _wallCoveringsArea;
-
-  // AC Installation Card
-  int? _acInstallationCount;
 
   @override
   bool get wantKeepAlive => true;
@@ -183,7 +178,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               labelText: AppLocalizations.of(context)!.area_sq_ft,
             ),
             onChanged: (value) {
-              value.isEmpty ? paintArea = null : paintArea = int.parse(value);
+              value.isEmpty
+                  ? widget.data.paintArea = null
+                  : widget.data.paintArea = int.parse(value);
               setState(() {});
             },
           ),
@@ -191,20 +188,20 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         RadioListTile(
           title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
           value: true,
-          groupValue: _scrapeOldPaint,
+          groupValue: widget.data.scrapeOldPaint,
           onChanged: (bool? value) {
             setState(() {
-              _scrapeOldPaint = true;
+              widget.data.scrapeOldPaint = true;
             });
           },
         ),
         RadioListTile(
           title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
           value: false,
-          groupValue: _scrapeOldPaint,
+          groupValue: widget.data.scrapeOldPaint,
           onChanged: (bool? value) {
             setState(() {
-              _scrapeOldPaint = false;
+              widget.data.scrapeOldPaint = false;
             });
           },
         ),
@@ -218,12 +215,14 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                    paintArea == null || _scrapeOldPaint == null
+                    widget.data.paintArea == null ||
+                            widget.data.scrapeOldPaint == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
                             .format(RemodelingPricing.getPaintingEstimate(
-                                paintArea!, _scrapeOldPaint!)),
+                                widget.data.paintArea!,
+                                widget.data.scrapeOldPaint!)),
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],
@@ -246,8 +245,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             ),
             onChanged: (value) {
               value.isEmpty
-                  ? _wallCoveringsArea = null
-                  : _wallCoveringsArea = int.parse(value);
+                  ? widget.data.wallCoveringsArea = null
+                  : widget.data.wallCoveringsArea = int.parse(value);
               setState(() {});
             },
           ),
@@ -262,12 +261,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                    _wallCoveringsArea == null
+                    widget.data.wallCoveringsArea == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
                             .format(RemodelingPricing.getWallCoveringsEstimate(
-                                _wallCoveringsArea!)),
+                                widget.data.wallCoveringsArea!)),
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],
@@ -291,8 +290,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             ),
             onChanged: (value) {
               value.isEmpty
-                  ? _acInstallationCount = null
-                  : _acInstallationCount = int.parse(value);
+                  ? widget.data.acInstallationCount = null
+                  : widget.data.acInstallationCount = int.parse(value);
               setState(() {});
             },
           ),
@@ -309,11 +308,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Text(
-                    _acInstallationCount == null
+                    widget.data.acInstallationCount == null
                         ? '\$-'
                         : NumberFormat.currency(
                                 locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(_acInstallationCount! * 800), //TODO
+                            .format(
+                                widget.data.acInstallationCount! * 800), //TODO
                     textAlign: TextAlign.right,
                     style: Theme.of(context).textTheme.subtitle1)),
           ],

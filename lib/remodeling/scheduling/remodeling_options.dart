@@ -80,7 +80,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           },
           onStepTapped: (int index) {
             setState(() {
-              if(_activeOption != index) {
+              if (_activeOption != index) {
                 FocusScope.of(context).unfocus();
                 _activeOption = index;
               }
@@ -268,22 +268,18 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getEstimationWidget(int? price) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text(AppLocalizations.of(context)!.estimate,
-                style: Theme.of(context).textTheme.subtitle1)),
-        Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text(formatPrice(price),
-                textAlign: TextAlign.right,
-                style: Theme.of(context).textTheme.subtitle1)),
-      ],
-    );
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(AppLocalizations.of(context)!.estimate,
+                style: Theme.of(context).textTheme.subtitle1),
+            Text(formatPrice(price),
+                style: Theme.of(context).textTheme.subtitle1),
+          ],
+        ));
   }
 
   TextStyle _getOptionTitleTextStyle() =>

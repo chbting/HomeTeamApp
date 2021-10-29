@@ -90,26 +90,26 @@ class RemodelingConfirmationWidget extends StatelessWidget {
   }
 
   Widget _getPaintingItem(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(direction: Axis.vertical, children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
             Text(getRemodelingItemTitle(RemodelingItem.painting, context),
                 style: _getCardBodyTextStyle(context)),
-            Text('- ${data.paintArea} ${AppLocalizations.of(context)!.sq_ft}',
-                style: _getCardBodyTextStyle(context)),
             Text(
-                data.scrapeOldPaint!
-                    ? '- ${AppLocalizations.of(context)!.scrape_old_paint_yes}'
-                    : '- ${AppLocalizations.of(context)!.scrape_old_paint_no}',
-                style: _getCardBodyTextStyle(context)),
+                formatPrice(RemodelingPricing.getPaintingEstimate(
+                    data.paintArea, data.scrapeOldPaint)),
+                style: _getCardBodyTextStyle(context))
           ]),
-          Text(
-              formatPrice(RemodelingPricing.getPaintingEstimate(
-                  data.paintArea, data.scrapeOldPaint)), // todo vertical aligment issue
-              style: _getCardBodyTextStyle(context))
-        ]);
+      Text('- ${data.paintArea} ${AppLocalizations.of(context)!.sq_ft}',
+          style: _getCardBodyTextStyle(context)),
+      Text(
+          data.scrapeOldPaint!
+              ? '- ${AppLocalizations.of(context)!.scrape_old_paint_yes}'
+              : '- ${AppLocalizations.of(context)!.scrape_old_paint_no}',
+          style: _getCardBodyTextStyle(context)),
+    ]);
   }
 
   String _getContactName() {

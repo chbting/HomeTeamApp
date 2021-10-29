@@ -28,8 +28,8 @@ class RootApp extends StatefulWidget {
 class RootAppState extends State<RootApp> {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     // TODO check to see if orientation works on ipads
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {

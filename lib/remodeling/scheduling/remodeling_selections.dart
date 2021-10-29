@@ -36,8 +36,8 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
         getRemodelingItemTitle(RemodelingItem.painting, context);
     _titleMap[RemodelingItem.wallCoverings] =
         getRemodelingItemTitle(RemodelingItem.wallCoverings, context);
-    _titleMap[RemodelingItem.acInstallation] =
-        getRemodelingItemTitle(RemodelingItem.acInstallation, context);
+    _titleMap[RemodelingItem.ac] =
+        getRemodelingItemTitle(RemodelingItem.ac, context);
     _titleMap[RemodelingItem.removals] =
         getRemodelingItemTitle(RemodelingItem.removals, context);
     _titleMap[RemodelingItem.suspendedCeiling] =
@@ -56,7 +56,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
 
       _iconMap[RemodelingItem.painting] = Icons.imagesearch_roller;
       _iconMap[RemodelingItem.wallCoverings] = CustomIcons.wallcovering;
-      _iconMap[RemodelingItem.acInstallation] = Icons.ac_unit;
+      _iconMap[RemodelingItem.ac] = Icons.ac_unit;
       _iconMap[RemodelingItem.removals] = Icons.delete_forever;
       _iconMap[RemodelingItem.suspendedCeiling] = CustomIcons.suspendedCeiling;
       _iconMap[RemodelingItem.toiletReplacement] = CustomIcons.toilet;

@@ -1,4 +1,9 @@
+import '../remodeling_items.dart';
+
 class RemodelingSchedulingData {
+
+  final List<RemodelingItem> selectedItemList = [];
+
   // Painting Card
   int? paintArea;
   bool? scrapeOldPaint;
@@ -7,7 +12,7 @@ class RemodelingSchedulingData {
   int? wallCoveringsArea;
 
   // AC Installation Card
-  int? acInstallationCount;
+  int? acCount;
 
   // Removals
 

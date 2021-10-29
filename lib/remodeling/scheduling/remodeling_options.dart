@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
-      {Key? key,
-      required this.selectionMap,
-      required this.data,
-      required this.callBack})
+      {Key? key, required this.data, required this.callBack})
       : super(key: key);
 
-  final Map<RemodelingItem, bool> selectionMap;
   final RemodelingSchedulingData data;
   final Function callBack;
 
@@ -26,37 +21,23 @@ class RemodelingOptionsWidget extends StatefulWidget {
 class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
   int _activeOption = 0;
-  final List<RemodelingItem> _selectedItemList = [];
 
   @override
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
-    // Initialize only once
-    if (_selectedItemList.isEmpty) {
-      widget.selectionMap.forEach((item, value) {
-        if (value) {
-          _selectedItemList.add(item);
-        }
-      });
-    }
 
     // Return a Card for one item, a Stepper for multiple items
-    if (_selectedItemList.length == 1) {
+    if (widget.data.selectedItemList.length == 1) {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         widget.callBack(true);
       });
-      return _getSingleOptionWidget(_selectedItemList[0]);
+      return _getSingleOptionWidget(widget.data.selectedItemList[0]);
     } else {
       List<Step> _stepList = [];
-      for (var item in _selectedItemList) {
+      for (var item in widget.data.selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
       // TODO add total estimation
@@ -82,6 +63,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onStepCancel: () {
             if (_activeOption > 0) {
               setState(() {
+                FocusScope.of(context).unfocus();
                 _activeOption--;
                 _notifyIsRemodelingOptionsAtBottom(_stepList.length);
               });
@@ -90,6 +72,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onStepContinue: () {
             if (_activeOption < _stepList.length - 1) {
               setState(() {
+                FocusScope.of(context).unfocus();
                 _activeOption++;
                 _notifyIsRemodelingOptionsAtBottom(_stepList.length);
               });
@@ -97,7 +80,10 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           },
           onStepTapped: (int index) {
             setState(() {
-              _activeOption = index;
+              if(_activeOption != index) {
+                FocusScope.of(context).unfocus();
+                _activeOption = index;
+              }
               _notifyIsRemodelingOptionsAtBottom(_stepList.length);
             });
           },
@@ -154,170 +140,148 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     if (item == RemodelingItem.wallCoverings) {
       return _getWallCoveringsCardLayout();
     }
-    if (item == RemodelingItem.acInstallation) {
-      return _getAcInstallationCardLayout();
+    if (item == RemodelingItem.ac) {
+      return _getAcCardLayout();
     }
-    // todo
-    if (item == RemodelingItem.removals) {}
-    if (item == RemodelingItem.suspendedCeiling) {}
-    if (item == RemodelingItem.toiletReplacement) {}
-    if (item == RemodelingItem.pestControl) {}
+    if (item == RemodelingItem.removals) {
+      return _getRemovalsCardLayout();
+    }
+    if (item == RemodelingItem.suspendedCeiling) {
+      return _getSuspendedCeilingCardLayout();
+    }
+    if (item == RemodelingItem.toiletReplacement) {
+      return _getToiletReplacementCardLayout();
+    }
+    if (item == RemodelingItem.pestControl) {
+      return _getPestControlCardLayout();
+    }
     return Container();
   }
 
   Widget _getPaintingCardLayout() {
-    return Wrap(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: AppLocalizations.of(context)!.area_sq_ft,
-            ),
-            onChanged: (value) {
-              value.isEmpty
-                  ? widget.data.paintArea = null
-                  : widget.data.paintArea = int.parse(value);
-              setState(() {});
-            },
+    return Wrap(children: [
+      Padding(
+        // todo painting color??
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: AppLocalizations.of(context)!.area_sq_ft,
           ),
-        ),
-        RadioListTile(
-          title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
-          value: true,
-          groupValue: widget.data.scrapeOldPaint,
-          onChanged: (bool? value) {
-            setState(() {
-              widget.data.scrapeOldPaint = true;
-            });
+          onChanged: (value) {
+            value.isEmpty
+                ? widget.data.paintArea = null
+                : widget.data.paintArea = int.parse(value);
+            setState(() {});
           },
         ),
-        RadioListTile(
-          title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
-          value: false,
-          groupValue: widget.data.scrapeOldPaint,
-          onChanged: (bool? value) {
-            setState(() {
-              widget.data.scrapeOldPaint = false;
-            });
-          },
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(AppLocalizations.of(context)!.estimate,
-                    style: Theme.of(context).textTheme.subtitle1)),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                    widget.data.paintArea == null ||
-                            widget.data.scrapeOldPaint == null
-                        ? '\$-'
-                        : NumberFormat.currency(
-                                locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(RemodelingPricing.getPaintingEstimate(
-                                widget.data.paintArea!,
-                                widget.data.scrapeOldPaint!)),
-                    textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.subtitle1)),
-          ],
-        )
-      ],
-    );
+      ),
+      RadioListTile(
+        title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
+        value: true,
+        groupValue: widget.data.scrapeOldPaint,
+        onChanged: (bool? value) {
+          setState(() {
+            widget.data.scrapeOldPaint = true;
+          });
+        },
+      ),
+      RadioListTile(
+        title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
+        value: false,
+        groupValue: widget.data.scrapeOldPaint,
+        onChanged: (bool? value) {
+          setState(() {
+            widget.data.scrapeOldPaint = false;
+          });
+        },
+      ),
+      _getEstimationWidget(RemodelingPricing.getPaintingEstimate(
+          widget.data.paintArea, widget.data.scrapeOldPaint))
+    ]);
   }
 
   Widget _getWallCoveringsCardLayout() {
-    return Wrap(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: AppLocalizations.of(context)!.area_sq_ft,
-            ),
-            onChanged: (value) {
-              value.isEmpty
-                  ? widget.data.wallCoveringsArea = null
-                  : widget.data.wallCoveringsArea = int.parse(value);
-              setState(() {});
-            },
+    return Wrap(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: AppLocalizations.of(context)!.area_sq_ft,
           ),
+          onChanged: (value) {
+            value.isEmpty
+                ? widget.data.wallCoveringsArea = null
+                : widget.data.wallCoveringsArea = int.parse(value);
+            setState(() {});
+          },
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(AppLocalizations.of(context)!.estimate,
-                    style: Theme.of(context).textTheme.subtitle1)),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                    widget.data.wallCoveringsArea == null
-                        ? '\$-'
-                        : NumberFormat.currency(
-                                locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(RemodelingPricing.getWallCoveringsEstimate(
-                                widget.data.wallCoveringsArea!)),
-                    textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.subtitle1)),
-          ],
-        )
-      ],
-    );
+      ),
+      _getEstimationWidget(RemodelingPricing.getWallCoveringsEstimate(
+          widget.data.wallCoveringsArea))
+    ]);
   }
 
-  Widget _getAcInstallationCardLayout() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _getAcCardLayout() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        // todo types and count
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: AppLocalizations.of(context)!.count,
+          ),
+          onChanged: (value) {
+            value.isEmpty
+                ? widget.data.acCount = null
+                : widget.data.acCount = int.parse(value);
+            setState(() {});
+          },
+        ),
+      ),
+      _getEstimationWidget(RemodelingPricing.getAcEstimate())
+    ]);
+  }
+
+  Widget _getRemovalsCardLayout() {
+    return Container();
+  }
+
+  Widget _getSuspendedCeilingCardLayout() {
+    return Container();
+  }
+
+  Widget _getToiletReplacementCardLayout() {
+    return Container();
+  }
+
+  Widget _getPestControlCardLayout() {
+    return Container();
+  }
+
+  Widget _getEstimationWidget(int? price) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: AppLocalizations.of(context)!.count,
-            ),
-            onChanged: (value) {
-              value.isEmpty
-                  ? widget.data.acInstallationCount = null
-                  : widget.data.acInstallationCount = int.parse(value);
-              setState(() {});
-            },
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(AppLocalizations.of(context)!.estimate,
-                    style: Theme.of(context).textTheme.subtitle1)),
-            Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                    widget.data.acInstallationCount == null
-                        ? '\$-'
-                        : NumberFormat.currency(
-                                locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
-                            .format(
-                                widget.data.acInstallationCount! * 800), //TODO
-                    textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.subtitle1)),
-          ],
-        )
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Text(AppLocalizations.of(context)!.estimate,
+                style: Theme.of(context).textTheme.subtitle1)),
+        Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            child: Text(formatPrice(price),
+                textAlign: TextAlign.right,
+                style: Theme.of(context).textTheme.subtitle1)),
       ],
     );
   }

@@ -4,33 +4,33 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 enum RemodelingItem {
   painting,
   wallCoverings,
-  acInstallation,
+  ac,
   removals,
   suspendedCeiling,
   toiletReplacement,
   pestControl
 }
 
-String getRemodelingItemTitle(RemodelingItem key, BuildContext context) {
-  if (key == RemodelingItem.painting) {
+String getRemodelingItemTitle(RemodelingItem item, BuildContext context) {
+  if (item == RemodelingItem.painting) {
     return AppLocalizations.of(context)!.painting;
   }
-  if (key == RemodelingItem.wallCoverings) {
+  if (item == RemodelingItem.wallCoverings) {
     return AppLocalizations.of(context)!.wallcoverings;
   }
-  if (key == RemodelingItem.acInstallation) {
-    return AppLocalizations.of(context)!.ac_installation;
+  if (item == RemodelingItem.ac) {
+    return AppLocalizations.of(context)!.ac_window_type;
   }
-  if (key == RemodelingItem.removals) {
+  if (item == RemodelingItem.removals) {
     return AppLocalizations.of(context)!.removals;
   }
-  if (key == RemodelingItem.suspendedCeiling) {
+  if (item == RemodelingItem.suspendedCeiling) {
     return AppLocalizations.of(context)!.suspended_ceiling;
   }
-  if (key == RemodelingItem.toiletReplacement) {
+  if (item == RemodelingItem.toiletReplacement) {
     return AppLocalizations.of(context)!.toilet_replacement;
   }
-  if (key == RemodelingItem.pestControl) {
+  if (item == RemodelingItem.pestControl) {
     return AppLocalizations.of(context)!.pest_control;
   }
   throw 'NoTitleCreatedForRemodelingItem';

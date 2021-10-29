@@ -1,5 +1,10 @@
+import 'package:intl/intl.dart';
+
 class RemodelingPricing {
-  static int getPaintingEstimate(int area, bool scrapeOldPaint) {
+  static int? getPaintingEstimate(int? area, bool? scrapeOldPaint) {
+    if (area == null || scrapeOldPaint == null) {
+      return null;
+    } else {
       if (scrapeOldPaint) {
         if (area < 500) {
           return 28000;
@@ -27,11 +32,31 @@ class RemodelingPricing {
           return 26500;
         }
       }
-      return -1; // todo
+    }
+    return -1; // todo
   }
 
   // TODO
-  static int getWallCoveringsEstimate(int area) {
-    return 100*area;
+  static int? getWallCoveringsEstimate(int? area) {
+    if (area == null) {
+      return null;
+    } else {
+      return 100 * area;
+    }
+  }
+
+  // TODO
+  static int? getAcEstimate() {
+    return 1;
+  }
+}
+
+String formatPrice(int? price) {
+  if (price == null) {
+    return '\$-';
+  } else {
+    return NumberFormat.currency(
+            locale: 'zh_HK', symbol: '\$', decimalDigits: 0)
+        .format(price);
   }
 }

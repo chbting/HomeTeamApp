@@ -24,7 +24,6 @@
 	"painting": "油潻",
 	"wallcoverings": "壁纸",
 	"pest_control": "灭虫",
-	"ac_installation": "冷气安装",
 	"suspended_ceiling": "假天花",
 	"toilet_replacement": "坐厕更换",
 	"next": "下一步",
@@ -64,5 +63,7 @@
 	"miss": "小姐",
 	"mr": "先生",
 	"mrs": "太太",
-	"ms": "女士"
+	"ms": "女士",
+	"ac_window_type": "冷气 (窗口式)",
+	"sq_ft": "平方呎"
 }

@@ -24,7 +24,6 @@
 	"painting": "Painting",
 	"wallcoverings": "Wallcoverings",
 	"pest_control": "Pest Control",
-	"ac_installation": "AC Installation",
 	"suspended_ceiling": "Suspended Ceiling",
 	"toilet_replacement": "Toilet Replacement",
 	"next": "Next",
@@ -64,5 +63,7 @@
 	"miss": "Miss",
 	"mr": "Mr.",
 	"mrs": "Mrs.",
-	"ms": "Ms."
+	"ms": "Ms.",
+	"ac_window_type": "AC (Window Type)",
+	"sq_ft": "Sq. ft"
 }

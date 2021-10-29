@@ -35,6 +35,11 @@ class RemodelingSchedulingScreenState
   @override
   void initState() {
     super.initState();
+    widget.selectionMap.forEach((item, value) {
+      if (value) {
+        _data.selectedItemList.add(item);
+      }
+    });
   }
 
   @override
@@ -101,7 +106,6 @@ class RemodelingSchedulingScreenState
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       RemodelingOptionsWidget(
-                          selectionMap: widget.selectionMap,
                           data: _data,
                           callBack: (value) {
                             setState(() {

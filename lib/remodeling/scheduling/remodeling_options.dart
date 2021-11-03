@@ -43,18 +43,17 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       // TODO add total estimation
       return Stepper(
           currentStep: _activeOption,
-          controlsBuilder: (BuildContext context,
-              {VoidCallback? onStepContinue, VoidCallback? onStepCancel}) {
+          controlsBuilder: (BuildContext context, ControlsDetails details) {
             return Row(
               children: <Widget>[
                 _activeOption < _stepList.length - 1
                     ? ElevatedButton(
-                        onPressed: onStepContinue,
+                        onPressed: details.onStepContinue,
                         child: Text(AppLocalizations.of(context)!.next_option))
                     : Container(),
                 _activeOption > 0
                     ? TextButton(
-                        onPressed: onStepCancel,
+                        onPressed: details.onStepCancel,
                         child: Text(AppLocalizations.of(context)!.back))
                     : Container(),
               ],

@@ -19,7 +19,6 @@
 	"schedule_remodeling": "預約裝修",
 	"remodeling_status": "工程進度",
 	"sign_agreement": "簽約",
-	"find_property": "搵樓",
 	"owner": "業主",
 	"painting": "油潻",
 	"wallcoverings": "牆紙",
@@ -65,5 +64,8 @@
 	"mrs": "太太",
 	"ms": "女士",
 	"ac_window_type": "冷氣 (窗口式)",
-	"sq_ft": "平方呎"
+	"sq_ft": "平方呎",
+	"rent_properties": "租樓",
+	"find_properties": "搵樓",
+	"latest_additions": "最新租盤"
 }

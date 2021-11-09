@@ -19,7 +19,6 @@
 	"schedule_remodeling": "Schedule Remodeling",
 	"remodeling_status": "Status",
 	"sign_agreement": "Sign",
-	"find_property": "Find",
 	"owner": "Owner",
 	"painting": "Painting",
 	"wallcoverings": "Wallcoverings",
@@ -65,5 +64,8 @@
 	"mrs": "Mrs.",
 	"ms": "Ms.",
 	"ac_window_type": "AC (Window Type)",
-	"sq_ft": "Sq. ft"
+	"sq_ft": "Sq. ft",
+	"rent_properties": "Rent",
+	"find_properties": "Find",
+	"latest_additions": "Latest Additions"
 }

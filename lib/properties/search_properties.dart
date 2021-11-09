@@ -17,6 +17,8 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
       margins: const EdgeInsets.all(16.0),
       hint: AppLocalizations.of(context)!.search_properties_hint,
       hintStyle: const TextStyle(color: Colors.grey),
+      // TODO cursor color, light theme color
+      // TODO sliver search bar
       //backgroundColor: Colors.white,
       scrollPadding: const EdgeInsets.only(bottom: 56.0),
       transitionDuration: const Duration(milliseconds: 500),

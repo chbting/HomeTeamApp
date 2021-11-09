@@ -21,9 +21,14 @@ class RemodelingDatePickerWidgetState
 
   @override
   Widget build(BuildContext context) {
-    final firstDate = widget.data.datePicked;
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year, now.month,
+        now.day + RemodelingSchedulingData.firstAvailableDay);
     final lastDate = DateTime(
         firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
+    if(widget.data.datePicked.isBefore(firstDate)) {
+      widget.data.datePicked = firstDate;
+    }
     return ListView(
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
         // all sides, thus these values are offset

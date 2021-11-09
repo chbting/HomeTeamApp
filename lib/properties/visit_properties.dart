@@ -11,6 +11,8 @@ class VisitPropertiesScreen extends StatefulWidget {
 class VisitPropertiesScreenState extends State<VisitPropertiesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Text(AppLocalizations.of(context)!.visit_properties);
+    return ListTile(
+      title: Text(AppLocalizations.of(context)!.visit_properties),
+    );
   }
 }

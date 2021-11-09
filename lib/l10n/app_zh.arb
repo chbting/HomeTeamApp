@@ -67,5 +67,6 @@
 	"sq_ft": "平方呎",
 	"rent_properties": "租房",
 	"find_properties": "找房",
-	"latest_additions": "最新租盘"
+	"latest_additions": "最新租盘",
+	"search_properties_hint": "地区／屋苑名称"
 }

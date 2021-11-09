@@ -67,5 +67,6 @@
 	"sq_ft": "Sq. ft",
 	"rent_properties": "Rent",
 	"find_properties": "Find",
-	"latest_additions": "Latest Additions"
+	"latest_additions": "Latest Additions",
+	"search_properties_hint": "District／Name of the estate"
 }

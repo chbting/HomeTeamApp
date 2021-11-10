@@ -74,4 +74,18 @@ class SharedPreferencesHelper {
       }
     }
   }
+
+  String getSpeechRecognitionLocaleId() {
+    String savedValue = _prefs.getString(localeKey)!;
+    switch(savedValue) {
+      case 'en':
+        return 'en_GB';
+      case 'zh_Hant':
+        return 'yue_HK';
+      case 'zh_Hans':
+        return 'cmn_CN';
+      default:
+        return 'en_GB';
+    }
+  }
 }

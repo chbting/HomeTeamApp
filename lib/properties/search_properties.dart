@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:tner_client/shared_preferences_helper.dart';
 
 class SearchPropertiesScreen extends StatefulWidget {
   const SearchPropertiesScreen({Key? key}) : super(key: key);
@@ -80,10 +81,13 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
                                 })
                             .then((isAvailable) {
                           if (isAvailable) {
-                            speech.listen(onResult: (result) {
-                              query = result.recognizedWords;
-                              bar.query;
-                            });
+                            // todo dialogue box, onback stop listening, on no input
+                            speech.listen(
+                                localeId: SharedPreferencesHelper()
+                                    .getSpeechRecognitionLocaleId(),
+                                onResult: (result) {
+                                  bar.query = result.recognizedWords;
+                                });
                           } else {
                             _showSpeechToTextUnavailableMessage();
                           }

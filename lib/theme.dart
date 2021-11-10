@@ -44,4 +44,7 @@ class AppTheme {
       primarySwatch: Colors.blue,
     );
   }
+
+  static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
+      TextStyle(color: Theme.of(context).colorScheme.secondary);
 }

@@ -68,5 +68,11 @@
 	"rent_properties": "租樓",
 	"find_properties": "搵樓",
 	"latest_additions": "最新租盤",
-	"search_properties_hint": "地區／屋苑名稱"
+	"search_properties_hint": "地區/屋苑名稱",
+	"msg_cannot_recognize_speech": "未能辨識語音",
+	"msg_voice_search_unavailable": "無法使用語音搜尋",
+	"voice_search": "語音搜尋",
+	"cantonese": "中文 (廣東話)",
+	"mandarin": "中文 (普通話)",
+	"english_voice_input": "英語"
 }

@@ -68,5 +68,11 @@
 	"rent_properties": "Rent",
 	"find_properties": "Find",
 	"latest_additions": "Latest Additions",
-	"search_properties_hint": "District／Name of the estate"
+	"search_properties_hint": "District/Name of the estate",
+	"msg_cannot_recognize_speech": "Cannot recognize speech",
+	"msg_voice_search_unavailable": "Voice search is unavailable",
+	"voice_search": "Voice Search",
+	"cantonese": "Chinese (Cantonese)",
+	"mandarin": "Chinese (Mandarin)",
+	"english_voice_input": "English"
 }

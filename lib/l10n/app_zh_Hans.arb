@@ -68,5 +68,11 @@
 	"rent_properties": "租房",
 	"find_properties": "找房",
 	"latest_additions": "最新租盘",
-	"search_properties_hint": "地区／屋苑名称"
+	"search_properties_hint": "地区/屋苑名称",
+	"msg_cannot_recognize_speech": "未能辨识语音",
+	"msg_voice_search_unavailable": "无法使用语音搜寻",
+	"voice_search": "语音搜寻",
+	"cantonese": "中文 (广东话)",
+	"mandarin": "中文 (普通话)",
+	"english_voice_input": "英语"
 }

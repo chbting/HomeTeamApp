@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../theme.dart';
+
 class RadioListDialog {
   static show(
       BuildContext context,
@@ -26,8 +28,9 @@ class RadioListDialog {
               actions: <Widget>[
                 TextButton(
                   child: Text(AppLocalizations.of(context)!.cancel,
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary)),
+                      style: AppTheme
+                          .getDialogTextButtonTextStyle(
+                          context)),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

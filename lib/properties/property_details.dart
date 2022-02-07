@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class PropertyDetailsScreen extends StatelessWidget {
   const PropertyDetailsScreen({Key? key}) : super(key: key);
@@ -8,12 +7,12 @@ class PropertyDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: <Widget>[
-        SliverAppBar(
+        const SliverAppBar(
           pinned: true,
           snap: false,
           floating: false,
           expandedHeight: 160.0,
-          flexibleSpace: const FlexibleSpaceBar(
+          flexibleSpace: FlexibleSpaceBar(
             title: Text('SliverAppBar'),
             background: FlutterLogo(),
           ),

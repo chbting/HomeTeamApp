@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/settings/settings_ui.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
-import 'package:tner_client/settings/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

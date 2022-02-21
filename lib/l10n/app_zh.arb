@@ -15,7 +15,6 @@
 	"choose_language": "选择语言",
 	"cancel": "取消",
 	"ok": "确认",
-	"visit_properties": "看房",
 	"schedule_remodeling": "预约装修",
 	"remodeling_status": "工程进度",
 	"sign_agreement": "签约",
@@ -74,5 +73,6 @@
 	"voice_search": "语音搜寻",
 	"cantonese": "中文 (广东话)",
 	"mandarin": "中文 (普通话)",
-	"english_voice_input": "英语"
+	"english_voice_input": "英语",
+	"properties_visit": "看房"
 }

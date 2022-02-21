@@ -2,4 +2,6 @@
 
 class Property {
 
+  String? id, name, address;
+
 }

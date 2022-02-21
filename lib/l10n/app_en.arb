@@ -15,7 +15,6 @@
 	"choose_language": "Choose Language",
 	"cancel": "Cancel",
 	"ok": "OK",
-	"visit_properties": "Visit",
 	"schedule_remodeling": "Schedule Remodeling",
 	"remodeling_status": "Status",
 	"sign_agreement": "Sign",
@@ -74,5 +73,6 @@
 	"voice_search": "Voice Search",
 	"cantonese": "Chinese (Cantonese)",
 	"mandarin": "Chinese (Mandarin)",
-	"english_voice_input": "English"
+	"english_voice_input": "English",
+	"properties_visit": "Visit"
 }

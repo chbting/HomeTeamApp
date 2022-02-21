@@ -2,11 +2,11 @@ import '../property.dart';
 
 class PropertiesVisitData {
 
-  final List<Property> selectedItemList = [];
+  final List<Property> selectedProperties = [];
 
   // Date Picker
   static const firstAvailableDay = 2;
-  late DateTime datePicked;
+  late DateTime dateTimePicked;
 
   // Contacts
   String? phoneNumber;
@@ -15,6 +15,6 @@ class PropertiesVisitData {
 
   PropertiesVisitData() {
     final now = DateTime.now();
-    datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
+    dateTimePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
   }
 }

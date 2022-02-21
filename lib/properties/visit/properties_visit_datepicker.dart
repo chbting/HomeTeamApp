@@ -26,8 +26,8 @@ class PropertiesVisitDatePickerWidgetState
         now.year, now.month, now.day + PropertiesVisitData.firstAvailableDay);
     final lastDate = DateTime(
         firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
-    if (widget.data.datePicked.isBefore(firstDate)) {
-      widget.data.datePicked = firstDate;
+    if (widget.data.dateTimePicked.isBefore(firstDate)) {
+      widget.data.dateTimePicked = firstDate;
     }
     return ListView(
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
@@ -39,12 +39,12 @@ class PropertiesVisitDatePickerWidgetState
             child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: CalendarDatePicker(
-                    initialDate: widget.data.datePicked,
+                    initialDate: widget.data.dateTimePicked,
                     firstDate: firstDate,
                     lastDate: lastDate,
                     onDateChanged: (DateTime value) {
                       setState(() {
-                        widget.data.datePicked = value;
+                        widget.data.dateTimePicked = value;
                       });
                     })),
           ),
@@ -63,7 +63,7 @@ class PropertiesVisitDatePickerWidgetState
                       DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
                               .getLocale()
                               .languageCode)
-                          .format(widget.data.datePicked),
+                          .format(widget.data.dateTimePicked),
                       style: Theme.of(context).textTheme.subtitle1,
                     )
                   ],

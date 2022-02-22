@@ -23,7 +23,7 @@ class PropertiesScreen extends StatelessWidget {
                   text: AppLocalizations.of(context)!.find_properties,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.visit_properties,
+                  text: AppLocalizations.of(context)!.properties_visit,
                 ),
                 Tab(
                   text: AppLocalizations.of(context)!.rent_properties,

@@ -18,7 +18,8 @@ class PropertiesVisitSelectionScreenState
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
-  final List<Property> _selectedProperties = []; //todo retrieve from?
+  final List<Property> _selectedProperties =
+      MOCK_DATA; //todo retrieve from local database, local database sync with server on app start
 
   @override
   bool get wantKeepAlive => true;

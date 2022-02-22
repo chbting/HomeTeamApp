@@ -74,5 +74,7 @@
 	"cantonese": "Chinese (Cantonese)",
 	"mandarin": "Chinese (Mandarin)",
 	"english_voice_input": "English",
-	"properties_visit": "Visit"
+	"properties_visit": "Visit",
+	"area_gross": "Area (Gross)",
+	"area_net": "Area (S.A.)"
 }

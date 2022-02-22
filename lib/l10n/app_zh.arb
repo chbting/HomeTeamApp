@@ -74,5 +74,7 @@
 	"cantonese": "中文 (广东话)",
 	"mandarin": "中文 (普通话)",
 	"english_voice_input": "英语",
-	"properties_visit": "看房"
+	"properties_visit": "看房",
+	"area_gross": "建筑面积",
+	"area_net": "实用面积"
 }

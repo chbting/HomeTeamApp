@@ -76,5 +76,9 @@
 	"english_voice_input": "English",
 	"properties_visit": "Visit",
 	"area_gross": "Area (Gross)",
-	"area_net": "Area (S.A.)"
+	"area_net": "Area (S.A.)",
+	"pick_starting_point": "Pick where to start",
+	"pick_datetime": "Pick the date and time",
+	"properties_visit_agreement": "Agreement",
+	"schedule_properties_visit": "Schedule Properties Visit"
 }

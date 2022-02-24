@@ -76,5 +76,9 @@
 	"english_voice_input": "英語",
 	"properties_visit": "睇樓",
 	"area_gross": "建築面積",
-	"area_net": "實用面積"
+	"area_net": "實用面積",
+	"pick_starting_point": "選擇起步點",
+	"pick_datetime": "選擇日期和時間",
+	"properties_visit_agreement": "睇樓紙",
+	"schedule_properties_visit": "預約睇樓"
 }

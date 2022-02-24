@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_date_picker.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
+import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
+import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
+import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 import '../property.dart';
@@ -28,10 +28,7 @@ class PropertiesVisitSchedulingScreenState
   final _totalSteps = 4;
   int _activeStep = 0;
 
-  final RemodelingSchedulingData _data = RemodelingSchedulingData();
-
-  // For options
-  bool _remodelingOptionsAtBottom = false;
+  final PropertiesVisitData _data = PropertiesVisitData();
 
   // @override
   // void initState() {
@@ -50,17 +47,13 @@ class PropertiesVisitSchedulingScreenState
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
+                title: Text(
+                    AppLocalizations.of(context)!.schedule_properties_visit)),
             floatingActionButton: Visibility(
-                visible: _activeStep == 0 &&
-                        _remodelingOptionsAtBottom &&
-                        !isKeyboardVisible
-                    ? true
-                    : false,
+                visible: _activeStep == 0 && !isKeyboardVisible ? true : false,
                 child: FloatingActionButton.extended(
                   onPressed: () {
                     _nextStep();
-                    // todo check data
                   },
                   label: Text(AppLocalizations.of(context)!.next),
                   icon: const Icon(Icons.arrow_forward),
@@ -72,11 +65,11 @@ class PropertiesVisitSchedulingScreenState
               children: [
                 IconStepper(
                   icons: [
-                    Icon(Icons.style,
+                    Icon(Icons.place,
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.calendar_today,
                         color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.contact_phone,
+                    Icon(Icons.description,
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.grading,
                         color: Theme.of(context).colorScheme.onSecondary)
@@ -106,16 +99,10 @@ class PropertiesVisitSchedulingScreenState
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
-                      RemodelingOptionsWidget(
-                          data: _data,
-                          callBack: (value) {
-                            setState(() {
-                              _remodelingOptionsAtBottom = value;
-                            });
-                          }),
-                      RemodelingDatePickerWidget(data: _data),
-                      RemodelingContactsWidget(data: _data),
-                      RemodelingConfirmationWidget(data: _data)
+                      PropertiesVisitStartingPointWidget(data: _data),
+                      PropertiesVisitDatePickerWidget(data: _data),
+                      PropertiesVisitAgreementWidget(data: _data),
+                      PropertiesVisitConfirmationWidget(data: _data)
                     ],
                   ),
                 ),
@@ -129,11 +116,11 @@ class PropertiesVisitSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return AppLocalizations.of(context)!.remodeling_options;
+        return AppLocalizations.of(context)!.pick_starting_point;
       case 1:
-        return AppLocalizations.of(context)!.pick_a_day;
+        return AppLocalizations.of(context)!.pick_datetime;
       case 2:
-        return AppLocalizations.of(context)!.remodeling_address_and_contacts;
+        return AppLocalizations.of(context)!.properties_visit_agreement;
       case 3:
         return AppLocalizations.of(context)!.confirm;
       default:

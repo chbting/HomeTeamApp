@@ -2,7 +2,7 @@ import '../property.dart';
 
 class PropertiesVisitData {
 
-  final List<Property> selectedProperties = [];
+  final List<Property> propertyList = [];
 
   // Date Picker
   static const firstAvailableDay = 2;

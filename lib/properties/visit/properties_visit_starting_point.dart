@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 
 class PropertiesVisitStartingPointWidget extends StatefulWidget {
@@ -14,37 +15,35 @@ class PropertiesVisitStartingPointWidget extends StatefulWidget {
 
 class PropertiesVisitStartingPointWidgetState
     extends State<PropertiesVisitStartingPointWidget> {
-  final int _schedulingRange = 30;
+  final double _imageSize = 120.0;
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    final firstDate = DateTime(
-        now.year, now.month, now.day + PropertiesVisitData.firstAvailableDay);
-    final lastDate = DateTime(
-        firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
-    if (widget.data.dateTimePicked.isBefore(firstDate)) {
-      widget.data.dateTimePicked = firstDate;
-    }
-    return ListView(
-        // note: ListView with CalendarDatePicker has 4.0 internal padding on
-        // all sides, thus these values are offset
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+    return ListView.builder(
+        padding: const EdgeInsets.only(
+            left: 8.0, top: 8.0, right: 8.0, bottom: 72.0),
         primary: false,
-        children: [
-          Card(
+        itemCount: widget.data.propertyList.length,
+        itemBuilder: (context, index) {
+          return Card(
             child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: CalendarDatePicker(
-                    initialDate: widget.data.dateTimePicked,
-                    firstDate: firstDate,
-                    lastDate: lastDate,
-                    onDateChanged: (DateTime value) {
-                      setState(() {
-                        widget.data.dateTimePicked = value;
-                      });
-                    })),
-          ),
-        ]);
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //todo add a radio button
+                    Padding(
+                        padding: const EdgeInsets.only(left:16, right: 16),
+                        child: Image(
+                            width: _imageSize,
+                            height: _imageSize,
+                            image: widget.data.propertyList[index].coverImage)),
+                    getPropertyPreviewTextWidget(
+                        context, _imageSize, widget.data.propertyList[index]),
+                  ],
+                )),
+          );
+        });
   }
 }

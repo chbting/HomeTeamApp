@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
 import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-
-import '../property.dart';
 
 class PropertiesVisitSchedulingScreen extends StatefulWidget {
   const PropertiesVisitSchedulingScreen(
@@ -30,15 +29,11 @@ class PropertiesVisitSchedulingScreenState
 
   final PropertiesVisitData _data = PropertiesVisitData();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   widget.selectedProperties.forEach((item, value) {
-  //     if (value) {
-  //       _data.selectedItemList.add(item);
-  //     }
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _data.propertyList.addAll(widget.selectedProperties);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +172,7 @@ class PropertiesVisitSchedulingScreenState
                     : Icons.check),
                 label: Text(_activeStep < _totalSteps - 1
                     ? AppLocalizations.of(context)!.next
-                    : AppLocalizations.of(context)!.confirm_remodeling),
+                    : AppLocalizations.of(context)!.confirm),
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(
                         MediaQuery.of(context).size.width / 2 - 24.0, 48.0),

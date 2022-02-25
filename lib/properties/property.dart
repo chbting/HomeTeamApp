@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../theme.dart';
 
 /// Data class for properties
 
@@ -11,11 +14,39 @@ class Property {
       this.price, this.coverImage);
 }
 
-List<Property> dummyData = [
-  Property(1, "康翠臺", "柴灣", 720, 630, 18400,
-      const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-  Property(2, "聚賢居", "上環", 631, 712, 32000,
-      const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-  Property(3, "尚翹峰", "柴灣", 601, 520, 24000,
-      const AssetImage('assets/demo_images/The_Zenith_240px.jpg'))
-];
+Widget getPropertyPreviewTextWidget(
+    BuildContext context, double leadingImageSize, Property property) {
+  return Expanded(
+      child: SizedBox(
+    height: leadingImageSize,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(property.name!, style: Theme.of(context).textTheme.subtitle1!),
+            Text(property.district!,
+                style: AppTheme.getListTileBodyTextStyle(context))
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+                '${AppLocalizations.of(context)!.area_net_abr}'
+                ': ${property.sqFtNet!}'
+                ' ${AppLocalizations.of(context)!.sq_ft_abr}',
+                style: AppTheme.getListTileBodyTextStyle(context)),
+            Text(
+                '${AppLocalizations.of(context)!.area_gross_abr}'
+                ': ${property.sqFtGross!}'
+                ' ${AppLocalizations.of(context)!.sq_ft_abr}',
+                style: AppTheme.getListTileBodyTextStyle(context))
+          ],
+        ),
+      ],
+    ),
+  ));
+}

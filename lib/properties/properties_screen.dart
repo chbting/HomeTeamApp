@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/properties/rent/rent_properties.dart';
 import 'package:tner_client/properties/search/search_properties.dart';
-import 'package:tner_client/properties/visit/properties_visit_selection.dart';
+import 'package:tner_client/properties/visit/properties_visit_cart.dart';
 
 class PropertiesScreen extends StatelessWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class PropertiesScreen extends StatelessWidget {
           child: TabBarView(
             children: <Widget>[
               SearchPropertiesScreen(),
-              PropertiesVisitSelectionScreen(),
+              PropertiesVisitCartScreen(),
               RentPropertiesScreen(),
             ],
           ),

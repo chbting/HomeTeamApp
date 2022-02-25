@@ -47,4 +47,10 @@ class AppTheme {
 
   static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
       TextStyle(color: Theme.of(context).colorScheme.secondary);
+
+  static TextStyle getListTileBodyTextStyle(BuildContext context) =>
+      Theme.of(context)
+          .textTheme
+          .bodyText2!
+          .copyWith(color: Theme.of(context).textTheme.caption!.color);
 }

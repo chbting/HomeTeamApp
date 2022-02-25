@@ -80,5 +80,8 @@
 	"pick_starting_point": "选择起步点",
 	"pick_datetime": "选择日期和时间",
 	"properties_visit_agreement": "睇楼纸",
-	"schedule_properties_visit": "预约睇楼"
+	"schedule_properties_visit": "预约睇楼",
+	"area_gross_abr": "建筑",
+	"area_net_abr": "实用",
+	"sq_ft_abr": "呎"
 }

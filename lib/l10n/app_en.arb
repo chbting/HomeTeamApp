@@ -63,7 +63,7 @@
 	"mrs": "Mrs.",
 	"ms": "Ms.",
 	"ac_window_type": "AC (Window Type)",
-	"sq_ft": "Sq. ft",
+	"sq_ft": "sq. ft",
 	"rent_properties": "Rent",
 	"find_properties": "Find",
 	"latest_additions": "Latest Additions",
@@ -80,5 +80,8 @@
 	"pick_starting_point": "Pick where to start",
 	"pick_datetime": "Pick the date and time",
 	"properties_visit_agreement": "Agreement",
-	"schedule_properties_visit": "Schedule Properties Visit"
+	"schedule_properties_visit": "Schedule Properties Visit",
+	"area_gross_abr": "Gross",
+	"area_net_abr": "S.A.",
+	"sq_ft_abr": "sq. ft"
 }

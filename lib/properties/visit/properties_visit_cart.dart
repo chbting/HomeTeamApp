@@ -39,7 +39,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
       key: _scaffoldMessengerKey,
       child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
-              heroTag: "btn1",
+              heroTag: "properties_visit_cart_fab",
               icon: const Icon(Icons.schedule),
               label: Text(AppLocalizations.of(context)!.schedule),
               onPressed: () {

@@ -65,8 +65,8 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
       child: Scaffold(
-          //key: _scaffoldKey, // todo mark what it does
           floatingActionButton: FloatingActionButton.extended(
+              heroTag: "remodelling_selections_fab",
               icon: const Icon(Icons.schedule),
               label: Text(AppLocalizations.of(context)!.schedule),
               onPressed: () {

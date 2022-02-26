@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/theme.dart';
 
 import '../../shared_preferences_helper.dart';
 
@@ -25,7 +26,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           child: ListTile(
               leading: const Icon(Icons.style),
               title: Text(AppLocalizations.of(context)!.remodeling_options,
-                  style: _getCardTitleTextStyle(context)),
+                  style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: _getRemodelingOptionsBody(context)),
         )),
         Card(
@@ -38,12 +39,12 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               ],
             ),
             title: Text(AppLocalizations.of(context)!.remodeling_start_date,
-                style: _getCardTitleTextStyle(context)),
+                style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat('d-M-y (EEEE)',
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(data.datePicked),
-                style: _getCardBodyTextStyle(context)),
+                style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
         Card(
@@ -52,13 +53,13 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           child: ListTile(
               leading: const Icon(Icons.location_pin),
               title: Text(AppLocalizations.of(context)!.remodeling_address,
-                  style: _getCardTitleTextStyle(context)),
+                  style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.addressLine1 ?? "1座2樓C室"}' //todo remove debug text
                   '\n${data.addressLine2 ?? "雅佳花園"}'
                   '\n${data.district ?? "上環"}'
                   '\n${data.region ?? "香港"}',
-                  style: _getCardBodyTextStyle(context))),
+                  style: AppTheme.getCardBodyTextStyle(context))),
         )),
         Card(
             child: Padding(
@@ -66,11 +67,11 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           child: ListTile(
               leading: const Icon(Icons.contact_phone),
               title: Text(AppLocalizations.of(context)!.contact_number,
-                  style: _getCardTitleTextStyle(context)),
+                  style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
                   '\n${_getContactName()}',
-                  style: _getCardBodyTextStyle(context))),
+                  style: AppTheme.getCardBodyTextStyle(context))),
         ))
       ],
     );
@@ -95,19 +96,19 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(getRemodelingItemTitle(RemodelingItem.painting, context),
-                style: _getCardBodyTextStyle(context)),
+                style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(
                     data.paintArea, data.scrapeOldPaint)),
-                style: _getCardBodyTextStyle(context))
+                style: AppTheme.getCardBodyTextStyle(context))
           ]),
       Text('- ${data.paintArea} ${AppLocalizations.of(context)!.sq_ft}',
-          style: _getCardBodyTextStyle(context)),
+          style: AppTheme.getCardBodyTextStyle(context)),
       Text(
           data.scrapeOldPaint!
               ? '- ${AppLocalizations.of(context)!.scrape_old_paint_yes}'
               : '- ${AppLocalizations.of(context)!.scrape_old_paint_no}',
-          style: _getCardBodyTextStyle(context)),
+          style: AppTheme.getCardBodyTextStyle(context)),
     ]);
   }
 
@@ -117,16 +118,5 @@ class RemodelingConfirmationWidget extends StatelessWidget {
     } else {
       return '${data.prefix ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text
     }
-  }
-
-  TextStyle? _getCardTitleTextStyle(BuildContext context) {
-    return Theme.of(context)
-        .textTheme
-        .subtitle2!
-        .copyWith(color: Theme.of(context).textTheme.caption!.color);
-  }
-
-  TextStyle? _getCardBodyTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.subtitle1;
   }
 }

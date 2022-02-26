@@ -53,4 +53,12 @@ class AppTheme {
           .textTheme
           .bodyText2!
           .copyWith(color: Theme.of(context).textTheme.caption!.color);
+
+  static TextStyle? getCardTitleTextStyle(BuildContext context) {
+    return Theme.of(context).textTheme.caption;
+  }
+
+  static TextStyle? getCardBodyTextStyle(BuildContext context) {
+    return Theme.of(context).textTheme.subtitle1;
+  }
 }

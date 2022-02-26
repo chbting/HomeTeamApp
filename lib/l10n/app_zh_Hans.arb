@@ -85,5 +85,8 @@
 	"area_net_abr": "实用",
 	"sq_ft_abr": "呎",
 	"date_time_selected": "己选择",
-	"time": "时间"
+	"time": "时间",
+	"date": "日期",
+	"am": "上午",
+	"pm": "下午"
 }

@@ -31,7 +31,7 @@ class RemodelingDatePickerWidgetState
     }
     return ListView(
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
-        // all sides, thus these values are offset
+        // all sides, thus these values are adjusted
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
         primary: false,
         children: [
@@ -61,7 +61,7 @@ class RemodelingDatePickerWidgetState
                     ),
                     Text(
                       DateFormat(
-                              'd-M-y (EEEE)',
+                              'd/M/y EEEE',
                               SharedPreferencesHelper()
                                   .getLocale()
                                   .languageCode)

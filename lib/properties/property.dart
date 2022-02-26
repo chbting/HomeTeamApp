@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../theme.dart';
 
-/// Data class for properties
-
 class Property {
   String? name, address, district;
   int? id, sqFtGross, sqFtNet, price;

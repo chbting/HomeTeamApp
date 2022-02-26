@@ -16,6 +16,13 @@ class PropertiesVisitStartingPointWidget extends StatefulWidget {
 class PropertiesVisitStartingPointWidgetState
     extends State<PropertiesVisitStartingPointWidget> {
   final double _imageSize = 120.0;
+  int? _selectedId = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.data.startingPropertyId ??= widget.data.propertyList[0].id;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +37,18 @@ class PropertiesVisitStartingPointWidgetState
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    //todo add a radio button
+                    Radio<int?>(
+                        value: widget.data.propertyList[index].id,
+                        groupValue: _selectedId,
+                        onChanged: (int? value) {
+                          setState(() {
+                            _selectedId = value;
+                          });
+                        }),
                     Padding(
-                        padding: const EdgeInsets.only(left:16, right: 16),
+                        padding: const EdgeInsets.only(left:0, right: 16.0),
                         child: Image(
                             width: _imageSize,
                             height: _imageSize,

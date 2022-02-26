@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 
 class RemodelingDatePickerWidget extends StatefulWidget {
@@ -26,7 +26,7 @@ class RemodelingDatePickerWidgetState
         now.day + RemodelingSchedulingData.firstAvailableDay);
     final lastDate = DateTime(
         firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
-    if(widget.data.datePicked.isBefore(firstDate)) {
+    if (widget.data.datePicked.isBefore(firstDate)) {
       widget.data.datePicked = firstDate;
     }
     return ListView(
@@ -60,9 +60,11 @@ class RemodelingDatePickerWidgetState
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
-                              .getLocale()
-                              .languageCode)
+                      DateFormat(
+                              'd-M-y (EEEE)',
+                              SharedPreferencesHelper()
+                                  .getLocale()
+                                  .languageCode)
                           .format(widget.data.datePicked),
                       style: Theme.of(context).textTheme.subtitle1,
                     )

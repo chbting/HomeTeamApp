@@ -66,7 +66,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                       padding: const EdgeInsets.symmetric(
                           vertical: 8.0, horizontal: 8.0),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                               padding: const EdgeInsets.only(right: 16),
@@ -76,14 +76,12 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                                   image: _propertiesInCart[index].coverImage)),
                           getPropertyPreviewTextWidget(
                               context, _imageSize, _propertiesInCart[index]),
-                          SizedBox(
-                              height: _imageSize,
-                              child: IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  // TODO remove item and update list
-                                },
-                              )),
+                          IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                              // TODO remove item and update list
+                            },
+                          )
                         ],
                       )),
                 );

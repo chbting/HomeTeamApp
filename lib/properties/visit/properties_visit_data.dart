@@ -3,12 +3,13 @@ import '../property.dart';
 class PropertiesVisitData {
 
   final List<Property> propertyList = [];
+  int? startingPropertyId;
 
   // Date Picker
   static const firstAvailableDay = 2;
   late DateTime dateTimePicked;
 
-  // Contacts
+  // Contact
   String? phoneNumber;
   String? lastName;
   String? prefix;

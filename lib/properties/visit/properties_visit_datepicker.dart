@@ -51,18 +51,31 @@ class PropertiesVisitDatePickerWidgetState
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(AppLocalizations.of(context)!.time, style: Theme.of(context).textTheme.caption),
+                    //DropdownButton(items: items, onChanged: onChanged)
+                  ],
+                )),
+          ),
+          Card(
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Wrap(
                   direction: Axis.vertical,
                   spacing: 8.0,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.remodeling_start_date,
+                      AppLocalizations.of(context)!.date_time_selected,
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
-                      DateFormat.yMMMMEEEEd(SharedPreferencesHelper()
-                              .getLocale()
-                              .languageCode)
+                      DateFormat(
+                              'd-M-y (EEEE) kk:mm',
+                              SharedPreferencesHelper()
+                                  .getLocale()
+                                  .languageCode)
                           .format(widget.data.dateTimePicked),
                       style: Theme.of(context).textTheme.subtitle1,
                     )

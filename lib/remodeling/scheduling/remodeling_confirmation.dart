@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
@@ -40,7 +40,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
             title: Text(AppLocalizations.of(context)!.remodeling_start_date,
                 style: _getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat.yMMMMEEEEd(
+                DateFormat('d-M-y (EEEE)',
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(data.datePicked),
                 style: _getCardBodyTextStyle(context)),

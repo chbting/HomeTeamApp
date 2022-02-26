@@ -83,5 +83,7 @@
 	"schedule_properties_visit": "Schedule Properties Visit",
 	"area_gross_abr": "Gross",
 	"area_net_abr": "S.A.",
-	"sq_ft_abr": "sq. ft"
+	"sq_ft_abr": "sq. ft",
+	"date_time_selected": "Preferred date and time",
+	"time": "Time"
 }

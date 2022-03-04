@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 
 class PropertiesVisitDatePickerWidget extends StatefulWidget {
   const PropertiesVisitDatePickerWidget({Key? key, required this.data})
@@ -18,12 +19,15 @@ class PropertiesVisitDatePickerWidget extends StatefulWidget {
 
 class PropertiesVisitDatePickerWidgetState
     extends State<PropertiesVisitDatePickerWidget> {
+  final GlobalKey<CollapsableExpansionTileState> _datePickerKey =
+      GlobalKey<CollapsableExpansionTileState>();
+  final GlobalKey<CollapsableExpansionTileState> _timePickerKey =
+      GlobalKey<CollapsableExpansionTileState>();
   final int _schedulingRange = 30;
 
   @override
   void initState() {
     super.initState();
-    //widget.data.dateTimePicked.;
   }
 
   @override
@@ -44,7 +48,8 @@ class PropertiesVisitDatePickerWidgetState
         primary: false,
         children: [
           Card(
-              child: ExpansionTile(
+              child: CollapsableExpansionTile(
+            key: _datePickerKey,
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
@@ -55,6 +60,13 @@ class PropertiesVisitDatePickerWidgetState
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(widget.data.dateTimePicked),
                 style: Theme.of(context).textTheme.subtitle1),
+            onExpansionChanged: (isExpanded) {
+              if (isExpanded && _timePickerKey.currentState!.isExpanded()) {
+                setState(() {
+                  _timePickerKey.currentState!.setExpanded(false);
+                });
+              }
+            },
             children: [
               CalendarDatePicker(
                   initialDate: widget.data.dateTimePicked,
@@ -63,37 +75,43 @@ class PropertiesVisitDatePickerWidgetState
                   onDateChanged: (DateTime value) {
                     setState(() {
                       widget.data.dateTimePicked = value;
+                      _datePickerKey.currentState?.setExpanded(false);
+                      // todo collapse the tile
+                      // _datePickerTile.setExpanded(false);
                     });
                   })
             ],
-
           )),
           Card(
-              child: ExpansionTile(
+              child: CollapsableExpansionTile(
+            key: _timePickerKey,
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.schedule)]),
             title: Text(AppLocalizations.of(context)!.time,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat('KK:mm',
-                        SharedPreferencesHelper().getLocale().languageCode)
-                    .format(widget.data.dateTimePicked),
+                TimeOfDay(
+                        hour: widget.data.dateTimePicked.hour,
+                        minute: widget.data.dateTimePicked.minute)
+                    .format(context),
                 style: Theme.of(context).textTheme.subtitle1),
+            onExpansionChanged: (isExpanded) {
+              if (isExpanded && _datePickerKey.currentState!.isExpanded()) {
+                setState(() {
+                  _datePickerKey.currentState!.setExpanded(false);
+                });
+              }
+            },
             children: [
               GridView.count(
                 crossAxisCount: 3,
                 shrinkWrap: true,
                 children: [
-                  TextButton(
-                    child: Text("9:00"),
-                    onPressed: () {
-
-                    },
-                  ),
-                  Text("9:30"),
-                  Text("10:00"),
-                  Text("10:30")
+                  getTimeButton(TimeOfDay(hour: 9, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 9, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 10, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 10, minute: 30)),
                 ],
               )
             ],
@@ -101,14 +119,32 @@ class PropertiesVisitDatePickerWidgetState
         ]);
   }
 
-  List<String> getAvailableTimes() {
-    final startTime = TimeOfDay(hour: 9, minute: 0);
-    final endTime = TimeOfDay(hour: 20, minute: 0);
-    final step = Duration(minutes: 30);
-    return getTimes(startTime, endTime, step)
-        .map((tod) => tod.format(context))
-        .toList();
+  Widget getTimeButton(TimeOfDay timeOfDay) {
+    return TextButton(
+      child: Text(timeOfDay.format(context)),
+      onPressed: () {
+        var newValue = DateTime(
+            widget.data.dateTimePicked.year,
+            widget.data.dateTimePicked.month,
+            widget.data.dateTimePicked.day,
+            timeOfDay.hour,
+            timeOfDay.minute);
+        setState(() {
+          widget.data.dateTimePicked = newValue;
+          _timePickerKey.currentState?.setExpanded(false);
+        });
+      },
+    );
   }
+
+  // List<String> getAvailableTimes() {
+  //   final startTime = TimeOfDay(hour: 9, minute: 0);
+  //   final endTime = TimeOfDay(hour: 20, minute: 0);
+  //   final step = Duration(minutes: 30);
+  //   return getTimes(startTime, endTime, step)
+  //       .map((tod) => tod.format(context))
+  //       .toList();
+  // }
 
   Iterable<TimeOfDay> getTimes(
       TimeOfDay startTime, TimeOfDay endTime, Duration step) sync* {
@@ -125,4 +161,12 @@ class PropertiesVisitDatePickerWidgetState
     } while (hour < endTime.hour ||
         (hour == endTime.hour && minute <= endTime.minute));
   }
+}
+
+class Item {
+  Item({
+    this.isExpanded = false,
+  });
+
+  bool isExpanded;
 }

@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/theme.dart';
 
-import '../../shared_preferences_helper.dart';
+import '../../utils/shared_preferences_helper.dart';
 
 class PropertiesVisitConfirmationWidget extends StatelessWidget {
   const PropertiesVisitConfirmationWidget({Key? key, required this.data})

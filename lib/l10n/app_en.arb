@@ -98,5 +98,13 @@
 	"reason_sign_property_visit_agreement": "Sign the property visit agreement with biometric authentication",
 	"properties_visit_date": "Visiting Date",
 	"name": "Name",
-	"signed": "Signed"
+	"signed": "Signed",
+	"contract_status": "Contract Status",
+	"visited_properties": "Visited Properties",
+	"properties_visited_last_thirty_days": "Properties visited in the last 30 days",
+	"negotiate_contract": "Make an Offer",
+	"tenant_sign_contract": "Tenant signs the contract",
+	"landlord_accept_offer": "Landlord accepts / counteroffer",
+	"landlord_sign_contract": "Landlord signs the contract",
+	"accept_or_make_offer": "Accept / Make an offer"
 }

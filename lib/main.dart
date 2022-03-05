@@ -4,10 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
-import 'package:tner_client/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 
-import 'agreements/agreements.dart';
+import 'contracts/contracts.dart';
 import 'owner/owner.dart';
 import 'remodeling/remodeling.dart';
 
@@ -91,7 +91,7 @@ class AppHomeState extends State<AppHome> {
         children: const <Widget>[
           PropertiesScreen(),
           RemodelingScreen(),
-          AgreementsScreen(),
+          ContractsScreen(),
           OwnerScreen(),
           SettingsScreen()
         ],

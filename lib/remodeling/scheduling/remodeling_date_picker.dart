@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
-import 'package:tner_client/shared_preferences_helper.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:tner_client/shared_preferences_helper.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 import '../../theme.dart';
 

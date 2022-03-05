@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/settings/settings_ui.dart';
-import 'package:tner_client/shared_preferences_helper.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
 
 class SettingsScreen extends StatefulWidget {

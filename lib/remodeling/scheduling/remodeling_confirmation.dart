@@ -6,7 +6,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/theme.dart';
 
-import '../../shared_preferences_helper.dart';
+import '../../utils/shared_preferences_helper.dart';
 
 class RemodelingConfirmationWidget extends StatelessWidget {
   const RemodelingConfirmationWidget({Key? key, required this.data})

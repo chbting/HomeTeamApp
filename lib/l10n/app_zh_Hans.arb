@@ -98,5 +98,13 @@
 	"reason_sign_property_visit_agreement": "使用生物认证签署睇楼纸",
 	"properties_visit_date": "睇楼日期",
 	"name": "姓名",
-	"signed": "已签署"
+	"signed": "已签署",
+	"contract_status": "租约进度",
+	"visited_properties": "已睇楼盘",
+	"properties_visited_last_thirty_days": "过去30日到访过的租盘",
+	"negotiate_contract": "商讨租约",
+	"tenant_sign_contract": "租客签约",
+	"landlord_accept_offer": "业主接受/提出更改",
+	"landlord_sign_contract": "業主簽約",
+	"accept_or_make_offer": "接受/提出更改"
 }

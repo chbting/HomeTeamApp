@@ -9,6 +9,9 @@ class PropertiesVisitData {
   static const firstAvailableDay = 2;
   late DateTime dateTimePicked;
 
+  // Agreement
+  bool agreementSigned = false;
+
   // Contact
   String? phoneNumber;
   String? lastName;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
 import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
@@ -134,6 +136,43 @@ class PropertiesVisitSchedulingScreenState
     }
   }
 
+  void _signWithBiometrics() async {
+    final LocalAuthentication localAuth = LocalAuthentication();
+    bool canCheckBiometrics, didAuthenticate;
+    try {
+      canCheckBiometrics = await localAuth.canCheckBiometrics;
+    } on PlatformException {
+      canCheckBiometrics = false;
+    }
+
+    if (canCheckBiometrics) {
+      try {
+        didAuthenticate = await localAuth.authenticate(
+            localizedReason: AppLocalizations.of(context)!
+                .reason_sign_property_visit_agreement,
+            biometricOnly: true);
+      } on PlatformException {
+        didAuthenticate = false;
+      }
+
+      if (didAuthenticate) {
+        // case 1: successfully authenticated
+        _data.agreementSigned = true;
+        _nextStep();
+      } else {
+        // case 2: authentication failed
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(AppLocalizations.of(context)!
+                .biometric_authentication_failed)));
+      }
+    } else {
+      // case 3: biometric authentication unavailable
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(AppLocalizations.of(context)!
+              .biometric_authentication_unavailable)));
+    }
+  }
+
   void _confirm() {
     // todo
   }
@@ -174,7 +213,7 @@ class PropertiesVisitSchedulingScreenState
                             MediaQuery.of(context).size.width - 32.0, 48.0),
                         shape: const StadiumBorder()),
                     onPressed: () {
-                      _nextStep();
+                      _signWithBiometrics();
                     },
                   ),
                   Container(height: 16.0),
@@ -186,7 +225,8 @@ class PropertiesVisitSchedulingScreenState
                         label: Text(AppLocalizations.of(context)!.back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                                MediaQuery.of(context).size.width / 2 - 24.0,
+                                48.0),
                             // 48.0 is the height of extended fab
                             shape: const StadiumBorder()),
                         onPressed: () {
@@ -198,10 +238,12 @@ class PropertiesVisitSchedulingScreenState
                         label: Text(AppLocalizations.of(context)!.sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                                MediaQuery.of(context).size.width / 2 - 24.0,
+                                48.0),
                             // 48.0 is the height of extended fab
                             shape: const StadiumBorder()),
                         onPressed: () {
+                          _data.agreementSigned = false;
                           _nextStep();
                         },
                       ),

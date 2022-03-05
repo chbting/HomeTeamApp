@@ -33,14 +33,20 @@ class PropertiesVisitDatePickerWidgetState
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
+    const earliestAvailableTime =
+        TimeOfDay(hour: 10, minute: 0); //todo from server
     final firstDate = DateTime(
-        now.year, now.month, now.day + PropertiesVisitData.firstAvailableDay);
+        now.year,
+        now.month,
+        now.day + PropertiesVisitData.firstAvailableDay,
+        earliestAvailableTime.hour,
+        earliestAvailableTime.minute);
     final lastDate = DateTime(
         firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
     if (widget.data.dateTimePicked.isBefore(firstDate)) {
       widget.data.dateTimePicked = firstDate;
     }
-    // todo default selected time & no available time
+
     return ListView(
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
         // all sides, thus these values are adjusted
@@ -115,12 +121,13 @@ class PropertiesVisitDatePickerWidgetState
                 shrinkWrap: true,
                 primary: false,
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                children: [
-                  getTimeButton(TimeOfDay(hour: 10, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 10, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 11, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 11, minute: 30)),
-                ],
+                children: getTimeOfDayList(
+                        const TimeOfDay(hour: 10, minute: 0),
+                        const TimeOfDay(hour: 11, minute: 30),
+                        const Duration(minutes: 30))
+                    .map<Widget>((timeOfDay) {
+                  return getTimeWidget(timeOfDay, true);
+                }).toList(),
               ),
               Align(
                   alignment: Alignment.centerLeft,
@@ -130,103 +137,91 @@ class PropertiesVisitDatePickerWidgetState
                       child: Text(AppLocalizations.of(context)!.afternoon,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
-                crossAxisCount: 4,
-                childAspectRatio: 2,
-                shrinkWrap: true,
-                primary: false,
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                children: [
-                  getTimeButton(TimeOfDay(hour: 12, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 12, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 1, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 1, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 2, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 2, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 3, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 3, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 4, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 4, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 5, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 5, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 6, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 6, minute: 30)),
-                  getTimeButton(TimeOfDay(hour: 7, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 7, minute: 30)),
-                ],
-              ),
+                  crossAxisCount: 4,
+                  childAspectRatio: 2,
+                  shrinkWrap: true,
+                  primary: false,
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  children: getTimeOfDayList(
+                          const TimeOfDay(hour: 12, minute: 0),
+                          const TimeOfDay(hour: 19, minute: 0),
+                          const Duration(minutes: 30))
+                      .map<Widget>((timeOfDay) {
+                    return getTimeWidget(timeOfDay, true);
+                  }).toList()),
             ],
           ))
         ]);
   }
 
-  // todo disable unavailable times
-  Widget getTimeButton(TimeOfDay timeOfDay) {
+  Widget getTimeWidget(TimeOfDay timeOfDay, bool isAvailable) {
     bool isSelected = timeOfDay.hour == widget.data.dateTimePicked.hour &&
         timeOfDay.minute == widget.data.dateTimePicked.minute;
+
+    Widget timeTextBox = Container(
+        decoration: isSelected
+            ? BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                shape: BoxShape.rectangle)
+            : null,
+        child: Align(
+            alignment: Alignment.center,
+            child: Text(
+                '${MaterialLocalizations.of(context).formatHour(timeOfDay)}:'
+                '${MaterialLocalizations.of(context).formatMinute(timeOfDay)}',
+                style: getTimeTextStyle(isAvailable, isSelected))));
+
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: InkWell(
-          child: Container(
-              decoration: isSelected
-                  ? BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(15.0)),
-                      shape: BoxShape.rectangle)
-                  : null,
-              child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                      '${timeOfDay.hour}:${timeOfDay.minute == 0 ? '00' : timeOfDay.minute}',
-                      style: isSelected
-                          ? AppTheme.getCardBodyTextStyle(context)!.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary)
-                          : AppTheme.getCardBodyTextStyle(context)))),
-          onTap: () {
-            var newValue = DateTime(
-                widget.data.dateTimePicked.year,
-                widget.data.dateTimePicked.month,
-                widget.data.dateTimePicked.day,
-                timeOfDay.hour,
-                timeOfDay.minute);
-            setState(() {
-              widget.data.dateTimePicked = newValue;
-              _timePickerKey.currentState?.setExpanded(false);
-            });
-          },
-        ));
+        child: !isAvailable
+            ? InkWell(
+                child: timeTextBox,
+                onTap: () {
+                  var newValue = DateTime(
+                      widget.data.dateTimePicked.year,
+                      widget.data.dateTimePicked.month,
+                      widget.data.dateTimePicked.day,
+                      timeOfDay.hour,
+                      timeOfDay.minute);
+                  setState(() {
+                    widget.data.dateTimePicked = newValue;
+                    _timePickerKey.currentState?.setExpanded(false);
+                  });
+                },
+              )
+            : timeTextBox);
   }
 
-  // List<String> getAvailableTimes() {
-  //   final startTime = TimeOfDay(hour: 9, minute: 0);
-  //   final endTime = TimeOfDay(hour: 20, minute: 0);
-  //   final step = Duration(minutes: 30);
-  //   return getTimes(startTime, endTime, step)
-  //       .map((tod) => tod.format(context))
-  //       .toList();
-  // }
+  TextStyle getTimeTextStyle(bool isAvailable, bool isSelected) {
+    if (isAvailable) {
+      if (isSelected) {
+        return AppTheme.getCardBodyTextStyle(context)!
+            .copyWith(color: Theme.of(context).colorScheme.onPrimary);
+      } else {
+        return AppTheme.getCardBodyTextStyle(context)!;
+      }
+    } else {
+      return AppTheme.getCardBodyTextStyle(context)!
+          .copyWith(color: Theme.of(context).disabledColor);
+    }
+  }
 
-  Iterable<TimeOfDay> getTimes(
-      TimeOfDay startTime, TimeOfDay endTime, Duration step) sync* {
+  List<TimeOfDay> getTimeOfDayList(
+      TimeOfDay startTime, TimeOfDay endTime, Duration interval) {
+    List<TimeOfDay> list = [];
     var hour = startTime.hour;
     var minute = startTime.minute;
 
     do {
-      yield TimeOfDay(hour: hour, minute: minute);
-      minute += step.inMinutes;
+      list.add(TimeOfDay(hour: hour, minute: minute));
+      minute += interval.inMinutes;
       while (minute >= 60) {
         minute -= 60;
         hour++;
       }
     } while (hour < endTime.hour ||
         (hour == endTime.hour && minute <= endTime.minute));
+    return list;
   }
-}
-
-class Item {
-  Item({
-    this.isExpanded = false,
-  });
-
-  bool isExpanded;
 }

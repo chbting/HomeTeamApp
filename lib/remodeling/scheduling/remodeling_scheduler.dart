@@ -194,13 +194,11 @@ class RemodelingSchedulingScreenState
                         MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
                     shape: const StadiumBorder()),
                 onPressed: () {
-                  setState(() {
-                    if (_activeStep == _totalSteps - 1) {
-                      // todo send order
-                    } else {
-                      _nextStep();
-                    }
-                  });
+                  if (_activeStep == _totalSteps - 1) {
+                    // todo send order
+                  } else {
+                    _nextStep();
+                  }
                 },
               )
             ],

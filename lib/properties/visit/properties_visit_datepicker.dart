@@ -40,7 +40,7 @@ class PropertiesVisitDatePickerWidgetState
     if (widget.data.dateTimePicked.isBefore(firstDate)) {
       widget.data.dateTimePicked = firstDate;
     }
-
+    // todo default selected time & no available time
     return ListView(
         // note: ListView with CalendarDatePicker has 4.0 internal padding on
         // all sides, thus these values are adjusted
@@ -104,37 +104,99 @@ class PropertiesVisitDatePickerWidgetState
               }
             },
             children: [
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      child: Text(AppLocalizations.of(context)!.morning,
+                          style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
-                crossAxisCount: 3,
+                crossAxisCount: 4,
+                childAspectRatio: 2,
                 shrinkWrap: true,
+                primary: false,
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 children: [
-                  getTimeButton(TimeOfDay(hour: 9, minute: 0)),
-                  getTimeButton(TimeOfDay(hour: 9, minute: 30)),
                   getTimeButton(TimeOfDay(hour: 10, minute: 0)),
                   getTimeButton(TimeOfDay(hour: 10, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 11, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 11, minute: 30)),
                 ],
-              )
+              ),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      child: Text(AppLocalizations.of(context)!.afternoon,
+                          style: AppTheme.getCardTitleTextStyle(context)))),
+              GridView.count(
+                crossAxisCount: 4,
+                childAspectRatio: 2,
+                shrinkWrap: true,
+                primary: false,
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                children: [
+                  getTimeButton(TimeOfDay(hour: 12, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 12, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 1, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 1, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 2, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 2, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 3, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 3, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 4, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 4, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 5, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 5, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 6, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 6, minute: 30)),
+                  getTimeButton(TimeOfDay(hour: 7, minute: 0)),
+                  getTimeButton(TimeOfDay(hour: 7, minute: 30)),
+                ],
+              ),
             ],
           ))
         ]);
   }
 
+  // todo disable unavailable times
   Widget getTimeButton(TimeOfDay timeOfDay) {
-    return TextButton(
-      child: Text(timeOfDay.format(context)),
-      onPressed: () {
-        var newValue = DateTime(
-            widget.data.dateTimePicked.year,
-            widget.data.dateTimePicked.month,
-            widget.data.dateTimePicked.day,
-            timeOfDay.hour,
-            timeOfDay.minute);
-        setState(() {
-          widget.data.dateTimePicked = newValue;
-          _timePickerKey.currentState?.setExpanded(false);
-        });
-      },
-    );
+    bool isSelected = timeOfDay.hour == widget.data.dateTimePicked.hour &&
+        timeOfDay.minute == widget.data.dateTimePicked.minute;
+    return Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: InkWell(
+          child: Container(
+              decoration: isSelected
+                  ? BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
+                      shape: BoxShape.rectangle)
+                  : null,
+              child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                      '${timeOfDay.hour}:${timeOfDay.minute == 0 ? '00' : timeOfDay.minute}',
+                      style: isSelected
+                          ? AppTheme.getCardBodyTextStyle(context)!.copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary)
+                          : AppTheme.getCardBodyTextStyle(context)))),
+          onTap: () {
+            var newValue = DateTime(
+                widget.data.dateTimePicked.year,
+                widget.data.dateTimePicked.month,
+                widget.data.dateTimePicked.day,
+                timeOfDay.hour,
+                timeOfDay.minute);
+            setState(() {
+              widget.data.dateTimePicked = newValue;
+              _timePickerKey.currentState?.setExpanded(false);
+            });
+          },
+        ));
   }
 
   // List<String> getAvailableTimes() {

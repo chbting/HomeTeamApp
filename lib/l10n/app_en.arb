@@ -88,5 +88,7 @@
 	"time": "Time",
 	"date": "Date",
 	"am": "AM",
-	"pm": "PM"
+	"pm": "PM",
+	"afternoon": "Afternoon",
+	"morning": "Morning"
 }

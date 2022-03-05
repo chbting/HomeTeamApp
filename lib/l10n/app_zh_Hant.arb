@@ -56,7 +56,6 @@
 	"kowloon": "九龍",
 	"new_territories": "新界",
 	"region": "地域",
-	"last_name": "姓氏",
 	"prefix": "稱謂",
 	"miss": "小姐",
 	"mr": "先生",
@@ -95,6 +94,9 @@
 	"sign_later": "睇樓時簽署",
 	"sign_now": "現在簽署",
 	"biometric_authentication_failed": "生物認證失敗",
-	"biometric_authentication_unavailable": "",
-	"reason_sign_property_visit_agreement": "使用生物認證簽署睇樓紙"
+	"biometric_authentication_unavailable": "本裝置未能使用生物認證，請選擇“睇樓時簽署”",
+	"reason_sign_property_visit_agreement": "使用生物認證簽署睇樓紙",
+	"properties_visit_date": "睇樓日期",
+	"name": "姓名",
+	"signed": "已簽署"
 }

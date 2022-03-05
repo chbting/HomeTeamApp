@@ -56,7 +56,7 @@ class PropertiesVisitDatePickerWidgetState
             title: Text(AppLocalizations.of(context)!.date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat('d/M/y EEEE',
+                DateFormat(AppTheme.dateFormat,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(widget.data.dateTimePicked),
                 style: Theme.of(context).textTheme.subtitle1),
@@ -76,8 +76,6 @@ class PropertiesVisitDatePickerWidgetState
                     setState(() {
                       widget.data.dateTimePicked = value;
                       _datePickerKey.currentState?.setExpanded(false);
-                      // todo collapse the tile
-                      // _datePickerTile.setExpanded(false);
                     });
                   })
             ],

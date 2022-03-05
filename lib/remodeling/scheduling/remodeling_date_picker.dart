@@ -3,6 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/shared_preferences_helper.dart';
+import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 
 class RemodelingDatePickerWidget extends StatefulWidget {
   const RemodelingDatePickerWidget({Key? key, required this.data})
@@ -17,6 +19,8 @@ class RemodelingDatePickerWidget extends StatefulWidget {
 
 class RemodelingDatePickerWidgetState
     extends State<RemodelingDatePickerWidget> {
+  final GlobalKey<CollapsableExpansionTileState> _datePickerKey =
+      GlobalKey<CollapsableExpansionTileState>();
   final int _schedulingRange = 30;
 
   @override
@@ -36,41 +40,31 @@ class RemodelingDatePickerWidgetState
         primary: false,
         children: [
           Card(
-            child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                child: CalendarDatePicker(
-                    initialDate: widget.data.datePicked,
-                    firstDate: firstDate,
-                    lastDate: lastDate,
-                    onDateChanged: (DateTime value) {
-                      setState(() {
-                        widget.data.datePicked = value;
-                      });
-                    })),
-          ),
-          Card(
-            child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Wrap(
-                  direction: Axis.vertical,
-                  spacing: 8.0,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.remodeling_start_date,
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Text(
-                      DateFormat(
-                              'd/M/y EEEE',
-                              SharedPreferencesHelper()
-                                  .getLocale()
-                                  .languageCode)
-                          .format(widget.data.datePicked),
-                      style: Theme.of(context).textTheme.subtitle1,
-                    )
-                  ],
-                )),
-          )
+              child: CollapsableExpansionTile(
+            key: _datePickerKey,
+            leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [Icon(Icons.calendar_today)]),
+            title: Text(AppLocalizations.of(context)!.remodeling_start_date,
+                style: AppTheme.getCardTitleTextStyle(context)),
+            subtitle: Text(
+                DateFormat(AppTheme.dateFormat,
+                        SharedPreferencesHelper().getLocale().languageCode)
+                    .format(widget.data.datePicked),
+                style: Theme.of(context).textTheme.subtitle1),
+            children: [
+              CalendarDatePicker(
+                  initialDate: widget.data.datePicked,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                  onDateChanged: (DateTime value) {
+                    setState(() {
+                      widget.data.datePicked = value;
+                      _datePickerKey.currentState?.setExpanded(false);
+                    });
+                  })
+            ],
+          )),
         ]);
   }
 }

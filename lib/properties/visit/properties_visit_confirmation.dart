@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/theme.dart';
 
 import '../../shared_preferences_helper.dart';
 
@@ -19,12 +20,19 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
       children: [
         Card(
             child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: ListTile(
-              leading: const Icon(Icons.style),
-              title: Text(AppLocalizations.of(context)!.remodeling_options,
-                  style: _getCardTitleTextStyle(context))),
-        )),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: ListTile(
+                    leading: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget>[
+                        Icon(Icons.place),
+                      ],
+                    ),
+                    title: Text(AppLocalizations.of(context)!.properties,
+                        style: AppTheme.getCardTitleTextStyle(context)),
+                    subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
+                        style: AppTheme.getCardBodyTextStyle(context))))),
         Card(
           child: ListTile(
             leading: Column(
@@ -34,41 +42,52 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 Icon(Icons.calendar_today),
               ],
             ),
-            title: Text(AppLocalizations.of(context)!.remodeling_start_date,
-                style: _getCardTitleTextStyle(context)),
+            isThreeLine: true,
+            title: Text(AppLocalizations.of(context)!.properties_visit_date,
+                style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat.yMMMMEEEEd(
-                        SharedPreferencesHelper().getLocale().languageCode)
-                    .format(data.dateTimePicked),
-                style: _getCardBodyTextStyle(context)),
+                '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
+                '\n${DateFormat(AppTheme.dateFormat, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
+                style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
-        // Card(
-        //     child: Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 8.0),
-        //   child: ListTile(
-        //       leading: const Icon(Icons.location_pin),
-        //       title: Text(AppLocalizations.of(context)!.remodeling_address,
-        //           style: _getCardTitleTextStyle(context)),
-        //       subtitle: Text(
-        //           '${data.addressLine1 ?? "1座2樓C室"}' //todo remove debug text
-        //           '\n${data.addressLine2 ?? "雅佳花園"}'
-        //           '\n${data.district ?? "上環"}'
-        //           '\n${data.region ?? "香港"}',
-        //           style: _getCardBodyTextStyle(context))),
-        // )),
         Card(
             child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
-              leading: const Icon(Icons.contact_phone),
+              leading: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const <Widget>[
+                  Icon(Icons.contact_phone),
+                ],
+              ),
               title: Text(AppLocalizations.of(context)!.contact_number,
-                  style: _getCardTitleTextStyle(context)),
+                  style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
                   '\n${_getContactName()}',
-                  style: _getCardBodyTextStyle(context))),
-        ))
+                  style: AppTheme.getCardBodyTextStyle(context))),
+        )),
+        Card(
+          child: ListTile(
+            leading: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const <Widget>[
+                Icon(Icons.description),
+              ],
+            ),
+            title: Text(
+                AppLocalizations.of(context)!.properties_visit_agreement,
+                style: AppTheme.getCardTitleTextStyle(context)),
+            subtitle: Text(
+                data.agreementSigned
+                    ? AppLocalizations.of(context)!.signed
+                    : AppLocalizations.of(context)!.sign_later,
+                style: AppTheme.getCardBodyTextStyle(context)),
+          ),
+        )
       ],
     );
   }
@@ -79,16 +98,5 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
     } else {
       return '${data.prefix ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text
     }
-  }
-
-  TextStyle? _getCardTitleTextStyle(BuildContext context) {
-    return Theme.of(context)
-        .textTheme
-        .subtitle2!
-        .copyWith(color: Theme.of(context).textTheme.caption!.color);
-  }
-
-  TextStyle? _getCardBodyTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.subtitle1;
   }
 }

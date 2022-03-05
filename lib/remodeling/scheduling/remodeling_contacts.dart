@@ -133,7 +133,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   labelText:
-                                      AppLocalizations.of(context)!.last_name),
+                                      AppLocalizations.of(context)!.name),
                               onChanged: (value) {
                                 widget.data.lastName = value;
                               }),

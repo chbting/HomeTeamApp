@@ -76,7 +76,7 @@ class RemodelingSchedulingScreenState
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.contact_phone,
                         color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.grading,
+                    Icon(Icons.check,
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
                   activeStep: _activeStep,
@@ -141,7 +141,7 @@ class RemodelingSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
-      FocusScope.of(context).unfocus(); // Close keyboard
+      //FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep++;
       });
@@ -152,7 +152,7 @@ class RemodelingSchedulingScreenState
 
   void _previousStep() {
     if (_activeStep > 0) {
-      FocusScope.of(context).unfocus(); // Close keyboard
+      //FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep--;
       });

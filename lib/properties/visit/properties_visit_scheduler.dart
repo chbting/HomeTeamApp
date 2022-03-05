@@ -57,7 +57,7 @@ class PropertiesVisitSchedulingScreenState
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.description,
                         color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.grading,
+                    Icon(Icons.check,
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
                   activeStep: _activeStep,
@@ -116,7 +116,6 @@ class PropertiesVisitSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
-      FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep++;
       });
@@ -127,7 +126,6 @@ class PropertiesVisitSchedulingScreenState
 
   void _previousStep() {
     if (_activeStep > 0) {
-      FocusScope.of(context).unfocus(); // Close keyboard
       setState(() {
         _activeStep--;
       });

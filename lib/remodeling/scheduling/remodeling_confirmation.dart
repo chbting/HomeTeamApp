@@ -41,7 +41,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
             title: Text(AppLocalizations.of(context)!.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat('d-M-y (EEEE)',
+                DateFormat(AppTheme.dateFormat,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(data.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),

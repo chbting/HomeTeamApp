@@ -16,7 +16,8 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
   Widget build(BuildContext context) {
     return ListView(
         primary: false,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        // note: ListView has 4.0 internal padding on all sides
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         children: []);
   }
 }

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/theme.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 class PropertiesVisitDatePickerWidget extends StatefulWidget {
   const PropertiesVisitDatePickerWidget({Key? key, required this.data})
@@ -48,9 +48,8 @@ class PropertiesVisitDatePickerWidgetState
     }
 
     return ListView(
-        // note: ListView with CalendarDatePicker has 4.0 internal padding on
-        // all sides, thus these values are adjusted
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+        // note: ListView has 4.0 internal padding on all sides
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         primary: false,
         children: [
           Card(

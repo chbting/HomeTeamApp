@@ -16,7 +16,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   Widget build(BuildContext context) {
     return ListView(
         primary: false,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         children: []);
   }
 }

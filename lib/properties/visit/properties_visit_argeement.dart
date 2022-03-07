@@ -15,14 +15,11 @@ class PropertiesVisitAgreementWidget extends StatefulWidget {
 
 class PropertiesVisitAgreementWidgetState
     extends State<PropertiesVisitAgreementWidget> {
-  final int _schedulingRange = 30;
-
   @override
   Widget build(BuildContext context) {
     return ListView(
-        // note: ListView with CalendarDatePicker has 4.0 internal padding on
-        // all sides, thus these values are offset
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+        // note: ListView has 4.0 internal padding on all sides
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
         primary: false,
         children: [
           Card(

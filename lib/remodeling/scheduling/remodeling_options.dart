@@ -104,7 +104,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       primary: false,
       children: [
         Card(
-            margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -128,7 +128,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         content: Card(
             child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                    const EdgeInsets.all(8.0),
                 child: _getLayoutByRemodelingItem(item))));
   }
 

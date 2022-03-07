@@ -27,8 +27,8 @@ class PropertiesVisitStartingPointWidgetState
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: const EdgeInsets.only(
-            left: 8.0, top: 8.0, right: 8.0, bottom: 72.0),
+        // note: ListView has 4.0 internal padding on all sides
+        padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 72.0),
         primary: false,
         itemCount: widget.data.propertyList.length,
         itemBuilder: (context, index) {
@@ -48,7 +48,7 @@ class PropertiesVisitStartingPointWidgetState
                           });
                         }),
                     Padding(
-                        padding: const EdgeInsets.only(left:0, right: 16.0),
+                        padding: const EdgeInsets.only(left: 0, right: 16.0),
                         child: Image(
                             width: _imageSize,
                             height: _imageSize,

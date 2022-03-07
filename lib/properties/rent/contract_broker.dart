@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
+import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 import 'contract_adjuster.dart';
@@ -45,7 +45,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconStepper(
+                CustomIconStepper(
                   icons: [
                     Icon(Icons.place,
                         color: Theme.of(context).colorScheme.onSecondary),
@@ -57,11 +57,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
                   activeStep: _activeStep,
-                  activeStepBorderWidth: 0,
-                  activeStepBorderPadding: 0,
+                  activeStepBorderWidth: 2,
                   activeStepColor: Theme.of(context).colorScheme.secondary,
                   enableNextPreviousButtons: false,
                   enableStepTapping: false,
+                  showStepCompleted: true,
                   stepRadius: 24.0,
                   lineColor: Colors.grey,
                   onStepReached: (index) {

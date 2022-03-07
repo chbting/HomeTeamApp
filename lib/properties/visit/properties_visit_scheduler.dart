@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
@@ -9,6 +8,7 @@ import 'package:tner_client/properties/visit/properties_visit_confirmation.dart'
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
+import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 class PropertiesVisitSchedulingScreen extends StatefulWidget {
@@ -49,7 +49,7 @@ class PropertiesVisitSchedulingScreenState
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconStepper(
+                CustomIconStepper(
                   icons: [
                     Icon(Icons.place,
                         color: Theme.of(context).colorScheme.onSecondary),
@@ -61,12 +61,12 @@ class PropertiesVisitSchedulingScreenState
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
                   activeStep: _activeStep,
-                  activeStepBorderWidth: 0,
-                  activeStepBorderPadding: 0,
+                  activeStepBorderWidth: 2,
                   activeStepColor: Theme.of(context).colorScheme.secondary,
                   enableNextPreviousButtons: false,
                   enableStepTapping: false,
                   stepRadius: 24.0,
+                  showStepCompleted: true,
                   lineColor: Colors.grey,
                   onStepReached: (index) {
                     setState(() {

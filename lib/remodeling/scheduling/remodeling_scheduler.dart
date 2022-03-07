@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_date_picker.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class RemodelingSchedulingScreenState
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconStepper(
+                CustomIconStepper(
                   icons: [
                     Icon(Icons.style,
                         color: Theme.of(context).colorScheme.onSecondary),
@@ -80,11 +80,11 @@ class RemodelingSchedulingScreenState
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
                   activeStep: _activeStep,
-                  activeStepBorderWidth: 0,
-                  activeStepBorderPadding: 0,
+                  activeStepBorderWidth: 2,
                   activeStepColor: Theme.of(context).colorScheme.secondary,
                   enableNextPreviousButtons: false,
                   enableStepTapping: false,
+                  showStepCompleted: true,
                   stepRadius: 24.0,
                   lineColor: Colors.grey,
                   onStepReached: (index) {

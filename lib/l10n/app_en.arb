@@ -17,7 +17,6 @@
 	"ok": "OK",
 	"schedule_remodeling": "Schedule Remodeling",
 	"remodeling_status": "Status",
-	"sign_agreement": "Sign",
 	"owner": "Owner",
 	"painting": "Painting",
 	"wallcoverings": "Wallcoverings",
@@ -118,5 +117,8 @@
 	"deposit": "Deposit",
 	"contract_start_date": "Contract Start Date",
 	"contract_end_date": "Contract End Date",
-	"lease_length": "Lease Length"
+	"lease_length": "Lease Length",
+	"reset": "Reset",
+	"sign_contract": "Sign Contract",
+	"submit": "Submit"
 }

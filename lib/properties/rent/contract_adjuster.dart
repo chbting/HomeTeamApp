@@ -95,7 +95,34 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 child: Text(
                   TextHelper.appLocalizations.lease_length,
                   style: Theme.of(context).textTheme.subtitle1,
-                ))
+                )),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText:
+                              TextHelper.appLocalizations.contract_start_date),
+                          onChanged: (value) {
+                            //widget.offer.startDate = value;
+                          }),
+                    ),
+                    Container(width: 16.0),
+                    Expanded(
+                      child: TextField(
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              labelText:
+                              TextHelper.appLocalizations.contract_end_date),
+                          onChanged: (value) {
+                            //widget.offer.endDate = value;
+                          }),
+                    ),
+                  ],
+                )
           ]),
           // todo datePicker
         )

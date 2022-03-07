@@ -17,7 +17,6 @@
 	"ok": "確認",
 	"schedule_remodeling": "預約裝修",
 	"remodeling_status": "工程進度",
-	"sign_agreement": "簽約",
 	"owner": "業主",
 	"painting": "油潻",
 	"wallcoverings": "牆紙",
@@ -118,5 +117,8 @@
 	"deposit": "保證金",
 	"contract_start_date": "租約開始日期",
 	"contract_end_date": "租約結束日期",
-	"lease_length": "租期"
+	"lease_length": "租期",
+	"reset": "重設",
+	"sign_contract": "簽署租約",
+	"submit": "提交"
 }

@@ -2317,6 +2317,31 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>reset</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>schedule</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -2517,22 +2542,22 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>sign_agreement</name>
+                <name>sign_contract</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
                 <default_text/>
                 <translations>
                     <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
                         <language>zh-CHS</language>
                         <approved>false</approved>
                     </translation>
                     <translation>
                         <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>en-US</language>
                         <approved>false</approved>
                     </translation>
                     <translation>
@@ -2708,6 +2733,31 @@
                     </translation>
                     <translation>
                         <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>submit</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
                         <approved>false</approved>
                     </translation>
                     <translation>

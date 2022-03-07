@@ -17,7 +17,6 @@
 	"ok": "确认",
 	"schedule_remodeling": "预约装修",
 	"remodeling_status": "工程进度",
-	"sign_agreement": "签约",
 	"owner": "业主",
 	"painting": "油潻",
 	"wallcoverings": "壁纸",
@@ -118,5 +117,8 @@
 	"deposit": "保证金",
 	"contract_start_date": "租约开始日期",
 	"contract_end_date": "租约结束日期",
-	"lease_length": "租期"
+	"lease_length": "租期",
+	"reset": "重设",
+	"sign_contract": "签署租约",
+	"submit": "提交"
 }

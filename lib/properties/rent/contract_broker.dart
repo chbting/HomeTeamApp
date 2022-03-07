@@ -179,116 +179,61 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     if (isKeyboardVisible) {
       return Container();
     } else {
-      switch (_activeStep) {
-        case 0:
-          return Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.arrow_forward),
-                    label: Text(TextHelper.appLocalizations.next),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      setState(() {
-                        _nextStep();
-                      });
-                    },
-                  )));
-        case 2:
-          return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.fingerprint),
-                    label: Text(TextHelper.appLocalizations.sign_now),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width - 32.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
+      return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              OutlinedButton.icon(
+                icon: Icon(
+                    _activeStep == 0 ? Icons.restart_alt : Icons.arrow_back),
+                label: Text(_activeStep == 0
+                    ? TextHelper.appLocalizations.reset
+                    : TextHelper.appLocalizations.back),
+                style: OutlinedButton.styleFrom(
+                    minimumSize: Size(
+                        MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                    // 48.0 is the height of extended fab
+                    shape: const StadiumBorder()),
+                onPressed: () {
+                  if (_activeStep == 0) {
+                    // todo reset
+                  } else {
+                    _previousStep();
+                  }
+                },
+              ),
+              ElevatedButton.icon(
+                icon: Icon(_activeStep == 2
+                    ? Icons.fingerprint
+                    : (_activeStep == 3
+                        ? Icons.check
+                        : Icons.arrow_forward)),
+                label: Text(_activeStep == 2
+                    ? TextHelper.appLocalizations.sign_contract
+                    : (_activeStep == 3
+                        ? TextHelper.appLocalizations.submit
+                        : TextHelper.appLocalizations.next)),
+                style: ElevatedButton.styleFrom(
+                    minimumSize: Size(
+                        MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                    shape: const StadiumBorder()),
+                onPressed: () {
+                  switch (_activeStep) {
+                    case 2:
                       _signWithBiometrics();
-                    },
-                  ),
-                  Container(height: 16.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.appLocalizations.back),
-                        style: OutlinedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0,
-                                48.0),
-                            // 48.0 is the height of extended fab
-                            shape: const StadiumBorder()),
-                        onPressed: () {
-                          _previousStep();
-                        },
-                      ),
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.redo),
-                        label: Text(TextHelper.appLocalizations.sign_later),
-                        style: OutlinedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0,
-                                48.0),
-                            // 48.0 is the height of extended fab
-                            shape: const StadiumBorder()),
-                        onPressed: () {
-                          // todo _data.agreementSigned = false;
-                          _nextStep();
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ));
-        default:
-          return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton.icon(
-                    icon: const Icon(Icons.arrow_back),
-                    label: Text(TextHelper.appLocalizations.back),
-                    style: OutlinedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        // 48.0 is the height of extended fab
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      _previousStep();
-                    },
-                  ),
-                  ElevatedButton.icon(
-                    icon: Icon(_activeStep < _totalSteps - 1
-                        ? Icons.arrow_forward
-                        : Icons.check),
-                    label: Text(_activeStep < _totalSteps - 1
-                        ? TextHelper.appLocalizations.next
-                        : TextHelper.appLocalizations.confirm),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      if (_activeStep == _totalSteps - 1) {
-                        _confirm();
-                      } else {
-                        _nextStep();
-                      }
-                    },
-                  )
-                ],
-              ));
-      }
+                      break;
+                    case 3:
+                      _confirm();
+                      break;
+                    default:
+                      _nextStep();
+                      break;
+                  }
+                },
+              )
+            ],
+          ));
     }
   }
 }

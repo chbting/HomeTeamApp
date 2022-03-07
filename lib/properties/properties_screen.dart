@@ -12,8 +12,8 @@ class PropertiesScreen extends StatelessWidget {
     return DefaultTabController(
       initialIndex: 0,
       length: 3,
-      child: Column(children: [
-        AppBar(
+      child: Scaffold(
+        appBar: AppBar(
           titleSpacing: 0.0,
           title: SizedBox(
             height: kToolbarHeight,
@@ -32,16 +32,14 @@ class PropertiesScreen extends StatelessWidget {
             ),
           ),
         ),
-        const Expanded(
-          child: TabBarView(
-            children: <Widget>[
-              SearchPropertiesScreen(),
-              PropertiesVisitCartScreen(),
-              RentPropertiesScreen(),
-            ],
-          ),
-        )
-      ]),
+        body: const TabBarView(
+          children: <Widget>[
+            SearchPropertiesScreen(),
+            PropertiesVisitCartScreen(),
+            RentPropertiesScreen(),
+          ],
+        ),
+      ),
     );
   }
 }

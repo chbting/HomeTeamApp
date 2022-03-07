@@ -9,7 +9,7 @@ import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 import 'contracts/contracts.dart';
 import 'owner/owner.dart';
-import 'remodeling/remodeling.dart';
+import 'remodeling/remodeling_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

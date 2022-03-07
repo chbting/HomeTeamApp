@@ -19,12 +19,12 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
         const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
     Property(3, "尚翹峰", "柴灣", 601, 520, 24000,
         const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
-    // Property(4, "康翠臺", "柴灣", 720, 630, 18400,
-    //     const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-    // Property(5, "聚賢居", "上環", 631, 712, 32000,
-    //     const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-    // Property(6, "尚翹峰", "柴灣", 601, 520, 24000,
-    //     const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
+    Property(4, "康翠臺", "柴灣", 720, 630, 18400,
+        const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
+    Property(5, "聚賢居", "上環", 631, 712, 32000,
+        const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
+    Property(6, "尚翹峰", "柴灣", 601, 520, 24000,
+        const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
   ];
 
   @override
@@ -35,8 +35,9 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
         floating: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-            AppLocalizations.of(context)!.properties_visited_last_thirty_days),
-        //collapsedHeight: 56.0, //todo min height
+          AppLocalizations.of(context)!.properties_visited_last_thirty_days,
+          style: TextStyle(color: Theme.of(context).textTheme.subtitle1!.color),
+        ),
       ),
       SliverList(
         delegate: SliverChildBuilderDelegate(

@@ -16,6 +16,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+  late bool _showFab = _propertiesInCart.isNotEmpty; //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
   final List<Property> _propertiesInCart = [
@@ -38,21 +39,25 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
       child: Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-              heroTag: "properties_visit_cart_fab",
-              icon: const Icon(Icons.schedule),
-              label: Text(AppLocalizations.of(context)!.schedule),
-              onPressed: () {
-                _propertiesInCart.isNotEmpty //todo
-                    ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PropertiesVisitSchedulingScreen(
-                            selectedProperties: _propertiesInCart)))
-                    : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                        content: Text(AppLocalizations.of(context)!
-                            .msg_select_remodeling_item), // todo
-                        behavior: SnackBarBehavior.floating,
-                      ));
-              }),
+          floatingActionButton: Visibility(
+              visible: _showFab,
+              child: FloatingActionButton.extended(
+                  heroTag: "properties_visit_cart_fab",
+                  icon: const Icon(Icons.schedule),
+                  label: Text(AppLocalizations.of(context)!.schedule),
+                  onPressed: () {
+                    _propertiesInCart.isNotEmpty
+                        ? Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                PropertiesVisitSchedulingScreen(
+                                    selectedProperties: _propertiesInCart)))
+                        : _scaffoldMessengerKey.currentState!
+                            .showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .msg_select_remodeling_item), // todo
+                            behavior: SnackBarBehavior.floating,
+                          ));
+                  })),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           body: ListView.builder(
@@ -79,7 +84,10 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                           IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
-                              // TODO remove item and update list
+                              _propertiesInCart.removeAt(index);
+                              _showFab = _propertiesInCart.isNotEmpty;
+                              // todo snackbar undo
+                              setState(() {});
                             },
                           )
                         ],

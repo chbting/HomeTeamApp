@@ -5,11 +5,11 @@ import '../theme.dart';
 
 class Property {
   String? name, address, district;
-  int? id, sqFtGross, sqFtNet, price;
+  int? id, sqFtGross, sqFtNet, rent;
   ImageProvider coverImage;
 
   Property(this.id, this.name, this.district, this.sqFtGross, this.sqFtNet,
-      this.price, this.coverImage);
+      this.rent, this.coverImage);
 }
 
 Widget getPropertyPreviewTextWidget(

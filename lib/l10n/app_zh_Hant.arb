@@ -106,5 +106,9 @@
 	"tenant_sign_contract": "租客簽約",
 	"landlord_accept_offer": "業主接受/提出更改",
 	"landlord_sign_contract": "業主簽約",
-	"accept_or_make_offer": "接受/提出更改"
+	"confirm_contract": "",
+	"fill_in_personal_information": "填寫個人資料",
+	"accept_or_make_an_offer": "接受/提出更改",
+	"sign_the_contract": "簽署租約",
+	"confirm_and_submit": "確認並提交"
 }

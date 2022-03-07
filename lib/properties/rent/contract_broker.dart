@@ -4,12 +4,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:im_stepper/stepper.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
-import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
-import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
-import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+
+import 'contract_adjuster.dart';
+import 'contract_confirmation.dart';
+import 'contract_offer_data.dart';
+import 'contract_viewer.dart';
+import 'tenant_info.dart';
 
 class ContractBrokerScreen extends StatefulWidget {
   const ContractBrokerScreen({Key? key, required this.property})
@@ -26,7 +27,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   final _totalSteps = 4;
   int _activeStep = 0;
 
-  final PropertiesVisitData _data = PropertiesVisitData();
+  late final ContractOffer _offer = ContractOffer(widget.property);
 
   @override
   void initState() {
@@ -40,8 +41,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(
-                    AppLocalizations.of(context)!.negotiate_contract)),
+                title: Text(AppLocalizations.of(context)!.negotiate_contract)),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -85,10 +85,10 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       //2. Personal information
                       //3. View the actual contract (aka confirmation page)
                       //4. Sign and submit
-                      PropertiesVisitStartingPointWidget(data: _data),
-                      PropertiesVisitDatePickerWidget(data: _data),
-                      PropertiesVisitAgreementWidget(data: _data),
-                      PropertiesVisitConfirmationWidget(data: _data)
+                      ContractAdjusterScreen(offer: _offer),
+                      TenantInformationScreen(offer: _offer),
+                      ContractViewerScreen(offer: _offer),
+                      ContractConfirmationScreen(offer: _offer)
                     ],
                   ),
                 ),
@@ -102,13 +102,13 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return AppLocalizations.of(context)!.accept_or_make_offer;
+        return AppLocalizations.of(context)!.accept_or_make_an_offer;
       case 1:
-        return AppLocalizations.of(context)!.tenant_sign_contract;
+        return AppLocalizations.of(context)!.fill_in_personal_information;
       case 2:
-        return AppLocalizations.of(context)!.landlord_accept_offer;
+        return AppLocalizations.of(context)!.sign_the_contract;
       case 3:
-        return AppLocalizations.of(context)!.landlord_sign_contract;
+        return AppLocalizations.of(context)!.confirm_and_submit;
       default:
         return '';
     }
@@ -155,7 +155,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
 
       if (didAuthenticate) {
         // case 1: successfully authenticated
-        _data.agreementSigned = true;
+        // todo _data.agreementSigned = true;
         _nextStep();
       } else {
         // case 2: authentication failed
@@ -241,7 +241,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                             // 48.0 is the height of extended fab
                             shape: const StadiumBorder()),
                         onPressed: () {
-                          _data.agreementSigned = false;
+                          // todo _data.agreementSigned = false;
                           _nextStep();
                         },
                       ),

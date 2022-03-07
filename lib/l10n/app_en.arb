@@ -106,5 +106,9 @@
 	"tenant_sign_contract": "Tenant signs the contract",
 	"landlord_accept_offer": "Landlord accepts / counteroffer",
 	"landlord_sign_contract": "Landlord signs the contract",
-	"accept_or_make_offer": "Accept / Make an offer"
+	"confirm_contract": "",
+	"fill_in_personal_information": "Fill in Personal Information",
+	"accept_or_make_an_offer": "Accept / Make an offer",
+	"sign_the_contract": "Sign the Contract",
+	"confirm_and_submit": "Confirm and Submit"
 }

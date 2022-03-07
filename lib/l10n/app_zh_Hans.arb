@@ -113,5 +113,10 @@
 	"confirm_and_submit": "确认并提交",
 	"property_address": "物业地址",
 	"property_has_been_removed": "租盘已从清单中移除",
-	"undo": "还原"
+	"undo": "还原",
+	"monthly_rent": "每月租金",
+	"deposit": "保证金",
+	"contract_start_date": "租约开始日期",
+	"contract_end_date": "租约结束日期",
+	"lease_length": "租期"
 }

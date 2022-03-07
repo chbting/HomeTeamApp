@@ -113,5 +113,10 @@
 	"confirm_and_submit": "Confirm and Submit",
 	"property_address": "Property Address",
 	"property_has_been_removed": "Property has been removed",
-	"undo": "Undo"
+	"undo": "Undo",
+	"monthly_rent": "Monthly Rent",
+	"deposit": "Deposit",
+	"contract_start_date": "Contract Start Date",
+	"contract_end_date": "Contract End Date",
+	"lease_length": "Lease Length"
 }

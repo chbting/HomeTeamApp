@@ -5,11 +5,13 @@ import '../theme.dart';
 
 class Property {
   String? name, address, district;
-  int? id, sqFtGross, sqFtNet, rent;
+  int? id, sqFtGross, sqFtNet, rent, deposit;
   ImageProvider coverImage;
 
   Property(this.id, this.name, this.address, this.district, this.sqFtGross,
-      this.sqFtNet, this.rent, this.coverImage);
+      this.sqFtNet, this.rent, this.coverImage) {
+    deposit = 20000; // todo
+  }
 
   static List<Property> getSampleList() {
     return [

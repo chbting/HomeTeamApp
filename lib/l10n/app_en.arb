@@ -115,10 +115,10 @@
 	"undo": "Undo",
 	"monthly_rent": "Monthly Rent",
 	"deposit": "Deposit",
-	"contract_start_date": "Contract Start Date",
-	"contract_end_date": "Contract End Date",
 	"lease_length": "Lease Length",
 	"reset": "Reset",
 	"sign_contract": "Sign Contract",
-	"submit": "Submit"
+	"submit": "Submit",
+	"end_date": "End Date",
+	"start_date": "Start Date"
 }

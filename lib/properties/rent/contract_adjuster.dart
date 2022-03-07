@@ -96,33 +96,39 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   TextHelper.appLocalizations.lease_length,
                   style: Theme.of(context).textTheme.subtitle1,
                 )),
-                Row(
-                  children: [
-                    Expanded(
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: TextField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText:
-                              TextHelper.appLocalizations.contract_start_date),
+                              icon: const Icon(Icons.calendar_today),
+                              labelText: TextHelper
+                                  .appLocalizations.start_date),
                           onChanged: (value) {
                             //widget.offer.startDate = value;
-                          }),
-                    ),
-                    Container(width: 16.0),
-                    Expanded(
+                          })),
+                ),
+                Container(width: 16.0),
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: TextField(
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText:
-                              TextHelper.appLocalizations.contract_end_date),
+                              icon: const Icon(Icons.calendar_today),
+                              labelText: TextHelper
+                                  .appLocalizations.end_date),
                           onChanged: (value) {
                             //widget.offer.endDate = value;
-                          }),
-                    ),
-                  ],
-                )
+                          })),
+                ),
+              ],
+            )
           ]),
           // todo datePicker
         )

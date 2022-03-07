@@ -115,10 +115,10 @@
 	"undo": "还原",
 	"monthly_rent": "每月租金",
 	"deposit": "保证金",
-	"contract_start_date": "租约开始日期",
-	"contract_end_date": "租约结束日期",
 	"lease_length": "租期",
 	"reset": "重设",
 	"sign_contract": "签署租约",
-	"submit": "提交"
+	"submit": "提交",
+	"end_date": "结束日期",
+	"start_date": "开始日期"
 }

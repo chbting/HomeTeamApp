@@ -111,5 +111,7 @@
 	"accept_or_make_an_offer": "接受/提出更改",
 	"sign_the_contract": "签署租约",
 	"confirm_and_submit": "确认并提交",
-	"property_address": "物业地址"
+	"property_address": "物业地址",
+	"property_has_been_removed": "租盘已从清单中移除",
+	"undo": "还原"
 }

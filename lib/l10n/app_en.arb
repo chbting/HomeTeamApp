@@ -111,5 +111,7 @@
 	"accept_or_make_an_offer": "Accept / Make an offer",
 	"sign_the_contract": "Sign the Contract",
 	"confirm_and_submit": "Confirm and Submit",
-	"property_address": "Property Address"
+	"property_address": "Property Address",
+	"property_has_been_removed": "Property has been removed",
+	"undo": "Undo"
 }

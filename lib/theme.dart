@@ -24,25 +24,29 @@ class AppTheme {
 
   static ThemeData getDarkTheme() {
     return ThemeData(
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: darkThemeBackground,
-      indicatorColor: darkThemeAccent,
-      // TabBar
-      toggleableActiveColor: darkThemeAccent,
-      // Checkbox, Switch
-      colorScheme: ColorScheme.fromSwatch(
-              primarySwatch: customLightBlue,
-              accentColor: darkThemeAccent,
-              brightness: Brightness.dark)
-          .copyWith(secondary: darkThemeAccent),
-    );
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: darkThemeBackground,
+        indicatorColor: darkThemeAccent,
+        // TabBar
+        toggleableActiveColor: darkThemeAccent,
+        // Checkbox, Switch
+        colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: customLightBlue,
+                accentColor: darkThemeAccent,
+                brightness: Brightness.dark)
+            .copyWith(secondary: darkThemeAccent),
+        snackBarTheme: ThemeData.dark()
+            .snackBarTheme
+            .copyWith(actionTextColor: Colors.blue));
   }
 
   static ThemeData getLightTheme() {
     return ThemeData(
-      brightness: Brightness.light,
-      primarySwatch: Colors.blue,
-    );
+        brightness: Brightness.light,
+        primarySwatch: Colors.blue,
+        snackBarTheme: ThemeData.light()
+            .snackBarTheme
+            .copyWith(actionTextColor: darkThemeAccent));
   }
 
   static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>

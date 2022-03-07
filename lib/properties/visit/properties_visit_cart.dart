@@ -78,11 +78,21 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                           IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
+                              var removedProperty = _propertiesInCart[index];
                               _propertiesInCart.removeAt(index);
                               _showFab = _propertiesInCart.isNotEmpty;
-                              // todo snackbar undo
-                              // _scaffoldMessengerKey.currentState!.showSnackBar(
-                              //     SnackBar(content: Text('removed'), action: SnackBarAction(label: 'undo',onPressed: ,),)),
+                              _scaffoldMessengerKey.currentState!.showSnackBar(
+                                  SnackBar(
+                                      content: Text(TextHelper.appLocalizations
+                                          .property_has_been_removed),
+                                      action: SnackBarAction(
+                                          label:
+                                              TextHelper.appLocalizations.undo,
+                                          onPressed: () {
+                                            _propertiesInCart.insert(
+                                                index, removedProperty);
+                                            setState(() {});
+                                          })));
                               setState(() {});
                             },
                           )

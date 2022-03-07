@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class SharedPreferencesHelper {
   static const String darkModeOnKey = 'darkMode';
@@ -89,17 +89,16 @@ class SharedPreferencesHelper {
     }
   }
 
-  static String getVoiceRecognitionLanguage(
-      String localeId, BuildContext context) {
+  static String getVoiceRecognitionLanguage(String localeId) {
     switch (localeId) {
       case 'en_GB':
-        return AppLocalizations.of(context)!.english_voice_input;
+        return TextHelper.appLocalizations.english_voice_input;
       case 'yue_HK':
-        return AppLocalizations.of(context)!.cantonese;
+        return TextHelper.appLocalizations.cantonese;
       case 'cmn_CN':
-        return AppLocalizations.of(context)!.mandarin;
+        return TextHelper.appLocalizations.mandarin;
       default:
-        return AppLocalizations.of(context)!.english;
+        return TextHelper.appLocalizations.english;
     }
   }
 }

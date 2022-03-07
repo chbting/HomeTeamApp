@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/theme.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class PropertiesVisitDatePickerWidget extends StatefulWidget {
   const PropertiesVisitDatePickerWidget({Key? key, required this.data})
@@ -58,7 +58,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
-            title: Text(AppLocalizations.of(context)!.date,
+            title: Text(TextHelper.appLocalizations.date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(AppTheme.dateFormat,
@@ -91,7 +91,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.schedule)]),
-            title: Text(AppLocalizations.of(context)!.time,
+            title: Text(TextHelper.appLocalizations.time,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 TimeOfDay(
@@ -112,7 +112,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(AppLocalizations.of(context)!.morning,
+                      child: Text(TextHelper.appLocalizations.morning,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                 crossAxisCount: 4,
@@ -133,7 +133,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(AppLocalizations.of(context)!.afternoon,
+                      child: Text(TextHelper.appLocalizations.afternoon,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                   crossAxisCount: 4,

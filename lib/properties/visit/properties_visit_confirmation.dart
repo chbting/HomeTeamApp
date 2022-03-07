@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/theme.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';
 
@@ -29,7 +29,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                         Icon(Icons.place),
                       ],
                     ),
-                    title: Text(AppLocalizations.of(context)!.properties,
+                    title: Text(TextHelper.appLocalizations.properties,
                         style: AppTheme.getCardTitleTextStyle(context)),
                     subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
                         style: AppTheme.getCardBodyTextStyle(context))))),
@@ -43,7 +43,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
               ],
             ),
             isThreeLine: true,
-            title: Text(AppLocalizations.of(context)!.properties_visit_date,
+            title: Text(TextHelper.appLocalizations.properties_visit_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
@@ -62,7 +62,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                   Icon(Icons.contact_phone),
                 ],
               ),
-              title: Text(AppLocalizations.of(context)!.contact_number,
+              title: Text(TextHelper.appLocalizations.contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
@@ -79,12 +79,12 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
               ],
             ),
             title: Text(
-                AppLocalizations.of(context)!.properties_visit_agreement,
+                TextHelper.appLocalizations.properties_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 data.agreementSigned
-                    ? AppLocalizations.of(context)!.signed
-                    : AppLocalizations.of(context)!.sign_later,
+                    ? TextHelper.appLocalizations.signed
+                    : TextHelper.appLocalizations.sign_later,
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         )

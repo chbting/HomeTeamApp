@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RentPropertiesScreen extends StatefulWidget {
   const RentPropertiesScreen({Key? key}) : super(key: key);
@@ -12,20 +12,7 @@ class RentPropertiesScreen extends StatefulWidget {
 
 class RentPropertiesScreenState extends State<RentPropertiesScreen> {
   final double _imageSize = 120.0;
-  final List<Property> _propertiesInCart = [
-    Property(1, "康翠臺", "柴灣", 720, 630, 18400,
-        const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-    Property(2, "聚賢居", "上環", 631, 712, 32000,
-        const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-    Property(3, "尚翹峰", "柴灣", 601, 520, 24000,
-        const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
-    Property(4, "康翠臺", "柴灣", 720, 630, 18400,
-        const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-    Property(5, "聚賢居", "上環", 631, 712, 32000,
-        const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-    Property(6, "尚翹峰", "柴灣", 601, 520, 24000,
-        const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
-  ];
+  final List<Property> _propertiesInCart = Property.getSampleList();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +22,7 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
         floating: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          AppLocalizations.of(context)!.properties_visited_last_thirty_days,
+          TextHelper.appLocalizations.properties_visited_last_thirty_days,
           style: TextStyle(color: Theme.of(context).textTheme.subtitle1!.color),
         ),
       ),
@@ -60,7 +47,7 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
                       // todo changed to check status once offer is submitted, the color should be different as well
                       ElevatedButton(
                           child: Text(
-                              AppLocalizations.of(context)!.negotiate_contract),
+                              TextHelper.appLocalizations.negotiate_contract),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => ContractBrokerScreen(

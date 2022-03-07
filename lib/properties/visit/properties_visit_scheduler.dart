@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
@@ -10,6 +9,7 @@ import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class PropertiesVisitSchedulingScreen extends StatefulWidget {
   const PropertiesVisitSchedulingScreen(
@@ -45,7 +45,7 @@ class PropertiesVisitSchedulingScreenState
         return Scaffold(
             appBar: AppBar(
                 title: Text(
-                    AppLocalizations.of(context)!.schedule_properties_visit)),
+                    TextHelper.appLocalizations.schedule_properties_visit)),
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,7 +55,7 @@ class PropertiesVisitSchedulingScreenState
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.calendar_today,
                         color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.description,
+                    Icon(Icons.article,
                         color: Theme.of(context).colorScheme.onSecondary),
                     Icon(Icons.check,
                         color: Theme.of(context).colorScheme.onSecondary)
@@ -102,13 +102,13 @@ class PropertiesVisitSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return AppLocalizations.of(context)!.pick_starting_point;
+        return TextHelper.appLocalizations.pick_starting_point;
       case 1:
-        return AppLocalizations.of(context)!.pick_datetime;
+        return TextHelper.appLocalizations.pick_datetime;
       case 2:
-        return AppLocalizations.of(context)!.properties_visit_agreement;
+        return TextHelper.appLocalizations.properties_visit_agreement;
       case 3:
-        return AppLocalizations.of(context)!.confirm;
+        return TextHelper.appLocalizations.confirm;
       default:
         return '';
     }
@@ -146,8 +146,8 @@ class PropertiesVisitSchedulingScreenState
     if (canCheckBiometrics) {
       try {
         didAuthenticate = await localAuth.authenticate(
-            localizedReason: AppLocalizations.of(context)!
-                .reason_sign_property_visit_agreement,
+            localizedReason: TextHelper
+                .appLocalizations.reason_sign_property_visit_agreement,
             biometricOnly: true);
       } on PlatformException {
         didAuthenticate = false;
@@ -160,14 +160,14 @@ class PropertiesVisitSchedulingScreenState
       } else {
         // case 2: authentication failed
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(AppLocalizations.of(context)!
-                .biometric_authentication_failed)));
+            content: Text(
+                TextHelper.appLocalizations.biometric_authentication_failed)));
       }
     } else {
       // case 3: biometric authentication unavailable
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(AppLocalizations.of(context)!
-              .biometric_authentication_unavailable)));
+          content: Text(TextHelper
+              .appLocalizations.biometric_authentication_unavailable)));
     }
   }
 
@@ -187,7 +187,7 @@ class PropertiesVisitSchedulingScreenState
                   padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton.icon(
                     icon: const Icon(Icons.arrow_forward),
-                    label: Text(AppLocalizations.of(context)!.next),
+                    label: Text(TextHelper.appLocalizations.next),
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(
                             MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
@@ -205,7 +205,7 @@ class PropertiesVisitSchedulingScreenState
                 children: [
                   ElevatedButton.icon(
                     icon: const Icon(Icons.fingerprint),
-                    label: Text(AppLocalizations.of(context)!.sign_now),
+                    label: Text(TextHelper.appLocalizations.sign_now),
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(
                             MediaQuery.of(context).size.width - 32.0, 48.0),
@@ -220,7 +220,7 @@ class PropertiesVisitSchedulingScreenState
                     children: [
                       OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
-                        label: Text(AppLocalizations.of(context)!.back),
+                        label: Text(TextHelper.appLocalizations.back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(
                                 MediaQuery.of(context).size.width / 2 - 24.0,
@@ -233,7 +233,7 @@ class PropertiesVisitSchedulingScreenState
                       ),
                       OutlinedButton.icon(
                         icon: const Icon(Icons.redo),
-                        label: Text(AppLocalizations.of(context)!.sign_later),
+                        label: Text(TextHelper.appLocalizations.sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(
                                 MediaQuery.of(context).size.width / 2 - 24.0,
@@ -257,7 +257,7 @@ class PropertiesVisitSchedulingScreenState
                 children: [
                   OutlinedButton.icon(
                     icon: const Icon(Icons.arrow_back),
-                    label: Text(AppLocalizations.of(context)!.back),
+                    label: Text(TextHelper.appLocalizations.back),
                     style: OutlinedButton.styleFrom(
                         minimumSize: Size(
                             MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
@@ -272,8 +272,8 @@ class PropertiesVisitSchedulingScreenState
                         ? Icons.arrow_forward
                         : Icons.check),
                     label: Text(_activeStep < _totalSteps - 1
-                        ? AppLocalizations.of(context)!.next
-                        : AppLocalizations.of(context)!.confirm),
+                        ? TextHelper.appLocalizations.next
+                        : TextHelper.appLocalizations.confirm),
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(
                             MediaQuery.of(context).size.width / 2 - 24.0, 48.0),

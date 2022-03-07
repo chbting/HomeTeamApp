@@ -110,5 +110,6 @@
 	"fill_in_personal_information": "填写个人资料",
 	"accept_or_make_an_offer": "接受/提出更改",
 	"sign_the_contract": "签署租约",
-	"confirm_and_submit": "确认并提交"
+	"confirm_and_submit": "确认并提交",
+	"property_address": "物业地址"
 }

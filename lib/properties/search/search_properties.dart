@@ -1,9 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import '../../theme.dart';
 
@@ -19,7 +19,7 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
   Widget build(BuildContext context) {
     return FloatingSearchBar(
       margins: const EdgeInsets.all(16.0),
-      hint: AppLocalizations.of(context)!.search_properties_hint,
+      hint: TextHelper.appLocalizations.search_properties_hint,
       hintStyle: const TextStyle(color: Colors.grey),
       // TODO cursor color, light theme color
       // TODO sliver search bar
@@ -79,9 +79,9 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
                                       error.errorMsg ==
                                           'error_speech_timeout') {
                                     Navigator.of(context).pop();
-                                    _showSnackBarMessage(
-                                        AppLocalizations.of(context)!
-                                            .msg_cannot_recognize_speech);
+                                    _showSnackBarMessage(TextHelper
+                                        .appLocalizations
+                                        .msg_cannot_recognize_speech);
                                   }
                                 })
                             .then((isAvailable) {
@@ -93,8 +93,8 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                      title: Text(AppLocalizations.of(context)!
-                                          .voice_search),
+                                      title: Text(TextHelper
+                                          .appLocalizations.voice_search),
                                       contentPadding: EdgeInsets.zero,
                                       content: Column(
                                         mainAxisSize: MainAxisSize.min,
@@ -119,14 +119,14 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
                                               )),
                                           Text(SharedPreferencesHelper
                                               .getVoiceRecognitionLanguage(
-                                                  localeId, context))
+                                                  localeId))
                                         ],
                                       ),
                                       actions: <Widget>[
                                         TextButton(
                                           child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .cancel,
+                                              TextHelper
+                                                  .appLocalizations.cancel,
                                               style: AppTheme
                                                   .getDialogTextButtonTextStyle(
                                                       context)),
@@ -197,13 +197,13 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
     //       expandedHeight: kToolbarHeight,
     //       flexibleSpace: FlexibleSpaceBar(
     //         title: ListTile(
-    //           title: Text(AppLocalizations.of(context)!.search_properties_hint),
+    //           title: Text(TextHelper.appLocalizations.search_properties_hint),
     //         ),
     //       ),
     //     ),
     //     SliverToBoxAdapter(
     //         child: ListTile(
-    //       title: Text(AppLocalizations.of(context)!.latest_additions),
+    //       title: Text(TextHelper.appLocalizations.latest_additions),
     //     )),
     //     SliverList(
     //       delegate: SliverChildBuilderDelegate(
@@ -225,7 +225,7 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
   void _showSpeechToTextUnavailableMessage() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content:
-            Text(AppLocalizations.of(context)!.msg_voice_search_unavailable)));
+            Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
   }
 
   void _showSnackBarMessage(String message) {

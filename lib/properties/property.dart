@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import '../theme.dart';
 
@@ -8,8 +8,19 @@ class Property {
   int? id, sqFtGross, sqFtNet, rent;
   ImageProvider coverImage;
 
-  Property(this.id, this.name, this.district, this.sqFtGross, this.sqFtNet,
-      this.rent, this.coverImage);
+  Property(this.id, this.name, this.address, this.district, this.sqFtGross,
+      this.sqFtNet, this.rent, this.coverImage);
+
+  static List<Property> getSampleList() {
+    return [
+      Property(1, "康翠臺", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 720, 630, 18400,
+          const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
+      Property(2, "聚賢居", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "上環", 631, 712, 32000,
+          const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
+      Property(3, "尚翹峰", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 601, 520, 24000,
+          const AssetImage('assets/demo_images/The_Zenith_240px.jpg'))
+    ];
+  }
 }
 
 Widget getPropertyPreviewTextWidget(
@@ -33,14 +44,14 @@ Widget getPropertyPreviewTextWidget(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-                '${AppLocalizations.of(context)!.area_net_abr}'
+                '${TextHelper.appLocalizations.area_net_abr}'
                 ': ${property.sqFtNet!}'
-                ' ${AppLocalizations.of(context)!.sq_ft_abr}',
+                ' ${TextHelper.appLocalizations.sq_ft_abr}',
                 style: AppTheme.getListTileBodyTextStyle(context)),
             Text(
-                '${AppLocalizations.of(context)!.area_gross_abr}'
+                '${TextHelper.appLocalizations.area_gross_abr}'
                 ': ${property.sqFtGross!}'
-                ' ${AppLocalizations.of(context)!.sq_ft_abr}',
+                ' ${TextHelper.appLocalizations.sq_ft_abr}',
                 style: AppTheme.getListTileBodyTextStyle(context))
           ],
         ),

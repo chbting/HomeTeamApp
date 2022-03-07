@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingStatusScreen extends StatefulWidget {
   const RemodelingStatusScreen({Key? key}) : super(key: key);
@@ -16,6 +16,6 @@ class RemodelingStatusScreenState extends State<RemodelingStatusScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Text(AppLocalizations.of(context)!.remodeling_status);
+    return Text(TextHelper.appLocalizations.remodeling_status);
   }
 }

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 enum RemodelingItem {
   painting,
@@ -11,27 +10,27 @@ enum RemodelingItem {
   pestControl
 }
 
-String getRemodelingItemTitle(RemodelingItem item, BuildContext context) {
+String getRemodelingItemTitle(RemodelingItem item) {
   if (item == RemodelingItem.painting) {
-    return AppLocalizations.of(context)!.painting;
+    return TextHelper.appLocalizations.painting;
   }
   if (item == RemodelingItem.wallCoverings) {
-    return AppLocalizations.of(context)!.wallcoverings;
+    return TextHelper.appLocalizations.wallcoverings;
   }
   if (item == RemodelingItem.ac) {
-    return AppLocalizations.of(context)!.ac_window_type;
+    return TextHelper.appLocalizations.ac_window_type;
   }
   if (item == RemodelingItem.removals) {
-    return AppLocalizations.of(context)!.removals;
+    return TextHelper.appLocalizations.removals;
   }
   if (item == RemodelingItem.suspendedCeiling) {
-    return AppLocalizations.of(context)!.suspended_ceiling;
+    return TextHelper.appLocalizations.suspended_ceiling;
   }
   if (item == RemodelingItem.toiletReplacement) {
-    return AppLocalizations.of(context)!.toilet_replacement;
+    return TextHelper.appLocalizations.toilet_replacement;
   }
   if (item == RemodelingItem.pestControl) {
-    return AppLocalizations.of(context)!.pest_control;
+    return TextHelper.appLocalizations.pest_control;
   }
   throw 'NoTitleCreatedForRemodelingItem';
 }

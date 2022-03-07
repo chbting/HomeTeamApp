@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import '../property.dart';
 
@@ -16,17 +16,11 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  late bool _showFab = _propertiesInCart.isNotEmpty; //todo show some messages for user to add items if empty
+  late bool _showFab = _propertiesInCart
+      .isNotEmpty; //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
-  final List<Property> _propertiesInCart = [
-    Property(1, "康翠臺", "柴灣", 720, 630, 18400,
-        const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-    Property(2, "聚賢居", "上環", 631, 712, 32000,
-        const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-    Property(3, "尚翹峰", "柴灣", 601, 520, 24000,
-        const AssetImage('assets/demo_images/The_Zenith_240px.jpg'))
-  ];
+  final List<Property> _propertiesInCart = Property.getSampleList();
 
   //todo retrieve from local database, local database sync with server on app start
 
@@ -44,7 +38,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
               child: FloatingActionButton.extended(
                   heroTag: "properties_visit_cart_fab",
                   icon: const Icon(Icons.schedule),
-                  label: Text(AppLocalizations.of(context)!.schedule),
+                  label: Text(TextHelper.appLocalizations.schedule),
                   onPressed: () {
                     _propertiesInCart.isNotEmpty
                         ? Navigator.of(context).push(MaterialPageRoute(
@@ -53,7 +47,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                                     selectedProperties: _propertiesInCart)))
                         : _scaffoldMessengerKey.currentState!
                             .showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!
+                            content: Text(TextHelper.appLocalizations
                                 .msg_select_remodeling_item), // todo
                             behavior: SnackBarBehavior.floating,
                           ));
@@ -87,6 +81,8 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                               _propertiesInCart.removeAt(index);
                               _showFab = _propertiesInCart.isNotEmpty;
                               // todo snackbar undo
+                              // _scaffoldMessengerKey.currentState!.showSnackBar(
+                              //     SnackBar(content: Text('removed'), action: SnackBarAction(label: 'undo',onPressed: ,),)),
                               setState(() {});
                             },
                           )

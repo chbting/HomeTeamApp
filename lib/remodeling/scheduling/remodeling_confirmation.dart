@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/theme.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';
 
@@ -25,7 +25,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
               leading: const Icon(Icons.style),
-              title: Text(AppLocalizations.of(context)!.remodeling_options,
+              title: Text(TextHelper.appLocalizations.remodeling_options,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: _getRemodelingOptionsBody(context)),
         )),
@@ -38,7 +38,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                 Icon(Icons.calendar_today),
               ],
             ),
-            title: Text(AppLocalizations.of(context)!.remodeling_start_date,
+            title: Text(TextHelper.appLocalizations.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(AppTheme.dateFormat,
@@ -52,7 +52,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
               leading: const Icon(Icons.location_pin),
-              title: Text(AppLocalizations.of(context)!.remodeling_address,
+              title: Text(TextHelper.appLocalizations.remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.addressLine1 ?? "1座2樓C室"}' //todo remove debug text
@@ -66,7 +66,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
               leading: const Icon(Icons.contact_phone),
-              title: Text(AppLocalizations.of(context)!.contact_number,
+              title: Text(TextHelper.appLocalizations.contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
@@ -95,19 +95,19 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(getRemodelingItemTitle(RemodelingItem.painting, context),
+            Text(getRemodelingItemTitle(RemodelingItem.painting),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(
                     data.paintArea, data.scrapeOldPaint)),
                 style: AppTheme.getCardBodyTextStyle(context))
           ]),
-      Text('- ${data.paintArea} ${AppLocalizations.of(context)!.sq_ft}',
+      Text('- ${data.paintArea} ${TextHelper.appLocalizations.sq_ft}',
           style: AppTheme.getCardBodyTextStyle(context)),
       Text(
           data.scrapeOldPaint!
-              ? '- ${AppLocalizations.of(context)!.scrape_old_paint_yes}'
-              : '- ${AppLocalizations.of(context)!.scrape_old_paint_no}',
+              ? '- ${TextHelper.appLocalizations.scrape_old_paint_yes}'
+              : '- ${TextHelper.appLocalizations.scrape_old_paint_no}',
           style: AppTheme.getCardBodyTextStyle(context)),
     ]);
   }

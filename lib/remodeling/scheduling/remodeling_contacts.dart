@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
   const RemodelingContactsWidget({Key? key, required this.data})
@@ -39,9 +39,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         labelText:
-                            AppLocalizations.of(context)!.address_line1_label,
+                            TextHelper.appLocalizations.address_line1_label,
                         helperText:
-                            AppLocalizations.of(context)!.address_line1_helper,
+                            TextHelper.appLocalizations.address_line1_helper,
                         icon: const Icon(Icons.location_pin)),
                     onChanged: (value) {
                       widget.data.addressLine1 = value;
@@ -54,10 +54,10 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: AppLocalizations.of(context)!
-                                .address_line2_label,
-                            helperText: AppLocalizations.of(context)!
-                                .address_line2_helper),
+                            labelText:
+                                TextHelper.appLocalizations.address_line2_label,
+                            helperText: TextHelper
+                                .appLocalizations.address_line2_helper),
                         onChanged: (value) {
                           widget.data.addressLine2 = value;
                         }),
@@ -73,7 +73,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   labelText:
-                                      AppLocalizations.of(context)!.district),
+                                      TextHelper.appLocalizations.district),
                               onChanged: (value) {
                                 widget.data.district = value;
                               }),
@@ -81,7 +81,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         Container(width: 16.0),
                         Expanded(
                           child: DropdownButton<String>(
-                            hint: Text(AppLocalizations.of(context)!.region),
+                            hint: Text(TextHelper.appLocalizations.region),
                             isExpanded: true,
                             value: widget.data.region,
                             onChanged: (String? newValue) {
@@ -90,9 +90,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               });
                             },
                             items: <String>[
-                              AppLocalizations.of(context)!.hong_kong,
-                              AppLocalizations.of(context)!.kowloon,
-                              AppLocalizations.of(context)!.new_territories
+                              TextHelper.appLocalizations.hong_kong,
+                              TextHelper.appLocalizations.kowloon,
+                              TextHelper.appLocalizations.new_territories
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -117,10 +117,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                       },
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          labelText:
-                              AppLocalizations.of(context)!.contact_number,
-                          helperText: AppLocalizations.of(context)!
-                              .hong_kong_number_only,
+                          labelText: TextHelper.appLocalizations.contact_number,
+                          helperText:
+                              TextHelper.appLocalizations.hong_kong_number_only,
                           icon: const Icon(Icons.phone))),
                   Padding(
                     padding: const EdgeInsets.only(left: 40.0),
@@ -132,8 +131,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  labelText:
-                                      AppLocalizations.of(context)!.name),
+                                  labelText: TextHelper.appLocalizations.name),
                               onChanged: (value) {
                                 widget.data.lastName = value;
                               }),
@@ -141,7 +139,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         Container(width: 16.0),
                         Expanded(
                           child: DropdownButton<String>(
-                            hint: Text(AppLocalizations.of(context)!.prefix),
+                            hint: Text(TextHelper.appLocalizations.prefix),
                             isExpanded: true,
                             value: widget.data.prefix,
                             onChanged: (String? newValue) {
@@ -150,10 +148,10 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               });
                             },
                             items: <String>[
-                              AppLocalizations.of(context)!.mr,
-                              AppLocalizations.of(context)!.mrs,
-                              AppLocalizations.of(context)!.miss,
-                              AppLocalizations.of(context)!.ms
+                              TextHelper.appLocalizations.mr,
+                              TextHelper.appLocalizations.mrs,
+                              TextHelper.appLocalizations.miss,
+                              TextHelper.appLocalizations.ms
                             ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,

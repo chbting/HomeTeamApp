@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_selections.dart';
 import 'package:tner_client/remodeling/remodeling_status.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_selections.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingScreen extends StatelessWidget {
   const RemodelingScreen({Key? key}) : super(key: key);
@@ -19,10 +19,10 @@ class RemodelingScreen extends StatelessWidget {
             child: TabBar(
               tabs: <Widget>[
                 Tab(
-                  text: AppLocalizations.of(context)!.schedule_remodeling,
+                  text: TextHelper.appLocalizations.schedule_remodeling,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.remodeling_status,
+                  text: TextHelper.appLocalizations.remodeling_status,
                 ),
               ],
             ),

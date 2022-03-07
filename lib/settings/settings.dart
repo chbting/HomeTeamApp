@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/settings/settings_ui.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       for (var element in _localeStringList) {
-        _languageList.add(_localeStringToLanguage(element, context));
+        _languageList.add(_localeStringToLanguage(element));
       }
     });
   }
@@ -34,16 +34,16 @@ class SettingsScreenState extends State<SettingsScreen> {
     return Column(
       children: [
         AppBar(
-          title: Text(AppLocalizations.of(context)!.settings),
+          title: Text(TextHelper.appLocalizations.settings),
         ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               SettingsUI.getSettingsTitle(
-                  context, AppLocalizations.of(context)!.general_settings),
+                  context, TextHelper.appLocalizations.general_settings),
               SwitchListTile(
-                title: Text(AppLocalizations.of(context)!.darkMode),
+                title: Text(TextHelper.appLocalizations.darkMode),
                 secondary: const Icon(Icons.dark_mode),
                 onChanged: (value) {
                   setState(() {
@@ -54,9 +54,8 @@ class SettingsScreenState extends State<SettingsScreen> {
                 value: _darkMode,
               ),
               ListTile(
-                  title: Text(AppLocalizations.of(context)!.language),
-                  subtitle:
-                      Text(_localeStringToLanguage(_localeString, context)),
+                  title: Text(TextHelper.appLocalizations.language),
+                  subtitle: Text(_localeStringToLanguage(_localeString)),
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,7 +69,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         _localeStringList,
                         _languageList,
                         _localeString,
-                        AppLocalizations.of(context)!.choose_language, (value) {
+                        TextHelper.appLocalizations.choose_language, (value) {
                       _localeString = value;
                       SharedPreferencesHelper().setLocale(
                           SharedPreferencesHelper.stringToLocale(value));
@@ -87,14 +86,14 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-String _localeStringToLanguage(String locale, BuildContext context) {
+String _localeStringToLanguage(String locale) {
   switch (locale) {
     case 'en':
-      return AppLocalizations.of(context)!.english;
+      return TextHelper.appLocalizations.english;
     case 'zh_Hant':
-      return AppLocalizations.of(context)!.traditional_chinese;
+      return TextHelper.appLocalizations.traditional_chinese;
     case 'zh_Hans':
-      return AppLocalizations.of(context)!.simplified_chinese;
+      return TextHelper.appLocalizations.simplified_chinese;
     default:
       return 'unknown';
   }

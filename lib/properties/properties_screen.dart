@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/properties/rent/rent_properties.dart';
 import 'package:tner_client/properties/search/search_properties.dart';
 import 'package:tner_client/properties/visit/properties_visit_cart.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class PropertiesScreen extends StatelessWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -20,13 +20,13 @@ class PropertiesScreen extends StatelessWidget {
             child: TabBar(
               tabs: <Widget>[
                 Tab(
-                  text: AppLocalizations.of(context)!.find_properties,
+                  text: TextHelper.appLocalizations.find_properties,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.properties_visit,
+                  text: TextHelper.appLocalizations.properties_visit,
                 ),
                 Tab(
-                  text: AppLocalizations.of(context)!.rent_properties,
+                  text: TextHelper.appLocalizations.rent_properties,
                 ),
               ],
             ),

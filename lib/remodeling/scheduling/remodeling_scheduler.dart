@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
@@ -8,6 +7,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
   const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
@@ -48,7 +48,7 @@ class RemodelingSchedulingScreenState
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(AppLocalizations.of(context)!.schedule_remodeling)),
+                title: Text(TextHelper.appLocalizations.schedule_remodeling)),
             floatingActionButton: Visibility(
                 visible: _activeStep == 0 &&
                         _remodelingOptionsAtBottom &&
@@ -60,7 +60,7 @@ class RemodelingSchedulingScreenState
                     _nextStep();
                     // todo check data
                   },
-                  label: Text(AppLocalizations.of(context)!.next),
+                  label: Text(TextHelper.appLocalizations.next),
                   icon: const Icon(Icons.arrow_forward),
                 )),
             floatingActionButtonLocation:
@@ -127,13 +127,13 @@ class RemodelingSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return AppLocalizations.of(context)!.remodeling_options;
+        return TextHelper.appLocalizations.remodeling_options;
       case 1:
-        return AppLocalizations.of(context)!.pick_a_day;
+        return TextHelper.appLocalizations.pick_a_day;
       case 2:
-        return AppLocalizations.of(context)!.remodeling_address_and_contacts;
+        return TextHelper.appLocalizations.remodeling_address_and_contacts;
       case 3:
-        return AppLocalizations.of(context)!.confirm;
+        return TextHelper.appLocalizations.confirm;
       default:
         return '';
     }
@@ -172,7 +172,7 @@ class RemodelingSchedulingScreenState
             children: [
               OutlinedButton.icon(
                 icon: const Icon(Icons.arrow_back),
-                label: Text(AppLocalizations.of(context)!.back),
+                label: Text(TextHelper.appLocalizations.back),
                 style: OutlinedButton.styleFrom(
                     minimumSize: Size(
                         MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
@@ -187,8 +187,8 @@ class RemodelingSchedulingScreenState
                     ? Icons.arrow_forward
                     : Icons.check),
                 label: Text(_activeStep < _totalSteps - 1
-                    ? AppLocalizations.of(context)!.next
-                    : AppLocalizations.of(context)!.confirm_remodeling),
+                    ? TextHelper.appLocalizations.next
+                    : TextHelper.appLocalizations.confirm_remodeling),
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(
                         MediaQuery.of(context).size.width / 2 - 24.0, 48.0),

@@ -6,6 +6,7 @@ import 'package:tner_client/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 import 'package:tner_client/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 import 'contracts/contracts.dart';
 import 'owner/owner.dart';
@@ -85,6 +86,7 @@ class AppHomeState extends State<AppHome> {
 
   @override
   Widget build(BuildContext context) {
+    TextHelper.ensureInitialized(context);
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -101,23 +103,23 @@ class AppHomeState extends State<AppHome> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.apartment),
-            label: AppLocalizations.of(context)!.properties,
+            label: TextHelper.appLocalizations.properties,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.construction),
-            label: AppLocalizations.of(context)!.remodeling,
+            label: TextHelper.appLocalizations.remodeling,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.description),
-            label: AppLocalizations.of(context)!.agreements,
+            label: TextHelper.appLocalizations.agreements,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.perm_identity),
-            label: AppLocalizations.of(context)!.owner,
+            label: TextHelper.appLocalizations.owner,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
-            label: AppLocalizations.of(context)!.settings,
+            label: TextHelper.appLocalizations.settings,
           ),
         ],
         currentIndex: _selectedIndex,

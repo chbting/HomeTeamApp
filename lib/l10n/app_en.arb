@@ -110,5 +110,6 @@
 	"fill_in_personal_information": "Fill in Personal Information",
 	"accept_or_make_an_offer": "Accept / Make an offer",
 	"sign_the_contract": "Sign the Contract",
-	"confirm_and_submit": "Confirm and Submit"
+	"confirm_and_submit": "Confirm and Submit",
+	"property_address": "Property Address"
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/theme.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingDatePickerWidget extends StatefulWidget {
   const RemodelingDatePickerWidget({Key? key, required this.data})
@@ -44,7 +44,7 @@ class RemodelingDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
-            title: Text(AppLocalizations.of(context)!.remodeling_start_date,
+            title: Text(TextHelper.appLocalizations.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(AppTheme.dateFormat,

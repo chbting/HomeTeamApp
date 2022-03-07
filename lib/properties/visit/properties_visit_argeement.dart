@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class PropertiesVisitAgreementWidget extends StatefulWidget {
   const PropertiesVisitAgreementWidget({Key? key, required this.data})
@@ -25,7 +25,7 @@ class PropertiesVisitAgreementWidgetState
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(AppLocalizations.of(context)!
+                child: Text(TextHelper.appLocalizations
                     .properties_visit_agreement_content)), //todo name of the person
           )
         ]);

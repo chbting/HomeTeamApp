@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
@@ -49,12 +49,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 _activeOption < _stepList.length - 1
                     ? ElevatedButton(
                         onPressed: details.onStepContinue,
-                        child: Text(AppLocalizations.of(context)!.next_option))
+                        child: Text(TextHelper.appLocalizations.next_option))
                     : Container(),
                 _activeOption > 0
                     ? TextButton(
                         onPressed: details.onStepCancel,
-                        child: Text(AppLocalizations.of(context)!.back))
+                        child: Text(TextHelper.appLocalizations.back))
                     : Container(),
               ],
             );
@@ -99,7 +99,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item) {
-    String title = getRemodelingItemTitle(item, context);
+    String title = getRemodelingItemTitle(item);
     return ListView(
       primary: false,
       children: [
@@ -122,13 +122,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Step _getOptionStep(RemodelingItem item) {
-    String title = getRemodelingItemTitle(item, context);
+    String title = getRemodelingItemTitle(item);
     return Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
             child: Padding(
-                padding:
-                    const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: _getLayoutByRemodelingItem(item))));
   }
 
@@ -167,7 +166,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: AppLocalizations.of(context)!.area_sq_ft,
+            labelText: TextHelper.appLocalizations.area_sq_ft,
           ),
           onChanged: (value) {
             value.isEmpty
@@ -178,7 +177,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         ),
       ),
       RadioListTile(
-        title: Text(AppLocalizations.of(context)!.scrape_old_paint_yes),
+        title: Text(TextHelper.appLocalizations.scrape_old_paint_yes),
         value: true,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -188,7 +187,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         },
       ),
       RadioListTile(
-        title: Text(AppLocalizations.of(context)!.scrape_old_paint_no),
+        title: Text(TextHelper.appLocalizations.scrape_old_paint_no),
         value: false,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -211,7 +210,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: AppLocalizations.of(context)!.area_sq_ft,
+            labelText: TextHelper.appLocalizations.area_sq_ft,
           ),
           onChanged: (value) {
             value.isEmpty
@@ -236,7 +235,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: AppLocalizations.of(context)!.count,
+            labelText: TextHelper.appLocalizations.count,
           ),
           onChanged: (value) {
             value.isEmpty
@@ -273,7 +272,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(AppLocalizations.of(context)!.estimate,
+            Text(TextHelper.appLocalizations.estimate,
                 style: Theme.of(context).textTheme.subtitle1),
             Text(formatPrice(price),
                 style: Theme.of(context).textTheme.subtitle1),

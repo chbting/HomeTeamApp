@@ -120,5 +120,6 @@
 	"sign_contract": "Sign Contract",
 	"submit": "Submit",
 	"end_date": "End Date",
-	"start_date": "Start Date"
+	"start_date": "Start Date",
+	"please_put_in_a_valid_amount": "Please put in a valid amount"
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';

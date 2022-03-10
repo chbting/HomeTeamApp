@@ -27,6 +27,8 @@ class AppTheme {
         brightness: Brightness.dark,
         scaffoldBackgroundColor: darkThemeBackground,
         indicatorColor: darkThemeAccent,
+        // As defined in material design
+        errorColor: const Color(0xFFCF6679),
         // TabBar
         toggleableActiveColor: darkThemeAccent,
         // Checkbox, Switch

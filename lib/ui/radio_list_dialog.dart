@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
-import '../theme.dart';
+import 'theme.dart';
 
 class RadioListDialog {
   static show(

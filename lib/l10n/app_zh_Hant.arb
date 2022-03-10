@@ -120,5 +120,6 @@
 	"sign_contract": "簽署租約",
 	"submit": "提交",
 	"end_date": "結束日期",
-	"start_date": "開始日期"
+	"start_date": "開始日期",
+	"please_put_in_a_valid_amount": "請輸入有效的金額"
 }

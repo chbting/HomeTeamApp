@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
-import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';

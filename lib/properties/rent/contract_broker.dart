@@ -28,6 +28,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   int _activeStep = 0;
 
   late final ContractOffer _offer = ContractOffer(widget.property);
+  final GlobalKey<FormState> adjusterFormKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -85,7 +86,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       //2. Personal information
                       //3. View the actual contract (aka confirmation page)
                       //4. Sign and submit
-                      ContractAdjusterScreen(offer: _offer),
+                      ContractAdjusterScreen(
+                          offer: _offer, adjusterFormKey: adjusterFormKey),
                       TenantInformationScreen(offer: _offer),
                       ContractViewerScreen(offer: _offer),
                       ContractConfirmationScreen(offer: _offer)
@@ -196,19 +198,21 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     // 48.0 is the height of extended fab
                     shape: const StadiumBorder()),
                 onPressed: () {
-                  if (_activeStep == 0) {
-                    // todo reset
-                  } else {
-                    _previousStep();
+                  switch (_activeStep) {
+                    case 0:
+                      adjusterFormKey.currentState!
+                          .reset(); //todo reset to initials
+                      break;
+                    default:
+                      _previousStep();
+                      break;
                   }
                 },
               ),
               ElevatedButton.icon(
                 icon: Icon(_activeStep == 2
                     ? Icons.fingerprint
-                    : (_activeStep == 3
-                        ? Icons.check
-                        : Icons.arrow_forward)),
+                    : (_activeStep == 3 ? Icons.check : Icons.arrow_forward)),
                 label: Text(_activeStep == 2
                     ? TextHelper.appLocalizations.sign_contract
                     : (_activeStep == 3
@@ -220,6 +224,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     shape: const StadiumBorder()),
                 onPressed: () {
                   switch (_activeStep) {
+                    case 0:
+                      if (adjusterFormKey.currentState!.validate()) {
+                        _nextStep();
+                      }
+                      break;
                     case 2:
                       _signWithBiometrics();
                       break;

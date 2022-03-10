@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
-import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class ContractAdjusterScreen extends StatefulWidget {
-  const ContractAdjusterScreen({Key? key, required this.offer})
+  const ContractAdjusterScreen(
+      {Key? key, required this.offer, required this.adjusterFormKey})
       : super(key: key);
 
   final ContractOffer offer;
+  final GlobalKey<FormState> adjusterFormKey;
 
   @override
   State<StatefulWidget> createState() => ContractAdjusterScreenState();
@@ -19,7 +21,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   Widget build(BuildContext context) {
     return ListView(
       primary: false,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
       children: [
         Card(
           child: ListTile(
@@ -35,103 +37,101 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             isThreeLine: true, //todo address format
           ),
         ),
-        const Divider(thickness: 1.0),
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Card(
-              child: SizedBox(
-                  // 16.0 on one side + 4.0 card margin
-                  width: MediaQuery.of(context).size.width / 2 - 20.0,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 16.0),
-                      child: TextField(
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          // todo comma, dollar sign
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              icon: const Icon(Icons.savings),
-                              labelText: TextHelper.appLocalizations.deposit),
-                          onChanged: (value) {
-                            value.isEmpty
-                                ? widget.offer.offeredDeposit = 0
-                                : widget.offer.offeredDeposit =
-                                    int.parse(value);
-                          })))),
-          Card(
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width / 2 - 20.0,
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 16.0),
-                      child: TextField(
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          // todo comma
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              icon: const Icon(Icons.attach_money),
-                              labelText:
-                                  TextHelper.appLocalizations.monthly_rent),
-                          onChanged: (value) {
-                            value.isEmpty
-                                ? widget.offer.offeredMonthlyRent = 0
-                                : widget.offer.offeredMonthlyRent =
-                                    int.parse(value);
-                          })))),
-        ]),
         Card(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  TextHelper.appLocalizations.lease_length,
-                  style: Theme.of(context).textTheme.subtitle1,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+                key: widget.adjusterFormKey,
+                child: Wrap(
+                  children: [
+                    TextFormField(
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        initialValue: '${widget.offer.property.monthlyRent}',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        // todo format to money $50,000
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            icon: const Icon(Icons.attach_money),
+                            labelText:
+                                TextHelper.appLocalizations.monthly_rent),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return TextHelper
+                                .appLocalizations.please_put_in_a_valid_amount;
+                          } else {
+                            widget.offer.offeredMonthlyRent = int.parse(value);
+                            return null;
+                          }
+                        }),
+                    Container(height: 16.0),
+                    TextFormField(
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        initialValue: '${widget.offer.property.deposit}',
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            icon: const Icon(Icons.savings),
+                            labelText: TextHelper.appLocalizations.deposit),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return TextHelper
+                                .appLocalizations.please_put_in_a_valid_amount;
+                          } else {
+                            widget.offer.offeredDeposit = int.parse(value);
+                            return null;
+                          }
+                        }),
+                    Container(height: 16.0),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Text(
+                          TextHelper.appLocalizations.lease_length,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        )),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      icon: const Icon(Icons.calendar_today),
+                                      labelText: TextHelper
+                                          .appLocalizations.start_date),
+                                  onChanged: (value) {
+                                    //widget.offer.startDate = value;
+                                  })),
+                        ),
+                        Container(width: 16.0),
+                        Expanded(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: TextField(
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      icon: const Icon(Icons.calendar_today),
+                                      labelText:
+                                          TextHelper.appLocalizations.end_date),
+                                  onChanged: (value) {
+                                    //widget.offer.endDate = value;
+                                  })),
+                        ),
+                      ],
+                    )
+                  ],
                 )),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              icon: const Icon(Icons.calendar_today),
-                              labelText: TextHelper
-                                  .appLocalizations.start_date),
-                          onChanged: (value) {
-                            //widget.offer.startDate = value;
-                          })),
-                ),
-                Container(width: 16.0),
-                Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              icon: const Icon(Icons.calendar_today),
-                              labelText: TextHelper
-                                  .appLocalizations.end_date),
-                          onChanged: (value) {
-                            //widget.offer.endDate = value;
-                          })),
-                ),
-              ],
-            )
-          ]),
-          // todo datePicker
-        )
+          ),
+        ),
       ],
     );
   }

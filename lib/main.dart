@@ -4,7 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
-import 'package:tner_client/theme.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 

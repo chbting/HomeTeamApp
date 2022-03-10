@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
-import '../theme.dart';
+import '../ui/theme.dart';
 
 class Property {
   String? name, address, district;
-  int? id, sqFtGross, sqFtNet, rent, deposit;
+  int? id, sqFtGross, sqFtNet, monthlyRent, deposit;
   ImageProvider coverImage;
 
   Property(this.id, this.name, this.address, this.district, this.sqFtGross,
-      this.sqFtNet, this.rent, this.coverImage) {
+      this.sqFtNet, this.monthlyRent, this.coverImage) {
     deposit = 20000; // todo
   }
 

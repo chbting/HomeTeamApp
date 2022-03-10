@@ -5,7 +5,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
-import '../../theme.dart';
+import '../../ui/theme.dart';
 
 class SearchPropertiesScreen extends StatefulWidget {
   const SearchPropertiesScreen({Key? key}) : super(key: key);

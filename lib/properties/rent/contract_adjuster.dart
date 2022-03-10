@@ -125,7 +125,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       children: [
                         SizedBox(
                             width: 40.0,
-                            height: 75.0,
+                            height: 76.0, // 60 + 8 x 2 (paddings)
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Icon(Icons.calendar_today,
@@ -170,7 +170,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                       });
                                     },
                                     validator: (value) {
-                                      debugPrint(value);
                                       try {
                                         DateFormat(Format.dateFormat)
                                             .parse(value!);

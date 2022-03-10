@@ -121,5 +121,6 @@
 	"submit": "Submit",
 	"end_date": "End Date",
 	"start_date": "Start Date",
-	"please_put_in_a_valid_amount": "Please put in a valid amount"
+	"please_put_in_a_valid_amount": "Please put in a valid amount",
+	"invalid_date": "Invalid date"
 }

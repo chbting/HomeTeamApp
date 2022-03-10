@@ -4,6 +4,7 @@ import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';
@@ -41,7 +42,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
             title: Text(TextHelper.appLocalizations.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat(AppTheme.dateFormat,
+                DateFormat(Format.dateFormatLong,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(data.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),

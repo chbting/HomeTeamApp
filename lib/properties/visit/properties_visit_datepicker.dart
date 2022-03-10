@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
+import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -61,7 +62,7 @@ class PropertiesVisitDatePickerWidgetState
             title: Text(TextHelper.appLocalizations.date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat(AppTheme.dateFormat,
+                DateFormat(Format.dateFormatLong,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(widget.data.dateTimePicked),
                 style: Theme.of(context).textTheme.subtitle1),

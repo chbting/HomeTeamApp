@@ -67,6 +67,4 @@ class AppTheme {
   static TextStyle? getCardBodyTextStyle(BuildContext context) {
     return Theme.of(context).textTheme.subtitle1;
   }
-
-  static String dateFormat = 'd/M/y (EEEE)';
 }

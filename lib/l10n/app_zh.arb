@@ -121,5 +121,6 @@
 	"submit": "提交",
 	"end_date": "结束日期",
 	"start_date": "开始日期",
-	"please_put_in_a_valid_amount": "请输入有效的金额"
+	"please_put_in_a_valid_amount": "请输入有效的金额",
+	"invalid_date": "日期无效"
 }

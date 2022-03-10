@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import '../../utils/shared_preferences_helper.dart';
@@ -47,7 +48,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
-                '\n${DateFormat(AppTheme.dateFormat, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
+                '\n${DateFormat(Format.dateFormatLong, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
@@ -78,8 +79,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 Icon(Icons.description),
               ],
             ),
-            title: Text(
-                TextHelper.appLocalizations.properties_visit_agreement,
+            title: Text(TextHelper.appLocalizations.properties_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 data.agreementSigned

@@ -28,7 +28,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   int _activeStep = 0;
 
   late final ContractOffer _offer = ContractOffer(widget.property);
-  final GlobalKey<FormState> adjusterFormKey = GlobalKey<FormState>();
+  final GlobalKey<ContractAdjusterScreenState> adjusterKey =
+      GlobalKey<ContractAdjusterScreenState>();
 
   @override
   void initState() {
@@ -86,8 +87,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       //2. Personal information
                       //3. View the actual contract (aka confirmation page)
                       //4. Sign and submit
-                      ContractAdjusterScreen(
-                          offer: _offer, adjusterFormKey: adjusterFormKey),
+                      ContractAdjusterScreen(key: adjusterKey, offer: _offer),
                       TenantInformationScreen(offer: _offer),
                       ContractViewerScreen(offer: _offer),
                       ContractConfirmationScreen(offer: _offer)
@@ -200,8 +200,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                 onPressed: () {
                   switch (_activeStep) {
                     case 0:
-                      adjusterFormKey.currentState!
-                          .reset(); //todo reset to initials
+                      adjusterKey.currentState!.reset();
                       break;
                     default:
                       _previousStep();
@@ -225,7 +224,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                 onPressed: () {
                   switch (_activeStep) {
                     case 0:
-                      if (adjusterFormKey.currentState!.validate()) {
+                      if (adjusterKey.currentState!.validate()) {
                         _nextStep();
                       }
                       break;

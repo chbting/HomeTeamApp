@@ -1,22 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class ContractAdjusterScreen extends StatefulWidget {
-  const ContractAdjusterScreen(
-      {Key? key, required this.offer, required this.adjusterFormKey})
+  const ContractAdjusterScreen({Key? key, required this.offer})
       : super(key: key);
 
   final ContractOffer offer;
-  final GlobalKey<FormState> adjusterFormKey;
 
   @override
   State<StatefulWidget> createState() => ContractAdjusterScreenState();
 }
 
 class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final _leaseStartRange = 180;
+  final _now = DateTime.now();
+  late final _leaseStartDefault = DateTime(_now.year, _now.month, _now.day + 1);
+  late final _leaseEndDefault = DateTime(
+      _leaseStartDefault.year + 1,
+      _leaseStartDefault.month,
+      _leaseStartDefault.day - 1); // Default lease length is 1 year
+
+  late final _leaseStartFirstDate = _leaseStartDefault;
+  late final _leaseStartLastDate = DateTime(_leaseStartFirstDate.year,
+      _leaseStartFirstDate.month, _leaseStartFirstDate.day + _leaseStartRange);
+  late DateTime _leaseEndFirstDate, _leaseEndLastDate;
+
+  late final _startDateController = TextEditingController(
+      text: DateFormat(Format.dateFormat).format(_leaseStartDefault));
+  late final _endDateController = TextEditingController(
+      text: DateFormat(Format.dateFormat).format(_leaseEndDefault));
+
+  @override
+  void initState() {
+    super.initState();
+    widget.offer.offeredStartDate ??= _leaseStartDefault;
+    widget.offer.offeredEndDate ??= _leaseEndDefault;
+    _updateLeaseEndRange();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -41,7 +69,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-                key: widget.adjusterFormKey,
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Wrap(
                   children: [
                     TextFormField(
@@ -51,7 +80,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
-                        // todo format to money $50,000
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.attach_money),
@@ -69,7 +97,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.done,
                         initialValue: '${widget.offer.property.deposit}',
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
@@ -88,51 +116,155 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                           }
                         }),
                     Container(height: 16.0),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Text(
-                          TextHelper.appLocalizations.lease_length,
-                          style: Theme.of(context).textTheme.subtitle1,
-                        )),
+                    Text(
+                      TextHelper.appLocalizations.lease_length,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                            width: 40.0,
+                            height: 75.0,
+                            child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Icon(Icons.calendar_today,
+                                    // copied from input_decorator.dart
+                                    // _getIconColor(ThemeData themeData)
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white70
+                                        : Colors.black45))),
                         Expanded(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                  keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      icon: const Icon(Icons.calendar_today),
-                                      labelText: TextHelper
-                                          .appLocalizations.start_date),
-                                  onChanged: (value) {
-                                    //widget.offer.startDate = value;
-                                  })),
-                        ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: TextFormField(
+                                    controller: _startDateController,
+                                    enableInteractiveSelection: false,
+                                    decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        labelText: TextHelper
+                                            .appLocalizations.start_date),
+                                    onTap: () {
+                                      // Stop the keyboard from appearing
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
+                                      showDatePicker(
+                                              context: context,
+                                              helpText: TextHelper
+                                                  .appLocalizations.start_date,
+                                              initialDate: widget
+                                                  .offer.offeredStartDate!,
+                                              firstDate: _leaseStartFirstDate,
+                                              lastDate: _leaseStartLastDate)
+                                          .then((value) {
+                                        if (value != null) {
+                                          _startDateController.text =
+                                              DateFormat(
+                                            Format.dateFormat,
+                                          ).format(value);
+                                          widget.offer.offeredStartDate = value;
+                                          _updateLeaseEndRange();
+                                        }
+                                      });
+                                    },
+                                    validator: (value) {
+                                      debugPrint(value);
+                                      try {
+                                        DateFormat(Format.dateFormat)
+                                            .parse(value!);
+                                        return null;
+                                      } on Exception {
+                                        return TextHelper
+                                            .appLocalizations.invalid_date;
+                                      }
+                                    }))),
                         Container(width: 16.0),
                         Expanded(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                  keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      icon: const Icon(Icons.calendar_today),
-                                      labelText:
-                                          TextHelper.appLocalizations.end_date),
-                                  onChanged: (value) {
-                                    //widget.offer.endDate = value;
-                                  })),
-                        ),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: TextFormField(
+                                    controller: _endDateController,
+                                    enableInteractiveSelection: false,
+                                    decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        labelText: TextHelper
+                                            .appLocalizations.end_date),
+                                    onTap: () {
+                                      // Stop the keyboard from appearing
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
+                                      showDatePicker(
+                                              context: context,
+                                              helpText: TextHelper
+                                                  .appLocalizations.end_date,
+                                              initialDate:
+                                                  widget.offer.offeredEndDate!,
+                                              firstDate: _leaseEndFirstDate,
+                                              lastDate: _leaseEndLastDate)
+                                          .then((value) {
+                                        if (value != null) {
+                                          _endDateController.text =
+                                              DateFormat(Format.dateFormat)
+                                                  .format(value);
+                                          widget.offer.offeredEndDate = value;
+                                        }
+                                      });
+                                    },
+                                    validator: (value) {
+                                      try {
+                                        var end = DateFormat(Format.dateFormat)
+                                            .parse(value!);
+                                        if (widget.offer.offeredStartDate ==
+                                            null) {
+                                          return null;
+                                        }
+                                        if (end.isBefore(
+                                            widget.offer.offeredStartDate!)) {
+                                          return TextHelper
+                                              .appLocalizations.invalid_date;
+                                        } else {
+                                          return null;
+                                        }
+                                      } on Exception {
+                                        return TextHelper
+                                            .appLocalizations.invalid_date;
+                                      }
+                                    }))),
                       ],
-                    )
+                    ),
+                    Container(height: 16.0)
                   ],
                 )),
           ),
         ),
       ],
     );
+  }
+
+  bool validate() => _formKey.currentState!.validate();
+
+  void _updateLeaseEndRange() {
+    _leaseEndFirstDate = DateTime(
+        widget.offer.offeredStartDate!.year,
+        widget.offer.offeredStartDate!.month,
+        widget.offer.offeredStartDate!.day + 1); // 1 day after lease start
+    _leaseEndLastDate = DateTime(
+        widget.offer.offeredStartDate!.year + 2,
+        widget.offer.offeredStartDate!.month,
+        widget.offer.offeredStartDate!.day - 1); // 2 years after lease start
+    if (widget.offer.offeredEndDate!.isBefore(_leaseEndFirstDate)) {
+      widget.offer.offeredEndDate = _leaseEndFirstDate;
+    }
+  }
+
+  void reset() {
+    _formKey.currentState!.reset();
+    _startDateController.text =
+        DateFormat(Format.dateFormat).format(_leaseStartDefault);
+    _endDateController.text =
+        DateFormat(Format.dateFormat).format(_leaseEndDefault);
   }
 }

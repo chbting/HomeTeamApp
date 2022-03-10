@@ -165,6 +165,14 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                             Format.dateFormat,
                                           ).format(value);
                                           widget.offer.offeredStartDate = value;
+                                          // auto update end date
+                                          widget.offer.offeredEndDate =
+                                              DateTime(value.year + 1,
+                                                  value.month, value.day - 1);
+                                          _endDateController.text = DateFormat(
+                                                  Format.dateFormat)
+                                              .format(
+                                                  widget.offer.offeredEndDate!);
                                           _updateLeaseEndRange();
                                         }
                                       });
@@ -254,9 +262,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
         widget.offer.offeredStartDate!.year + 2,
         widget.offer.offeredStartDate!.month,
         widget.offer.offeredStartDate!.day - 1); // 2 years after lease start
-    if (widget.offer.offeredEndDate!.isBefore(_leaseEndFirstDate)) {
-      widget.offer.offeredEndDate = _leaseEndFirstDate;
-    }
   }
 
   void reset() {

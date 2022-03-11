@@ -122,5 +122,11 @@
 	"end_date": "End Date",
 	"start_date": "Start Date",
 	"please_put_in_a_valid_amount": "Please put in a valid amount",
-	"invalid_date": "Invalid date"
+	"invalid_date": "Invalid date",
+	"tenant_pays_the_following": "Tenant pays the following:",
+	"bill_electricity": "Electricity",
+	"bill_water": "Water",
+	"bill_gas": "Gas",
+	"bill_rates": "Rates",
+	"bill_management": "Management"
 }

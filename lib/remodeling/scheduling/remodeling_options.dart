@@ -40,7 +40,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       for (var item in widget.data.selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
-      // TODO add total estimation
+      // TODO add total estimation, avoid fab collision with the stepper
       return Stepper(
           currentStep: _activeOption,
           controlsBuilder: (BuildContext context, ControlsDetails details) {

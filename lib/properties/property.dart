@@ -4,22 +4,27 @@ import 'package:tner_client/utils/text_helper.dart';
 import '../ui/theme.dart';
 
 class Property {
-  String? name, address, district;
-  int? id, sqFtGross, sqFtNet, monthlyRent, deposit;
-  ImageProvider coverImage;
+  final String? name, address, district;
+  final int? id, sqFtGross, sqFtNet, monthlyRent, deposit;
+  final ImageProvider coverImage;
+
+  //Tenant paid fees
+  final bool water = true;
+  final bool electricity = true;
+  final bool gas = true;
+  final bool rates = true;
+  final bool management = true;
 
   Property(this.id, this.name, this.address, this.district, this.sqFtGross,
-      this.sqFtNet, this.monthlyRent, this.coverImage) {
-    deposit = 20000; // todo
-  }
+      this.sqFtNet, this.monthlyRent, this.deposit, this.coverImage);
 
   static List<Property> getSampleList() {
     return [
-      Property(1, "康翠臺", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 720, 630, 18400,
+      Property(1, "康翠臺", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 720, 630, 18400, 36800,
           const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
-      Property(2, "聚賢居", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "上環", 631, 712, 32000,
+      Property(2, "聚賢居", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "上環", 631, 712, 32000, 64000,
           const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
-      Property(3, "尚翹峰", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 601, 520, 24000,
+      Property(3, "尚翹峰", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 601, 520, 24000, 48000,
           const AssetImage('assets/demo_images/The_Zenith_240px.jpg'))
     ];
   }

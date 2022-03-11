@@ -122,5 +122,11 @@
 	"end_date": "結束日期",
 	"start_date": "開始日期",
 	"please_put_in_a_valid_amount": "請輸入有效的金額",
-	"invalid_date": "日期無效"
+	"invalid_date": "日期無效",
+	"tenant_pays_the_following": "租客負責下列費用︰",
+	"bill_electricity": "電費",
+	"bill_water": "水費",
+	"bill_gas": "煤氣費",
+	"bill_rates": "差餉",
+	"bill_management": "管理費"
 }

@@ -19,17 +19,20 @@ class ContractAdjusterScreen extends StatefulWidget {
 class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final _leaseStartRange = 180;
+  final _leaseStartRangeInYears = 1;
+  final _leaseEndRangeInYears = 10;
   final _now = DateTime.now();
   late final _leaseStartDefault = DateTime(_now.year, _now.month, _now.day + 1);
   late final _leaseEndDefault = DateTime(
-      _leaseStartDefault.year + 1,
+      _leaseStartDefault.year + _leaseEndRangeInYears,
       _leaseStartDefault.month,
       _leaseStartDefault.day - 1); // Default lease length is 1 year
 
   late final _leaseStartFirstDate = _leaseStartDefault;
-  late final _leaseStartLastDate = DateTime(_leaseStartFirstDate.year,
-      _leaseStartFirstDate.month, _leaseStartFirstDate.day + _leaseStartRange);
+  late final _leaseStartLastDate = DateTime(
+      _leaseStartFirstDate.year + _leaseStartRangeInYears,
+      _leaseStartFirstDate.month,
+      _leaseStartFirstDate.day - 1);
   late DateTime _leaseEndFirstDate, _leaseEndLastDate;
 
   late final _startDateController = TextEditingController(
@@ -242,7 +245,127 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                     }))),
                       ],
                     ),
-                    Container(height: 16.0)
+                    Container(height: 16.0),
+                    Text(
+                      TextHelper.appLocalizations.tenant_pays_the_following,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    GridView.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: 2,
+                      shrinkWrap: true,
+                      primary: false,
+                      children: [
+                        InkWell(
+                            onTap: () {
+                              widget.offer.offeredWater =
+                                  !widget.offer.offeredWater;
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: widget.offer.offeredWater,
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        widget.offer.offeredWater = value;
+                                        setState(() {});
+                                      }
+                                    }),
+                                Text(TextHelper.appLocalizations.bill_water,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))
+                              ],
+                            )),
+                        InkWell(
+                            onTap: () {
+                              widget.offer.offeredElectricity =
+                                  !widget.offer.offeredElectricity;
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: widget.offer.offeredElectricity,
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        widget.offer.offeredElectricity = value;
+                                        setState(() {});
+                                      }
+                                    }),
+                                Text(
+                                    TextHelper
+                                        .appLocalizations.bill_electricity,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))
+                              ],
+                            )),
+                        InkWell(
+                            onTap: () {
+                              widget.offer.offeredGas =
+                                  !widget.offer.offeredGas;
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: widget.offer.offeredGas,
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        widget.offer.offeredGas = value;
+                                        setState(() {});
+                                      }
+                                    }),
+                                Text(TextHelper.appLocalizations.bill_gas,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))
+                              ],
+                            )),
+                        InkWell(
+                            onTap: () {
+                              widget.offer.offeredRates =
+                                  !widget.offer.offeredRates;
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: widget.offer.offeredRates,
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        widget.offer.offeredRates = value;
+                                        setState(() {});
+                                      }
+                                    }),
+                                Text(TextHelper.appLocalizations.bill_rates,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))
+                              ],
+                            )),
+                        InkWell(
+                            onTap: () {
+                              widget.offer.offeredManagement =
+                                  !widget.offer.offeredManagement;
+                              setState(() {});
+                            },
+                            child: Row(
+                              children: [
+                                Checkbox(
+                                    value: widget.offer.offeredManagement,
+                                    onChanged: (bool? value) {
+                                      if (value != null) {
+                                        widget.offer.offeredManagement = value;
+                                        setState(() {});
+                                      }
+                                    }),
+                                Text(
+                                    TextHelper.appLocalizations.bill_management,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))
+                              ],
+                            ))
+                      ],
+                    )
                   ],
                 )),
           ),

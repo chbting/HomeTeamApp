@@ -29,9 +29,13 @@ class AppTheme {
         indicatorColor: darkThemeAccent,
         // As defined in material design
         errorColor: const Color(0xFFCF6679),
-        // TabBar
+        // TabBar & custom checkbox in remodelling selections
         toggleableActiveColor: darkThemeAccent,
-        // Checkbox, Switch
+        // Flutter checkbox
+        checkboxTheme: ThemeData.dark()
+            .checkboxTheme
+            .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
+        // Checkbox & Switch
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: customLightBlue,
                 accentColor: darkThemeAccent,

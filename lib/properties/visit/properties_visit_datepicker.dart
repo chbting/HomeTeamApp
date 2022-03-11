@@ -68,9 +68,7 @@ class PropertiesVisitDatePickerWidgetState
                 style: Theme.of(context).textTheme.subtitle1),
             onExpansionChanged: (isExpanded) {
               if (isExpanded && _timePickerKey.currentState!.isExpanded()) {
-                setState(() {
-                  _timePickerKey.currentState!.setExpanded(false);
-                });
+                _timePickerKey.currentState!.setExpanded(false);
               }
             },
             children: [
@@ -81,8 +79,8 @@ class PropertiesVisitDatePickerWidgetState
                   onDateChanged: (DateTime value) {
                     setState(() {
                       widget.data.dateTimePicked = value;
-                      _datePickerKey.currentState?.setExpanded(false);
                     });
+                    _datePickerKey.currentState?.setExpanded(false);
                   })
             ],
           )),
@@ -102,9 +100,7 @@ class PropertiesVisitDatePickerWidgetState
                 style: Theme.of(context).textTheme.subtitle1),
             onExpansionChanged: (isExpanded) {
               if (isExpanded && _datePickerKey.currentState!.isExpanded()) {
-                setState(() {
-                  _datePickerKey.currentState!.setExpanded(false);
-                });
+                _datePickerKey.currentState!.setExpanded(false);
               }
             },
             children: [
@@ -149,6 +145,7 @@ class PropertiesVisitDatePickerWidgetState
                       .map<Widget>((timeOfDay) {
                     return getTimeWidget(timeOfDay, true);
                   }).toList()),
+              Container(height: 4.0)
             ],
           ))
         ]);
@@ -174,7 +171,7 @@ class PropertiesVisitDatePickerWidgetState
 
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        child: !isAvailable
+        child: isAvailable
             ? InkWell(
                 child: timeTextBox,
                 onTap: () {
@@ -186,8 +183,8 @@ class PropertiesVisitDatePickerWidgetState
                       timeOfDay.minute);
                   setState(() {
                     widget.data.dateTimePicked = newValue;
-                    _timePickerKey.currentState?.setExpanded(false);
                   });
+                  _timePickerKey.currentState?.setExpanded(false);
                 },
               )
             : timeTextBox);

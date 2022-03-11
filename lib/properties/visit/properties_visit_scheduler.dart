@@ -46,55 +46,64 @@ class PropertiesVisitSchedulingScreenState
             appBar: AppBar(
                 title: Text(
                     TextHelper.appLocalizations.schedule_properties_visit)),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomIconStepper(
-                  icons: [
-                    Icon(Icons.place,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.calendar_today,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.article,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.check,
-                        color: Theme.of(context).colorScheme.onSecondary)
-                  ],
-                  activeStep: _activeStep,
-                  activeStepBorderWidth: 2,
-                  activeStepColor: Theme.of(context).colorScheme.secondary,
-                  enableNextPreviousButtons: false,
-                  enableStepTapping: false,
-                  stepRadius: 24.0,
-                  showStepCompleted: true,
-                  lineColor: Colors.grey,
-                  onStepReached: (index) {
-                    setState(() {
-                      _activeStep = index;
-                    });
-                  },
-                ),
-                Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Text(_getStepTitle(),
-                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Theme.of(context).colorScheme.secondary))),
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      PropertiesVisitStartingPointWidget(data: _data),
-                      PropertiesVisitDatePickerWidget(data: _data),
-                      PropertiesVisitAgreementWidget(data: _data),
-                      PropertiesVisitConfirmationWidget(data: _data)
+            body: Stack(children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomIconStepper(
+                    icons: [
+                      Icon(Icons.place,
+                          color: Theme.of(context).colorScheme.onSecondary),
+                      Icon(Icons.calendar_today,
+                          color: Theme.of(context).colorScheme.onSecondary),
+                      Icon(Icons.article,
+                          color: Theme.of(context).colorScheme.onSecondary),
+                      Icon(Icons.check,
+                          color: Theme.of(context).colorScheme.onSecondary)
                     ],
+                    activeStep: _activeStep,
+                    activeStepBorderWidth: 2,
+                    activeStepColor: Theme.of(context).colorScheme.secondary,
+                    enableNextPreviousButtons: false,
+                    enableStepTapping: false,
+                    stepRadius: 24.0,
+                    showStepCompleted: true,
+                    lineColor: Colors.grey,
+                    onStepReached: (index) {
+                      setState(() {
+                        _activeStep = index;
+                      });
+                    },
                   ),
-                ),
-                _bottomButtons(isKeyboardVisible)
-              ],
-            ));
+                  Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16.0),
+                      child: Text(_getStepTitle(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1!
+                              .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary))),
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
+                        PropertiesVisitStartingPointWidget(data: _data),
+                        PropertiesVisitDatePickerWidget(data: _data),
+                        PropertiesVisitAgreementWidget(data: _data),
+                        PropertiesVisitConfirmationWidget(data: _data)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                  alignment: Alignment.bottomCenter,
+                  child: isKeyboardVisible ? null : _getBottomButtons())
+            ]));
       },
     );
   }
@@ -175,120 +184,129 @@ class PropertiesVisitSchedulingScreenState
     // todo
   }
 
-  Widget _bottomButtons(bool isKeyboardVisible) {
-    if (isKeyboardVisible) {
-      return Container();
-    } else {
-      switch (_activeStep) {
-        case 0:
-          return Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.arrow_forward),
-                    label: Text(TextHelper.appLocalizations.next),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      setState(() {
+  Widget _getBottomButtons() {
+    // todo gradient
+    switch (_activeStep) {
+      case 0:
+        return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton.icon(
+              icon: const Icon(Icons.arrow_forward),
+              label: Text(TextHelper.appLocalizations.next),
+              style: ElevatedButton.styleFrom(
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                  shape: const StadiumBorder()),
+              onPressed: () {
+                setState(() {
+                  _nextStep();
+                });
+              },
+            ));
+      case 2:
+        return Container(
+            height: 48.0 + 48.0 + 16.0 * 3,
+            width: double.infinity,
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                  Theme.of(context).scaffoldBackgroundColor,
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
+                ])),
+            child: Stack(
+              children: [
+                Container(
+                    alignment: Alignment.topCenter,
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.fingerprint),
+                      label: Text(TextHelper.appLocalizations.sign_now),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width - 32.0, 48.0),
+                          shape: const StadiumBorder()),
+                      onPressed: () {
+                        _signWithBiometrics();
+                      },
+                    )),
+                Container(
+                    alignment: Alignment.bottomLeft,
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.arrow_back),
+                      label: Text(TextHelper.appLocalizations.back),
+                      style: OutlinedButton.styleFrom(
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width / 2 - 24.0,
+                              48.0),
+                          // 48.0 is the height of extended fab
+                          shape: const StadiumBorder(),
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor),
+                      onPressed: () {
+                        _previousStep();
+                      },
+                    )),
+                Container(
+                    alignment: Alignment.bottomRight,
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.redo),
+                      label: Text(TextHelper.appLocalizations.sign_later),
+                      style: OutlinedButton.styleFrom(
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width / 2 - 24.0,
+                              48.0),
+                          // 48.0 is the height of extended fab
+                          shape: const StadiumBorder(),
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor),
+                      onPressed: () {
+                        _data.agreementSigned = false;
                         _nextStep();
-                      });
-                    },
-                  )));
-        case 2:
-          return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.fingerprint),
-                    label: Text(TextHelper.appLocalizations.sign_now),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width - 32.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      _signWithBiometrics();
-                    },
-                  ),
-                  Container(height: 16.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.appLocalizations.back),
-                        style: OutlinedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0,
-                                48.0),
-                            // 48.0 is the height of extended fab
-                            shape: const StadiumBorder()),
-                        onPressed: () {
-                          _previousStep();
-                        },
-                      ),
-                      OutlinedButton.icon(
-                        icon: const Icon(Icons.redo),
-                        label: Text(TextHelper.appLocalizations.sign_later),
-                        style: OutlinedButton.styleFrom(
-                            minimumSize: Size(
-                                MediaQuery.of(context).size.width / 2 - 24.0,
-                                48.0),
-                            // 48.0 is the height of extended fab
-                            shape: const StadiumBorder()),
-                        onPressed: () {
-                          _data.agreementSigned = false;
-                          _nextStep();
-                        },
-                      ),
-                    ],
-                  )
-                ],
-              ));
-        default:
-          return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton.icon(
-                    icon: const Icon(Icons.arrow_back),
-                    label: Text(TextHelper.appLocalizations.back),
-                    style: OutlinedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        // 48.0 is the height of extended fab
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      _previousStep();
-                    },
-                  ),
-                  ElevatedButton.icon(
-                    icon: Icon(_activeStep < _totalSteps - 1
-                        ? Icons.arrow_forward
-                        : Icons.check),
-                    label: Text(_activeStep < _totalSteps - 1
-                        ? TextHelper.appLocalizations.next
-                        : TextHelper.appLocalizations.confirm),
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        shape: const StadiumBorder()),
-                    onPressed: () {
-                      if (_activeStep == _totalSteps - 1) {
-                        _confirm();
-                      } else {
-                        _nextStep();
-                      }
-                    },
-                  )
-                ],
-              ));
-      }
+                      },
+                    ))
+              ],
+            ));
+      default:
+        return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OutlinedButton.icon(
+                  icon: const Icon(Icons.arrow_back),
+                  label: Text(TextHelper.appLocalizations.back),
+                  style: OutlinedButton.styleFrom(
+                      minimumSize: Size(
+                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                      // 48.0 is the height of extended fab
+                      shape: const StadiumBorder()),
+                  onPressed: () {
+                    _previousStep();
+                  },
+                ),
+                ElevatedButton.icon(
+                  icon: Icon(_activeStep < _totalSteps - 1
+                      ? Icons.arrow_forward
+                      : Icons.check),
+                  label: Text(_activeStep < _totalSteps - 1
+                      ? TextHelper.appLocalizations.next
+                      : TextHelper.appLocalizations.confirm),
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(
+                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                      shape: const StadiumBorder()),
+                  onPressed: () {
+                    if (_activeStep == _totalSteps - 1) {
+                      _confirm();
+                    } else {
+                      _nextStep();
+                    }
+                  },
+                )
+              ],
+            ));
     }
   }
 }

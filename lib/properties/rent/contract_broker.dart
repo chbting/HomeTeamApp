@@ -127,7 +127,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
               ),
               Container(
                   alignment: Alignment.bottomCenter,
-                  child: isKeyboardVisible ? null : _bottomButtons())
+                  child: isKeyboardVisible ? null : _getBottomButtons())
             ]));
       },
     );
@@ -209,7 +209,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     // todo
   }
 
-  Widget _bottomButtons() {
+  Widget _getBottomButtons() {
     return Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(

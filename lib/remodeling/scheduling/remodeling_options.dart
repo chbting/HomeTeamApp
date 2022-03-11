@@ -169,10 +169,11 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             labelText: TextHelper.appLocalizations.area_sq_ft,
           ),
           onChanged: (value) {
-            value.isEmpty
-                ? widget.data.paintArea = null
-                : widget.data.paintArea = int.parse(value);
-            setState(() {});
+            setState(() {
+              value.isEmpty
+                  ? widget.data.paintArea = null
+                  : widget.data.paintArea = int.parse(value);
+            });
           },
         ),
       ),
@@ -213,10 +214,11 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             labelText: TextHelper.appLocalizations.area_sq_ft,
           ),
           onChanged: (value) {
-            value.isEmpty
-                ? widget.data.wallCoveringsArea = null
-                : widget.data.wallCoveringsArea = int.parse(value);
-            setState(() {});
+            setState(() {
+              value.isEmpty
+                  ? widget.data.wallCoveringsArea = null
+                  : widget.data.wallCoveringsArea = int.parse(value);
+            });
           },
         ),
       ),
@@ -238,10 +240,11 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             labelText: TextHelper.appLocalizations.count,
           ),
           onChanged: (value) {
-            value.isEmpty
-                ? widget.data.acCount = null
-                : widget.data.acCount = int.parse(value);
-            setState(() {});
+            setState(() {
+              value.isEmpty
+                  ? widget.data.acCount = null
+                  : widget.data.acCount = int.parse(value);
+            });
           },
         ),
       ),

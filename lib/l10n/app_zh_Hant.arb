@@ -128,5 +128,6 @@
 	"bill_water": "水費",
 	"bill_gas": "煤氣費",
 	"bill_rates": "差餉",
-	"bill_management": "管理費"
+	"bill_management": "管理費",
+	"notes": "備註"
 }

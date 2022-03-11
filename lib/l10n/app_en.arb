@@ -128,5 +128,6 @@
 	"bill_water": "Water",
 	"bill_gas": "Gas",
 	"bill_rates": "Rates",
-	"bill_management": "Management"
+	"bill_management": "Management",
+	"notes": "Notes"
 }

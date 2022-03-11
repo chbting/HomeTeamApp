@@ -35,8 +35,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
         getRemodelingItemTitle(RemodelingItem.painting);
     _titleMap[RemodelingItem.wallCoverings] =
         getRemodelingItemTitle(RemodelingItem.wallCoverings);
-    _titleMap[RemodelingItem.ac] =
-        getRemodelingItemTitle(RemodelingItem.ac);
+    _titleMap[RemodelingItem.ac] = getRemodelingItemTitle(RemodelingItem.ac);
     _titleMap[RemodelingItem.removals] =
         getRemodelingItemTitle(RemodelingItem.removals);
     _titleMap[RemodelingItem.suspendedCeiling] =
@@ -75,8 +74,8 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                         builder: (context) => RemodelingSchedulingScreen(
                             selectionMap: _isSelectedMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                        content: Text(TextHelper.appLocalizations
-                            .msg_select_remodeling_item),
+                        content: Text(TextHelper
+                            .appLocalizations.msg_select_remodeling_item),
                         behavior: SnackBarBehavior.floating,
                       ));
               }),
@@ -99,9 +98,10 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                             color: Theme.of(context).toggleableActiveColor)
                         : const Icon(Icons.check_circle_outline),
                     onTap: () {
-                      setState(() {});
-                      _isSelectedMap[_keyList[index]] =
-                          !_isSelectedMap[_keyList[index]]!;
+                      setState(() {
+                        _isSelectedMap[_keyList[index]] =
+                            !_isSelectedMap[_keyList[index]]!;
+                      });
                     },
                   ),
                 );

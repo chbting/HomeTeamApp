@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
@@ -54,7 +55,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   Widget build(BuildContext context) {
     return ListView(
       primary: false,
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
+      // ListView has 4.0 internal padding
+      padding: const EdgeInsets.only(
+          left: 12.0,
+          right: 12.0,
+          top: ContractBrokerScreen.stepTitleBarHeight - 4.0,
+          bottom: ContractBrokerScreen.bottomButtonContainerHeight - 4.0),
       children: [
         Card(
           child: ListTile(

@@ -197,8 +197,8 @@ class PropertiesVisitSchedulingScreenState
     } else {
       // case 3: biometric authentication unavailable
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(TextHelper
-              .appLocalizations.biometric_authentication_unavailable)));
+          content: Text(TextHelper.appLocalizations
+              .biometric_authentication_unavailable_agreement)));
     }
   }
 

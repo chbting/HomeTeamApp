@@ -93,7 +93,6 @@
 	"sign_later": "Sign on Visit",
 	"sign_now": "Sign Now",
 	"biometric_authentication_failed": "Biometric authentication failed",
-	"biometric_authentication_unavailable": "This device cannot use biometric authentication, please choose \"Sign on Visit\"",
 	"reason_sign_property_visit_agreement": "Sign the property visit agreement with biometric authentication",
 	"properties_visit_date": "Visiting Date",
 	"name": "Name",
@@ -129,5 +128,8 @@
 	"bill_gas": "Gas",
 	"bill_rates": "Rates",
 	"bill_management": "Management",
-	"notes": "Notes"
+	"notes": "Notes",
+	"biometric_authentication_unavailable_agreement": "This device cannot use biometric authentication, please choose \"Sign on Visit\"",
+	"biometric_authentication_unavailable": "This device cannot use biometric authentication",
+	"reason_sign_rental_contract": "Sign the rental contract with biometric authentication"
 }

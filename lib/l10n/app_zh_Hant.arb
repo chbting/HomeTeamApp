@@ -93,7 +93,6 @@
 	"sign_later": "睇樓時簽署",
 	"sign_now": "現在簽署",
 	"biometric_authentication_failed": "生物認證失敗",
-	"biometric_authentication_unavailable": "本裝置未能使用生物認證，請選擇“睇樓時簽署”",
 	"reason_sign_property_visit_agreement": "使用生物認證簽署睇樓紙",
 	"properties_visit_date": "睇樓日期",
 	"name": "姓名",
@@ -129,5 +128,8 @@
 	"bill_gas": "煤氣費",
 	"bill_rates": "差餉",
 	"bill_management": "管理費",
-	"notes": "備註"
+	"notes": "備註",
+	"biometric_authentication_unavailable_agreement": "本裝置未能使用生物認證，請選擇“睇樓時簽署”",
+	"biometric_authentication_unavailable": "本裝置未能使用生物認證",
+	"reason_sign_rental_contract": "使用生物認證簽署租约"
 }

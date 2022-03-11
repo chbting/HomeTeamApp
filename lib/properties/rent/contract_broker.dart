@@ -181,7 +181,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
       try {
         didAuthenticate = await localAuth.authenticate(
             localizedReason: TextHelper
-                .appLocalizations.reason_sign_property_visit_agreement,
+                .appLocalizations.reason_sign_rental_contract,
             biometricOnly: true);
       } on PlatformException {
         didAuthenticate = false;
@@ -197,7 +197,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
             content: Text(
                 TextHelper.appLocalizations.biometric_authentication_failed)));
       }
-    } else {
+    } else {//todo other options?
       // case 3: biometric authentication unavailable
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(TextHelper

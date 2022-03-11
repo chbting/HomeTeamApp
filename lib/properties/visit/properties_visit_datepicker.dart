@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
@@ -50,7 +51,13 @@ class PropertiesVisitDatePickerWidgetState
 
     return ListView(
         // note: ListView has 4.0 internal padding on all sides
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            bottom:
+                PropertiesVisitSchedulingScreen.bottomButtonContainerHeight -
+                    4.0),
         primary: false,
         children: [
           Card(

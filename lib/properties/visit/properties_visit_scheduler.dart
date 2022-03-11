@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/properties/property.dart';
@@ -17,6 +18,8 @@ class PropertiesVisitSchedulingScreen extends StatefulWidget {
       : super(key: key);
 
   final List<Property> selectedProperties;
+  static const stepTitleBarHeight = 40.0;
+  static const bottomButtonContainerHeight = 48.0 + 16.0 * 2;
 
   @override
   State<PropertiesVisitSchedulingScreen> createState() =>
@@ -25,9 +28,11 @@ class PropertiesVisitSchedulingScreen extends StatefulWidget {
 
 class PropertiesVisitSchedulingScreenState
     extends State<PropertiesVisitSchedulingScreen> {
+  final GlobalKey _stepperKey = GlobalKey();
   final PageController _pageController = PageController(initialPage: 0);
   final _totalSteps = 4;
   int _activeStep = 0;
+  double _stepTitleBarTopMargin = 0.0;
 
   final PropertiesVisitData _data = PropertiesVisitData();
 
@@ -35,6 +40,12 @@ class PropertiesVisitSchedulingScreenState
   void initState() {
     super.initState();
     _data.propertyList.addAll(widget.selectedProperties);
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
+      final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
+      setState(() {
+        _stepTitleBarTopMargin = box.size.height - 1; // -1 rounding error?
+      });
+    });
   }
 
   @override
@@ -51,6 +62,7 @@ class PropertiesVisitSchedulingScreenState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomIconStepper(
+                    key: _stepperKey,
                     icons: [
                       Icon(Icons.place,
                           color: Theme.of(context).colorScheme.onSecondary),
@@ -75,17 +87,6 @@ class PropertiesVisitSchedulingScreenState
                       });
                     },
                   ),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16.0),
-                      child: Text(_getStepTitle(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .subtitle1!
-                              .copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .secondary))),
                   Expanded(
                     child: PageView(
                       controller: _pageController,
@@ -99,6 +100,27 @@ class PropertiesVisitSchedulingScreenState
                     ),
                   ),
                 ],
+              ),
+              Container(
+                width: double.infinity,
+                height: PropertiesVisitSchedulingScreen.stepTitleBarHeight,
+                margin: EdgeInsets.only(top: _stepTitleBarTopMargin),
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.center,
+                        colors: [
+                      Theme.of(context)
+                          .scaffoldBackgroundColor
+                          .withOpacity(0.0),
+                      Theme.of(context).scaffoldBackgroundColor
+                    ])),
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16.0),
+                    child: Text(_getStepTitle(),
+                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                            color: Theme.of(context).colorScheme.secondary))),
               ),
               Container(
                   alignment: Alignment.bottomCenter,
@@ -185,7 +207,6 @@ class PropertiesVisitSchedulingScreenState
   }
 
   Widget _getBottomButtons() {
-    // todo gradient
     switch (_activeStep) {
       case 0:
         return Padding(

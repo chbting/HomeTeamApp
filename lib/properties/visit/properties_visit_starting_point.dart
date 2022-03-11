@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
 
 class PropertiesVisitStartingPointWidget extends StatefulWidget {
   const PropertiesVisitStartingPointWidget({Key? key, required this.data})
@@ -28,7 +29,13 @@ class PropertiesVisitStartingPointWidgetState
   Widget build(BuildContext context) {
     return ListView.builder(
         // note: ListView has 4.0 internal padding on all sides
-        padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 72.0),
+        padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            bottom:
+                PropertiesVisitSchedulingScreen.bottomButtonContainerHeight -
+                    4.0),
         primary: false,
         itemCount: widget.data.propertyList.length,
         itemBuilder: (context, index) {

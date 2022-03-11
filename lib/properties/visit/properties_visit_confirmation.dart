@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
+import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/text_helper.dart';
@@ -17,7 +18,12 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       primary: false,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.only(
+          left: 12.0,
+          right: 12.0,
+          top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+          bottom: PropertiesVisitSchedulingScreen.bottomButtonContainerHeight -
+              4.0),
       children: [
         Card(
             child: Padding(

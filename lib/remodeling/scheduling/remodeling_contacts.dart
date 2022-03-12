@@ -138,7 +138,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                     Container(width: 16.0),
                     Expanded(
                       child: DropdownButton<String>(
-                        hint: Text(TextHelper.appLocalizations.prefix),
+                        hint: Text(TextHelper.appLocalizations.title),
                         isExpanded: true,
                         value: widget.data.prefix,
                         onChanged: (String? newValue) {

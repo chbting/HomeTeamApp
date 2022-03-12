@@ -1142,6 +1142,31 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>first_name</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>general_settings</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -1208,6 +1233,56 @@
                     </translation>
                     <translation>
                         <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>id_card_number</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>info_required</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
                         <approved>false</approved>
                     </translation>
                     <translation>
@@ -1333,6 +1408,31 @@
                     </translation>
                     <translation>
                         <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>last_name</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
                         <approved>false</approved>
                     </translation>
                     <translation>
@@ -2033,31 +2133,6 @@
                     </translation>
                     <translation>
                         <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>prefix</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>en-US</language>
                         <approved>false</approved>
                     </translation>
                     <translation>
@@ -3108,6 +3183,31 @@
                     </translation>
                     <translation>
                         <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>title</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>en-US</language>
                         <approved>false</approved>
                     </translation>
                     <translation>

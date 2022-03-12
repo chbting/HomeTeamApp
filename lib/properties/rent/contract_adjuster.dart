@@ -142,12 +142,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Icon(Icons.calendar_today,
-                                    // copied from input_decorator.dart
-                                    // _getIconColor(ThemeData themeData)
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? Colors.white70
-                                        : Colors.black45))),
+                                    color: AppTheme.getTextFieldIconColor(
+                                        context)))),
                         _getLeaseStartDatePicker(),
                         Container(width: 16.0),
                         _getLeaseEndDatePicker(),

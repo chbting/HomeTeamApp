@@ -35,6 +35,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   late final ContractOffer _offer = ContractOffer(widget.property);
   final GlobalKey<ContractAdjusterScreenState> adjusterKey =
       GlobalKey<ContractAdjusterScreenState>();
+  final GlobalKey<TenantInformationScreenState> tenantInfoKey =
+      GlobalKey<TenantInformationScreenState>();
 
   @override
   void initState() {
@@ -95,8 +97,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         //3. View the actual contract (aka confirmation page)
                         //4. Sign and submit
                         ContractAdjusterScreen(key: adjusterKey, offer: _offer),
-                        //todo margin
-                        TenantInformationScreen(offer: _offer),
+                        TenantInformationScreen(
+                            key: tenantInfoKey, offer: _offer),
                         ContractViewerScreen(offer: _offer),
                         ContractConfirmationScreen(offer: _offer)
                       ],
@@ -180,8 +182,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     if (canCheckBiometrics) {
       try {
         didAuthenticate = await localAuth.authenticate(
-            localizedReason: TextHelper
-                .appLocalizations.reason_sign_rental_contract,
+            localizedReason:
+                TextHelper.appLocalizations.reason_sign_rental_contract,
             biometricOnly: true);
       } on PlatformException {
         didAuthenticate = false;
@@ -197,7 +199,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
             content: Text(
                 TextHelper.appLocalizations.biometric_authentication_failed)));
       }
-    } else {//todo other options?
+    } else {
+      //todo other options?
       // case 3: biometric authentication unavailable
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(TextHelper
@@ -265,6 +268,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     switch (_activeStep) {
                       case 0:
                         if (adjusterKey.currentState!.validate()) {
+                          _nextStep();
+                        }
+                        break;
+                      case 1:
+                        if (tenantInfoKey.currentState!.validate()) {
                           _nextStep();
                         }
                         break;

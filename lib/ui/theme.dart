@@ -71,4 +71,11 @@ class AppTheme {
   static TextStyle? getCardBodyTextStyle(BuildContext context) {
     return Theme.of(context).textTheme.subtitle1;
   }
+
+  // Copied from input_decorator.dart _getIconColor(ThemeData themeData)
+  static Color getTextFieldIconColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? Colors.white70
+        : Colors.black45;
+  }
 }

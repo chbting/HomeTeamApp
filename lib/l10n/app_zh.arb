@@ -55,7 +55,6 @@
 	"kowloon": "九龙",
 	"new_territories": "新界",
 	"region": "地域",
-	"prefix": "称谓",
 	"miss": "小姐",
 	"mr": "先生",
 	"mrs": "太太",
@@ -131,5 +130,10 @@
 	"notes": "备注",
 	"biometric_authentication_unavailable_agreement": "本装置未能使用生物认证，请选择“睇楼时签署”",
 	"biometric_authentication_unavailable": "本装置未能使用生物认证",
-	"reason_sign_rental_contract": "使用生物认证签署租约"
+	"reason_sign_rental_contract": "使用生物认证签署租约",
+	"first_name": "名字",
+	"last_name": "姓氏",
+	"title": "称谓",
+	"info_required": "需填写资料",
+	"id_card_number": "身份证号码"
 }

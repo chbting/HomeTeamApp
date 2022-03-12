@@ -55,7 +55,6 @@
 	"kowloon": "Kowloon",
 	"new_territories": "New Territories",
 	"region": "Region",
-	"prefix": "Prefix",
 	"miss": "Miss",
 	"mr": "Mr.",
 	"mrs": "Mrs.",
@@ -131,5 +130,10 @@
 	"notes": "Notes",
 	"biometric_authentication_unavailable_agreement": "This device cannot use biometric authentication, please choose \"Sign on Visit\"",
 	"biometric_authentication_unavailable": "This device cannot use biometric authentication",
-	"reason_sign_rental_contract": "Sign the rental contract with biometric authentication"
+	"reason_sign_rental_contract": "Sign the rental contract with biometric authentication",
+	"first_name": "First name",
+	"last_name": "Last name",
+	"title": "Title",
+	"info_required": "Info Required",
+	"id_card_number": "ID card no."
 }

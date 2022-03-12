@@ -15,7 +15,8 @@ class ContractOffer {
       offeredManagement;
 
   // Tenant info
-  String? name, prefix, idCardNumber, phoneNumber, emailAddress;
+  String? firstName, lastName, prefix, idCardNumber, phoneNumber, emailAddress;
+  String? addressLine1, addressLine2, district, region;
 
   ContractOffer(this.property) {
     offeredWater = property.water;

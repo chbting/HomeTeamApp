@@ -46,7 +46,7 @@
 	"remodeling_start_date": "Remodeling Start Date",
 	"remodeling_options": "Remodeling Options",
 	"address_line1_label": "Unit, floor, name of the building",
-	"remodeling_address_and_contacts": "Remodeling Address & Contacts",
+	"remodeling_address_and_contacts": "Contacts & Remodeling Address",
 	"address_line2_label": "Housing estate or street number",
 	"address_line1_helper": "e.g. Flat 25, 12/F, Block 1",
 	"address_line2_helper": "e.g. Acacia Garden or 105 Kennedy Road",
@@ -135,5 +135,6 @@
 	"last_name": "Last name",
 	"title": "Title",
 	"info_required": "Info Required",
-	"id_card_number": "ID card no."
+	"id_card_number": "ID card no.",
+	"mailing_address": "Mailing address"
 }

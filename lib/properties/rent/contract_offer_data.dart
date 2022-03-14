@@ -1,6 +1,7 @@
 import 'package:tner_client/properties/property.dart';
+import 'package:tner_client/utils/client_data.dart';
 
-class ContractOffer {
+class ContractOffer extends ClientData {
   Property property;
   int? offeredMonthlyRent, offeredDeposit;
   String? notes;
@@ -15,8 +16,7 @@ class ContractOffer {
       offeredManagement;
 
   // Tenant info
-  String? firstName, lastName, prefix, idCardNumber, phoneNumber, emailAddress;
-  String? addressLine1, addressLine2, district, region;
+  String? idCardNumber, emailAddress;
 
   ContractOffer(this.property) {
     offeredWater = property.water;

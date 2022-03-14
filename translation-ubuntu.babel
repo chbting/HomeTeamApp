@@ -1492,6 +1492,31 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>mailing_address</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>mandarin</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>

@@ -46,7 +46,7 @@
 	"remodeling_start_date": "裝修開始日期",
 	"remodeling_options": "裝修選項",
 	"address_line1_label": "大廈名稱, 樓層, 單位",
-	"remodeling_address_and_contacts": "裝修地址及聯絡",
+	"remodeling_address_and_contacts": "聯絡及裝修地址",
 	"address_line2_label": "屋苑 或 街道門牌",
 	"address_line1_helper": "例: 1座12樓25室",
 	"address_line2_helper": "例: 雅佳花園 或 堅尼地道105號",
@@ -135,5 +135,6 @@
 	"last_name": "姓氏",
 	"title": "稱謂",
 	"info_required": "需填寫資料",
-	"id_card_number": "身份證號碼"
+	"id_card_number": "身份證號碼",
+	"mailing_address": "郵寄地址"
 }

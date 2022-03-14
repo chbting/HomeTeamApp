@@ -115,9 +115,9 @@ class RemodelingConfirmationWidget extends StatelessWidget {
 
   String _getContactName() {
     if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
-      return '${data.lastName ?? "陳"}${data.prefix ?? "先生"}';
+      return '${data.lastName ?? "陳"}${data.title ?? "先生"}';
     } else {
-      return '${data.prefix ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text
+      return '${data.title ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text
     }
   }
 }

@@ -1,6 +1,8 @@
+import 'package:tner_client/utils/client_data.dart';
+
 import '../remodeling_items.dart';
 
-class RemodelingSchedulingData {
+class RemodelingSchedulingData extends ClientData{
 
   final List<RemodelingItem> selectedItemList = [];
 
@@ -26,15 +28,6 @@ class RemodelingSchedulingData {
   // Date Picker
   static const firstAvailableDay = 2;
   late DateTime datePicked;
-
-  // Contacts
-  String? addressLine1;
-  String? addressLine2;
-  String? district;
-  String? region;
-  String? phoneNumber;
-  String? lastName;
-  String? prefix;
 
   RemodelingSchedulingData() {
     final now = DateTime.now();

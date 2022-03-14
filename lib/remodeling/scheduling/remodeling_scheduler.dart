@@ -165,7 +165,7 @@ class RemodelingSchedulingScreenState
     if (_activeStep == 0 || isKeyboardVisible) {
       return Container();
     } else {
-      return Padding(
+      return Padding( //todo gradient
           padding: const EdgeInsets.all(16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,6 +195,7 @@ class RemodelingSchedulingScreenState
                     shape: const StadiumBorder()),
                 onPressed: () {
                   if (_activeStep == _totalSteps - 1) {
+                    // todo validate
                     // todo send order
                   } else {
                     _nextStep();

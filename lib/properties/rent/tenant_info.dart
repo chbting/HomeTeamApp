@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
+import 'package:tner_client/ui/address_form.dart';
+import 'package:tner_client/ui/name_form.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class TenantInformationScreen extends StatefulWidget {
@@ -16,7 +19,9 @@ class TenantInformationScreen extends StatefulWidget {
 
 class TenantInformationScreenState extends State<TenantInformationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  FocusNode focusNode = FocusNode(); // todo hasFocus doesn't update until keyboard is closed
+  final GlobalKey<NameFormState> _nameFormKey = GlobalKey<NameFormState>();
+  final GlobalKey<AddressFormState> _addressFormKey =
+      GlobalKey<AddressFormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,92 +39,11 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Form(
                 key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Wrap(
-                  runSpacing: 16.0,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizedBox(
-                          width: 40.0,
-                          child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Icon(
-                                Icons.person_outline,
-                                color: focusNode.hasPrimaryFocus
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).iconTheme.color,
-                              )),
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                              keyboardType: TextInputType.text,
-                              textInputAction: TextInputAction.next,
-                              //todo next not working
-                              focusNode: focusNode,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  labelText:
-                                      TextHelper.appLocalizations.last_name),
-                              onChanged: (value) {
-                                widget.offer.lastName = value;
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return TextHelper
-                                      .appLocalizations.info_required;
-                                } else {
-                                  return null;
-                                }
-                              }),
-                        ),
-                        Container(width: 16.0),
-                        Expanded(
-                          child: DropdownButton<String>(
-                            hint: Text(TextHelper.appLocalizations.title),
-                            isExpanded: true,
-                            value: widget.offer.prefix,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                widget.offer.prefix = newValue!;
-                              });
-                            },
-                            items: <String>[
-                              TextHelper.appLocalizations.mr,
-                              TextHelper.appLocalizations.mrs,
-                              TextHelper.appLocalizations.miss,
-                              TextHelper.appLocalizations.ms
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
-                      child: TextFormField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText:
-                                  TextHelper.appLocalizations.first_name),
-                          onChanged: (value) {
-                            widget.offer.firstName = value;
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return TextHelper.appLocalizations.info_required;
-                            } else {
-                              return null;
-                            }
-                          }),
-                    ),
-                    // todo highlight the icon when these lines has focus
+                    NameForm(key: _nameFormKey, data: widget.offer),
+                    Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.next,
@@ -130,11 +54,13 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                                 TextHelper.appLocalizations.id_card_number),
                         onChanged: (value) {
                           //widget.offer.addressLine2 = value;
-                        },// todo format input
+                        },
+                        // todo format input
                         validator: (value) {
                           //todo id card validator
                           return null;
                         }),
+                    Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.next,
@@ -142,94 +68,37 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
-                        onChanged: (value) {
-                          widget.offer.phoneNumber = value;
-                        },
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText:
                                 TextHelper.appLocalizations.contact_number,
                             helperText: TextHelper
                                 .appLocalizations.hong_kong_number_only,
-                            icon: const Icon(Icons.phone))),
+                            icon: const Icon(Icons.phone)),
+                        onChanged: (value) {
+                          widget.offer.phoneNumber = value;
+                        },
+                        validator: (value) {
+                          return (value == null || value.isEmpty)
+                              ? TextHelper.appLocalizations.info_required
+                              : null;
+                        }),
                     const Divider(thickness: 1.0),
-                    TextField(
-                      // todo auto complete with the gov api
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText:
-                              TextHelper.appLocalizations.address_line1_label,
-                          helperText:
-                              TextHelper.appLocalizations.address_line1_helper,
-                          icon: const Icon(Icons.location_pin)),
-                      onChanged: (value) {
-                        widget.offer.addressLine1 = value;
-                      },
-                    ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
-                      child: TextField(
-                          keyboardType: TextInputType.text,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: TextHelper
-                                  .appLocalizations.address_line2_label,
-                              helperText: TextHelper
-                                  .appLocalizations.address_line2_helper),
-                          onChanged: (value) {
-                            widget.offer.addressLine2 = value;
-                          }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: TextField(
-                                keyboardType: TextInputType.text,
-                                decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    labelText:
-                                        TextHelper.appLocalizations.district),
-                                onChanged: (value) {
-                                  widget.offer.district = value;
-                                }),
-                          ),
-                          Container(width: 16.0),
-                          Expanded(
-                            child: DropdownButton<String>(
-                              hint: Text(TextHelper.appLocalizations.region),
-                              isExpanded: true,
-                              value: widget.offer.region,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  widget.offer.region = newValue!;
-                                });
-                              },
-                              items: <String>[
-                                TextHelper.appLocalizations.hong_kong,
-                                TextHelper.appLocalizations.kowloon,
-                                TextHelper.appLocalizations.new_territories
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          TextHelper.appLocalizations.mailing_address,
+                          style: AppTheme.getListTileBodyTextStyle(context),
+                        )),
+                    AddressForm(key: _addressFormKey, data: widget.offer)
                   ],
                 )),
           ))
         ]);
   }
 
-  bool validate() => _formKey.currentState!.validate();
+  bool validate() =>
+      _formKey.currentState!.validate() &&
+      _nameFormKey.currentState!.validate() &&
+      _addressFormKey.currentState!.validate();
 }

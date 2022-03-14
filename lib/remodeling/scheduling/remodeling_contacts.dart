@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/ui/address_form.dart';
+import 'package:tner_client/ui/name_form.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
@@ -16,6 +19,31 @@ class RemodelingContactsWidget extends StatefulWidget {
 
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<NameFormState> _nameFormKey = GlobalKey<NameFormState>();
+  final GlobalKey<AddressFormState> _addressFormKey =
+      GlobalKey<AddressFormState>();
+  final FocusNode _lastNameFieldFocus = FocusNode();
+  final FocusNode _firstNameFieldFocus = FocusNode();
+
+  @override
+  void initState() {
+    _lastNameFieldFocus.addListener(() {
+      setState(() {});
+    });
+    _firstNameFieldFocus.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _lastNameFieldFocus.removeListener(() {});
+    _firstNameFieldFocus.removeListener(() {});
+    super.dispose();
+  }
+
   @override
   bool get wantKeepAlive => true;
 
@@ -30,142 +58,51 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
         Card(
             child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Wrap(
-            runSpacing: 16.0,
-            children: [
-              TextField(
-                // todo auto complete with the gov api
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    labelText: TextHelper.appLocalizations.address_line1_label,
-                    helperText:
-                        TextHelper.appLocalizations.address_line1_helper,
-                    icon: const Icon(Icons.location_pin)),
-                onChanged: (value) {
-                  widget.data.addressLine1 = value;
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40.0),
-                child: TextField(
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText:
-                            TextHelper.appLocalizations.address_line2_label,
-                        helperText:
-                            TextHelper.appLocalizations.address_line2_helper),
-                    onChanged: (value) {
-                      widget.data.addressLine2 = value;
-                    }),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: TextHelper.appLocalizations.district),
-                          onChanged: (value) {
-                            widget.data.district = value;
-                          }),
-                    ),
-                    Container(width: 16.0),
-                    Expanded(
-                      child: DropdownButton<String>(
-                        hint: Text(TextHelper.appLocalizations.region),
-                        isExpanded: true,
-                        value: widget.data.region,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            widget.data.region = newValue!;
-                          });
-                        },
-                        items: <String>[
-                          TextHelper.appLocalizations.hong_kong,
-                          TextHelper.appLocalizations.kowloon,
-                          TextHelper.appLocalizations.new_territories
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const Divider(thickness: 1.0),
-              TextField(
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.next,
-                  maxLength: 8,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  onChanged: (value) {
-                    widget.data.phoneNumber = value;
-                  },
-                  decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: TextHelper.appLocalizations.contact_number,
-                      helperText:
-                          TextHelper.appLocalizations.hong_kong_number_only,
-                      icon: const Icon(Icons.phone))),
-              Padding(
-                padding: const EdgeInsets.only(left: 40.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                              border: const OutlineInputBorder(),
-                              labelText: TextHelper.appLocalizations.name),
-                          onChanged: (value) {
-                            widget.data.lastName = value;
-                          }),
-                    ),
-                    Container(width: 16.0),
-                    Expanded(
-                      child: DropdownButton<String>(
-                        hint: Text(TextHelper.appLocalizations.title),
-                        isExpanded: true,
-                        value: widget.data.prefix,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            widget.data.prefix = newValue!;
-                          });
-                        },
-                        items: <String>[
-                          TextHelper.appLocalizations.mr,
-                          TextHelper.appLocalizations.mrs,
-                          TextHelper.appLocalizations.miss,
-                          TextHelper.appLocalizations.ms
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+          child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Wrap(
+                children: [
+                  NameForm(key: _nameFormKey, data: widget.data),
+                  Container(height: 16.0),
+                  TextFormField(
+                      keyboardType: TextInputType.phone,
+                      textInputAction: TextInputAction.next,
+                      maxLength: 8,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: TextHelper.appLocalizations.contact_number,
+                          helperText:
+                              TextHelper.appLocalizations.hong_kong_number_only,
+                          icon: const Icon(Icons.phone)),
+                      onChanged: (value) {
+                        widget.data.phoneNumber = value;
+                      },
+                      validator: (value) {
+                        return (value == null || value.isEmpty)
+                            ? TextHelper.appLocalizations.info_required
+                            : null;
+                      }),
+                  const Divider(thickness: 1.0),
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Text(
+                        TextHelper.appLocalizations.remodeling_address,
+                        style: AppTheme.getListTileBodyTextStyle(context),
+                      )),
+                  AddressForm(key: _addressFormKey, data: widget.data)
+                ],
+              )),
         ))
       ],
     );
   }
+
+  bool validate() =>
+      _formKey.currentState!.validate() &&
+      _nameFormKey.currentState!.validate() &&
+      _addressFormKey.currentState!.validate();
 }

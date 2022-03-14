@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
@@ -19,7 +20,11 @@ class RemodelingConfirmationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       primary: false,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.only(
+          left: 12.0,
+          right: 12.0,
+          top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
+          bottom: RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
       children: [
         Card(
             child: Padding(

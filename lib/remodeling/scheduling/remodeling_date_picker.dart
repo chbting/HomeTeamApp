@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
@@ -37,7 +38,12 @@ class RemodelingDatePickerWidgetState
     }
     return ListView(
         // note: ListView has 4.0 internal padding on all sides
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
+            bottom:
+                RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
         primary: false,
         children: [
           Card(

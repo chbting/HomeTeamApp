@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/address_form.dart';
 import 'package:tner_client/ui/name_form.dart';
@@ -51,9 +52,12 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
   Widget build(BuildContext context) {
     super.build(context);
     return ListView(
+      padding: const EdgeInsets.only(
+          left: 12.0,
+          right: 12.0,
+          top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
+          bottom: RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
       primary: false,
-      // Or use margin vertical: 8.0, horizontal: 16.0 with the Card
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0),
       children: [
         Card(
             child: Padding(

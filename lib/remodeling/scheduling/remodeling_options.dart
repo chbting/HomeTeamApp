@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -40,7 +41,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       for (var item in widget.data.selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
-      // TODO add total estimation, avoid fab collision with the stepper
+      // TODO add total estimation,
+      //  todo top and bottom paddings
       return Stepper(
           currentStep: _activeOption,
           controlsBuilder: (BuildContext context, ControlsDetails details) {
@@ -91,34 +93,34 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   void _notifyIsRemodelingOptionsAtBottom(int numberOfSteps) {
-    if (_activeOption == numberOfSteps - 1) {
-      widget.callBack(true);
-    } else {
-      widget.callBack(false);
-    }
+    (_activeOption == numberOfSteps - 1)
+        ? widget.callBack(true)
+        : widget.callBack(false);
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item) {
     String title = getRemodelingItemTitle(item);
-    return ListView(
-      primary: false,
-      children: [
-        Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+    return SingleChildScrollView(
+        padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
+            bottom:
+                RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
+        primary: false,
+        child: Card(
             child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(title, style: _getOptionTitleTextStyle())),
-                    _getLayoutByRemodelingItem(item)
-                  ],
-                )))
-      ],
-    );
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child:
+                              Text(title, style: _getOptionTitleTextStyle())),
+                      _getLayoutByRemodelingItem(item)
+                    ]))));
   }
 
   Step _getOptionStep(RemodelingItem item) {
@@ -159,7 +161,6 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   Widget _getPaintingCardLayout() {
     return Wrap(children: [
       Padding(
-        // todo painting color??
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: TextField(
           keyboardType: TextInputType.number,

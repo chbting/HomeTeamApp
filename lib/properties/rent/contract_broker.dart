@@ -113,7 +113,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.bottomCenter,
-                        end: Alignment.center,
+                        end: const Alignment(0.0, 0.5),
                         colors: [
                       Theme.of(context)
                           .scaffoldBackgroundColor

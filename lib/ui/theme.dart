@@ -47,7 +47,7 @@ class AppTheme {
   }
 
   static ThemeData getLightTheme() {
-    return ThemeData(
+    return ThemeData( // todo scroll gradient is difficult to see
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
         snackBarTheme: ThemeData.light()

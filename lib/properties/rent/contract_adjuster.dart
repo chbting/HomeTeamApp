@@ -370,5 +370,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
         DateFormat(Format.dateFormat).format(_leaseStartDefault);
     _endDateController.text =
         DateFormat(Format.dateFormat).format(_leaseEndDefault);
+    setState(() {
+      widget.offer.offeredWater = widget.offer.property.water;
+      widget.offer.offeredElectricity = widget.offer.property.electricity;
+      widget.offer.offeredGas = widget.offer.property.gas;
+      widget.offer.offeredRates = widget.offer.property.rates;
+      widget.offer.offeredManagement = widget.offer.property.management;
+    });
   }
 }

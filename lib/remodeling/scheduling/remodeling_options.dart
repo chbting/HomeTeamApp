@@ -4,6 +4,7 @@ import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/ui/custom_stepper.dart' as custom;
 import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
@@ -37,15 +38,18 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       });
       return _getSingleOptionWidget(widget.data.selectedItemList[0]);
     } else {
-      List<Step> _stepList = [];
+      List<custom.Step> _stepList = [];
       for (var item in widget.data.selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
-      // TODO add total estimation,
-      //  todo top and bottom paddings
-      return Stepper(
+      // todo top margin
+      // todo use form to validate
+      return custom.Stepper(
+          padding: const EdgeInsets.only(
+              top: RemodelingSchedulingScreen.stepTitleBarHeight - 16.0),
           currentStep: _activeOption,
-          controlsBuilder: (BuildContext context, ControlsDetails details) {
+          controlsBuilder:
+              (BuildContext context, custom.ControlsDetails details) {
             return Row(
               children: <Widget>[
                 _activeOption < _stepList.length - 1
@@ -123,9 +127,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                     ]))));
   }
 
-  Step _getOptionStep(RemodelingItem item) {
+  custom.Step _getOptionStep(RemodelingItem item) {
     String title = getRemodelingItemTitle(item);
-    return Step(
+    return custom.Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
             child: Padding(

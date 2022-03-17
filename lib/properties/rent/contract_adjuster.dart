@@ -81,7 +81,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Form(
                 key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Wrap(
                   children: [
                     TextFormField(
@@ -96,6 +95,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             icon: const Icon(Icons.attach_money),
                             labelText:
                                 TextHelper.appLocalizations.monthly_rent),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return TextHelper
@@ -117,6 +117,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.savings),
                             labelText: TextHelper.appLocalizations.deposit),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return TextHelper

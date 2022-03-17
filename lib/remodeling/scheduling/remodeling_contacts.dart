@@ -64,7 +64,6 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
           padding: const EdgeInsets.all(16.0),
           child: Form(
               key: _formKey,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Wrap(
                 children: [
                   NameForm(key: _nameFormKey, data: widget.data),
@@ -105,8 +104,12 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     );
   }
 
-  bool validate() =>
-      _formKey.currentState!.validate() &&
-      _nameFormKey.currentState!.validate() &&
-      _addressFormKey.currentState!.validate();
+  bool validate() {
+    // note: In "return form1.validate() && form2.validate();", the second
+    // statement won't execute if the first return false
+    bool nameFormValidated = _nameFormKey.currentState!.validate();
+    bool currentFormValidated = _formKey.currentState!.validate();
+    bool addressFormValidated = _addressFormKey.currentState!.validate();
+    return nameFormValidated && currentFormValidated && addressFormValidated;
+  }
 }

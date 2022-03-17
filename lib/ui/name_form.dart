@@ -38,7 +38,6 @@ class NameFormState extends State<NameForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Wrap(
           runSpacing: 16.0,
           children: [
@@ -68,6 +67,7 @@ class NameFormState extends State<NameForm> {
                       onChanged: (value) {
                         widget.data.lastName = value;
                       },
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         return (value == null || value.isEmpty)
                             ? TextHelper.appLocalizations.info_required
@@ -112,6 +112,7 @@ class NameFormState extends State<NameForm> {
                   onChanged: (value) {
                     widget.data.firstName = value;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
                         ? TextHelper.appLocalizations.info_required

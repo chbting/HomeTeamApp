@@ -43,7 +43,6 @@ class AddressFormState extends State<AddressForm> {
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Wrap(
           runSpacing: 16.0,
           children: [
@@ -81,6 +80,7 @@ class AddressFormState extends State<AddressForm> {
                   onChanged: (value) {
                     widget.data.addressLine2 = value;
                   },
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
                         ? TextHelper.appLocalizations.info_required
@@ -102,6 +102,7 @@ class AddressFormState extends State<AddressForm> {
                         onChanged: (value) {
                           widget.data.district = value;
                         },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
                               ? TextHelper.appLocalizations.info_required

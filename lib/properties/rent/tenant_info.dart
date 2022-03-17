@@ -39,7 +39,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Form(
                 key: _formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                //autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Wrap(
                   children: [
                     NameForm(key: _nameFormKey, data: widget.offer),
@@ -56,6 +56,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                           //widget.offer.addressLine2 = value;
                         },
                         // todo format input
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           //todo id card validator
                           return null;
@@ -78,6 +79,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         onChanged: (value) {
                           widget.offer.phoneNumber = value;
                         },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
                               ? TextHelper.appLocalizations.info_required
@@ -97,8 +99,12 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
         ]);
   }
 
-  bool validate() =>
-      _formKey.currentState!.validate() &&
-      _nameFormKey.currentState!.validate() &&
-      _addressFormKey.currentState!.validate();
+  bool validate() {
+    // note: In "return form1.validate() && form2.validate();", the second
+    // statement won't execute if the first return false
+    bool nameFormValidated = _nameFormKey.currentState!.validate();
+    bool currentFormValidated = _formKey.currentState!.validate();
+    bool addressFormValidated = _addressFormKey.currentState!.validate();
+    return nameFormValidated && currentFormValidated && addressFormValidated;
+  }
 }

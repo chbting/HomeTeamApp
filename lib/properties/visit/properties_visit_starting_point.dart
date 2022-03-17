@@ -60,7 +60,7 @@ class PropertiesVisitStartingPointWidgetState
                             width: _imageSize,
                             height: _imageSize,
                             image: widget.data.propertyList[index].coverImage)),
-                    getPropertyPreviewTextWidget(
+                    Property.getPropertyPreviewTextWidget(
                         context, _imageSize, widget.data.propertyList[index]),
                   ],
                 )),

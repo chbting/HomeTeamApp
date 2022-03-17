@@ -5,6 +5,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -18,6 +19,9 @@ class RemodelingConfirmationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(data.client.firstName == null) {
+      data.client = getSampleClientData();
+    } // todo debug line
     return ListView(
       primary: false,
       padding: const EdgeInsets.only(
@@ -61,10 +65,10 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               title: Text(TextHelper.appLocalizations.remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${data.addressLine1 ?? "1座2樓C室"}' //todo remove debug text
-                  '\n${data.addressLine2 ?? "雅佳花園"}'
-                  '\n${data.district ?? "上環"}'
-                  '\n${data.region ?? "香港"}',
+                  '${data.client.addressLine1}'
+                  '\n${data.client.addressLine2}'
+                  '\n${data.client.district}'
+                  '\n${data.client.region}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         )),
         Card(
@@ -75,7 +79,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               title: Text(TextHelper.appLocalizations.contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${data.phoneNumber ?? "12345678"}' //todo remove debug text
+                  '${data.client.phoneNumber}'
                   '\n${_getContactName()}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         ))
@@ -120,9 +124,9 @@ class RemodelingConfirmationWidget extends StatelessWidget {
 
   String _getContactName() {
     if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
-      return '${data.lastName ?? "陳"}${data.title ?? "先生"}';
+      return '${data.client.lastName}${data.client.title}';
     } else {
-      return '${data.title ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text
+      return '${data.client.title} ${data.client.lastName}';
     }
   }
 }

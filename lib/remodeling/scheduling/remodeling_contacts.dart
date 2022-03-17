@@ -66,7 +66,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
               key: _formKey,
               child: Wrap(
                 children: [
-                  NameForm(key: _nameFormKey, data: widget.data),
+                  NameForm(key: _nameFormKey, client: widget.data.client),
                   Container(height: 16.0),
                   TextFormField(
                       keyboardType: TextInputType.phone,
@@ -82,7 +82,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                               TextHelper.appLocalizations.hong_kong_number_only,
                           icon: const Icon(Icons.phone)),
                       onChanged: (value) {
-                        widget.data.phoneNumber = value;
+                        widget.data.client.phoneNumber = value;
                       },
                       validator: (value) {
                         return (value == null || value.isEmpty)
@@ -96,7 +96,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         TextHelper.appLocalizations.remodeling_address,
                         style: AppTheme.getListTileBodyTextStyle(context),
                       )),
-                  AddressForm(key: _addressFormKey, data: widget.data)
+                  AddressForm(key: _addressFormKey, data: widget.data.client)
                 ],
               )),
         ))

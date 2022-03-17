@@ -13,7 +13,7 @@ class VisitedPropertiesScreen extends StatefulWidget {
 
 class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
   final double _imageSize = 120.0;
-  final List<Property> _propertiesInCart = Property.getSampleList();
+  final List<Property> _propertiesInCart = getSampleProperties();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                               width: _imageSize,
                               height: _imageSize,
                               image: _propertiesInCart[index].coverImage)),
-                      getPropertyPreviewTextWidget(
+                      Property.getPropertyPreviewTextWidget(
                           context, _imageSize, _propertiesInCart[index]),
                       // todo changed to check status once offer is submitted, the color should be different as well
                       ElevatedButton(

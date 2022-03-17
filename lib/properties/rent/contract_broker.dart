@@ -8,7 +8,7 @@ import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import 'contract_adjuster.dart';
-import 'contract_confirmation.dart';
+import 'offer_confirmation.dart';
 import 'contract_offer_data.dart';
 import 'contract_viewer.dart';
 import 'tenant_info.dart';
@@ -100,7 +100,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         TenantInformationScreen(
                             key: tenantInfoKey, offer: _offer),
                         ContractViewerScreen(offer: _offer),
-                        ContractConfirmationScreen(offer: _offer)
+                        OfferConfirmationScreen(offer: _offer)
                       ],
                     ),
                   ),
@@ -191,7 +191,6 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
 
       if (didAuthenticate) {
         // case 1: successfully authenticated
-        // todo _data.agreementSigned = true;
         _nextStep();
       } else {
         // case 2: authentication failed
@@ -272,11 +271,9 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         }
                         break;
                       case 1:
-                        _nextStep();
-                        // todo
-                        // if (tenantInfoKey.currentState!.validate()) {
-                        //   _nextStep();
-                        // }
+                        if (tenantInfoKey.currentState!.validate()) {
+                          _nextStep();
+                        }
                         break;
                       case 2:
                         _signWithBiometrics();

@@ -20,7 +20,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
       .isNotEmpty; //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
-  final List<Property> _propertiesInCart = Property.getSampleList();
+  final List<Property> _propertiesInCart = getSampleProperties();
 
   //todo retrieve from local database, local database sync with server on app start
 
@@ -40,17 +40,9 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                   icon: const Icon(Icons.schedule),
                   label: Text(TextHelper.appLocalizations.schedule),
                   onPressed: () {
-                    _propertiesInCart.isNotEmpty
-                        ? Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                PropertiesVisitSchedulingScreen(
-                                    selectedProperties: _propertiesInCart)))
-                        : _scaffoldMessengerKey.currentState!
-                            .showSnackBar(SnackBar(
-                            content: Text(TextHelper.appLocalizations
-                                .msg_select_remodeling_item), // todo
-                            behavior: SnackBarBehavior.floating,
-                          ));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => PropertiesVisitSchedulingScreen(
+                            selectedProperties: _propertiesInCart)));
                   })),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
@@ -74,7 +66,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                                   width: _imageSize,
                                   height: _imageSize,
                                   image: _propertiesInCart[index].coverImage)),
-                          getPropertyPreviewTextWidget(
+                          Property.getPropertyPreviewTextWidget(
                               context, _imageSize, _propertiesInCart[index]),
                           IconButton(
                             icon: const Icon(Icons.delete),

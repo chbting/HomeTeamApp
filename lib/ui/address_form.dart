@@ -5,7 +5,7 @@ import 'package:tner_client/utils/text_helper.dart';
 class AddressForm extends StatefulWidget {
   const AddressForm({Key? key, required this.data}) : super(key: key);
 
-  final ClientData data;
+  final Client data;
 
   @override
   State<StatefulWidget> createState() => AddressFormState();

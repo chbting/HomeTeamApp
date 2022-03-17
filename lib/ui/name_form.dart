@@ -3,9 +3,9 @@ import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class NameForm extends StatefulWidget {
-  const NameForm({Key? key, required this.data}) : super(key: key);
+  const NameForm({Key? key, required this.client}) : super(key: key);
 
-  final ClientData data;
+  final Client client;
 
   @override
   State<StatefulWidget> createState() => NameFormState();
@@ -65,7 +65,7 @@ class NameFormState extends State<NameForm> {
                           border: const OutlineInputBorder(),
                           labelText: TextHelper.appLocalizations.last_name),
                       onChanged: (value) {
-                        widget.data.lastName = value;
+                        widget.client.lastName = value;
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
@@ -79,10 +79,10 @@ class NameFormState extends State<NameForm> {
                   child: DropdownButton<String>(
                     hint: Text(TextHelper.appLocalizations.title),
                     isExpanded: true,
-                    value: widget.data.title,
+                    value: widget.client.title,
                     onChanged: (String? newValue) {
                       setState(() {
-                        widget.data.title = newValue!;
+                        widget.client.title = newValue!;
                       });
                     },
                     items: <String>[
@@ -110,7 +110,7 @@ class NameFormState extends State<NameForm> {
                       border: const OutlineInputBorder(),
                       labelText: TextHelper.appLocalizations.first_name),
                   onChanged: (value) {
-                    widget.data.firstName = value;
+                    widget.client.firstName = value;
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {

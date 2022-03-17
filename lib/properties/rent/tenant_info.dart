@@ -39,10 +39,9 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Form(
                 key: _formKey,
-                //autovalidateMode: AutovalidateMode.onUserInteraction,
                 child: Wrap(
                   children: [
-                    NameForm(key: _nameFormKey, data: widget.offer),
+                    NameForm(key: _nameFormKey, client: widget.offer.client),
                     Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.text,
@@ -77,7 +76,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                                 .appLocalizations.hong_kong_number_only,
                             icon: const Icon(Icons.phone)),
                         onChanged: (value) {
-                          widget.offer.phoneNumber = value;
+                          widget.offer.client.phoneNumber = value;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
@@ -92,7 +91,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                           TextHelper.appLocalizations.mailing_address,
                           style: AppTheme.getListTileBodyTextStyle(context),
                         )),
-                    AddressForm(key: _addressFormKey, data: widget.offer)
+                    AddressForm(key: _addressFormKey, data: widget.offer.client)
                   ],
                 )),
           ))

@@ -19,7 +19,9 @@ class PropertiesVisitSchedulingScreen extends StatefulWidget {
 
   final List<Property> selectedProperties;
   static const stepTitleBarHeight = 40.0;
-  static const bottomButtonContainerHeight = 48.0 + 16.0 * 2;
+  static const buttonHeight = 48.0; // Same as an extended floatingActionButton
+  static const buttonSpacing = 16.0;
+  static const bottomButtonContainerHeight = buttonHeight + buttonSpacing * 2;
 
   @override
   State<PropertiesVisitSchedulingScreen> createState() =>
@@ -34,6 +36,9 @@ class PropertiesVisitSchedulingScreenState
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
   bool _isButtonEnabled = true;
+
+  late double _buttonWidth;
+  late double _biometricButtonWidth;
 
   final PropertiesVisitData _data = PropertiesVisitData();
 
@@ -52,6 +57,12 @@ class PropertiesVisitSchedulingScreenState
   @override
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
+    _buttonWidth = (MediaQuery.of(context).size.width -
+            PropertiesVisitSchedulingScreen.buttonSpacing * 3) /
+        2;
+    _biometricButtonWidth = MediaQuery.of(context).size.width -
+        PropertiesVisitSchedulingScreen.buttonSpacing * 2;
+
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
@@ -79,7 +90,8 @@ class PropertiesVisitSchedulingScreenState
                     activeStepColor: Theme.of(context).colorScheme.secondary,
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
-                    stepRadius: 24.0,
+                    stepRadius:
+                        PropertiesVisitSchedulingScreen.buttonSpacing * 3 / 2,
                     showStepCompleted: true,
                     lineColor: Colors.grey,
                     onStepReached: (index) {
@@ -215,125 +227,101 @@ class PropertiesVisitSchedulingScreenState
   }
 
   Widget _getBottomButtons() {
-    switch (_activeStep) {
-      case 0:
-        return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton.icon(
-              icon: const Icon(Icons.arrow_forward),
-              label: Text(TextHelper.appLocalizations.next),
-              style: ElevatedButton.styleFrom(
-                  minimumSize:
-                      Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                  shape: const StadiumBorder()),
-              onPressed: () {
-                _isButtonEnabled ? _nextStep() : null;
-              },
-            ));
-      case 2:
-        return Container(
-            height: 48.0 + 48.0 + 16.0 * 3,
-            width: double.infinity,
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                    colors: [
-                  Theme.of(context).scaffoldBackgroundColor,
-                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
-                ])),
-            child: Stack(
-              children: [
-                Container(
-                    alignment: Alignment.topCenter,
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.fingerprint),
-                      label: Text(TextHelper.appLocalizations.sign_now),
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width - 32.0, 48.0),
-                          shape: const StadiumBorder()),
-                      onPressed: () {
-                        _isButtonEnabled ? _signWithBiometrics() : null;
-                      },
-                    )),
-                Container(
-                    alignment: Alignment.bottomLeft,
-                    child: OutlinedButton.icon(
-                      icon: const Icon(Icons.arrow_back),
-                      label: Text(TextHelper.appLocalizations.back),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width / 2 - 24.0,
-                              48.0),
-                          // 48.0 is the height of extended fab
-                          shape: const StadiumBorder(),
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor),
-                      onPressed: () {
-                        _isButtonEnabled ? _previousStep() : null;
-                      },
-                    )),
-                Container(
-                    alignment: Alignment.bottomRight,
-                    child: OutlinedButton.icon(
-                      icon: const Icon(Icons.redo),
-                      label: Text(TextHelper.appLocalizations.sign_later),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width / 2 - 24.0,
-                              48.0),
-                          // 48.0 is the height of extended fab
-                          shape: const StadiumBorder(),
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor),
-                      onPressed: () {
-                        if (_isButtonEnabled) {
-                          _data.agreementSigned = false;
-                          _nextStep();
-                        }
-                      },
-                    ))
-              ],
-            ));
-      default:
-        return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                OutlinedButton.icon(
-                  icon: const Icon(Icons.arrow_back),
-                  label: Text(TextHelper.appLocalizations.back),
-                  style: OutlinedButton.styleFrom(
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                      // 48.0 is the height of extended fab
-                      shape: const StadiumBorder()),
-                  onPressed: () {
-                    _isButtonEnabled ? _previousStep() : null;
-                  },
-                ),
-                ElevatedButton.icon(
-                  icon: Icon(_activeStep < _totalSteps - 1
-                      ? Icons.arrow_forward
-                      : Icons.check),
-                  label: Text(_activeStep < _totalSteps - 1
-                      ? TextHelper.appLocalizations.next
-                      : TextHelper.appLocalizations.confirm),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                      shape: const StadiumBorder()),
-                  onPressed: () {
-                    if (_isButtonEnabled) {
-                      _activeStep == _totalSteps - 1 ? _confirm() : _nextStep();
-                    }
-                  },
-                )
-              ],
-            ));
-    }
+    return Container(
+        height: _activeStep == 2
+            ? PropertiesVisitSchedulingScreen.buttonHeight * 2 +
+                PropertiesVisitSchedulingScreen.buttonSpacing * 3
+            : PropertiesVisitSchedulingScreen.buttonHeight +
+                PropertiesVisitSchedulingScreen.buttonSpacing * 2,
+        width: double.infinity,
+        padding:
+            const EdgeInsets.all(PropertiesVisitSchedulingScreen.buttonSpacing),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+              Theme.of(context).scaffoldBackgroundColor,
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
+            ])),
+        child: Stack(
+          children: [
+            // Top: biometric authentication button
+            Container(
+                alignment: Alignment.topCenter,
+                child: _activeStep == 2
+                    ? ElevatedButton.icon(
+                        icon: const Icon(Icons.fingerprint),
+                        label: Text(TextHelper.appLocalizations.sign_now),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(_biometricButtonWidth,
+                                PropertiesVisitSchedulingScreen.buttonHeight),
+                            shape: const StadiumBorder()),
+                        onPressed: () {
+                          _isButtonEnabled ? _signWithBiometrics() : null;
+                        },
+                      )
+                    : null),
+            // Left: back button
+            Container(
+                alignment: Alignment.bottomLeft,
+                child: _activeStep == 0
+                    ? Container()
+                    : OutlinedButton.icon(
+                        icon: const Icon(Icons.arrow_back),
+                        label: Text(TextHelper.appLocalizations.back),
+                        style: OutlinedButton.styleFrom(
+                            minimumSize: Size(_buttonWidth,
+                                PropertiesVisitSchedulingScreen.buttonHeight),
+                            shape: const StadiumBorder(),
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor),
+                        onPressed: () {
+                          _isButtonEnabled ? _previousStep() : null;
+                        },
+                      )),
+            // Right: next or confirm button
+            Container(
+                alignment: _activeStep == 0
+                    ? Alignment.bottomCenter
+                    : Alignment.bottomRight,
+                child: _activeStep == 2
+                    ? OutlinedButton.icon(
+                        icon: const Icon(Icons.redo),
+                        label: Text(TextHelper.appLocalizations.sign_later),
+                        style: OutlinedButton.styleFrom(
+                            minimumSize: Size(_buttonWidth,
+                                PropertiesVisitSchedulingScreen.buttonHeight),
+                            shape: const StadiumBorder(),
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor),
+                        onPressed: () {
+                          if (_isButtonEnabled) {
+                            _data.agreementSigned = false;
+                            _nextStep();
+                          }
+                        },
+                      )
+                    : ElevatedButton.icon(
+                        icon: Icon(_activeStep < _totalSteps - 1
+                            ? Icons.arrow_forward
+                            : Icons.check),
+                        label: Text(_activeStep < _totalSteps - 1
+                            ? TextHelper.appLocalizations.next
+                            : TextHelper.appLocalizations.confirm),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(_buttonWidth,
+                                PropertiesVisitSchedulingScreen.buttonHeight),
+                            shape: const StadiumBorder()),
+                        onPressed: () {
+                          if (_isButtonEnabled) {
+                            _activeStep == _totalSteps - 1
+                                ? _confirm()
+                                : _nextStep();
+                          }
+                        },
+                      ))
+          ],
+        ));
   }
 }

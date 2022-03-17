@@ -19,7 +19,9 @@ class ContractBrokerScreen extends StatefulWidget {
 
   final Property property;
   static const stepTitleBarHeight = 40.0;
-  static const bottomButtonContainerHeight = 80.0;
+  static const buttonHeight = 48.0; // Same as an extended floatingActionButton
+  static const buttonSpacing = 16.0;
+  static const bottomButtonContainerHeight = buttonHeight + buttonSpacing * 2;
 
   @override
   State<ContractBrokerScreen> createState() => ContractBrokerScreenState();
@@ -32,6 +34,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
   bool _isButtonEnabled = true;
+
+  late double _buttonWidth;
 
   late final ContractOffer _offer = ContractOffer(widget.property);
   final GlobalKey<ContractAdjusterScreenState> adjusterKey =
@@ -53,6 +57,10 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
+
+    _buttonWidth = (MediaQuery.of(context).size.width -
+            ContractBrokerScreen.buttonSpacing * 3) /
+        2;
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
@@ -230,7 +238,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
               Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
             ])),
         child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(ContractBrokerScreen.buttonSpacing),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -241,9 +249,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       ? TextHelper.appLocalizations.reset
                       : TextHelper.appLocalizations.back),
                   style: OutlinedButton.styleFrom(
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                      // 48.0 is the height of extended fab
+                      minimumSize:
+                          Size(_buttonWidth, ContractBrokerScreen.buttonHeight),
                       shape: const StadiumBorder(),
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor),
@@ -270,8 +277,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                           ? TextHelper.appLocalizations.submit
                           : TextHelper.appLocalizations.next)),
                   style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                      minimumSize:
+                          Size(_buttonWidth, ContractBrokerScreen.buttonHeight),
                       shape: const StadiumBorder()),
                   onPressed: () {
                     if (_isButtonEnabled) {

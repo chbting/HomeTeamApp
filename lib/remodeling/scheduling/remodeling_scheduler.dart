@@ -16,7 +16,9 @@ class RemodelingSchedulingScreen extends StatefulWidget {
 
   final Map<RemodelingItem, bool> selectionMap;
   static const stepTitleBarHeight = 40.0;
-  static const bottomButtonContainerHeight = 80.0;
+  static const buttonHeight = 48.0; // Same as an extended floatingActionButton
+  static const buttonSpacing = 16.0;
+  static const bottomButtonContainerHeight = buttonHeight + buttonSpacing * 2;
 
   @override
   State<RemodelingSchedulingScreen> createState() =>
@@ -32,6 +34,8 @@ class RemodelingSchedulingScreenState
   double _stepTitleBarTopMargin = 0.0;
   bool _isButtonEnabled = true;
 
+  late double _buttonWidth;
+
   final RemodelingSchedulingData _data = RemodelingSchedulingData();
 
   // For options
@@ -40,7 +44,6 @@ class RemodelingSchedulingScreenState
   @override
   void initState() {
     super.initState();
-
     SchedulerBinding.instance?.addPostFrameCallback((_) {
       final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
@@ -58,6 +61,10 @@ class RemodelingSchedulingScreenState
   @override
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
+
+    _buttonWidth = (MediaQuery.of(context).size.width -
+            RemodelingSchedulingScreen.buttonSpacing * 3) /
+        2;
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
@@ -187,72 +194,62 @@ class RemodelingSchedulingScreenState
   }
 
   Widget _getBottomButtons() {
-    if (_activeStep == 0) {
-      return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton.icon(
-              icon: const Icon(Icons.arrow_forward),
-              label: Text(TextHelper.appLocalizations.next),
-              style: ElevatedButton.styleFrom(
-                  minimumSize:
-                      Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                  shape: const StadiumBorder()),
-              onPressed: () {
-                _isButtonEnabled ? _nextStep() : null;
-              }));
-    } else {
-      return Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [
-                Theme.of(context).scaffoldBackgroundColor,
-                Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
-              ])),
-          child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton.icon(
-                      icon: const Icon(Icons.arrow_back),
-                      label: Text(TextHelper.appLocalizations.back),
-                      style: OutlinedButton.styleFrom(
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width / 2 - 24.0,
-                              48.0),
-                          // 48.0 is the height of extended fab
-                          shape: const StadiumBorder(),
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor),
-                      onPressed: () {
-                        _isButtonEnabled ? _previousStep() : null;
-                      }),
-                  ElevatedButton.icon(
-                      icon: Icon(_activeStep < _totalSteps - 1
-                          ? Icons.arrow_forward
-                          : Icons.check),
-                      label: Text(_activeStep < _totalSteps - 1
-                          ? TextHelper.appLocalizations.next
-                          : TextHelper.appLocalizations.confirm_remodeling),
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                            MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        shape: const StadiumBorder(),
-                      ),
-                      onPressed: () {
-                        if (_isButtonEnabled) {
-                          if (_activeStep == _totalSteps - 1) {
-                            // todo validate
-                            // todo send order
-                          } else {
-                            _nextStep();
-                          }
+    return Container(
+        height: RemodelingSchedulingScreen.bottomButtonContainerHeight,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                colors: [
+              Theme.of(context).scaffoldBackgroundColor,
+              Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0)
+            ])),
+        child: Padding(
+            padding:
+                const EdgeInsets.all(RemodelingSchedulingScreen.buttonSpacing),
+            child: Row(
+              mainAxisAlignment: _activeStep == 0
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.spaceBetween,
+              children: [
+                _activeStep == 0
+                    ? Container()
+                    : OutlinedButton.icon(
+                        icon: const Icon(Icons.arrow_back),
+                        label: Text(TextHelper.appLocalizations.back),
+                        style: OutlinedButton.styleFrom(
+                            minimumSize: Size(_buttonWidth,
+                                RemodelingSchedulingScreen.buttonHeight),
+                            shape: const StadiumBorder(),
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor),
+                        onPressed: () {
+                          _isButtonEnabled ? _previousStep() : null;
+                        }),
+                ElevatedButton.icon(
+                    icon: Icon(_activeStep < _totalSteps - 1
+                        ? Icons.arrow_forward
+                        : Icons.check),
+                    label: Text(_activeStep < _totalSteps - 1
+                        ? TextHelper.appLocalizations.next
+                        : TextHelper.appLocalizations.confirm_remodeling),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(_buttonWidth,
+                          RemodelingSchedulingScreen.buttonHeight),
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: () {
+                      if (_isButtonEnabled) {
+                        if (_activeStep == _totalSteps - 1) {
+                          // todo validate
+                          // todo send order
+                        } else {
+                          _nextStep();
                         }
-                      })
-                ],
-              )));
-    }
+                      }
+                    })
+              ],
+            )));
   }
 }

@@ -42,11 +42,13 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       for (var item in widget.data.selectedItemList) {
         _stepList.add(_getOptionStep(item));
       }
-      // todo top margin
       // todo use form to validate
       return custom.Stepper(
+          // Minus the internal paddings of the stepper
           padding: const EdgeInsets.only(
-              top: RemodelingSchedulingScreen.stepTitleBarHeight - 16.0),
+              top: RemodelingSchedulingScreen.stepTitleBarHeight - 16.0,
+              bottom: RemodelingSchedulingScreen.bottomButtonContainerHeight -
+                  24.0),
           currentStep: _activeOption,
           controlsBuilder:
               (BuildContext context, custom.ControlsDetails details) {
@@ -270,7 +272,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getPestControlCardLayout() {
-    return Container();
+    return Container(height: 150.0); // for debugging
   }
 
   Widget _getEstimationWidget(int? price) {

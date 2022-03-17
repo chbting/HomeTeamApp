@@ -33,6 +33,7 @@ class PropertiesVisitSchedulingScreenState
   final _totalSteps = 4;
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
+  bool _isButtonEnabled = true;
 
   final PropertiesVisitData _data = PropertiesVisitData();
 
@@ -147,21 +148,27 @@ class PropertiesVisitSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
+      _isButtonEnabled = false;
       setState(() {
         _activeStep++;
       });
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .nextPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
   void _previousStep() {
     if (_activeStep > 0) {
+      _isButtonEnabled = false;
       setState(() {
         _activeStep--;
       });
-      _pageController.previousPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .previousPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
@@ -199,6 +206,7 @@ class PropertiesVisitSchedulingScreenState
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(TextHelper.appLocalizations
               .biometric_authentication_unavailable_agreement)));
+      // todo button bar should move up when the snackBar shows
     }
   }
 
@@ -219,9 +227,7 @@ class PropertiesVisitSchedulingScreenState
                       Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
                   shape: const StadiumBorder()),
               onPressed: () {
-                setState(() {
-                  _nextStep();
-                });
+                _isButtonEnabled ? _nextStep() : null;
               },
             ));
       case 2:
@@ -249,7 +255,7 @@ class PropertiesVisitSchedulingScreenState
                               MediaQuery.of(context).size.width - 32.0, 48.0),
                           shape: const StadiumBorder()),
                       onPressed: () {
-                        _signWithBiometrics();
+                        _isButtonEnabled ? _signWithBiometrics() : null;
                       },
                     )),
                 Container(
@@ -266,7 +272,7 @@ class PropertiesVisitSchedulingScreenState
                           backgroundColor:
                               Theme.of(context).scaffoldBackgroundColor),
                       onPressed: () {
-                        _previousStep();
+                        _isButtonEnabled ? _previousStep() : null;
                       },
                     )),
                 Container(
@@ -283,8 +289,10 @@ class PropertiesVisitSchedulingScreenState
                           backgroundColor:
                               Theme.of(context).scaffoldBackgroundColor),
                       onPressed: () {
-                        _data.agreementSigned = false;
-                        _nextStep();
+                        if (_isButtonEnabled) {
+                          _data.agreementSigned = false;
+                          _nextStep();
+                        }
                       },
                     ))
               ],
@@ -304,7 +312,7 @@ class PropertiesVisitSchedulingScreenState
                       // 48.0 is the height of extended fab
                       shape: const StadiumBorder()),
                   onPressed: () {
-                    _previousStep();
+                    _isButtonEnabled ? _previousStep() : null;
                   },
                 ),
                 ElevatedButton.icon(
@@ -319,10 +327,8 @@ class PropertiesVisitSchedulingScreenState
                           MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
                       shape: const StadiumBorder()),
                   onPressed: () {
-                    if (_activeStep == _totalSteps - 1) {
-                      _confirm();
-                    } else {
-                      _nextStep();
+                    if (_isButtonEnabled) {
+                      _activeStep == _totalSteps - 1 ? _confirm() : _nextStep();
                     }
                   },
                 )

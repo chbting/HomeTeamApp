@@ -30,6 +30,7 @@ class RemodelingSchedulingScreenState
   final _totalSteps = 4;
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
+  bool _isButtonEnabled = true;
 
   final RemodelingSchedulingData _data = RemodelingSchedulingData();
 
@@ -161,23 +162,27 @@ class RemodelingSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
-      //FocusScope.of(context).unfocus(); // Close keyboard
+      _isButtonEnabled = false;
       setState(() {
         _activeStep++;
       });
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .nextPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
   void _previousStep() {
     if (_activeStep > 0) {
-      //FocusScope.of(context).unfocus(); // Close keyboard
+      _isButtonEnabled = false;
       setState(() {
         _activeStep--;
       });
-      _pageController.previousPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .previousPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
@@ -186,18 +191,15 @@ class RemodelingSchedulingScreenState
       return Padding(
           padding: const EdgeInsets.all(16.0),
           child: ElevatedButton.icon(
-            icon: const Icon(Icons.arrow_forward),
-            label: Text(TextHelper.appLocalizations.next),
-            style: ElevatedButton.styleFrom(
-                minimumSize:
-                    Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                shape: const StadiumBorder()),
-            onPressed: () {
-              setState(() {
-                _nextStep();
-              });
-            },
-          ));
+              icon: const Icon(Icons.arrow_forward),
+              label: Text(TextHelper.appLocalizations.next),
+              style: ElevatedButton.styleFrom(
+                  minimumSize:
+                      Size(MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
+                  shape: const StadiumBorder()),
+              onPressed: () {
+                _isButtonEnabled ? _nextStep() : null;
+              }));
     } else {
       return Container(
           decoration: BoxDecoration(
@@ -214,40 +216,41 @@ class RemodelingSchedulingScreenState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   OutlinedButton.icon(
-                    icon: const Icon(Icons.arrow_back),
-                    label: Text(TextHelper.appLocalizations.back),
-                    style: OutlinedButton.styleFrom(
+                      icon: const Icon(Icons.arrow_back),
+                      label: Text(TextHelper.appLocalizations.back),
+                      style: OutlinedButton.styleFrom(
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width / 2 - 24.0,
+                              48.0),
+                          // 48.0 is the height of extended fab
+                          shape: const StadiumBorder(),
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor),
+                      onPressed: () {
+                        _isButtonEnabled ? _previousStep() : null;
+                      }),
+                  ElevatedButton.icon(
+                      icon: Icon(_activeStep < _totalSteps - 1
+                          ? Icons.arrow_forward
+                          : Icons.check),
+                      label: Text(_activeStep < _totalSteps - 1
+                          ? TextHelper.appLocalizations.next
+                          : TextHelper.appLocalizations.confirm_remodeling),
+                      style: ElevatedButton.styleFrom(
                         minimumSize: Size(
                             MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                        // 48.0 is the height of extended fab
                         shape: const StadiumBorder(),
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor),
-                    onPressed: () {
-                      _previousStep();
-                    },
-                  ),
-                  ElevatedButton.icon(
-                    icon: Icon(_activeStep < _totalSteps - 1
-                        ? Icons.arrow_forward
-                        : Icons.check),
-                    label: Text(_activeStep < _totalSteps - 1
-                        ? TextHelper.appLocalizations.next
-                        : TextHelper.appLocalizations.confirm_remodeling),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
-                      shape: const StadiumBorder(),
-                    ),
-                    onPressed: () {
-                      if (_activeStep == _totalSteps - 1) {
-                        // todo validate
-                        // todo send order
-                      } else {
-                        _nextStep();
-                      }
-                    },
-                  )
+                      ),
+                      onPressed: () {
+                        if (_isButtonEnabled) {
+                          if (_activeStep == _totalSteps - 1) {
+                            // todo validate
+                            // todo send order
+                          } else {
+                            _nextStep();
+                          }
+                        }
+                      })
                 ],
               )));
     }

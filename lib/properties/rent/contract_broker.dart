@@ -8,9 +8,9 @@ import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import 'contract_adjuster.dart';
-import 'offer_confirmation.dart';
 import 'contract_offer_data.dart';
 import 'contract_viewer.dart';
+import 'offer_confirmation.dart';
 import 'tenant_info.dart';
 
 class ContractBrokerScreen extends StatefulWidget {
@@ -31,6 +31,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   final _totalSteps = 4;
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
+  bool _isButtonEnabled = true;
 
   late final ContractOffer _offer = ContractOffer(widget.property);
   final GlobalKey<ContractAdjusterScreenState> adjusterKey =
@@ -152,21 +153,27 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
+      _isButtonEnabled = false;
       setState(() {
         _activeStep++;
       });
-      _pageController.nextPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .nextPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
   void _previousStep() {
     if (_activeStep > 0) {
+      _isButtonEnabled = false;
       setState(() {
         _activeStep--;
       });
-      _pageController.previousPage(
-          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _pageController
+          .previousPage(
+              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .whenComplete(() => _isButtonEnabled = true);
     }
   }
 
@@ -205,6 +212,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           content: Text(TextHelper
               .appLocalizations.biometric_authentication_unavailable)));
     }
+    // todo snackbar blocking buttons
   }
 
   void _confirm() {
@@ -240,13 +248,15 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor),
                   onPressed: () {
-                    switch (_activeStep) {
-                      case 0:
-                        adjusterKey.currentState!.reset();
-                        break;
-                      default:
-                        _previousStep();
-                        break;
+                    if (_isButtonEnabled) {
+                      switch (_activeStep) {
+                        case 0:
+                          adjusterKey.currentState!.reset();
+                          break;
+                        default:
+                          _previousStep();
+                          break;
+                      }
                     }
                   },
                 ),
@@ -264,30 +274,32 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                           MediaQuery.of(context).size.width / 2 - 24.0, 48.0),
                       shape: const StadiumBorder()),
                   onPressed: () {
-                    switch (_activeStep) {
-                      case 0:
-                        if (adjusterKey.currentState!.validate()) {
+                    if (_isButtonEnabled) {
+                      switch (_activeStep) {
+                        case 0:
+                          if (adjusterKey.currentState!.validate()) {
+                            _nextStep();
+                          }
+                          break;
+                        case 1:
                           _nextStep();
-                        }
-                        break;
-                      case 1:
-                        _nextStep();
-                        // todo debug mode
-                        // if (tenantInfoKey.currentState!.validate()) {
-                        //   _nextStep();
-                        // }
-                        break;
-                      case 2:
-                        // todo debug mode
-                        //_signWithBiometrics();
-                        _nextStep();
-                        break;
-                      case 3:
-                        _confirm();
-                        break;
-                      default:
-                        _nextStep();
-                        break;
+                          // todo debug mode
+                          // if (tenantInfoKey.currentState!.validate()) {
+                          //   _nextStep();
+                          // }
+                          break;
+                        case 2:
+                          // todo debug mode
+                          //_signWithBiometrics();
+                          _nextStep();
+                          break;
+                        case 3:
+                          _confirm();
+                          break;
+                        default:
+                          _nextStep();
+                          break;
+                      }
                     }
                   },
                 )

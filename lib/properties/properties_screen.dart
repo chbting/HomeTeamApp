@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/properties/rent/rent_properties.dart';
+import 'package:tner_client/properties/rent/visited_properties.dart';
 import 'package:tner_client/properties/search/search_properties.dart';
 import 'package:tner_client/properties/visit/properties_visit_cart.dart';
 import 'package:tner_client/utils/text_helper.dart';
@@ -36,7 +36,7 @@ class PropertiesScreen extends StatelessWidget {
           children: <Widget>[
             SearchPropertiesScreen(),
             PropertiesVisitCartScreen(),
-            RentPropertiesScreen(),
+            VisitedPropertiesScreen(),
           ],
         ),
       ),

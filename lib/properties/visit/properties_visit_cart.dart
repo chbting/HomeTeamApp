@@ -55,8 +55,9 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
           body: ListView.builder(
+              // All are -4.0 internal padding
               padding: const EdgeInsets.only(
-                  left: 8.0, top: 8.0, right: 8.0, bottom: 72.0),
+                  left: 4.0, right: 4.0, top: 4.0, bottom: 68.0),
               primary: false,
               itemCount: _propertiesInCart.length,
               itemBuilder: (context, index) {

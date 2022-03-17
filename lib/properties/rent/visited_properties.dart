@@ -3,14 +3,15 @@ import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
-class RentPropertiesScreen extends StatefulWidget {
-  const RentPropertiesScreen({Key? key}) : super(key: key);
+class VisitedPropertiesScreen extends StatefulWidget {
+  const VisitedPropertiesScreen({Key? key}) : super(key: key);
 
   @override
-  State<RentPropertiesScreen> createState() => RentPropertiesScreenState();
+  State<VisitedPropertiesScreen> createState() =>
+      VisitedPropertiesScreenState();
 }
 
-class RentPropertiesScreenState extends State<RentPropertiesScreen> {
+class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
   final double _imageSize = 120.0;
   final List<Property> _propertiesInCart = Property.getSampleList();
 
@@ -30,6 +31,8 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             return Card(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
               child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 8.0),
@@ -60,9 +63,6 @@ class RentPropertiesScreenState extends State<RentPropertiesScreen> {
           childCount: _propertiesInCart.length,
         ),
       )
-    ]
-        // padding: const EdgeInsets.only(
-        //     left: 8.0, top: 8.0, right: 8.0, bottom: 72.0),
-        );
+    ]);
   }
 }

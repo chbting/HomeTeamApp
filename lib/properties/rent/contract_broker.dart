@@ -272,9 +272,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         }
                         break;
                       case 1:
-                        if (tenantInfoKey.currentState!.validate()) {
-                          _nextStep();
-                        }
+                        _nextStep();
+                        // todo
+                        // if (tenantInfoKey.currentState!.validate()) {
+                        //   _nextStep();
+                        // }
                         break;
                       case 2:
                         _signWithBiometrics();

@@ -66,7 +66,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     icons: [
                       Icon(Icons.edit,
                           color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.contacts,
+                      Icon(Icons.account_box_rounded,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.article,
                           color: Theme.of(context).colorScheme.onSecondary),
@@ -271,12 +271,16 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                         }
                         break;
                       case 1:
-                        if (tenantInfoKey.currentState!.validate()) {
-                          _nextStep();
-                        }
+                        _nextStep();
+                        // todo debug mode
+                        // if (tenantInfoKey.currentState!.validate()) {
+                        //   _nextStep();
+                        // }
                         break;
                       case 2:
-                        _signWithBiometrics();
+                        // todo debug mode
+                        //_signWithBiometrics();
+                        _nextStep();
                         break;
                       case 3:
                         _confirm();

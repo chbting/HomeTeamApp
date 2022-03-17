@@ -54,7 +54,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
-                '\n${DateFormat(Format.dateFormatLong, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
+                '\n${DateFormat(Format.dateLong, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),

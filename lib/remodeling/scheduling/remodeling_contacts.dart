@@ -94,7 +94,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: Text(
                         TextHelper.appLocalizations.remodeling_address,
-                        style: AppTheme.getListTileBodyTextStyle(context),
+                        style: AppTheme.getCardTitleTextStyle(context),
                       )),
                   AddressForm(key: _addressFormKey, data: widget.data.client)
                 ],

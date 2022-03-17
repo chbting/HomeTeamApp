@@ -32,7 +32,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
       children: [
         Card(
             child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0), // todo review padding = all 16.0?
           child: ListTile(
               leading: const Icon(Icons.style),
               title: Text(TextHelper.appLocalizations.remodeling_options,
@@ -51,7 +51,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
             title: Text(TextHelper.appLocalizations.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat(Format.dateFormatLong,
+                DateFormat(Format.dateLong,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(data.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),

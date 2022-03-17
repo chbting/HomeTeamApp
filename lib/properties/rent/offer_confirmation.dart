@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/client_data.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -11,23 +13,27 @@ class OfferConfirmationScreen extends StatelessWidget {
       : super(key: key);
 
   final ContractOffer offer;
-  final double _lineSpacing = 8.0;
+  final double _leadSpacing = 56.0;
+  final double _itemSpacing = 12.0; // Spacing between title-item pairs
+  final double _listViewPadding = 16.0;
+  final double _listViewInternalPadding =
+      4.0; // note: ListView has 4.0 internal padding on all sides
+  final double _cardPadding = 16.0;
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('${offer.client.firstName}');
     if (offer.client.firstName == null) {
       offer.client = getSampleClientData();
-      debugPrint('${offer.client.firstName}');
     } // todo debug line
     return ListView(
         primary: false,
-        // note: ListView has 4.0 internal padding on all sides
-        padding: const EdgeInsets.only(
-            left: 12.0,
-            right: 12.0,
-            top: ContractBrokerScreen.stepTitleBarHeight - 4.0,
-            bottom: ContractBrokerScreen.bottomButtonContainerHeight - 4.0),
+        padding: EdgeInsets.only(
+            left: _listViewPadding - _listViewInternalPadding,
+            right: _listViewPadding - _listViewInternalPadding,
+            top: ContractBrokerScreen.stepTitleBarHeight -
+                _listViewInternalPadding,
+            bottom: ContractBrokerScreen.bottomButtonContainerHeight -
+                _listViewInternalPadding),
         children: [
           Card(
             child: ListTile(
@@ -45,15 +51,58 @@ class OfferConfirmationScreen extends StatelessWidget {
           ),
           Card(
               child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
+                  padding: EdgeInsets.all(_cardPadding),
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                          width: 56.0,
-                          child: Align(
+                      SizedBox(
+                          width: _leadSpacing,
+                          child: const Align(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(Icons.local_offer))),
+                      Expanded(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(TextHelper.appLocalizations.lease_terms,
+                              style: AppTheme.getCardTitleTextStyle(context)),
+                          Container(height: _itemSpacing),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _getPricingColumn(context, ClientType.tenant),
+                              _getPricingColumn(context, ClientType.landLord)
+                            ],
+                          ),
+                          Container(height: _itemSpacing),
+                          const Divider(thickness: 1.0),
+                          Text(TextHelper.appLocalizations.lease_period,
+                              style: AppTheme.getCardTitleTextStyle(context)),
+                          Text(
+                              '${DateFormat(Format.date).format(offer.offeredStartDate!)} '
+                              '- ${DateFormat(Format.date).format(offer.offeredEndDate!)}',
+                              style: AppTheme.getCardBodyTextStyle(context)),
+                          Container(height: _itemSpacing),
+                          Text(TextHelper.appLocalizations.notes,
+                              style: AppTheme.getCardTitleTextStyle(context)),
+                          Text(
+                              offer.notes == null
+                                  ? '-'
+                                  : offer.notes!.isEmpty
+                                      ? '-'
+                                      : offer.notes!,
+                              style: AppTheme.getCardBodyTextStyle(context)),
+                        ],
+                      ))
+                    ],
+                  ))),
+          Card(
+              child: Padding(
+                  padding: EdgeInsets.all(_cardPadding),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                          width: _leadSpacing,
+                          child: const Align(
                               alignment: Alignment.centerLeft,
                               child: Icon(Icons.person))),
                       Column(
@@ -61,29 +110,31 @@ class OfferConfirmationScreen extends StatelessWidget {
                         children: [
                           Text(TextHelper.appLocalizations.tenant_info,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Container(height: _lineSpacing),
+                          Container(height: _itemSpacing),
                           Text(TextHelper.appLocalizations.name,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(_getTenantName(),
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Container(height: _lineSpacing),
+                          Container(height: _itemSpacing),
                           Text(TextHelper.appLocalizations.id_card_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.idCardNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Container(height: _lineSpacing),
+                          Container(height: _itemSpacing),
                           Text(TextHelper.appLocalizations.contact_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.phoneNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Container(height: _lineSpacing),
+                          Container(height: _itemSpacing),
                           Text(TextHelper.appLocalizations.mailing_address,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(
-                              '${offer.client.addressLine1}'
-                              '\n${offer.client.addressLine2}'
-                              '\n${offer.client.district}'
-                              '\n${offer.client.region}',
+                          Text(offer.client.addressLine1!,
+                              style: AppTheme.getCardBodyTextStyle(context)),
+                          Text(offer.client.addressLine2!,
+                              style: AppTheme.getCardBodyTextStyle(context)),
+                          Text(offer.client.district!,
+                              style: AppTheme.getCardBodyTextStyle(context)),
+                          Text(offer.client.region!,
                               style: AppTheme.getCardBodyTextStyle(context))
                         ],
                       )
@@ -92,12 +143,81 @@ class OfferConfirmationScreen extends StatelessWidget {
         ]);
   }
 
+  Widget _getPricingColumn(BuildContext context, ClientType clientType) {
+    String title;
+    int monthlyRent, deposit;
+    bool water, electricity, gas, rates, management;
+
+    switch (clientType) {
+      case ClientType.tenant:
+        title = TextHelper.appLocalizations.offered;
+        monthlyRent = offer.offeredMonthlyRent!;
+        deposit = offer.offeredDeposit!;
+        water = offer.offeredWater;
+        electricity = offer.offeredElectricity;
+        gas = offer.offeredGas;
+        rates = offer.offeredRates;
+        management = offer.offeredManagement;
+        break;
+      case ClientType.landLord:
+        title = TextHelper.appLocalizations.original;
+        monthlyRent = offer.property.monthlyRent!;
+        deposit = offer.property.deposit!;
+        water = offer.property.water;
+        electricity = offer.property.electricity;
+        gas = offer.property.gas;
+        rates = offer.property.rates;
+        management = offer.property.management;
+        break;
+    }
+
+    return SizedBox(
+        width: MediaQuery.of(context).size.width / 2 -
+            _listViewPadding -
+            _cardPadding -
+            _leadSpacing / 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: Theme.of(context).textTheme.headline6),
+            Container(height: _itemSpacing),
+            Text(TextHelper.appLocalizations.monthly_rent,
+                style: AppTheme.getCardTitleTextStyle(context)),
+            Text(Format.currency.format(monthlyRent),
+                style: AppTheme.getCardBodyTextStyle(context)),
+            Container(height: _itemSpacing),
+            Text(TextHelper.appLocalizations.deposit,
+                style: AppTheme.getCardTitleTextStyle(context)),
+            Text(Format.currency.format(deposit),
+                style: AppTheme.getCardBodyTextStyle(context)),
+            Container(height: _itemSpacing),
+            Text(TextHelper.appLocalizations.tenant_paid_fees_colon,
+                style: AppTheme.getCardTitleTextStyle(context)),
+            _getFeeItem(context, TextHelper.appLocalizations.bill_water, water),
+            _getFeeItem(context, TextHelper.appLocalizations.bill_electricity,
+                electricity),
+            _getFeeItem(context, TextHelper.appLocalizations.bill_gas, gas),
+            _getFeeItem(context, TextHelper.appLocalizations.bill_rates, rates),
+            _getFeeItem(context, TextHelper.appLocalizations.bill_management,
+                management),
+          ],
+        ));
+  }
+
+  Widget _getFeeItem(BuildContext context, String title, bool show) {
+    return Container(
+        child: show
+            ? Text('-$title', style: AppTheme.getCardBodyTextStyle(context))
+            : null);
+  }
+
   String _getTenantName() {
-    //todo detect input language is more sophisticated
     if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
-      return '${offer.client.lastName}${offer.client.title}';
+      return '${offer.client.lastName}${offer.client.firstName}';
     } else {
       return '${offer.client.lastName}, ${offer.client.firstName}';
     }
   }
 }
+
+enum ClientType { tenant, landLord }

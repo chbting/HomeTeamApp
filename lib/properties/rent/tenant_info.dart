@@ -89,7 +89,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Text(
                           TextHelper.appLocalizations.mailing_address,
-                          style: AppTheme.getListTileBodyTextStyle(context),
+                          style: AppTheme.getCardTitleTextStyle(context),
                         )),
                     AddressForm(key: _addressFormKey, data: widget.offer.client)
                   ],

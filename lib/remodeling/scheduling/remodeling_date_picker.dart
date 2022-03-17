@@ -55,7 +55,7 @@ class RemodelingDatePickerWidgetState
             title: Text(TextHelper.appLocalizations.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-                DateFormat(Format.dateFormatLong,
+                DateFormat(Format.dateLong,
                         SharedPreferencesHelper().getLocale().languageCode)
                     .format(widget.data.datePicked),
                 style: Theme.of(context).textTheme.subtitle1),

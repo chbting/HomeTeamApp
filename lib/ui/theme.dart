@@ -47,7 +47,8 @@ class AppTheme {
   }
 
   static ThemeData getLightTheme() {
-    return ThemeData( // todo scroll gradient is difficult to see
+    return ThemeData(
+        // todo scroll gradient is difficult to see
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
         snackBarTheme: ThemeData.light()
@@ -58,24 +59,28 @@ class AppTheme {
   static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
       TextStyle(color: Theme.of(context).colorScheme.secondary);
 
+  /// Essentially the same function as getCardTitleTextStyle(), but this should
+  /// be used only in a ListTile setting when swapping title and subtitle
   static TextStyle getListTileBodyTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
           .bodyText2!
           .copyWith(color: Theme.of(context).textTheme.caption!.color);
 
-  static TextStyle? getCardTitleTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.caption;
-  }
+  /// Same style as ListTile subtitle text (unselected)
+  static TextStyle? getCardTitleTextStyle(BuildContext context) =>
+      Theme.of(context)
+          .textTheme
+          .bodyText2!
+          .copyWith(color: Theme.of(context).textTheme.caption!.color);
 
-  static TextStyle? getCardBodyTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.subtitle1;
-  }
+  /// Same style (subtitle1) as ListTileStyle.list
+  static TextStyle? getCardBodyTextStyle(BuildContext context) =>
+      Theme.of(context).textTheme.subtitle1;
 
-  // Copied from input_decorator.dart _getIconColor(ThemeData themeData)
-  static Color getTextFieldIconColor(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark
-        ? Colors.white70
-        : Colors.black45;
-  }
+  /// Copied from input_decorator.dart _getIconColor(ThemeData themeData)
+  static Color getTextFieldIconColor(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? Colors.white70
+          : Colors.black45;
 }

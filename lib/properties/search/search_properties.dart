@@ -22,204 +22,72 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
       hint: TextHelper.appLocalizations.search_properties_hint,
       hintStyle: const TextStyle(color: Colors.grey),
       // TODO cursor color, light theme color
-      // TODO sliver search bar
+      // TODO sliver search searchBar
       //backgroundColor: Colors.white,
       scrollPadding: const EdgeInsets.only(bottom: 56.0),
       transitionDuration: const Duration(milliseconds: 500),
       transitionCurve: Curves.easeInOut,
       physics: const BouncingScrollPhysics(),
       debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {
-        // todo Call your model, bloc, controller here.
-      },
-      // Specify a custom transition to be used for
-      // animating between opened and closed stated.
       transition: CircularFloatingSearchBarTransition(),
+      // open/close transition
       leadingActions: [
-        FloatingSearchBarAction(builder: (context, animation) {
+        FloatingSearchBarAction(builder: (searchBarContext, animation) {
           return CircularButton(
             icon: const Icon(Icons.search),
             onPressed: () {
-              FloatingSearchBar.of(context)?.open();
+              FloatingSearchBar.of(searchBarContext)?.open();
             },
           );
         }),
         FloatingSearchBarAction(
             showIfOpened: true,
             showIfClosed: false,
-            builder: (context, animation) {
+            builder: (searchBarContext, animation) {
               return CircularButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
-                  FloatingSearchBar.of(context)?.close();
+                  FloatingSearchBar.of(searchBarContext)?.close();
                 },
               );
             }),
       ],
+      onQueryChanged: (query) {
+        // todo Call your model, bloc, controller here.
+      },
       actions: [
         FloatingSearchBarAction(
             showIfOpened: true,
-            showIfClosed: false,
+            showIfClosed: true,
             builder: (searchBarContext, animation) {
-              final bar = FloatingSearchAppBar.of(searchBarContext)!;
+              final searchBar = FloatingSearchAppBar.of(searchBarContext)!;
 
               return ValueListenableBuilder<String>(
-                valueListenable: bar.queryNotifer,
+                valueListenable: searchBar.queryNotifer,
                 builder: (valueListenableContext, query, _) {
-                  if (query.isEmpty) {
+                  if (query.isNotEmpty) {
                     return CircularButton(
-                      icon: const Icon(Icons.mic),
+                      icon: const Icon(Icons.close),
                       onPressed: () {
-                        final speech = SpeechToText();
-                        speech
-                            .initialize(
-                                onStatus: (value) {},
-                                onError: (error) {
-                                  if (error.errorMsg == 'error_no_match' ||
-                                      error.errorMsg ==
-                                          'error_speech_timeout') {
-                                    Navigator.of(context).pop();
-                                    _showSnackBarMessage(TextHelper
-                                        .appLocalizations
-                                        .msg_cannot_recognize_speech);
-                                  }
-                                })
-                            .then((isAvailable) {
-                          if (isAvailable) {
-                            String localeId = SharedPreferencesHelper()
-                                .getVoiceRecognitionLocaleId();
-
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                      title: Text(TextHelper
-                                          .appLocalizations.voice_search),
-                                      contentPadding: EdgeInsets.zero,
-                                      content: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: AvatarGlow(
-                                                glowColor: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                                endRadius: 72.0,
-                                                child: CircleAvatar(
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary,
-                                                  radius: 40.0,
-                                                  child: const Icon(Icons.mic,
-                                                      size: 32.0),
-                                                ),
-                                              )),
-                                          Text(SharedPreferencesHelper
-                                              .getVoiceRecognitionLanguage(
-                                                  localeId))
-                                        ],
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text(
-                                              TextHelper
-                                                  .appLocalizations.cancel,
-                                              style: AppTheme
-                                                  .getDialogTextButtonTextStyle(
-                                                      context)),
-                                          onPressed: () {
-                                            if (speech.isListening) {
-                                              speech.stop();
-                                            }
-                                            Navigator.of(context).pop();
-                                          },
-                                        )
-                                      ]);
-                                }).then((value) {
-                              if (speech.isListening) {
-                                speech.stop();
-                              }
-                            });
-                            speech.listen(
-                                // todo lengthen active time
-                                localeId: localeId,
-                                // todo make sure the 3 locales always work
-                                onResult: (result) {
-                                  if (result.confidence > 0.0) {
-                                    Navigator.of(context).pop();
-                                    bar.query = result.recognizedWords;
-                                  }
-                                });
-                          } else {
-                            _showSpeechToTextUnavailableMessage();
-                          }
-                        });
+                        searchBar.clear();
                       },
                     );
                   } else {
                     return CircularButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        bar.clear();
-                      },
-                    );
+                        icon: const Icon(Icons.mic),
+                        onPressed: () {
+                          _speechToText((value) =>
+                              value != null ? searchBar.query = value : null);
+                        });
                   }
                 },
               );
             }),
       ],
       builder: (context, transition) {
-        return Container();
-        // return ClipRRect(
-        //   borderRadius: BorderRadius.circular(8),
-        //   child: Material(
-        //     color: Colors.white,
-        //     elevation: 4.0,
-        //     child: Column(
-        //       mainAxisSize: MainAxisSize.min,
-        //       children: Colors.accents.map((color) {
-        //         return Container(height: 112, color: color);
-        //       }).toList(),
-        //     ),
-        //   ),
-        // );
+        return Container(); //todo
       },
     );
-    //   CustomScrollView(
-    //   slivers: <Widget>[
-    //     SliverAppBar(
-    //       pinned: false,
-    //       snap: false,
-    //       floating: true,
-    //       expandedHeight: kToolbarHeight,
-    //       flexibleSpace: FlexibleSpaceBar(
-    //         title: ListTile(
-    //           title: Text(TextHelper.appLocalizations.search_properties_hint),
-    //         ),
-    //       ),
-    //     ),
-    //     SliverToBoxAdapter(
-    //         child: ListTile(
-    //       title: Text(TextHelper.appLocalizations.latest_additions),
-    //     )),
-    //     SliverList(
-    //       delegate: SliverChildBuilderDelegate(
-    //         (BuildContext context, int index) {
-    //           return SizedBox(
-    //             height: 100.0,
-    //             child: Center(
-    //               child: Text('$index', textScaleFactor: 4),
-    //             ),
-    //           );
-    //         },
-    //         childCount: 20,
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 
   void _showSpeechToTextUnavailableMessage() {
@@ -231,5 +99,87 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
   void _showSnackBarMessage(String message) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _speechToText(Function(String?) onSpeechToTextResult) async {
+    final speech = SpeechToText();
+    final dialogKey = GlobalKey();
+
+    bool isAvailable = await speech.initialize(
+        onStatus: (value) {},
+        onError: (error) {
+          if (error.errorMsg == 'error_no_match' ||
+              error.errorMsg == 'error_speech_timeout') {
+            Navigator.of(context).pop();
+            _showSnackBarMessage(
+                TextHelper.appLocalizations.msg_cannot_recognize_speech);
+          }
+        });
+    if (!isAvailable) {
+      _showSpeechToTextUnavailableMessage();
+      onSpeechToTextResult(null);
+    } else {
+      String localeId = SharedPreferencesHelper().getVoiceRecognitionLocaleId();
+
+      // Show the speech to text dialog in the foreground
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                key: dialogKey,
+                title: Text(TextHelper.appLocalizations.voice_search),
+                contentPadding: EdgeInsets.zero,
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AvatarGlow(
+                          glowColor: Theme.of(context).colorScheme.secondary,
+                          endRadius: 72.0,
+                          child: CircleAvatar(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.secondary,
+                            radius: 40.0,
+                            child: const Icon(Icons.mic, size: 32.0),
+                          ),
+                        )),
+                    Text(SharedPreferencesHelper.getVoiceRecognitionLanguage(
+                        localeId))
+                  ],
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text(TextHelper.appLocalizations.cancel,
+                        style: AppTheme.getDialogTextButtonTextStyle(context)),
+                    onPressed: () {
+                      speech.isListening ? speech.stop() : null;
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]);
+          }).then((value) {
+        // make sure speech to text stops
+        speech.isListening ? speech.stop() : null;
+      });
+
+      // Listen in the background
+      speech.listen(
+          // todo lengthen active time
+          // todo make sure the 3 locales always work
+          localeId: localeId,
+          onResult: (result) {
+            if (result.finalResult) {
+              if (result.confidence > 0.0) {
+                onSpeechToTextResult(result.recognizedWords);
+              } else {
+                onSpeechToTextResult(null);
+                _showSnackBarMessage(
+                    TextHelper.appLocalizations.msg_cannot_recognize_speech);
+              }
+              Navigator.of(dialogKey.currentContext!).pop();
+            }
+          });
+    }
   }
 }

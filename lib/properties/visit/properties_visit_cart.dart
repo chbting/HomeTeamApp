@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/ui/search_bar.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import '../property.dart';
@@ -30,6 +31,10 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    return Stack(
+      children: [SearchBar()],
+    );
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
       child: Scaffold(

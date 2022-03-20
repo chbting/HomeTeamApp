@@ -2,6 +2,7 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -15,11 +16,23 @@ class SearchPropertiesScreen extends StatefulWidget {
 }
 
 class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
+  final _searchBarKey = GlobalKey();
+  final double _imageSize = 120.0;
+  final List<Property> _propertyList = getSampleProperties();
+  final List<String> _suggestions = [
+    TextHelper.appLocalizations.hong_kong,
+    TextHelper.appLocalizations.kowloon,
+    TextHelper.appLocalizations.new_territories
+  ];
+
   @override
   Widget build(BuildContext context) {
     return FloatingSearchBar(
+      key: _searchBarKey,
       margins: const EdgeInsets.all(16.0),
       hint: TextHelper.appLocalizations.search_properties_hint,
+      // todo show query
+      title: _getSearchBarTitle(),
       hintStyle: const TextStyle(color: Colors.grey),
       // TODO cursor color, light theme color
       // TODO sliver search searchBar
@@ -44,40 +57,55 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
             showIfOpened: true,
             showIfClosed: false,
             builder: (searchBarContext, animation) {
+              final searchAppBar = FloatingSearchAppBar.of(searchBarContext)!;
               return CircularButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   FloatingSearchBar.of(searchBarContext)?.close();
+                  setState(() {
+                    searchAppBar.clear();
+                  });
                 },
               );
             }),
       ],
       onQueryChanged: (query) {
-        // todo Call your model, bloc, controller here.
+        // todo update suggestion order
+      },
+      onSubmitted: (query) {
+        _submitQuery(query);
       },
       actions: [
         FloatingSearchBarAction(
             showIfOpened: true,
             showIfClosed: true,
             builder: (searchBarContext, animation) {
-              final searchBar = FloatingSearchAppBar.of(searchBarContext)!;
+              final searchAppBar = FloatingSearchAppBar.of(searchBarContext)!;
 
               return ValueListenableBuilder<String>(
-                valueListenable: searchBar.queryNotifer,
+                valueListenable: searchAppBar.queryNotifer,
                 builder: (valueListenableContext, query, _) {
                   if (query.isNotEmpty) {
                     return CircularButton(
                       icon: const Icon(Icons.close),
                       onPressed: () {
-                        searchBar.clear();
+                        setState(() {
+                          searchAppBar.clear();
+                        });
                       },
                     );
                   } else {
                     return CircularButton(
                         icon: const Icon(Icons.mic),
                         onPressed: () {
-                          _speechToText((value) =>
-                              value != null ? searchBar.query = value : null);
+                          _speechToText((value) {
+                            if (value != null) {
+                              setState(() {
+                                searchAppBar.query = value;
+                              });
+                              _submitQuery(value);
+                            }
+                          });
                         });
                   }
                 },
@@ -85,11 +113,61 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
             }),
       ],
       builder: (context, transition) {
-        return Container(); //todo
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Material(
+            elevation: 4.0,
+            child: ListView.builder(
+              shrinkWrap: true,
+              primary: false,
+              itemCount: _suggestions.length,
+              itemBuilder: (BuildContext context, int index) {
+                final searchBarState =
+                    _searchBarKey.currentState as FloatingSearchBarState;
+                final searchBar = searchBarState.barState!;
+                return ListTile(
+                  leading: const Icon(Icons.history),
+                  title: Text(_suggestions[index]),
+                  onTap: () {
+                    searchBar.query = _suggestions[index];
+                    //todo execute search
+                  },
+                );
+              },
+            ),
+          ),
+        );
       },
     );
   }
 
+  Widget? _getSearchBarTitle() {
+    if (_searchBarKey.currentState != null) {
+      final searchBar = _getFloatingSearchAppBar();
+      if (searchBar != null) {
+        if (searchBar.query.isNotEmpty) {
+          return Text(searchBar.query);
+        }
+      }
+    }
+    return null;
+  }
+
+  FloatingSearchAppBarState? _getFloatingSearchAppBar() {
+    if (_searchBarKey.currentState != null) {
+      final searchBarState =
+      _searchBarKey.currentState as FloatingSearchBarState;
+      return searchBarState.barState;
+    }
+    return null;
+  }
+
+  void _submitQuery(String query) {
+    debugPrint('search:$query'); //todo
+    _getFloatingSearchAppBar()?.close(); //todo close() clear the query in the textfield out, supposed to show the query
+    debugPrint('search:${ _getFloatingSearchAppBar()?.query}'); //todo
+  }
+  
   void _showSpeechToTextUnavailableMessage() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content:

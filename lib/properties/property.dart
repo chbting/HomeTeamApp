@@ -66,6 +66,12 @@ List<Property> getSampleProperties() {
     Property(2, "聚賢居", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "上環", 631, 712, 32000, 64000,
         const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
     Property(3, "尚翹峰", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 601, 520, 24000, 48000,
+        const AssetImage('assets/demo_images/The_Zenith_240px.jpg')),
+    Property(4, "康翠臺2", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 720, 630, 18400, 36800,
+        const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
+    Property(5, "聚賢居2", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "上環", 631, 712, 32000, 64000,
+        const AssetImage('assets/demo_images/CentreStage_240px.jpg')),
+    Property(7, "尚翹峰2", "灣仔皇后⼤道東258號 尚翹峰 20樓 F室", "柴灣", 601, 520, 24000, 48000,
         const AssetImage('assets/demo_images/The_Zenith_240px.jpg'))
   ];
 }

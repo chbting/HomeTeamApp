@@ -72,10 +72,7 @@ class SearchBarState extends State<SearchBar> {
                       debugPrint('onchanged:$value'); //todo
                     });
                   },
-                  onSubmitted: (value) {
-                    debugPrint('onSubmitted:$value'); //todo
-                    _close();
-                  },
+                  onSubmitted: (value) => _submit(),
                 )),
                 IconButton(
                   icon: Icon(
@@ -86,8 +83,7 @@ class SearchBarState extends State<SearchBar> {
                         ? _speechToText((value) {
                             if (value != null) {
                               _setQuery(value);
-                              // todo hide cursor... actually close and submit
-                              // _submitQuery(value);
+                              _submit();
                             }
                           })
                         : _setQuery('');
@@ -102,6 +98,11 @@ class SearchBarState extends State<SearchBar> {
     setState(() {
       _queryController.text = query;
     });
+  }
+
+  void _submit() {
+    _close();
+    debugPrint('submitted:${_queryController.text}'); //todo
   }
 
   void _open() {

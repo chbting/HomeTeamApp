@@ -30,7 +30,9 @@ class NameFormState extends State<NameForm> {
   @override
   void dispose() {
     _lastNameFieldFocus.removeListener(() {});
+    _lastNameFieldFocus.dispose();
     _firstNameFieldFocus.removeListener(() {});
+    _firstNameFieldFocus.dispose();
     super.dispose();
   }
 

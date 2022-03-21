@@ -34,8 +34,11 @@ class AddressFormState extends State<AddressForm> {
   @override
   void dispose() {
     _addressLine1FieldFocus.removeListener(() {});
+    _addressLine1FieldFocus.dispose();
     _addressLine2FieldFocus.removeListener(() {});
+    _addressLine2FieldFocus.dispose();
     _districtFieldFocus.removeListener(() {});
+    _districtFieldFocus.dispose();
     super.dispose();
   }
 

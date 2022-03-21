@@ -7,9 +7,10 @@ class ToggleableIconButton extends StatefulWidget {
       this.duration = const Duration(milliseconds: 250),
       this.beginWithStartIcon = true,
       this.iconSize = 24.0,
-      this.splashRadius = 24.0,
+      this.splashRadius = 20.0,
       this.onStartPress,
       this.onEndPress,
+      this.isStartButtonNotifier,
       Key? key})
       : super(key: key);
 
@@ -18,22 +19,32 @@ class ToggleableIconButton extends StatefulWidget {
   final bool beginWithStartIcon;
   final double iconSize, splashRadius;
   final VoidCallback? onStartPress, onEndPress;
+  final ValueNotifier<bool>? isStartButtonNotifier;
 
   @override
   State<StatefulWidget> createState() => ToggleableIconButtonState();
 }
 
 class ToggleableIconButtonState extends State<ToggleableIconButton> {
-  late bool _isStart;
+  late bool _isStartButton;
   late IconData _iconData;
   bool _updateFinished = true;
   double _iconButtonScale = 1.0;
 
   @override
   void initState() {
-    _isStart = widget.beginWithStartIcon;
-    _iconData = _isStart ? widget.startIcon : widget.endIcon;
+    _isStartButton = widget.beginWithStartIcon;
+    _iconData = _isStartButton ? widget.startIcon : widget.endIcon;
+    widget.isStartButtonNotifier?.addListener(() {
+      _setButton(widget.isStartButtonNotifier!.value);
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.isStartButtonNotifier?.removeListener(() {});
+    super.dispose();
   }
 
   @override
@@ -43,26 +54,16 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
         icon: AnimatedScale(
             child: Icon(_iconData),
             duration: widget.duration,
-            curve: Curves.easeIn,
+            curve: Curves.easeOut,
             scale: _iconButtonScale,
             onEnd: () {
               if (!_updateFinished) {
-                // 2. Execute the defined codes
-                if (_isStart) {
-                  if (widget.onStartPress != null) {
-                    widget.onStartPress!();
-                  }
-                } else {
-                  if (widget.onEndPress != null) {
-                    widget.onEndPress!();
-                  }
-                }
                 setState(() {
-                  // 3. Change the icon
-                  _isStart = !_isStart;
-                  _iconData = _isStart ? widget.startIcon : widget.endIcon;
+                  // 2. Change the icon
+                  _iconData =
+                      _isStartButton ? widget.startIcon : widget.endIcon;
 
-                  // 4. Expand the icon
+                  // 3. Expand the icon
                   _iconButtonScale = 1.0;
                   _updateFinished = true;
                 });
@@ -70,13 +71,28 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
             }),
         splashRadius: widget.splashRadius,
         onPressed: () {
-          if (_updateFinished) {
-            setState(() {
-              //1. Shrink the icon
-              _updateFinished = false;
-              _iconButtonScale = 0.0;
-            });
-          }
+          // Save value to avoid set button twice
+          bool newValue = !_isStartButton;
+
+          // I. Execute the defined codes
+          _isStartButton
+              ? widget.onStartPress?.call()
+              : widget.onEndPress?.call();
+
+          // II. Update icon state
+          _setButton(newValue);
         });
+  }
+
+  void _setButton(bool isStart) {
+    if (_isStartButton != isStart) {
+      _isStartButton = isStart;
+
+      setState(() {
+        //1. Shrink the icon
+        _updateFinished = false;
+        _iconButtonScale = 0.0;
+      });
+    }
   }
 }

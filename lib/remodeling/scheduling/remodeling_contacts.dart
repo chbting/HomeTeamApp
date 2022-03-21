@@ -41,7 +41,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
   @override
   void dispose() {
     _lastNameFieldFocus.removeListener(() {});
+    _lastNameFieldFocus.dispose();
     _firstNameFieldFocus.removeListener(() {});
+    _firstNameFieldFocus.dispose();
     super.dispose();
   }
 

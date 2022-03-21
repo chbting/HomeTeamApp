@@ -42,7 +42,7 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
       transitionCurve: Curves.easeInOut,
       physics: const BouncingScrollPhysics(),
       debounceDelay: const Duration(milliseconds: 500),
-      transition: CircularFloatingSearchBarTransition(),
+      transition: SlideFadeFloatingSearchBarTransition(),
       // open/close transition
       leadingActions: [
         FloatingSearchBarAction(builder: (searchBarContext, animation) {

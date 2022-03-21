@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/ui/toggled_icon_button.dart';
+import 'package:tner_client/utils/text_helper.dart';
 
 class SearchBar extends StatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
@@ -10,22 +12,35 @@ class SearchBar extends StatefulWidget {
 class SearchBarState extends State<SearchBar> {
   // todo keep alive maxin?
   final _actionButtonSplashRadius = 24.0;
-  bool isOpen = false;
+  bool _isOpen = false;
   String query = '';
+
+  final List<String> _suggestions = [
+    TextHelper.appLocalizations.hong_kong,
+    TextHelper.appLocalizations.kowloon,
+    TextHelper.appLocalizations.new_territories
+  ];
+
+  // todo
+  // left input gradient
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
         margin: const EdgeInsets.all(16.0),
         child: ListTile(
-            leading: IconButton(
-              icon: Icon(isOpen ? Icons.arrow_back : Icons.search),
-              // todo animation
-              splashRadius: _actionButtonSplashRadius,
-              onPressed: () {
-                isOpen ? _close() : _open();
-              },
-            ),
+            // todo higher elevation
+            leading: ToggleableIconButton(
+                startIcon: Icons.search,
+                endIcon: Icons.arrow_back,
+                onStartPress: _open,
+                onEndPress: _close),
             title: Text(query),
             trailing: IconButton(
               icon: const Icon(Icons.mic),
@@ -34,22 +49,19 @@ class SearchBarState extends State<SearchBar> {
             )));
   }
 
-  @override
-  void didUpdateWidget(SearchBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
   void _open() {
-    if (!isOpen) {
+    if (!_isOpen) {
       setState(() {});
-      isOpen = true;
+      _isOpen = true;
     }
+    debugPrint('open');
   }
 
   void _close() {
-    if (isOpen) {
+    if (_isOpen) {
       setState(() {});
-      isOpen = false;
+      _isOpen = false;
     }
+    debugPrint('close');
   }
 }

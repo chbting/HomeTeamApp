@@ -7,7 +7,9 @@ import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+  const SearchBar({this.hintText, Key? key}) : super(key: key);
+
+  final String? hintText;
 
   @override
   State<StatefulWidget> createState() => SearchBarState();
@@ -44,6 +46,28 @@ class SearchBarState extends State<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    var suggestionWidget = ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Material(
+        elevation: 4.0,
+        child: ListView.builder(
+          shrinkWrap: true,
+          primary: false,
+          itemCount: _suggestions.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              leading: const Icon(Icons.history),
+              title: Text(_suggestions[index]),
+              onTap: () {
+                _setQuery(_suggestions[index]);
+                //todo execute search
+              },
+            );
+          },
+        ),
+      ),
+    );
+
     return Card(
         margin: const EdgeInsets.all(16.0),
         elevation: 4.0,
@@ -62,9 +86,8 @@ class SearchBarState extends State<SearchBar> {
                     }),
                 Expanded(
                     child: TextField(
-                  decoration: InputDecoration.collapsed(
-                      hintText:
-                          TextHelper.appLocalizations.search_properties_hint),
+                  decoration:
+                      InputDecoration.collapsed(hintText: widget.hintText),
                   focusNode: _focusNode,
                   controller: _queryController,
                   onChanged: (value) {
@@ -93,8 +116,9 @@ class SearchBarState extends State<SearchBar> {
             )));
   }
 
+  /// *Use this function to programmatically set the query value
+  /// Note: TextField.onChanged() will not be triggered by this function
   void _setQuery(String query) {
-    // note: onChanged is not called by setting the controller value
     setState(() {
       _queryController.text = query;
     });
@@ -111,6 +135,7 @@ class SearchBarState extends State<SearchBar> {
       setState(() {
         _isOpen = true;
         _isSearchButtonNotifier.value = false;
+        // todo show suggestions
       });
     }
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/rent/visited_properties.dart';
 import 'package:tner_client/properties/search/search_properties.dart';
+import 'package:tner_client/properties/search/search_properties_old.dart';
 import 'package:tner_client/properties/visit/properties_visit_cart.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
@@ -35,7 +36,8 @@ class PropertiesScreen extends StatelessWidget {
         body: const TabBarView(
           children: <Widget>[
             SearchPropertiesScreen(),
-            PropertiesVisitCartScreen(),
+            SearchPropertiesScreenOld(),
+            //PropertiesVisitCartScreen(), //todo
             VisitedPropertiesScreen(),
           ],
         ),

@@ -52,7 +52,7 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
     return IconButton(
         iconSize: widget.iconSize,
         icon: AnimatedScale(
-            child: Icon(_iconData),
+            child: Icon(_iconData, color: Theme.of(context).iconTheme.color),
             duration: widget.duration,
             curve: Curves.easeOut,
             scale: _iconButtonScale,

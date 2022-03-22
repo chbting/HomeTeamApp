@@ -120,9 +120,11 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                       onSubmitted: (value) => _submit(),
                     )),
                     IconButton(
-                      icon: Icon(_queryController.text.isEmpty
-                          ? Icons.mic
-                          : Icons.close),
+                      icon: Icon(
+                          _queryController.text.isEmpty
+                              ? Icons.mic
+                              : Icons.close,
+                          color: Theme.of(context).iconTheme.color),
                       splashRadius: _actionButtonSplashRadius,
                       onPressed: () {
                         _queryController.text.isEmpty

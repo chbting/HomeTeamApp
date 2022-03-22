@@ -12,7 +12,8 @@ class SearchPropertiesScreenOld extends StatefulWidget {
   const SearchPropertiesScreenOld({Key? key}) : super(key: key);
 
   @override
-  State<SearchPropertiesScreenOld> createState() => SearchPropertiesScreenOldState();
+  State<SearchPropertiesScreenOld> createState() =>
+      SearchPropertiesScreenOldState();
 }
 
 class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
@@ -123,7 +124,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
               itemCount: _suggestions.length,
               itemBuilder: (BuildContext context, int index) {
                 final searchBarState =
-                _searchBarKey.currentState as FloatingSearchBarState;
+                    _searchBarKey.currentState as FloatingSearchBarState;
                 final searchBar = searchBarState.barState!;
                 return ListTile(
                   leading: const Icon(Icons.history),
@@ -138,6 +139,32 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
           ),
         );
       },
+      body: ListView.builder(
+          // All are -4.0 internal padding
+          padding: const EdgeInsets.only(
+              left: 4.0, right: 4.0, top: 4.0, bottom: 68.0),
+          primary: false,
+          itemCount: _propertyList.length,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 8.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Image(
+                              width: _imageSize,
+                              height: _imageSize,
+                              image: _propertyList[index].coverImage)),
+                      Property.getPropertyPreviewTextWidget(
+                          context, _imageSize, _propertyList[index]),
+                    ],
+                  )),
+            );
+          }),
     );
   }
 
@@ -156,7 +183,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
   FloatingSearchAppBarState? _getFloatingSearchAppBar() {
     if (_searchBarKey.currentState != null) {
       final searchBarState =
-      _searchBarKey.currentState as FloatingSearchBarState;
+          _searchBarKey.currentState as FloatingSearchBarState;
       return searchBarState.barState;
     }
     return null;
@@ -164,14 +191,15 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
 
   void _submitQuery(String query) {
     debugPrint('search:$query'); //todo
-    _getFloatingSearchAppBar()?.close(); //todo close() clear the query in the textfield out, supposed to show the query
-    debugPrint('search:${ _getFloatingSearchAppBar()?.query}'); //todo
+    _getFloatingSearchAppBar()
+        ?.close(); //todo close() clear the query in the textfield out, supposed to show the query
+    debugPrint('search:${_getFloatingSearchAppBar()?.query}'); //todo
   }
 
   void _showSpeechToTextUnavailableMessage() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content:
-        Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
+            Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
   }
 
   void _showSnackBarMessage(String message) {
@@ -217,7 +245,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
                           endRadius: 72.0,
                           child: CircleAvatar(
                             backgroundColor:
-                            Theme.of(context).colorScheme.secondary,
+                                Theme.of(context).colorScheme.secondary,
                             radius: 40.0,
                             child: const Icon(Icons.mic, size: 32.0),
                           ),
@@ -243,8 +271,8 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
 
       // Listen in the background
       speech.listen(
-        // todo lengthen active time
-        // todo make sure the 3 locales always work
+          // todo lengthen active time
+          // todo make sure the 3 locales always work
           localeId: localeId,
           onResult: (result) {
             if (result.finalResult) {

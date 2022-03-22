@@ -44,6 +44,7 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
   @override
   void dispose() {
     widget.isStartButtonNotifier?.removeListener(() {});
+    widget.isStartButtonNotifier?.dispose();
     super.dispose();
   }
 

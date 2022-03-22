@@ -6,16 +6,18 @@ import 'package:tner_client/ui/toggleable_icon_button.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
-class SearchBar extends StatefulWidget {
-  const SearchBar({this.hintText, Key? key}) : super(key: key);
+class SliverSearchBar extends StatefulWidget {
+  const SliverSearchBar({this.hintText, Key? key}) : super(key: key);
 
   final String? hintText;
+  static const horizontalMargins = 16.0;
+  static const verticalMargins = 8.0;
 
   @override
-  State<StatefulWidget> createState() => SearchBarState();
+  State<StatefulWidget> createState() => SliverSearchBarState();
 }
 
-class SearchBarState extends State<SearchBar> {
+class SliverSearchBarState extends State<SliverSearchBar> {
   final _actionButtonSplashRadius = 20.0;
   final _queryController = TextEditingController();
   final ValueNotifier<bool> _isSearchButtonNotifier = ValueNotifier(true);
@@ -40,7 +42,6 @@ class SearchBarState extends State<SearchBar> {
   @override
   void dispose() {
     _focusNode.dispose();
-    _focusNode.removeListener(() {});
     super.dispose();
   }
 
@@ -68,52 +69,74 @@ class SearchBarState extends State<SearchBar> {
       ),
     );
 
-    return Card(
-        margin: const EdgeInsets.all(16.0),
-        elevation: 4.0,
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Row(
-              children: [
-                ToggleableIconButton(
-                    startIcon: Icons.search,
-                    endIcon: Icons.arrow_back,
-                    isStartButtonNotifier: _isSearchButtonNotifier,
-                    onStartPress: _open,
-                    onEndPress: () {
-                      FocusScope.of(context).unfocus();
-                      _close();
-                    }),
-                Expanded(
-                    child: TextField(
-                  decoration:
-                      InputDecoration.collapsed(hintText: widget.hintText),
-                  focusNode: _focusNode,
-                  controller: _queryController,
-                  onChanged: (value) {
-                    setState(() {
-                      debugPrint('onchanged:$value'); //todo
-                    });
-                  },
-                  onSubmitted: (value) => _submit(),
-                )),
-                IconButton(
-                  icon: Icon(
-                      _queryController.text.isEmpty ? Icons.mic : Icons.close),
-                  splashRadius: _actionButtonSplashRadius,
-                  onPressed: () {
-                    _queryController.text.isEmpty
-                        ? _speechToText((value) {
-                            if (value != null) {
-                              _setQuery(value);
-                              _submit();
-                            }
-                          })
-                        : _setQuery('');
-                  },
-                )
-              ],
-            )));
+    return SliverAppBar(
+        // toolbarHeight = iconSize + (icon padding + card padding +
+        //  vertical margins) * 2
+        toolbarHeight: (Theme.of(context).iconTheme.size ?? 24.0) +
+            (8.0 + 4.0 + SliverSearchBar.verticalMargins) * 2,
+        pinned: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        titleSpacing: 0.0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [
+                Theme.of(context).scaffoldBackgroundColor.withOpacity(0.0),
+                Theme.of(context).scaffoldBackgroundColor
+              ])),
+        ),
+        title: Card(
+            margin: const EdgeInsets.symmetric(
+                horizontal: SliverSearchBar.horizontalMargins,
+                vertical: SliverSearchBar.verticalMargins),
+            elevation: 4.0,
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    ToggleableIconButton(
+                        startIcon: Icons.search,
+                        endIcon: Icons.arrow_back,
+                        isStartButtonNotifier: _isSearchButtonNotifier,
+                        onStartPress: _open,
+                        onEndPress: () {
+                          FocusScope.of(context).unfocus();
+                          _close();
+                        }),
+                    Expanded(
+                        child: TextField(
+                      decoration:
+                          InputDecoration.collapsed(hintText: widget.hintText),
+                      focusNode: _focusNode,
+                      controller: _queryController,
+                      onChanged: (value) {
+                        setState(() {
+                          debugPrint('onchanged:$value'); //todo
+                        });
+                      },
+                      onSubmitted: (value) => _submit(),
+                    )),
+                    IconButton(
+                      icon: Icon(_queryController.text.isEmpty
+                          ? Icons.mic
+                          : Icons.close),
+                      splashRadius: _actionButtonSplashRadius,
+                      onPressed: () {
+                        _queryController.text.isEmpty
+                            ? _speechToText((value) {
+                                if (value != null) {
+                                  _setQuery(value);
+                                  _submit();
+                                }
+                              })
+                            : _setQuery('');
+                      },
+                    )
+                  ],
+                ))));
   }
 
   /// *Use this function to programmatically set the query value

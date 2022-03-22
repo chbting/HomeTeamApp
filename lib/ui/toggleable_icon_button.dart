@@ -6,10 +6,11 @@ class ToggleableIconButton extends StatefulWidget {
       required this.endIcon,
       this.duration = const Duration(milliseconds: 250),
       this.beginWithStartIcon = true,
+      this.toggleOnPressed = true,
       this.iconSize = 24.0,
       this.splashRadius = 20.0,
-      this.onStartPress,
-      this.onEndPress,
+      this.onStartPressed,
+      this.onEndPressed,
       this.isStartButtonNotifier,
       Key? key})
       : super(key: key);
@@ -17,8 +18,9 @@ class ToggleableIconButton extends StatefulWidget {
   final IconData startIcon, endIcon;
   final Duration duration;
   final bool beginWithStartIcon;
+  final bool toggleOnPressed;
   final double iconSize, splashRadius;
-  final VoidCallback? onStartPress, onEndPress;
+  final VoidCallback? onStartPressed, onEndPressed;
   final ValueNotifier<bool>? isStartButtonNotifier;
 
   @override
@@ -72,16 +74,22 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
             }),
         splashRadius: widget.splashRadius,
         onPressed: () {
-          // Save value to avoid set button twice
-          bool newValue = !_isStartButton;
+          if (widget.toggleOnPressed) {
+            // Save value to avoid set button twice
+            bool newValue = !_isStartButton;
 
-          // I. Execute the defined codes
-          _isStartButton
-              ? widget.onStartPress?.call()
-              : widget.onEndPress?.call();
+            // I. Execute the defined codes
+            _isStartButton
+                ? widget.onStartPressed?.call()
+                : widget.onEndPressed?.call();
 
-          // II. Update icon state
-          _setButton(newValue);
+            // II. Update icon state
+            _setButton(newValue);
+          } else {
+            _isStartButton
+                ? widget.onStartPressed?.call()
+                : widget.onEndPressed?.call();
+          }
         });
   }
 

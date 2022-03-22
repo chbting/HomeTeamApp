@@ -36,8 +36,7 @@ class PropertiesScreen extends StatelessWidget {
         body: const TabBarView(
           children: <Widget>[
             SearchPropertiesScreen(),
-            SearchPropertiesScreenOld(),
-            //PropertiesVisitCartScreen(), //todo
+            PropertiesVisitCartScreen(), //todo close keyboard on swtiching
             VisitedPropertiesScreen(),
           ],
         ),

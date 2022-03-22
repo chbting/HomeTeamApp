@@ -23,9 +23,12 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
   Widget build(BuildContext context) {
     return SliverSearchBar(
       hintText: TextHelper.appLocalizations.search_properties_hint,
+      onQuerySubmitted: (query) {
+        debugPrint('submitted:$query'); //todo
+      },
       itemBuilderDelegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-          return Card(
+          return Card( // todo text color not updating on changing theme
               margin: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
               child: Padding(
                   padding: const EdgeInsets.all(8.0),

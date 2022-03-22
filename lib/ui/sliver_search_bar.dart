@@ -11,14 +11,14 @@ class SliverSearchBar extends StatefulWidget {
       {this.hintText,
       required this.itemBuilderDelegate,
       this.searchSuggestions,
-      this.onQuerySubmitted,
+      required this.onQuerySubmitted,
       Key? key})
       : super(key: key);
 
   final String? hintText;
   final SliverChildBuilderDelegate itemBuilderDelegate;
   final List<String>? searchSuggestions;
-  final Function? onQuerySubmitted;
+  final Function(String) onQuerySubmitted;
   static const horizontalMargins = 16.0;
   static const verticalMargins = 8.0;
 
@@ -28,10 +28,10 @@ class SliverSearchBar extends StatefulWidget {
 
 class SliverSearchBarState extends State<SliverSearchBar> {
   final _duration = const Duration(milliseconds: 250);
-  final _actionButtonSplashRadius = 20.0;
   final _queryController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
+  late FocusNode _focusNode;
   final ValueNotifier<bool> _isSearchButtonNotifier = ValueNotifier(true);
+  final ValueNotifier<bool> _isMicButtonNotifier = ValueNotifier(true);
   bool _isOpen = false;
 
   final List<String> _suggestions = [
@@ -43,20 +43,11 @@ class SliverSearchBarState extends State<SliverSearchBar> {
   @override
   void initState() {
     super.initState();
-    debugPrint('initState');
-    _focusNode.addListener(() {
-      // todo not called when textField is tapped
-      // todo no keyboard, no cursor on leading button tapped
-      // todo focus return to focusNode and trigger open() after close() on submit
-      debugPrint('focus listener:${_focusNode.hasFocus}');
-      _focusNode.hasFocus ? _open() : null;
-    });
+    _focusNode = FocusNode();
   }
 
   @override
   void dispose() {
-    debugPrint('dispose');
-    _focusNode.removeListener(() { });
     _focusNode.dispose();
     super.dispose();
   }
@@ -134,7 +125,9 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                   ),
                   Card(
                     margin: EdgeInsets.only(
-                        left: 16.0, right: 16.0, top: sliverAppBarHeight),
+                        left: SliverSearchBar.horizontalMargins,
+                        right: SliverSearchBar.horizontalMargins,
+                        top: sliverAppBarHeight),
                     color: Theme.of(context).canvasColor,
                     child: ListView.builder(
                       shrinkWrap: true,
@@ -146,7 +139,7 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                           title: Text(_suggestions[index]),
                           onTap: () {
                             _setQuery(_suggestions[index]);
-                            //todo execute search
+                            _submit();
                           },
                         );
                       },
@@ -173,42 +166,48 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                     startIcon: Icons.search,
                     endIcon: Icons.arrow_back,
                     isStartButtonNotifier: _isSearchButtonNotifier,
-                    onStartPress: _open,
-                    onEndPress: _close),
+                    onStartPressed: _open,
+                    onEndPressed: _close),
                 Expanded(
                     child: TextField(
                   decoration:
                       InputDecoration.collapsed(hintText: widget.hintText),
                   textInputAction: TextInputAction.search,
                   controller: _queryController,
-                  // onTap: () {
-                  //   _open();
-                  //   _focusNode.requestFocus();
-                  // },
+                  focusNode: _focusNode,
+                  onTap: _open,
                   onChanged: (value) {
                     setState(() {
-                      debugPrint('onchanged:$value'); //todo
+                      _isMicButtonNotifier.value =
+                          _queryController.text.isEmpty;
+                      //todo update suggestions
+                      debugPrint('onChanged:$value');
                     });
                   },
                   onSubmitted: (value) => _submit(),
                 )),
-                IconButton(
-                  icon: Icon(
-                      _queryController.text.isEmpty ? Icons.mic : Icons.close,
-                      color: Theme.of(context).iconTheme.color),
-                  splashRadius: _actionButtonSplashRadius,
-                  onPressed: () {
-                    _queryController.text.isEmpty
-                        ? _speechToText((value) {
-                            if (value != null) {
-                              // todo on return, textfield gain focus and calls _open()
-                              _setQuery(value);
-                              _submit();
-                            }
-                          })
-                        : _setQuery('');
-                  },
-                )
+                ToggleableIconButton(
+                    startIcon: Icons.mic,
+                    endIcon: Icons.close,
+                    toggleOnPressed: false,
+                    isStartButtonNotifier: _isMicButtonNotifier,
+                    onStartPressed: () {
+                      bool searchHasFocused = _focusNode.hasFocus;
+                      FocusScope.of(context).unfocus();
+                      _speechToText((value) {
+                        if (value != null) {
+                          _setQuery(value);
+                          _submit();
+                        } else {
+                          searchHasFocused
+                              ? FocusScope.of(context).requestFocus(_focusNode)
+                              : null;
+                        }
+                      });
+                    },
+                    onEndPressed: () {
+                      _setQuery('');
+                    }),
               ],
             )));
   }
@@ -217,7 +216,8 @@ class SliverSearchBarState extends State<SliverSearchBar> {
   /// Note: TextField.onChanged() will not be triggered by this function
   void _setQuery(String query) {
     setState(() {
-      _queryController.text = query; // todo cursor set to end on suggestions
+      _queryController.text = query;
+      _isMicButtonNotifier.value = _queryController.text.isEmpty;
       _queryController.selection = TextSelection.fromPosition(
           TextPosition(offset: _queryController.text.length));
     });
@@ -225,12 +225,11 @@ class SliverSearchBarState extends State<SliverSearchBar> {
 
   void _submit() {
     _close();
-    debugPrint('submitted:${_queryController.text}'); //todo
+    widget.onQuerySubmitted(_queryController.text);
   }
 
   void _open() {
     if (!_isOpen) {
-      debugPrint('do the open');
       FocusScope.of(context).requestFocus(_focusNode);
       setState(() {
         _isOpen = true;
@@ -241,7 +240,6 @@ class SliverSearchBarState extends State<SliverSearchBar> {
 
   void _close() {
     if (_isOpen) {
-      debugPrint('do the close');
       FocusScope.of(context).unfocus();
       setState(() {
         _isOpen = false;

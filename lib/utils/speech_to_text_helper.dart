@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
@@ -9,6 +12,7 @@ class SpeechToTextHelper {
   static final _speechToText = SpeechToText();
   static bool _initialized = false;
   static bool _isDialogShowing = false;
+  static BuildContext? _context;
   static final SpeechToTextHelper _instance = SpeechToTextHelper._internal();
 
   factory SpeechToTextHelper() => _instance;
@@ -18,20 +22,9 @@ class SpeechToTextHelper {
   static Future<bool> _isInitialized(BuildContext context) async {
     if (!_initialized) {
       _initialized = await _speechToText.initialize(
-        finalTimeout: const Duration(seconds: 5), //todo
-        onStatus: (status) {
-          debugPrint('${DateTime.now()} onStatus:$status');
-        },
-        onError: (error) {
-          debugPrint('${DateTime.now()} onError:$error');
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-                  TextHelper.appLocalizations.msg_cannot_recognize_speech)));
-          if (_isDialogShowing) {
-            Navigator.pop(context);
-          }
-        },
-      );
+          finalTimeout: const Duration(seconds: 3),
+          onStatus: (status) => _onStatus(status),
+          onError: (error) => _onError(error));
     }
     return _initialized;
   }
@@ -45,14 +38,16 @@ class SpeechToTextHelper {
               Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
       onSpeechToTextResult(null);
     } else {
-      // todo make sure the 3 locales always work/ handle error
+      _context = context;
       String localeId = SharedPreferencesHelper().getVoiceRecognitionLocaleId();
 
       _showSpeechToTextDialog(context, localeId);
-      await _speechToText.listen(
+      log('${DateTime.now()} begin listening');
+      _speechToText.listen(
           localeId: localeId,
           cancelOnError: true,
           onResult: (result) {
+            debugPrint('$result');
             if (result.finalResult) {
               if (_isDialogShowing) {
                 Navigator.pop(context);
@@ -114,5 +109,21 @@ class SpeechToTextHelper {
       _isDialogShowing = false;
       _speechToText.isListening ? _speechToText.stop() : null;
     });
+  }
+
+  static void _onStatus(String status) {
+    log('${DateTime.now()} onStatus:$status');
+  }
+
+  static void _onError(SpeechRecognitionError error) {
+    log('${DateTime.now()} onError:$error');
+    if (_context != null) {
+      ScaffoldMessenger.of(_context!).showSnackBar(SnackBar(
+          content:
+              Text(TextHelper.appLocalizations.msg_cannot_recognize_speech)));
+      if (_isDialogShowing) {
+        Navigator.pop(_context!);
+      }
+    }
   }
 }

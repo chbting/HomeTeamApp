@@ -1,9 +1,6 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/speech_to_text_helper.dart';
 import 'package:tner_client/ui/toggleable_icon_button.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 class SliverSearchBar extends StatefulWidget {
@@ -194,7 +191,8 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                     onStartPressed: () {
                       bool searchHasFocused = _focusNode.hasFocus;
                       FocusScope.of(context).unfocus();
-                      _speechToText((value) {
+                      SpeechToTextHelper.speechToText(context,
+                          (value) {
                         if (value != null) {
                           _setQuery(value);
                           _submit();
@@ -245,99 +243,6 @@ class SliverSearchBarState extends State<SliverSearchBar> {
         _isOpen = false;
         _isSearchButtonNotifier.value = true;
       });
-    }
-  }
-
-  void _showSpeechToTextUnavailableMessage() {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content:
-            Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
-  }
-
-  void _showSnackBarMessage(String message) {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  void _speechToText(Function(String?) onSpeechToTextResult) async {
-    final speech = SpeechToText();
-    final dialogKey = GlobalKey();
-
-    bool isAvailable = await speech.initialize(
-        onStatus: (value) {},
-        onError: (error) {
-          if (error.errorMsg == 'error_no_match' ||
-              error.errorMsg == 'error_speech_timeout') {
-            Navigator.of(context).pop();
-            _showSnackBarMessage(
-                TextHelper.appLocalizations.msg_cannot_recognize_speech);
-          }
-        });
-    if (!isAvailable) {
-      _showSpeechToTextUnavailableMessage();
-      onSpeechToTextResult(null);
-    } else {
-      String localeId = SharedPreferencesHelper().getVoiceRecognitionLocaleId();
-
-      // Show the speech to text dialog in the foreground
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-                key: dialogKey,
-                title: Text(TextHelper.appLocalizations.voice_search),
-                contentPadding: EdgeInsets.zero,
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: AvatarGlow(
-                          glowColor: Theme.of(context).colorScheme.secondary,
-                          endRadius: 72.0,
-                          child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.secondary,
-                            radius: 40.0,
-                            child: const Icon(Icons.mic, size: 32.0),
-                          ),
-                        )),
-                    Text(SharedPreferencesHelper.getVoiceRecognitionLanguage(
-                        localeId))
-                  ],
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: Text(TextHelper.appLocalizations.cancel,
-                        style: AppTheme.getDialogTextButtonTextStyle(context)),
-                    onPressed: () {
-                      speech.isListening ? speech.stop() : null;
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ]);
-          }).then((value) {
-        // make sure speech to text stops
-        speech.isListening ? speech.stop() : null;
-      });
-
-      // Listen in the background
-      speech.listen(
-          // todo lengthen active time
-          // todo make sure the 3 locales always work
-          localeId: localeId,
-          onResult: (result) {
-            if (result.finalResult) {
-              Navigator.of(dialogKey.currentContext!).pop();
-              if (result.confidence > 0.0) {
-                onSpeechToTextResult(result.recognizedWords);
-              } else {
-                onSpeechToTextResult(null);
-                _showSnackBarMessage(
-                    TextHelper.appLocalizations.msg_cannot_recognize_speech);
-              }
-            }
-          });
     }
   }
 }

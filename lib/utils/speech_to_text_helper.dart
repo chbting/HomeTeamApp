@@ -28,7 +28,7 @@ class SpeechToTextHelper {
               content: Text(
                   TextHelper.appLocalizations.msg_cannot_recognize_speech)));
           if (_isDialogShowing) {
-            Navigator.pop(context); // todo
+            Navigator.pop(context);
           }
         },
       );
@@ -55,7 +55,7 @@ class SpeechToTextHelper {
           onResult: (result) {
             if (result.finalResult) {
               if (_isDialogShowing) {
-                Navigator.pop(context); // todo test
+                Navigator.pop(context);
               }
               if (result.confidence > 0.0) {
                 onSpeechToTextResult(result.recognizedWords);

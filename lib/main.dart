@@ -34,7 +34,7 @@ class RootAppState extends State<RootApp> {
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {
-        return ValueListenableBuilder(
+        return ValueListenableBuilder( // todo changes not propagate throughout the app
           valueListenable: SharedPreferencesHelper.localeNotifier,
           builder: (context, value, _) {
             return MaterialApp(

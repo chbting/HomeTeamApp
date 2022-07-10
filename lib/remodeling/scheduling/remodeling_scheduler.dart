@@ -44,7 +44,7 @@ class RemodelingSchedulingScreenState
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance?.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
         _stepTitleBarTopMargin = box.size.height - 1; // -1 rounding error?

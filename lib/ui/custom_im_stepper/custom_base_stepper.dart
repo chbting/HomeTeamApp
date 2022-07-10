@@ -172,7 +172,7 @@ class _BaseStepperState extends State<BaseStepper> {
   Widget build(BuildContext context) {
     // Controls scrolling behavior.
     if (!widget.scrollingDisabled) {
-      WidgetsBinding.instance!.addPostFrameCallback(_afterLayout);
+      WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
     }
 
     return widget.direction == Axis.horizontal
@@ -246,7 +246,6 @@ class _BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
-      child: widget.children![index],
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {
@@ -270,6 +269,7 @@ class _BaseStepperState extends State<BaseStepper> {
       padding: widget.padding,
       margin: widget.margin,
       activeBorderWidth: widget.activeStepBorderWidth,
+      child: widget.children![index],
     );
   }
 

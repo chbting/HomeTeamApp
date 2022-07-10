@@ -88,12 +88,12 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                       child: Stack(
                         children: [
                           GestureDetector(
+                            onTap: _close,
                             child: Container(
                               width: double.infinity,
                               height: sliverAppBarHeight,
                               color: Colors.black.withOpacity(0.5),
                             ),
-                            onTap: _close,
                           ),
                         ],
                       ),
@@ -113,12 +113,12 @@ class SliverSearchBarState extends State<SliverSearchBar> {
             ? Stack(
                 children: [
                   GestureDetector(
+                    onTap: _close,
                     child: Container(
                       width: double.infinity,
                       color: Colors.black.withOpacity(0.5),
                       margin: EdgeInsets.only(top: sliverAppBarHeight),
                     ),
-                    onTap: _close,
                   ),
                   Card(
                     margin: EdgeInsets.only(

@@ -46,7 +46,7 @@ class PropertiesVisitSchedulingScreenState
   void initState() {
     super.initState();
     _data.propertyList.addAll(widget.selectedProperties);
-    SchedulerBinding.instance?.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
         _stepTitleBarTopMargin = box.size.height - 1; // -1 rounding error?
@@ -186,39 +186,40 @@ class PropertiesVisitSchedulingScreenState
 
   void _signWithBiometrics() async {
     final LocalAuthentication localAuth = LocalAuthentication();
-    bool canCheckBiometrics, didAuthenticate;
+    bool canCheckBiometrics = false;
+    bool didAuthenticate = false;
     try {
       canCheckBiometrics = await localAuth.canCheckBiometrics;
     } on PlatformException {
       canCheckBiometrics = false;
-    }
-
-    if (canCheckBiometrics) {
-      try {
-        didAuthenticate = await localAuth.authenticate(
-            localizedReason: TextHelper
-                .appLocalizations.reason_sign_property_visit_agreement,
-            biometricOnly: true);
-      } on PlatformException {
-        didAuthenticate = false;
-      }
-
-      if (didAuthenticate) {
-        // case 1: successfully authenticated
-        _data.agreementSigned = true;
-        _nextStep();
+    } finally {
+      if (canCheckBiometrics) {
+        try {
+          didAuthenticate = await localAuth.authenticate(
+              localizedReason: TextHelper
+                  .appLocalizations.reason_sign_property_visit_agreement,
+              options: const AuthenticationOptions(biometricOnly: true));
+        } on PlatformException {
+          didAuthenticate = false;
+        } finally {
+          if (didAuthenticate) {
+            // case 1: successfully authenticated
+            _data.agreementSigned = true;
+            _nextStep();
+          } else {
+            // case 2: authentication failed
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(TextHelper
+                    .appLocalizations.biometric_authentication_failed)));
+          }
+        }
       } else {
-        // case 2: authentication failed
+        // case 3: biometric authentication unavailable
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-                TextHelper.appLocalizations.biometric_authentication_failed)));
+            content: Text(TextHelper.appLocalizations
+                .biometric_authentication_unavailable_agreement)));
+        // todo button bar should move up when the snackBar shows
       }
-    } else {
-      // case 3: biometric authentication unavailable
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(TextHelper.appLocalizations
-              .biometric_authentication_unavailable_agreement)));
-      // todo button bar should move up when the snackBar shows
     }
   }
 

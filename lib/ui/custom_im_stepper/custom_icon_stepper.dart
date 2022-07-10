@@ -108,7 +108,6 @@ class CustomIconStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
-        children: _iconsWithSizeOverridden(),
         nextPreviousButtonsDisabled: enableNextPreviousButtons,
         stepTappingDisabled: enableStepTapping,
         previousButtonIcon: previousButtonIcon,
@@ -131,7 +130,8 @@ class CustomIconStepper extends StatelessWidget {
         scrollingDisabled: scrollingDisabled,
         activeStep: activeStep,
         alignment: alignment,
-        showStepCompleted: showStepCompleted);
+        showStepCompleted: showStepCompleted,
+        children: _iconsWithSizeOverridden());
   }
 
   // Overrides the size of the icons to almost fit the step.

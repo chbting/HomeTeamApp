@@ -22,7 +22,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       for (var element in _localeStringList) {
         _languageList.add(_localeStringToLanguage(element));
       }
@@ -53,7 +53,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 },
                 value: _darkMode,
               ),
-              ListTile(
+              ListTile(//todo language change is not propagated
                   title: Text(TextHelper.appLocalizations.language),
                   subtitle: Text(_localeStringToLanguage(_localeString)),
                   leading: Column(

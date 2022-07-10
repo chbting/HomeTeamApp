@@ -55,7 +55,6 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
     return IconButton(
         iconSize: widget.iconSize,
         icon: AnimatedScale(
-            child: Icon(_iconData, color: Theme.of(context).iconTheme.color),
             duration: widget.duration,
             curve: Curves.easeOut,
             scale: _iconButtonScale,
@@ -71,7 +70,8 @@ class ToggleableIconButtonState extends State<ToggleableIconButton> {
                   _updateFinished = true;
                 });
               }
-            }),
+            },
+            child: Icon(_iconData, color: Theme.of(context).iconTheme.color)),
         splashRadius: widget.splashRadius,
         onPressed: () {
           if (widget.toggleOnPressed) {

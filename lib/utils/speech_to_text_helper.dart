@@ -31,38 +31,40 @@ class SpeechToTextHelper {
 
   static void speechToText(
       BuildContext context, Function(String?) onSpeechToTextResult) async {
-    bool initialized = await _isInitialized(context);
-    if (!initialized) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content:
-              Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
-      onSpeechToTextResult(null);
-    } else {
-      _context = context;
-      String localeId = SharedPreferencesHelper().getVoiceRecognitionLocaleId();
+    _isInitialized(context).then((initialized) {
+      if (!initialized) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+                TextHelper.appLocalizations.msg_voice_search_unavailable)));
+        onSpeechToTextResult(null);
+      } else {
+        _context = context;
+        String localeId =
+            SharedPreferencesHelper().getVoiceRecognitionLocaleId();
 
-      _showSpeechToTextDialog(context, localeId);
-      log('${DateTime.now()} begin listening');
-      _speechToText.listen(
-          localeId: localeId,
-          cancelOnError: true,
-          onResult: (result) {
-            debugPrint('$result');
-            if (result.finalResult) {
-              if (_isDialogShowing) {
-                Navigator.pop(context);
+        _showSpeechToTextDialog(context, localeId);
+        log('${DateTime.now()} begin listening');
+        _speechToText.listen(
+            localeId: localeId,
+            cancelOnError: true,
+            onResult: (result) {
+              debugPrint('$result');
+              if (result.finalResult) {
+                if (_isDialogShowing) {
+                  Navigator.pop(context);
+                }
+                if (result.confidence > 0.0) {
+                  onSpeechToTextResult(result.recognizedWords);
+                } else {
+                  onSpeechToTextResult(null);
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(TextHelper
+                          .appLocalizations.msg_cannot_recognize_speech)));
+                }
               }
-              if (result.confidence > 0.0) {
-                onSpeechToTextResult(result.recognizedWords);
-              } else {
-                onSpeechToTextResult(null);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(TextHelper
-                        .appLocalizations.msg_cannot_recognize_speech)));
-              }
-            }
-          });
-    }
+            });
+      }
+    });
   }
 
   static void _showSpeechToTextDialog(BuildContext context, String localeId) {

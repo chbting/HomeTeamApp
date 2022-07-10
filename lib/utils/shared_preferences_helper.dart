@@ -49,7 +49,7 @@ class SharedPreferencesHelper {
 
   bool isDarkMode() =>
       _prefs.getBool(darkModeOnKey) ??
-      (Brightness.dark == SchedulerBinding.instance!.window.platformBrightness);
+      (Brightness.dark == SchedulerBinding.instance.window.platformBrightness);
 
   setLocale(Locale locale) {
     String newValue = localeToString(locale);

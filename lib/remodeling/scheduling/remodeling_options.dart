@@ -33,14 +33,14 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
     // Return a Card for one item, a Stepper for multiple items
     if (widget.data.selectedItemList.length == 1) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         widget.callBack(true);
       });
       return _getSingleOptionWidget(widget.data.selectedItemList[0]);
     } else {
-      List<custom.Step> _stepList = [];
+      List<custom.Step> stepList = [];
       for (var item in widget.data.selectedItemList) {
-        _stepList.add(_getOptionStep(item));
+        stepList.add(_getOptionStep(item));
       }
       // todo use form to validate
       return custom.Stepper(
@@ -54,7 +54,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               (BuildContext context, custom.ControlsDetails details) {
             return Row(
               children: <Widget>[
-                _activeOption < _stepList.length - 1
+                _activeOption < stepList.length - 1
                     ? ElevatedButton(
                         onPressed: details.onStepContinue,
                         child: Text(TextHelper.appLocalizations.next_option))
@@ -72,16 +72,16 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               setState(() {
                 FocusScope.of(context).unfocus();
                 _activeOption--;
-                _notifyIsRemodelingOptionsAtBottom(_stepList.length);
+                _notifyIsRemodelingOptionsAtBottom(stepList.length);
               });
             }
           },
           onStepContinue: () {
-            if (_activeOption < _stepList.length - 1) {
+            if (_activeOption < stepList.length - 1) {
               setState(() {
                 FocusScope.of(context).unfocus();
                 _activeOption++;
-                _notifyIsRemodelingOptionsAtBottom(_stepList.length);
+                _notifyIsRemodelingOptionsAtBottom(stepList.length);
               });
             }
           },
@@ -91,10 +91,10 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 FocusScope.of(context).unfocus();
                 _activeOption = index;
               }
-              _notifyIsRemodelingOptionsAtBottom(_stepList.length);
+              _notifyIsRemodelingOptionsAtBottom(stepList.length);
             });
           },
-          steps: _stepList);
+          steps: stepList);
     }
   }
 

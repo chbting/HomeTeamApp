@@ -35,7 +35,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                 context, _imageSize, _propertiesInCart[index],
                 trailing: InkWellButton(
                     text: S.of(context).negotiate_contract,
-                    icon: Icons.edit_note,
+                    icon: Icons.description_outlined,
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ContractBrokerScreen(

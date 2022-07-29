@@ -75,11 +75,11 @@ class PropertyVisitSchedulingScreenState
                   CustomIconStepper(
                     key: _stepperKey,
                     icons: [
-                      Icon(Icons.place,
+                      Icon(Icons.route,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.calendar_today,
                           color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.article,
+                      Icon(Icons.description,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.check,
                           color: Theme.of(context).colorScheme.onSecondary)

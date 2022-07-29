@@ -75,7 +75,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     icons: [
                       Icon(Icons.edit_note,
                           color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.account_box_rounded,
+                      Icon(Icons.person,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.draw,
                           color: Theme.of(context).colorScheme.onSecondary),

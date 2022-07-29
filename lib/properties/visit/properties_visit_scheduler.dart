@@ -7,7 +7,7 @@ import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
 import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
-import 'package:tner_client/properties/visit/properties_visit_starting_point.dart';
+import 'package:tner_client/properties/visit/properties_visit_sequencer.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 import 'package:tner_client/utils/text_helper.dart';

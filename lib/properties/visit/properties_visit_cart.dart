@@ -41,6 +41,9 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                   icon: const Icon(Icons.schedule),
                   label: Text(TextHelper.appLocalizations.schedule),
                   onPressed: () {
+                    //todo set distant matrix request here
+
+
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PropertiesVisitSchedulingScreen(
                             selectedProperties: _propertiesInCart)));

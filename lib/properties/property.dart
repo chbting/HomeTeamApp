@@ -40,14 +40,14 @@ class Property {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                  '${TextHelper.appLocalizations.area_net_abr}'
+                  '${TextHelper.s.area_net_abr}'
                   ': ${property.sqFtNet!}'
-                  ' ${TextHelper.appLocalizations.sq_ft_abr}',
+                  ' ${TextHelper.s.sq_ft_abr}',
                   style: AppTheme.getListTileBodyTextStyle(context)),
               Text(
-                  '${TextHelper.appLocalizations.area_gross_abr}'
+                  '${TextHelper.s.area_gross_abr}'
                   ': ${property.sqFtGross!}'
-                  ' ${TextHelper.appLocalizations.sq_ft_abr}',
+                  ' ${TextHelper.s.sq_ft_abr}',
                   style: AppTheme.getListTileBodyTextStyle(context))
             ],
           ),
@@ -71,6 +71,7 @@ List<Property> getSampleProperties() {
         const AssetImage('assets/demo_images/dragon_inn_court_240px.png')),
     Property(5, "嘉湖山莊", "嘉湖山莊 景湖居3座", "天水圍", 906, 783, 32000, 64000,
         const AssetImage('assets/demo_images/kenswood_court_240px.png')),
+    //notes: google map inaccuracy for this address
     Property(7, "海逸豪園", "海逸豪園2期 玉庭軒10座 ", "紅磡", 722, 592, 23000, 46000,
         const AssetImage('assets/demo_images/laguna_verde_240px.png')),
     Property(8, "麗港城", "麗港城9座14樓 ", "藍田", 639, 517, 17500, 35000,
@@ -78,6 +79,6 @@ List<Property> getSampleProperties() {
     Property(9, "珀麗灣", "珀麗灣1期16座", "馬灣", 1362, 1068, 42000, 84000,
         const AssetImage('assets/demo_images/park_island_240px.png')),
     Property(10, "粉嶺名都", "粉嶺名都富臨閣20樓", "紅磡", 500, 369, 13000, 48000,
-        const AssetImage('assets/demo_images/fanling_town_centre_240px.png')) //notes: google map inaccuracy for this address
+        const AssetImage('assets/demo_images/fanling_town_centre_240px.png'))
   ];
 }

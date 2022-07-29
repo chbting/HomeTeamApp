@@ -25,7 +25,7 @@ class RadioListDialog {
                   })),
               actions: <Widget>[
                 TextButton(
-                  child: Text(TextHelper.appLocalizations.cancel,
+                  child: Text(TextHelper.s.cancel,
                       style: AppTheme
                           .getDialogTextButtonTextStyle(
                           context)),

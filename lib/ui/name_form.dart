@@ -65,21 +65,21 @@ class NameFormState extends State<NameForm> {
                       focusNode: _lastNameFieldFocus,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          labelText: TextHelper.appLocalizations.last_name),
+                          labelText: TextHelper.s.last_name),
                       onChanged: (value) {
                         widget.client.lastName = value;
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         return (value == null || value.isEmpty)
-                            ? TextHelper.appLocalizations.info_required
+                            ? TextHelper.s.info_required
                             : null;
                       }),
                 ),
                 Container(width: 16.0),
                 Expanded(
                   child: DropdownButton<String>(
-                    hint: Text(TextHelper.appLocalizations.title),
+                    hint: Text(TextHelper.s.title),
                     isExpanded: true,
                     value: widget.client.title,
                     onChanged: (String? newValue) {
@@ -88,10 +88,10 @@ class NameFormState extends State<NameForm> {
                       });
                     },
                     items: <String>[
-                      TextHelper.appLocalizations.mr,
-                      TextHelper.appLocalizations.mrs,
-                      TextHelper.appLocalizations.miss,
-                      TextHelper.appLocalizations.ms
+                      TextHelper.s.mr,
+                      TextHelper.s.mrs,
+                      TextHelper.s.miss,
+                      TextHelper.s.ms
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -110,14 +110,14 @@ class NameFormState extends State<NameForm> {
                   focusNode: _firstNameFieldFocus,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: TextHelper.appLocalizations.first_name),
+                      labelText: TextHelper.s.first_name),
                   onChanged: (value) {
                     widget.client.firstName = value;
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
-                        ? TextHelper.appLocalizations.info_required
+                        ? TextHelper.s.info_required
                         : null;
                   }),
             )

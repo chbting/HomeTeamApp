@@ -50,7 +50,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.branding_watermark),
                             labelText:
-                                TextHelper.appLocalizations.id_card_number),
+                                TextHelper.s.id_card_number),
                         onChanged: (value) {
                           //widget.offer.addressLine2 = value;
                         },
@@ -71,9 +71,9 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText:
-                                TextHelper.appLocalizations.contact_number,
+                                TextHelper.s.contact_number,
                             helperText: TextHelper
-                                .appLocalizations.hong_kong_number_only,
+                                .s.hong_kong_number_only,
                             icon: const Icon(Icons.phone)),
                         onChanged: (value) {
                           widget.offer.client.phoneNumber = value;
@@ -81,14 +81,14 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
-                              ? TextHelper.appLocalizations.info_required
+                              ? TextHelper.s.info_required
                               : null;
                         }),
                     const Divider(thickness: 1.0),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Text(
-                          TextHelper.appLocalizations.mailing_address,
+                          TextHelper.s.mailing_address,
                           style: AppTheme.getCardTitleTextStyle(context),
                         )),
                     AddressForm(key: _addressFormKey, data: widget.offer.client)

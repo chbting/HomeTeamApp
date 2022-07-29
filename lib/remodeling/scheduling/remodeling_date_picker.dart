@@ -52,7 +52,7 @@ class RemodelingDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
-            title: Text(TextHelper.appLocalizations.remodeling_start_date,
+            title: Text(TextHelper.s.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,

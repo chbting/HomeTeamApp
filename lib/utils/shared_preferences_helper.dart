@@ -92,13 +92,13 @@ class SharedPreferencesHelper {
   static String getVoiceRecognitionLanguage(String localeId) {
     switch (localeId) {
       case 'en_GB':
-        return TextHelper.appLocalizations.english_voice_input;
+        return TextHelper.s.english_voice_input;
       case 'yue_HK':
-        return TextHelper.appLocalizations.cantonese;
+        return TextHelper.s.cantonese;
       case 'cmn_CN':
-        return TextHelper.appLocalizations.mandarin;
+        return TextHelper.s.mandarin;
       default:
-        return TextHelper.appLocalizations.english;
+        return TextHelper.s.english;
     }
   }
 }

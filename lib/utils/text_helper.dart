@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../generated/l10n.dart';
 
 class TextHelper {
-  static late AppLocalizations appLocalizations;
+  static late S s;
 
   static void ensureInitialized(BuildContext context) {
-    appLocalizations = AppLocalizations.of(context)!;
+    s = S.of(context);
   }
 }

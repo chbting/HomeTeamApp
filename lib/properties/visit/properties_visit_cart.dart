@@ -39,7 +39,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
               child: FloatingActionButton.extended(
                   heroTag: "properties_visit_cart_fab",
                   icon: const Icon(Icons.schedule),
-                  label: Text(TextHelper.appLocalizations.schedule),
+                  label: Text(TextHelper.s.schedule),
                   onPressed: () {
                     //todo set distant matrix request here
 
@@ -82,11 +82,11 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                                 _scaffoldMessengerKey.currentState!
                                     .showSnackBar(SnackBar(
                                         content: Text(TextHelper
-                                            .appLocalizations
+                                            .s
                                             .property_has_been_removed),
                                         action: SnackBarAction(
                                             label: TextHelper
-                                                .appLocalizations.undo,
+                                                .s.undo,
                                             onPressed: () {
                                               setState(() {
                                                 _propertiesInCart.insert(

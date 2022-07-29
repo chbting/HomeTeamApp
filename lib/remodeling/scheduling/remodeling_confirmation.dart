@@ -35,7 +35,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0), // todo review padding = all 16.0?
           child: ListTile(
               leading: const Icon(Icons.style),
-              title: Text(TextHelper.appLocalizations.remodeling_options,
+              title: Text(TextHelper.s.remodeling_options,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: _getRemodelingOptionsBody(context)),
         )),
@@ -48,7 +48,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                 Icon(Icons.calendar_today),
               ],
             ),
-            title: Text(TextHelper.appLocalizations.remodeling_start_date,
+            title: Text(TextHelper.s.remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
@@ -62,7 +62,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
               leading: const Icon(Icons.location_pin),
-              title: Text(TextHelper.appLocalizations.remodeling_address,
+              title: Text(TextHelper.s.remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.client.addressLine1}'
@@ -76,7 +76,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
               leading: const Icon(Icons.contact_phone),
-              title: Text(TextHelper.appLocalizations.contact_number,
+              title: Text(TextHelper.s.contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.client.phoneNumber}'
@@ -112,12 +112,12 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                     data.paintArea, data.scrapeOldPaint)),
                 style: AppTheme.getCardBodyTextStyle(context))
           ]),
-      Text('- ${data.paintArea} ${TextHelper.appLocalizations.sq_ft}',
+      Text('- ${data.paintArea} ${TextHelper.s.sq_ft}',
           style: AppTheme.getCardBodyTextStyle(context)),
       Text(
           data.scrapeOldPaint!
-              ? '- ${TextHelper.appLocalizations.scrape_old_paint_yes}'
-              : '- ${TextHelper.appLocalizations.scrape_old_paint_no}',
+              ? '- ${TextHelper.s.scrape_old_paint_yes}'
+              : '- ${TextHelper.s.scrape_old_paint_no}',
           style: AppTheme.getCardBodyTextStyle(context)),
     ]);
   }

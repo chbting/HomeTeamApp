@@ -57,12 +57,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 _activeOption < stepList.length - 1
                     ? ElevatedButton(
                         onPressed: details.onStepContinue,
-                        child: Text(TextHelper.appLocalizations.next_option))
+                        child: Text(TextHelper.s.next_option))
                     : Container(),
                 _activeOption > 0
                     ? TextButton(
                         onPressed: details.onStepCancel,
-                        child: Text(TextHelper.appLocalizations.back))
+                        child: Text(TextHelper.s.back))
                     : Container(),
               ],
             );
@@ -173,7 +173,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.appLocalizations.area_sq_ft,
+            labelText: TextHelper.s.area_sq_ft,
           ),
           onChanged: (value) {
             setState(() {
@@ -185,7 +185,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         ),
       ),
       RadioListTile(
-        title: Text(TextHelper.appLocalizations.scrape_old_paint_yes),
+        title: Text(TextHelper.s.scrape_old_paint_yes),
         value: true,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -195,7 +195,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         },
       ),
       RadioListTile(
-        title: Text(TextHelper.appLocalizations.scrape_old_paint_no),
+        title: Text(TextHelper.s.scrape_old_paint_no),
         value: false,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -218,7 +218,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.appLocalizations.area_sq_ft,
+            labelText: TextHelper.s.area_sq_ft,
           ),
           onChanged: (value) {
             setState(() {
@@ -244,7 +244,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.appLocalizations.count,
+            labelText: TextHelper.s.count,
           ),
           onChanged: (value) {
             setState(() {
@@ -282,7 +282,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(TextHelper.appLocalizations.estimate,
+            Text(TextHelper.s.estimate,
                 style: Theme.of(context).textTheme.subtitle1),
             Text(formatPrice(price),
                 style: Theme.of(context).textTheme.subtitle1),

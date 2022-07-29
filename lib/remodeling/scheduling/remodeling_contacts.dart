@@ -79,23 +79,23 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                       ],
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          labelText: TextHelper.appLocalizations.contact_number,
+                          labelText: TextHelper.s.contact_number,
                           helperText:
-                              TextHelper.appLocalizations.hong_kong_number_only,
+                              TextHelper.s.hong_kong_number_only,
                           icon: const Icon(Icons.phone)),
                       onChanged: (value) {
                         widget.data.client.phoneNumber = value;
                       },
                       validator: (value) {
                         return (value == null || value.isEmpty)
-                            ? TextHelper.appLocalizations.info_required
+                            ? TextHelper.s.info_required
                             : null;
                       }),
                   const Divider(thickness: 1.0),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: Text(
-                        TextHelper.appLocalizations.remodeling_address,
+                        TextHelper.s.remodeling_address,
                         style: AppTheme.getCardTitleTextStyle(context),
                       )),
                   AddressForm(key: _addressFormKey, data: widget.data.client)

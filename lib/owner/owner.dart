@@ -11,10 +11,10 @@ class OwnerScreen extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(TextHelper.appLocalizations.owner),
+            title: Text(TextHelper.s.owner),
           ),
           body: Center(
-            child: Text(TextHelper.appLocalizations.owner),
+            child: Text(TextHelper.s.owner),
           ),
         ));
   }

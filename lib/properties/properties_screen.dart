@@ -43,13 +43,13 @@ class PropertiesScreenState extends State<PropertiesScreen>
             controller: _tabController,
             tabs: <Widget>[
               Tab(
-                text: TextHelper.appLocalizations.find_properties,
+                text: TextHelper.s.find_properties,
               ),
               Tab(
-                text: TextHelper.appLocalizations.properties_visit,
+                text: TextHelper.s.properties_visit,
               ),
               Tab(
-                text: TextHelper.appLocalizations.rent_properties,
+                text: TextHelper.s.rent_properties,
               ),
             ],
           ),

@@ -36,7 +36,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                         Icon(Icons.place),
                       ],
                     ),
-                    title: Text(TextHelper.appLocalizations.properties,
+                    title: Text(TextHelper.s.properties,
                         style: AppTheme.getCardTitleTextStyle(context)),
                     subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
                         style: AppTheme.getCardBodyTextStyle(context))))),
@@ -50,7 +50,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
               ],
             ),
             isThreeLine: true,
-            title: Text(TextHelper.appLocalizations.properties_visit_date,
+            title: Text(TextHelper.s.properties_visit_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
@@ -69,7 +69,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                   Icon(Icons.contact_phone),
                 ],
               ),
-              title: Text(TextHelper.appLocalizations.contact_number,
+              title: Text(TextHelper.s.contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
@@ -85,12 +85,12 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 Icon(Icons.description),
               ],
             ),
-            title: Text(TextHelper.appLocalizations.properties_visit_agreement,
+            title: Text(TextHelper.s.properties_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 data.agreementSigned
-                    ? TextHelper.appLocalizations.signed
-                    : TextHelper.appLocalizations.sign_later,
+                    ? TextHelper.s.signed
+                    : TextHelper.s.sign_later,
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         )

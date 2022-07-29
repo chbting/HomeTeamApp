@@ -67,7 +67,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
           floatingActionButton: FloatingActionButton.extended(
               heroTag: 'remodelling_selections_fab',
               icon: const Icon(Icons.schedule),
-              label: Text(TextHelper.appLocalizations.schedule),
+              label: Text(TextHelper.s.schedule),
               onPressed: () {
                 _isSelectedMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
@@ -75,7 +75,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                             selectionMap: _isSelectedMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                         content: Text(TextHelper
-                            .appLocalizations.msg_select_remodeling_item),
+                            .s.msg_select_remodeling_item),
                         behavior: SnackBarBehavior.floating,
                       ));
               }),

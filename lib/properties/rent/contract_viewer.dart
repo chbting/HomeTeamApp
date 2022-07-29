@@ -27,7 +27,7 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
           Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                TextHelper.appLocalizations.review_before_submission,
+                TextHelper.s.review_before_submission,
                 style: Theme.of(context).textTheme.subtitle2!.copyWith(
                   color: Theme.of(context).textTheme.caption!.color
                 )
@@ -35,7 +35,7 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(TextHelper.appLocalizations
+                child: Text(TextHelper.s
                     .properties_visit_agreement_content)), //todo adjust the contract according to the offer
           )
         ]);

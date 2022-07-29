@@ -66,7 +66,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
-            title: Text(TextHelper.appLocalizations.date,
+            title: Text(TextHelper.s.date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
@@ -97,7 +97,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.schedule)]),
-            title: Text(TextHelper.appLocalizations.time,
+            title: Text(TextHelper.s.time,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 TimeOfDay(
@@ -116,7 +116,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(TextHelper.appLocalizations.morning,
+                      child: Text(TextHelper.s.morning,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                 crossAxisCount: 4,
@@ -137,7 +137,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(TextHelper.appLocalizations.afternoon,
+                      child: Text(TextHelper.s.afternoon,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                   crossAxisCount: 4,

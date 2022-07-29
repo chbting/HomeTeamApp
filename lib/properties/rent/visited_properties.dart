@@ -23,7 +23,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
         floating: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          TextHelper.appLocalizations.properties_visited_last_thirty_days,
+          TextHelper.s.properties_visited_last_thirty_days,
           style: TextStyle(color: Theme.of(context).textTheme.subtitle1!.color),
         ),
       ),
@@ -50,7 +50,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                       // todo changed to check status once offer is submitted, the color should be different as well
                       ElevatedButton(
                           child: Text(
-                              TextHelper.appLocalizations.negotiate_contract),
+                              TextHelper.s.negotiate_contract),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => ContractBrokerScreen(

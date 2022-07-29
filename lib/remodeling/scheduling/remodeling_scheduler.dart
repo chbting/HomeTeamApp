@@ -69,7 +69,7 @@ class RemodelingSchedulingScreenState
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(TextHelper.appLocalizations.schedule_remodeling)),
+                title: Text(TextHelper.s.schedule_remodeling)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,13 +155,13 @@ class RemodelingSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return TextHelper.appLocalizations.remodeling_options;
+        return TextHelper.s.remodeling_options;
       case 1:
-        return TextHelper.appLocalizations.pick_a_day;
+        return TextHelper.s.pick_a_day;
       case 2:
-        return TextHelper.appLocalizations.remodeling_address_and_contacts;
+        return TextHelper.s.remodeling_address_and_contacts;
       case 3:
-        return TextHelper.appLocalizations.confirm;
+        return TextHelper.s.confirm;
       default:
         return '';
     }
@@ -217,7 +217,7 @@ class RemodelingSchedulingScreenState
                     ? Container()
                     : OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.appLocalizations.back),
+                        label: Text(TextHelper.s.back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 RemodelingSchedulingScreen.buttonHeight),
@@ -232,8 +232,8 @@ class RemodelingSchedulingScreenState
                         ? Icons.arrow_forward
                         : Icons.check),
                     label: Text(_activeStep < _totalSteps - 1
-                        ? TextHelper.appLocalizations.next
-                        : TextHelper.appLocalizations.confirm_remodeling),
+                        ? TextHelper.s.next
+                        : TextHelper.s.confirm_remodeling),
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(_buttonWidth,
                           RemodelingSchedulingScreen.buttonHeight),

@@ -34,16 +34,16 @@ class SettingsScreenState extends State<SettingsScreen> {
     return Column(
       children: [
         AppBar(
-          title: Text(TextHelper.appLocalizations.settings),
+          title: Text(TextHelper.s.settings),
         ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               SettingsUI.getSettingsTitle(
-                  context, TextHelper.appLocalizations.general_settings),
+                  context, TextHelper.s.general_settings),
               SwitchListTile(
-                title: Text(TextHelper.appLocalizations.darkMode),
+                title: Text(TextHelper.s.darkMode),
                 secondary: const Icon(Icons.dark_mode),
                 onChanged: (value) {
                   setState(() {
@@ -54,7 +54,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 value: _darkMode,
               ),
               ListTile(//todo language change is not propagated
-                  title: Text(TextHelper.appLocalizations.language),
+                  title: Text(TextHelper.s.language),
                   subtitle: Text(_localeStringToLanguage(_localeString)),
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +69,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         _localeStringList,
                         _languageList,
                         _localeString,
-                        TextHelper.appLocalizations.choose_language, (value) {
+                        TextHelper.s.choose_language, (value) {
                       _localeString = value;
                       SharedPreferencesHelper().setLocale(
                           SharedPreferencesHelper.stringToLocale(value));
@@ -89,11 +89,11 @@ class SettingsScreenState extends State<SettingsScreen> {
 String _localeStringToLanguage(String locale) {
   switch (locale) {
     case 'en':
-      return TextHelper.appLocalizations.english;
+      return TextHelper.s.english;
     case 'zh_Hant':
-      return TextHelper.appLocalizations.traditional_chinese;
+      return TextHelper.s.traditional_chinese;
     case 'zh_Hans':
-      return TextHelper.appLocalizations.simplified_chinese;
+      return TextHelper.s.simplified_chinese;
     default:
       return 'unknown';
   }

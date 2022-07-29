@@ -68,7 +68,7 @@ class PropertiesVisitSchedulingScreenState
         return Scaffold(
             appBar: AppBar(
                 title: Text(
-                    TextHelper.appLocalizations.schedule_properties_visit)),
+                    TextHelper.s.schedule_properties_visit)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,13 +146,13 @@ class PropertiesVisitSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return TextHelper.appLocalizations.pick_starting_point;
+        return TextHelper.s.pick_starting_point;
       case 1:
-        return TextHelper.appLocalizations.pick_datetime;
+        return TextHelper.s.pick_datetime;
       case 2:
-        return TextHelper.appLocalizations.properties_visit_agreement;
+        return TextHelper.s.properties_visit_agreement;
       case 3:
-        return TextHelper.appLocalizations.confirm;
+        return TextHelper.s.confirm;
       default:
         return '';
     }
@@ -197,7 +197,7 @@ class PropertiesVisitSchedulingScreenState
         try {
           didAuthenticate = await localAuth.authenticate(
               localizedReason: TextHelper
-                  .appLocalizations.reason_sign_property_visit_agreement,
+                  .s.reason_sign_property_visit_agreement,
               options: const AuthenticationOptions(biometricOnly: true));
         } on PlatformException {
           didAuthenticate = false;
@@ -210,13 +210,13 @@ class PropertiesVisitSchedulingScreenState
             // case 2: authentication failed
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(TextHelper
-                    .appLocalizations.biometric_authentication_failed)));
+                    .s.biometric_authentication_failed)));
           }
         }
       } else {
         // case 3: biometric authentication unavailable
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(TextHelper.appLocalizations
+            content: Text(TextHelper.s
                 .biometric_authentication_unavailable_agreement)));
         // todo button bar should move up when the snackBar shows
       }
@@ -253,7 +253,7 @@ class PropertiesVisitSchedulingScreenState
                 child: _activeStep == 2
                     ? ElevatedButton.icon(
                         icon: const Icon(Icons.fingerprint),
-                        label: Text(TextHelper.appLocalizations.sign_now),
+                        label: Text(TextHelper.s.sign_now),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_biometricButtonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -270,7 +270,7 @@ class PropertiesVisitSchedulingScreenState
                     ? Container()
                     : OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.appLocalizations.back),
+                        label: Text(TextHelper.s.back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -289,7 +289,7 @@ class PropertiesVisitSchedulingScreenState
                 child: _activeStep == 2
                     ? OutlinedButton.icon(
                         icon: const Icon(Icons.redo),
-                        label: Text(TextHelper.appLocalizations.sign_later),
+                        label: Text(TextHelper.s.sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -308,8 +308,8 @@ class PropertiesVisitSchedulingScreenState
                             ? Icons.arrow_forward
                             : Icons.check),
                         label: Text(_activeStep < _totalSteps - 1
-                            ? TextHelper.appLocalizations.next
-                            : TextHelper.appLocalizations.confirm),
+                            ? TextHelper.s.next
+                            : TextHelper.s.confirm),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),

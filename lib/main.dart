@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
@@ -9,6 +8,7 @@ import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/utils/text_helper.dart';
 
 import 'contracts/contracts.dart';
+import 'generated/l10n.dart';
 import 'owner/owner.dart';
 import 'remodeling/remodeling_screen.dart';
 
@@ -39,29 +39,12 @@ class RootAppState extends State<RootApp> {
           builder: (context, value, _) {
             return MaterialApp(
                 localizationsDelegates: const [
-                  AppLocalizations.delegate,
+                  S.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                supportedLocales: const [
-                  Locale('en', ''),
-                  Locale.fromSubtags(languageCode: 'zh'),
-                  Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
-                  Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
-                  Locale.fromSubtags(
-                      languageCode: 'zh',
-                      scriptCode: 'Hans',
-                      countryCode: 'CN'),
-                  Locale.fromSubtags(
-                      languageCode: 'zh',
-                      scriptCode: 'Hant',
-                      countryCode: 'TW'),
-                  Locale.fromSubtags(
-                      languageCode: 'zh',
-                      scriptCode: 'Hant',
-                      countryCode: 'HK'),
-                ],
+                supportedLocales: S.delegate.supportedLocales,
                 home: const AppHome(),
                 theme: SharedPreferencesHelper().isDarkMode()
                     ? AppTheme.getDarkTheme()
@@ -103,23 +86,23 @@ class AppHomeState extends State<AppHome> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.apartment),
-            label: TextHelper.appLocalizations.properties,
+            label: TextHelper.s.properties,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.construction),
-            label: TextHelper.appLocalizations.remodeling,
+            label: TextHelper.s.remodeling,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.description),
-            label: TextHelper.appLocalizations.agreements,
+            label: TextHelper.s.agreements,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.perm_identity),
-            label: TextHelper.appLocalizations.owner,
+            label: TextHelper.s.owner,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
-            label: TextHelper.appLocalizations.settings,
+            label: TextHelper.s.settings,
           ),
         ],
         currentIndex: _selectedIndex,

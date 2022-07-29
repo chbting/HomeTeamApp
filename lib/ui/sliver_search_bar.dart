@@ -32,9 +32,9 @@ class SliverSearchBarState extends State<SliverSearchBar> {
   bool _isOpen = false;
 
   final List<String> _suggestions = [
-    TextHelper.appLocalizations.hong_kong,
-    TextHelper.appLocalizations.kowloon,
-    TextHelper.appLocalizations.new_territories
+    TextHelper.s.hong_kong,
+    TextHelper.s.kowloon,
+    TextHelper.s.new_territories
   ];
 
   @override

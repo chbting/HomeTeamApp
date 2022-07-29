@@ -16,6 +16,6 @@ class RemodelingStatusScreenState extends State<RemodelingStatusScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Text(TextHelper.appLocalizations.remodeling_status);
+    return Text(TextHelper.s.remodeling_status);
   }
 }

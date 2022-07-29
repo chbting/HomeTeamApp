@@ -21,9 +21,9 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
   final double _imageSize = 120.0;
   final List<Property> _propertyList = getSampleProperties();
   final List<String> _suggestions = [
-    TextHelper.appLocalizations.hong_kong,
-    TextHelper.appLocalizations.kowloon,
-    TextHelper.appLocalizations.new_territories
+    TextHelper.s.hong_kong,
+    TextHelper.s.kowloon,
+    TextHelper.s.new_territories
   ];
 
   @override
@@ -31,7 +31,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
     return FloatingSearchBar(
       key: _searchBarKey,
       margins: const EdgeInsets.all(16.0),
-      hint: TextHelper.appLocalizations.search_properties_hint,
+      hint: TextHelper.s.search_properties_hint,
       // todo show query
       title: _getSearchBarTitle(),
       hintStyle: const TextStyle(color: Colors.grey),
@@ -199,7 +199,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
   void _showSpeechToTextUnavailableMessage() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content:
-            Text(TextHelper.appLocalizations.msg_voice_search_unavailable)));
+            Text(TextHelper.s.msg_voice_search_unavailable)));
   }
 
   void _showSnackBarMessage(String message) {
@@ -218,7 +218,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
               error.errorMsg == 'error_speech_timeout') {
             Navigator.of(context).pop();
             _showSnackBarMessage(
-                TextHelper.appLocalizations.msg_cannot_recognize_speech);
+                TextHelper.s.msg_cannot_recognize_speech);
           }
         });
     if (!isAvailable) {
@@ -233,7 +233,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
           builder: (BuildContext context) {
             return AlertDialog(
                 key: dialogKey,
-                title: Text(TextHelper.appLocalizations.voice_search),
+                title: Text(TextHelper.s.voice_search),
                 contentPadding: EdgeInsets.zero,
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -256,7 +256,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: Text(TextHelper.appLocalizations.cancel,
+                    child: Text(TextHelper.s.cancel,
                         style: AppTheme.getDialogTextButtonTextStyle(context)),
                     onPressed: () {
                       speech.isListening ? speech.stop() : null;
@@ -281,7 +281,7 @@ class SearchPropertiesScreenOldState extends State<SearchPropertiesScreenOld> {
               } else {
                 onSpeechToTextResult(null);
                 _showSnackBarMessage(
-                    TextHelper.appLocalizations.msg_cannot_recognize_speech);
+                    TextHelper.s.msg_cannot_recognize_speech);
               }
               Navigator.of(dialogKey.currentContext!).pop();
             }

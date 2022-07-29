@@ -19,10 +19,10 @@ class RemodelingScreen extends StatelessWidget {
             child: TabBar(
               tabs: <Widget>[
                 Tab(
-                  text: TextHelper.appLocalizations.schedule_remodeling,
+                  text: TextHelper.s.schedule_remodeling,
                 ),
                 Tab(
-                  text: TextHelper.appLocalizations.remodeling_status,
+                  text: TextHelper.s.remodeling_status,
                 ),
               ],
             ),

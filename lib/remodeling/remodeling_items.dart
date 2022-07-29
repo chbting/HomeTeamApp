@@ -12,25 +12,25 @@ enum RemodelingItem {
 
 String getRemodelingItemTitle(RemodelingItem item) {
   if (item == RemodelingItem.painting) {
-    return TextHelper.appLocalizations.painting;
+    return TextHelper.s.painting;
   }
   if (item == RemodelingItem.wallCoverings) {
-    return TextHelper.appLocalizations.wallcoverings;
+    return TextHelper.s.wallcoverings;
   }
   if (item == RemodelingItem.ac) {
-    return TextHelper.appLocalizations.ac_window_type;
+    return TextHelper.s.ac_window_type;
   }
   if (item == RemodelingItem.removals) {
-    return TextHelper.appLocalizations.removals;
+    return TextHelper.s.removals;
   }
   if (item == RemodelingItem.suspendedCeiling) {
-    return TextHelper.appLocalizations.suspended_ceiling;
+    return TextHelper.s.suspended_ceiling;
   }
   if (item == RemodelingItem.toiletReplacement) {
-    return TextHelper.appLocalizations.toilet_replacement;
+    return TextHelper.s.toilet_replacement;
   }
   if (item == RemodelingItem.pestControl) {
-    return TextHelper.appLocalizations.pest_control;
+    return TextHelper.s.pest_control;
   }
   throw 'NoTitleCreatedForRemodelingItem';
 }

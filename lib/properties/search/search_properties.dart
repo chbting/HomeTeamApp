@@ -14,15 +14,15 @@ class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
   final double _imageSize = 120.0;
   final List<Property> _propertyList = getSampleProperties();
   final List<String> _suggestions = [
-    TextHelper.appLocalizations.hong_kong,
-    TextHelper.appLocalizations.kowloon,
-    TextHelper.appLocalizations.new_territories
+    TextHelper.s.hong_kong,
+    TextHelper.s.kowloon,
+    TextHelper.s.new_territories
   ];
 
   @override
   Widget build(BuildContext context) {
     return SliverSearchBar(
-      hintText: TextHelper.appLocalizations.search_properties_hint,
+      hintText: TextHelper.s.search_properties_hint,
       onQuerySubmitted: (query) {
         debugPrint('submitted:$query'); //todo
       },

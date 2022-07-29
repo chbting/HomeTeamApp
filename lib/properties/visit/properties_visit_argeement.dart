@@ -30,7 +30,7 @@ class PropertiesVisitAgreementWidgetState
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(TextHelper.appLocalizations
+                child: Text(TextHelper.s
                     .properties_visit_agreement_content)), //todo name of the person
           )
         ]);

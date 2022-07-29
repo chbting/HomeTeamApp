@@ -112,3 +112,5 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
+flutter_intl:
+  enabled: true

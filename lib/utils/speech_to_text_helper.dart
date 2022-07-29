@@ -35,7 +35,7 @@ class SpeechToTextHelper {
       if (!initialized) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-                TextHelper.appLocalizations.msg_voice_search_unavailable)));
+                TextHelper.s.msg_voice_search_unavailable)));
         onSpeechToTextResult(null);
       } else {
         _context = context;
@@ -59,7 +59,7 @@ class SpeechToTextHelper {
                   onSpeechToTextResult(null);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(TextHelper
-                          .appLocalizations.msg_cannot_recognize_speech)));
+                          .s.msg_cannot_recognize_speech)));
                 }
               }
             });
@@ -73,7 +73,7 @@ class SpeechToTextHelper {
         builder: (BuildContext context) {
           _isDialogShowing = true;
           return AlertDialog(
-              title: Text(TextHelper.appLocalizations.voice_search),
+              title: Text(TextHelper.s.voice_search),
               contentPadding: EdgeInsets.zero,
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -96,7 +96,7 @@ class SpeechToTextHelper {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text(TextHelper.appLocalizations.cancel,
+                  child: Text(TextHelper.s.cancel,
                       style: AppTheme.getDialogTextButtonTextStyle(context)),
                   onPressed: () {
                     _speechToText.isListening ? _speechToText.stop() : null;
@@ -122,7 +122,7 @@ class SpeechToTextHelper {
     if (_context != null) {
       ScaffoldMessenger.of(_context!).showSnackBar(SnackBar(
           content:
-              Text(TextHelper.appLocalizations.msg_cannot_recognize_speech)));
+              Text(TextHelper.s.msg_cannot_recognize_speech)));
       if (_isDialogShowing) {
         Navigator.pop(_context!);
       }

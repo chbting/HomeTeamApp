@@ -67,7 +67,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.place)]),
-            title: Text(TextHelper.appLocalizations.property_address,
+            title: Text(TextHelper.s.property_address,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
               '${widget.offer.property.address}',
@@ -94,12 +94,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.attach_money),
                             labelText:
-                                TextHelper.appLocalizations.monthly_rent),
+                                TextHelper.s.monthly_rent),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return TextHelper
-                                .appLocalizations.please_put_in_a_valid_amount;
+                                .s.please_put_in_a_valid_amount;
                           } else {
                             widget.offer.offeredMonthlyRent = int.parse(value);
                             return null;
@@ -116,12 +116,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.savings),
-                            labelText: TextHelper.appLocalizations.deposit),
+                            labelText: TextHelper.s.deposit),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return TextHelper
-                                .appLocalizations.please_put_in_a_valid_amount;
+                                .s.please_put_in_a_valid_amount;
                           } else {
                             widget.offer.offeredDeposit = int.parse(value);
                             return null;
@@ -131,7 +131,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
-                          TextHelper.appLocalizations.lease_period,
+                          TextHelper.s.lease_period,
                           style: Theme.of(context).textTheme.subtitle1,
                         )),
                     Row(
@@ -154,7 +154,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
-                          TextHelper.appLocalizations.tenant_pays_the_following,
+                          TextHelper.s.tenant_pays_the_following,
                           style: Theme.of(context).textTheme.subtitle1,
                         )),
                     GridView.count(
@@ -172,7 +172,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(TextHelper.appLocalizations.bill_water,
+                            title: Text(TextHelper.s.bill_water,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
@@ -186,7 +186,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(TextHelper.appLocalizations.bill_rates,
+                            title: Text(TextHelper.s.bill_rates,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
@@ -201,7 +201,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
                             title: Text(
-                                TextHelper.appLocalizations.bill_electricity,
+                                TextHelper.s.bill_electricity,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
@@ -216,7 +216,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
                             title: Text(
-                                TextHelper.appLocalizations.bill_management,
+                                TextHelper.s.bill_management,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
@@ -230,7 +230,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(TextHelper.appLocalizations.bill_gas,
+                            title: Text(TextHelper.s.bill_gas,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
@@ -249,7 +249,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.notes),
-                            labelText: TextHelper.appLocalizations.notes),
+                            labelText: TextHelper.s.notes),
                         onChanged: (value) {
                           widget.offer.notes = value;
                         },
@@ -273,13 +273,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: TextHelper.appLocalizations.start_date),
+                    labelText: TextHelper.s.start_date),
                 onTap: () {
                   // Stop the keyboard from appearing
                   FocusScope.of(context).requestFocus(FocusNode());
                   showDatePicker(
                           context: context,
-                          helpText: TextHelper.appLocalizations.start_date,
+                          helpText: TextHelper.s.start_date,
                           initialDate: widget.offer.offeredStartDate!,
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
@@ -303,7 +303,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     DateFormat(Format.date).parse(value!);
                     return null;
                   } on Exception {
-                    return TextHelper.appLocalizations.invalid_date;
+                    return TextHelper.s.invalid_date;
                   }
                 })));
   }
@@ -317,13 +317,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 enableInteractiveSelection: false,
                 decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: TextHelper.appLocalizations.end_date),
+                    labelText: TextHelper.s.end_date),
                 onTap: () {
                   // Stop the keyboard from appearing
                   FocusScope.of(context).requestFocus(FocusNode());
                   showDatePicker(
                           context: context,
-                          helpText: TextHelper.appLocalizations.end_date,
+                          helpText: TextHelper.s.end_date,
                           initialDate: widget.offer.offeredEndDate!,
                           firstDate: _leaseEndFirstDate,
                           lastDate: _leaseEndLastDate)
@@ -342,12 +342,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       return null;
                     }
                     if (end.isBefore(widget.offer.offeredStartDate!)) {
-                      return TextHelper.appLocalizations.invalid_date;
+                      return TextHelper.s.invalid_date;
                     } else {
                       return null;
                     }
                   } on Exception {
-                    return TextHelper.appLocalizations.invalid_date;
+                    return TextHelper.s.invalid_date;
                   }
                 })));
   }

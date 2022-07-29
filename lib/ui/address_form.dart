@@ -56,8 +56,8 @@ class AddressFormState extends State<AddressForm> {
               focusNode: _addressLine1FieldFocus,
               decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: TextHelper.appLocalizations.address_line1_label,
-                  helperText: TextHelper.appLocalizations.address_line1_helper,
+                  labelText: TextHelper.s.address_line1_label,
+                  helperText: TextHelper.s.address_line1_helper,
                   icon: Icon(Icons.location_pin,
                       color: (_addressLine1FieldFocus.hasPrimaryFocus ||
                               _addressLine2FieldFocus.hasFocus ||
@@ -77,16 +77,16 @@ class AddressFormState extends State<AddressForm> {
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText:
-                          TextHelper.appLocalizations.address_line2_label,
+                          TextHelper.s.address_line2_label,
                       helperText:
-                          TextHelper.appLocalizations.address_line2_helper),
+                          TextHelper.s.address_line2_helper),
                   onChanged: (value) {
                     widget.data.addressLine2 = value;
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
-                        ? TextHelper.appLocalizations.info_required
+                        ? TextHelper.s.info_required
                         : null;
                   }),
             ),
@@ -101,21 +101,21 @@ class AddressFormState extends State<AddressForm> {
                         focusNode: _districtFieldFocus,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: TextHelper.appLocalizations.district),
+                            labelText: TextHelper.s.district),
                         onChanged: (value) {
                           widget.data.district = value;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
-                              ? TextHelper.appLocalizations.info_required
+                              ? TextHelper.s.info_required
                               : null;
                         }),
                   ),
                   Container(width: 16.0),
                   Expanded(
                     child: DropdownButton<String>(
-                      hint: Text(TextHelper.appLocalizations.region),
+                      hint: Text(TextHelper.s.region),
                       isExpanded: true,
                       value: widget.data.region,
                       onChanged: (String? newValue) {
@@ -124,9 +124,9 @@ class AddressFormState extends State<AddressForm> {
                         });
                       },
                       items: <String>[
-                        TextHelper.appLocalizations.hong_kong,
-                        TextHelper.appLocalizations.kowloon,
-                        TextHelper.appLocalizations.new_territories
+                        TextHelper.s.hong_kong,
+                        TextHelper.s.kowloon,
+                        TextHelper.s.new_territories
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

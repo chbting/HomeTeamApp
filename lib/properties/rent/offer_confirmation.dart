@@ -40,7 +40,7 @@ class OfferConfirmationScreen extends StatelessWidget {
               leading: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [Icon(Icons.place)]),
-              title: Text(TextHelper.appLocalizations.property_address,
+              title: Text(TextHelper.s.property_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                 '${offer.property.address}',
@@ -63,7 +63,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(TextHelper.appLocalizations.lease_terms,
+                          Text(TextHelper.s.lease_terms,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Container(height: _itemSpacing),
                           Row(
@@ -75,14 +75,14 @@ class OfferConfirmationScreen extends StatelessWidget {
                           ),
                           Container(height: _itemSpacing),
                           const Divider(thickness: 1.0),
-                          Text(TextHelper.appLocalizations.lease_period,
+                          Text(TextHelper.s.lease_period,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(
                               '${DateFormat(Format.date).format(offer.offeredStartDate!)} '
                               '- ${DateFormat(Format.date).format(offer.offeredEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.appLocalizations.notes,
+                          Text(TextHelper.s.notes,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(
                               offer.notes == null
@@ -108,25 +108,25 @@ class OfferConfirmationScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(TextHelper.appLocalizations.tenant_info,
+                          Text(TextHelper.s.tenant_info,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.appLocalizations.name,
+                          Text(TextHelper.s.name,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(_getTenantName(),
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.appLocalizations.id_card_number,
+                          Text(TextHelper.s.id_card_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.idCardNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.appLocalizations.contact_number,
+                          Text(TextHelper.s.contact_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.phoneNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.appLocalizations.mailing_address,
+                          Text(TextHelper.s.mailing_address,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.addressLine1!,
                               style: AppTheme.getCardBodyTextStyle(context)),
@@ -150,7 +150,7 @@ class OfferConfirmationScreen extends StatelessWidget {
 
     switch (clientType) {
       case ClientType.tenant:
-        title = TextHelper.appLocalizations.offered;
+        title = TextHelper.s.offered;
         monthlyRent = offer.offeredMonthlyRent!;
         deposit = offer.offeredDeposit!;
         water = offer.offeredWater;
@@ -160,7 +160,7 @@ class OfferConfirmationScreen extends StatelessWidget {
         management = offer.offeredManagement;
         break;
       case ClientType.landLord:
-        title = TextHelper.appLocalizations.original;
+        title = TextHelper.s.original;
         monthlyRent = offer.property.monthlyRent!;
         deposit = offer.property.deposit!;
         water = offer.property.water;
@@ -181,24 +181,24 @@ class OfferConfirmationScreen extends StatelessWidget {
           children: [
             Text(title, style: Theme.of(context).textTheme.headline6),
             Container(height: _itemSpacing),
-            Text(TextHelper.appLocalizations.monthly_rent,
+            Text(TextHelper.s.monthly_rent,
                 style: AppTheme.getCardTitleTextStyle(context)),
             Text(Format.currency.format(monthlyRent),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Container(height: _itemSpacing),
-            Text(TextHelper.appLocalizations.deposit,
+            Text(TextHelper.s.deposit,
                 style: AppTheme.getCardTitleTextStyle(context)),
             Text(Format.currency.format(deposit),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Container(height: _itemSpacing),
-            Text(TextHelper.appLocalizations.tenant_paid_fees_colon,
+            Text(TextHelper.s.tenant_paid_fees_colon,
                 style: AppTheme.getCardTitleTextStyle(context)),
-            _getFeeItem(context, TextHelper.appLocalizations.bill_water, water),
-            _getFeeItem(context, TextHelper.appLocalizations.bill_electricity,
+            _getFeeItem(context, TextHelper.s.bill_water, water),
+            _getFeeItem(context, TextHelper.s.bill_electricity,
                 electricity),
-            _getFeeItem(context, TextHelper.appLocalizations.bill_gas, gas),
-            _getFeeItem(context, TextHelper.appLocalizations.bill_rates, rates),
-            _getFeeItem(context, TextHelper.appLocalizations.bill_management,
+            _getFeeItem(context, TextHelper.s.bill_gas, gas),
+            _getFeeItem(context, TextHelper.s.bill_rates, rates),
+            _getFeeItem(context, TextHelper.s.bill_management,
                 management),
           ],
         ));

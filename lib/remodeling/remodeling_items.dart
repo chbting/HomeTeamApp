@@ -1,4 +1,5 @@
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:flutter/widgets.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 enum RemodelingItem {
   painting,
@@ -10,27 +11,27 @@ enum RemodelingItem {
   pestControl
 }
 
-String getRemodelingItemTitle(RemodelingItem item) {
+String getRemodelingItemTitle(RemodelingItem item, BuildContext context) {
   if (item == RemodelingItem.painting) {
-    return TextHelper.s.painting;
+    return S.of(context).painting;
   }
   if (item == RemodelingItem.wallCoverings) {
-    return TextHelper.s.wallcoverings;
+    return S.of(context).wallcoverings;
   }
   if (item == RemodelingItem.ac) {
-    return TextHelper.s.ac_window_type;
+    return S.of(context).ac_window_type;
   }
   if (item == RemodelingItem.removals) {
-    return TextHelper.s.removals;
+    return S.of(context).removals;
   }
   if (item == RemodelingItem.suspendedCeiling) {
-    return TextHelper.s.suspended_ceiling;
+    return S.of(context).suspended_ceiling;
   }
   if (item == RemodelingItem.toiletReplacement) {
-    return TextHelper.s.toilet_replacement;
+    return S.of(context).toilet_replacement;
   }
   if (item == RemodelingItem.pestControl) {
-    return TextHelper.s.pest_control;
+    return S.of(context).pest_control;
   }
   throw 'NoTitleCreatedForRemodelingItem';
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 import 'theme.dart';
 
@@ -25,7 +25,7 @@ class RadioListDialog {
                   })),
               actions: <Widget>[
                 TextButton(
-                  child: Text(TextHelper.s.cancel,
+                  child: Text(S.of(context).cancel,
                       style: AppTheme
                           .getDialogTextButtonTextStyle(
                           context)),

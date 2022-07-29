@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/utils/speech_to_text_helper.dart';
 import 'package:tner_client/ui/toggleable_icon_button.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class SliverSearchBar extends StatefulWidget {
   const SliverSearchBar(
@@ -31,12 +31,6 @@ class SliverSearchBarState extends State<SliverSearchBar> {
   final ValueNotifier<bool> _isMicButtonNotifier = ValueNotifier(true);
   bool _isOpen = false;
 
-  final List<String> _suggestions = [
-    TextHelper.s.hong_kong,
-    TextHelper.s.kowloon,
-    TextHelper.s.new_territories
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -55,6 +49,13 @@ class SliverSearchBarState extends State<SliverSearchBar> {
     //  vertical margins) * 2
     double sliverAppBarHeight = (Theme.of(context).iconTheme.size ?? 24.0) +
         (8.0 + 4.0 + SliverSearchBar.verticalMargins) * 2;
+
+    // todo sample suggestions
+    final List<String> sampleSuggestions = [
+      S.of(context).hong_kong,
+      S.of(context).kowloon,
+      S.of(context).new_territories
+    ];
 
     return Stack(children: [
       CustomScrollView(slivers: <Widget>[
@@ -129,13 +130,13 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       primary: false,
-                      itemCount: _suggestions.length,
+                      itemCount: sampleSuggestions.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           leading: const Icon(Icons.history),
-                          title: Text(_suggestions[index]),
+                          title: Text(sampleSuggestions[index]),
                           onTap: () {
-                            _setQuery(_suggestions[index]);
+                            _setQuery(sampleSuggestions[index]);
                             _submit();
                           },
                         );

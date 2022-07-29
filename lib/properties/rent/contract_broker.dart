@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 import 'contract_adjuster.dart';
 import 'contract_offer_data.dart';
@@ -65,7 +65,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(TextHelper.s.negotiate_contract)),
+                title: Text(S.of(context).negotiate_contract)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,13 +147,13 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return TextHelper.s.accept_or_make_an_offer;
+        return S.of(context).accept_or_make_an_offer;
       case 1:
-        return TextHelper.s.fill_in_personal_information;
+        return S.of(context).fill_in_personal_information;
       case 2:
-        return TextHelper.s.sign_the_contract;
+        return S.of(context).sign_the_contract;
       case 3:
-        return TextHelper.s.confirm_and_submit;
+        return S.of(context).confirm_and_submit;
       default:
         return '';
     }
@@ -198,7 +198,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
         try {
           didAuthenticate = await localAuth.authenticate(
               localizedReason:
-                  TextHelper.s.reason_sign_rental_contract,
+                  S.of(context).reason_sign_rental_contract,
               options: const AuthenticationOptions(biometricOnly: true));
         } on PlatformException {
           didAuthenticate = false;
@@ -209,15 +209,13 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           } else {
             // case 2: authentication failed
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(TextHelper
-                    .s.biometric_authentication_failed)));
+                content: Text(S.of(context).biometric_authentication_failed)));
           }
         }
       } else {
         // case 3: biometric authentication unavailable
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(TextHelper
-                .s.biometric_authentication_unavailable)));
+            content: Text(S.of(context).biometric_authentication_unavailable)));
       }
       // todo snackbar blocking buttons
     }
@@ -246,8 +244,8 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                   icon: Icon(
                       _activeStep == 0 ? Icons.restart_alt : Icons.arrow_back),
                   label: Text(_activeStep == 0
-                      ? TextHelper.s.reset
-                      : TextHelper.s.back),
+                      ? S.of(context).reset
+                      : S.of(context).back),
                   style: OutlinedButton.styleFrom(
                       minimumSize:
                           Size(_buttonWidth, ContractBrokerScreen.buttonHeight),
@@ -272,10 +270,10 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       ? Icons.fingerprint
                       : (_activeStep == 3 ? Icons.check : Icons.arrow_forward)),
                   label: Text(_activeStep == 2
-                      ? TextHelper.s.sign_contract
+                      ? S.of(context).sign_contract
                       : (_activeStep == 3
-                          ? TextHelper.s.submit
-                          : TextHelper.s.next)),
+                          ? S.of(context).submit
+                          : S.of(context).next)),
                   style: ElevatedButton.styleFrom(
                       minimumSize:
                           Size(_buttonWidth, ContractBrokerScreen.buttonHeight),

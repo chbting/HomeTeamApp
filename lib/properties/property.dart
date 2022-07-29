@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 import '../ui/theme.dart';
 
@@ -40,14 +40,14 @@ class Property {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                  '${TextHelper.s.area_net_abr}'
+                  '${S.of(context).area_net_abr}'
                   ': ${property.sqFtNet!}'
-                  ' ${TextHelper.s.sq_ft_abr}',
+                  ' ${S.of(context).sq_ft_abr}',
                   style: AppTheme.getListTileBodyTextStyle(context)),
               Text(
-                  '${TextHelper.s.area_gross_abr}'
+                  '${S.of(context).area_gross_abr}'
                   ': ${property.sqFtGross!}'
-                  ' ${TextHelper.s.sq_ft_abr}',
+                  ' ${S.of(context).sq_ft_abr}',
                   style: AppTheme.getListTileBodyTextStyle(context))
             ],
           ),

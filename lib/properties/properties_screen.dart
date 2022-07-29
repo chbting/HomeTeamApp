@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tner_client/properties/rent/visited_properties.dart';
 import 'package:tner_client/properties/search/search_properties.dart';
 import 'package:tner_client/properties/visit/properties_visit_cart.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -43,13 +43,13 @@ class PropertiesScreenState extends State<PropertiesScreen>
             controller: _tabController,
             tabs: <Widget>[
               Tab(
-                text: TextHelper.s.find_properties,
+                text: S.of(context).find_properties,
               ),
               Tab(
-                text: TextHelper.s.properties_visit,
+                text: S.of(context).properties_visit,
               ),
               Tab(
-                text: TextHelper.s.rent_properties,
+                text: S.of(context).rent_properties,
               ),
             ],
           ),

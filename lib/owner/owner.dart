@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class OwnerScreen extends StatelessWidget {
   const OwnerScreen({Key? key}) : super(key: key);
@@ -11,10 +11,10 @@ class OwnerScreen extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(TextHelper.s.owner),
+            title: Text(S.of(context).owner),
           ),
           body: Center(
-            child: Text(TextHelper.s.owner),
+            child: Text(S.of(context).owner),
           ),
         ));
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
 import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
@@ -10,7 +11,6 @@ import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/properties_visit_sequencer.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class PropertiesVisitSchedulingScreen extends StatefulWidget {
   const PropertiesVisitSchedulingScreen(
@@ -66,9 +66,8 @@ class PropertiesVisitSchedulingScreenState
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar: AppBar(
-                title: Text(
-                    TextHelper.s.schedule_properties_visit)),
+            appBar:
+                AppBar(title: Text(S.of(context).schedule_properties_visit)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,13 +145,13 @@ class PropertiesVisitSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return TextHelper.s.pick_starting_point;
+        return S.of(context).pick_starting_point;
       case 1:
-        return TextHelper.s.pick_datetime;
+        return S.of(context).pick_datetime;
       case 2:
-        return TextHelper.s.properties_visit_agreement;
+        return S.of(context).properties_visit_agreement;
       case 3:
-        return TextHelper.s.confirm;
+        return S.of(context).confirm;
       default:
         return '';
     }
@@ -196,8 +195,8 @@ class PropertiesVisitSchedulingScreenState
       if (canCheckBiometrics) {
         try {
           didAuthenticate = await localAuth.authenticate(
-              localizedReason: TextHelper
-                  .s.reason_sign_property_visit_agreement,
+              localizedReason:
+                  S.of(context).reason_sign_property_visit_agreement,
               options: const AuthenticationOptions(biometricOnly: true));
         } on PlatformException {
           didAuthenticate = false;
@@ -209,15 +208,14 @@ class PropertiesVisitSchedulingScreenState
           } else {
             // case 2: authentication failed
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(TextHelper
-                    .s.biometric_authentication_failed)));
+                content: Text(S.of(context).biometric_authentication_failed)));
           }
         }
       } else {
         // case 3: biometric authentication unavailable
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(TextHelper.s
-                .biometric_authentication_unavailable_agreement)));
+            content: Text(
+                S.of(context).biometric_authentication_unavailable_agreement)));
         // todo button bar should move up when the snackBar shows
       }
     }
@@ -253,7 +251,7 @@ class PropertiesVisitSchedulingScreenState
                 child: _activeStep == 2
                     ? ElevatedButton.icon(
                         icon: const Icon(Icons.fingerprint),
-                        label: Text(TextHelper.s.sign_now),
+                        label: Text(S.of(context).sign_now),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_biometricButtonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -270,7 +268,7 @@ class PropertiesVisitSchedulingScreenState
                     ? Container()
                     : OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.s.back),
+                        label: Text(S.of(context).back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -289,7 +287,7 @@ class PropertiesVisitSchedulingScreenState
                 child: _activeStep == 2
                     ? OutlinedButton.icon(
                         icon: const Icon(Icons.redo),
-                        label: Text(TextHelper.s.sign_later),
+                        label: Text(S.of(context).sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),
@@ -308,8 +306,8 @@ class PropertiesVisitSchedulingScreenState
                             ? Icons.arrow_forward
                             : Icons.check),
                         label: Text(_activeStep < _totalSteps - 1
-                            ? TextHelper.s.next
-                            : TextHelper.s.confirm),
+                            ? S.of(context).next
+                            : S.of(context).confirm),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertiesVisitSchedulingScreen.buttonHeight),

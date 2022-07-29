@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
   const VisitedPropertiesScreen({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
         floating: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          TextHelper.s.properties_visited_last_thirty_days,
+          S.of(context).properties_visited_last_thirty_days,
           style: TextStyle(color: Theme.of(context).textTheme.subtitle1!.color),
         ),
       ),
@@ -50,7 +50,7 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                       // todo changed to check status once offer is submitted, the color should be different as well
                       ElevatedButton(
                           child: Text(
-                              TextHelper.s.negotiate_contract),
+                              S.of(context).negotiate_contract),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => ContractBrokerScreen(

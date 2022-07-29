@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 import '../property.dart';
 
@@ -39,7 +39,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
               child: FloatingActionButton.extended(
                   heroTag: "properties_visit_cart_fab",
                   icon: const Icon(Icons.schedule),
-                  label: Text(TextHelper.s.schedule),
+                  label: Text(S.of(context).schedule),
                   onPressed: () {
                     //todo set distant matrix request here
 
@@ -81,12 +81,10 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
                                 _showFab = _propertiesInCart.isNotEmpty;
                                 _scaffoldMessengerKey.currentState!
                                     .showSnackBar(SnackBar(
-                                        content: Text(TextHelper
-                                            .s
+                                        content: Text(S.of(context)
                                             .property_has_been_removed),
                                         action: SnackBarAction(
-                                            label: TextHelper
-                                                .s.undo,
+                                            label: S.of(context).undo,
                                             onPressed: () {
                                               setState(() {
                                                 _propertiesInCart.insert(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 import 'contracts/contracts.dart';
 import 'generated/l10n.dart';
@@ -34,7 +34,7 @@ class RootAppState extends State<RootApp> {
     return ValueListenableBuilder(
       valueListenable: SharedPreferencesHelper.themeNotifier,
       builder: (context, value, _) {
-        return ValueListenableBuilder( // todo changes not propagate throughout the app
+        return ValueListenableBuilder(
           valueListenable: SharedPreferencesHelper.localeNotifier,
           builder: (context, value, _) {
             return MaterialApp(
@@ -69,7 +69,6 @@ class AppHomeState extends State<AppHome> {
 
   @override
   Widget build(BuildContext context) {
-    TextHelper.ensureInitialized(context);
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -86,23 +85,23 @@ class AppHomeState extends State<AppHome> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.apartment),
-            label: TextHelper.s.properties,
+            label: S.of(context).properties,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.construction),
-            label: TextHelper.s.remodeling,
+            label: S.of(context).remodeling,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.description),
-            label: TextHelper.s.agreements,
+            label: S.of(context).agreements,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.perm_identity),
-            label: TextHelper.s.owner,
+            label: S.of(context).owner,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
-            label: TextHelper.s.settings,
+            label: S.of(context).settings,
           ),
         ],
         currentIndex: _selectedIndex,

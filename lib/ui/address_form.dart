@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/utils/client_data.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class AddressForm extends StatefulWidget {
   const AddressForm({Key? key, required this.data}) : super(key: key);
@@ -56,8 +56,8 @@ class AddressFormState extends State<AddressForm> {
               focusNode: _addressLine1FieldFocus,
               decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: TextHelper.s.address_line1_label,
-                  helperText: TextHelper.s.address_line1_helper,
+                  labelText: S.of(context).address_line1_label,
+                  helperText: S.of(context).address_line1_helper,
                   icon: Icon(Icons.location_pin,
                       color: (_addressLine1FieldFocus.hasPrimaryFocus ||
                               _addressLine2FieldFocus.hasFocus ||
@@ -77,16 +77,16 @@ class AddressFormState extends State<AddressForm> {
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText:
-                          TextHelper.s.address_line2_label,
+                          S.of(context).address_line2_label,
                       helperText:
-                          TextHelper.s.address_line2_helper),
+                          S.of(context).address_line2_helper),
                   onChanged: (value) {
                     widget.data.addressLine2 = value;
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
-                        ? TextHelper.s.info_required
+                        ? S.of(context).info_required
                         : null;
                   }),
             ),
@@ -101,21 +101,21 @@ class AddressFormState extends State<AddressForm> {
                         focusNode: _districtFieldFocus,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: TextHelper.s.district),
+                            labelText: S.of(context).district),
                         onChanged: (value) {
                           widget.data.district = value;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
-                              ? TextHelper.s.info_required
+                              ? S.of(context).info_required
                               : null;
                         }),
                   ),
                   Container(width: 16.0),
                   Expanded(
                     child: DropdownButton<String>(
-                      hint: Text(TextHelper.s.region),
+                      hint: Text(S.of(context).region),
                       isExpanded: true,
                       value: widget.data.region,
                       onChanged: (String? newValue) {
@@ -124,9 +124,9 @@ class AddressFormState extends State<AddressForm> {
                         });
                       },
                       items: <String>[
-                        TextHelper.s.hong_kong,
-                        TextHelper.s.kowloon,
-                        TextHelper.s.new_territories
+                        S.of(context).hong_kong,
+                        S.of(context).kowloon,
+                        S.of(context).new_territories
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

@@ -4,7 +4,7 @@ import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 import '../../utils/shared_preferences_helper.dart';
 
@@ -36,7 +36,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                         Icon(Icons.place),
                       ],
                     ),
-                    title: Text(TextHelper.s.properties,
+                    title: Text(S.of(context).properties,
                         style: AppTheme.getCardTitleTextStyle(context)),
                     subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
                         style: AppTheme.getCardBodyTextStyle(context))))),
@@ -50,7 +50,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
               ],
             ),
             isThreeLine: true,
-            title: Text(TextHelper.s.properties_visit_date,
+            title: Text(S.of(context).properties_visit_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
@@ -69,7 +69,7 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                   Icon(Icons.contact_phone),
                 ],
               ),
-              title: Text(TextHelper.s.contact_number,
+              title: Text(S.of(context).contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                   '${data.phoneNumber ?? "12345678"}' //todo remove debug text
@@ -85,12 +85,12 @@ class PropertiesVisitConfirmationWidget extends StatelessWidget {
                 Icon(Icons.description),
               ],
             ),
-            title: Text(TextHelper.s.properties_visit_agreement,
+            title: Text(S.of(context).properties_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 data.agreementSigned
-                    ? TextHelper.s.signed
-                    : TextHelper.s.sign_later,
+                    ? S.of(context).signed
+                    : S.of(context).sign_later,
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         )

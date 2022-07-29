@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -19,31 +19,32 @@ class SettingsScreenState extends State<SettingsScreen> {
   String _localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper().getLocale());
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      for (var element in _localeStringList) {
-        _languageList.add(_localeStringToLanguage(element));
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
+    for (var element in _localeStringList) {
+      _languageList.add(_localeStringToLanguage(element, context));
+    }
     return Column(
       children: [
         AppBar(
-          title: Text(TextHelper.s.settings),
+          title: Text(S.of(context).settings),
         ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               SettingsUI.getSettingsTitle(
-                  context, TextHelper.s.general_settings),
+                  context, S.of(context).general_settings),
               SwitchListTile(
-                title: Text(TextHelper.s.darkMode),
+                title: Text(S.of(context).darkMode),
                 secondary: const Icon(Icons.dark_mode),
                 onChanged: (value) {
                   setState(() {
@@ -53,9 +54,10 @@ class SettingsScreenState extends State<SettingsScreen> {
                 },
                 value: _darkMode,
               ),
-              ListTile(//todo language change is not propagated
-                  title: Text(TextHelper.s.language),
-                  subtitle: Text(_localeStringToLanguage(_localeString)),
+              ListTile(
+                  title: Text(S.of(context).language),
+                  subtitle:
+                      Text(_localeStringToLanguage(_localeString, context)),
                   leading: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +71,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         _localeStringList,
                         _languageList,
                         _localeString,
-                        TextHelper.s.choose_language, (value) {
+                        S.of(context).choose_language, (value) {
                       _localeString = value;
                       SharedPreferencesHelper().setLocale(
                           SharedPreferencesHelper.stringToLocale(value));
@@ -86,14 +88,14 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-String _localeStringToLanguage(String locale) {
+String _localeStringToLanguage(String locale, BuildContext context) {
   switch (locale) {
     case 'en':
-      return TextHelper.s.english;
+      return S.of(context).english;
     case 'zh_Hant':
-      return TextHelper.s.traditional_chinese;
+      return S.of(context).traditional_chinese;
     case 'zh_Hans':
-      return TextHelper.s.simplified_chinese;
+      return S.of(context).simplified_chinese;
     default:
       return 'unknown';
   }

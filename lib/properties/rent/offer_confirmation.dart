@@ -6,7 +6,7 @@ import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class OfferConfirmationScreen extends StatelessWidget {
   const OfferConfirmationScreen({Key? key, required this.offer})
@@ -40,7 +40,7 @@ class OfferConfirmationScreen extends StatelessWidget {
               leading: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [Icon(Icons.place)]),
-              title: Text(TextHelper.s.property_address,
+              title: Text(S.of(context).property_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
                 '${offer.property.address}',
@@ -63,7 +63,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(TextHelper.s.lease_terms,
+                          Text(S.of(context).lease_terms,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Container(height: _itemSpacing),
                           Row(
@@ -75,14 +75,14 @@ class OfferConfirmationScreen extends StatelessWidget {
                           ),
                           Container(height: _itemSpacing),
                           const Divider(thickness: 1.0),
-                          Text(TextHelper.s.lease_period,
+                          Text(S.of(context).lease_period,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(
                               '${DateFormat(Format.date).format(offer.offeredStartDate!)} '
                               '- ${DateFormat(Format.date).format(offer.offeredEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.s.notes,
+                          Text(S.of(context).notes,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(
                               offer.notes == null
@@ -108,25 +108,25 @@ class OfferConfirmationScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(TextHelper.s.tenant_info,
+                          Text(S.of(context).tenant_info,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.s.name,
+                          Text(S.of(context).name,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(_getTenantName(),
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.s.id_card_number,
+                          Text(S.of(context).id_card_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.idCardNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.s.contact_number,
+                          Text(S.of(context).contact_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.phoneNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
-                          Text(TextHelper.s.mailing_address,
+                          Text(S.of(context).mailing_address,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(offer.client.addressLine1!,
                               style: AppTheme.getCardBodyTextStyle(context)),
@@ -150,7 +150,7 @@ class OfferConfirmationScreen extends StatelessWidget {
 
     switch (clientType) {
       case ClientType.tenant:
-        title = TextHelper.s.offered;
+        title = S.of(context).offered;
         monthlyRent = offer.offeredMonthlyRent!;
         deposit = offer.offeredDeposit!;
         water = offer.offeredWater;
@@ -160,7 +160,7 @@ class OfferConfirmationScreen extends StatelessWidget {
         management = offer.offeredManagement;
         break;
       case ClientType.landLord:
-        title = TextHelper.s.original;
+        title = S.of(context).original;
         monthlyRent = offer.property.monthlyRent!;
         deposit = offer.property.deposit!;
         water = offer.property.water;
@@ -181,24 +181,24 @@ class OfferConfirmationScreen extends StatelessWidget {
           children: [
             Text(title, style: Theme.of(context).textTheme.headline6),
             Container(height: _itemSpacing),
-            Text(TextHelper.s.monthly_rent,
+            Text(S.of(context).monthly_rent,
                 style: AppTheme.getCardTitleTextStyle(context)),
             Text(Format.currency.format(monthlyRent),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Container(height: _itemSpacing),
-            Text(TextHelper.s.deposit,
+            Text(S.of(context).deposit,
                 style: AppTheme.getCardTitleTextStyle(context)),
             Text(Format.currency.format(deposit),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Container(height: _itemSpacing),
-            Text(TextHelper.s.tenant_paid_fees_colon,
+            Text(S.of(context).tenant_paid_fees_colon,
                 style: AppTheme.getCardTitleTextStyle(context)),
-            _getFeeItem(context, TextHelper.s.bill_water, water),
-            _getFeeItem(context, TextHelper.s.bill_electricity,
+            _getFeeItem(context, S.of(context).bill_water, water),
+            _getFeeItem(context, S.of(context).bill_electricity,
                 electricity),
-            _getFeeItem(context, TextHelper.s.bill_gas, gas),
-            _getFeeItem(context, TextHelper.s.bill_rates, rates),
-            _getFeeItem(context, TextHelper.s.bill_management,
+            _getFeeItem(context, S.of(context).bill_gas, gas),
+            _getFeeItem(context, S.of(context).bill_rates, rates),
+            _getFeeItem(context, S.of(context).bill_management,
                 management),
           ],
         ));

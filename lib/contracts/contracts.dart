@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class ContractsScreen extends StatelessWidget {
   const ContractsScreen({Key? key}) : super(key: key);
@@ -8,10 +8,10 @@ class ContractsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TextHelper.s.agreements),
+        title: Text(S.of(context).agreements),
       ),
       body: Center(
-        child: Text(TextHelper.s.agreements),
+        child: Text(S.of(context).agreements),
       ),
     );
   }

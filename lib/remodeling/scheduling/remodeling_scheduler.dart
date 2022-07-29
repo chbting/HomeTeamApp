@@ -8,7 +8,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
   const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
@@ -69,7 +69,7 @@ class RemodelingSchedulingScreenState
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(TextHelper.s.schedule_remodeling)),
+                title: Text(S.of(context).schedule_remodeling)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,13 +155,13 @@ class RemodelingSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return TextHelper.s.remodeling_options;
+        return S.of(context).remodeling_options;
       case 1:
-        return TextHelper.s.pick_a_day;
+        return S.of(context).pick_a_day;
       case 2:
-        return TextHelper.s.remodeling_address_and_contacts;
+        return S.of(context).remodeling_address_and_contacts;
       case 3:
-        return TextHelper.s.confirm;
+        return S.of(context).confirm;
       default:
         return '';
     }
@@ -217,7 +217,7 @@ class RemodelingSchedulingScreenState
                     ? Container()
                     : OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
-                        label: Text(TextHelper.s.back),
+                        label: Text(S.of(context).back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 RemodelingSchedulingScreen.buttonHeight),
@@ -232,8 +232,8 @@ class RemodelingSchedulingScreenState
                         ? Icons.arrow_forward
                         : Icons.check),
                     label: Text(_activeStep < _totalSteps - 1
-                        ? TextHelper.s.next
-                        : TextHelper.s.confirm_remodeling),
+                        ? S.of(context).next
+                        : S.of(context).confirm_remodeling),
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(_buttonWidth,
                           RemodelingSchedulingScreen.buttonHeight),

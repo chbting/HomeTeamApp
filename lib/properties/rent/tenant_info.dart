@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
 import 'package:tner_client/ui/address_form.dart';
 import 'package:tner_client/ui/name_form.dart';
 import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class TenantInformationScreen extends StatefulWidget {
   const TenantInformationScreen({Key? key, required this.offer})
@@ -49,8 +49,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.branding_watermark),
-                            labelText:
-                                TextHelper.s.id_card_number),
+                            labelText: S.of(context).id_card_number),
                         onChanged: (value) {
                           //widget.offer.addressLine2 = value;
                         },
@@ -70,10 +69,8 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         ],
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText:
-                                TextHelper.s.contact_number,
-                            helperText: TextHelper
-                                .s.hong_kong_number_only,
+                            labelText: S.of(context).contact_number,
+                            helperText: S.of(context).hong_kong_number_only,
                             icon: const Icon(Icons.phone)),
                         onChanged: (value) {
                           widget.offer.client.phoneNumber = value;
@@ -81,14 +78,14 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           return (value == null || value.isEmpty)
-                              ? TextHelper.s.info_required
+                              ? S.of(context).info_required
                               : null;
                         }),
                     const Divider(thickness: 1.0),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
                         child: Text(
-                          TextHelper.s.mailing_address,
+                          S.of(context).mailing_address,
                           style: AppTheme.getCardTitleTextStyle(context),
                         )),
                     AddressForm(key: _addressFormKey, data: widget.offer.client)

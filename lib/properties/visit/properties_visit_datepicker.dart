@@ -6,7 +6,7 @@ import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class PropertiesVisitDatePickerWidget extends StatefulWidget {
   const PropertiesVisitDatePickerWidget({Key? key, required this.data})
@@ -66,7 +66,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.calendar_today)]),
-            title: Text(TextHelper.s.date,
+            title: Text(S.of(context).date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
@@ -97,7 +97,7 @@ class PropertiesVisitDatePickerWidgetState
             leading: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [Icon(Icons.schedule)]),
-            title: Text(TextHelper.s.time,
+            title: Text(S.of(context).time,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 TimeOfDay(
@@ -116,7 +116,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(TextHelper.s.morning,
+                      child: Text(S.of(context).morning,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                 crossAxisCount: 4,
@@ -137,7 +137,7 @@ class PropertiesVisitDatePickerWidgetState
                   child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
-                      child: Text(TextHelper.s.afternoon,
+                      child: Text(S.of(context).afternoon,
                           style: AppTheme.getCardTitleTextStyle(context)))),
               GridView.count(
                   crossAxisCount: 4,

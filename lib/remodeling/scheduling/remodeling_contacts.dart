@@ -5,7 +5,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dar
 import 'package:tner_client/ui/address_form.dart';
 import 'package:tner_client/ui/name_form.dart';
 import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
   const RemodelingContactsWidget({Key? key, required this.data})
@@ -79,23 +79,23 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                       ],
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          labelText: TextHelper.s.contact_number,
+                          labelText: S.of(context).contact_number,
                           helperText:
-                              TextHelper.s.hong_kong_number_only,
+                              S.of(context).hong_kong_number_only,
                           icon: const Icon(Icons.phone)),
                       onChanged: (value) {
                         widget.data.client.phoneNumber = value;
                       },
                       validator: (value) {
                         return (value == null || value.isEmpty)
-                            ? TextHelper.s.info_required
+                            ? S.of(context).info_required
                             : null;
                       }),
                   const Divider(thickness: 1.0),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: Text(
-                        TextHelper.s.remodeling_address,
+                        S.of(context).remodeling_address,
                         style: AppTheme.getCardTitleTextStyle(context),
                       )),
                   AddressForm(key: _addressFormKey, data: widget.data.client)

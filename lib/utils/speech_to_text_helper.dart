@@ -4,9 +4,9 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class SpeechToTextHelper {
   static final _speechToText = SpeechToText();
@@ -24,7 +24,7 @@ class SpeechToTextHelper {
       _initialized = await _speechToText.initialize(
           finalTimeout: const Duration(seconds: 3),
           onStatus: (status) => _onStatus(status),
-          onError: (error) => _onError(error));
+          onError: (error) => _onError(error, context));
     }
     return _initialized;
   }
@@ -35,7 +35,7 @@ class SpeechToTextHelper {
       if (!initialized) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
-                TextHelper.s.msg_voice_search_unavailable)));
+                S.of(context).msg_voice_search_unavailable)));
         onSpeechToTextResult(null);
       } else {
         _context = context;
@@ -58,8 +58,7 @@ class SpeechToTextHelper {
                 } else {
                   onSpeechToTextResult(null);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(TextHelper
-                          .s.msg_cannot_recognize_speech)));
+                      content: Text(S.of(context).msg_cannot_recognize_speech)));
                 }
               }
             });
@@ -73,7 +72,7 @@ class SpeechToTextHelper {
         builder: (BuildContext context) {
           _isDialogShowing = true;
           return AlertDialog(
-              title: Text(TextHelper.s.voice_search),
+              title: Text(S.of(context).voice_search),
               contentPadding: EdgeInsets.zero,
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -91,12 +90,12 @@ class SpeechToTextHelper {
                         ),
                       )),
                   Text(SharedPreferencesHelper.getVoiceRecognitionLanguage(
-                      localeId))
+                      localeId, context))
                 ],
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text(TextHelper.s.cancel,
+                  child: Text(S.of(context).cancel,
                       style: AppTheme.getDialogTextButtonTextStyle(context)),
                   onPressed: () {
                     _speechToText.isListening ? _speechToText.stop() : null;
@@ -117,12 +116,12 @@ class SpeechToTextHelper {
     log('${DateTime.now()} onStatus:$status');
   }
 
-  static void _onError(SpeechRecognitionError error) {
+  static void _onError(SpeechRecognitionError error, BuildContext context) {
     log('${DateTime.now()} onError:$error');
     if (_context != null) {
       ScaffoldMessenger.of(_context!).showSnackBar(SnackBar(
           content:
-              Text(TextHelper.s.msg_cannot_recognize_speech)));
+              Text(S.of(context).msg_cannot_recognize_speech)));
       if (_isDialogShowing) {
         Navigator.pop(_context!);
       }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/visit/properties_visit_data.dart';
 import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class PropertiesVisitAgreementWidget extends StatefulWidget {
   const PropertiesVisitAgreementWidget({Key? key, required this.data})
@@ -30,7 +30,7 @@ class PropertiesVisitAgreementWidgetState
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(TextHelper.s
+                child: Text(S.of(context)
                     .properties_visit_agreement_content)), //todo name of the person
           )
         ]);

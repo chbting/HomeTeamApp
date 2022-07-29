@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class ContractViewerScreen extends StatefulWidget {
   const ContractViewerScreen({Key? key, required this.offer}) : super(key: key);
@@ -27,7 +27,7 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
           Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                TextHelper.s.review_before_submission,
+                S.of(context).review_before_submission,
                 style: Theme.of(context).textTheme.subtitle2!.copyWith(
                   color: Theme.of(context).textTheme.caption!.color
                 )
@@ -35,7 +35,7 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(TextHelper.s
+                child: Text(S.of(context)
                     .properties_visit_agreement_content)), //todo adjust the contract according to the offer
           )
         ]);

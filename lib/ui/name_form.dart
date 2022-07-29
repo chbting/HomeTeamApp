@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/utils/client_data.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class NameForm extends StatefulWidget {
   const NameForm({Key? key, required this.client}) : super(key: key);
@@ -65,21 +65,21 @@ class NameFormState extends State<NameForm> {
                       focusNode: _lastNameFieldFocus,
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          labelText: TextHelper.s.last_name),
+                          labelText: S.of(context).last_name),
                       onChanged: (value) {
                         widget.client.lastName = value;
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         return (value == null || value.isEmpty)
-                            ? TextHelper.s.info_required
+                            ? S.of(context).info_required
                             : null;
                       }),
                 ),
                 Container(width: 16.0),
                 Expanded(
                   child: DropdownButton<String>(
-                    hint: Text(TextHelper.s.title),
+                    hint: Text(S.of(context).title),
                     isExpanded: true,
                     value: widget.client.title,
                     onChanged: (String? newValue) {
@@ -88,10 +88,10 @@ class NameFormState extends State<NameForm> {
                       });
                     },
                     items: <String>[
-                      TextHelper.s.mr,
-                      TextHelper.s.mrs,
-                      TextHelper.s.miss,
-                      TextHelper.s.ms
+                      S.of(context).mr,
+                      S.of(context).mrs,
+                      S.of(context).miss,
+                      S.of(context).ms
                     ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -110,14 +110,14 @@ class NameFormState extends State<NameForm> {
                   focusNode: _firstNameFieldFocus,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: TextHelper.s.first_name),
+                      labelText: S.of(context).first_name),
                   onChanged: (value) {
                     widget.client.firstName = value;
                   },
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
-                        ? TextHelper.s.info_required
+                        ? S.of(context).info_required
                         : null;
                   }),
             )

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/custom_stepper.dart' as custom;
-import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget(
@@ -36,11 +36,11 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       WidgetsBinding.instance.addPostFrameCallback((_) {
         widget.callBack(true);
       });
-      return _getSingleOptionWidget(widget.data.selectedItemList[0]);
+      return _getSingleOptionWidget(widget.data.selectedItemList[0], context);
     } else {
       List<custom.Step> stepList = [];
       for (var item in widget.data.selectedItemList) {
-        stepList.add(_getOptionStep(item));
+        stepList.add(_getOptionStep(item, context));
       }
       // todo use form to validate
       return custom.Stepper(
@@ -57,12 +57,12 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 _activeOption < stepList.length - 1
                     ? ElevatedButton(
                         onPressed: details.onStepContinue,
-                        child: Text(TextHelper.s.next_option))
+                        child: Text(S.of(context).next_option))
                     : Container(),
                 _activeOption > 0
                     ? TextButton(
                         onPressed: details.onStepCancel,
-                        child: Text(TextHelper.s.back))
+                        child: Text(S.of(context).back))
                     : Container(),
               ],
             );
@@ -104,8 +104,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         : widget.callBack(false);
   }
 
-  Widget _getSingleOptionWidget(RemodelingItem item) {
-    String title = getRemodelingItemTitle(item);
+  Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {
+    String title = getRemodelingItemTitle(item, context);
     return SingleChildScrollView(
         padding: const EdgeInsets.only(
             left: 12.0,
@@ -129,8 +129,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                     ]))));
   }
 
-  custom.Step _getOptionStep(RemodelingItem item) {
-    String title = getRemodelingItemTitle(item);
+  custom.Step _getOptionStep(RemodelingItem item, BuildContext context) {
+    String title = getRemodelingItemTitle(item, context);
     return custom.Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
@@ -173,7 +173,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.s.area_sq_ft,
+            labelText: S.of(context).area_sq_ft,
           ),
           onChanged: (value) {
             setState(() {
@@ -185,7 +185,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         ),
       ),
       RadioListTile(
-        title: Text(TextHelper.s.scrape_old_paint_yes),
+        title: Text(S.of(context).scrape_old_paint_yes),
         value: true,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -195,7 +195,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         },
       ),
       RadioListTile(
-        title: Text(TextHelper.s.scrape_old_paint_no),
+        title: Text(S.of(context).scrape_old_paint_no),
         value: false,
         groupValue: widget.data.scrapeOldPaint,
         onChanged: (bool? value) {
@@ -218,7 +218,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.s.area_sq_ft,
+            labelText: S.of(context).area_sq_ft,
           ),
           onChanged: (value) {
             setState(() {
@@ -244,7 +244,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
             border: const OutlineInputBorder(),
-            labelText: TextHelper.s.count,
+            labelText: S.of(context).count,
           ),
           onChanged: (value) {
             setState(() {
@@ -282,7 +282,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(TextHelper.s.estimate,
+            Text(S.of(context).estimate,
                 style: Theme.of(context).textTheme.subtitle1),
             Text(formatPrice(price),
                 style: Theme.of(context).textTheme.subtitle1),

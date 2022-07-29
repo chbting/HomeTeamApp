@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/assets/custom_icons_icons.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
-import 'package:tner_client/utils/text_helper.dart';
 
 class RemodelingSelectionsScreen extends StatefulWidget {
   const RemodelingSelectionsScreen({Key? key}) : super(key: key);
@@ -32,18 +32,19 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
 
     // Rebuild _titleMap every time, in case of language change
     _titleMap[RemodelingItem.painting] =
-        getRemodelingItemTitle(RemodelingItem.painting);
+        getRemodelingItemTitle(RemodelingItem.painting, context);
     _titleMap[RemodelingItem.wallCoverings] =
-        getRemodelingItemTitle(RemodelingItem.wallCoverings);
-    _titleMap[RemodelingItem.ac] = getRemodelingItemTitle(RemodelingItem.ac);
+        getRemodelingItemTitle(RemodelingItem.wallCoverings, context);
+    _titleMap[RemodelingItem.ac] =
+        getRemodelingItemTitle(RemodelingItem.ac, context);
     _titleMap[RemodelingItem.removals] =
-        getRemodelingItemTitle(RemodelingItem.removals);
+        getRemodelingItemTitle(RemodelingItem.removals, context);
     _titleMap[RemodelingItem.suspendedCeiling] =
-        getRemodelingItemTitle(RemodelingItem.suspendedCeiling);
+        getRemodelingItemTitle(RemodelingItem.suspendedCeiling, context);
     _titleMap[RemodelingItem.toiletReplacement] =
-        getRemodelingItemTitle(RemodelingItem.toiletReplacement);
+        getRemodelingItemTitle(RemodelingItem.toiletReplacement, context);
     _titleMap[RemodelingItem.pestControl] =
-        getRemodelingItemTitle(RemodelingItem.pestControl);
+        getRemodelingItemTitle(RemodelingItem.pestControl, context);
 
     // Build only once
     if (_keyList.isEmpty) {
@@ -67,15 +68,14 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
           floatingActionButton: FloatingActionButton.extended(
               heroTag: 'remodelling_selections_fab',
               icon: const Icon(Icons.schedule),
-              label: Text(TextHelper.s.schedule),
+              label: Text(S.of(context).schedule),
               onPressed: () {
                 _isSelectedMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => RemodelingSchedulingScreen(
                             selectionMap: _isSelectedMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                        content: Text(TextHelper
-                            .s.msg_select_remodeling_item),
+                        content: Text(S.of(context).msg_select_remodeling_item),
                         behavior: SnackBarBehavior.floating,
                       ));
               }),

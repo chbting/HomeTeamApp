@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/text_helper.dart';
+import 'package:tner_client/generated/l10n.dart';
 
 class RemodelingStatusScreen extends StatefulWidget {
   const RemodelingStatusScreen({Key? key}) : super(key: key);
@@ -16,6 +16,6 @@ class RemodelingStatusScreenState extends State<RemodelingStatusScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Text(TextHelper.s.remodeling_status);
+    return Text(S.of(context).remodeling_status);
   }
 }

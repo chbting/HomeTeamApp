@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mailing address"),
         "mandarin": MessageLookupByLibrary.simpleMessage("Chinese (Mandarin)"),
         "miss": MessageLookupByLibrary.simpleMessage("Miss"),
+        "month": MessageLookupByLibrary.simpleMessage("month"),
         "monthly_rent": MessageLookupByLibrary.simpleMessage("Monthly Rent"),
         "morning": MessageLookupByLibrary.simpleMessage("Morning"),
         "mr": MessageLookupByLibrary.simpleMessage("Mr."),
@@ -178,10 +179,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remodeling Start Date"),
         "remodeling_status": MessageLookupByLibrary.simpleMessage("Status"),
         "removals": MessageLookupByLibrary.simpleMessage("Removals"),
+        "remove_property_from_cart":
+            MessageLookupByLibrary.simpleMessage("Remove"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("Rent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "save_for_later":
+            MessageLookupByLibrary.simpleMessage("Save for later"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schedule"),
         "schedule_properties_visit":
             MessageLookupByLibrary.simpleMessage("Schedule Properties Visit"),

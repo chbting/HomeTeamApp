@@ -40,7 +40,8 @@ class AppTheme {
                 primarySwatch: customLightBlue,
                 accentColor: darkThemeAccent,
                 brightness: Brightness.dark)
-            .copyWith(secondary: darkThemeAccent),
+            .copyWith(
+                secondary: darkThemeAccent, tertiary: Colors.lightBlueAccent),
         snackBarTheme: ThemeData.dark()
             .snackBarTheme
             .copyWith(actionTextColor: Colors.blue));
@@ -51,6 +52,8 @@ class AppTheme {
         // todo scroll gradient is difficult to see
         brightness: Brightness.light,
         primarySwatch: Colors.blue,
+        colorScheme:
+            ThemeData.light().colorScheme.copyWith(tertiary: Colors.blueAccent),
         snackBarTheme: ThemeData.light()
             .snackBarTheme
             .copyWith(actionTextColor: darkThemeAccent));
@@ -83,4 +86,16 @@ class AppTheme {
       Theme.of(context).brightness == Brightness.dark
           ? Colors.white70
           : Colors.black45;
+
+  static TextStyle? getRentTextStyle(BuildContext context) =>
+      Theme.of(context).textTheme.subtitle1;
+
+  static TextStyle? getInkWellButtonTextStyle(BuildContext context) =>
+      Theme.of(context)
+          .textTheme
+          .subtitle2!
+          .copyWith(color: getInkWellButtonColor(context));
+
+  static Color? getInkWellButtonColor(BuildContext context) =>
+      Theme.of(context).colorScheme.tertiary;
 }

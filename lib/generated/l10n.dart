@@ -1469,6 +1469,46 @@ class S {
       args: [],
     );
   }
+
+  /// `month`
+  String get month {
+    return Intl.message(
+      'month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save for later`
+  String get save_for_later {
+    return Intl.message(
+      'Save for later',
+      name: 'save_for_later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove`
+  String get remove_property_from_cart {
+    return Intl.message(
+      'Remove',
+      name: 'remove_property_from_cart',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

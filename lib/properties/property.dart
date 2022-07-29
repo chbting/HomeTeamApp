@@ -18,7 +18,52 @@ class Property {
   Property(this.id, this.name, this.address, this.district, this.sqFtGross,
       this.sqFtNet, this.monthlyRent, this.deposit, this.coverImage);
 
-  static Widget getPropertyPreviewTextWidget(
+  static Widget getPropertyListTile(
+      BuildContext context, double leadingImageSize, Property property,
+      {Widget? trailing, Widget? trailingSecondary}) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Image(
+                        width: leadingImageSize,
+                        height: leadingImageSize,
+                        image: property.coverImage)),
+                Property._getPropertyPreviewTextWidget(
+                    context, leadingImageSize, property),
+                Expanded(
+                  child: SizedBox(
+                    height: leadingImageSize,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            trailing ?? Container(),
+                            trailingSecondary ?? Container(),
+                          ],
+                        ),
+                        Text('\$${property.monthlyRent}/${S.of(context).month}',
+                            style: AppTheme.getRentTextStyle(context))
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const Divider(thickness: 1.0)
+          ],
+        ));
+  }
+
+  static Widget _getPropertyPreviewTextWidget(
       BuildContext context, double leadingImageSize, Property property) {
     return Expanded(
         child: SizedBox(

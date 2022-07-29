@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/ui/inkwell_button.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
   const VisitedPropertiesScreen({Key? key}) : super(key: key);
@@ -30,35 +31,16 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-            return Card(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: Image(
-                              width: _imageSize,
-                              height: _imageSize,
-                              image: _propertiesInCart[index].coverImage)),
-                      Property.getPropertyPreviewTextWidget(
-                          context, _imageSize, _propertiesInCart[index]),
-                      // todo changed to check status once offer is submitted, the color should be different as well
-                      ElevatedButton(
-                          child: Text(
-                              S.of(context).negotiate_contract),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ContractBrokerScreen(
-                                    property: _propertiesInCart[index])));
-                          })
-                    ],
-                  )),
-            );
+            return Property.getPropertyListTile(
+                context, _imageSize, _propertiesInCart[index],
+                trailing: InkWellButton(
+                    text: S.of(context).negotiate_contract,
+                    icon: Icons.edit_note,
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ContractBrokerScreen(
+                              property: _propertiesInCart[index])));
+                    }));
           },
           childCount: _propertiesInCart.length,
         ),

@@ -16,7 +16,8 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(context); // This line triggers widget updates when dark/light mode switches
+    Theme.of(
+        context); // This line triggers widget updates when dark/light mode switches
     return SliverSearchBar(
       hintText: S.of(context).search_properties_hint,
       onQuerySubmitted: (query) {
@@ -24,23 +25,8 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
       },
       itemBuilderDelegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return Card(
-              margin: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-              child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(right: 16.0),
-                          child: Image(
-                              width: _imageSize,
-                              height: _imageSize,
-                              image: _propertyList[index].coverImage)),
-                      Property.getPropertyPreviewTextWidget(
-                          context, _imageSize, _propertyList[index]),
-                    ],
-                  )));
+          return Property.getPropertyListTile(
+              context, _imageSize, _propertyList[index]);
         },
         childCount: _propertyList.length,
       ),

@@ -98,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mailing_address": MessageLookupByLibrary.simpleMessage("郵寄地址"),
         "mandarin": MessageLookupByLibrary.simpleMessage("中文 (普通話)"),
         "miss": MessageLookupByLibrary.simpleMessage("小姐"),
+        "month": MessageLookupByLibrary.simpleMessage("月"),
         "monthly_rent": MessageLookupByLibrary.simpleMessage("每月租金"),
         "morning": MessageLookupByLibrary.simpleMessage("上午"),
         "mr": MessageLookupByLibrary.simpleMessage("先生"),
@@ -110,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_voice_search_unavailable":
             MessageLookupByLibrary.simpleMessage("無法使用語音搜尋"),
         "name": MessageLookupByLibrary.simpleMessage("姓名"),
-        "negotiate_contract": MessageLookupByLibrary.simpleMessage("商討租約"),
+        "negotiate_contract": MessageLookupByLibrary.simpleMessage("傾租約"),
         "new_territories": MessageLookupByLibrary.simpleMessage("新界"),
         "next": MessageLookupByLibrary.simpleMessage("下一步"),
         "next_option": MessageLookupByLibrary.simpleMessage("下一項"),
@@ -153,10 +154,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "remodeling_start_date": MessageLookupByLibrary.simpleMessage("裝修開始日期"),
         "remodeling_status": MessageLookupByLibrary.simpleMessage("工程進度"),
         "removals": MessageLookupByLibrary.simpleMessage("清拆"),
+        "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租樓"),
         "reset": MessageLookupByLibrary.simpleMessage("重設"),
         "review_before_submission":
             MessageLookupByLibrary.simpleMessage("簽署租約後，你可在提交之前確認細節"),
+        "save": MessageLookupByLibrary.simpleMessage("收藏"),
+        "save_for_later": MessageLookupByLibrary.simpleMessage("遲啲睇"),
         "schedule": MessageLookupByLibrary.simpleMessage("預約"),
         "schedule_properties_visit":
             MessageLookupByLibrary.simpleMessage("預約睇樓"),

@@ -33,38 +33,13 @@ class PropertyVisitSequencerWidgetState
             left: 12.0,
             right: 12.0,
             top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom:
-                PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
-                    4.0),
+            bottom: PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
+                4.0),
         primary: false,
         itemCount: widget.data.propertyList.length,
         itemBuilder: (context, index) {
-          return Card(
-            child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Radio<int?>(
-                        value: widget.data.propertyList[index].id,
-                        groupValue: _selectedId,
-                        onChanged: (int? value) {
-                          setState(() {
-                            _selectedId = value;
-                          });
-                        }),
-                    Padding(
-                        padding: const EdgeInsets.only(left: 0, right: 16.0),
-                        child: Image(
-                            width: _imageSize,
-                            height: _imageSize,
-                            image: widget.data.propertyList[index].coverImage)),
-                    Property.getPropertyPreviewTextWidget(
-                        context, _imageSize, widget.data.propertyList[index]),
-                  ],
-                )),
-          );
+          return Property.getPropertyListTile(
+              context, _imageSize, widget.data.propertyList[index]);
         });
   }
 }

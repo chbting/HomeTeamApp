@@ -73,11 +73,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                   CustomIconStepper(
                     key: _stepperKey,
                     icons: [
-                      Icon(Icons.edit,
+                      Icon(Icons.edit_note,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.account_box_rounded,
                           color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.article,
+                      Icon(Icons.draw,
                           color: Theme.of(context).colorScheme.onSecondary),
                       Icon(Icons.check,
                           color: Theme.of(context).colorScheme.onSecondary)

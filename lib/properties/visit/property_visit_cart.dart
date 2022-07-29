@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/ui/inkwell_button.dart';
 
 import '../property.dart';
 
@@ -41,9 +41,9 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
                   heroTag: "properties_visit_cart_fab",
                   icon: const Icon(Icons.schedule),
                   label: Text(S.of(context).schedule),
+                  //todo swipe to save for later
                   onPressed: () {
                     //todo set distant matrix request here
-
 
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => PropertyVisitSchedulingScreen(
@@ -54,49 +54,39 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
           body: ListView.builder(
               // All are -4.0 internal padding
               padding: const EdgeInsets.only(
-                  left: 4.0, right: 4.0, top: 4.0, bottom: 68.0),
+                  left: 4.0, right: 4.0, top: 8.0, bottom: 68.0),
               primary: false,
               itemCount: _propertiesInCart.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Image(
-                                  width: _imageSize,
-                                  height: _imageSize,
-                                  image: _propertiesInCart[index].coverImage)),
-                          Property.getPropertyPreviewTextWidget(
-                              context, _imageSize, _propertiesInCart[index]),
-                          IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                              setState(() {
-                                var removedProperty = _propertiesInCart[index];
-                                _propertiesInCart.removeAt(index);
-                                _showFab = _propertiesInCart.isNotEmpty;
-                                _scaffoldMessengerKey.currentState!
-                                    .showSnackBar(SnackBar(
-                                        content: Text(S.of(context)
-                                            .property_has_been_removed),
-                                        action: SnackBarAction(
-                                            label: S.of(context).undo,
-                                            onPressed: () {
-                                              setState(() {
-                                                _propertiesInCart.insert(
-                                                    index, removedProperty);
-                                              });
-                                            })));
-                              });
-                            },
-                          )
-                        ],
-                      )),
+                return Property.getPropertyListTile(
+                  context,
+                  _imageSize,
+                  _propertiesInCart[index],
+                  trailing: InkWellButton(text: S.of(context).save_for_later,
+                  icon: Icons.favorite_outline),
+                  trailingSecondary: InkWellButton(
+                    text: S.of(context).remove_property_from_cart,
+                    icon: Icons.delete_outline,
+                    onTap: () {
+                      setState(() {
+                        var removedProperty = _propertiesInCart[index];
+                        _propertiesInCart.removeAt(index);
+                        _showFab = _propertiesInCart.isNotEmpty;
+                        _scaffoldMessengerKey.currentState!.showSnackBar(
+                            SnackBar(
+                                content: Text(
+                                    S.of(context).property_has_been_removed),
+                                action: SnackBarAction(
+                                    label: S.of(context).undo,
+                                    onPressed: () {
+                                      setState(() {
+                                        _propertiesInCart.insert(
+                                            index, removedProperty);
+                                      });
+                                    })));
+                      });
+                    },
+                  ),
                 );
               })),
     );

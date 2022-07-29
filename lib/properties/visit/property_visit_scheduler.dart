@@ -4,16 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/properties_visit_argeement.dart';
-import 'package:tner_client/properties/visit/properties_visit_confirmation.dart';
-import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/properties/visit/properties_visit_datepicker.dart';
-import 'package:tner_client/properties/visit/properties_visit_sequencer.dart';
+import 'package:tner_client/properties/visit/property_visit_agreement.dart';
+import 'package:tner_client/properties/visit/property_visit_confirmation.dart';
+import 'package:tner_client/properties/visit/property_visit_data.dart';
+import 'package:tner_client/properties/visit/property_visit_datepicker.dart';
+import 'package:tner_client/properties/visit/property_visit_sequencer.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
-class PropertiesVisitSchedulingScreen extends StatefulWidget {
-  const PropertiesVisitSchedulingScreen(
+class PropertyVisitSchedulingScreen extends StatefulWidget {
+  const PropertyVisitSchedulingScreen(
       {Key? key, required this.selectedProperties})
       : super(key: key);
 
@@ -24,12 +24,12 @@ class PropertiesVisitSchedulingScreen extends StatefulWidget {
   static const bottomButtonContainerHeight = buttonHeight + buttonSpacing * 2;
 
   @override
-  State<PropertiesVisitSchedulingScreen> createState() =>
-      PropertiesVisitSchedulingScreenState();
+  State<PropertyVisitSchedulingScreen> createState() =>
+      PropertyVisitSchedulingScreenState();
 }
 
-class PropertiesVisitSchedulingScreenState
-    extends State<PropertiesVisitSchedulingScreen> {
+class PropertyVisitSchedulingScreenState
+    extends State<PropertyVisitSchedulingScreen> {
   final GlobalKey _stepperKey = GlobalKey();
   final PageController _pageController = PageController(initialPage: 0);
   final _totalSteps = 4;
@@ -40,7 +40,7 @@ class PropertiesVisitSchedulingScreenState
   late double _buttonWidth;
   late double _biometricButtonWidth;
 
-  final PropertiesVisitData _data = PropertiesVisitData();
+  final PropertyVisitData _data = PropertyVisitData();
 
   @override
   void initState() {
@@ -58,10 +58,10 @@ class PropertiesVisitSchedulingScreenState
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
     _buttonWidth = (MediaQuery.of(context).size.width -
-            PropertiesVisitSchedulingScreen.buttonSpacing * 3) /
+            PropertyVisitSchedulingScreen.buttonSpacing * 3) /
         2;
     _biometricButtonWidth = MediaQuery.of(context).size.width -
-        PropertiesVisitSchedulingScreen.buttonSpacing * 2;
+        PropertyVisitSchedulingScreen.buttonSpacing * 2;
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
@@ -90,7 +90,7 @@ class PropertiesVisitSchedulingScreenState
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
                     stepRadius:
-                        PropertiesVisitSchedulingScreen.buttonSpacing * 3 / 2,
+                        PropertyVisitSchedulingScreen.buttonSpacing * 3 / 2,
                     showStepCompleted: true,
                     lineColor: Colors.grey,
                     onStepReached: (index) {
@@ -104,10 +104,10 @@ class PropertiesVisitSchedulingScreenState
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        PropertiesVisitStartingPointWidget(data: _data),
-                        PropertiesVisitDatePickerWidget(data: _data),
-                        PropertiesVisitAgreementWidget(data: _data),
-                        PropertiesVisitConfirmationWidget(data: _data)
+                        PropertyVisitSequencerWidget(data: _data),
+                        PropertyVisitDatePickerWidget(data: _data),
+                        PropertyVisitAgreementWidget(data: _data),
+                        PropertyVisitConfirmationWidget(data: _data)
                       ],
                     ),
                   ),
@@ -115,7 +115,7 @@ class PropertiesVisitSchedulingScreenState
               ),
               Container(
                 width: double.infinity,
-                height: PropertiesVisitSchedulingScreen.stepTitleBarHeight,
+                height: PropertyVisitSchedulingScreen.stepTitleBarHeight,
                 margin: EdgeInsets.only(top: _stepTitleBarTopMargin),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -228,13 +228,13 @@ class PropertiesVisitSchedulingScreenState
   Widget _getBottomButtons() {
     return Container(
         height: _activeStep == 2
-            ? PropertiesVisitSchedulingScreen.buttonHeight * 2 +
-                PropertiesVisitSchedulingScreen.buttonSpacing * 3
-            : PropertiesVisitSchedulingScreen.buttonHeight +
-                PropertiesVisitSchedulingScreen.buttonSpacing * 2,
+            ? PropertyVisitSchedulingScreen.buttonHeight * 2 +
+                PropertyVisitSchedulingScreen.buttonSpacing * 3
+            : PropertyVisitSchedulingScreen.buttonHeight +
+                PropertyVisitSchedulingScreen.buttonSpacing * 2,
         width: double.infinity,
         padding:
-            const EdgeInsets.all(PropertiesVisitSchedulingScreen.buttonSpacing),
+            const EdgeInsets.all(PropertyVisitSchedulingScreen.buttonSpacing),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
@@ -254,7 +254,7 @@ class PropertiesVisitSchedulingScreenState
                         label: Text(S.of(context).sign_now),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_biometricButtonWidth,
-                                PropertiesVisitSchedulingScreen.buttonHeight),
+                                PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),
                         onPressed: () {
                           _isButtonEnabled ? _signWithBiometrics() : null;
@@ -271,7 +271,7 @@ class PropertiesVisitSchedulingScreenState
                         label: Text(S.of(context).back),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
-                                PropertiesVisitSchedulingScreen.buttonHeight),
+                                PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder(),
                             backgroundColor:
                                 Theme.of(context).scaffoldBackgroundColor),
@@ -290,7 +290,7 @@ class PropertiesVisitSchedulingScreenState
                         label: Text(S.of(context).sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
-                                PropertiesVisitSchedulingScreen.buttonHeight),
+                                PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder(),
                             backgroundColor:
                                 Theme.of(context).scaffoldBackgroundColor),
@@ -310,7 +310,7 @@ class PropertiesVisitSchedulingScreenState
                             : S.of(context).confirm),
                         style: ElevatedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
-                                PropertiesVisitSchedulingScreen.buttonHeight),
+                                PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),
                         onPressed: () {
                           if (_isButtonEnabled) {

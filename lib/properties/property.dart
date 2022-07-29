@@ -57,7 +57,6 @@ class Property {
   }
 }
 
-// todo debug lines
 // todo English sample
 List<Property> getSampleProperties() {
   return [
@@ -72,13 +71,13 @@ List<Property> getSampleProperties() {
     Property(5, "嘉湖山莊", "嘉湖山莊 景湖居3座", "天水圍", 906, 783, 32000, 64000,
         const AssetImage('assets/demo_images/kenswood_court_240px.png')),
     //notes: google map inaccuracy for this address
-    Property(7, "海逸豪園", "海逸豪園2期 玉庭軒10座 ", "紅磡", 722, 592, 23000, 46000,
+    Property(6, "海逸豪園", "海逸豪園2期 玉庭軒10座", "紅磡", 722, 592, 23000, 46000,
         const AssetImage('assets/demo_images/laguna_verde_240px.png')),
-    Property(8, "麗港城", "麗港城9座14樓 ", "藍田", 639, 517, 17500, 35000,
+    Property(7, "麗港城", "麗港城9座14樓 ", "藍田", 639, 517, 17500, 35000,
         const AssetImage('assets/demo_images/laguna_city_240px.png')),
-    Property(9, "珀麗灣", "珀麗灣1期16座", "馬灣", 1362, 1068, 42000, 84000,
+    Property(8, "珀麗灣", "珀麗灣1期16座", "馬灣", 1362, 1068, 42000, 84000,
         const AssetImage('assets/demo_images/park_island_240px.png')),
-    Property(10, "粉嶺名都", "粉嶺名都富臨閣20樓", "紅磡", 500, 369, 13000, 48000,
+    Property(9, "粉嶺名都", "粉嶺名都富臨閣20樓", "紅磡", 500, 369, 13000, 48000,
         const AssetImage('assets/demo_images/fanling_town_centre_240px.png'))
   ];
 }

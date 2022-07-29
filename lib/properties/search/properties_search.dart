@@ -3,19 +3,20 @@ import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/ui/sliver_search_bar.dart';
 
-class SearchPropertiesScreen extends StatefulWidget {
-  const SearchPropertiesScreen({Key? key}) : super(key: key);
+class PropertySearchScreen extends StatefulWidget {
+  const PropertySearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<SearchPropertiesScreen> createState() => SearchPropertiesScreenState();
+  State<PropertySearchScreen> createState() => PropertySearchScreenState();
 }
 
-class SearchPropertiesScreenState extends State<SearchPropertiesScreen> {
+class PropertySearchScreenState extends State<PropertySearchScreen> {
   final double _imageSize = 120.0;
   final List<Property> _propertyList = getSampleProperties();
 
   @override
   Widget build(BuildContext context) {
+    Theme.of(context); // This line triggers widget updates when dark/light mode switches
     return SliverSearchBar(
       hintText: S.of(context).search_properties_hint,
       onQuerySubmitted: (query) {

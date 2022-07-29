@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/properties_screen.dart';
+import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
@@ -73,7 +73,7 @@ class AppHomeState extends State<AppHome> {
       body: IndexedStack(
         index: _selectedIndex,
         children: const <Widget>[
-          PropertiesScreen(),
+          PropertyScreen(),
           RemodelingScreen(),
           ContractsScreen(),
           OwnerScreen(),

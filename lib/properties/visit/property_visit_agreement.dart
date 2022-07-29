@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/properties/visit/property_visit_data.dart';
+import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
 import 'package:tner_client/generated/l10n.dart';
 
-class PropertiesVisitAgreementWidget extends StatefulWidget {
-  const PropertiesVisitAgreementWidget({Key? key, required this.data})
+class PropertyVisitAgreementWidget extends StatefulWidget {
+  const PropertyVisitAgreementWidget({Key? key, required this.data})
       : super(key: key);
 
-  final PropertiesVisitData data;
+  final PropertyVisitData data;
 
   @override
-  State<PropertiesVisitAgreementWidget> createState() =>
-      PropertiesVisitAgreementWidgetState();
+  State<PropertyVisitAgreementWidget> createState() =>
+      PropertyVisitAgreementWidgetState();
 }
 
-class PropertiesVisitAgreementWidgetState
-    extends State<PropertiesVisitAgreementWidget> {
+class PropertyVisitAgreementWidgetState
+    extends State<PropertyVisitAgreementWidget> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -23,7 +23,7 @@ class PropertiesVisitAgreementWidgetState
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
             bottom: 48.0 * 2 + 16.0 * 3 - 4.0),
         primary: false,
         children: [

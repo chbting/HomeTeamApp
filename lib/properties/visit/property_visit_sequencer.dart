@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/properties/visit/property_visit_data.dart';
+import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
 
-class PropertiesVisitStartingPointWidget extends StatefulWidget {
-  const PropertiesVisitStartingPointWidget({Key? key, required this.data})
+class PropertyVisitSequencerWidget extends StatefulWidget {
+  const PropertyVisitSequencerWidget({Key? key, required this.data})
       : super(key: key);
 
-  final PropertiesVisitData data;
+  final PropertyVisitData data;
 
   @override
-  State<PropertiesVisitStartingPointWidget> createState() =>
-      PropertiesVisitStartingPointWidgetState();
+  State<PropertyVisitSequencerWidget> createState() =>
+      PropertyVisitSequencerWidgetState();
 }
 
-class PropertiesVisitStartingPointWidgetState
-    extends State<PropertiesVisitStartingPointWidget> {
+class PropertyVisitSequencerWidgetState
+    extends State<PropertyVisitSequencerWidget> {
   final double _imageSize = 120.0;
   int? _selectedId = 0;
 
@@ -32,9 +32,9 @@ class PropertiesVisitStartingPointWidgetState
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
             bottom:
-                PropertiesVisitSchedulingScreen.bottomButtonContainerHeight -
+                PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
                     4.0),
         primary: false,
         itemCount: widget.data.propertyList.length,

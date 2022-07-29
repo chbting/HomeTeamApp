@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tner_client/properties/visit/properties_visit_data.dart';
-import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/properties/visit/property_visit_data.dart';
+import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 import 'package:tner_client/generated/l10n.dart';
 
-class PropertiesVisitDatePickerWidget extends StatefulWidget {
-  const PropertiesVisitDatePickerWidget({Key? key, required this.data})
+class PropertyVisitDatePickerWidget extends StatefulWidget {
+  const PropertyVisitDatePickerWidget({Key? key, required this.data})
       : super(key: key);
 
-  final PropertiesVisitData data;
+  final PropertyVisitData data;
 
   @override
-  State<PropertiesVisitDatePickerWidget> createState() =>
-      PropertiesVisitDatePickerWidgetState();
+  State<PropertyVisitDatePickerWidget> createState() =>
+      PropertyVisitDatePickerWidgetState();
 }
 
-class PropertiesVisitDatePickerWidgetState
-    extends State<PropertiesVisitDatePickerWidget> {
+class PropertyVisitDatePickerWidgetState
+    extends State<PropertyVisitDatePickerWidget> {
   final GlobalKey<CollapsableExpansionTileState> _datePickerKey =
       GlobalKey<CollapsableExpansionTileState>();
   final GlobalKey<CollapsableExpansionTileState> _timePickerKey =
@@ -40,7 +40,7 @@ class PropertiesVisitDatePickerWidgetState
     final firstDate = DateTime(
         now.year,
         now.month,
-        now.day + PropertiesVisitData.firstAvailableDay,
+        now.day + PropertyVisitData.firstAvailableDay,
         earliestAvailableTime.hour,
         earliestAvailableTime.minute);
     final lastDate = DateTime(
@@ -54,9 +54,9 @@ class PropertiesVisitDatePickerWidgetState
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: PropertiesVisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
             bottom:
-                PropertiesVisitSchedulingScreen.bottomButtonContainerHeight -
+                PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
                     4.0),
         primary: false,
         children: [

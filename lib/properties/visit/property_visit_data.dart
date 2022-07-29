@@ -1,6 +1,6 @@
 import '../property.dart';
 
-class PropertiesVisitData {
+class PropertyVisitData {
 
   final List<Property> propertyList = [];
   int? startingPropertyId;
@@ -17,7 +17,7 @@ class PropertiesVisitData {
   String? lastName;
   String? prefix;
 
-  PropertiesVisitData() {
+  PropertyVisitData() {
     final now = DateTime.now();
     dateTimePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
   }

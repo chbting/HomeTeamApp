@@ -19,14 +19,6 @@ class SettingsScreenState extends State<SettingsScreen> {
   String _localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper().getLocale());
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     for (var element in _localeStringList) {

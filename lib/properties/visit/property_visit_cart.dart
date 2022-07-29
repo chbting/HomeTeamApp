@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/visit/properties_visit_scheduler.dart';
+import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
+import 'package:tner_client/ui/theme.dart';
 
 import '../property.dart';
 
-class PropertiesVisitCartScreen extends StatefulWidget {
-  const PropertiesVisitCartScreen({Key? key}) : super(key: key);
+class PropertyVisitCartScreen extends StatefulWidget {
+  const PropertyVisitCartScreen({Key? key}) : super(key: key);
 
   @override
-  State<PropertiesVisitCartScreen> createState() =>
-      PropertiesVisitCartScreenState();
+  State<PropertyVisitCartScreen> createState() =>
+      PropertyVisitCartScreenState();
 }
 
-class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
+class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -45,7 +46,7 @@ class PropertiesVisitCartScreenState extends State<PropertiesVisitCartScreen>
 
 
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => PropertiesVisitSchedulingScreen(
+                        builder: (context) => PropertyVisitSchedulingScreen(
                             selectedProperties: _propertiesInCart)));
                   })),
           floatingActionButtonLocation:

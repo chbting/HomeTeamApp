@@ -1,9 +1,8 @@
-import '../property.dart';
+import 'package:tner_client/properties/property.dart';
 
 class PropertyVisitData {
-
   final List<Property> propertyList = [];
-  int? startingPropertyId;
+  final List<Property> propertyVisitSequence = [];
 
   // Date Picker
   static const firstAvailableDay = 2;

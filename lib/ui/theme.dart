@@ -62,8 +62,8 @@ class AppTheme {
   static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
       TextStyle(color: Theme.of(context).colorScheme.secondary);
 
-  /// Essentially the same function as getCardTitleTextStyle(), but this should
-  /// be used only in a ListTile setting when swapping title and subtitle
+  /// Essentially the same function as getCardTitleTextStyle(), this should be
+  /// used only in a ListTile setting when swapping between title and subtitle
   static TextStyle getListTileBodyTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
@@ -87,15 +87,19 @@ class AppTheme {
           ? Colors.white70
           : Colors.black45;
 
+  /// Specifically for the rent text in PropertyListTile
   static TextStyle? getRentTextStyle(BuildContext context) =>
       Theme.of(context).textTheme.subtitle1;
+
+  static TextStyle? getHeadline6TextStyle(BuildContext context) =>
+      Theme.of(context).textTheme.headline6;
 
   static TextStyle? getInkWellButtonTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .subtitle2!
-          .copyWith(color: getInkWellButtonColor(context));
+          .button!
+          .copyWith(color: getTertiaryColor(context));
 
-  static Color? getInkWellButtonColor(BuildContext context) =>
+  static Color? getTertiaryColor(BuildContext context) =>
       Theme.of(context).colorScheme.tertiary;
 }

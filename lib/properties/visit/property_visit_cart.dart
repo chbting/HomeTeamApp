@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/ui/inkwell_button.dart';
+import 'package:tner_client/ui/property_list_tile.dart';
 
 import '../property.dart';
 
@@ -58,13 +58,15 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
               primary: false,
               itemCount: _propertiesInCart.length,
               itemBuilder: (context, index) {
-                return Property.getPropertyListTile(
-                  context,
-                  _imageSize,
-                  _propertiesInCart[index],
-                  trailing: InkWellButton(text: S.of(context).save_for_later,
-                  icon: Icons.favorite_outline),
-                  trailingSecondary: InkWellButton(
+                return PropertyListTile(
+                  property: _propertiesInCart[index],
+                  imageSize: _imageSize,
+                  trailing: PropertyListTileTrailingButton(
+                    text: S.of(context).save_for_later,
+                    icon: Icons.favorite_outline,
+                    onTap: () {},
+                  ),
+                  secondaryTrailing: PropertyListTileTrailingButton(
                     text: S.of(context).remove_property_from_cart,
                     icon: Icons.delete_outline,
                     onTap: () {

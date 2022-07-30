@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-
-import '../ui/theme.dart';
 
 class Property {
   final String? name, address, district;
@@ -17,95 +14,13 @@ class Property {
 
   Property(this.id, this.name, this.address, this.district, this.sqFtGross,
       this.sqFtNet, this.monthlyRent, this.deposit, this.coverImage);
-
-  static Widget getPropertyListTile(
-      BuildContext context, double leadingImageSize, Property property,
-      {Widget? trailing, Widget? trailingSecondary}) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: Image(
-                        width: leadingImageSize,
-                        height: leadingImageSize,
-                        image: property.coverImage)),
-                Property._getPropertyPreviewTextWidget(
-                    context, leadingImageSize, property),
-                Expanded(
-                  child: SizedBox(
-                    height: leadingImageSize,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            trailing ?? Container(),
-                            trailingSecondary ?? Container(),
-                          ],
-                        ),
-                        Text('\$${property.monthlyRent}/${S.of(context).month}',
-                            style: AppTheme.getRentTextStyle(context))
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            const Divider(thickness: 1.0)
-          ],
-        ));
-  }
-
-  static Widget _getPropertyPreviewTextWidget(
-      BuildContext context, double leadingImageSize, Property property) {
-    return Expanded(
-        child: SizedBox(
-      height: leadingImageSize,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(property.name!,
-                  style: Theme.of(context).textTheme.subtitle1!),
-              Text(property.district!,
-                  style: AppTheme.getListTileBodyTextStyle(context))
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  '${S.of(context).area_net_abr}'
-                  ': ${property.sqFtNet!}'
-                  ' ${S.of(context).sq_ft_abr}',
-                  style: AppTheme.getListTileBodyTextStyle(context)),
-              Text(
-                  '${S.of(context).area_gross_abr}'
-                  ': ${property.sqFtGross!}'
-                  ' ${S.of(context).sq_ft_abr}',
-                  style: AppTheme.getListTileBodyTextStyle(context))
-            ],
-          ),
-        ],
-      ),
-    ));
-  }
 }
 
 // todo English sample
 List<Property> getSampleProperties() {
   return [
-    Property(1, "康翠臺", "康翠臺第5座10樓", "柴灣", 720, 630, 18400, 36800,
+    Property(1, "康翠臺嘉湖山莊景湖", "康翠臺第5座10樓", "柴灣", 720, 630, 18400,
+        36800,
         const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg')),
     Property(2, "聚賢居", "聚賢居第1座35樓", "上環", 631, 712, 32000, 64000,
         const AssetImage('assets/demo_images/CentreStage_240px.jpg')),

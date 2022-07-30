@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
+import 'package:tner_client/ui/property_list_tile.dart';
 import 'package:tner_client/ui/sliver_search_bar.dart';
 
 class PropertySearchScreen extends StatefulWidget {
@@ -25,8 +26,21 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
       },
       itemBuilderDelegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return Property.getPropertyListTile(
-              context, _imageSize, _propertyList[index]);
+          return PropertyListTile(
+              property: _propertyList[index],
+              imageSize: _imageSize,
+              trailing: PropertyListTileTrailingButton(
+                  text: S.of(context).properties_visit,
+                  icon: Icons.check_box_outline_blank,
+                  onTap: () {
+                    // todo implement checkbox & list add/remove
+                  }),
+              secondaryTrailing: PropertyListTileTrailingButton(
+                  text: S.of(context).save,
+                  icon: Icons.favorite_outline,
+                  onTap: () {
+                    // todo implement save to favorites
+                  }));
         },
         childCount: _propertyList.length,
       ),

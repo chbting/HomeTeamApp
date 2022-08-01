@@ -46,7 +46,7 @@ class PropertyScreenState extends State<PropertyScreen>
                 text: S.of(context).find_properties,
               ),
               Tab(
-                text: S.of(context).properties_visit,
+                text: S.of(context).property_visit,
               ),
               Tab(
                 text: S.of(context).rent_properties,

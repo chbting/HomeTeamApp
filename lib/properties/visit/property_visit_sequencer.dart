@@ -21,16 +21,6 @@ class PropertyVisitSequencerWidgetState
   final double _imageSize = 120.0;
 
   @override
-  void initState() {
-    super.initState();
-    if (widget.data.propertyVisitSequence.isEmpty) {
-      for (var element in widget.data.propertyList) {
-        widget.data.propertyVisitSequence.add(element);
-      }
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ReorderableListView.builder(
       // note: ListView has 4.0 internal padding on all sides
@@ -41,16 +31,16 @@ class PropertyVisitSequencerWidgetState
           bottom:
               PropertyVisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
       primary: false,
-      itemCount: widget.data.propertyVisitSequence.length,
+      itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {
-        Property property = widget.data.propertyVisitSequence[index];
+        Property property = widget.data.selectedPath[index];
         return PropertyListTile(
           key: ValueKey(property.id),
           property: property,
           imageSize: _imageSize,
           leading: const Icon(Icons.reorder),
           trailing: Text(
-            '${widget.data.propertyVisitSequence.indexOf(property) + 1}',
+            '${widget.data.selectedPath.indexOf(property) + 1}',
             style: AppTheme.getHeadline6TextStyle(context),
           ),
         );
@@ -58,9 +48,10 @@ class PropertyVisitSequencerWidgetState
       onReorder: (int oldIndex, int newIndex) {
         debugPrint('$oldIndex, $newIndex');
         setState(() {
-          Property property = widget.data.propertyVisitSequence[oldIndex];
-          widget.data.propertyVisitSequence.removeAt(oldIndex);
-          widget.data.propertyVisitSequence
+          debugPrint('$oldIndex,$newIndex');
+          Property property = widget.data.selectedPath[oldIndex];
+          widget.data.selectedPath.removeAt(oldIndex);
+          widget.data.selectedPath
               .insert(newIndex > oldIndex ? newIndex - 1 : newIndex, property);
         });
         // todo update est

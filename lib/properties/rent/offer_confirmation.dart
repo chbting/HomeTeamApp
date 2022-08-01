@@ -161,8 +161,8 @@ class OfferConfirmationScreen extends StatelessWidget {
         break;
       case ClientType.landLord:
         title = S.of(context).original;
-        monthlyRent = offer.property.monthlyRent!;
-        deposit = offer.property.deposit!;
+        monthlyRent = offer.property.monthlyRent;
+        deposit = offer.property.deposit;
         water = offer.property.water;
         electricity = offer.property.electricity;
         gas = offer.property.gas;

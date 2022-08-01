@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "cantonese": MessageLookupByLibrary.simpleMessage("中文 (广东话)"),
         "choose_language": MessageLookupByLibrary.simpleMessage("选择语言"),
+        "choose_the_route": MessageLookupByLibrary.simpleMessage("选择路线"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "confirm_and_submit": MessageLookupByLibrary.simpleMessage("确认并提交"),
         "confirm_contract": MessageLookupByLibrary.simpleMessage(""),
@@ -73,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英语"),
         "estimate": MessageLookupByLibrary.simpleMessage("预算:"),
+        "estimated_duration": MessageLookupByLibrary.simpleMessage("预时"),
         "fill_in_personal_information":
             MessageLookupByLibrary.simpleMessage("填写个人资料"),
         "find_properties": MessageLookupByLibrary.simpleMessage("找房"),
@@ -125,22 +127,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "pest_control": MessageLookupByLibrary.simpleMessage("灭虫"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("选择日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
-        "pick_starting_point": MessageLookupByLibrary.simpleMessage("选择起步点"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
-        "properties": MessageLookupByLibrary.simpleMessage("租盘"),
-        "properties_visit": MessageLookupByLibrary.simpleMessage("看房"),
-        "properties_visit_agreement":
-            MessageLookupByLibrary.simpleMessage("睇楼纸"),
-        "properties_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
-            "1. “代理”: 本人David， (“租客”) 现按照本协议条款的规限下就拟承租本协议附表1所列物业(“物业”)一事委任Tner Property Management And Agency Limited 为本人的代理。\n\n2. “有效期”: 本协议由2021年1月1日起生效至同年3月31日届满 (首尾两天包括在内) 。\n\n3. 代理与租客之间就物业而有的代理关系属本协议附表1第4栏所指明的双边代理。\n\n4. 如属双边代理关系，则代理须在切实可行的范围内，尽快以书面向租客披露代理将向有关业主收取的佣金的数额或收费率。\n\n5. 代理除须履行本协议或任何成文法则委予代理的责任外，亦须履行本协议附表2内所列的责任。\n\n6. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。\n\n7. “物业资料”: 代理须就物业向租客提供《地产代理常规(一般责任及香港住宅物业)规例》订明的所有有关的出租资料表格。\n\n8. 如属双边代理的关系，或在业主并没有持牌地产代理代表的情况下，该等表格须由代理填妥和签署。\n\n9. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。"),
-        "properties_visit_date": MessageLookupByLibrary.simpleMessage("睇楼日期"),
         "properties_visited_last_thirty_days":
             MessageLookupByLibrary.simpleMessage("过去30日到访过的租盘"),
+        "property": MessageLookupByLibrary.simpleMessage("租盘"),
         "property_address": MessageLookupByLibrary.simpleMessage("物业地址"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("租盘已从清单中移除"),
+        "property_visit": MessageLookupByLibrary.simpleMessage("看房"),
+        "property_visit_agreement": MessageLookupByLibrary.simpleMessage("睇楼纸"),
+        "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
+            "1. “代理”: 本人David， (“租客”) 现按照本协议条款的规限下就拟承租本协议附表1所列物业(“物业”)一事委任Tner Property Management And Agency Limited 为本人的代理。\n\n2. “有效期”: 本协议由2021年1月1日起生效至同年3月31日届满 (首尾两天包括在内) 。\n\n3. 代理与租客之间就物业而有的代理关系属本协议附表1第4栏所指明的双边代理。\n\n4. 如属双边代理关系，则代理须在切实可行的范围内，尽快以书面向租客披露代理将向有关业主收取的佣金的数额或收费率。\n\n5. 代理除须履行本协议或任何成文法则委予代理的责任外，亦须履行本协议附表2内所列的责任。\n\n6. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。\n\n7. “物业资料”: 代理须就物业向租客提供《地产代理常规(一般责任及香港住宅物业)规例》订明的所有有关的出租资料表格。\n\n8. 如属双边代理的关系，或在业主并没有持牌地产代理代表的情况下，该等表格须由代理填妥和签署。\n\n9. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。"),
+        "property_visit_date": MessageLookupByLibrary.simpleMessage("睇楼日期"),
         "reason_sign_property_visit_agreement":
             MessageLookupByLibrary.simpleMessage("使用生物认证签署睇楼纸"),
         "reason_sign_rental_contract":
@@ -162,8 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("收藏"),
         "save_for_later": MessageLookupByLibrary.simpleMessage("迟些看"),
         "schedule": MessageLookupByLibrary.simpleMessage("预约"),
-        "schedule_properties_visit":
-            MessageLookupByLibrary.simpleMessage("预约睇楼"),
+        "schedule_property_visit": MessageLookupByLibrary.simpleMessage("预约睇楼"),
         "schedule_remodeling": MessageLookupByLibrary.simpleMessage("预约装修"),
         "scrape_old_paint": MessageLookupByLibrary.simpleMessage("铲底"),
         "scrape_old_paint_no": MessageLookupByLibrary.simpleMessage("不铲底"),

@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chinese (Cantonese)"),
         "choose_language":
             MessageLookupByLibrary.simpleMessage("Choose Language"),
+        "choose_the_route":
+            MessageLookupByLibrary.simpleMessage("Choose the route"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_and_submit":
             MessageLookupByLibrary.simpleMessage("Confirm and Submit"),
@@ -83,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),
+        "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
         "fill_in_personal_information": MessageLookupByLibrary.simpleMessage(
             "Fill in Personal Information"),
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
@@ -142,26 +145,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
-        "pick_starting_point":
-            MessageLookupByLibrary.simpleMessage("Pick where to start"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
             "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
-        "properties": MessageLookupByLibrary.simpleMessage("Properties"),
-        "properties_visit": MessageLookupByLibrary.simpleMessage("Visit"),
-        "properties_visit_agreement":
-            MessageLookupByLibrary.simpleMessage("Agreement"),
-        "properties_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
-            "1. \"Agent\": I, David, (\"Tenant\"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the \"Property\") subject to the terms of this Agreement \'s agent.\n\n2. \"Validity period\": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. \"Property Information\": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4)."),
-        "properties_visit_date":
-            MessageLookupByLibrary.simpleMessage("Visiting Date"),
         "properties_visited_last_thirty_days":
             MessageLookupByLibrary.simpleMessage(
                 "Properties visited in the last 30 days"),
+        "property": MessageLookupByLibrary.simpleMessage("Properties"),
         "property_address":
             MessageLookupByLibrary.simpleMessage("Property Address"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("Property has been removed"),
+        "property_visit": MessageLookupByLibrary.simpleMessage("Visit"),
+        "property_visit_agreement":
+            MessageLookupByLibrary.simpleMessage("Agreement"),
+        "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
+            "1. \"Agent\": I, David, (\"Tenant\"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the \"Property\") subject to the terms of this Agreement \'s agent.\n\n2. \"Validity period\": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. \"Property Information\": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4)."),
+        "property_visit_date":
+            MessageLookupByLibrary.simpleMessage("Visiting Date"),
         "reason_sign_property_visit_agreement":
             MessageLookupByLibrary.simpleMessage(
                 "Sign the property visit agreement with biometric authentication"),
@@ -189,7 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_for_later":
             MessageLookupByLibrary.simpleMessage("Save for later"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schedule"),
-        "schedule_properties_visit":
+        "schedule_property_visit":
             MessageLookupByLibrary.simpleMessage("Schedule Properties Visit"),
         "schedule_remodeling":
             MessageLookupByLibrary.simpleMessage("Schedule Remodeling"),

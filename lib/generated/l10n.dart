@@ -80,16 +80,6 @@ class S {
     );
   }
 
-  /// `Properties`
-  String get properties {
-    return Intl.message(
-      'Properties',
-      name: 'properties',
-      desc: 'Search properties',
-      args: [],
-    );
-  }
-
   /// `Remodeling`
   String get remodeling {
     return Intl.message(
@@ -740,16 +730,6 @@ class S {
     );
   }
 
-  /// `Visit`
-  String get properties_visit {
-    return Intl.message(
-      'Visit',
-      name: 'properties_visit',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Area (Gross)`
   String get area_gross {
     return Intl.message(
@@ -770,41 +750,11 @@ class S {
     );
   }
 
-  /// `Pick where to start`
-  String get pick_starting_point {
-    return Intl.message(
-      'Pick where to start',
-      name: 'pick_starting_point',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Pick the date and time`
   String get pick_datetime {
     return Intl.message(
       'Pick the date and time',
       name: 'pick_datetime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Agreement`
-  String get properties_visit_agreement {
-    return Intl.message(
-      'Agreement',
-      name: 'properties_visit_agreement',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Schedule Properties Visit`
-  String get schedule_properties_visit {
-    return Intl.message(
-      'Schedule Properties Visit',
-      name: 'schedule_properties_visit',
       desc: '',
       args: [],
     );
@@ -910,16 +860,6 @@ class S {
     );
   }
 
-  /// `1. "Agent": I, David, ("Tenant"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the "Property") subject to the terms of this Agreement 's agent.\n\n2. "Validity period": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. "Property Information": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).`
-  String get properties_visit_agreement_content {
-    return Intl.message(
-      '1. "Agent": I, David, ("Tenant"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the "Property") subject to the terms of this Agreement \'s agent.\n\n2. "Validity period": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. "Property Information": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).',
-      name: 'properties_visit_agreement_content',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Sign on Visit`
   String get sign_later {
     return Intl.message(
@@ -955,16 +895,6 @@ class S {
     return Intl.message(
       'Sign the property visit agreement with biometric authentication',
       name: 'reason_sign_property_visit_agreement',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Visiting Date`
-  String get properties_visit_date {
-    return Intl.message(
-      'Visiting Date',
-      name: 'properties_visit_date',
       desc: '',
       args: [],
     );
@@ -1505,6 +1435,86 @@ class S {
     return Intl.message(
       'Remove',
       name: 'remove_property_from_cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visit`
+  String get property_visit {
+    return Intl.message(
+      'Visit',
+      name: 'property_visit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Properties`
+  String get property {
+    return Intl.message(
+      'Properties',
+      name: 'property',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agreement`
+  String get property_visit_agreement {
+    return Intl.message(
+      'Agreement',
+      name: 'property_visit_agreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1. "Agent": I, David, ("Tenant"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the "Property") subject to the terms of this Agreement 's agent.\n\n2. "Validity period": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. "Property Information": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).`
+  String get property_visit_agreement_content {
+    return Intl.message(
+      '1. "Agent": I, David, ("Tenant"), hereby appoint Tner Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the "Property") subject to the terms of this Agreement \'s agent.\n\n2. "Validity period": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. "Property Information": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. "Commission": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).',
+      name: 'property_visit_agreement_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visiting Date`
+  String get property_visit_date {
+    return Intl.message(
+      'Visiting Date',
+      name: 'property_visit_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule Properties Visit`
+  String get schedule_property_visit {
+    return Intl.message(
+      'Schedule Properties Visit',
+      name: 'schedule_property_visit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose the route`
+  String get choose_the_route {
+    return Intl.message(
+      'Choose the route',
+      name: 'choose_the_route',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Est.`
+  String get estimated_duration {
+    return Intl.message(
+      'Est.',
+      name: 'estimated_duration',
       desc: '',
       args: [],
     );

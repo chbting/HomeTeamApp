@@ -59,6 +59,9 @@ class AppTheme {
             .copyWith(actionTextColor: darkThemeAccent));
   }
 
+  static Color getBackgroundColor(BuildContext context) =>
+      Theme.of(context).scaffoldBackgroundColor;
+
   static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
       TextStyle(color: Theme.of(context).colorScheme.secondary);
 

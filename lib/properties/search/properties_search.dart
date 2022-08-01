@@ -30,7 +30,7 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
               property: _propertyList[index],
               imageSize: _imageSize,
               trailing: PropertyListTileTrailingButton(
-                  text: S.of(context).properties_visit,
+                  text: S.of(context).property_visit,
                   icon: Icons.check_box_outline_blank,
                   onTap: () {
                     // todo implement checkbox & list add/remove

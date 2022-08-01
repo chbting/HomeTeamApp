@@ -31,7 +31,7 @@ class PropertyVisitAgreementWidgetState
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(S.of(context)
-                    .properties_visit_agreement_content)), //todo name of the person
+                    .property_visit_agreement_content)), //todo name of the person
           )
         ]);
   }

@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/property_visit_agreement.dart';
 import 'package:tner_client/properties/visit/property_visit_confirmation.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
@@ -13,11 +12,10 @@ import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 class PropertyVisitSchedulingScreen extends StatefulWidget {
-  const PropertyVisitSchedulingScreen(
-      {Key? key, required this.selectedProperties})
+  const PropertyVisitSchedulingScreen({Key? key, required this.data})
       : super(key: key);
 
-  final List<Property> selectedProperties;
+  final PropertyVisitData data;
   static const stepTitleBarHeight = 40.0;
   static const buttonHeight = 48.0; // Same as an extended floatingActionButton
   static const buttonSpacing = 16.0;
@@ -40,12 +38,9 @@ class PropertyVisitSchedulingScreenState
   late double _buttonWidth;
   late double _biometricButtonWidth;
 
-  final PropertyVisitData _data = PropertyVisitData();
-
   @override
   void initState() {
     super.initState();
-    _data.propertyList.addAll(widget.selectedProperties);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
@@ -66,8 +61,7 @@ class PropertyVisitSchedulingScreenState
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar:
-                AppBar(title: Text(S.of(context).schedule_properties_visit)),
+            appBar: AppBar(title: Text(S.of(context).schedule_property_visit)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,10 +98,10 @@ class PropertyVisitSchedulingScreenState
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        PropertyVisitSequencerWidget(data: _data),
-                        PropertyVisitDatePickerWidget(data: _data),
-                        PropertyVisitAgreementWidget(data: _data),
-                        PropertyVisitConfirmationWidget(data: _data)
+                        PropertyVisitSequencerWidget(data: widget.data),
+                        PropertyVisitDatePickerWidget(data: widget.data),
+                        PropertyVisitAgreementWidget(data: widget.data),
+                        PropertyVisitConfirmationWidget(data: widget.data)
                       ],
                     ),
                   ),
@@ -145,11 +139,11 @@ class PropertyVisitSchedulingScreenState
   String _getStepTitle() {
     switch (_activeStep) {
       case 0:
-        return S.of(context).pick_starting_point;
+        return S.of(context).choose_the_route;
       case 1:
         return S.of(context).pick_datetime;
       case 2:
-        return S.of(context).properties_visit_agreement;
+        return S.of(context).property_visit_agreement;
       case 3:
         return S.of(context).confirm;
       default:
@@ -203,7 +197,7 @@ class PropertyVisitSchedulingScreenState
         } finally {
           if (didAuthenticate) {
             // case 1: successfully authenticated
-            _data.agreementSigned = true;
+            widget.data.agreementSigned = true;
             _nextStep();
           } else {
             // case 2: authentication failed
@@ -261,29 +255,31 @@ class PropertyVisitSchedulingScreenState
                         },
                       )
                     : null),
-            // Left: back button
+            // Left: reset or back button
             Container(
                 alignment: Alignment.bottomLeft,
-                child: _activeStep == 0
-                    ? Container()
-                    : OutlinedButton.icon(
-                        icon: const Icon(Icons.arrow_back),
-                        label: Text(S.of(context).back),
-                        style: OutlinedButton.styleFrom(
-                            minimumSize: Size(_buttonWidth,
-                                PropertyVisitSchedulingScreen.buttonHeight),
-                            shape: const StadiumBorder(),
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor),
-                        onPressed: () {
-                          _isButtonEnabled ? _previousStep() : null;
-                        },
-                      )),
+                child: OutlinedButton.icon(
+                  icon: Icon(_activeStep == 0 ? Icons.undo : Icons.arrow_back),
+                  label: Text(_activeStep == 0
+                      ? S.of(context).reset
+                      : S.of(context).back),
+                  style: OutlinedButton.styleFrom(
+                      minimumSize: Size(_buttonWidth,
+                          PropertyVisitSchedulingScreen.buttonHeight),
+                      shape: const StadiumBorder(),
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor),
+                  onPressed: () {
+                    _isButtonEnabled
+                        ? (_activeStep == 0
+                            ? _resetSelectedSequence()
+                            : _previousStep()) //todo reset sequence list
+                        : null;
+                  },
+                )),
             // Right: next or confirm button
             Container(
-                alignment: _activeStep == 0
-                    ? Alignment.bottomCenter
-                    : Alignment.bottomRight,
+                alignment: Alignment.bottomRight,
                 child: _activeStep == 2
                     ? OutlinedButton.icon(
                         icon: const Icon(Icons.redo),
@@ -296,7 +292,7 @@ class PropertyVisitSchedulingScreenState
                                 Theme.of(context).scaffoldBackgroundColor),
                         onPressed: () {
                           if (_isButtonEnabled) {
-                            _data.agreementSigned = false;
+                            widget.data.agreementSigned = false;
                             _nextStep();
                           }
                         },
@@ -322,5 +318,12 @@ class PropertyVisitSchedulingScreenState
                       ))
           ],
         ));
+  }
+
+  void _resetSelectedSequence() {
+    setState(() {
+      widget.data.selectedPath.clear();
+      widget.data.selectedPath.addAll(widget.data.optimizedPath);
+    });
   }
 }

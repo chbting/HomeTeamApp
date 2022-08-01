@@ -36,7 +36,7 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(S.of(context)
-                    .properties_visit_agreement_content)), //todo adjust the contract according to the offer
+                    .property_visit_agreement_content)), //todo adjust the contract according to the offer
           )
         ]);
   }

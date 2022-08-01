@@ -35,7 +35,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
                         Icon(Icons.place),
                       ],
                     ),
-                    title: Text(S.of(context).properties,
+                    title: Text(S.of(context).property,
                         style: AppTheme.getCardTitleTextStyle(context)),
                     subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
                         style: AppTheme.getCardBodyTextStyle(context))))),
@@ -49,7 +49,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
               ],
             ),
             isThreeLine: true,
-            title: Text(S.of(context).properties_visit_date,
+            title: Text(S.of(context).property_visit_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
@@ -84,7 +84,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
                 Icon(Icons.description),
               ],
             ),
-            title: Text(S.of(context).properties_visit_agreement,
+            title: Text(S.of(context).property_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 data.agreementSigned

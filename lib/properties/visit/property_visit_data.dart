@@ -1,11 +1,15 @@
 import 'package:tner_client/properties/property.dart';
 
 class PropertyVisitData {
-  final List<Property> propertyList = [];
-  final List<Property> propertyVisitSequence = [];
+  final List<Property> properties;
+
+  // Sequencer
+  final List<Property> optimizedPath;
+  final List<Property> selectedPath;
+  final Map<Property, Map<Property, int>> travelMap;
 
   // Date Picker
-  static const firstAvailableDay = 2;
+  static const firstAvailableDay = 1;
   late DateTime dateTimePicked;
 
   // Agreement
@@ -16,7 +20,11 @@ class PropertyVisitData {
   String? lastName;
   String? prefix;
 
-  PropertyVisitData() {
+  PropertyVisitData(
+      {required this.properties,
+      required this.optimizedPath,
+      required this.selectedPath,
+      required this.travelMap}) {
     final now = DateTime.now();
     dateTimePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
   }

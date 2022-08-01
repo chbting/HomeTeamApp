@@ -85,7 +85,7 @@ class AppHomeState extends State<AppHome> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.apartment),
-            label: S.of(context).properties,
+            label: S.of(context).property,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.construction),

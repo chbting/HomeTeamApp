@@ -73,7 +73,7 @@ class PropertyListTile extends StatelessWidget {
                             children: [
                               Text(
                                   '${S.of(context).area_net_abr}'
-                                  ': ${property.sqFtNet!}'
+                                  ': ${property.sqFtNet}'
                                   ' ${S.of(context).sq_ft_abr}',
                                   style: AppTheme.getListTileBodyTextStyle(
                                       context),
@@ -81,7 +81,7 @@ class PropertyListTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis),
                               Text(
                                   '${S.of(context).area_gross_abr}'
-                                  ': ${property.sqFtGross!}'
+                                  ': ${property.sqFtGross}'
                                   ' ${S.of(context).sq_ft_abr}',
                                   style: AppTheme.getListTileBodyTextStyle(
                                       context),

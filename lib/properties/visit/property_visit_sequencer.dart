@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
 import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
@@ -6,10 +7,12 @@ import 'package:tner_client/ui/property_list_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 
 class PropertyVisitSequencerWidget extends StatefulWidget {
-  const PropertyVisitSequencerWidget({Key? key, required this.data})
+  const PropertyVisitSequencerWidget(
+      {Key? key, required this.data, required this.updateEstimatedTime})
       : super(key: key);
 
   final PropertyVisitData data;
+  final Function updateEstimatedTime;
 
   @override
   State<PropertyVisitSequencerWidget> createState() =>
@@ -19,6 +22,14 @@ class PropertyVisitSequencerWidget extends StatefulWidget {
 class PropertyVisitSequencerWidgetState
     extends State<PropertyVisitSequencerWidget> {
   final double _imageSize = 120.0;
+
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      widget.updateEstimatedTime();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,15 +57,14 @@ class PropertyVisitSequencerWidgetState
         );
       },
       onReorder: (int oldIndex, int newIndex) {
-        debugPrint('$oldIndex, $newIndex');
         setState(() {
-          debugPrint('$oldIndex,$newIndex');
           Property property = widget.data.selectedPath[oldIndex];
           widget.data.selectedPath.removeAt(oldIndex);
           widget.data.selectedPath
               .insert(newIndex > oldIndex ? newIndex - 1 : newIndex, property);
+
+          widget.updateEstimatedTime();
         });
-        // todo update est
       },
     );
   }

@@ -95,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hong_kong": MessageLookupByLibrary.simpleMessage("Hong Kong"),
         "hong_kong_number_only":
             MessageLookupByLibrary.simpleMessage("Hong Kong number only"),
+        "hour": MessageLookupByLibrary.simpleMessage("hr"),
+        "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
@@ -114,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mailing_address":
             MessageLookupByLibrary.simpleMessage("Mailing address"),
         "mandarin": MessageLookupByLibrary.simpleMessage("Chinese (Mandarin)"),
+        "minute": MessageLookupByLibrary.simpleMessage("minute"),
+        "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "miss": MessageLookupByLibrary.simpleMessage("Miss"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "monthly_rent": MessageLookupByLibrary.simpleMessage("Monthly Rent"),

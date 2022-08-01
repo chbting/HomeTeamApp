@@ -103,6 +103,18 @@ class AppTheme {
           .button!
           .copyWith(color: getTertiaryColor(context));
 
+  static TextStyle? getStepTitleTextStyle(BuildContext context) =>
+      Theme.of(context)
+          .textTheme
+          .subtitle1!
+          .copyWith(color: Theme.of(context).colorScheme.secondary);
+
+  static TextStyle? getStepSubtitleTextStyle(BuildContext context) =>
+      Theme.of(context)
+          .textTheme
+          .subtitle1!
+          .copyWith(color: Theme.of(context).textTheme.caption!.color);
+
   static Color? getTertiaryColor(BuildContext context) =>
       Theme.of(context).colorScheme.tertiary;
 }

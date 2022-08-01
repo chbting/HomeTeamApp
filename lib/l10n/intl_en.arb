@@ -146,5 +146,9 @@
 	"property_visit_date": "Visiting Date",
 	"schedule_property_visit": "Schedule Properties Visit",
 	"choose_the_route": "Choose the route",
-	"estimated_duration": "Est."
+	"estimated_duration": "Est.",
+	"hour": "hr",
+	"hours": "hrs",
+	"minute": "minute",
+	"minutes": "minutes"
 }

@@ -3,12 +3,15 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/property_visit_agreement.dart';
 import 'package:tner_client/properties/visit/property_visit_confirmation.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
 import 'package:tner_client/properties/visit/property_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/property_visit_sequencer.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
+import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 class PropertyVisitSchedulingScreen extends StatefulWidget {
@@ -34,9 +37,12 @@ class PropertyVisitSchedulingScreenState
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
   bool _isButtonEnabled = true;
+  String _subtitle = '';
 
   late double _buttonWidth;
   late double _biometricButtonWidth;
+
+  final int durationPerProperty = 900; // 15 minutes
 
   @override
   void initState() {
@@ -98,7 +104,9 @@ class PropertyVisitSchedulingScreenState
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        PropertyVisitSequencerWidget(data: widget.data),
+                        PropertyVisitSequencerWidget(
+                            data: widget.data,
+                            updateEstimatedTime: _updateEstimatedTime),
                         PropertyVisitDatePickerWidget(data: widget.data),
                         PropertyVisitAgreementWidget(data: widget.data),
                         PropertyVisitConfirmationWidget(data: widget.data)
@@ -124,9 +132,15 @@ class PropertyVisitSchedulingScreenState
                 child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 16.0),
-                    child: Text(_getStepTitle(),
-                        style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                            color: Theme.of(context).colorScheme.secondary))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(_getStepTitle(),
+                            style: AppTheme.getStepTitleTextStyle(context)),
+                        Text(_subtitle,
+                            style: AppTheme.getStepSubtitleTextStyle(context))
+                      ],
+                    )),
               ),
               Container(
                   alignment: Alignment.bottomCenter,
@@ -272,8 +286,8 @@ class PropertyVisitSchedulingScreenState
                   onPressed: () {
                     _isButtonEnabled
                         ? (_activeStep == 0
-                            ? _resetSelectedSequence()
-                            : _previousStep()) //todo reset sequence list
+                            ? _resetToOptimizedPath()
+                            : _previousStep())
                         : null;
                   },
                 )),
@@ -320,10 +334,25 @@ class PropertyVisitSchedulingScreenState
         ));
   }
 
-  void _resetSelectedSequence() {
+  /// Return the estimated duration in seconds
+  void _updateEstimatedTime() {
+    int duration = 0;
+    for (int i = 0; i < widget.data.selectedPath.length - 1; i++) {
+      Property origin = widget.data.selectedPath[i];
+      Property destination = widget.data.selectedPath[i + 1];
+      duration += widget.data.travelMap[origin]![destination]!;
+    }
+    duration += durationPerProperty * widget.data.selectedPath.length;
+
     setState(() {
-      widget.data.selectedPath.clear();
-      widget.data.selectedPath.addAll(widget.data.optimizedPath);
+      _subtitle = '${S.of(context).estimated_duration}: '
+          '${Format.formatDuration(Duration(seconds: duration), context)}';
     });
+  }
+
+  void _resetToOptimizedPath() {
+    widget.data.selectedPath.clear();
+    widget.data.selectedPath.addAll(widget.data.optimizedPath);
+    _updateEstimatedTime();
   }
 }

@@ -1,1 +1,1 @@
-final distanceMatrtixDebugKey = 'AIzaSyAt18ufKK_hQ5bEfVXjzhnPNWO4IwCR3o0';
+const distanceMatrixDebugKey = 'AIzaSyAt18ufKK_hQ5bEfVXjzhnPNWO4IwCR3o0';

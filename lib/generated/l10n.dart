@@ -1519,6 +1519,46 @@ class S {
       args: [],
     );
   }
+
+  /// `hr`
+  String get hour {
+    return Intl.message(
+      'hr',
+      name: 'hour',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hrs`
+  String get hours {
+    return Intl.message(
+      'hrs',
+      name: 'hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `minute`
+  String get minute {
+    return Intl.message(
+      'minute',
+      name: 'minute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `minutes`
+  String get minutes {
+    return Intl.message(
+      'minutes',
+      name: 'minutes',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

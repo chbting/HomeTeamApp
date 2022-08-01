@@ -3,11 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'distance_matrix.g.dart';
 
-const String distanceMatrixURL =
-    'https://maps.googleapis.com/maps/api/distancematrix/';
-const String distanceMatrixResponseFormat = 'json';
-const String distanceMatrixResponseLanguage = 'en';
-
 @JsonSerializable()
 class DistanceMatrix {
   DistanceMatrix(this.destination_addresses, this.origin_addresses, this.rows,

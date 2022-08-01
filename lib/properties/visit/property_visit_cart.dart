@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:tner_client/configs/keys.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/http_request/distance_matrix_request.dart';
 import 'package:tner_client/json_model/distance_matrix.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
@@ -151,7 +152,7 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
         'origins=$origins'
         '&destinations=$destinations'
         '&language=$distanceMatrixResponseLanguage'
-        '&key=$distanceMatrtixDebugKey');
+        '&key=$distanceMatrixDebugKey');
 
     debugPrint('request:\n$request');
     return get(request);

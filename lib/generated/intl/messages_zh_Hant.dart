@@ -74,7 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english": MessageLookupByLibrary.simpleMessage("English"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英語"),
         "estimate": MessageLookupByLibrary.simpleMessage("預算:"),
-        "estimated_duration": MessageLookupByLibrary.simpleMessage("預時"),
+        "estimated_duration": MessageLookupByLibrary.simpleMessage("需時"),
         "fill_in_personal_information":
             MessageLookupByLibrary.simpleMessage("填寫個人資料"),
         "find_properties": MessageLookupByLibrary.simpleMessage("搵樓"),
@@ -83,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hong_kong": MessageLookupByLibrary.simpleMessage("香港"),
         "hong_kong_number_only":
             MessageLookupByLibrary.simpleMessage("只限香港電話號碼"),
+        "hour": MessageLookupByLibrary.simpleMessage("小時"),
+        "hours": MessageLookupByLibrary.simpleMessage("小時"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
@@ -99,6 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lease_terms": MessageLookupByLibrary.simpleMessage("租約條款"),
         "mailing_address": MessageLookupByLibrary.simpleMessage("郵寄地址"),
         "mandarin": MessageLookupByLibrary.simpleMessage("中文 (普通話)"),
+        "minute": MessageLookupByLibrary.simpleMessage("分"),
+        "minutes": MessageLookupByLibrary.simpleMessage("分"),
         "miss": MessageLookupByLibrary.simpleMessage("小姐"),
         "month": MessageLookupByLibrary.simpleMessage("月"),
         "monthly_rent": MessageLookupByLibrary.simpleMessage("每月租金"),

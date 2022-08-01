@@ -146,5 +146,9 @@
 	"property_visit_date": "睇楼日期",
 	"schedule_property_visit": "预约睇楼",
 	"choose_the_route": "选择路线",
-	"estimated_duration": "预时"
+	"estimated_duration": "需时",
+	"hour": "小时",
+	"hours": "小时",
+	"minute": "分",
+	"minutes": "分"
 }

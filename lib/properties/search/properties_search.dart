@@ -17,8 +17,6 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Theme.of(
-        context); // This line triggers widget updates when dark/light mode switches
     return SliverSearchBar(
       hintText: S.of(context).search_properties_hint,
       onQuerySubmitted: (query) {

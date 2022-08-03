@@ -35,6 +35,7 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
   late List<Property> _currentPath, _optimizedPath;
   late int _optimizedTravelTime;
   bool _showProgressIndicator = false;
+  bool _fabEnabled = true;
 
   @override
   bool get wantKeepAlive => true;
@@ -53,35 +54,28 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
                   icon: const Icon(Icons.schedule),
                   label: Text(S.of(context).schedule),
                   onPressed: () {
-                    setState(() {
-                      _showProgressIndicator = true;
-                    });
-                    var tStart = DateTime.now().millisecondsSinceEpoch;
-                    _findOptimizedPath().then((response) {
-                      var tResponseReceived =
-                          DateTime.now().millisecondsSinceEpoch;
-                      _parseDistanceMatrixResponse(response);
-                      var tResponseParsed =
-                          DateTime.now().millisecondsSinceEpoch;
-                      _getOptimizedRoute();
-                      var tRouteGenerated =
-                          DateTime.now().millisecondsSinceEpoch;
+                    // Do no action if a request is in progress
+                    if (_fabEnabled) {
+                      setState(() {
+                        _fabEnabled = false;
+                        _showProgressIndicator = true;
+                      });
+                      _findOptimizedPath().then((response) {
+                        _parseDistanceMatrixResponse(response);
+                        _getOptimizedRoute();
 
-                      debugPrint(
-                          'Response Delay (ms):${tResponseReceived - tStart}'
-                          '\nParse Delay (ms):${tResponseParsed - tResponseReceived}'
-                          '\nRoute Optimization (ms):${tRouteGenerated - tResponseParsed}');
-
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => PropertyVisitSchedulingScreen(
-                              data: PropertyVisitData(
-                                  properties: _propertiesCart,
-                                  optimizedPath: _optimizedPath,
-                                  selectedPath: _optimizedPath.toList(),
-                                  travelMap: _travelMap))));
-                    }).whenComplete(() => setState(() {
-                          _showProgressIndicator = false;
-                        }));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PropertyVisitSchedulingScreen(
+                                data: PropertyVisitData(
+                                    properties: _propertiesCart,
+                                    optimizedPath: _optimizedPath,
+                                    selectedPath: _optimizedPath.toList(),
+                                    travelMap: _travelMap))));
+                      }).whenComplete(() => setState(() {
+                            _showProgressIndicator = false;
+                            _fabEnabled = true;
+                          }));
+                    }
                   })),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,

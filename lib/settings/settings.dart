@@ -15,9 +15,9 @@ class SettingsScreenState extends State<SettingsScreen> {
   final List<String> _localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
   final List<String> _languageList = [];
 
-  bool _darkMode = SharedPreferencesHelper().isDarkMode();
+  bool _darkMode = SharedPreferencesHelper.isDarkMode();
   String _localeString = SharedPreferencesHelper.localeToString(
-      SharedPreferencesHelper().getLocale());
+      SharedPreferencesHelper.getLocale());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                 onChanged: (value) {
                   setState(() {
                     _darkMode = value;
-                    SharedPreferencesHelper().setDarkModeOn(value);
+                    SharedPreferencesHelper.setDarkModeOn(value);
                   });
                 },
                 value: _darkMode,
@@ -65,7 +65,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         _localeString,
                         S.of(context).choose_language, (value) {
                       _localeString = value;
-                      SharedPreferencesHelper().setLocale(
+                      SharedPreferencesHelper.setLocale(
                           SharedPreferencesHelper.stringToLocale(value));
                     });
                   }),

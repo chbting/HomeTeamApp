@@ -53,7 +53,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 '${TimeOfDay(hour: data.dateTimePicked.hour, minute: data.dateTimePicked.minute).format(context)}'
-                '\n${DateFormat(Format.dateLong, SharedPreferencesHelper().getLocale().languageCode).format(data.dateTimePicked)}',
+                '\n${DateFormat(Format.dateLong, SharedPreferencesHelper.getLocale().languageCode).format(data.dateTimePicked)}',
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
@@ -98,7 +98,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
   }
 
   String _getContactName() {
-    if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
+    if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
       return '${data.lastName ?? "陳"}${data.prefix ?? "先生"}';
     } else {
       return '${data.prefix ?? "Mr."} ${data.lastName ?? "Brown"}'; //Todo remove debug text

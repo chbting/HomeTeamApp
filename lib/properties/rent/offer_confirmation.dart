@@ -212,7 +212,7 @@ class OfferConfirmationScreen extends StatelessWidget {
   }
 
   String _getTenantName() {
-    if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
+    if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
       return '${offer.client.lastName}${offer.client.firstName}';
     } else {
       return '${offer.client.lastName}, ${offer.client.firstName}';

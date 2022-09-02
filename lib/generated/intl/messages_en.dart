@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "biometric_authentication_unavailable_agreement":
             MessageLookupByLibrary.simpleMessage(
                 "This device cannot use biometric authentication, please choose \"Sign on Visit\""),
+        "cameras_not_available":
+            MessageLookupByLibrary.simpleMessage("Cameras are not available"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantonese":
             MessageLookupByLibrary.simpleMessage("Chinese (Cantonese)"),

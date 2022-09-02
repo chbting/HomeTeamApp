@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("本裝置未能使用生物認證"),
         "biometric_authentication_unavailable_agreement":
             MessageLookupByLibrary.simpleMessage("本裝置未能使用生物認證，請選擇“睇樓時簽署”"),
+        "cameras_not_available":
+            MessageLookupByLibrary.simpleMessage("無法使用拍照功能"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "cantonese": MessageLookupByLibrary.simpleMessage("中文 (廣東話)"),
         "choose_language": MessageLookupByLibrary.simpleMessage("選擇語言"),

@@ -52,7 +52,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
-                        SharedPreferencesHelper().getLocale().languageCode)
+                        SharedPreferencesHelper.getLocale().languageCode)
                     .format(data.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
@@ -123,7 +123,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
   }
 
   String _getContactName() {
-    if (SharedPreferencesHelper().getLocale().languageCode == 'zh') {
+    if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
       return '${data.client.lastName}${data.client.title}';
     } else {
       return '${data.client.title} ${data.client.lastName}';

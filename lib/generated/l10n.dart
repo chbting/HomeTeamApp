@@ -1559,6 +1559,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Cameras are not available`
+  String get cameras_not_available {
+    return Intl.message(
+      'Cameras are not available',
+      name: 'cameras_not_available',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

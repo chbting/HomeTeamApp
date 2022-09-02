@@ -5,16 +5,17 @@ import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/camera_helper.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 import 'contracts/contracts.dart';
-import 'generated/l10n.dart';
 import 'owner/owner.dart';
 import 'remodeling/remodeling_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
+  await CameraHelper.ensureInitialized();
 
   runApp(const RootApp());
 }
@@ -46,10 +47,10 @@ class RootAppState extends State<RootApp> {
                 ],
                 supportedLocales: S.delegate.supportedLocales,
                 home: const AppHome(),
-                theme: SharedPreferencesHelper().isDarkMode()
+                theme: SharedPreferencesHelper.isDarkMode()
                     ? AppTheme.getDarkTheme()
                     : AppTheme.getLightTheme(),
-                locale: SharedPreferencesHelper().getLocale());
+                locale: SharedPreferencesHelper.getLocale());
           },
         );
       },

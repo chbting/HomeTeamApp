@@ -31,6 +31,8 @@
 	<string>Let you search by voice input</string>
 	<key>NSMicrophoneUsageDescription</key>
     <string>Let you use the microphone for speech recognition</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Let you take pictures of the remodelling areas for pricing estimates</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

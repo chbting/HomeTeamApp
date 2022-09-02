@@ -70,7 +70,7 @@ class PropertyVisitDatePickerWidgetState
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
-                        SharedPreferencesHelper().getLocale().languageCode)
+                        SharedPreferencesHelper.getLocale().languageCode)
                     .format(widget.data.dateTimePicked),
                 style: Theme.of(context).textTheme.subtitle1),
             onExpansionChanged: (isExpanded) {

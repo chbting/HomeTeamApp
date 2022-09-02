@@ -12,17 +12,10 @@ class SharedPreferencesHelper {
   static late SharedPreferences _prefs;
   static late ValueNotifier themeNotifier, localeNotifier;
 
-  static final SharedPreferencesHelper _helperInstance =
-      SharedPreferencesHelper._constructor();
-
-  factory SharedPreferencesHelper() => _helperInstance;
-
-  SharedPreferencesHelper._constructor();
-
   static ensureInitialized() async {
     _prefs = await SharedPreferences.getInstance();
-    themeNotifier = ValueNotifier(_helperInstance.isDarkMode());
-    localeNotifier = ValueNotifier(localeToString(_helperInstance.getLocale()));
+    themeNotifier = ValueNotifier(isDarkMode());
+    localeNotifier = ValueNotifier(localeToString(getLocale()));
   }
 
   static String localeToString(Locale locale) {
@@ -42,22 +35,22 @@ class SharedPreferencesHelper {
     }
   }
 
-  setDarkModeOn(bool darkModeOn) {
+  static setDarkModeOn(bool darkModeOn) {
     _prefs.setBool(darkModeOnKey, darkModeOn);
     themeNotifier.value = darkModeOn;
   }
 
-  bool isDarkMode() =>
+  static bool isDarkMode() =>
       _prefs.getBool(darkModeOnKey) ??
       (Brightness.dark == SchedulerBinding.instance.window.platformBrightness);
 
-  setLocale(Locale locale) {
+  static setLocale(Locale locale) {
     String newValue = localeToString(locale);
     _prefs.setString(localeKey, newValue);
     localeNotifier.value = newValue;
   }
 
-  Locale getLocale() {
+  static Locale getLocale() {
     String? savedValue = _prefs.getString(localeKey);
     if (savedValue != null) {
       return stringToLocale(savedValue);
@@ -75,7 +68,7 @@ class SharedPreferencesHelper {
     }
   }
 
-  String getVoiceRecognitionLocaleId() {
+  static String getVoiceRecognitionLocaleId() {
     String savedValue = _prefs.getString(localeKey)!;
     switch (savedValue) {
       case 'en':

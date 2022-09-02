@@ -40,7 +40,7 @@ class SpeechToTextHelper {
       } else {
         _context = context;
         String localeId =
-            SharedPreferencesHelper().getVoiceRecognitionLocaleId();
+            SharedPreferencesHelper.getVoiceRecognitionLocaleId();
 
         _showSpeechToTextDialog(context, localeId);
         log('${DateTime.now()} begin listening');

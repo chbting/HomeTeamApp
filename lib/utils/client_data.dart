@@ -9,7 +9,7 @@ class Client {
 
 // todo debug sample
 Client getSampleClientData() {
-  var chinese = SharedPreferencesHelper().getLocale().languageCode == 'zh';
+  var chinese = SharedPreferencesHelper.getLocale().languageCode == 'zh';
   Client client = Client();
   client.firstName = chinese ? '大明' : 'David';
   client.lastName = chinese ? '陳' : 'Johnson';

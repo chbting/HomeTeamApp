@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_camera.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/ui/theme.dart';
 
 class RemodellingImagesWidget extends StatefulWidget {
   const RemodellingImagesWidget({Key? key, required this.data})
@@ -34,29 +36,44 @@ class RemodellingImagesWidgetState extends State<RemodellingImagesWidget>
         primary: false,
         itemCount: widget.data.selectedItemList.length,
         itemBuilder: (context, index) {
+          var item = widget.data.selectedItemList[index];
+          var pictureRequired = RemodelingItemHelper.isPictureRequired(item);
+          var itemImage = widget.data.imageMap[item];
           return Card(
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              leading: Icon(RemodelingItemHelper.getIconData(
-                  widget.data.selectedItemList[index])),
-              title: Text(RemodelingItemHelper.getTitle(
-                  widget.data.selectedItemList[index], context)),
-              trailing:
-                  widget.data.imageMap[widget.data.selectedItemList[index]] ==
-                          null
+              leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Icon(RemodelingItemHelper.getIconData(item))]),
+              title: Text(RemodelingItemHelper.getTitle(item, context)),
+              subtitle: Text(
+                  pictureRequired
+                      ? itemImage == null
+                          ? S.of(context).picture_required
+                          : S.of(context).picture_added
+                      : S.of(context).picture_not_required,
+                  style: AppTheme.getListTileBodyTextStyle(context)),
+              trailing: pictureRequired
+                  ? itemImage == null
                       ? const Icon(Icons.add_circle)
                       : Icon(Icons.check_circle,
-                          color: Theme.of(context).toggleableActiveColor),
+                          color: Theme.of(context).toggleableActiveColor)
+                  : Icon(Icons.check_circle,
+                      color: Theme.of(context).toggleableActiveColor),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(
-                        builder: (context) => const RemodelingCameraScreen()))
-                    .then((image) => setState(() {
-                          widget.data.imageMap[
-                              widget.data.selectedItemList[index]] = image;
-                        }));
-                // todo need a callback to save the image path
+                pictureRequired
+                    ? Navigator.of(context)
+                        .push(MaterialPageRoute(
+                            builder: (context) =>
+                                const RemodelingCameraScreen()))
+                        .then((image) => setState(() {
+                              if (image != null) {
+                                widget.data.imageMap[widget
+                                    .data.selectedItemList[index]] = image;
+                              }
+                            }))
+                    : null;
                 // todo need a way to cleanup
                 // todo grey out next button until all pictures are taken
               },

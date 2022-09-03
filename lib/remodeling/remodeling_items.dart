@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tner_client/assets/custom_icons_icons.dart';
 import 'package:tner_client/generated/l10n.dart';
 
@@ -49,6 +48,25 @@ class RemodelingItemHelper {
         return CustomIcons.toilet;
       case RemodelingItem.pestControl:
         return Icons.pest_control;
+    }
+  }
+
+  static bool isPictureRequired(RemodelingItem item) {
+    switch (item) {
+      case RemodelingItem.painting:
+        return false;
+      case RemodelingItem.wallCoverings:
+        return false;
+      case RemodelingItem.ac:
+        return true;
+      case RemodelingItem.removals:
+        return true;
+      case RemodelingItem.suspendedCeiling:
+        return true;
+      case RemodelingItem.toiletReplacement:
+        return true;
+      case RemodelingItem.pestControl:
+        return false;
     }
   }
 }

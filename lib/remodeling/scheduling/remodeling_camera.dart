@@ -14,7 +14,7 @@ class RemodelingCameraScreen extends StatefulWidget {
 
 class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
   late CameraController _controller;
-  late Future<void>? _controllerFuture;
+  Future<void>? _controllerFuture;
   File? _image;
 
   final _fabBottomMargin = 16.0;
@@ -24,12 +24,15 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
     super.initState();
     try {
       _controller = CameraController(
-          CameraHelper.cameras.first, ResolutionPreset.veryHigh,
-          enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
+          CameraHelper.cameras.first, ResolutionPreset.max, // todo aspect ratio
+          enableAudio: false,
+          imageFormatGroup: ImageFormatGroup.jpeg);
       _controllerFuture = _controller.initialize().catchError((Object e) {
         // On permission denied
         _controllerFuture = null;
-      });
+      }).then((_) => _controller.setFlashMode(
+          FlashMode.off)); // Turning flash off because it goes haywire
+      // todo allow different orientation
     } on StateError catch (_) {
       // On no camera found
     }
@@ -37,7 +40,8 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
 
   @override
   void dispose() {
-    _controller.dispose(); //todo clean up images? probably save to a specific folder and clean up every time
+    _controller
+        .dispose(); //todo clean up images? probably save to a specific folder and clean up every time
     super.dispose();
   }
 
@@ -65,20 +69,15 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                                         try {
                                           // Ensure that the camera is initialized.
                                           await _controllerFuture;
-                                          _controller.setFlashMode(FlashMode.off); //todo
                                           final image =
                                               await _controller.takePicture();
                                           _image = File(image.path);
-                                          // debugPrint(
-                                          //     'image saved: ${image?.path}');
 
                                           if (!mounted) return;
-                                          // todo flash light still on after taking picture
                                           setState(() {});
-
-                                          // todo allow different orientation?
                                         } catch (e) {
-                                          debugPrint('$e');
+                                          debugPrint(
+                                              'Exception when taking pictures: $e');
                                         }
                                       },
                                       heroTag: 'picture_button',
@@ -104,7 +103,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                                             });
                                           });
                                         },
-                                        heroTag: 'decline_button',
+                                        heroTag: 'retake_button',
                                         backgroundColor: Colors.white,
                                         child: const Icon(Icons.clear)),
                                     FloatingActionButton.large(

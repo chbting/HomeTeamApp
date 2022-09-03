@@ -1579,6 +1579,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Picture taken`
+  String get picture_added {
+    return Intl.message(
+      'Picture taken',
+      name: 'picture_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Picture is not required`
+  String get picture_not_required {
+    return Intl.message(
+      'Picture is not required',
+      name: 'picture_not_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Picture is required`
+  String get picture_required {
+    return Intl.message(
+      'Picture is required',
+      name: 'picture_required',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

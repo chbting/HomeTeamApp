@@ -151,6 +151,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
+        "picture_added": MessageLookupByLibrary.simpleMessage("Picture taken"),
+        "picture_not_required":
+            MessageLookupByLibrary.simpleMessage("Picture is not required"),
+        "picture_required":
+            MessageLookupByLibrary.simpleMessage("Picture is required"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
             "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),

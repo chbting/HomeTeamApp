@@ -32,7 +32,8 @@ class RemodelingSchedulingScreenState
   final _totalSteps = 4;
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
-  bool _isButtonEnabled = true;
+  bool _bottomButtonEnabled = true;
+  bool _rightButtonEnabled = true;
 
   late double _buttonWidth;
 
@@ -168,31 +169,32 @@ class RemodelingSchedulingScreenState
 
   void _nextStep() {
     if (_activeStep < _totalSteps - 1) {
-      _isButtonEnabled = false;
+      _bottomButtonEnabled = false;
       setState(() {
         _activeStep++;
       });
       _pageController
           .nextPage(
               duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
-          .whenComplete(() => _isButtonEnabled = true);
+          .whenComplete(() => _bottomButtonEnabled = true);
     }
   }
 
   void _previousStep() {
     if (_activeStep > 0) {
-      _isButtonEnabled = false;
+      _bottomButtonEnabled = false;
       setState(() {
         _activeStep--;
       });
       _pageController
           .previousPage(
               duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
-          .whenComplete(() => _isButtonEnabled = true);
+          .whenComplete(() => _bottomButtonEnabled = true);
     }
   }
 
   Widget _getBottomButtons() {
+    _updateRightButtonState();
     return Container(
         height: RemodelingSchedulingScreen.bottomButtonContainerHeight,
         width: double.infinity,
@@ -212,6 +214,7 @@ class RemodelingSchedulingScreenState
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.spaceBetween,
               children: [
+                // Left button
                 _activeStep == 0
                     ? Container()
                     : OutlinedButton.icon(
@@ -224,8 +227,9 @@ class RemodelingSchedulingScreenState
                             backgroundColor:
                                 Theme.of(context).scaffoldBackgroundColor),
                         onPressed: () {
-                          _isButtonEnabled ? _previousStep() : null;
+                          _bottomButtonEnabled ? _previousStep() : null;
                         }),
+                //Right button
                 ElevatedButton.icon(
                     icon: Icon(_activeStep < _totalSteps - 1
                         ? Icons.arrow_forward
@@ -238,17 +242,37 @@ class RemodelingSchedulingScreenState
                           RemodelingSchedulingScreen.buttonHeight),
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () {
-                      if (_isButtonEnabled) {
-                        if (_activeStep == _totalSteps - 1) {
-                          // todo validate
-                          // todo send order
-                        } else {
-                          _nextStep();
-                        }
-                      }
-                    })
+                    onPressed: !_rightButtonEnabled
+                        ? null // This null makes the button to grey out
+                        : () {
+                            // The check here won't grey out the button
+                            if (_bottomButtonEnabled) {
+                              if (_activeStep == _totalSteps - 1) {
+                                // todo validate
+                                // todo send order
+                              } else {
+                                _nextStep();
+                              }
+                            }
+                          })
               ],
             )));
+  }
+
+  // todo the child setState doesn't cause this to run
+  void _updateRightButtonState() {
+    if (_activeStep != 1) {
+      _rightButtonEnabled = true;
+    } else {
+      for (var item in _data.selectedItemList) {
+        if (RemodelingItemHelper.isPictureRequired(item)) {
+          if (_data.imageMap[item] == null) {
+            _rightButtonEnabled = false;
+            return;
+          }
+        }
+      }
+      _rightButtonEnabled = true;
+    }
   }
 }

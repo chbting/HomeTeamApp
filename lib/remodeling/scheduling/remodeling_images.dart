@@ -17,15 +17,9 @@ class RemodellingImagesWidget extends StatefulWidget {
       RemodellingImagesWidgetState();
 }
 
-class RemodellingImagesWidgetState extends State<RemodellingImagesWidget>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  bool get wantKeepAlive => true; //todo needed?
-
+class RemodellingImagesWidgetState extends State<RemodellingImagesWidget> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return ListView.builder(
         padding: const EdgeInsets.only(
             left: 12.0,
@@ -67,15 +61,13 @@ class RemodellingImagesWidgetState extends State<RemodellingImagesWidget>
                         .push(MaterialPageRoute(
                             builder: (context) =>
                                 const RemodelingCameraScreen()))
-                        .then((image) => setState(() {
-                              if (image != null) {
-                                widget.data.imageMap[widget
-                                    .data.selectedItemList[index]] = image;
+                        .then((newImage) => setState(() {
+                              if (newImage != null) {
+                                widget.data.imageMap[item] = newImage;
                               }
                             }))
                     : null;
                 // todo need a way to cleanup
-                // todo grey out next button until all pictures are taken
               },
             ),
           );

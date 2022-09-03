@@ -46,12 +46,16 @@ class RemodellingImagesWidgetState extends State<RemodellingImagesWidget>
                   widget.data.imageMap[widget.data.selectedItemList[index]] ==
                           null
                       ? const Icon(Icons.add_circle)
-                      : Icon(Icons.check_circle_outline,
+                      : Icon(Icons.check_circle,
                           color: Theme.of(context).toggleableActiveColor),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => RemodelingCameraScreen(
-                        item: widget.data.selectedItemList[index])));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => const RemodelingCameraScreen()))
+                    .then((image) => setState(() {
+                          widget.data.imageMap[
+                              widget.data.selectedItemList[index]] = image;
+                        }));
                 // todo need a callback to save the image path
                 // todo need a way to cleanup
                 // todo grey out next button until all pictures are taken

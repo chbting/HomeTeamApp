@@ -1,11 +1,12 @@
-import 'package:camera/camera.dart';
+import 'dart:io';
+
 import 'package:tner_client/utils/client_data.dart';
 
 import '../remodeling_items.dart';
 
 class RemodelingSchedulingData {
   final List<RemodelingItem> selectedItemList = [];
-  final Map<RemodelingItem, XFile> imageMap = {};
+  final Map<RemodelingItem, File> imageMap = {};
 
   // Painting Card
   int? paintArea;

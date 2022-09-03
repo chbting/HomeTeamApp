@@ -187,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "start_date": MessageLookupByLibrary.simpleMessage("开始日期"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
+        "take_pictures": MessageLookupByLibrary.simpleMessage("拍摄图片"),
         "tenant_info": MessageLookupByLibrary.simpleMessage("租客资料"),
         "tenant_paid_fees_colon":
             MessageLookupByLibrary.simpleMessage("租客负担费用︰"),

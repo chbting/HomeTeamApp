@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
@@ -7,7 +8,6 @@ import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dar
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
-import 'package:tner_client/generated/l10n.dart';
 
 import '../../utils/shared_preferences_helper.dart';
 
@@ -19,7 +19,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(data.client.firstName == null) {
+    if (data.client.firstName == null) {
       data.client = getSampleClientData();
     } // todo debug line
     return ListView(
@@ -32,7 +32,8 @@ class RemodelingConfirmationWidget extends StatelessWidget {
       children: [
         Card(
             child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0), // todo review padding = all 16.0?
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          // todo review padding = all 16.0?
           child: ListTile(
               leading: const Icon(Icons.style),
               title: Text(S.of(context).remodeling_options,
@@ -105,7 +106,8 @@ class RemodelingConfirmationWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(getRemodelingItemTitle(RemodelingItem.painting, context),
+            Text(
+                RemodelingItemHelper.getTitle(RemodelingItem.painting, context),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(

@@ -222,6 +222,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),
+        "take_pictures": MessageLookupByLibrary.simpleMessage("Take pictures"),
         "tenant_info":
             MessageLookupByLibrary.simpleMessage("Tenant Information"),
         "tenant_paid_fees_colon":

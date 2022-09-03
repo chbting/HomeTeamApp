@@ -1569,6 +1569,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Take pictures`
+  String get take_pictures {
+    return Intl.message(
+      'Take pictures',
+      name: 'take_pictures',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

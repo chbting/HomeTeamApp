@@ -151,5 +151,6 @@
 	"hours": "小时",
 	"minute": "分",
 	"minutes": "分",
-	"cameras_not_available": "无法使用拍照功能"
+	"cameras_not_available": "无法使用拍照功能",
+	"take_pictures": "拍摄图片"
 }

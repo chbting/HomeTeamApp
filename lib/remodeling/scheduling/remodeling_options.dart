@@ -43,6 +43,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         stepList.add(_getOptionStep(item, context));
       }
       // todo use form to validate
+      // todo sometimes the nextStep button on scheduler is blocked
       return custom.Stepper(
           // Minus the internal paddings of the stepper
           padding: const EdgeInsets.only(
@@ -105,7 +106,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {
-    String title = getRemodelingItemTitle(item, context);
+    String title = RemodelingItemHelper.getTitle(item, context);
     return SingleChildScrollView(
         padding: const EdgeInsets.only(
             left: 12.0,
@@ -130,7 +131,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   custom.Step _getOptionStep(RemodelingItem item, BuildContext context) {
-    String title = getRemodelingItemTitle(item, context);
+    String title = RemodelingItemHelper.getTitle(item, context);
     return custom.Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(

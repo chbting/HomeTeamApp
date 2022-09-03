@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/assets/custom_icons_icons.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
@@ -18,49 +17,31 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
       GlobalKey<ScaffoldMessengerState>();
 
   //final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final Map<RemodelingItem, String> _titleMap = {};
-  final Map<RemodelingItem, IconData> _iconMap = {};
-  final List<RemodelingItem> _keyList = [];
-  final Map<RemodelingItem, bool> _isSelectedMap = {};
+  final List<RemodelingItem> _itemList = [
+    RemodelingItem.painting,
+    RemodelingItem.wallCoverings,
+    RemodelingItem.ac,
+    RemodelingItem.removals,
+    RemodelingItem.suspendedCeiling,
+    RemodelingItem.toiletReplacement,
+    RemodelingItem.pestControl
+  ];
+  final Map<RemodelingItem, bool> _selectionMap = {};
 
   @override
   bool get wantKeepAlive => true;
 
   @override
+  void initState() {
+    super.initState();
+    for (var item in _itemList) {
+      _selectionMap[item] = false;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    // Rebuild _titleMap every time, in case of language change
-    _titleMap[RemodelingItem.painting] =
-        getRemodelingItemTitle(RemodelingItem.painting, context);
-    _titleMap[RemodelingItem.wallCoverings] =
-        getRemodelingItemTitle(RemodelingItem.wallCoverings, context);
-    _titleMap[RemodelingItem.ac] =
-        getRemodelingItemTitle(RemodelingItem.ac, context);
-    _titleMap[RemodelingItem.removals] =
-        getRemodelingItemTitle(RemodelingItem.removals, context);
-    _titleMap[RemodelingItem.suspendedCeiling] =
-        getRemodelingItemTitle(RemodelingItem.suspendedCeiling, context);
-    _titleMap[RemodelingItem.toiletReplacement] =
-        getRemodelingItemTitle(RemodelingItem.toiletReplacement, context);
-    _titleMap[RemodelingItem.pestControl] =
-        getRemodelingItemTitle(RemodelingItem.pestControl, context);
-
-    // Build only once
-    if (_keyList.isEmpty) {
-      _keyList.addAll(_titleMap.keys);
-      for (var key in _keyList) {
-        _isSelectedMap[key] = false;
-      }
-
-      _iconMap[RemodelingItem.painting] = Icons.imagesearch_roller;
-      _iconMap[RemodelingItem.wallCoverings] = CustomIcons.wallcovering;
-      _iconMap[RemodelingItem.ac] = Icons.ac_unit;
-      _iconMap[RemodelingItem.removals] = Icons.delete_forever;
-      _iconMap[RemodelingItem.suspendedCeiling] = CustomIcons.suspendedCeiling;
-      _iconMap[RemodelingItem.toiletReplacement] = CustomIcons.toilet;
-      _iconMap[RemodelingItem.pestControl] = Icons.pest_control;
-    }
 
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
@@ -70,10 +51,10 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               icon: const Icon(Icons.schedule),
               label: Text(S.of(context).schedule),
               onPressed: () {
-                _isSelectedMap.containsValue(true)
+                _selectionMap.containsValue(true)
                     ? Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => RemodelingSchedulingScreen(
-                            selectionMap: _isSelectedMap)))
+                            selectionMap: _selectionMap)))
                     : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                         content: Text(S.of(context).msg_select_remodeling_item),
                         behavior: SnackBarBehavior.floating,
@@ -85,22 +66,24 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               padding: const EdgeInsets.only(
                   left: 8.0, top: 8.0, right: 8.0, bottom: 72.0),
               primary: false,
-              itemCount: _keyList.length,
+              itemCount: _itemList.length,
               itemBuilder: (context, index) {
                 return Card(
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 4.0, horizontal: 16.0),
-                    leading: Icon(_iconMap[_keyList[index]]),
-                    title: Text(_titleMap[_keyList[index]]!),
-                    trailing: _isSelectedMap[_keyList[index]]!
+                    leading: Icon(
+                        RemodelingItemHelper.getIconData(_itemList[index])),
+                    title: Text(RemodelingItemHelper.getTitle(
+                        _itemList[index], context)),
+                    trailing: _selectionMap[_itemList[index]]!
                         ? Icon(Icons.check_circle,
                             color: Theme.of(context).toggleableActiveColor)
                         : const Icon(Icons.check_circle_outline),
                     onTap: () {
                       setState(() {
-                        _isSelectedMap[_keyList[index]] =
-                            !_isSelectedMap[_keyList[index]]!;
+                        _selectionMap[_itemList[index]] =
+                            !_selectionMap[_itemList[index]]!;
                       });
                     },
                   ),

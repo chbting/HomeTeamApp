@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tner_client/assets/custom_icons_icons.dart';
 import 'package:tner_client/generated/l10n.dart';
 
 enum RemodelingItem {
@@ -11,27 +13,42 @@ enum RemodelingItem {
   pestControl
 }
 
-String getRemodelingItemTitle(RemodelingItem item, BuildContext context) {
-  if (item == RemodelingItem.painting) {
-    return S.of(context).painting;
+class RemodelingItemHelper {
+  static String getTitle(RemodelingItem item, BuildContext context) {
+    switch (item) {
+      case RemodelingItem.painting:
+        return S.of(context).painting;
+      case RemodelingItem.wallCoverings:
+        return S.of(context).wallcoverings;
+      case RemodelingItem.ac:
+        return S.of(context).ac_window_type;
+      case RemodelingItem.removals:
+        return S.of(context).removals;
+      case RemodelingItem.suspendedCeiling:
+        return S.of(context).suspended_ceiling;
+      case RemodelingItem.toiletReplacement:
+        return S.of(context).toilet_replacement;
+      case RemodelingItem.pestControl:
+        return S.of(context).pest_control;
+    }
   }
-  if (item == RemodelingItem.wallCoverings) {
-    return S.of(context).wallcoverings;
+
+  static IconData getIconData(RemodelingItem item) {
+    switch (item) {
+      case RemodelingItem.painting:
+        return Icons.imagesearch_roller;
+      case RemodelingItem.wallCoverings:
+        return CustomIcons.wallcovering;
+      case RemodelingItem.ac:
+        return Icons.ac_unit;
+      case RemodelingItem.removals:
+        return Icons.delete_forever;
+      case RemodelingItem.suspendedCeiling:
+        return CustomIcons.suspendedCeiling;
+      case RemodelingItem.toiletReplacement:
+        return CustomIcons.toilet;
+      case RemodelingItem.pestControl:
+        return Icons.pest_control;
+    }
   }
-  if (item == RemodelingItem.ac) {
-    return S.of(context).ac_window_type;
-  }
-  if (item == RemodelingItem.removals) {
-    return S.of(context).removals;
-  }
-  if (item == RemodelingItem.suspendedCeiling) {
-    return S.of(context).suspended_ceiling;
-  }
-  if (item == RemodelingItem.toiletReplacement) {
-    return S.of(context).toilet_replacement;
-  }
-  if (item == RemodelingItem.pestControl) {
-    return S.of(context).pest_control;
-  }
-  throw 'NoTitleCreatedForRemodelingItem';
 }

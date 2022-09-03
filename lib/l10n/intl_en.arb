@@ -151,5 +151,6 @@
 	"hours": "hrs",
 	"minute": "minute",
 	"minutes": "minutes",
-	"cameras_not_available": "Cameras are not available"
+	"cameras_not_available": "Cameras are not available",
+	"take_pictures": "Take pictures"
 }

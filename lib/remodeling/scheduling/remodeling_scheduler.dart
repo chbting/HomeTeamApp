@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_date_picker.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_images.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodelling_camera.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-import 'package:tner_client/generated/l10n.dart';
 
 class RemodelingSchedulingScreen extends StatefulWidget {
   const RemodelingSchedulingScreen({Key? key, required this.selectionMap})
@@ -69,8 +68,7 @@ class RemodelingSchedulingScreenState
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar: AppBar(
-                title: Text(S.of(context).schedule_remodeling)),
+            appBar: AppBar(title: Text(S.of(context).schedule_remodeling)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +111,7 @@ class RemodelingSchedulingScreenState
                                 _remodelingOptionsAtBottom = value;
                               });
                             }),
-                        RemodelingCameraWidget(data: _data),
+                        RemodellingImagesWidget(data: _data),
                         RemodelingContactsWidget(data: _data),
                         RemodelingConfirmationWidget(data: _data)
                       ],
@@ -158,7 +156,7 @@ class RemodelingSchedulingScreenState
       case 0:
         return S.of(context).remodeling_options;
       case 1:
-        return S.of(context).pick_a_day;
+        return S.of(context).take_pictures;
       case 2:
         return S.of(context).remodeling_address_and_contacts;
       case 3:

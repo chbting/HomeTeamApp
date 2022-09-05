@@ -23,14 +23,9 @@ void main() async {
       child: const App()));
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
-  @override
-  State<App> createState() => AppState();
-}
-
-class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     // TODO check to see if orientation works on ipad
@@ -62,7 +57,7 @@ class AppHome extends StatefulWidget {
 }
 
 class AppHomeState extends State<AppHome> {
-  static int _selectedIndex = 0; // Default value
+  int _selectedIndex = 0; // Default value
 
   @override
   Widget build(BuildContext context) {

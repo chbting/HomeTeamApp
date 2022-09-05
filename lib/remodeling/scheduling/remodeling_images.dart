@@ -59,11 +59,11 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                                 const RemodelingCameraScreen()))
                         .then((newImage) {
                         if (newImage != null) {
-                          setState(() {
-                            RemodelingInheritedData.of(context)!
-                                .info
-                                .imageMap[item] = newImage; //todo got reset when back and come back
-                          });
+                          RemodelingInheritedData.of(context)!
+                              .info
+                              .imageMap[item] = newImage;
+                          RemodelingInheritedData.of(context)!
+                              .updateRightButtonState();
                         }
                       })
                     : null;

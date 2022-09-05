@@ -18,8 +18,8 @@ void main() async {
   await SharedPreferencesHelper.ensureInitialized();
   await CameraHelper.ensureInitialized();
 
-  runApp(ChangeNotifierProvider(
-      create: (context) => SharedPreferencesHelper.changeNotifier,
+  runApp(ChangeNotifierProvider.value(
+      value: SharedPreferencesHelper.changeNotifier,
       child: const App()));
 }
 

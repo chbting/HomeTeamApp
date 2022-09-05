@@ -67,7 +67,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               setState(() {
                 FocusScope.of(context).unfocus();
                 _activeOption--;
-                _notifyIsRemodelingOptionsAtBottom(stepList.length);
+                _updateBottomButtonState();
               });
             }
           },
@@ -76,7 +76,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
               setState(() {
                 FocusScope.of(context).unfocus();
                 _activeOption++;
-                _notifyIsRemodelingOptionsAtBottom(stepList.length);
+                _updateBottomButtonState();
               });
             }
           },
@@ -86,18 +86,19 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
                 FocusScope.of(context).unfocus();
                 _activeOption = index;
               }
-              _notifyIsRemodelingOptionsAtBottom(stepList.length);
+              _updateBottomButtonState();
             });
           },
           steps: stepList);
     }
   }
 
-  void _notifyIsRemodelingOptionsAtBottom(int numberOfSteps) {
-    (_activeOption == numberOfSteps - 1)
-        ? RemodelingInheritedData.of(context)!.ui.showBottomButtons = true
-        : RemodelingInheritedData.of(context)!.ui.showBottomButtons = false;
-    // todo this doesnt trigger a rebuild
+  void _updateBottomButtonState() {
+    // Show the button only when the user is on the last option
+    (_activeOption == _data.remodelingItems.length - 1)
+        ? RemodelingInheritedData.of(context)!.ui.showBottomButtons.value = true
+        : RemodelingInheritedData.of(context)!.ui.showBottomButtons.value =
+            false; //todo
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {

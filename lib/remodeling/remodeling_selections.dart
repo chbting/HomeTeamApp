@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 
 class RemodelingSelectionsScreen extends StatefulWidget {
@@ -58,9 +60,17 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                       remodelingItems.add(remodelingItem);
                     }
                   });
+
+                  var info = RemodelingInfo(remodelingItems: remodelingItems);
+                  var ui = RemodelingSchedulerUI(
+                      showBottomButtons: ValueNotifier(
+                          remodelingItems.length == 1 ? true : false));
+
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RemodelingScheduler(
-                          remodelingItems: remodelingItems)));
+                      builder: (context) => RemodelingInheritedData(
+                          info: info,
+                          ui: ui,
+                          child: const RemodelingScheduler())));
                 } else {
                   _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
                     content: Text(S.of(context).msg_select_remodeling_item),

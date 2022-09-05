@@ -40,7 +40,7 @@ class RemodelingInheritedData extends InheritedWidget {
   }
 }
 
-class RemodelingSchedulerUI extends ChangeNotifier {
+class RemodelingSchedulerUI {
   ValueNotifier<bool> showBottomButtons;
   ValueNotifier<bool> rightButtonEnabled = ValueNotifier(true);
   int activeStep = 0;

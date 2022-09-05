@@ -184,20 +184,20 @@ class Stepper extends StatefulWidget {
   /// new one.
   ///
   /// The [steps], [type], and [currentStep] arguments must not be null.
-  const Stepper({
-    Key? key,
-    required this.steps,
-    this.physics,
-    this.type = StepperType.vertical,
-    this.currentStep = 0,
-    this.onStepTapped,
-    this.onStepContinue,
-    this.onStepCancel,
-    this.controlsBuilder,
-    this.elevation,
-    this.margin,
-    this.padding
-  })  : assert(steps != null),
+  const Stepper(
+      {Key? key,
+      required this.steps,
+      this.physics,
+      this.type = StepperType.vertical,
+      this.currentStep = 0,
+      this.onStepTapped,
+      this.onStepContinue,
+      this.onStepCancel,
+      this.controlsBuilder,
+      this.elevation,
+      this.margin,
+      this.padding})
+      : assert(steps != null),
         assert(type != null),
         assert(currentStep != null),
         assert(0 <= currentStep && currentStep < steps.length),
@@ -535,7 +535,7 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
               child: TextButton(
                 onPressed: widget.onStepCancel,
                 style: TextButton.styleFrom(
-                  primary: cancelColor,
+                  foregroundColor: cancelColor,
                   padding: buttonPadding,
                   shape: buttonShape,
                 ),

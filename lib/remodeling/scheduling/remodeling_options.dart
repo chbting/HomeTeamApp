@@ -2,18 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/custom_stepper.dart' as custom;
 
 class RemodelingOptionsWidget extends StatefulWidget {
-  const RemodelingOptionsWidget(
-      {Key? key, required this.data, required this.callBack})
-      : super(key: key);
-
-  final RemodelingSchedulingData data;
-  final Function callBack;
+  const RemodelingOptionsWidget({Key? key}) : super(key: key);
 
   @override
   State<RemodelingOptionsWidget> createState() =>
@@ -22,24 +18,23 @@ class RemodelingOptionsWidget extends StatefulWidget {
 
 class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
+  late RemodelingInfo _data;
   int _activeOption = 0;
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => true; //todo needed?
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    _data = RemodelingInheritedData.of(context)!.info;
 
     // Return a Card for one item, a Stepper for multiple items
-    if (widget.data.selectedItemList.length == 1) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        widget.callBack(true);
-      });
-      return _getSingleOptionWidget(widget.data.selectedItemList[0], context);
+    if (_data.remodelingItems.length == 1) {
+      return _getSingleOptionWidget(_data.remodelingItems[0], context);
     } else {
       List<custom.Step> stepList = [];
-      for (var item in widget.data.selectedItemList) {
+      for (var item in _data.remodelingItems) {
         stepList.add(_getOptionStep(item, context));
       }
       // todo use form to validate
@@ -47,9 +42,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       return custom.Stepper(
           // Minus the internal paddings of the stepper
           padding: const EdgeInsets.only(
-              top: RemodelingSchedulingScreen.stepTitleBarHeight - 16.0,
-              bottom: RemodelingSchedulingScreen.bottomButtonContainerHeight -
-                  24.0),
+              top: RemodelingScheduler.stepTitleBarHeight - 16.0,
+              bottom: RemodelingScheduler.bottomButtonContainerHeight - 24.0),
           currentStep: _activeOption,
           controlsBuilder:
               (BuildContext context, custom.ControlsDetails details) {
@@ -101,8 +95,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
 
   void _notifyIsRemodelingOptionsAtBottom(int numberOfSteps) {
     (_activeOption == numberOfSteps - 1)
-        ? widget.callBack(true)
-        : widget.callBack(false);
+        ? RemodelingInheritedData.of(context)!.ui.showBottomButtons = true
+        : RemodelingInheritedData.of(context)!.ui.showBottomButtons = false;
+    // todo this doesnt trigger a rebuild
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {
@@ -111,9 +106,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom:
-                RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
+            top: RemodelingScheduler.stepTitleBarHeight - 4.0,
+            bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
         primary: false,
         child: Card(
             child: Padding(
@@ -141,28 +135,22 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getLayoutByRemodelingItem(RemodelingItem item) {
-    if (item == RemodelingItem.painting) {
-      return _getPaintingCardLayout();
+    switch (item) {
+      case RemodelingItem.painting:
+        return _getPaintingCardLayout();
+      case RemodelingItem.wallCoverings:
+        return _getWallCoveringsCardLayout();
+      case RemodelingItem.ac:
+        return _getAcCardLayout();
+      case RemodelingItem.removals:
+        return _getRemovalsCardLayout();
+      case RemodelingItem.suspendedCeiling:
+        return _getSuspendedCeilingCardLayout();
+      case RemodelingItem.toiletReplacement:
+        return _getToiletReplacementCardLayout();
+      case RemodelingItem.pestControl:
+        return _getPestControlCardLayout();
     }
-    if (item == RemodelingItem.wallCoverings) {
-      return _getWallCoveringsCardLayout();
-    }
-    if (item == RemodelingItem.ac) {
-      return _getAcCardLayout();
-    }
-    if (item == RemodelingItem.removals) {
-      return _getRemovalsCardLayout();
-    }
-    if (item == RemodelingItem.suspendedCeiling) {
-      return _getSuspendedCeilingCardLayout();
-    }
-    if (item == RemodelingItem.toiletReplacement) {
-      return _getToiletReplacementCardLayout();
-    }
-    if (item == RemodelingItem.pestControl) {
-      return _getPestControlCardLayout();
-    }
-    return Container();
   }
 
   Widget _getPaintingCardLayout() {
@@ -179,8 +167,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onChanged: (value) {
             setState(() {
               value.isEmpty
-                  ? widget.data.paintArea = null
-                  : widget.data.paintArea = int.parse(value);
+                  ? _data.paintArea = null
+                  : _data.paintArea = int.parse(value);
             });
           },
         ),
@@ -188,25 +176,25 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       RadioListTile(
         title: Text(S.of(context).scrape_old_paint_yes),
         value: true,
-        groupValue: widget.data.scrapeOldPaint,
+        groupValue: _data.scrapeOldPaint,
         onChanged: (bool? value) {
           setState(() {
-            widget.data.scrapeOldPaint = true;
+            _data.scrapeOldPaint = true;
           });
         },
       ),
       RadioListTile(
         title: Text(S.of(context).scrape_old_paint_no),
         value: false,
-        groupValue: widget.data.scrapeOldPaint,
+        groupValue: _data.scrapeOldPaint,
         onChanged: (bool? value) {
           setState(() {
-            widget.data.scrapeOldPaint = false;
+            _data.scrapeOldPaint = false;
           });
         },
       ),
       _getEstimationWidget(RemodelingPricing.getPaintingEstimate(
-          widget.data.paintArea, widget.data.scrapeOldPaint))
+          _data.paintArea, _data.scrapeOldPaint))
     ]);
   }
 
@@ -224,14 +212,14 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onChanged: (value) {
             setState(() {
               value.isEmpty
-                  ? widget.data.wallCoveringsArea = null
-                  : widget.data.wallCoveringsArea = int.parse(value);
+                  ? _data.wallCoveringsArea = null
+                  : _data.wallCoveringsArea = int.parse(value);
             });
           },
         ),
       ),
-      _getEstimationWidget(RemodelingPricing.getWallCoveringsEstimate(
-          widget.data.wallCoveringsArea))
+      _getEstimationWidget(
+          RemodelingPricing.getWallCoveringsEstimate(_data.wallCoveringsArea))
     ]);
   }
 
@@ -250,8 +238,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onChanged: (value) {
             setState(() {
               value.isEmpty
-                  ? widget.data.acCount = null
-                  : widget.data.acCount = int.parse(value);
+                  ? _data.acCount = null
+                  : _data.acCount = int.parse(value);
             });
           },
         ),

@@ -10,7 +10,8 @@ class SharedPreferencesHelper {
   static const String localeKey = 'locale';
 
   static late SharedPreferences _prefs;
-  static late ValueNotifier themeNotifier, localeNotifier;
+  static late ValueNotifier<bool> themeNotifier;
+  static late ValueNotifier<String> localeNotifier;
 
   static ensureInitialized() async {
     _prefs = await SharedPreferences.getInstance();

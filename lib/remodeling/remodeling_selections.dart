@@ -51,14 +51,22 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
               icon: const Icon(Icons.schedule),
               label: Text(S.of(context).schedule),
               onPressed: () {
-                _selectionMap.containsValue(true)
-                    ? Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RemodelingSchedulingScreen(
-                            selectionMap: _selectionMap)))
-                    : _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
-                        content: Text(S.of(context).msg_select_remodeling_item),
-                        behavior: SnackBarBehavior.floating,
-                      ));
+                if (_selectionMap.containsValue(true)) {
+                  List<RemodelingItem> remodelingItems = [];
+                  _selectionMap.forEach((remodelingItem, selected) {
+                    if (selected) {
+                      remodelingItems.add(remodelingItem);
+                    }
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RemodelingScheduler(
+                          remodelingItems: remodelingItems)));
+                } else {
+                  _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(
+                    content: Text(S.of(context).msg_select_remodeling_item),
+                    behavior: SnackBarBehavior.floating,
+                  ));
+                }
               }),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,

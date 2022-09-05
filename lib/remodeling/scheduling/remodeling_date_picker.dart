@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
@@ -12,7 +12,7 @@ class RemodelingDatePickerWidget extends StatefulWidget {
   const RemodelingDatePickerWidget({Key? key, required this.data})
       : super(key: key);
 
-  final RemodelingSchedulingData data;
+  final RemodelingInfo data;
 
   @override
   State<RemodelingDatePickerWidget> createState() =>
@@ -27,7 +27,7 @@ class RemodelingDatePickerWidgetState
   final int _schedulingRange = 30;
   late final now = DateTime.now();
   late final firstDate = DateTime(now.year, now.month,
-      now.day + RemodelingSchedulingData.firstAvailableDay);
+      now.day + RemodelingInfo.firstAvailableDay);
   late final lastDate = DateTime(
       firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
 
@@ -41,9 +41,9 @@ class RemodelingDatePickerWidgetState
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
+            top: RemodelingScheduler.stepTitleBarHeight - 4.0,
             bottom:
-                RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
+                RemodelingScheduler.bottomButtonContainerHeight - 4.0),
         primary: false,
         children: [
           Card(

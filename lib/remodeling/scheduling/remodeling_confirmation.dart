@@ -2,33 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 
-import '../../utils/shared_preferences_helper.dart';
+class RemodelingConfirmationWidget extends StatefulWidget {
+  const RemodelingConfirmationWidget({Key? key}) : super(key: key);
 
-class RemodelingConfirmationWidget extends StatelessWidget {
-  const RemodelingConfirmationWidget({Key? key, required this.data})
-      : super(key: key);
+  @override
+  State<RemodelingScheduler> createState() => RemodelingSchedulerState();
+}
 
-  final RemodelingSchedulingData data;
+class RemodelingConfirmationWidgetState
+    extends State<RemodelingConfirmationWidget> {
+  late RemodelingInfo _data;
 
   @override
   Widget build(BuildContext context) {
-    if (data.client.firstName == null) {
-      data.client = getSampleClientData();
+    _data = RemodelingInheritedData.of(context)!.info;
+    if (_data.client.firstName == null) {
+      _data.client = getSampleClientData();
     } // todo debug line
     return ListView(
       primary: false,
       padding: const EdgeInsets.only(
           left: 12.0,
           right: 12.0,
-          top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom: RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
+          top: RemodelingScheduler.stepTitleBarHeight - 4.0,
+          bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
       children: [
         Card(
             child: Padding(
@@ -54,7 +60,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
             subtitle: Text(
                 DateFormat(Format.dateLong,
                         SharedPreferencesHelper.getLocale().languageCode)
-                    .format(data.datePicked),
+                    .format(_data.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
@@ -66,10 +72,10 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               title: Text(S.of(context).remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${data.client.addressLine1}'
-                  '\n${data.client.addressLine2}'
-                  '\n${data.client.district}'
-                  '\n${data.client.region}',
+                  '${_data.client.addressLine1}'
+                  '\n${_data.client.addressLine2}'
+                  '\n${_data.client.district}'
+                  '\n${_data.client.region}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         )),
         Card(
@@ -80,7 +86,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               title: Text(S.of(context).contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${data.client.phoneNumber}'
+                  '${_data.client.phoneNumber}'
                   '\n${_getContactName()}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         ))
@@ -93,7 +99,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
     return Wrap(
       runSpacing: 4.0,
       children: [
-        data.selectedItemList.contains(RemodelingItem.painting)
+        _data.remodelingItems.contains(RemodelingItem.painting)
             ? _getPaintingItem(context)
             : Container(),
       ],
@@ -111,13 +117,13 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                 style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(
-                    data.paintArea, data.scrapeOldPaint)),
+                    _data.paintArea, _data.scrapeOldPaint)),
                 style: AppTheme.getCardBodyTextStyle(context))
           ]),
-      Text('- ${data.paintArea} ${S.of(context).sq_ft}',
+      Text('- ${_data.paintArea} ${S.of(context).sq_ft}',
           style: AppTheme.getCardBodyTextStyle(context)),
       Text(
-          data.scrapeOldPaint!
+          _data.scrapeOldPaint!
               ? '- ${S.of(context).scrape_old_paint_yes}'
               : '- ${S.of(context).scrape_old_paint_no}',
           style: AppTheme.getCardBodyTextStyle(context)),
@@ -126,9 +132,9 @@ class RemodelingConfirmationWidget extends StatelessWidget {
 
   String _getContactName() {
     if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
-      return '${data.client.lastName}${data.client.title}';
+      return '${_data.client.lastName}${_data.client.title}';
     } else {
-      return '${data.client.title} ${data.client.lastName}';
+      return '${_data.client.title} ${_data.client.lastName}';
     }
   }
 }

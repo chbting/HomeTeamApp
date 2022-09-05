@@ -2,37 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_camera.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduling_data.dart';
 import 'package:tner_client/ui/theme.dart';
 
-class RemodellingImagesWidget extends StatefulWidget {
-  const RemodellingImagesWidget({Key? key, required this.data})
-      : super(key: key);
-
-  final RemodelingSchedulingData data;
+class RemodelingImagesWidget extends StatefulWidget {
+  const RemodelingImagesWidget({Key? key}) : super(key: key);
 
   @override
-  State<RemodellingImagesWidget> createState() =>
-      RemodellingImagesWidgetState();
+  State<RemodelingImagesWidget> createState() => RemodelingImagesWidgetState();
 }
 
-class RemodellingImagesWidgetState extends State<RemodellingImagesWidget> {
+class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
   @override
   Widget build(BuildContext context) {
+    var data = RemodelingInheritedData.of(context)!.info;
     return ListView.builder(
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: RemodelingSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom:
-                RemodelingSchedulingScreen.bottomButtonContainerHeight - 4.0),
+            top: RemodelingScheduler.stepTitleBarHeight - 4.0,
+            bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
         primary: false,
-        itemCount: widget.data.selectedItemList.length,
+        itemCount: data.remodelingItems.length,
         itemBuilder: (context, index) {
-          var item = widget.data.selectedItemList[index];
+          var item = data.remodelingItems[index];
           var pictureRequired = RemodelingItemHelper.isPictureRequired(item);
-          var itemImage = widget.data.imageMap[item];
+          var itemImage = data.imageMap[item];
           return Card(
             child: ListTile(
               contentPadding:
@@ -61,11 +57,15 @@ class RemodellingImagesWidgetState extends State<RemodellingImagesWidget> {
                         .push(MaterialPageRoute(
                             builder: (context) =>
                                 const RemodelingCameraScreen()))
-                        .then((newImage) => setState(() {
-                              if (newImage != null) {
-                                widget.data.imageMap[item] = newImage;
-                              }
-                            }))
+                        .then((newImage) {
+                        if (newImage != null) {
+                          setState(() {
+                            RemodelingInheritedData.of(context)!
+                                .info
+                                .imageMap[item] = newImage; //todo got reset when back and come back
+                          });
+                        }
+                      })
                     : null;
                 // todo need a way to cleanup
               },

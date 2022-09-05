@@ -4,8 +4,9 @@ import 'package:tner_client/utils/client_data.dart';
 
 import '../remodeling_items.dart';
 
-class RemodelingSchedulingData {
-  final List<RemodelingItem> selectedItemList = [];
+/// This class contains the data to be submitted to the server
+class RemodelingInfo {
+  final List<RemodelingItem> remodelingItems;
   final Map<RemodelingItem, File> imageMap = {};
 
   // Painting Card
@@ -33,7 +34,7 @@ class RemodelingSchedulingData {
 
   late Client client;
 
-  RemodelingSchedulingData() {
+  RemodelingInfo({required this.remodelingItems}) {
     final now = DateTime.now();
     datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
     client = Client();

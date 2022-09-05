@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/settings/settings.dart';
@@ -17,44 +18,39 @@ void main() async {
   await SharedPreferencesHelper.ensureInitialized();
   await CameraHelper.ensureInitialized();
 
-  runApp(const RootApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => SharedPreferencesHelper.changeNotifier,
+      child: const App()));
 }
 
-class RootApp extends StatefulWidget {
-  const RootApp({Key? key}) : super(key: key);
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
-  State<RootApp> createState() => RootAppState();
+  State<App> createState() => AppState();
 }
 
-class RootAppState extends State<RootApp> {
+class AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     // TODO check to see if orientation works on ipad
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    return ValueListenableBuilder(
-      valueListenable: SharedPreferencesHelper.themeNotifier,
-      builder: (context, value, _) {
-        return ValueListenableBuilder(
-          valueListenable: SharedPreferencesHelper.localeNotifier,
-          builder: (context, value, _) {
-            return MaterialApp(
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: S.delegate.supportedLocales,
-                home: const AppHome(),
-                theme: SharedPreferencesHelper.isDarkMode()
-                    ? AppTheme.getDarkTheme()
-                    : AppTheme.getLightTheme(),
-                locale: SharedPreferencesHelper.getLocale());
-          },
-        );
-      },
-    );
+    return Consumer<SharedPreferencesChangedNotifier>(
+        builder: (context, _, child) {
+      return MaterialApp(
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          home: const AppHome(),
+          theme: SharedPreferencesHelper.isDarkMode()
+              ? AppTheme.getDarkTheme()
+              : AppTheme.getLightTheme(),
+          locale: SharedPreferencesHelper.getLocale());
+    });
   }
 }
 

@@ -10,13 +10,12 @@ class SharedPreferencesHelper {
   static const String localeKey = 'locale';
 
   static late SharedPreferences _prefs;
-  static late ValueNotifier<bool> themeNotifier;
-  static late ValueNotifier<String> localeNotifier;
+
+  static SharedPreferencesChangedNotifier changeNotifier =
+      SharedPreferencesChangedNotifier();
 
   static ensureInitialized() async {
     _prefs = await SharedPreferences.getInstance();
-    themeNotifier = ValueNotifier(isDarkMode());
-    localeNotifier = ValueNotifier(localeToString(getLocale()));
   }
 
   static String localeToString(Locale locale) {
@@ -38,7 +37,7 @@ class SharedPreferencesHelper {
 
   static setDarkModeOn(bool darkModeOn) {
     _prefs.setBool(darkModeOnKey, darkModeOn);
-    themeNotifier.value = darkModeOn;
+    changeNotifier.notify();
   }
 
   static bool isDarkMode() =>
@@ -48,7 +47,7 @@ class SharedPreferencesHelper {
   static setLocale(Locale locale) {
     String newValue = localeToString(locale);
     _prefs.setString(localeKey, newValue);
-    localeNotifier.value = newValue;
+    changeNotifier.notify();
   }
 
   static Locale getLocale() {
@@ -95,5 +94,11 @@ class SharedPreferencesHelper {
       default:
         return S.of(context).english;
     }
+  }
+}
+
+class SharedPreferencesChangedNotifier extends ChangeNotifier {
+  void notify() {
+    notifyListeners();
   }
 }

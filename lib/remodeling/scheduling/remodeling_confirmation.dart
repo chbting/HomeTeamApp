@@ -113,7 +113,7 @@ class RemodelingConfirmationWidgetState
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-                RemodelingItemHelper.getTitle(RemodelingItem.painting, context),
+                RemodelingItemHelper.getItemName(RemodelingItem.painting, context),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(

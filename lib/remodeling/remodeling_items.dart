@@ -13,7 +13,7 @@ enum RemodelingItem {
 }
 
 class RemodelingItemHelper {
-  static String getTitle(RemodelingItem item, BuildContext context) {
+  static String getItemName(RemodelingItem item, BuildContext context) {
     switch (item) {
       case RemodelingItem.painting:
         return S.of(context).painting;
@@ -54,15 +54,15 @@ class RemodelingItemHelper {
   static bool isPictureRequired(RemodelingItem item) {
     switch (item) {
       case RemodelingItem.painting:
-        return false;
+        return true;
       case RemodelingItem.wallCoverings:
-        return false;
+        return true;
       case RemodelingItem.ac:
         return true;
       case RemodelingItem.removals:
         return true;
       case RemodelingItem.suspendedCeiling:
-        return true;
+        return false;
       case RemodelingItem.toiletReplacement:
         return true;
       case RemodelingItem.pestControl:

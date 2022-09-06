@@ -1609,6 +1609,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Retake the picture?`
+  String get retake_picture {
+    return Intl.message(
+      'Retake the picture?',
+      name: 'retake_picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retake`
+  String get retake {
+    return Intl.message(
+      'Retake',
+      name: 'retake',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

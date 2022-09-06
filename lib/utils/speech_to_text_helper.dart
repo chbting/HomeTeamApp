@@ -95,8 +95,7 @@ class SpeechToTextHelper {
               ),
               actions: <Widget>[
                 TextButton(
-                  child: Text(S.of(context).cancel,
-                      style: AppTheme.getDialogTextButtonTextStyle(context)),
+                  child: Text(S.of(context).cancel),
                   onPressed: () {
                     _speechToText.isListening ? _speechToText.stop() : null;
                     if (_isDialogShowing) {

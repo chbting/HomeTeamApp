@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 
-import 'theme.dart';
-
 class RadioListDialog {
   static show(
       BuildContext context,
@@ -25,10 +23,7 @@ class RadioListDialog {
                   })),
               actions: <Widget>[
                 TextButton(
-                  child: Text(S.of(context).cancel,
-                      style: AppTheme
-                          .getDialogTextButtonTextStyle(
-                          context)),
+                  child: Text(S.of(context).cancel),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

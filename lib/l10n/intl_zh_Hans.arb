@@ -155,5 +155,7 @@
 	"take_pictures": "拍摄图片",
 	"picture_added": "已拍照",
 	"picture_not_required": "无需拍照",
-	"picture_required": "需要拍照"
+	"picture_required": "需要拍照",
+	"retake_picture": "重拍照片？",
+	"retake": "重拍"
 }

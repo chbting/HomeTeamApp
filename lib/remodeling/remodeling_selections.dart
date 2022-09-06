@@ -92,7 +92,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                         vertical: 4.0, horizontal: 16.0),
                     leading: Icon(
                         RemodelingItemHelper.getIconData(_itemList[index])),
-                    title: Text(RemodelingItemHelper.getTitle(
+                    title: Text(RemodelingItemHelper.getItemName(
                         _itemList[index], context)),
                     trailing: _selectionMap[_itemList[index]]!
                         ? Icon(Icons.check_circle,

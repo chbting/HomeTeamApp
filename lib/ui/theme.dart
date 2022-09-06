@@ -62,9 +62,6 @@ class AppTheme {
   static Color getBackgroundColor(BuildContext context) =>
       Theme.of(context).scaffoldBackgroundColor;
 
-  static TextStyle getDialogTextButtonTextStyle(BuildContext context) =>
-      TextStyle(color: Theme.of(context).colorScheme.secondary);
-
   /// Essentially the same function as getCardTitleTextStyle(), this should be
   /// used only in a ListTile setting when swapping between title and subtitle
   static TextStyle getListTileBodyTextStyle(BuildContext context) =>
@@ -114,6 +111,9 @@ class AppTheme {
           .textTheme
           .subtitle1!
           .copyWith(color: Theme.of(context).textTheme.caption!.color);
+
+  static Color? getPrimaryColor(BuildContext context) =>
+      Theme.of(context).colorScheme.primary;
 
   static Color? getTertiaryColor(BuildContext context) =>
       Theme.of(context).colorScheme.tertiary;

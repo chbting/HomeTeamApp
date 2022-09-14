@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/FileHelper.dart';
 import 'package:tner_client/utils/camera_helper.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 class RemodelingCameraScreen extends StatefulWidget {
   const RemodelingCameraScreen({Key? key}) : super(key: key);
@@ -58,6 +57,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (_image == null) {
+                      // Show the take picture UI
                       return Stack(
                         children: [
                           CameraPreview(_controller),
@@ -73,13 +73,13 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                                           await _controllerFuture;
                                           final image =
                                               await _controller.takePicture();
-                                          _image = File(image.path);
-
+                                          _image = await FileHelper
+                                              .moveToSchedulerCache(
+                                                  File(image.path));
                                           if (!mounted) return;
                                           setState(() {});
                                         } catch (e) {
-                                          debugPrint(
-                                              'Exception when taking pictures: $e');
+                                          debugPrint('$e');
                                         }
                                       },
                                       heroTag: 'picture_button',
@@ -87,8 +87,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                         ],
                       );
                     } else {
-                      debugPrint(
-                          '${Theme.of(context).colorScheme.onSecondary},${Theme.of(context).colorScheme.secondary}');
+                      // Show the picture and check and cross buttons
                       return Stack(children: [
                         Image.file(File(_image!.path)),
                         Padding(
@@ -109,8 +108,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                                         },
                                         heroTag: 'reject_button',
                                         backgroundColor: Colors.white,
-                                        foregroundColor: SharedPreferencesHelper.isDarkMode()? Theme.of(context).colorScheme.onSecondary:
-                                            AppTheme.getPrimaryColor(context), //todo light theme only
+                                        foregroundColor: Colors.black,
                                         child: const Icon(Icons.clear)),
                                     FloatingActionButton.large(
                                         onPressed: () {

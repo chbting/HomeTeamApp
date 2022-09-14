@@ -16,17 +16,15 @@ class RemodelingOptionsWidget extends StatefulWidget {
       RemodelingOptionsWidgetState();
 }
 
-class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
-    with AutomaticKeepAliveClientMixin {
+class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
   late RemodelingInfo _data;
   int _activeOption = 0;
 
-  @override
-  bool get wantKeepAlive => true; //todo needed?
+  // @override
+  // bool get wantKeepAlive => true; //todo needed?
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     _data = RemodelingInheritedData.of(context)!.info;
 
     // Return a Card for one item, a Stepper for multiple items

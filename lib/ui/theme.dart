@@ -8,6 +8,7 @@ class AppTheme {
   static final Color tnerBlue = Colors.lightBlueAccent[700]!;
   static MaterialColor customLightBlue = MaterialColor(
     darkThemeAccent.value,
+    // Affects button, button text, textField border colors
     <int, Color>{
       50: Colors.lightBlue[50]!,
       100: Colors.lightBlue[100]!,
@@ -21,12 +22,52 @@ class AppTheme {
       900: Colors.lightBlue[900]!,
     },
   );
+  static const bool useMaterial3Themes = false;
 
+  // todo define primary, onPrimary, secondary,...
+  // todo try to standardize with fromSeed/fromSwatch without sacrificing the current theming
   static ThemeData getDarkTheme() {
+    if (useMaterial3Themes) {
+      ColorScheme colorScheme = ColorScheme.fromSeed(
+          brightness: Brightness.dark, seedColor: Colors.lightBlueAccent);
+
+      return _getDarkThemeWithColorScheme(colorScheme).copyWith(
+          scaffoldBackgroundColor: darkThemeBackground,
+          errorColor: const Color(0xFFCF6679),
+          // As defined in material design
+          appBarTheme: ThemeData.dark()
+              .appBarTheme
+              .copyWith(backgroundColor: colorScheme.surface),
+          checkboxTheme: ThemeData.dark()
+              .checkboxTheme
+              .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
+          snackBarTheme: ThemeData.dark()
+              .snackBarTheme
+              .copyWith(actionTextColor: Colors.blue));
+    } else {
+      return _getMaterial2DarkTheme();
+    }
+  }
+
+  /// Work around for the hardcoded Colors.tealAccent[200] teal accent color
+  static ThemeData _getDarkThemeWithColorScheme(ColorScheme colorScheme) {
+    // have artifacts when the sliverSearchBar
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      indicatorColor: colorScheme.primary,
+      toggleableActiveColor: colorScheme.primary,
+      colorScheme: colorScheme,
+    );
+  }
+
+  static ThemeData _getMaterial2DarkTheme() {
     return ThemeData(
         brightness: Brightness.dark,
         scaffoldBackgroundColor: darkThemeBackground,
+        // override
         indicatorColor: darkThemeAccent,
+        // todo  indicatorColor ??= accentColor == primaryColor ? Colors.white : accentColor;
         // As defined in material design
         errorColor: const Color(0xFFCF6679),
         // TabBar & custom checkbox in remodelling selections
@@ -36,18 +77,31 @@ class AppTheme {
             .checkboxTheme
             .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
         // Checkbox & Switch
+        // In dark mode, the accentColor setting has no effect because it is forced to be Colors.tealAccent[200]
+        // same as toggleableActiveColor and must be manually overridden
         colorScheme: ColorScheme.fromSwatch(
                 primarySwatch: customLightBlue,
-                accentColor: darkThemeAccent,
+                //accentColor: darkThemeAccent,
                 brightness: Brightness.dark)
             .copyWith(
                 secondary: darkThemeAccent, tertiary: Colors.lightBlueAccent),
+        appBarTheme: ThemeData.dark()
+            .appBarTheme
+            .copyWith(backgroundColor: ThemeData.dark().canvasColor),
         snackBarTheme: ThemeData.dark()
             .snackBarTheme
             .copyWith(actionTextColor: Colors.blue));
   }
 
   static ThemeData getLightTheme() {
+    if (useMaterial3Themes) {
+      return ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue); //todo
+    } else {
+      return _getMaterial2LightTheme();
+    }
+  }
+
+  static ThemeData _getMaterial2LightTheme() {
     return ThemeData(
         // todo scroll gradient is difficult to see
         brightness: Brightness.light,

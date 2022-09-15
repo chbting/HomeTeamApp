@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
+import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
-import 'package:tner_client/generated/l10n.dart';
 
 class RemodelingDatePickerWidget extends StatefulWidget {
   const RemodelingDatePickerWidget({Key? key, required this.data})
@@ -26,8 +26,8 @@ class RemodelingDatePickerWidgetState
 
   final int _schedulingRange = 30;
   late final now = DateTime.now();
-  late final firstDate = DateTime(now.year, now.month,
-      now.day + RemodelingInfo.firstAvailableDay);
+  late final firstDate =
+      DateTime(now.year, now.month, now.day + RemodelingInfo.firstAvailableDay);
   late final lastDate = DateTime(
       firstDate.year, firstDate.month, firstDate.day + _schedulingRange);
 
@@ -42,16 +42,16 @@ class RemodelingDatePickerWidgetState
             left: 12.0,
             right: 12.0,
             top: RemodelingScheduler.stepTitleBarHeight - 4.0,
-            bottom:
-                RemodelingScheduler.bottomButtonContainerHeight - 4.0),
+            bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
         primary: false,
         children: [
           Card(
               child: CollapsableExpansionTile(
             key: _datePickerKey,
-            leading: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Icon(Icons.calendar_today)]),
+            leading: const SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.calendar_today),
+            ),
             title: Text(S.of(context).remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(

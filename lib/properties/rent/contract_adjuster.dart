@@ -64,9 +64,10 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
       children: [
         Card(
           child: ListTile(
-            leading: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [Icon(Icons.place)]),
+            leading: const SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.place),
+            ),
             title: Text(S.of(context).property_address,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(

@@ -50,12 +50,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                   title: Text(S.of(context).language),
                   subtitle:
                       Text(_localeStringToLanguage(_localeString, context)),
-                  leading: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(Icons.language),
-                    ],
+                  leading: const SizedBox(
+                    height: double.infinity,
+                    child: Icon(Icons.language),
                   ),
                   onTap: () {
                     RadioListDialog.show(

@@ -11,22 +11,14 @@ import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
-class RemodelingConfirmationWidget extends StatefulWidget {
+class RemodelingConfirmationWidget extends StatelessWidget {
   const RemodelingConfirmationWidget({Key? key}) : super(key: key);
 
   @override
-  State<RemodelingScheduler> createState() => RemodelingSchedulerState();
-}
-
-class RemodelingConfirmationWidgetState
-    extends State<RemodelingConfirmationWidget> {
-  late RemodelingInfo _data;
-
-  @override
   Widget build(BuildContext context) {
-    _data = RemodelingInheritedData.of(context)!.info;
-    if (_data.client.firstName == null) {
-      _data.client = getSampleClientData();
+    var info = RemodelingInheritedData.of(context)!.info;
+    if (info.client.firstName == null) {
+      info.client = getSampleClientData();
     } // todo debug line
     return ListView(
       primary: false,
@@ -44,23 +36,18 @@ class RemodelingConfirmationWidgetState
               leading: const Icon(Icons.style),
               title: Text(S.of(context).remodeling_options,
                   style: AppTheme.getCardTitleTextStyle(context)),
-              subtitle: _getRemodelingOptionsBody(context)),
+              subtitle: _getRemodelingOptionsBody(context, info)),
         )),
         Card(
           child: ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const <Widget>[
-                Icon(Icons.calendar_today),
-              ],
-            ),
+            leading: const SizedBox(
+                height: double.infinity, child: Icon(Icons.calendar_today)),
             title: Text(S.of(context).remodeling_start_date,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
                 DateFormat(Format.dateLong,
                         SharedPreferencesHelper.getLocale().languageCode)
-                    .format(_data.datePicked),
+                    .format(info.datePicked),
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         ),
@@ -72,10 +59,10 @@ class RemodelingConfirmationWidgetState
               title: Text(S.of(context).remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${_data.client.addressLine1}'
-                  '\n${_data.client.addressLine2}'
-                  '\n${_data.client.district}'
-                  '\n${_data.client.region}',
+                  '${info.client.addressLine1}'
+                  '\n${info.client.addressLine2}'
+                  '\n${info.client.district}'
+                  '\n${info.client.region}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         )),
         Card(
@@ -86,55 +73,56 @@ class RemodelingConfirmationWidgetState
               title: Text(S.of(context).contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                  '${_data.client.phoneNumber}'
-                  '\n${_getContactName()}',
+                  '${info.client.phoneNumber}'
+                  '\n${_getContactName(info)}',
                   style: AppTheme.getCardBodyTextStyle(context))),
         ))
       ],
     );
   }
 
-  Widget _getRemodelingOptionsBody(BuildContext context) {
+  Widget _getRemodelingOptionsBody(BuildContext context, RemodelingInfo info) {
     // TODO include subtotal and total estimation
     return Wrap(
       runSpacing: 4.0,
       children: [
-        _data.remodelingItems.contains(RemodelingItem.painting)
-            ? _getPaintingItem(context)
+        info.remodelingItems.contains(RemodelingItem.painting)
+            ? _getPaintingItem(context, info)
             : Container(),
       ],
     );
   }
 
-  Widget _getPaintingItem(BuildContext context) {
+  Widget _getPaintingItem(BuildContext context, RemodelingInfo info) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-                RemodelingItemHelper.getItemName(RemodelingItem.painting, context),
+                RemodelingItemHelper.getItemName(
+                    RemodelingItem.painting, context),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Text(
                 formatPrice(RemodelingPricing.getPaintingEstimate(
-                    _data.paintArea, _data.scrapeOldPaint)),
+                    info.paintArea, info.scrapeOldPaint)),
                 style: AppTheme.getCardBodyTextStyle(context))
           ]),
-      Text('- ${_data.paintArea} ${S.of(context).sq_ft}',
+      Text('- ${info.paintArea} ${S.of(context).sq_ft}',
           style: AppTheme.getCardBodyTextStyle(context)),
       Text(
-          _data.scrapeOldPaint!
+          info.scrapeOldPaint!
               ? '- ${S.of(context).scrape_old_paint_yes}'
               : '- ${S.of(context).scrape_old_paint_no}',
           style: AppTheme.getCardBodyTextStyle(context)),
     ]);
   }
 
-  String _getContactName() {
+  String _getContactName(RemodelingInfo info) {
     if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
-      return '${_data.client.lastName}${_data.client.title}';
+      return '${info.client.lastName}${info.client.title}';
     } else {
-      return '${_data.client.title} ${_data.client.lastName}';
+      return '${info.client.title} ${info.client.lastName}';
     }
   }
 }

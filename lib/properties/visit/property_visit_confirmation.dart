@@ -21,19 +21,16 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
           left: 12.0,
           right: 12.0,
           top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom: PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
-              4.0),
+          bottom:
+              PropertyVisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
       children: [
         Card(
             child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ListTile(
-                    leading: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const <Widget>[
-                        Icon(Icons.place),
-                      ],
+                    leading: const SizedBox(
+                      height: double.infinity,
+                      child: Icon(Icons.place),
                     ),
                     title: Text(S.of(context).property,
                         style: AppTheme.getCardTitleTextStyle(context)),
@@ -41,12 +38,9 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
                         style: AppTheme.getCardBodyTextStyle(context))))),
         Card(
           child: ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const <Widget>[
-                Icon(Icons.calendar_today),
-              ],
+            leading: const SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.calendar_today),
             ),
             isThreeLine: true,
             title: Text(S.of(context).property_visit_date,
@@ -61,12 +55,9 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
             child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: ListTile(
-              leading: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: const <Widget>[
-                  Icon(Icons.contact_phone),
-                ],
+              leading: const SizedBox(
+                height: double.infinity,
+                child: Icon(Icons.contact_phone),
               ),
               title: Text(S.of(context).contact_number,
                   style: AppTheme.getCardTitleTextStyle(context)),
@@ -77,12 +68,9 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
         )),
         Card(
           child: ListTile(
-            leading: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const <Widget>[
-                Icon(Icons.description),
-              ],
+            leading: const SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.description),
             ),
             title: Text(S.of(context).property_visit_agreement,
                 style: AppTheme.getCardTitleTextStyle(context)),

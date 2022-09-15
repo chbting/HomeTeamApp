@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/scheduling/image_viewer.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_camera.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
@@ -30,15 +33,18 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         itemBuilder: (context, index) {
           var item = info.remodelingItems[index];
           var pictureRequired = RemodelingItemHelper.isPictureRequired(item);
-          var imageList = info.imageMap[item]!;
+          var imageList = info.imageMap[item];
           return Card(
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              leading: Icon(RemodelingItemHelper.getIconData(item)),
+              leading: SizedBox(
+                  // Explicitly center the icon only when there are images
+                  height: imageList == null ? double.infinity : 0.0,
+                  child: Icon(RemodelingItemHelper.getIconData(item))),
               title: Text(RemodelingItemHelper.getItemName(item, context)),
               subtitle: pictureRequired
-                  ? imageList.isEmpty
+                  ? imageList == null
                       ? Text(S.of(context).picture_required,
                           style: AppTheme.getListTileBodyTextStyle(context))
                       : Column(
@@ -59,35 +65,42 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                                 shrinkWrap: true,
                                 primary: false,
                                 itemBuilder: (context, index) {
-                                  return Ink.image(
-                                      image: FileImage(imageList[index]),
-                                      fit: BoxFit.cover,
-                                      child: InkWell(onTap: () {
-                                        debugPrint(
-                                            '$index'); // todo open image, probably in a dialog /w option to retake this and retake all images
-                                      }));
+                                  return _getEnlargeableThumbnail(
+                                      imageList[index]);
                                 })
                           ],
                         )
                   : Text(S.of(context).picture_not_required,
                       style: AppTheme.getListTileBodyTextStyle(context)),
-              trailing: pictureRequired
-                  ? imageList.isEmpty
-                      ? const Icon(Icons.add_circle)
-                      : Icon(Icons.check_circle,
-                          color: Theme.of(context).toggleableActiveColor)
+              trailing: pictureRequired && imageList == null
+                  ? const Icon(Icons.add_circle)
                   : Icon(Icons.check_circle,
                       color: Theme.of(context).toggleableActiveColor),
-              onTap: pictureRequired
-                  ? imageList.isEmpty
-                      ? () {
-                          _openCamera(item);
-                        }
-                      : null
+              onTap: pictureRequired && imageList == null
+                  ? () {
+                      _openCamera(item);
+                    }
                   : null,
             ),
           );
         });
+  }
+
+  Widget _getEnlargeableThumbnail(File image) {
+    var heroTag = 'image';
+    return Hero(
+        tag: heroTag,
+        child: Material(
+            type: MaterialType.transparency,
+            child: Ink.image(
+                image: FileImage(image),
+                fit: BoxFit.cover,
+                child: InkWell(onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ImageViewer(heroTag: heroTag, image: image);
+                  }));
+                  // todo option to retake this and retake all images
+                }))));
   }
 
   void _openCamera(RemodelingItem item) {
@@ -97,10 +110,9 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         .then((newImage) {
       if (newImage != null) {
         setState(() {
-          RemodelingInheritedData.of(context)!
-              .info
-              .imageMap[item]!
-              .add(newImage); // todo
+          RemodelingInheritedData.of(context)!.info.imageMap[item] = [
+            newImage
+          ]; // todo add a list of images
           RemodelingInheritedData.of(context)!.updateRightButtonState();
         });
       }

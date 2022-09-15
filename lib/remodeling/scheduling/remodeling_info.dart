@@ -38,10 +38,5 @@ class RemodelingInfo {
     final now = DateTime.now();
     datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
     client = Client();
-    for (var item in remodelingItems) {
-      if (RemodelingItemHelper.isPictureRequired(item)) {
-        imageMap[item] = [];
-      }
-    }
   }
 }

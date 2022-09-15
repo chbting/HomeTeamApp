@@ -32,7 +32,7 @@ class RemodelingInheritedData extends InheritedWidget {
     } else {
       for (var item in info.remodelingItems) {
         if (RemodelingItemHelper.isPictureRequired(item)) {
-          if (info.imageMap[item]!.isEmpty) {
+          if (info.imageMap[item] == null) {
             uiState.rightButtonEnabled.value = false;
             return;
           }

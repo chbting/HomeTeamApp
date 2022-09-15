@@ -41,8 +41,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
 
   @override
   void dispose() {
-    _controller
-        .dispose(); //todo clean up images? probably save to a specific folder and clean up every time
+    _controller.dispose();
     super.dispose();
   }
 
@@ -79,7 +78,7 @@ class RemodelingCameraScreenState extends State<RemodelingCameraScreen> {
                                           if (!mounted) return;
                                           setState(() {});
                                         } catch (e) {
-                                          debugPrint('$e');
+                                          debugPrint('$e'); //todo
                                         }
                                       },
                                       heroTag: 'picture_button',

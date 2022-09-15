@@ -156,9 +156,9 @@
 	"minutes": "分",
 	"cameras_not_available": "無法使用拍照功能",
 	"take_pictures": "拍攝圖片",
-	"picture_added": "已拍照",
 	"picture_not_required": "無需拍照",
 	"picture_required": "需要拍照",
 	"retake_picture": "重拍照片？",
-	"retake": "重拍"
+	"retake": "重拍",
+	"picture_taken": "已拍照"
 }

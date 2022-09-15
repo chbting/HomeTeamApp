@@ -14,6 +14,8 @@ class RemodelingImagesWidget extends StatefulWidget {
 }
 
 class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
+  final _gridviewSpacing = 8.0;
+
   @override
   Widget build(BuildContext context) {
     var info = RemodelingInheritedData.of(context)!.info;
@@ -28,38 +30,61 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         itemBuilder: (context, index) {
           var item = info.remodelingItems[index];
           var pictureRequired = RemodelingItemHelper.isPictureRequired(item);
-          var itemImage = info.imageMap[item];
+          var imageList = info.imageMap[item]!;
           return Card(
             child: ListTile(
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              leading: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Icon(RemodelingItemHelper.getIconData(item))]),
+              leading: Icon(RemodelingItemHelper.getIconData(item)),
               title: Text(RemodelingItemHelper.getItemName(item, context)),
-              subtitle: Text(
-                  pictureRequired
-                      ? itemImage == null
-                          ? S.of(context).picture_required
-                          : S.of(context).picture_added
-                      : S.of(context).picture_not_required,
-                  style: AppTheme.getListTileBodyTextStyle(context)),
+              subtitle: pictureRequired
+                  ? imageList.isEmpty
+                      ? Text(S.of(context).picture_required,
+                          style: AppTheme.getListTileBodyTextStyle(context))
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.only(bottom: 8.0),
+                                child: Text(S.of(context).picture_taken,
+                                    style: AppTheme.getListTileBodyTextStyle(
+                                        context))),
+                            GridView.builder(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        mainAxisSpacing: _gridviewSpacing,
+                                        crossAxisSpacing: _gridviewSpacing),
+                                itemCount: imageList.length,
+                                shrinkWrap: true,
+                                primary: false,
+                                itemBuilder: (context, index) {
+                                  return Ink.image(
+                                      image: FileImage(imageList[index]),
+                                      fit: BoxFit.cover,
+                                      child: InkWell(onTap: () {
+                                        debugPrint(
+                                            '$index'); // todo open image, probably in a dialog /w option to retake this and retake all images
+                                      }));
+                                })
+                          ],
+                        )
+                  : Text(S.of(context).picture_not_required,
+                      style: AppTheme.getListTileBodyTextStyle(context)),
               trailing: pictureRequired
-                  ? itemImage == null
+                  ? imageList.isEmpty
                       ? const Icon(Icons.add_circle)
                       : Icon(Icons.check_circle,
                           color: Theme.of(context).toggleableActiveColor)
                   : Icon(Icons.check_circle,
                       color: Theme.of(context).toggleableActiveColor),
-              onTap: () {
-                pictureRequired
-                    ? info.imageMap[item] == null
-                        ? _openCamera(item)
-                        : _showRetakeDialog(context, item)
-                    : null;
-                // todo if picture is already taken, ask if the user want to retake it
-                // todo need a way to cleanup
-              },
+              onTap: pictureRequired
+                  ? imageList.isEmpty
+                      ? () {
+                          _openCamera(item);
+                        }
+                      : null
+                  : null,
             ),
           );
         });
@@ -72,7 +97,10 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         .then((newImage) {
       if (newImage != null) {
         setState(() {
-          RemodelingInheritedData.of(context)!.info.imageMap[item] = newImage;
+          RemodelingInheritedData.of(context)!
+              .info
+              .imageMap[item]!
+              .add(newImage); // todo
           RemodelingInheritedData.of(context)!.updateRightButtonState();
         });
       }

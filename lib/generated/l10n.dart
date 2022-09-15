@@ -1580,16 +1580,6 @@ class S {
     );
   }
 
-  /// `Picture taken`
-  String get picture_added {
-    return Intl.message(
-      'Picture taken',
-      name: 'picture_added',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Picture is not required`
   String get picture_not_required {
     return Intl.message(
@@ -1625,6 +1615,16 @@ class S {
     return Intl.message(
       'Retake',
       name: 'retake',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Picture taken`
+  String get picture_taken {
+    return Intl.message(
+      'Picture taken',
+      name: 'picture_taken',
       desc: '',
       args: [],
     );

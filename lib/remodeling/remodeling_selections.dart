@@ -62,14 +62,14 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                   });
 
                   var info = RemodelingInfo(remodelingItems: remodelingItems);
-                  var ui = RemodelingSchedulerUI(
+                  var uiState = RemodelingSchedulerUIState(
                       showBottomButtons: ValueNotifier(
                           remodelingItems.length == 1 ? true : false));
 
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => RemodelingInheritedData(
                           info: info,
-                          ui: ui,
+                          uiState: uiState,
                           child: const RemodelingScheduler())));
                 } else {
                   _scaffoldMessengerKey.currentState!.showSnackBar(SnackBar(

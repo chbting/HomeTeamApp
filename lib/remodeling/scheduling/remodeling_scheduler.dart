@@ -70,7 +70,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                     Icon(Icons.check,
                         color: Theme.of(context).colorScheme.onSecondary)
                   ],
-                  activeStep: _data.ui.activeStep,
+                  activeStep: _data.uiState.activeStep,
                   activeStepBorderWidth: 2,
                   activeStepColor: Theme.of(context).colorScheme.secondary,
                   enableNextPreviousButtons: false,
@@ -113,12 +113,12 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
               child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
-                  child: Text(_getStepTitle(_data.ui.activeStep),
+                  child: Text(_getStepTitle(_data.uiState.activeStep),
                       style: Theme.of(context).textTheme.subtitle1!.copyWith(
                           color: Theme.of(context).colorScheme.secondary))),
             ),
             ValueListenableBuilder<bool>(
-                valueListenable: _data.ui.showBottomButtons,
+                valueListenable: _data.uiState.showBottomButtons,
                 builder: (context, showBottomButtons, child) {
                   return Container(
                       alignment: Alignment.bottomCenter,
@@ -152,7 +152,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
   }
 
   void _nextStep() {
-    var activeStep = _data.ui.activeStep;
+    var activeStep = _data.uiState.activeStep;
     if (activeStep < _totalSteps - 1) {
       _bottomButtonEnabled = false;
       setState(() {
@@ -166,7 +166,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
   }
 
   void _previousStep() {
-    var activeStep = _data.ui.activeStep;
+    var activeStep = _data.uiState.activeStep;
     if (activeStep > 0) {
       _bottomButtonEnabled = false;
       setState(() {
@@ -194,12 +194,12 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
         child: Padding(
             padding: const EdgeInsets.all(RemodelingScheduler.buttonSpacing),
             child: Row(
-              mainAxisAlignment: _data.ui.activeStep == 0
+              mainAxisAlignment: _data.uiState.activeStep == 0
                   ? MainAxisAlignment.center
                   : MainAxisAlignment.spaceBetween,
               children: [
                 // Left button
-                _data.ui.activeStep == 0
+                _data.uiState.activeStep == 0
                     ? Container()
                     : OutlinedButton.icon(
                         icon: const Icon(Icons.arrow_back),
@@ -215,13 +215,13 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                         }),
                 //Right button
                 ValueListenableBuilder<bool>(
-                    valueListenable: _data.ui.rightButtonEnabled,
+                    valueListenable: _data.uiState.rightButtonEnabled,
                     builder: (context, rightButtonEnabled, child) {
                       return ElevatedButton.icon(
-                          icon: Icon(_data.ui.activeStep < _totalSteps - 1
+                          icon: Icon(_data.uiState.activeStep < _totalSteps - 1
                               ? Icons.arrow_forward
                               : Icons.check),
-                          label: Text(_data.ui.activeStep < _totalSteps - 1
+                          label: Text(_data.uiState.activeStep < _totalSteps - 1
                               ? S.of(context).next
                               : S.of(context).confirm_remodeling),
                           style: ElevatedButton.styleFrom(
@@ -234,7 +234,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                               : () {
                                   // The check here won't grey out the button
                                   if (_bottomButtonEnabled) {
-                                    if (_data.ui.activeStep ==
+                                    if (_data.uiState.activeStep ==
                                         _totalSteps - 1) {
                                       // todo validate on step 3
                                       // todo send order on step 4

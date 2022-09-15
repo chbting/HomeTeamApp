@@ -94,8 +94,8 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
   void _updateBottomButtonState() {
     // Show the button only when the user is on the last option
     (_activeOption == _data.remodelingItems.length - 1)
-        ? RemodelingInheritedData.of(context)!.ui.showBottomButtons.value = true
-        : RemodelingInheritedData.of(context)!.ui.showBottomButtons.value =
+        ? RemodelingInheritedData.of(context)!.uiState.showBottomButtons.value = true
+        : RemodelingInheritedData.of(context)!.uiState.showBottomButtons.value =
             false; //todo
   }
 

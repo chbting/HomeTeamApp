@@ -7,7 +7,7 @@ import '../remodeling_items.dart';
 /// This class contains the data to be submitted to the server
 class RemodelingInfo {
   final List<RemodelingItem> remodelingItems;
-  final Map<RemodelingItem, File> imageMap = {};
+  final Map<RemodelingItem, List<File>> imageMap = {};
 
   // Painting Card
   int? paintArea;
@@ -38,5 +38,10 @@ class RemodelingInfo {
     final now = DateTime.now();
     datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
     client = Client();
+    for (var item in remodelingItems) {
+      if (RemodelingItemHelper.isPictureRequired(item)) {
+        imageMap[item] = [];
+      }
+    }
   }
 }

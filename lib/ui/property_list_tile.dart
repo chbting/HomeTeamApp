@@ -141,7 +141,7 @@ class PropertyListTileTrailingButton extends StatelessWidget {
             children: [
               Text(text, style: AppTheme.getInkWellButtonTextStyle(context)),
               icon == null
-                  // A null width causes the button to take up the whole row
+                  // A null width let the button to take up the whole row
                   ? Container(width: 0.0)
                   : Icon(icon, color: AppTheme.getTertiaryColor(context)),
             ],

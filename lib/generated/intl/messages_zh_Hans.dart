@@ -133,9 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pest_control": MessageLookupByLibrary.simpleMessage("灭虫"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("选择日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
-        "picture_added": MessageLookupByLibrary.simpleMessage("已拍照"),
         "picture_not_required": MessageLookupByLibrary.simpleMessage("无需拍照"),
         "picture_required": MessageLookupByLibrary.simpleMessage("需要拍照"),
+        "picture_taken": MessageLookupByLibrary.simpleMessage("已拍照"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),

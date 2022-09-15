@@ -4,11 +4,14 @@ import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
 
 class RemodelingInheritedData extends InheritedWidget {
   const RemodelingInheritedData(
-      {Key? key, required Widget child, required this.info, required this.ui})
+      {Key? key,
+      required Widget child,
+      required this.info,
+      required this.uiState})
       : super(key: key, child: child);
 
   final RemodelingInfo info;
-  final RemodelingSchedulerUI ui;
+  final RemodelingSchedulerUIState uiState;
 
   static RemodelingInheritedData? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<RemodelingInheritedData>();
@@ -19,31 +22,31 @@ class RemodelingInheritedData extends InheritedWidget {
   }
 
   void setActiveStep(int activeStep) {
-    ui.activeStep = activeStep;
+    uiState.activeStep = activeStep;
     updateRightButtonState();
   }
 
   void updateRightButtonState() {
-    if (ui.activeStep != 1) {
-      ui.rightButtonEnabled.value = true;
+    if (uiState.activeStep != 1) {
+      uiState.rightButtonEnabled.value = true;
     } else {
       for (var item in info.remodelingItems) {
         if (RemodelingItemHelper.isPictureRequired(item)) {
-          if (info.imageMap[item] == null) {
-            ui.rightButtonEnabled.value = false;
+          if (info.imageMap[item]!.isEmpty) {
+            uiState.rightButtonEnabled.value = false;
             return;
           }
         }
       }
-      ui.rightButtonEnabled.value = true;
+      uiState.rightButtonEnabled.value = true;
     }
   }
 }
 
-class RemodelingSchedulerUI {
+class RemodelingSchedulerUIState {
   ValueNotifier<bool> showBottomButtons;
   ValueNotifier<bool> rightButtonEnabled = ValueNotifier(true);
   int activeStep = 0;
 
-  RemodelingSchedulerUI({required this.showBottomButtons});
+  RemodelingSchedulerUIState({required this.showBottomButtons});
 }

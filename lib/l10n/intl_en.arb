@@ -153,9 +153,9 @@
 	"minutes": "minutes",
 	"cameras_not_available": "Cameras are not available",
 	"take_pictures": "Take pictures",
-	"picture_added": "Picture taken",
 	"picture_not_required": "Picture is not required",
 	"picture_required": "Picture is required",
 	"retake_picture": "Retake the picture?",
-	"retake": "Retake"
+	"retake": "Retake",
+	"picture_taken": "Picture taken"
 }

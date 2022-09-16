@@ -1,12 +1,56 @@
 import 'package:flutter/material.dart';
 
+import '../../core/dotted_line.dart';
 import 'base_indicator.dart';
-import 'dotted_line.dart';
 
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
 class BaseStepper extends StatefulWidget {
+  /// Creates a basic stepper.
+  BaseStepper({
+    Key? key,
+    this.children,
+    this.nextPreviousButtonsDisabled = true,
+    this.stepTappingDisabled = true,
+    this.previousButtonIcon,
+    this.nextButtonIcon,
+    this.onStepReached,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
+    this.scrollingDisabled = false,
+    this.activeStep = 0,
+    this.alignment,
+    this.showStepCompleted = false
+  }) : super(key: key) {
+    assert(
+      lineDotRadius <= 10 && lineDotRadius > 0,
+      'lineDotRadius must be less than or equal to 10 and greater than 0',
+    );
+
+    assert(
+      stepRadius > 0,
+      'iconIndicatorRadius must be greater than 0',
+    );
+
+    assert(
+      activeStep >= 0 && activeStep <= children!.length,
+      'Error: Active Step out of range',
+    );
+  }
+
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
   final List<Widget>? children;
 
@@ -79,55 +123,11 @@ class BaseStepper extends StatefulWidget {
   /// Color completed steps
   final bool showStepCompleted;
 
-  /// Creates a basic stepper.
-  BaseStepper(
-      {Key? key,
-      this.children,
-      this.nextPreviousButtonsDisabled = true,
-      this.stepTappingDisabled = true,
-      this.previousButtonIcon,
-      this.nextButtonIcon,
-      this.onStepReached,
-      this.direction = Axis.horizontal,
-      this.stepColor,
-      this.activeStepColor,
-      this.activeStepBorderColor,
-      this.lineColor,
-      this.lineLength = 50.0,
-      this.lineDotRadius = 1.0,
-      this.stepRadius = 24.0,
-      this.stepReachedAnimationEffect = Curves.bounceOut,
-      this.stepReachedAnimationDuration = const Duration(seconds: 1),
-      this.steppingEnabled = true,
-      this.padding = 5.0,
-      this.margin = 1.0,
-      this.activeStepBorderWidth = 0.5,
-      this.scrollingDisabled = false,
-      this.activeStep = 0,
-      this.alignment,
-      this.showStepCompleted = false})
-      : super(key: key) {
-    assert(
-      lineDotRadius <= 10 && lineDotRadius > 0,
-      'lineDotRadius must be less than or equal to 10 and greater than 0',
-    );
-
-    assert(
-      stepRadius > 0,
-      'iconIndicatorRadius must be greater than 0',
-    );
-
-    assert(
-      activeStep >= 0 && activeStep <= children!.length,
-      'Error: Active Step out of range',
-    );
-  }
-
   @override
-  _BaseStepperState createState() => _BaseStepperState();
+  BaseStepperState createState() => BaseStepperState();
 }
 
-class _BaseStepperState extends State<BaseStepper> {
+class BaseStepperState extends State<BaseStepper> {
   ScrollController? _scrollController;
   late int _selectedIndex;
 
@@ -140,12 +140,12 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     // Verify that the active step falls within a valid range.
     if (widget.activeStep >= 0 && widget.activeStep < widget.children!.length) {
       _selectedIndex = widget.activeStep;
     }
-
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
+import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 import 'contract_adjuster.dart';
@@ -61,11 +61,12 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     _buttonWidth = (MediaQuery.of(context).size.width -
             ContractBrokerScreen.buttonSpacing * 3) /
         2;
+
+    var stepIconColor = Theme.of(context).colorScheme.onSecondary;
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar: AppBar(
-                title: Text(S.of(context).negotiate_contract)),
+            appBar: AppBar(title: Text(S.of(context).negotiate_contract)),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,14 +74,10 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                   CustomIconStepper(
                     key: _stepperKey,
                     icons: [
-                      Icon(Icons.edit_note,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.person,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.draw,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.check,
-                          color: Theme.of(context).colorScheme.onSecondary)
+                      Icon(Icons.edit_note, color: stepIconColor),
+                      Icon(Icons.person, color: stepIconColor),
+                      Icon(Icons.draw, color: stepIconColor),
+                      Icon(Icons.check, color: stepIconColor)
                     ],
                     activeStep: _activeStep,
                     activeStepBorderWidth: 2,
@@ -197,8 +194,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
       if (canCheckBiometrics) {
         try {
           didAuthenticate = await localAuth.authenticate(
-              localizedReason:
-                  S.of(context).reason_sign_rental_contract,
+              localizedReason: S.of(context).reason_sign_rental_contract,
               options: const AuthenticationOptions(biometricOnly: true));
         } on PlatformException {
           didAuthenticate = false;

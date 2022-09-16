@@ -51,9 +51,9 @@ class BaseIndicator extends StatelessWidget {
       decoration: BoxDecoration(
         border: isSelected
             ? Border.all(
-          color: activeBorderColor ?? Colors.blue,
-          width: activeBorderWidth,
-        )
+                color: activeBorderColor ?? Colors.blue,
+                width: activeBorderWidth,
+              )
             : null,
         shape: BoxShape.circle,
       ),
@@ -65,7 +65,7 @@ class BaseIndicator extends StatelessWidget {
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
             color:
-            isSelected ? activeColor ?? Colors.green : color ?? Colors.grey,
+                isSelected ? activeColor ?? Colors.green : color ?? Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(

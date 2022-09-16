@@ -9,7 +9,7 @@ import 'package:tner_client/properties/visit/property_visit_confirmation.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
 import 'package:tner_client/properties/visit/property_visit_datepicker.dart';
 import 'package:tner_client/properties/visit/property_visit_sequencer.dart';
-import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
+import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
@@ -63,6 +63,7 @@ class PropertyVisitSchedulingScreenState
         2;
     _biometricButtonWidth = MediaQuery.of(context).size.width -
         PropertyVisitSchedulingScreen.buttonSpacing * 2;
+    var stepIconColor = Theme.of(context).colorScheme.onSecondary;
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
@@ -75,14 +76,10 @@ class PropertyVisitSchedulingScreenState
                   CustomIconStepper(
                     key: _stepperKey,
                     icons: [
-                      Icon(Icons.route,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.calendar_today,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.description,
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      Icon(Icons.check,
-                          color: Theme.of(context).colorScheme.onSecondary)
+                      Icon(Icons.route, color: stepIconColor),
+                      Icon(Icons.calendar_today, color: stepIconColor),
+                      Icon(Icons.description, color: stepIconColor),
+                      Icon(Icons.check, color: stepIconColor)
                     ],
                     activeStep: _activeStep,
                     activeStepBorderWidth: 2,

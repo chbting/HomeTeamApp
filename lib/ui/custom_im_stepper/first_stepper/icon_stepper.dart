@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_base_stepper.dart';
+import 'core/base_stepper.dart';
 
 /// In general, the stepper widgets help you to show or collect information from users using organized steps. The IconStepper is a simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps.
 class CustomIconStepper extends StatelessWidget {
@@ -108,30 +108,31 @@ class CustomIconStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
-        nextPreviousButtonsDisabled: enableNextPreviousButtons,
-        stepTappingDisabled: enableStepTapping,
-        previousButtonIcon: previousButtonIcon,
-        nextButtonIcon: nextButtonIcon,
-        onStepReached: onStepReached,
-        direction: direction,
-        stepColor: stepColor,
-        activeStepColor: activeStepColor,
-        activeStepBorderColor: activeStepBorderColor,
-        activeStepBorderWidth: activeStepBorderWidth,
-        lineColor: lineColor,
-        lineLength: lineLength,
-        lineDotRadius: lineDotRadius,
-        stepRadius: stepRadius,
-        stepReachedAnimationEffect: stepReachedAnimationEffect,
-        stepReachedAnimationDuration: stepReachedAnimationDuration,
-        steppingEnabled: steppingEnabled,
-        margin: activeStepBorderPadding,
-        padding: stepPadding,
-        scrollingDisabled: scrollingDisabled,
-        activeStep: activeStep,
-        alignment: alignment,
-        showStepCompleted: showStepCompleted,
-        children: _iconsWithSizeOverridden());
+      nextPreviousButtonsDisabled: enableNextPreviousButtons,
+      stepTappingDisabled: enableStepTapping,
+      previousButtonIcon: previousButtonIcon,
+      nextButtonIcon: nextButtonIcon,
+      onStepReached: onStepReached,
+      direction: direction,
+      stepColor: stepColor,
+      activeStepColor: activeStepColor,
+      activeStepBorderColor: activeStepBorderColor,
+      activeStepBorderWidth: activeStepBorderWidth,
+      lineColor: lineColor,
+      lineLength: lineLength,
+      lineDotRadius: lineDotRadius,
+      stepRadius: stepRadius,
+      stepReachedAnimationEffect: stepReachedAnimationEffect,
+      stepReachedAnimationDuration: stepReachedAnimationDuration,
+      steppingEnabled: steppingEnabled,
+      margin: activeStepBorderPadding,
+      padding: stepPadding,
+      scrollingDisabled: scrollingDisabled,
+      activeStep: activeStep,
+      alignment: alignment,
+      showStepCompleted: showStepCompleted,
+      children: _iconsWithSizeOverridden(),
+    );
   }
 
   // Overrides the size of the icons to almost fit the step.

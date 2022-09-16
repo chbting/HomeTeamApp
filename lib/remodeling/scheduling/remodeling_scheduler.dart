@@ -6,7 +6,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_images.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
-import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
+import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/FileHelper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
@@ -53,6 +53,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
     return KeyboardVisibilityBuilder(
         builder: (context, child, isKeyboardVisible) {
       _data = RemodelingInheritedData.of(context)!;
+      var stepIconColor = Theme.of(context).colorScheme.onSecondary;
+
       return Scaffold(
           appBar: AppBar(title: Text(S.of(context).schedule_remodeling)),
           body: Stack(children: [
@@ -62,14 +64,10 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                 CustomIconStepper(
                   key: _stepperKey,
                   icons: [
-                    Icon(Icons.style,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.camera_alt,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.contact_phone,
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    Icon(Icons.check,
-                        color: Theme.of(context).colorScheme.onSecondary)
+                    Icon(Icons.style, color: stepIconColor),
+                    Icon(Icons.camera_alt, color: stepIconColor),
+                    Icon(Icons.contact_phone, color: stepIconColor),
+                    Icon(Icons.check, color: stepIconColor)
                   ],
                   activeStep: _data.uiState.activeStep,
                   activeStepBorderWidth: 2,
@@ -78,7 +76,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   enableStepTapping: false,
                   showStepCompleted: true,
                   stepRadius: 24.0,
-                  lineColor: Colors.grey,
+                  lineColor: Theme.of(context).colorScheme.onSurface,
                   onStepReached: (index) {
                     setState(() {
                       _data.setActiveStep(index);
@@ -99,6 +97,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                 ),
               ],
             ),
+            // Header
             Container(
               width: double.infinity,
               height: RemodelingScheduler.stepTitleBarHeight,
@@ -117,6 +116,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   child: Text(_getStepTitle(_data.uiState.activeStep),
                       style: AppTheme.getStepTitleTextStyle(context))),
             ),
+            // Bottom buttons
             ValueListenableBuilder<bool>(
                 valueListenable: _data.uiState.showBottomButtons,
                 builder: (context, showBottomButtons, child) {
@@ -132,8 +132,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
 
   @override
   void dispose() {
-    FileHelper
-        .clearSchedulerCache(); //todo this may not run if user swipe close the app
+    //todo this may not run if user swipe close the app
+    FileHelper.clearSchedulerCache();
     super.dispose();
   }
 

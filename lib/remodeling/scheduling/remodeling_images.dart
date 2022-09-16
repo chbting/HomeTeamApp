@@ -67,7 +67,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                                 primary: false,
                                 itemBuilder: (context, index) {
                                   return _getEnlargeableThumbnail(
-                                      imageList[index], context);
+                                      context, item, imageList, index);
                                 })
                           ],
                         )
@@ -78,30 +78,49 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                   : Icon(Icons.check_circle,
                       color: Theme.of(context).toggleableActiveColor),
               onTap: pictureRequired && imageList == null
-                  ? () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(
-                              builder: (context) =>
-                                  RemodelingImageWizard(item: item)))
-                          .then((imageList) {
-                        if (imageList != null) {
-                          setState(() {
-                            RemodelingInheritedData.of(context)!
-                                .info
-                                .imageMap[item] = imageList;
-                            RemodelingInheritedData.of(context)!
-                                .updateRightButtonState();
-                          });
-                        }
-                      });
-                    }
+                  ? () => _openImageWizard(context, item)
                   : null,
             ),
           );
         });
   }
 
-  Widget _getEnlargeableThumbnail(File image, BuildContext context) {
+  void _openImageWizard(BuildContext context, RemodelingItem item) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => RemodelingImageWizard(item: item)))
+        .then((imageList) {
+      if (imageList != null) {
+        setState(() {
+          RemodelingInheritedData.of(context)!.info.imageMap[item] = imageList;
+          RemodelingInheritedData.of(context)!.updateRightButtonState();
+        });
+      }
+    });
+  }
+
+  void _openImageWizardForRetake(BuildContext context, RemodelingItem item,
+      List<File> imageList, int initialIndex) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(
+            builder: (context) => RemodelingImageWizard(
+                item: item,
+                imageList: imageList,
+                initialIndex: initialIndex,
+                retake: true)))
+        .then((imageList) {
+      if (imageList != null) {
+        setState(() {
+          RemodelingInheritedData.of(context)!.info.imageMap[item] = imageList;
+          RemodelingInheritedData.of(context)!.updateRightButtonState();
+        });
+      }
+    });
+  }
+
+  Widget _getEnlargeableThumbnail(BuildContext context, RemodelingItem item,
+      List<File> imageList, int index) {
+    var image = imageList[index];
     var heroTag = basename(image.path);
     return Hero(
         tag: heroTag,
@@ -113,31 +132,12 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                 child: InkWell(onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return ImageViewer(heroTag: heroTag, image: image);
-                  }));
-                  // todo option to retake this and retake all images
+                  })).then((retake) {
+                    if (retake != null) {
+                      _openImageWizardForRetake(
+                          context, item, imageList, index);
+                    }
+                  });
                 }))));
-  }
-
-  void _showRetakeDialog(BuildContext context, RemodelingItem item) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(S.of(context).retake_picture),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(S.of(context).cancel)),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(S.of(context).retake),
-              )
-            ],
-          );
-        });
   }
 }

@@ -174,7 +174,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "rent_properties": MessageLookupByLibrary.simpleMessage("租樓"),
         "reset": MessageLookupByLibrary.simpleMessage("重設"),
         "retake": MessageLookupByLibrary.simpleMessage("重拍"),
-        "retake_picture": MessageLookupByLibrary.simpleMessage("重拍照片？"),
         "review_before_submission":
             MessageLookupByLibrary.simpleMessage("簽署租約後，你可在提交之前確認細節"),
         "save": MessageLookupByLibrary.simpleMessage("收藏"),

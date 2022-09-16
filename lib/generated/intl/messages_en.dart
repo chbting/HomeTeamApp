@@ -203,8 +203,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "rent_properties": MessageLookupByLibrary.simpleMessage("Rent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "retake": MessageLookupByLibrary.simpleMessage("Retake"),
-        "retake_picture":
-            MessageLookupByLibrary.simpleMessage("Retake the picture?"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),

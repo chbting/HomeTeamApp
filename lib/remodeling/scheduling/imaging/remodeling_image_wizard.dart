@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/ui/custom_im_stepper/first_stepper/number_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/ui/two_button_bar.dart';
 import 'package:tner_client/utils/FileHelper.dart';
 
 /// if [retake] is true, returns after taking the picture indicated by
@@ -31,14 +33,14 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
   final ImagePicker _picker = ImagePicker();
   final List<File> _imageList = [];
   late List<ImagingInstruction> _instructionList;
-  late int _pictureIndex;
+  late int _activeIndex;
 
   @override
   void initState() {
     assert((widget.retake && widget.imageList != null) ||
         (!widget.retake && widget.imageList == null));
 
-    _pictureIndex = widget.initialIndex;
+    _activeIndex = widget.initialIndex;
     if (widget.imageList != null) {
       _imageList.addAll(widget.imageList!);
     }
@@ -56,57 +58,82 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
           leading: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () => Navigator.of(context).pop()),
-          title: Text(S.of(context).take_pictures)),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          var image = await _picker.pickImage(source: ImageSource.camera);
-          if (image != null) {
-            FileHelper.moveToSchedulerCache(File(image.path)).then((newFile) {
-              if (widget.retake) {
-                _imageList.removeAt(widget.initialIndex);
-                _imageList.insert(widget.initialIndex, newFile);
-                Navigator.of(context).pop(_imageList);
-              } else {
-                _imageList.add(newFile);
-                _pictureIndex++;
-                if (_pictureIndex == _instructionList.length) {
-                  Navigator.of(context).pop(_imageList);
-                } else {
-                  setState(() {});
-                }
-              }
-            });
-          }
-        },
-        label: Text(S.of(context).start_taking_picture),
-        icon: const Icon(Icons.camera_alt),
+          title: Text(widget.retake
+              ? S.of(context).change_photo
+              : S.of(context).add_photos)),
+      body: Stack(
+        children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            widget.retake
+                ? const SizedBox()
+                : CustomNumberStepper(
+                    numbers: List<int>.generate(
+                        _instructionList.length, (i) => i + 1),
+                    activeStep: _activeIndex,
+                    activeStepBorderWidth: 2.0,
+                    activeStepBorderPadding: 5.0,
+                    activeStepColor: Theme.of(context).colorScheme.secondary,
+                    enableNextPreviousButtons: false,
+                    enableStepTapping: false,
+                    showIsStepCompleted: true,
+                    stepRadius: 20.0,
+                    lineColor: Theme.of(context).colorScheme.onSurface,
+                    onStepReached: (index) {
+                      setState(() {
+                        _activeIndex = index;
+                      });
+                    },
+                  ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Text(
+                _instructionList[_activeIndex].description,
+                style: AppTheme.getHeadline6TextStyle(context),
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Image(image: _instructionList[_activeIndex].image))
+          ]),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TwoButtonBar(
+                leftButtonLabel: Text(S.of(context).select_from_gallery),
+                leftButtonIcon: const Icon(Icons.collections),
+                onLeftButtonPressed: () {
+                  _getImageFromSource(ImageSource.gallery);
+                },
+                rightButtonLabel: Text(S.of(context).take_photo),
+                rightButtonIcon: const Icon(Icons.camera_alt),
+                onRightButtonPressed: () {
+                  _getImageFromSource(ImageSource.camera);
+                }),
+          )
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        _getInstruction(),
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Image(image: _instructionList[_pictureIndex].image))
-      ]),
     );
   }
 
-  Widget _getInstruction() {
-    return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Text(
-                  '${S.of(context).step} '
-                  '${_pictureIndex + 1}/${_instructionList.length}',
-                  style: AppTheme.getStepTitleTextStyle(context))),
-          Text(
-            _instructionList[_pictureIndex].description,
-            style: AppTheme.getHeadline6TextStyle(context),
-          )
-        ]));
+  void _getImageFromSource(ImageSource source) {
+    _picker.pickImage(source: source).then((image) {
+      if (image != null) {
+        FileHelper.moveToSchedulerCache(File(image.path)).then((newFile) {
+          if (widget.retake) {
+            _imageList.removeAt(widget.initialIndex);
+            _imageList.insert(widget.initialIndex, newFile);
+            Navigator.of(context).pop(_imageList);
+          } else {
+            _imageList.add(newFile);
+            _activeIndex++;
+            if (_activeIndex == _instructionList.length) {
+              Navigator.of(context).pop(_imageList);
+            } else {
+              setState(() {});
+            }
+          }
+        });
+      }
+    });
   }
-
-// todo add a "select from gallery" button for each image taking step (needs read and write permission)
 }

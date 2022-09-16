@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/imaging/image_viewer.dart';
+import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_viewer.dart';
 import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_wizard.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
@@ -46,14 +46,14 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
               title: Text(RemodelingItemHelper.getItemName(item, context)),
               subtitle: pictureRequired
                   ? imageList == null
-                      ? Text(S.of(context).picture_required,
+                      ? Text(S.of(context).photo_required,
                           style: AppTheme.getListTileBodyTextStyle(context))
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Text(S.of(context).picture_taken,
+                                child: Text(S.of(context).photo_added,
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context))),
                             GridView.builder(
@@ -71,7 +71,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                                 })
                           ],
                         )
-                  : Text(S.of(context).picture_not_required,
+                  : Text(S.of(context).photo_not_required,
                       style: AppTheme.getListTileBodyTextStyle(context)),
               trailing: pictureRequired && imageList == null
                   ? const Icon(Icons.add_circle)
@@ -131,7 +131,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                 fit: BoxFit.cover,
                 child: InkWell(onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ImageViewer(heroTag: heroTag, image: image);
+                    return RemodelingImageViewer(heroTag: heroTag, image: image);
                   })).then((retake) {
                     if (retake != null) {
                       _openImageWizardForRetake(

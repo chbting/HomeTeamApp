@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AC (Window Type)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("Accept / Make an offer"),
+        "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("e.g. Flat 25, 12/F, Block 1"),
         "address_line1_label": MessageLookupByLibrary.simpleMessage(
@@ -61,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cantonese":
             MessageLookupByLibrary.simpleMessage("Chinese (Cantonese)"),
+        "change_photo": MessageLookupByLibrary.simpleMessage("Change photo"),
         "choose_language":
             MessageLookupByLibrary.simpleMessage("Choose Language"),
         "choose_the_route":
@@ -101,11 +103,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
         "imaging_instruction_ac_1": MessageLookupByLibrary.simpleMessage(
-            "Take a closeup image of the current AC"),
+            "A front closeup of the current AC unit"),
         "imaging_instruction_ac_2": MessageLookupByLibrary.simpleMessage(
-            "Take a picture of the wall where the AC will be installed"),
+            "The wall on which the AC unit will be installed"),
         "imaging_instruction_ac_3": MessageLookupByLibrary.simpleMessage(
-            "Take a picture of the room where the AC will be installed"),
+            "The room where the AC unit will be installed"),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
@@ -154,14 +156,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "painting": MessageLookupByLibrary.simpleMessage("Painting"),
         "pest_control": MessageLookupByLibrary.simpleMessage("Pest Control"),
+        "photo_added":
+            MessageLookupByLibrary.simpleMessage("Photos have been added"),
+        "photo_not_required":
+            MessageLookupByLibrary.simpleMessage("Photo is not required"),
+        "photo_required":
+            MessageLookupByLibrary.simpleMessage("Photos are required"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
-        "picture_not_required":
-            MessageLookupByLibrary.simpleMessage("Picture is not required"),
-        "picture_required":
-            MessageLookupByLibrary.simpleMessage("Picture is required"),
-        "picture_taken": MessageLookupByLibrary.simpleMessage("Picture taken"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
             "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
@@ -202,7 +205,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Remove"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("Rent"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
-        "retake": MessageLookupByLibrary.simpleMessage("Retake"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -221,6 +223,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Scrape old paints"),
         "search_properties_hint":
             MessageLookupByLibrary.simpleMessage("District/Name of the estate"),
+        "select_from_gallery":
+            MessageLookupByLibrary.simpleMessage("Select from Gallery"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
@@ -232,13 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
-        "start_taking_picture":
-            MessageLookupByLibrary.simpleMessage("Take Picture"),
-        "step": MessageLookupByLibrary.simpleMessage("Step"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),
-        "take_pictures": MessageLookupByLibrary.simpleMessage("Take pictures"),
+        "take_photo": MessageLookupByLibrary.simpleMessage("Take photo"),
         "tenant_info":
             MessageLookupByLibrary.simpleMessage("Tenant Information"),
         "tenant_paid_fees_colon":

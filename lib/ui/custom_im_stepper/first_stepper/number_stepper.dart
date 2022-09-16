@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'core/base_stepper.dart';
 
-class NumberStepper extends StatelessWidget {
+class CustomNumberStepper extends StatelessWidget {
   /// Each number defines a step. Hence, total count of numbers determines the total number of steps.
   final List<int>? numbers;
 
@@ -75,8 +75,11 @@ class NumberStepper extends StatelessWidget {
   /// Specifies the alignment of the NumberStepper.
   final AlignmentGeometry alignment;
 
+  /// Color completed steps
+  final bool showIsStepCompleted;
+
   /// Creates a NumberStepper widget.
-  NumberStepper({
+  CustomNumberStepper({
     this.numbers,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
@@ -101,6 +104,7 @@ class NumberStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+    this.showIsStepCompleted = false
   });
 
   @override
@@ -129,6 +133,7 @@ class NumberStepper extends StatelessWidget {
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
       alignment: alignment,
+      showIsStepCompleted: showIsStepCompleted,
     );
   }
 

@@ -67,6 +67,31 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>add_photos</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>address_line1_helper</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -643,6 +668,31 @@
             </concept_node>
             <concept_node>
                 <name>cantonese</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>change_photo</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -2417,6 +2467,81 @@
                 </translations>
             </concept_node>
             <concept_node>
+                <name>photo_added</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>photo_not_required</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>photo_required</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
                 <name>pick_a_day</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -2443,81 +2568,6 @@
             </concept_node>
             <concept_node>
                 <name>pick_datetime</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>picture_not_required</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>picture_required</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>picture_taken</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3142,31 +3192,6 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>retake</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
                 <name>review_before_submission</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -3393,6 +3418,31 @@
             </concept_node>
             <concept_node>
                 <name>search_properties_hint</name>
+                <definition_loaded>false</definition_loaded>
+                <description/>
+                <comment/>
+                <default_text/>
+                <translations>
+                    <translation>
+                        <language>en-US</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHS</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CHT</language>
+                        <approved>false</approved>
+                    </translation>
+                    <translation>
+                        <language>zh-CN</language>
+                        <approved>false</approved>
+                    </translation>
+                </translations>
+            </concept_node>
+            <concept_node>
+                <name>select_from_gallery</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>
@@ -3667,56 +3717,6 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>start_taking_picture</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
-                <name>step</name>
-                <definition_loaded>false</definition_loaded>
-                <description/>
-                <comment/>
-                <default_text/>
-                <translations>
-                    <translation>
-                        <language>en-US</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHS</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CHT</language>
-                        <approved>false</approved>
-                    </translation>
-                    <translation>
-                        <language>zh-CN</language>
-                        <approved>false</approved>
-                    </translation>
-                </translations>
-            </concept_node>
-            <concept_node>
                 <name>submit</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
@@ -3767,7 +3767,7 @@
                 </translations>
             </concept_node>
             <concept_node>
-                <name>take_pictures</name>
+                <name>take_photo</name>
                 <definition_loaded>false</definition_loaded>
                 <description/>
                 <comment/>

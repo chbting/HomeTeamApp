@@ -1570,101 +1570,31 @@ class S {
     );
   }
 
-  /// `Take pictures`
-  String get take_pictures {
-    return Intl.message(
-      'Take pictures',
-      name: 'take_pictures',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Picture is not required`
-  String get picture_not_required {
-    return Intl.message(
-      'Picture is not required',
-      name: 'picture_not_required',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Picture is required`
-  String get picture_required {
-    return Intl.message(
-      'Picture is required',
-      name: 'picture_required',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Retake`
-  String get retake {
-    return Intl.message(
-      'Retake',
-      name: 'retake',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Picture taken`
-  String get picture_taken {
-    return Intl.message(
-      'Picture taken',
-      name: 'picture_taken',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Take Picture`
-  String get start_taking_picture {
-    return Intl.message(
-      'Take Picture',
-      name: 'start_taking_picture',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Take a closeup image of the current AC`
+  /// `A front closeup of the current AC unit`
   String get imaging_instruction_ac_1 {
     return Intl.message(
-      'Take a closeup image of the current AC',
+      'A front closeup of the current AC unit',
       name: 'imaging_instruction_ac_1',
       desc: '',
       args: [],
     );
   }
 
-  /// `Take a picture of the wall where the AC will be installed`
+  /// `The wall on which the AC unit will be installed`
   String get imaging_instruction_ac_2 {
     return Intl.message(
-      'Take a picture of the wall where the AC will be installed',
+      'The wall on which the AC unit will be installed',
       name: 'imaging_instruction_ac_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `Take a picture of the room where the AC will be installed`
+  /// `The room where the AC unit will be installed`
   String get imaging_instruction_ac_3 {
     return Intl.message(
-      'Take a picture of the room where the AC will be installed',
+      'The room where the AC unit will be installed',
       name: 'imaging_instruction_ac_3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Step`
-  String get step {
-    return Intl.message(
-      'Step',
-      name: 'step',
       desc: '',
       args: [],
     );
@@ -1675,6 +1605,76 @@ class S {
     return Intl.message(
       'Processing',
       name: 'processing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select from Gallery`
+  String get select_from_gallery {
+    return Intl.message(
+      'Select from Gallery',
+      name: 'select_from_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photo is not required`
+  String get photo_not_required {
+    return Intl.message(
+      'Photo is not required',
+      name: 'photo_not_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos are required`
+  String get photo_required {
+    return Intl.message(
+      'Photos are required',
+      name: 'photo_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos have been added`
+  String get photo_added {
+    return Intl.message(
+      'Photos have been added',
+      name: 'photo_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add photos`
+  String get add_photos {
+    return Intl.message(
+      'Add photos',
+      name: 'add_photos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take photo`
+  String get take_photo {
+    return Intl.message(
+      'Take photo',
+      name: 'take_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change photo`
+  String get change_photo {
+    return Intl.message(
+      'Change photo',
+      name: 'change_photo',
       desc: '',
       args: [],
     );

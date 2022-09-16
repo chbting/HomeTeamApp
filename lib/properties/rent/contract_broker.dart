@@ -84,7 +84,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     activeStepColor: Theme.of(context).colorScheme.secondary,
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
-                    showStepCompleted: true,
+                    showIsStepCompleted: true,
                     stepRadius: 24.0,
                     lineColor: Colors.grey,
                     onStepReached: (index) {

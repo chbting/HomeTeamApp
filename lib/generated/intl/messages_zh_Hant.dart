@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ac_window_type": MessageLookupByLibrary.simpleMessage("冷氣 (窗口式)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("接受/提出更改"),
+        "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("例: 1座12樓25室"),
         "address_line1_label":
@@ -57,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("無法使用拍照功能"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "cantonese": MessageLookupByLibrary.simpleMessage("中文 (廣東話)"),
+        "change_photo": MessageLookupByLibrary.simpleMessage("更改照片"),
         "choose_language": MessageLookupByLibrary.simpleMessage("選擇語言"),
         "choose_the_route": MessageLookupByLibrary.simpleMessage("選擇路線"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認"),
@@ -89,11 +91,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("小時"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
         "imaging_instruction_ac_1":
-            MessageLookupByLibrary.simpleMessage("拍攝現有的冷氣機身"),
+            MessageLookupByLibrary.simpleMessage("現有冷氣機的正面特寫"),
         "imaging_instruction_ac_2":
-            MessageLookupByLibrary.simpleMessage("拍攝安裝冷氣的那埲牆"),
+            MessageLookupByLibrary.simpleMessage("冷氣所在的牆身"),
         "imaging_instruction_ac_3":
-            MessageLookupByLibrary.simpleMessage("拍攝安裝冷氣的房間"),
+            MessageLookupByLibrary.simpleMessage("冷氣所在的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
@@ -137,11 +139,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "owner": MessageLookupByLibrary.simpleMessage("業主"),
         "painting": MessageLookupByLibrary.simpleMessage("油潻"),
         "pest_control": MessageLookupByLibrary.simpleMessage("滅蟲"),
+        "photo_added": MessageLookupByLibrary.simpleMessage("照片已加入"),
+        "photo_not_required": MessageLookupByLibrary.simpleMessage("無需照片"),
+        "photo_required": MessageLookupByLibrary.simpleMessage("需要照片"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("選擇日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("選擇日期和時間"),
-        "picture_not_required": MessageLookupByLibrary.simpleMessage("無需拍照"),
-        "picture_required": MessageLookupByLibrary.simpleMessage("需要拍照"),
-        "picture_taken": MessageLookupByLibrary.simpleMessage("已拍照"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("請輸入有效的金額"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
@@ -173,7 +175,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租樓"),
         "reset": MessageLookupByLibrary.simpleMessage("重設"),
-        "retake": MessageLookupByLibrary.simpleMessage("重拍"),
         "review_before_submission":
             MessageLookupByLibrary.simpleMessage("簽署租約後，你可在提交之前確認細節"),
         "save": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -186,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scrape_old_paint_yes": MessageLookupByLibrary.simpleMessage("剷底"),
         "search_properties_hint":
             MessageLookupByLibrary.simpleMessage("地區/屋苑名稱"),
+        "select_from_gallery": MessageLookupByLibrary.simpleMessage("從相薄選取"),
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
@@ -196,11 +198,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("呎"),
         "start_date": MessageLookupByLibrary.simpleMessage("開始日期"),
-        "start_taking_picture": MessageLookupByLibrary.simpleMessage("開始拍攝"),
-        "step": MessageLookupByLibrary.simpleMessage("步驟"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
-        "take_pictures": MessageLookupByLibrary.simpleMessage("拍攝圖片"),
+        "take_photo": MessageLookupByLibrary.simpleMessage("拍照"),
         "tenant_info": MessageLookupByLibrary.simpleMessage("租客資料"),
         "tenant_paid_fees_colon":
             MessageLookupByLibrary.simpleMessage("租客負擔費用︰"),

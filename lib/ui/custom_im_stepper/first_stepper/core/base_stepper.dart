@@ -33,7 +33,7 @@ class BaseStepper extends StatefulWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment,
-    this.showStepCompleted = false
+    this.showIsStepCompleted = false
   }) : super(key: key) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -121,7 +121,7 @@ class BaseStepper extends StatefulWidget {
   final AlignmentGeometry? alignment;
 
   /// Color completed steps
-  final bool showStepCompleted;
+  final bool showIsStepCompleted;
 
   @override
   BaseStepperState createState() => BaseStepperState();
@@ -260,7 +260,7 @@ class BaseStepperState extends State<BaseStepper> {
               }
             }
           : null,
-      color: widget.showStepCompleted
+      color: widget.showIsStepCompleted
           ? (_selectedIndex > index ? widget.activeStepColor : widget.stepColor)
           : widget.stepColor,
       activeColor: widget.activeStepColor,

@@ -74,7 +74,7 @@ class CustomIconStepper extends StatelessWidget {
   final AlignmentGeometry alignment;
 
   /// Color completed steps
-  final bool showStepCompleted;
+  final bool showIsStepCompleted;
 
   /// Creates an IconStepper widget.
   const CustomIconStepper(
@@ -102,7 +102,7 @@ class CustomIconStepper extends StatelessWidget {
       this.scrollingDisabled = false,
       this.activeStep = 0,
       this.alignment = Alignment.center,
-      this.showStepCompleted = false})
+      this.showIsStepCompleted = false})
       : super(key: key);
 
   @override
@@ -130,7 +130,7 @@ class CustomIconStepper extends StatelessWidget {
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
       alignment: alignment,
-      showStepCompleted: showStepCompleted,
+      showIsStepCompleted: showIsStepCompleted,
       children: _iconsWithSizeOverridden(),
     );
   }

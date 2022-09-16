@@ -65,7 +65,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   key: _stepperKey,
                   icons: [
                     Icon(Icons.style, color: stepIconColor),
-                    Icon(Icons.camera_alt, color: stepIconColor),
+                    Icon(Icons.image, color: stepIconColor),
                     Icon(Icons.contact_phone, color: stepIconColor),
                     Icon(Icons.check, color: stepIconColor)
                   ],
@@ -74,7 +74,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   activeStepColor: Theme.of(context).colorScheme.secondary,
                   enableNextPreviousButtons: false,
                   enableStepTapping: false,
-                  showStepCompleted: true,
+                  showIsStepCompleted: true,
                   stepRadius: 24.0,
                   lineColor: Theme.of(context).colorScheme.onSurface,
                   onStepReached: (index) {
@@ -142,7 +142,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
       case 0:
         return S.of(context).remodeling_options;
       case 1:
-        return S.of(context).take_pictures;
+        return S.of(context).add_photos;
       case 2:
         return S.of(context).remodeling_address_and_contacts;
       case 3:

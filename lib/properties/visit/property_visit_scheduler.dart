@@ -88,7 +88,7 @@ class PropertyVisitSchedulingScreenState
                     enableStepTapping: false,
                     stepRadius:
                         PropertyVisitSchedulingScreen.buttonSpacing * 3 / 2,
-                    showStepCompleted: true,
+                    showIsStepCompleted: true,
                     lineColor: Colors.grey,
                     onStepReached: (index) {
                       setState(() {

@@ -16,15 +16,18 @@ class RemodelingOptionsWidget extends StatefulWidget {
       RemodelingOptionsWidgetState();
 }
 
-class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
+class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
+    with AutomaticKeepAliveClientMixin {
   late RemodelingInfo _data;
   int _activeOption = 0;
 
-  // @override
-  // bool get wantKeepAlive => true; //todo needed?
+  // Maintain the stepper position even after moved to the next step
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     _data = RemodelingInheritedData.of(context)!.info;
 
     // Return a Card for one item, a Stepper for multiple items
@@ -36,7 +39,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
         stepList.add(_getOptionStep(item, context));
       }
       // todo use form to validate
-      // todo sometimes the nextStep button on scheduler is blocked
+      // todo sometimes the nextStep button on scheduler is blocked (try to reproduce)
       return custom.Stepper(
           // Minus the internal paddings of the stepper
           padding: const EdgeInsets.only(
@@ -94,9 +97,10 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget> {
   void _updateBottomButtonState() {
     // Show the button only when the user is on the last option
     (_activeOption == _data.remodelingItems.length - 1)
-        ? RemodelingInheritedData.of(context)!.uiState.showBottomButtons.value = true
+        ? RemodelingInheritedData.of(context)!.uiState.showBottomButtons.value =
+            true
         : RemodelingInheritedData.of(context)!.uiState.showBottomButtons.value =
-            false; //todo
+            false;
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {

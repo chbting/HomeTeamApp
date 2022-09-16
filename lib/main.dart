@@ -6,7 +6,6 @@ import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/camera_helper.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 import 'contracts/contracts.dart';
@@ -16,7 +15,6 @@ import 'remodeling/remodeling_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
-  await CameraHelper.ensureInitialized();
 
   runApp(ChangeNotifierProvider.value(
       value: SharedPreferencesHelper.changeNotifier,

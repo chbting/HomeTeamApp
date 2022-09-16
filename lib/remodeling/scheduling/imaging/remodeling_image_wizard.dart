@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/imaging/camera_widget.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/FileHelper.dart';
 
@@ -28,10 +28,10 @@ class RemodelingImageWizard extends StatefulWidget {
 }
 
 class RemodelingImageWizardState extends State<RemodelingImageWizard> {
+  final ImagePicker _picker = ImagePicker();
   final List<File> _imageList = [];
   late List<ImagingInstruction> _instructionList;
   late int _pictureIndex;
-  bool _cameraOn = false;
 
   @override
   void initState() {
@@ -57,45 +57,36 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
               icon: const Icon(Icons.close),
               onPressed: () => Navigator.of(context).pop()),
           title: Text(S.of(context).take_pictures)),
-      floatingActionButton: Visibility(
-        visible: !_cameraOn,
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            setState(() {
-              _cameraOn = true;
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          var image = await _picker.pickImage(source: ImageSource.camera);
+          if (image != null) {
+            FileHelper.moveToSchedulerCache(File(image.path)).then((newFile) {
+              if (widget.retake) {
+                _imageList.removeAt(widget.initialIndex);
+                _imageList.insert(widget.initialIndex, newFile);
+                Navigator.of(context).pop(_imageList);
+              } else {
+                _imageList.add(newFile);
+                _pictureIndex++;
+                if (_pictureIndex == _instructionList.length) {
+                  Navigator.of(context).pop(_imageList);
+                } else {
+                  setState(() {});
+                }
+              }
             });
-          },
-          label: Text(S.of(context).start_taking_picture),
-          icon: const Icon(Icons.camera_alt),
-        ),
+          }
+        },
+        label: Text(S.of(context).start_taking_picture),
+        icon: const Icon(Icons.camera_alt),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         _getInstruction(),
-        _cameraOn
-            ? CameraWidget(onFinish: (image) async {
-                if (image != null) {
-                  FileHelper.moveToSchedulerCache(File(image.path))
-                      .then((newImage) {
-                    if (widget.retake) {
-                      _imageList.removeAt(widget.initialIndex);
-                      _imageList.insert(widget.initialIndex, newImage);
-                      Navigator.of(context).pop(_imageList);
-                    } else {
-                      _imageList.add(newImage);
-                      _pictureIndex++;
-                      _pictureIndex == _instructionList.length
-                          ? Navigator.of(context).pop(_imageList)
-                          : setState(() => _cameraOn = false);
-                    }
-                  });
-                } else {
-                  setState(() => _cameraOn = false);
-                }
-              })
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Image(image: _instructionList[_pictureIndex].image))
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Image(image: _instructionList[_pictureIndex].image))
       ]),
     );
   }

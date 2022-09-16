@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 class SpeechToTextHelper {
@@ -34,13 +33,11 @@ class SpeechToTextHelper {
     _isInitialized(context).then((initialized) {
       if (!initialized) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-                S.of(context).msg_voice_search_unavailable)));
+            content: Text(S.of(context).msg_voice_search_unavailable)));
         onSpeechToTextResult(null);
       } else {
         _context = context;
-        String localeId =
-            SharedPreferencesHelper.getVoiceRecognitionLocaleId();
+        String localeId = SharedPreferencesHelper.getVoiceRecognitionLocaleId();
 
         _showSpeechToTextDialog(context, localeId);
         log('${DateTime.now()} begin listening');
@@ -58,7 +55,8 @@ class SpeechToTextHelper {
                 } else {
                   onSpeechToTextResult(null);
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text(S.of(context).msg_cannot_recognize_speech)));
+                      content:
+                          Text(S.of(context).msg_cannot_recognize_speech)));
                 }
               }
             });
@@ -118,9 +116,8 @@ class SpeechToTextHelper {
   static void _onError(SpeechRecognitionError error, BuildContext context) {
     log('${DateTime.now()} onError:$error');
     if (_context != null) {
-      ScaffoldMessenger.of(_context!).showSnackBar(SnackBar(
-          content:
-              Text(S.of(context).msg_cannot_recognize_speech)));
+      ScaffoldMessenger.of(_context!).showSnackBar(
+          SnackBar(content: Text(S.of(context).msg_cannot_recognize_speech)));
       if (_isDialogShowing) {
         Navigator.pop(_context!);
       }

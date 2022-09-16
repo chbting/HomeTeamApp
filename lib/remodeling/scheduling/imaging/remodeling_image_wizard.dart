@@ -7,7 +7,7 @@ import 'package:tner_client/remodeling/remodeling_items.dart';
 import 'package:tner_client/ui/custom_im_stepper/first_stepper/number_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/ui/two_button_bar.dart';
-import 'package:tner_client/utils/FileHelper.dart';
+import 'package:tner_client/utils/file_helper.dart';
 
 /// if [retake] is true, returns after taking the picture indicated by
 /// initialIndex
@@ -69,6 +69,8 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                 : CustomNumberStepper(
                     numbers: List<int>.generate(
                         _instructionList.length, (i) => i + 1),
+                    numberStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.onSecondary),
                     activeStep: _activeIndex,
                     activeStepBorderWidth: 2.0,
                     activeStepBorderPadding: 5.0,

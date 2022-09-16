@@ -7,6 +7,7 @@ import 'package:tner_client/remodeling/scheduling/remodeling_images.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/ui/custom_im_stepper/custom_icon_stepper.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/FileHelper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
@@ -114,8 +115,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
                   child: Text(_getStepTitle(_data.uiState.activeStep),
-                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: Theme.of(context).colorScheme.secondary))),
+                      style: AppTheme.getStepTitleTextStyle(context))),
             ),
             ValueListenableBuilder<bool>(
                 valueListenable: _data.uiState.showBottomButtons,
@@ -129,10 +129,11 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
           ]));
     });
   }
-  
+
   @override
   void dispose() {
-    FileHelper.clearSchedulerCache(); //todo this may not run if user swipe close the app
+    FileHelper
+        .clearSchedulerCache(); //todo this may not run if user swipe close the app
     super.dispose();
   }
 

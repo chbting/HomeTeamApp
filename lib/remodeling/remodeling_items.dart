@@ -69,4 +69,42 @@ class RemodelingItemHelper {
         return false;
     }
   }
+
+  static List<ImagingInstruction> getImagingInstructions(
+      RemodelingItem item, BuildContext context) {
+    switch (item) {
+      case RemodelingItem.painting:
+        return [];
+      case RemodelingItem.wallCoverings:
+        return [];
+      case RemodelingItem.ac:
+        return [
+          ImagingInstruction(
+              S.of(context).imaging_instruction_ac_1,
+              const AssetImage(
+                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
+          ImagingInstruction(
+              S.of(context).imaging_instruction_ac_2,
+              const AssetImage(
+                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
+          ImagingInstruction(
+              S.of(context).imaging_instruction_ac_2,
+              const AssetImage(
+                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
+        ];
+      case RemodelingItem.removals:
+        return [];
+      case RemodelingItem.toiletReplacement:
+        return [];
+      default:
+        return [];
+    }
+  }
+}
+
+class ImagingInstruction {
+  String description;
+  AssetImage image;
+
+  ImagingInstruction(this.description, this.image);
 }

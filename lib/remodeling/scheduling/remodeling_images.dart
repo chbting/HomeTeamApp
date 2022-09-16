@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/image_viewer.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_camera.dart';
+import 'package:tner_client/remodeling/scheduling/imaging/image_viewer.dart';
+import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_wizard.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
@@ -66,7 +67,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                                 primary: false,
                                 itemBuilder: (context, index) {
                                   return _getEnlargeableThumbnail(
-                                      imageList[index]);
+                                      imageList[index], context);
                                 })
                           ],
                         )
@@ -78,7 +79,21 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                       color: Theme.of(context).toggleableActiveColor),
               onTap: pictureRequired && imageList == null
                   ? () {
-                      _openCamera(item);
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                              builder: (context) =>
+                                  RemodelingImageWizard(item: item)))
+                          .then((imageList) {
+                        if (imageList != null) {
+                          setState(() {
+                            RemodelingInheritedData.of(context)!
+                                .info
+                                .imageMap[item] = imageList;
+                            RemodelingInheritedData.of(context)!
+                                .updateRightButtonState();
+                          });
+                        }
+                      });
                     }
                   : null,
             ),
@@ -86,8 +101,8 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         });
   }
 
-  Widget _getEnlargeableThumbnail(File image) {
-    var heroTag = 'image';
+  Widget _getEnlargeableThumbnail(File image, BuildContext context) {
+    var heroTag = basename(image.path);
     return Hero(
         tag: heroTag,
         child: Material(
@@ -101,22 +116,6 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                   }));
                   // todo option to retake this and retake all images
                 }))));
-  }
-
-  void _openCamera(RemodelingItem item) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(
-            builder: (context) => const RemodelingCameraScreen()))
-        .then((newImage) {
-      if (newImage != null) {
-        setState(() {
-          RemodelingInheritedData.of(context)!.info.imageMap[item] = [
-            newImage
-          ]; // todo add a list of images
-          RemodelingInheritedData.of(context)!.updateRightButtonState();
-        });
-      }
-    });
   }
 
   void _showRetakeDialog(BuildContext context, RemodelingItem item) {
@@ -134,7 +133,6 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  _openCamera(item);
                 },
                 child: Text(S.of(context).retake),
               )

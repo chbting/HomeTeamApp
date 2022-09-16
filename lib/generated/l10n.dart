@@ -1629,6 +1629,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Take Picture`
+  String get start_taking_picture {
+    return Intl.message(
+      'Take Picture',
+      name: 'start_taking_picture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a closeup image of the current AC`
+  String get imaging_instruction_ac_1 {
+    return Intl.message(
+      'Take a closeup image of the current AC',
+      name: 'imaging_instruction_ac_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a picture of the wall where the AC will be installed`
+  String get imaging_instruction_ac_2 {
+    return Intl.message(
+      'Take a picture of the wall where the AC will be installed',
+      name: 'imaging_instruction_ac_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take a picture of the room where the AC will be installed`
+  String get imaging_instruction_ac_3 {
+    return Intl.message(
+      'Take a picture of the room where the AC will be installed',
+      name: 'imaging_instruction_ac_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Step`
+  String get step {
+    return Intl.message(
+      'Step',
+      name: 'step',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -160,5 +160,10 @@
 	"picture_required": "需要拍照",
 	"retake_picture": "重拍照片？",
 	"retake": "重拍",
-	"picture_taken": "已拍照"
+	"picture_taken": "已拍照",
+	"start_taking_picture": "開始拍攝",
+	"imaging_instruction_ac_1": "拍攝現有的冷氣機身",
+	"imaging_instruction_ac_2": "拍攝安裝冷氣的那埲牆",
+	"imaging_instruction_ac_3": "拍攝安裝冷氣的房間",
+	"step": "步驟"
 }

@@ -100,6 +100,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("hr"),
         "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
+        "imaging_instruction_ac_1": MessageLookupByLibrary.simpleMessage(
+            "Take a closeup image of the current AC"),
+        "imaging_instruction_ac_2": MessageLookupByLibrary.simpleMessage(
+            "Take a picture of the wall where the AC will be installed"),
+        "imaging_instruction_ac_3": MessageLookupByLibrary.simpleMessage(
+            "Take a picture of the room where the AC will be installed"),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
@@ -227,6 +233,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "start_taking_picture":
+            MessageLookupByLibrary.simpleMessage("Take Picture"),
+        "step": MessageLookupByLibrary.simpleMessage("Step"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),

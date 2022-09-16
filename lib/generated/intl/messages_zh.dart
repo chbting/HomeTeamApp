@@ -88,6 +88,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("小时"),
         "hours": MessageLookupByLibrary.simpleMessage("小时"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份证号码"),
+        "imaging_instruction_ac_1":
+            MessageLookupByLibrary.simpleMessage("拍摄現有的空调机身"),
+        "imaging_instruction_ac_2":
+            MessageLookupByLibrary.simpleMessage("拍摄安装冷气的那道墙"),
+        "imaging_instruction_ac_3":
+            MessageLookupByLibrary.simpleMessage("拍摄安装冷气的房间"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填写资料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期无效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龙"),
@@ -190,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("呎"),
         "start_date": MessageLookupByLibrary.simpleMessage("开始日期"),
+        "start_taking_picture": MessageLookupByLibrary.simpleMessage("开始拍摄"),
+        "step": MessageLookupByLibrary.simpleMessage("步骤"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
         "take_pictures": MessageLookupByLibrary.simpleMessage("拍摄图片"),

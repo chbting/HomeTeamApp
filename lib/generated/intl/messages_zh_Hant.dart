@@ -88,6 +88,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("小時"),
         "hours": MessageLookupByLibrary.simpleMessage("小時"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
+        "imaging_instruction_ac_1":
+            MessageLookupByLibrary.simpleMessage("拍攝現有的冷氣機身"),
+        "imaging_instruction_ac_2":
+            MessageLookupByLibrary.simpleMessage("拍攝安裝冷氣的那埲牆"),
+        "imaging_instruction_ac_3":
+            MessageLookupByLibrary.simpleMessage("拍攝安裝冷氣的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
@@ -190,6 +196,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("呎"),
         "start_date": MessageLookupByLibrary.simpleMessage("開始日期"),
+        "start_taking_picture": MessageLookupByLibrary.simpleMessage("開始拍攝"),
+        "step": MessageLookupByLibrary.simpleMessage("步驟"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
         "take_pictures": MessageLookupByLibrary.simpleMessage("拍攝圖片"),

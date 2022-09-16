@@ -88,7 +88,7 @@ class RemodelingItemHelper {
               const AssetImage(
                   'assets/demo_images/Greenwood_Terrace_240px.jpg')),
           ImagingInstruction(
-              S.of(context).imaging_instruction_ac_2,
+              S.of(context).imaging_instruction_ac_3,
               const AssetImage(
                   'assets/demo_images/Greenwood_Terrace_240px.jpg')),
         ];

@@ -162,5 +162,6 @@
 	"imaging_instruction_ac_1": "拍摄現有的空调机身",
 	"imaging_instruction_ac_2": "拍摄安装冷气的那道墙",
 	"imaging_instruction_ac_3": "拍摄安装冷气的房间",
-	"step": "步骤"
+	"step": "步骤",
+	"processing": "处理中"
 }

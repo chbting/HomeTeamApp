@@ -11,6 +11,7 @@ class ImageViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // todo image can overflow
     return Scaffold(
         appBar: AppBar(backgroundColor: Colors.transparent, elevation: 0.0),
         body: Center(child: Hero(tag: heroTag, child: Image.file(image))));

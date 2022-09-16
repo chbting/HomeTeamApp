@@ -145,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("請輸入有效的金額"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
+        "processing": MessageLookupByLibrary.simpleMessage("處理中"),
         "properties_visited_last_thirty_days":
             MessageLookupByLibrary.simpleMessage("過去30日到訪過的租盤"),
         "property": MessageLookupByLibrary.simpleMessage("租盤"),

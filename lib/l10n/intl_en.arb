@@ -162,5 +162,6 @@
 	"imaging_instruction_ac_1": "Take a closeup image of the current AC",
 	"imaging_instruction_ac_2": "Take a picture of the wall where the AC will be installed",
 	"imaging_instruction_ac_3": "Take a picture of the room where the AC will be installed",
-	"step": "Step"
+	"step": "Step",
+	"processing": "Processing"
 }

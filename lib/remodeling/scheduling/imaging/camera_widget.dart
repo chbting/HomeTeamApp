@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/camera_helper.dart';
 
 class CameraWidget extends StatefulWidget {
@@ -15,9 +16,11 @@ class CameraWidget extends StatefulWidget {
 }
 
 class CameraWidgetState extends State<CameraWidget> {
+  final _pictureAspectRatio = 4 / 3;
   late CameraController _controller;
   Future<void>? _controllerFuture;
   File? _image;
+  bool _processing = false;
 
   final _fabBottomMargin = 16.0;
 
@@ -25,18 +28,24 @@ class CameraWidgetState extends State<CameraWidget> {
   void initState() {
     super.initState();
     try {
-      _controller = CameraController(
-          CameraHelper.cameras.first, ResolutionPreset.max, // todo aspect ratio
-          enableAudio: false,
-          imageFormatGroup: ImageFormatGroup.jpeg);
+      var camera = CameraHelper.getBackCamera();
+      if (camera == null) throw Exception('No back camera');
+
+      /// Wait for the official package to enable the 4:3 aspect ratio
+      _controller = CameraController(camera, ResolutionPreset.max,
+          enableAudio: false, imageFormatGroup: ImageFormatGroup.jpeg);
       _controllerFuture = _controller.initialize().catchError((Object e) {
         // On permission denied
         _controllerFuture = null;
-      }).then((_) => _controller.setFlashMode(
-          FlashMode.off)); // Turning flash off because it goes haywire
-      // todo allow different orientation
-    } on StateError catch (_) {
-      // On no camera found
+      }).then((_) {
+        // Turning flash off because it goes haywire in the current package
+        _controller.setFlashMode(FlashMode.off);
+        // todo allow different orientation
+        //  _controller.unlockCaptureOrientation();
+      });
+    } on Exception catch (e) {
+      debugPrint('$e');
+      _controllerFuture = null;
     }
   }
 
@@ -48,9 +57,7 @@ class CameraWidgetState extends State<CameraWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        //todo container or expanded?
-        //color: Theme.of(context).scaffoldBackgroundColor,
+    return Expanded(
         child: _controllerFuture == null
             ? Center(child: Text(S.of(context).cameras_not_available))
             : FutureBuilder<void>(
@@ -58,18 +65,56 @@ class CameraWidgetState extends State<CameraWidget> {
                 builder: (context, snapshot) {
                   return _image == null
                       ? snapshot.connectionState == ConnectionState.done
-                          ? _getCamera()
+                          ? _getCamera(context)
                           : const Center(child: CircularProgressIndicator())
                       : _getPictureViewer();
                 },
               ));
   }
 
-  Widget _getCamera() {
+  Widget _getCamera(BuildContext context) {
     // todo need a back button
+    var size = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        CameraPreview(_controller),
+        // Fit camera preview to custom aspect ratio
+        SizedBox(
+          width: size,
+          height: size * _pictureAspectRatio,
+          child: ClipRect(
+            child: OverflowBox(
+              alignment: Alignment.center,
+              child: FittedBox(
+                fit: BoxFit.fitWidth,
+                child: SizedBox(
+                  width: size,
+                  height: size * _controller.value.aspectRatio,
+                  child: Stack(
+                    children: [
+                      CameraPreview(_controller),
+                      _processing
+                          ? Align(
+                              alignment: Alignment.center,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Text(S.of(context).processing,
+                                          style: AppTheme.getHeadline6TextStyle(
+                                              context)),
+                                    ),
+                                    const CircularProgressIndicator()
+                                  ]))
+                          : const SizedBox()
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
         Padding(
             padding: EdgeInsets.only(bottom: _fabBottomMargin),
             child: Align(
@@ -78,18 +123,21 @@ class CameraWidgetState extends State<CameraWidget> {
                     onPressed: () async {
                       try {
                         // Ensure that the camera is initialized.
+                        setState(() => _processing = true);
                         await _controllerFuture;
                         final image = await _controller.takePicture();
+
+                        // todo Resize picture
                         _image = File(image.path);
 
                         if (!mounted) return;
-                        setState(() {});
+                        setState(() => _processing = false);
                       } catch (e) {
                         debugPrint('$e');
                       }
                     },
                     heroTag: 'shutter_button',
-                    child: const Icon(Icons.camera))))
+                    child: const Icon(Icons.camera)))) //SizedBox()
       ],
     );
   }
@@ -97,7 +145,7 @@ class CameraWidgetState extends State<CameraWidget> {
   Widget _getPictureViewer() {
     // Show the picture and ok and reject buttons
     return Stack(children: [
-      Image.file(File(_image!.path)),
+      Image.file(File(_image!.path)), //todo size to fill
       Padding(
           padding: EdgeInsets.only(bottom: _fabBottomMargin),
           child: Align(

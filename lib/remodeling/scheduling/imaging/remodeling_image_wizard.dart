@@ -45,7 +45,8 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Stack(children: [
+      body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        _getInstruction(),
         _cameraOn
             ? CameraWidget(onFinish: (image) async {
                 if (image != null) {
@@ -53,46 +54,37 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                       .then((newImage) {
                     _imageList.add(newImage);
                     _pictureIndex++;
-                    setState(() => _cameraOn = false);
-                    if (_pictureIndex == _instructionList.length) {
-                      Navigator.of(context).pop(_imageList);
-                    }
+                    _pictureIndex == _instructionList.length
+                        ? Navigator.of(context).pop(_imageList)
+                        : setState(() => _cameraOn = false);
                   });
                 } else {
                   setState(() => _cameraOn = false);
                 }
               })
-            : _pictureIndex <
-                    _instructionList.length // Avoid index out of bound
-                ? _getInstructions()
-                : Container(),
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Image(image: _instructionList[_pictureIndex].image))
       ]),
     );
   }
 
-// todo add a "select from gallery" button for each image taking step (needs read and write permission)
-
-  Widget _getInstructions() {
+  Widget _getInstruction() {
     return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Text(
-                    '${S.of(context).step} '
-                    '${_pictureIndex + 1}/${_instructionList.length}',
-                    style: AppTheme.getStepTitleTextStyle(context))),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
               child: Text(
-                _instructionList[_pictureIndex].description,
-                style: AppTheme.getHeadline6TextStyle(context),
-              ),
-            ),
-            Image(image: _instructionList[_pictureIndex].image)
-          ],
-        ));
+                  '${S.of(context).step} '
+                  '${_pictureIndex + 1}/${_instructionList.length}',
+                  style: AppTheme.getStepTitleTextStyle(context))),
+          Text(
+            _instructionList[_pictureIndex].description,
+            style: AppTheme.getHeadline6TextStyle(context),
+          )
+        ]));
   }
+
+// todo add a "select from gallery" button for each image taking step (needs read and write permission)
 }

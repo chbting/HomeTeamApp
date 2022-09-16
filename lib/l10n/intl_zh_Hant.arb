@@ -165,5 +165,6 @@
 	"imaging_instruction_ac_1": "拍攝現有的冷氣機身",
 	"imaging_instruction_ac_2": "拍攝安裝冷氣的那埲牆",
 	"imaging_instruction_ac_3": "拍攝安裝冷氣的房間",
-	"step": "步驟"
+	"step": "步驟",
+	"processing": "處理中"
 }

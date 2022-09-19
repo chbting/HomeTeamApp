@@ -97,23 +97,22 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child:
-                      Image.file(File(_instructionList[_activeIndex].image))),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: TwoButtonBar(
-                    leftButtonLabel: Text(S.of(context).select_from_gallery),
-                    leftButtonIcon: const Icon(Icons.collections),
-                    onLeftButtonPressed: () {
-                      _getImageFromSource(ImageSource.gallery);
-                    },
-                    rightButtonLabel: Text(S.of(context).take_photo),
-                    rightButtonIcon: const Icon(Icons.camera_alt),
-                    onRightButtonPressed: () {
-                      _getImageFromSource(ImageSource.camera);
-                    }),
-              )
+                  child: Image(image: _instructionList[_activeIndex].image)),
             ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TwoButtonBar(
+                leftButtonLabel: Text(S.of(context).select_from_gallery),
+                leftButtonIcon: const Icon(Icons.collections),
+                onLeftButtonPressed: () {
+                  _getImageFromSource(ImageSource.gallery);
+                },
+                rightButtonLabel: Text(S.of(context).take_photo),
+                rightButtonIcon: const Icon(Icons.camera_alt),
+                onRightButtonPressed: () {
+                  _getImageFromSource(ImageSource.camera);
+                }),
           )
         ]));
   }

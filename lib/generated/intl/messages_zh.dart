@@ -91,7 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("小时"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份证号码"),
         "imaging_instruction_ac_1":
-            MessageLookupByLibrary.simpleMessage("現有空调正面特寫"),
+            MessageLookupByLibrary.simpleMessage("現有空调的正面特寫"),
         "imaging_instruction_ac_2":
             MessageLookupByLibrary.simpleMessage("空调所在的牆身"),
         "imaging_instruction_ac_3":

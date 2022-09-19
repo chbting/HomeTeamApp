@@ -93,9 +93,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "imaging_instruction_ac_1":
             MessageLookupByLibrary.simpleMessage("現有冷氣機的正面特寫"),
         "imaging_instruction_ac_2":
-            MessageLookupByLibrary.simpleMessage("冷氣所在的牆身"),
+            MessageLookupByLibrary.simpleMessage("冷氣機所在的牆身"),
         "imaging_instruction_ac_3":
-            MessageLookupByLibrary.simpleMessage("冷氣所在的房間"),
+            MessageLookupByLibrary.simpleMessage("冷氣機所在的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),

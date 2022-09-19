@@ -30,10 +30,12 @@ class RemodelingImageWizard extends StatefulWidget {
 }
 
 class RemodelingImageWizardState extends State<RemodelingImageWizard> {
+  bool _bottomButtonEnabled = true;
   final ImagePicker _picker = ImagePicker();
   final List<File> _imageList = [];
   late List<ImagingInstruction> _instructionList;
   late int _activeIndex;
+  late PageController _pageController;
 
   @override
   void initState() {
@@ -44,6 +46,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
     if (widget.imageList != null) {
       _imageList.addAll(widget.imageList!);
     }
+    _pageController = PageController(initialPage: widget.initialIndex);
     super.initState();
   }
 
@@ -87,17 +90,29 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                         });
                       },
                     ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  _instructionList[_activeIndex].description,
-                  style: AppTheme.getHeadline6TextStyle(context),
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        child: Text(
+                          _instructionList[index].description,
+                          style: AppTheme.getHeadline6TextStyle(context),
+                        ),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Image(image: _instructionList[index].image)),
+                    ]);
+                  },
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Image(image: _instructionList[_activeIndex].image)),
             ],
           ),
           Align(
@@ -105,16 +120,26 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
             child: TwoButtonBar(
                 leftButtonLabel: Text(S.of(context).select_from_gallery),
                 leftButtonIcon: const Icon(Icons.collections),
-                onLeftButtonPressed: () {
-                  _getImageFromSource(ImageSource.gallery);
-                },
+                onLeftButtonPressed: () => _bottomButtonEnabled
+                    ? _getImageFromSource(ImageSource.gallery)
+                    : null,
                 rightButtonLabel: Text(S.of(context).take_photo),
                 rightButtonIcon: const Icon(Icons.camera_alt),
-                onRightButtonPressed: () {
-                  _getImageFromSource(ImageSource.camera);
-                }),
+                onRightButtonPressed: () => _bottomButtonEnabled
+                    ? _getImageFromSource(ImageSource.camera)
+                    : null),
           )
         ]));
+  }
+
+  void _nextStep() {
+    setState(() {
+      _bottomButtonEnabled = false;
+    });
+    _pageController
+        .nextPage(
+            duration: const Duration(milliseconds: 500), curve: Curves.easeIn)
+        .whenComplete(() => _bottomButtonEnabled = true);
   }
 
   void _getImageFromSource(ImageSource source) {
@@ -131,7 +156,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
             if (_activeIndex == _instructionList.length) {
               Navigator.of(context).pop(_imageList);
             } else {
-              setState(() {});
+              _nextStep();
             }
           }
         });

@@ -79,18 +79,12 @@ class RemodelingItemHelper {
         return [];
       case RemodelingItem.ac:
         return [
-          ImagingInstruction(
-              S.of(context).imaging_instruction_ac_1,
-              const AssetImage(
-                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
-          ImagingInstruction(
-              S.of(context).imaging_instruction_ac_2,
-              const AssetImage(
-                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
-          ImagingInstruction(
-              S.of(context).imaging_instruction_ac_3,
-              const AssetImage(
-                  'assets/demo_images/Greenwood_Terrace_240px.jpg')),
+          ImagingInstruction(S.of(context).imaging_instruction_ac_1,
+              'assets/images/ac_instruction_1.gif'),
+          ImagingInstruction(S.of(context).imaging_instruction_ac_2,
+              'assets/images/ac_instruction_2.gif'),
+          ImagingInstruction(S.of(context).imaging_instruction_ac_3,
+              'assets/images/ac_instruction_3.gif'),
         ];
       case RemodelingItem.removals:
         return [];
@@ -104,7 +98,7 @@ class RemodelingItemHelper {
 
 class ImagingInstruction {
   String description;
-  AssetImage image;
+  String image;
 
   ImagingInstruction(this.description, this.image);
 }

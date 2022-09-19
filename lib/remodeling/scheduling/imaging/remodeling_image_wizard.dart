@@ -54,67 +54,68 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
     assert(widget.initialIndex < _instructionList.length);
 
     return Scaffold(
-      appBar: AppBar(
-          leading: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop()),
-          title: Text(widget.retake
-              ? S.of(context).change_photo
-              : S.of(context).add_photos)),
-      body: Stack(
-        children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            widget.retake
-                ? const SizedBox()
-                : CustomNumberStepper(
-                    numbers: List<int>.generate(
-                        _instructionList.length, (i) => i + 1),
-                    numberStyle: TextStyle(
-                        color: Theme.of(context).colorScheme.onSecondary),
-                    activeStep: _activeIndex,
-                    activeStepBorderWidth: 2.0,
-                    activeStepBorderPadding: 5.0,
-                    activeStepColor: Theme.of(context).colorScheme.secondary,
-                    enableNextPreviousButtons: false,
-                    enableStepTapping: false,
-                    showIsStepCompleted: true,
-                    stepRadius: 20.0,
-                    lineColor: Theme.of(context).colorScheme.onSurface,
-                    onStepReached: (index) {
-                      setState(() {
-                        _activeIndex = index;
-                      });
-                    },
-                  ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Text(
-                _instructionList[_activeIndex].description,
-                style: AppTheme.getHeadline6TextStyle(context),
+        appBar: AppBar(
+            leading: IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.of(context).pop()),
+            title: Text(widget.retake
+                ? S.of(context).change_photo
+                : S.of(context).add_photos)),
+        body: Stack(children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              widget.retake
+                  ? const SizedBox()
+                  : CustomNumberStepper(
+                      numbers: List<int>.generate(
+                          _instructionList.length, (i) => i + 1),
+                      numberStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.onSecondary),
+                      activeStep: _activeIndex,
+                      activeStepBorderWidth: 2.0,
+                      activeStepBorderPadding: 5.0,
+                      activeStepColor: Theme.of(context).colorScheme.secondary,
+                      enableNextPreviousButtons: false,
+                      enableStepTapping: false,
+                      showIsStepCompleted: true,
+                      stepRadius: 20.0,
+                      lineColor: Theme.of(context).colorScheme.onSurface,
+                      onStepReached: (index) {
+                        setState(() {
+                          _activeIndex = index;
+                        });
+                      },
+                    ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(
+                  _instructionList[_activeIndex].description,
+                  style: AppTheme.getHeadline6TextStyle(context),
+                ),
               ),
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Image(image: _instructionList[_activeIndex].image))
-          ]),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: TwoButtonBar(
-                leftButtonLabel: Text(S.of(context).select_from_gallery),
-                leftButtonIcon: const Icon(Icons.collections),
-                onLeftButtonPressed: () {
-                  _getImageFromSource(ImageSource.gallery);
-                },
-                rightButtonLabel: Text(S.of(context).take_photo),
-                rightButtonIcon: const Icon(Icons.camera_alt),
-                onRightButtonPressed: () {
-                  _getImageFromSource(ImageSource.camera);
-                }),
+              Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child:
+                      Image.file(File(_instructionList[_activeIndex].image))),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: TwoButtonBar(
+                    leftButtonLabel: Text(S.of(context).select_from_gallery),
+                    leftButtonIcon: const Icon(Icons.collections),
+                    onLeftButtonPressed: () {
+                      _getImageFromSource(ImageSource.gallery);
+                    },
+                    rightButtonLabel: Text(S.of(context).take_photo),
+                    rightButtonIcon: const Icon(Icons.camera_alt),
+                    onRightButtonPressed: () {
+                      _getImageFromSource(ImageSource.camera);
+                    }),
+              )
+            ],
           )
-        ],
-      ),
-    );
+        ]));
   }
 
   void _getImageFromSource(ImageSource source) {

@@ -21,6 +21,8 @@ void main() async {
       child: const App()));
 }
 
+bool debug = true; // TODO for debugging
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 

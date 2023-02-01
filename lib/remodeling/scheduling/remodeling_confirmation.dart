@@ -7,7 +7,6 @@ import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
@@ -17,9 +16,6 @@ class RemodelingConfirmationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var info = RemodelingInheritedData.of(context)!.info;
-    if (info.client.firstName == null) {
-      info.client = getSampleClientData();
-    } // todo debug line
     return ListView(
       primary: false,
       padding: const EdgeInsets.only(

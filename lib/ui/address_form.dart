@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/utils/client_data.dart';
 
 class AddressForm extends StatefulWidget {
-  const AddressForm({Key? key, required this.data}) : super(key: key);
+  const AddressForm({Key? key, required this.data, required this.autofill})
+      : super(key: key);
 
   final Client data;
+  final bool autofill;
 
   @override
   State<StatefulWidget> createState() => AddressFormState();
@@ -50,7 +52,7 @@ class AddressFormState extends State<AddressForm> {
           runSpacing: 16.0,
           children: [
             TextFormField(
-              // todo auto complete with the gov api
+              // todo autocomplete with the gov address api
               keyboardType: TextInputType.text,
               textInputAction: TextInputAction.next,
               focusNode: _addressLine1FieldFocus,
@@ -76,10 +78,8 @@ class AddressFormState extends State<AddressForm> {
                   focusNode: _addressLine2FieldFocus,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText:
-                          S.of(context).address_line2_label,
-                      helperText:
-                          S.of(context).address_line2_helper),
+                      labelText: S.of(context).address_line2_label,
+                      helperText: S.of(context).address_line2_helper),
                   onChanged: (value) {
                     widget.data.addressLine2 = value;
                   },

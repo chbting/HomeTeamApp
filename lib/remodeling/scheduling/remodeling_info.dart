@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:tner_client/main.dart';
 import 'package:tner_client/utils/client_data.dart';
 
 import '../remodeling_items.dart';
@@ -37,6 +38,6 @@ class RemodelingInfo {
   RemodelingInfo({required this.remodelingItems}) {
     final now = DateTime.now();
     datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
-    client = Client();
+    debug ? client = getSampleClientData() : client = Client();
   }
 }

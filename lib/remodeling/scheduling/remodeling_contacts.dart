@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/main.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
@@ -19,32 +20,9 @@ class RemodelingContactsWidget extends StatefulWidget {
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
   late RemodelingInfo _data;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<NameFormState> _nameFormKey = GlobalKey<NameFormState>();
   final GlobalKey<AddressFormState> _addressFormKey =
       GlobalKey<AddressFormState>();
-  final FocusNode _lastNameFieldFocus = FocusNode();
-  final FocusNode _firstNameFieldFocus = FocusNode();
-
-  @override
-  void initState() {
-    _lastNameFieldFocus.addListener(() {
-      setState(() {});
-    });
-    _firstNameFieldFocus.addListener(() {
-      setState(() {});
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _lastNameFieldFocus.removeListener(() {});
-    _lastNameFieldFocus.dispose();
-    _firstNameFieldFocus.removeListener(() {});
-    _firstNameFieldFocus.dispose();
-    super.dispose();
-  }
 
   @override
   bool get wantKeepAlive => true;
@@ -65,7 +43,6 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
             child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
-              key: _formKey,
               child: Wrap(
                 children: [
                   NameForm(key: _nameFormKey, client: _data.client),
@@ -97,7 +74,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                         S.of(context).remodeling_address,
                         style: AppTheme.getCardTitleTextStyle(context),
                       )),
-                  AddressForm(key: _addressFormKey, data: _data.client)
+                  AddressForm(key: _addressFormKey, data: _data.client, autofill: debug)
                 ],
               )),
         ))
@@ -106,12 +83,11 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
   }
 
   bool validate() {
-    //todo call this function
     // note: In "return form1.validate() && form2.validate();", the second
-    // statement won't execute if the first return false
+    // statement won't execute if the first return false, therefore validate()
+    // must be called separately
     bool nameFormValidated = _nameFormKey.currentState!.validate();
-    bool currentFormValidated = _formKey.currentState!.validate();
     bool addressFormValidated = _addressFormKey.currentState!.validate();
-    return nameFormValidated && currentFormValidated && addressFormValidated;
+    return nameFormValidated && addressFormValidated;
   }
 }

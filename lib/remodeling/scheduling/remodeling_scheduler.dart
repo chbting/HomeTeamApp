@@ -25,6 +25,8 @@ class RemodelingScheduler extends StatefulWidget {
 
 class RemodelingSchedulerState extends State<RemodelingScheduler> {
   final GlobalKey _stepperKey = GlobalKey();
+  final GlobalKey<RemodelingContactsWidgetState> _contactsWidgetKey =
+      GlobalKey<RemodelingContactsWidgetState>();
   final PageController _pageController = PageController(initialPage: 0);
   final _totalSteps = 4;
   double _stepTitleBarTopMargin = 0.0;
@@ -87,11 +89,11 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                   child: PageView(
                     controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
-                    children: const [
-                      RemodelingOptionsWidget(),
-                      RemodelingImagesWidget(),
-                      RemodelingContactsWidget(),
-                      RemodelingConfirmationWidget()
+                    children: [
+                      const RemodelingOptionsWidget(),
+                      const RemodelingImagesWidget(),
+                      RemodelingContactsWidget(key: _contactsWidgetKey),
+                      const RemodelingConfirmationWidget()
                     ],
                   ),
                 ),
@@ -235,12 +237,23 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                               : () {
                                   // The check here won't grey out the button
                                   if (_bottomButtonEnabled) {
-                                    if (_data.uiState.activeStep ==
-                                        _totalSteps - 1) {
-                                      // todo validate on step 3
-                                      // todo send order on step 4
-                                    } else {
-                                      _nextStep();
+                                    switch (_data.uiState.activeStep) {
+                                      case 2:
+                                        _contactsWidgetKey.currentState!
+                                                .validate()
+                                            ? _nextStep()
+                                            : null;
+                                        break;
+                                      case 3:
+                                        // todo send order to server
+                                        // todo clearly notify the user that the order has been received
+                                        break;
+                                      default:
+                                        _data.uiState.activeStep <
+                                                _totalSteps - 1
+                                            ? _nextStep()
+                                            : null;
+                                        break;
                                     }
                                   }
                                 });

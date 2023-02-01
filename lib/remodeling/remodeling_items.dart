@@ -74,9 +74,11 @@ class RemodelingItemHelper {
       RemodelingItem item, BuildContext context) {
     switch (item) {
       case RemodelingItem.painting:
-        return [];
+        return [ImagingInstruction('Put the instruction here',
+            const AssetImage('assets/images/ac_instruction_1.gif'))];
       case RemodelingItem.wallCoverings:
-        return [];
+        return [ImagingInstruction('Put the instruction here',
+            const AssetImage('assets/images/ac_instruction_1.gif'))];
       case RemodelingItem.ac:
         return [
           ImagingInstruction(S.of(context).imaging_instruction_ac_1,
@@ -87,15 +89,18 @@ class RemodelingItemHelper {
               const AssetImage('assets/images/ac_instruction_3.gif')),
         ];
       case RemodelingItem.removals:
-        return [];
+        return [ImagingInstruction('Put the instruction here',
+            const AssetImage('assets/images/ac_instruction_1.gif'))];
       case RemodelingItem.toiletReplacement:
-        return [];
+        return [ImagingInstruction('Put the instruction here',
+            const AssetImage('assets/images/ac_instruction_1.gif'))];
       default:
         return [];
     }
   }
 }
 
+/// The image size should be 500x500 px
 class ImagingInstruction {
   String description;
   AssetImage image;

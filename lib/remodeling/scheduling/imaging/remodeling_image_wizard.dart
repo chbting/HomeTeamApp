@@ -54,7 +54,6 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
   Widget build(BuildContext context) {
     _instructionList =
         RemodelingItemHelper.getImagingInstructions(widget.item, context);
-    assert(widget.initialIndex < _instructionList.length);
 
     return Scaffold(
         appBar: AppBar(

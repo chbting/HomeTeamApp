@@ -75,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm Scheduling"),
         "contact_number":
             MessageLookupByLibrary.simpleMessage("Contact Number"),
+        "contact_person":
+            MessageLookupByLibrary.simpleMessage("Contact Person"),
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
@@ -240,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),
         "take_photo": MessageLookupByLibrary.simpleMessage("Take photo"),
+        "tenant": MessageLookupByLibrary.simpleMessage("Tenant"),
         "tenant_info":
             MessageLookupByLibrary.simpleMessage("Tenant Information"),
         "tenant_paid_fees_colon":

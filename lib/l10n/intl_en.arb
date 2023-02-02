@@ -162,5 +162,7 @@
 	"photo_added": "Photos have been added",
 	"add_photos": "Add photos",
 	"take_photo": "Take photo",
-	"change_photo": "Change photo"
+	"change_photo": "Change photo",
+	"contact_person": "Contact Person",
+	"tenant": "Tenant"
 }

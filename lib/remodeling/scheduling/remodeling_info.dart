@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
+import 'package:tner_client/debug.dart';
 import 'package:tner_client/main.dart';
 import 'package:tner_client/utils/client_data.dart';
 
@@ -38,6 +40,6 @@ class RemodelingInfo {
   RemodelingInfo({required this.remodelingItems}) {
     final now = DateTime.now();
     datePicked = DateTime(now.year, now.month, now.day + firstAvailableDay);
-    debug ? client = getSampleClientData() : client = Client();
+    kDebugMode ? client = getSampleClientData() : client = Client();
   }
 }

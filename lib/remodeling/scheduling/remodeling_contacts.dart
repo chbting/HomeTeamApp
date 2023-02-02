@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/main.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/address_form.dart';
-import 'package:tner_client/ui/name_form.dart';
+import 'package:tner_client/ui/contact_person_form.dart';
 import 'package:tner_client/ui/theme.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
@@ -20,7 +18,8 @@ class RemodelingContactsWidget extends StatefulWidget {
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
   late RemodelingInfo _data;
-  final GlobalKey<NameFormState> _nameFormKey = GlobalKey<NameFormState>();
+  final GlobalKey<ContactPersonFormState> _contactPersonFormKey =
+      GlobalKey<ContactPersonFormState>();
   final GlobalKey<AddressFormState> _addressFormKey =
       GlobalKey<AddressFormState>();
 
@@ -39,44 +38,31 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
           bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
       primary: false,
       children: [
+        //todo close keyboard => remove cursor
         Card(
             child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
               child: Wrap(
-                children: [
-                  NameForm(key: _nameFormKey, client: _data.client),
-                  Container(height: 16.0),
-                  TextFormField(
-                      keyboardType: TextInputType.phone,
-                      textInputAction: TextInputAction.next,
-                      maxLength: 8,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).contact_number,
-                          helperText: S.of(context).hong_kong_number_only,
-                          icon: const Icon(Icons.phone)),
-                      onChanged: (value) {
-                        _data.client.phoneNumber = value;
-                      },
-                      validator: (value) {
-                        return (value == null || value.isEmpty)
-                            ? S.of(context).info_required
-                            : null;
-                      }),
-                  const Divider(thickness: 1.0),
-                  Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Text(
-                        S.of(context).remodeling_address,
-                        style: AppTheme.getCardTitleTextStyle(context),
-                      )),
-                  AddressForm(key: _addressFormKey, data: _data.client, autofill: debug)
-                ],
-              )),
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    S.of(context).contact_person,
+                    style: AppTheme.getCardTitleTextStyle(context),
+                  )),
+              ContactPersonForm(
+                  key: _contactPersonFormKey, client: _data.client),
+              const Divider(thickness: 1.0),
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    S.of(context).remodeling_address,
+                    style: AppTheme.getCardTitleTextStyle(context),
+                  )),
+              AddressForm(key: _addressFormKey, data: _data.client)
+            ],
+          )),
         ))
       ],
     );
@@ -86,8 +72,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     // note: In "return form1.validate() && form2.validate();", the second
     // statement won't execute if the first return false, therefore validate()
     // must be called separately
-    bool nameFormValidated = _nameFormKey.currentState!.validate();
+    bool contactPersonFormValidated =
+        _contactPersonFormKey.currentState!.validate();
     bool addressFormValidated = _addressFormKey.currentState!.validate();
-    return nameFormValidated && addressFormValidated;
+    return contactPersonFormValidated && addressFormValidated;
   }
 }

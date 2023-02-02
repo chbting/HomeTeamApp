@@ -1679,6 +1679,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Contact Person`
+  String get contact_person {
+    return Intl.message(
+      'Contact Person',
+      name: 'contact_person',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tenant`
+  String get tenant {
+    return Intl.message(
+      'Tenant',
+      name: 'tenant',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

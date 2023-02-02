@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_contract": MessageLookupByLibrary.simpleMessage(""),
         "confirm_remodeling": MessageLookupByLibrary.simpleMessage("确认预约"),
         "contact_number": MessageLookupByLibrary.simpleMessage("联络电话"),
+        "contact_person": MessageLookupByLibrary.simpleMessage("联络人"),
         "contract_status": MessageLookupByLibrary.simpleMessage("租约进度"),
         "count": MessageLookupByLibrary.simpleMessage("数量"),
         "darkMode": MessageLookupByLibrary.simpleMessage("深色模式"),
@@ -201,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
         "take_photo": MessageLookupByLibrary.simpleMessage("拍照"),
+        "tenant": MessageLookupByLibrary.simpleMessage("租客"),
         "tenant_info": MessageLookupByLibrary.simpleMessage("租客资料"),
         "tenant_paid_fees_colon":
             MessageLookupByLibrary.simpleMessage("租客负担费用︰"),

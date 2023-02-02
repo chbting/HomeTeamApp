@@ -165,5 +165,7 @@
 	"photo_added": "照片已加入",
 	"add_photos": "加入照片",
 	"take_photo": "拍照",
-	"change_photo": "更改照片"
+	"change_photo": "更改照片",
+	"contact_person": "聯絡人",
+	"tenant": "租客"
 }

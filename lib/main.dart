@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -16,18 +17,17 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
 
+    debugPrint('debug mode:$kDebugMode');
   runApp(ChangeNotifierProvider.value(
-      value: SharedPreferencesHelper.changeNotifier,
-      child: const App()));
+      value: SharedPreferencesHelper.changeNotifier, child: const App()));
 }
-
-bool debug = true; // TODO for debugging
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // debugPrint('debug mode:$kDebugMode');
     // TODO check to see if orientation works on ipad
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Consumer<SharedPreferencesChangedNotifier>(

@@ -3,11 +3,9 @@ import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/utils/client_data.dart';
 
 class AddressForm extends StatefulWidget {
-  const AddressForm({Key? key, required this.data, required this.autofill})
-      : super(key: key);
+  const AddressForm({Key? key, required this.data}) : super(key: key);
 
   final Client data;
-  final bool autofill;
 
   @override
   State<StatefulWidget> createState() => AddressFormState();
@@ -52,8 +50,9 @@ class AddressFormState extends State<AddressForm> {
           runSpacing: 16.0,
           children: [
             TextFormField(
-              // todo autocomplete with the gov address api
+              initialValue: widget.data.addressLine1 ?? '',
               keyboardType: TextInputType.text,
+              // todo autocomplete with the gov address api
               textInputAction: TextInputAction.next,
               focusNode: _addressLine1FieldFocus,
               decoration: InputDecoration(
@@ -73,6 +72,7 @@ class AddressFormState extends State<AddressForm> {
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: TextFormField(
+                  initialValue: widget.data.addressLine2 ?? '',
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   focusNode: _addressLine2FieldFocus,
@@ -97,6 +97,7 @@ class AddressFormState extends State<AddressForm> {
                 children: [
                   Expanded(
                     child: TextFormField(
+                        initialValue: widget.data.district ?? '',
                         keyboardType: TextInputType.text,
                         focusNode: _districtFieldFocus,
                         decoration: InputDecoration(
@@ -117,7 +118,7 @@ class AddressFormState extends State<AddressForm> {
                     child: DropdownButton<String>(
                       hint: Text(S.of(context).region),
                       isExpanded: true,
-                      value: widget.data.region,
+                      value: widget.data.region, //todo validate
                       onChanged: (String? newValue) {
                         setState(() {
                           widget.data.region = newValue!;

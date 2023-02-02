@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tner_client/utils/client_data.dart';
 import 'package:tner_client/generated/l10n.dart';
 
-class NameForm extends StatefulWidget {
-  const NameForm({Key? key, required this.client}) : super(key: key);
+class ContactPersonForm extends StatefulWidget {
+  const ContactPersonForm({Key? key, required this.client}) : super(key: key);
 
   final Client client;
 
   @override
-  State<StatefulWidget> createState() => NameFormState();
+  State<StatefulWidget> createState() => ContactPersonFormState();
 }
 
-class NameFormState extends State<NameForm> {
+class ContactPersonFormState extends State<ContactPersonForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FocusNode _lastNameFieldFocus = FocusNode();
   final FocusNode _firstNameFieldFocus = FocusNode();
@@ -60,6 +61,7 @@ class NameFormState extends State<NameForm> {
                 ),
                 Expanded(
                   child: TextFormField(
+                      initialValue: widget.client.lastName ?? '',
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.done,
                       focusNode: _lastNameFieldFocus,
@@ -77,7 +79,7 @@ class NameFormState extends State<NameForm> {
                       }),
                 ),
                 Container(width: 16.0),
-                Expanded(
+                Expanded(// todo validate
                   child: DropdownButton<String>(
                     hint: Text(S.of(context).title),
                     isExpanded: true,
@@ -105,6 +107,7 @@ class NameFormState extends State<NameForm> {
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: TextFormField(
+                  initialValue: widget.client.firstName ?? '',
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   focusNode: _firstNameFieldFocus,
@@ -120,7 +123,28 @@ class NameFormState extends State<NameForm> {
                         ? S.of(context).info_required
                         : null;
                   }),
-            )
+            ),
+            TextFormField(
+                initialValue: widget.client.phoneNumber,
+                keyboardType: TextInputType.phone,
+                textInputAction: TextInputAction.next,
+                maxLength: 8,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: S.of(context).contact_number,
+                    helperText: S.of(context).hong_kong_number_only,
+                    icon: const Icon(Icons.phone)),
+                onChanged: (value) {
+                  widget.client.phoneNumber = value;
+                },
+                validator: (value) {
+                  return (value == null || value.isEmpty || value.length < 8)
+                      ? S.of(context).info_required
+                      : null;
+                }),
           ],
         ));
   }

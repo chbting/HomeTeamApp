@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
 import 'package:tner_client/properties/rent/contract_offer_data.dart';
 import 'package:tner_client/ui/address_form.dart';
-import 'package:tner_client/ui/name_form.dart';
+import 'package:tner_client/ui/contact_person_form.dart';
 import 'package:tner_client/ui/theme.dart';
 
 class TenantInformationScreen extends StatefulWidget {
@@ -19,7 +18,8 @@ class TenantInformationScreen extends StatefulWidget {
 
 class TenantInformationScreenState extends State<TenantInformationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<NameFormState> _nameFormKey = GlobalKey<NameFormState>();
+  final GlobalKey<ContactPersonFormState> _contactPersonFormKey =
+      GlobalKey<ContactPersonFormState>();
   final GlobalKey<AddressFormState> _addressFormKey =
       GlobalKey<AddressFormState>();
 
@@ -41,7 +41,15 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                 key: _formKey,
                 child: Wrap(
                   children: [
-                    NameForm(key: _nameFormKey, client: widget.offer.client),
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(
+                          S.of(context).tenant,
+                          style: AppTheme.getCardTitleTextStyle(context),
+                        )),
+                    ContactPersonForm(
+                        key: _contactPersonFormKey,
+                        client: widget.offer.client),
                     Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.text,
@@ -60,27 +68,6 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                           return null;
                         }),
                     Container(height: 16.0),
-                    TextFormField(
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.next,
-                        maxLength: 8,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: S.of(context).contact_number,
-                            helperText: S.of(context).hong_kong_number_only,
-                            icon: const Icon(Icons.phone)),
-                        onChanged: (value) {
-                          widget.offer.client.phoneNumber = value;
-                        },
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          return (value == null || value.isEmpty)
-                              ? S.of(context).info_required
-                              : null;
-                        }),
                     const Divider(thickness: 1.0),
                     Padding(
                         padding: const EdgeInsets.only(bottom: 16.0),
@@ -98,9 +85,12 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
   bool validate() {
     // note: In "return form1.validate() && form2.validate();", the second
     // statement won't execute if the first return false
-    bool nameFormValidated = _nameFormKey.currentState!.validate();
-    bool currentFormValidated = _formKey.currentState!.validate();
+    bool contactPersonFormValidated =
+        _contactPersonFormKey.currentState!.validate();
+    bool tenantFormValidated = _formKey.currentState!.validate(); // Validate ID
     bool addressFormValidated = _addressFormKey.currentState!.validate();
-    return nameFormValidated && currentFormValidated && addressFormValidated;
+    return contactPersonFormValidated &&
+        tenantFormValidated &&
+        addressFormValidated;
   }
 }

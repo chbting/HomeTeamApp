@@ -56,7 +56,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       indicatorColor: colorScheme.primary,
-      toggleableActiveColor: colorScheme.primary,
+      //toggleableActiveColor: colorScheme.primary,
       colorScheme: colorScheme,
     );
   }
@@ -67,30 +67,27 @@ class AppTheme {
         scaffoldBackgroundColor: darkThemeBackground,
         // override
         indicatorColor: darkThemeAccent,
-        // todo  indicatorColor ??= accentColor == primaryColor ? Colors.white : accentColor;
-        // As defined in material design
-        errorColor: const Color(0xFFCF6679),
-        // TabBar & custom checkbox in remodelling selections
-        toggleableActiveColor: darkThemeAccent,
+        // TabBar & custom checkbox in remodeling selections
+        // toggleableActiveColor: darkThemeAccent,
         // Flutter checkbox
         checkboxTheme: ThemeData.dark()
             .checkboxTheme
             .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
-        // Checkbox & Switch
-        // In dark mode, the accentColor setting has no effect because it is forced to be Colors.tealAccent[200]
-        // same as toggleableActiveColor and must be manually overridden
-        colorScheme: ColorScheme.fromSwatch(
-                primarySwatch: customLightBlue,
-                //accentColor: darkThemeAccent,
-                brightness: Brightness.dark)
-            .copyWith(
-                secondary: darkThemeAccent, tertiary: Colors.lightBlueAccent),
         appBarTheme: ThemeData.dark()
             .appBarTheme
             .copyWith(backgroundColor: ThemeData.dark().canvasColor),
         snackBarTheme: ThemeData.dark()
             .snackBarTheme
-            .copyWith(actionTextColor: Colors.blue));
+            .copyWith(actionTextColor: Colors.blue),
+        colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: customLightBlue,
+                //accentColor: darkThemeAccent,
+                brightness: Brightness.dark)
+            .copyWith(
+                secondary: darkThemeAccent,
+                tertiary: Colors.lightBlueAccent,
+                // As defined in material design
+                error: const Color(0xFFCF6679)));
   }
 
   static ThemeData getLightTheme() {
@@ -121,19 +118,19 @@ class AppTheme {
   static TextStyle getListTileBodyTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .bodyText2!
-          .copyWith(color: Theme.of(context).textTheme.caption!.color);
+          .bodyMedium!
+          .copyWith(color: Theme.of(context).textTheme.bodySmall!.color);
 
   /// Same style as ListTile subtitle text (unselected)
   static TextStyle? getCardTitleTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .bodyText2!
-          .copyWith(color: Theme.of(context).textTheme.caption!.color);
+          .bodyMedium!
+          .copyWith(color: Theme.of(context).textTheme.bodySmall!.color);
 
   /// Same style (subtitle1) as ListTileStyle.list
   static TextStyle? getCardBodyTextStyle(BuildContext context) =>
-      Theme.of(context).textTheme.subtitle1;
+      Theme.of(context).textTheme.titleMedium;
 
   /// Copied from input_decorator.dart _getIconColor(ThemeData themeData)
   static Color getTextFieldIconColor(BuildContext context) =>
@@ -143,28 +140,28 @@ class AppTheme {
 
   /// Specifically for the rent text in PropertyListTile
   static TextStyle? getRentTextStyle(BuildContext context) =>
-      Theme.of(context).textTheme.subtitle1;
+      Theme.of(context).textTheme.titleMedium;
 
   static TextStyle? getHeadline6TextStyle(BuildContext context) =>
-      Theme.of(context).textTheme.headline6;
+      Theme.of(context).textTheme.titleLarge;
 
   static TextStyle? getInkWellButtonTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .button!
+          .labelLarge!
           .copyWith(color: getTertiaryColor(context));
 
   static TextStyle? getStepTitleTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .subtitle1!
+          .titleMedium!
           .copyWith(color: Theme.of(context).colorScheme.secondary);
 
   static TextStyle? getStepSubtitleTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme
-          .subtitle1!
-          .copyWith(color: Theme.of(context).textTheme.caption!.color);
+          .titleMedium!
+          .copyWith(color: Theme.of(context).textTheme.bodySmall!.color);
 
   static Color? getPrimaryColor(BuildContext context) =>
       Theme.of(context).colorScheme.primary;

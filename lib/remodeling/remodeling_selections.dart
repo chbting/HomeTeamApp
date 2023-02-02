@@ -95,7 +95,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                         _itemList[index].type, context)),
                     trailing: _selectionMap[_itemList[index]]!
                         ? Icon(Icons.check_circle,
-                            color: Theme.of(context).toggleableActiveColor)
+                            color: Theme.of(context).colorScheme.secondary)
                         : const Icon(Icons.check_circle_outline),
                     onTap: () {
                       setState(() {

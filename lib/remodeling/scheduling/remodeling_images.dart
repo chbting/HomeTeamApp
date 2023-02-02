@@ -77,7 +77,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
               trailing: pictureRequired && imageList == null
                   ? const Icon(Icons.add_circle)
                   : Icon(Icons.check_circle,
-                      color: Theme.of(context).toggleableActiveColor),
+                      color: Theme.of(context).colorScheme.secondary),
               //todo deprecated item
               onTap: pictureRequired && imageList == null
                   ? () => _openImageWizard(context, item)

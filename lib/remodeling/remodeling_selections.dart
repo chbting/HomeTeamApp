@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 
@@ -18,15 +18,14 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
-  //final _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<RemodelingItem> _itemList = [
-    RemodelingItem.painting,
-    RemodelingItem.wallCoverings,
-    RemodelingItem.ac,
-    RemodelingItem.removals,
-    RemodelingItem.suspendedCeiling,
-    RemodelingItem.toiletReplacement,
-    RemodelingItem.pestControl
+    RemodelingPainting(),
+    RemodelingWallCoverings(),
+    RemodelingAC(),
+    RemodelingRemovals(),
+    RemodelingSuspendedCeiling(),
+    RemodelingToiletReplacement(),
+    RemodelingPestControl()
   ];
   final Map<RemodelingItem, bool> _selectionMap = {};
 
@@ -49,7 +48,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
       key: _scaffoldMessengerKey,
       child: Scaffold(
           floatingActionButton: FloatingActionButton.extended(
-              heroTag: 'remodelling_selections_fab',
+              heroTag: 'remodeling_selections_fab',
               icon: const Icon(Icons.schedule),
               label: Text(S.of(context).schedule),
               onPressed: () {
@@ -61,7 +60,7 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                     }
                   });
 
-                  var info = RemodelingInfo(remodelingItems: remodelingItems);
+                  var info = RemodelingOrder(remodelingItems: remodelingItems);
                   var uiState = RemodelingSchedulerUIState(
                       showBottomButtons: ValueNotifier(
                           remodelingItems.length == 1 ? true : false));
@@ -91,9 +90,9 @@ class RemodelingSelectionsScreenState extends State<RemodelingSelectionsScreen>
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 4.0, horizontal: 16.0),
                     leading: Icon(
-                        RemodelingItemHelper.getIconData(_itemList[index])),
-                    title: Text(RemodelingItemHelper.getItemName(
-                        _itemList[index], context)),
+                        RemodelingTypeHelper.getIconData(_itemList[index].type)),
+                    title: Text(RemodelingTypeHelper.getItemName(
+                        _itemList[index].type, context)),
                     trailing: _selectionMap[_itemList[index]]!
                         ? Icon(Icons.check_circle,
                             color: Theme.of(context).toggleableActiveColor)

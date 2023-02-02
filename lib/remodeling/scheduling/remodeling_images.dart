@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
 import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_viewer.dart';
 import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_wizard.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
@@ -33,7 +33,8 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
         itemCount: info.remodelingItems.length,
         itemBuilder: (context, index) {
           var item = info.remodelingItems[index];
-          var pictureRequired = RemodelingItemHelper.isPictureRequired(item);
+          var pictureRequired =
+              RemodelingTypeHelper.isPictureRequired(item.type);
           var imageList = info.imageMap[item];
           return Card(
             child: ListTile(
@@ -42,8 +43,8 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
               leading: SizedBox(
                   // Explicitly center the icon only when there are images
                   height: imageList == null ? double.infinity : 0.0,
-                  child: Icon(RemodelingItemHelper.getIconData(item))),
-              title: Text(RemodelingItemHelper.getItemName(item, context)),
+                  child: Icon(RemodelingTypeHelper.getIconData(item.type))),
+              title: Text(RemodelingTypeHelper.getItemName(item.type, context)),
               subtitle: pictureRequired
                   ? imageList == null
                       ? Text(S.of(context).photo_required,
@@ -77,6 +78,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                   ? const Icon(Icons.add_circle)
                   : Icon(Icons.check_circle,
                       color: Theme.of(context).toggleableActiveColor),
+              //todo deprecated item
               onTap: pictureRequired && imageList == null
                   ? () => _openImageWizard(context, item)
                   : null,
@@ -88,7 +90,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
   void _openImageWizard(BuildContext context, RemodelingItem item) {
     Navigator.of(context)
         .push(MaterialPageRoute(
-            builder: (context) => RemodelingImageWizard(item: item)))
+            builder: (context) => RemodelingImageWizard(type: item.type)))
         .then((imageList) {
       if (imageList != null) {
         setState(() {
@@ -104,7 +106,7 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (context) => RemodelingImageWizard(
-                item: item,
+                type: item.type,
                 imageList: imageList,
                 initialIndex: initialIndex,
                 retake: true)))
@@ -131,7 +133,8 @@ class RemodelingImagesWidgetState extends State<RemodelingImagesWidget> {
                 fit: BoxFit.cover,
                 child: InkWell(onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return RemodelingImageViewer(heroTag: heroTag, image: image);
+                    return RemodelingImageViewer(
+                        heroTag: heroTag, image: image);
                   })).then((retake) {
                     if (retake != null) {
                       _openImageWizardForRetake(

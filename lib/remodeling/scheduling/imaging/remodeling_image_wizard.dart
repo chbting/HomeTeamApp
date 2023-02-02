@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_items.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
 import 'package:tner_client/ui/custom_im_stepper/first_stepper/number_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/ui/two_button_bar.dart';
@@ -14,13 +14,13 @@ import 'package:tner_client/utils/file_helper.dart';
 class RemodelingImageWizard extends StatefulWidget {
   const RemodelingImageWizard(
       {Key? key,
-      required this.item,
+      required this.type,
       this.imageList,
       this.initialIndex = 0,
       this.retake = false})
       : super(key: key);
 
-  final RemodelingItem item;
+  final RemodelingType type;
   final List<File>? imageList;
   final int initialIndex;
   final bool retake;
@@ -53,7 +53,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
   @override
   Widget build(BuildContext context) {
     _instructionList =
-        RemodelingItemHelper.getImagingInstructions(widget.item, context);
+        RemodelingTypeHelper.getImagingInstructions(widget.type, context);
 
     return Scaffold(
         appBar: AppBar(

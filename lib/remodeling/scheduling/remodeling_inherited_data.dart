@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
 
 class RemodelingInheritedData extends InheritedWidget {
   const RemodelingInheritedData(
@@ -10,7 +10,7 @@ class RemodelingInheritedData extends InheritedWidget {
       required this.uiState})
       : super(key: key, child: child);
 
-  final RemodelingInfo info;
+  final RemodelingOrder info;
   final RemodelingSchedulerUIState uiState;
 
   static RemodelingInheritedData? of(BuildContext context) =>
@@ -31,7 +31,7 @@ class RemodelingInheritedData extends InheritedWidget {
       uiState.rightButtonEnabled.value = true;
     } else {
       for (var item in info.remodelingItems) {
-        if (RemodelingItemHelper.isPictureRequired(item)) {
+        if (RemodelingTypeHelper.isPictureRequired(item.type)) {
           if (info.imageMap[item] == null) {
             uiState.rightButtonEnabled.value = false;
             return;

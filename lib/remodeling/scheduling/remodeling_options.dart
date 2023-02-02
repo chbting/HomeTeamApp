@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_items.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/custom_stepper.dart' as custom;
@@ -18,7 +18,7 @@ class RemodelingOptionsWidget extends StatefulWidget {
 
 class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     with AutomaticKeepAliveClientMixin {
-  late RemodelingInfo _data;
+  late RemodelingOrder _data;
   int _activeOption = 0;
 
   // Maintain the stepper position even after moved to the next step
@@ -104,7 +104,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getSingleOptionWidget(RemodelingItem item, BuildContext context) {
-    String title = RemodelingItemHelper.getItemName(item, context);
+    String title = RemodelingTypeHelper.getItemName(item.type, context);
     return SingleChildScrollView(
         padding: const EdgeInsets.only(
             left: 12.0,
@@ -128,7 +128,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   custom.Step _getOptionStep(RemodelingItem item, BuildContext context) {
-    String title = RemodelingItemHelper.getItemName(item, context);
+    String title = RemodelingTypeHelper.getItemName(item.type, context);
     return custom.Step(
         title: Text(title, style: _getOptionTitleTextStyle()),
         content: Card(
@@ -138,25 +138,26 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
   }
 
   Widget _getLayoutByRemodelingItem(RemodelingItem item) {
-    switch (item) {
-      case RemodelingItem.painting:
-        return _getPaintingCardLayout();
-      case RemodelingItem.wallCoverings:
-        return _getWallCoveringsCardLayout();
-      case RemodelingItem.ac:
-        return _getAcCardLayout();
-      case RemodelingItem.removals:
+    switch (item.type) {
+      case RemodelingType.painting:
+        return _getPaintingCardLayout(item);
+      case RemodelingType.wallCoverings:
+        return _getWallCoveringsCardLayout(item);
+      case RemodelingType.ac:
+        return _getAcCardLayout(item);
+      case RemodelingType.removals:
         return _getRemovalsCardLayout();
-      case RemodelingItem.suspendedCeiling:
+      case RemodelingType.suspendedCeiling:
         return _getSuspendedCeilingCardLayout();
-      case RemodelingItem.toiletReplacement:
+      case RemodelingType.toiletReplacement:
         return _getToiletReplacementCardLayout();
-      case RemodelingItem.pestControl:
+      case RemodelingType.pestControl:
         return _getPestControlCardLayout();
     }
   }
 
-  Widget _getPaintingCardLayout() {
+  Widget _getPaintingCardLayout(RemodelingItem item) {
+    item as RemodelingPainting;
     return Wrap(children: [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -170,8 +171,9 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onChanged: (value) {
             setState(() {
               value.isEmpty
-                  ? _data.paintArea = null
-                  : _data.paintArea = int.parse(value);
+                  ? item.paintArea = 0
+                  : item.paintArea = int.parse(
+                      value); //todo see if the value of the original object got changed
             });
           },
         ),
@@ -179,29 +181,32 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       RadioListTile(
         title: Text(S.of(context).scrape_old_paint_yes),
         value: true,
-        groupValue: _data.scrapeOldPaint,
+        groupValue: item.scrapeOldPaint,
         onChanged: (bool? value) {
           setState(() {
-            _data.scrapeOldPaint = true;
+            item.scrapeOldPaint = true;
           });
         },
       ),
       RadioListTile(
         title: Text(S.of(context).scrape_old_paint_no),
         value: false,
-        groupValue: _data.scrapeOldPaint,
+        groupValue: item.scrapeOldPaint,
         onChanged: (bool? value) {
           setState(() {
-            _data.scrapeOldPaint = false;
+            item.scrapeOldPaint = false;
           });
         },
       ),
-      _getEstimationWidget(RemodelingPricing.getPaintingEstimate(
-          _data.paintArea, _data.scrapeOldPaint))
+      _getEstimationWidget(RemodelingPricing.getEstimate(
+        RemodelingPainting(
+            paintArea: item.paintArea, scrapeOldPaint: item.scrapeOldPaint),
+      ))
     ]);
   }
 
-  Widget _getWallCoveringsCardLayout() {
+  Widget _getWallCoveringsCardLayout(RemodelingItem item) {
+    item as RemodelingWallCoverings;
     return Wrap(children: [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -214,19 +219,18 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           ),
           onChanged: (value) {
             setState(() {
-              value.isEmpty
-                  ? _data.wallCoveringsArea = null
-                  : _data.wallCoveringsArea = int.parse(value);
+              value.isEmpty ? item.area = 0 : item.area = int.parse(value);
             });
           },
         ),
       ),
       _getEstimationWidget(
-          RemodelingPricing.getWallCoveringsEstimate(_data.wallCoveringsArea))
+          RemodelingPricing.getEstimate(RemodelingWallCoverings()))
     ]);
   }
 
-  Widget _getAcCardLayout() {
+  Widget _getAcCardLayout(RemodelingItem item) {
+    item as RemodelingAC;
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Padding(
         // todo types and count
@@ -241,13 +245,13 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           onChanged: (value) {
             setState(() {
               value.isEmpty
-                  ? _data.acCount = null
-                  : _data.acCount = int.parse(value);
+                  ? item.acCount = null
+                  : item.acCount = int.parse(value);
             });
           },
         ),
       ),
-      _getEstimationWidget(RemodelingPricing.getAcEstimate())
+      _getEstimationWidget(RemodelingPricing.getEstimate(RemodelingAC()))
     ]);
   }
 
@@ -275,13 +279,13 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(S.of(context).estimate,
-                style: Theme.of(context).textTheme.subtitle1),
+                style: Theme.of(context).textTheme.titleMedium),
             Text(formatPrice(price),
-                style: Theme.of(context).textTheme.subtitle1),
+                style: Theme.of(context).textTheme.titleMedium),
           ],
         ));
   }
 
   TextStyle _getOptionTitleTextStyle() =>
-      Theme.of(context).textTheme.subtitle1!;
+      Theme.of(context).textTheme.titleMedium!;
 }

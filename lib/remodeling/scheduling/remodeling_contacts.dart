@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_info.dart';
+import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/address_form.dart';
@@ -17,7 +17,7 @@ class RemodelingContactsWidget extends StatefulWidget {
 
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
-  late RemodelingInfo _data;
+  late RemodelingOrder _data;
   final GlobalKey<ContactPersonFormState> _contactPersonFormKey =
       GlobalKey<ContactPersonFormState>();
   final GlobalKey<AddressFormState> _addressFormKey =
@@ -38,7 +38,6 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
           bottom: RemodelingScheduler.bottomButtonContainerHeight - 4.0),
       primary: false,
       children: [
-        //todo close keyboard => remove cursor
         Card(
             child: Padding(
           padding: const EdgeInsets.all(16.0),

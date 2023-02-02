@@ -1,9 +1,31 @@
 import 'package:intl/intl.dart';
+import 'package:tner_client/remodeling/remodeling_types.dart';
 
 class RemodelingPricing {
-  static int? getPaintingEstimate(int? area, bool? scrapeOldPaint) {
+  static int getEstimate(RemodelingItem item) {
+    switch (item.type) {
+      case RemodelingType.painting:
+        item as RemodelingPainting;
+        return _getPaintingEstimate(item.paintArea, item.scrapeOldPaint);
+      case RemodelingType.wallCoverings:
+        item as RemodelingWallCoverings;
+        return _getWallCoveringsEstimate(item.area);
+      case RemodelingType.ac:
+        return _getAcEstimate();
+      case RemodelingType.removals:
+        return -1;
+      case RemodelingType.suspendedCeiling:
+        return -1;
+      case RemodelingType.toiletReplacement:
+        return -1;
+      case RemodelingType.pestControl:
+        return -1;
+    }
+  }
+
+  static int _getPaintingEstimate(int? area, bool? scrapeOldPaint) {
     if (area == null || scrapeOldPaint == null) {
-      return null;
+      return 0; // todo check
     } else {
       if (scrapeOldPaint) {
         if (area < 500) {
@@ -36,18 +58,17 @@ class RemodelingPricing {
     return -1; // todo
   }
 
-  // TODO
-  static int? getWallCoveringsEstimate(int? area) {
+  static int _getWallCoveringsEstimate(int? area) {
     if (area == null) {
-      return null;
+      return 0; //todo check
     } else {
-      return 100 * area;
+      return 100 * area; //TODO correct pricing
     }
   }
 
   // TODO
-  static int? getAcEstimate() {
-    return 1;
+  static int _getAcEstimate() {
+    return -1;
   }
 }
 

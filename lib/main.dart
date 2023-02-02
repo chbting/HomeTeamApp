@@ -17,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.ensureInitialized();
 
-    debugPrint('debug mode:$kDebugMode');
   runApp(ChangeNotifierProvider.value(
       value: SharedPreferencesHelper.changeNotifier, child: const App()));
 }

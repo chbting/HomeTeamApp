@@ -38,7 +38,6 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
       for (var item in _data.remodelingItems) {
         stepList.add(_getOptionStep(item, context));
       }
-      // todo use form to validate
       // todo sometimes the nextStep button on scheduler is blocked (try to reproduce)
       return custom.Stepper(
           // Minus the internal paddings of the stepper
@@ -73,6 +72,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             }
           },
           onStepContinue: () {
+            //todo validate here
             if (_activeOption < stepList.length - 1) {
               setState(() {
                 FocusScope.of(context).unfocus();
@@ -161,7 +161,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
     return Wrap(children: [
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: TextField(
+        child: TextFormField(
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           decoration: InputDecoration(
@@ -172,8 +172,15 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             setState(() {
               value.isEmpty
                   ? item.paintArea = 0
-                  : item.paintArea = int.parse(value); //todo zero out total before user put in a value, validate
+                  : item.paintArea = int.parse(value);
             });
+          },
+          validator: (value) { //todo validate in both stepper and single option
+            if (value == null || value.isEmpty) {
+              return S.of(context).please_put_in_a_valid_amount;
+            } else {
+              return null;
+            }
           },
         ),
       ),

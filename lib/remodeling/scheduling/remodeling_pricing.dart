@@ -23,9 +23,9 @@ class RemodelingPricing {
     }
   }
 
-  static int _getPaintingEstimate(int? area, bool? scrapeOldPaint) {
-    if (area == null || scrapeOldPaint == null) {
-      return 0; // todo check
+  static int _getPaintingEstimate(int area, bool scrapeOldPaint) {
+    if (area == 0) {
+      return 0;
     } else {
       if (scrapeOldPaint) {
         if (area < 500) {
@@ -55,11 +55,11 @@ class RemodelingPricing {
         }
       }
     }
-    return -1; // todo
+    return -1; // todo for area = 800+
   }
 
-  static int _getWallCoveringsEstimate(int? area) {
-    if (area == null) {
+  static int _getWallCoveringsEstimate(int area) {
+    if (area == 0) {
       return 0; //todo check
     } else {
       return 100 * area; //TODO correct pricing

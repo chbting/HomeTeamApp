@@ -167,5 +167,6 @@
 	"take_photo": "拍照",
 	"change_photo": "更改照片",
 	"contact_person": "聯絡人",
-	"tenant": "租客"
+	"tenant": "租客",
+	"total": "總計"
 }

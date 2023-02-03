@@ -164,5 +164,6 @@
 	"take_photo": "Take photo",
 	"change_photo": "Change photo",
 	"contact_person": "Contact Person",
-	"tenant": "Tenant"
+	"tenant": "Tenant",
+	"total": "Total"
 }

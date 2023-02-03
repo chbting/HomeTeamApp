@@ -102,7 +102,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                             horizontal: 16.0, vertical: 8.0),
                         child: Text(
                           _instructionList[index].description,
-                          style: AppTheme.getHeadline6TextStyle(context),
+                          style: AppTheme.getTitleLargeTextStyle(context),
                         ),
                       ),
                       Padding(

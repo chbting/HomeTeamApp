@@ -33,8 +33,10 @@ class AppTheme {
 
       return _getDarkThemeWithColorScheme(colorScheme).copyWith(
           scaffoldBackgroundColor: darkThemeBackground,
-          errorColor: const Color(0xFFCF6679),
-          // As defined in material design
+          colorScheme: ThemeData.dark()
+              .colorScheme
+              .copyWith(error: const Color(0xFFCF6679)),
+          // Error color as defined in material design
           appBarTheme: ThemeData.dark()
               .appBarTheme
               .copyWith(backgroundColor: colorScheme.surface),
@@ -86,7 +88,7 @@ class AppTheme {
             .copyWith(
                 secondary: darkThemeAccent,
                 tertiary: Colors.lightBlueAccent,
-                // As defined in material design
+                // Error color as defined in material design
                 error: const Color(0xFFCF6679)));
   }
 
@@ -132,6 +134,10 @@ class AppTheme {
   static TextStyle? getCardBodyTextStyle(BuildContext context) =>
       Theme.of(context).textTheme.titleMedium;
 
+  /// For texts one level below CardBodyText
+  static TextStyle? getCardBodySubTextStyle(BuildContext context) =>
+      Theme.of(context).textTheme.titleSmall;
+
   /// Copied from input_decorator.dart _getIconColor(ThemeData themeData)
   static Color getTextFieldIconColor(BuildContext context) =>
       Theme.of(context).brightness == Brightness.dark
@@ -142,7 +148,7 @@ class AppTheme {
   static TextStyle? getRentTextStyle(BuildContext context) =>
       Theme.of(context).textTheme.titleMedium;
 
-  static TextStyle? getHeadline6TextStyle(BuildContext context) =>
+  static TextStyle? getTitleLargeTextStyle(BuildContext context) =>
       Theme.of(context).textTheme.titleLarge;
 
   static TextStyle? getInkWellButtonTextStyle(BuildContext context) =>

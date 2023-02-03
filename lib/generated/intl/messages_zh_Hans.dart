@@ -212,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time": MessageLookupByLibrary.simpleMessage("时间"),
         "title": MessageLookupByLibrary.simpleMessage("称谓"),
         "toilet_replacement": MessageLookupByLibrary.simpleMessage("坐厕更换"),
+        "total": MessageLookupByLibrary.simpleMessage("总计"),
         "traditional_chinese": MessageLookupByLibrary.simpleMessage("䌓體中文"),
         "undo": MessageLookupByLibrary.simpleMessage("还原"),
         "visited_properties": MessageLookupByLibrary.simpleMessage("已睇楼盘"),

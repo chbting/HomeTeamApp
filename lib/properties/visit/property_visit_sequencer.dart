@@ -52,7 +52,7 @@ class PropertyVisitSequencerWidgetState
           leading: const Icon(Icons.reorder),
           trailing: Text(
             '${widget.data.selectedPath.indexOf(property) + 1}',
-            style: AppTheme.getHeadline6TextStyle(context),
+            style: AppTheme.getTitleLargeTextStyle(context),
           ),
         );
       },

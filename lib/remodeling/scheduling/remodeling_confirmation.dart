@@ -29,8 +29,7 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               leading: const Icon(Icons.style),
               title: Text(S.of(context).remodeling_options,
                   style: AppTheme.getCardTitleTextStyle(context)),
-              subtitle: _getRemodelingOptionsBody(
-                  context, info)), // todo estimate summary
+              subtitle: _getRemodelingItems(context, info)),
         )),
         Card(
             child: Padding(
@@ -39,12 +38,14 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               leading: const Icon(Icons.location_pin),
               title: Text(S.of(context).remodeling_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
-              subtitle: Text(
-                  '${info.client.addressLine1}'
-                  '\n${info.client.addressLine2}'
-                  '\n${info.client.district}'
-                  '\n${info.client.region}',
-                  style: AppTheme.getCardBodyTextStyle(context))),
+              subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                      '${info.client.addressLine1}'
+                      '\n${info.client.addressLine2}'
+                      '\n${info.client.district}'
+                      '\n${info.client.region}',
+                      style: AppTheme.getCardBodyTextStyle(context)))),
         )),
         Card(
             child: Padding(
@@ -53,21 +54,25 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               leading: const Icon(Icons.contact_phone),
               title: Text(S.of(context).contact_person,
                   style: AppTheme.getCardTitleTextStyle(context)),
-              subtitle: Text(
-                  '${_getContactName(info)}'
-                  '\n${info.client.phoneNumber}',
-                  style: AppTheme.getCardBodyTextStyle(context))),
+              subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                      '${_getContactName(info)}'
+                      '\n${info.client.phoneNumber}',
+                      style: AppTheme.getCardBodyTextStyle(context)))),
         ))
       ],
     );
   }
 
-  Widget _getRemodelingOptionsBody(BuildContext context, RemodelingOrder info) {
-    // TODO include subtotal and total estimation
+  Widget _getRemodelingItems(BuildContext context, RemodelingOrder order) {
+    // TODO total estimation
     return ListView.builder(
+        padding: const EdgeInsets.only(top: 8.0),
         primary: false,
-        shrinkWrap: true, // Necessary as a nested ListView
-        itemCount: info.remodelingItems.length,
+        shrinkWrap: true,
+        // Necessary as a nested ListView
+        itemCount: order.remodelingItems.length,
         itemBuilder: (context, index) {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,19 +84,43 @@ class RemodelingConfirmationWidget extends StatelessWidget {
                       // Item Name
                       Text(
                           RemodelingTypeHelper.getItemName(
-                              info.remodelingItems[index].type, context),
+                              order.remodelingItems[index].type, context),
                           style: AppTheme.getCardBodyTextStyle(context)),
                       // Item estimate
                       Text(
-                          // todo get a general version, do switch
                           formatPrice(RemodelingPricing.getEstimate(
-                              info.remodelingItems[index])),
+                              order.remodelingItems[index])),
                           style: AppTheme.getCardBodyTextStyle(context))
                     ]),
-                _getRemodelingItemDetails(context, info.remodelingItems[index])
-                //todo spacing in between
+                _getRemodelingItemDetails(
+                    context, order.remodelingItems[index]),
+                index < order.remodelingItems.length - 1
+                    ? Container(height: 8.0)
+                    // Add spacings between remodeling items
+                    : _getTotalEstimation(context, order)
               ]);
         });
+  }
+
+  Widget _getTotalEstimation(BuildContext context, RemodelingOrder order) {
+    var total = 0;
+    for (var element in order.remodelingItems) {
+      total += RemodelingPricing.getEstimate(element);
+    }
+    return Column(
+      children: [
+        const Divider(thickness: 1.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(S.of(context).total,
+                style: AppTheme.getCardBodyTextStyle(context)),
+            Text(formatPrice(total),
+                style: AppTheme.getCardBodyTextStyle(context))
+          ],
+        )
+      ],
+    );
   }
 
   Widget _getRemodelingItemDetails(BuildContext context, RemodelingItem item) {
@@ -99,14 +128,14 @@ class RemodelingConfirmationWidget extends StatelessWidget {
       // todo add other remodeling types here
       case RemodelingType.painting:
         item as RemodelingPainting;
-        return Column(children: [
+        return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('- ${item.paintArea} ${S.of(context).sq_ft}',
-              style: AppTheme.getCardBodyTextStyle(context)),
+              style: AppTheme.getCardBodySubTextStyle(context)),
           Text(
               item.scrapeOldPaint
                   ? '- ${S.of(context).scrape_old_paint_yes}'
-                  : '- ${S.of(context).scrape_old_paint_no}', //todo why is it tabbed?
-              style: AppTheme.getCardBodyTextStyle(context)),
+                  : '- ${S.of(context).scrape_old_paint_no}',
+              style: AppTheme.getCardBodySubTextStyle(context)),
         ]);
       default:
         return Container();

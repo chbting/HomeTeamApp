@@ -255,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "toilet_replacement":
             MessageLookupByLibrary.simpleMessage("Toilet Replacement"),
+        "total": MessageLookupByLibrary.simpleMessage("Total"),
         "traditional_chinese": MessageLookupByLibrary.simpleMessage("䌓体中文"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "visited_properties":

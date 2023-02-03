@@ -172,8 +172,7 @@ class RemodelingOptionsWidgetState extends State<RemodelingOptionsWidget>
             setState(() {
               value.isEmpty
                   ? item.paintArea = 0
-                  : item.paintArea = int.parse(
-                      value); //todo see if the value of the original object got changed
+                  : item.paintArea = int.parse(value); //todo zero out total before user put in a value, validate
             });
           },
         ),

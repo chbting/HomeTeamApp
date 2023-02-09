@@ -1,6 +1,10 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
 import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
@@ -116,7 +120,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
               child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 8.0, horizontal: 16.0),
-                  child: Text(_getStepTitle(_data.uiState.activeStep),
+                  child: Text(_getStepTitle(context, _data.uiState.activeStep),
                       style: AppTheme.getStepTitleTextStyle(context))),
             ),
             // Bottom buttons
@@ -140,7 +144,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
     super.dispose();
   }
 
-  String _getStepTitle(int stepNumber) {
+  String _getStepTitle(BuildContext context, int stepNumber) {
     switch (stepNumber) {
       case 0:
         return S.of(context).remodeling_options;
@@ -246,10 +250,9 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                                             : null;
                                         break;
                                       case 3:
-                                        // todo send order to server
                                         // todo clearly notify the user that the order has been received
-                                        // todo remove temp images
                                         sendOrder();
+                                        // temp images are removed via dispose()
                                         break;
                                       default:
                                         _data.uiState.activeStep <
@@ -265,8 +268,25 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
             )));
   }
 
-  void sendOrder() {
-    final storage = FirebaseStorage.instance;
+  void sendOrder() async {
+    // 1. Send JSON order
 
+    // 2. Send order images to cloud
+    var files = await FileHelper.getSchedulerCacheFiles();
+    final storageRef = FirebaseStorage.instance.ref('remodeling_order');
+    Map<File, Reference> refMap = {};
+
+    for (var image in files) {
+      refMap[image] = storageRef.child(basename(image.path));
+    }
+
+    try {
+      refMap.forEach((image, reference) async {
+        debugPrint('Uploading $image to $reference');
+        await reference.putFile(image);
+      });
+    } on FirebaseException catch (e) {
+      debugPrint(e.toString()); //todo
+    }
   }
 }

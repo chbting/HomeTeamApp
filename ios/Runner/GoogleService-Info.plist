@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAplIum-t1zwZI_Dr0up_iWyTyFhxfsP3s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>345923835537</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tner.tnerClient</string>
+	<key>PROJECT_ID</key>
+	<string>tnerserver</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tnerserver.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:345923835537:ios:0d4ee2f2860dd45a3c9130</string>
+</dict>
+</plist>

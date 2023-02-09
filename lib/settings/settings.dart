@@ -80,12 +80,12 @@ class SettingsScreenState extends State<SettingsScreen> {
 String _localeStringToLanguage(String locale, BuildContext context) {
   switch (locale) {
     case 'en':
-      return S.of(context).english;
+      return 'English';
     case 'zh_Hant':
-      return S.of(context).traditional_chinese;
+      return '䌓體中文';
     case 'zh_Hans':
-      return S.of(context).simplified_chinese;
+      return '简体中文';
     default:
-      return 'unknown';
+      return 'English';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:tner_client/generated/l10n.dart';
@@ -247,6 +248,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                                       case 3:
                                         // todo send order to server
                                         // todo clearly notify the user that the order has been received
+                                        // todo remove temp images
+                                        sendOrder();
                                         break;
                                       default:
                                         _data.uiState.activeStep <
@@ -260,5 +263,10 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
                     })
               ],
             )));
+  }
+
+  void sendOrder() {
+    final storage = FirebaseStorage.instance;
+
   }
 }

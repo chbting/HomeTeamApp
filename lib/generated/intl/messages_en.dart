@@ -88,7 +88,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "district": MessageLookupByLibrary.simpleMessage("District"),
         "end_date": MessageLookupByLibrary.simpleMessage("End Date"),
-        "english": MessageLookupByLibrary.simpleMessage("English"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),
         "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
@@ -234,7 +233,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_the_contract":
             MessageLookupByLibrary.simpleMessage("Sign the Contract"),
         "signed": MessageLookupByLibrary.simpleMessage("Signed"),
-        "simplified_chinese": MessageLookupByLibrary.simpleMessage("简体中文"),
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
@@ -256,7 +254,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "toilet_replacement":
             MessageLookupByLibrary.simpleMessage("Toilet Replacement"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
-        "traditional_chinese": MessageLookupByLibrary.simpleMessage("䌓体中文"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),

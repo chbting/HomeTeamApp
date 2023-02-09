@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "345923835537",
+    "project_id": "tnerserver",
+    "storage_bucket": "tnerserver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345923835537:android:efa565fdb7dc43d73c9130",
+        "android_client_info": {
+          "package_name": "com.tner.tner_client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345923835537-angg2r4fbhmdk3mq8rovmq9jtruljht5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqipy3u1DzNCKIzFYoFAuV85cHEDOmaSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345923835537-angg2r4fbhmdk3mq8rovmq9jtruljht5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tner.tnerClient"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

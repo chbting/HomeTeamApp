@@ -50,36 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `English`
-  String get english {
-    return Intl.message(
-      'English',
-      name: 'english',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `䌓体中文`
-  String get traditional_chinese {
-    return Intl.message(
-      '䌓体中文',
-      name: 'traditional_chinese',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `简体中文`
-  String get simplified_chinese {
-    return Intl.message(
-      '简体中文',
-      name: 'simplified_chinese',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Remodeling`
   String get remodeling {
     return Intl.message(

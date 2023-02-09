@@ -92,7 +92,7 @@ class SharedPreferencesHelper {
       case 'cmn_CN':
         return S.of(context).mandarin;
       default:
-        return S.of(context).english;
+        return 'English';
     }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/remodeling/remodeling_types.dart';
 import 'package:tner_client/ui/custom_im_stepper/first_stepper/number_stepper.dart';
@@ -97,18 +98,20 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                     return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: Text(
-                          _instructionList[index].description,
-                          style: AppTheme.getTitleLargeTextStyle(context),
-                        ),
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Image(image: _instructionList[index].image)),
-                    ]);
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8.0),
+                            child: Text(
+                              _instructionList[index].description,
+                              style: AppTheme.getTitleLargeTextStyle(context),
+                            ),
+                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child:
+                                  Image(image: _instructionList[index].image)),
+                        ]);
                   },
                 ),
               ),
@@ -120,12 +123,12 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
                 leftButtonLabel: Text(S.of(context).select_from_gallery),
                 leftButtonIcon: const Icon(Icons.collections),
                 onLeftButtonPressed: () => _bottomButtonEnabled
-                    ? _getImageFromSource(ImageSource.gallery)
+                    ? _getImageFromSource(context, ImageSource.gallery)
                     : null,
                 rightButtonLabel: Text(S.of(context).take_photo),
                 rightButtonIcon: const Icon(Icons.camera_alt),
                 onRightButtonPressed: () => _bottomButtonEnabled
-                    ? _getImageFromSource(ImageSource.camera)
+                    ? _getImageFromSource(context, ImageSource.camera)
                     : null),
           )
         ]));
@@ -141,10 +144,18 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
         .whenComplete(() => _bottomButtonEnabled = true);
   }
 
-  void _getImageFromSource(ImageSource source) {
+  void _getImageFromSource(BuildContext context, ImageSource source) {
     _picker.pickImage(source: source).then((image) {
       if (image != null) {
-        FileHelper.moveToSchedulerCache(File(image.path)).then((newFile) {
+        // Standardize image names with enum type and step number
+        // todo multiple ac's
+        var imageName =
+            '${widget.type.name}_${_activeIndex + 1}${extension(image.path)}';
+        FileHelper.moveToCache(
+                file: File(image.path),
+                child: FileHelper.remodelingCache,
+                newFileName: imageName)
+            .then((newFile) {
           if (widget.retake) {
             _imageList.removeAt(widget.initialIndex);
             _imageList.insert(widget.initialIndex, newFile);

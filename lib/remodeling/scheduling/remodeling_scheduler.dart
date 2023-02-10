@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -140,7 +139,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
   @override
   void dispose() {
     //todo this may not run if user swipe close the app
-    FileHelper.clearSchedulerCache();
+    FileHelper.clearCache(child: FileHelper.remodelingCache);
     super.dispose();
   }
 
@@ -272,8 +271,13 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
     // 1. Send JSON order
 
     // 2. Send order images to cloud
-    var files = await FileHelper.getSchedulerCacheFiles();
-    final storageRef = FirebaseStorage.instance.ref('remodeling_order');
+    var files =
+        await FileHelper.getCacheFiles(child: FileHelper.remodelingCache);
+    // todo need to match the images to which remodeling pic
+
+    // remodeling_order_images/{uid}/{orderId}/
+    final storageRef =
+        FirebaseStorage.instance.ref('remodeling_order_images/dev');
     Map<File, Reference> refMap = {};
 
     for (var image in files) {
@@ -286,7 +290,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
         await reference.putFile(image);
       });
     } on FirebaseException catch (e) {
-      debugPrint(e.toString()); //todo
+      debugPrint(e.toString()); //todo notify user upload has failed
     }
   }
 }

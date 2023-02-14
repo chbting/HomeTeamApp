@@ -190,6 +190,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_from_gallery": MessageLookupByLibrary.simpleMessage("从相薄选取"),
         "settings": MessageLookupByLibrary.simpleMessage("设定"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("签署租约"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("登入"),
+        "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用电邮登入"),
+        "sign_in_with_google":
+            MessageLookupByLibrary.simpleMessage("使用Google登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時签署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在签署"),
         "sign_the_contract": MessageLookupByLibrary.simpleMessage("签署租约"),

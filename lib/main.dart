@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,7 +32,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // debugPrint('debug mode:$kDebugMode');
     // TODO check to see if orientation works on ipad
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Consumer<SharedPreferencesChangedNotifier>(

@@ -162,5 +162,8 @@
 	"change_photo": "Change photo",
 	"contact_person": "Contact Person",
 	"tenant": "Tenant",
-	"total": "Total"
+	"total": "Total",
+	"sign_in": "Sign in",
+	"sign_in_with_email": "Sign in with email",
+	"sign_in_with_google": "Sign in with Google"
 }

@@ -162,5 +162,8 @@
 	"change_photo": "更改照片",
 	"contact_person": "联络人",
 	"tenant": "租客",
-	"total": "总计"
+	"total": "总计",
+	"sign_in": "登入",
+	"sign_in_with_email": "使用电邮登入",
+	"sign_in_with_google": "使用Google登入"
 }

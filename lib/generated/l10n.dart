@@ -1679,6 +1679,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign in`
+  String get sign_in {
+    return Intl.message(
+      'Sign in',
+      name: 'sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with email`
+  String get sign_in_with_email {
+    return Intl.message(
+      'Sign in with email',
+      name: 'sign_in_with_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with Google`
+  String get sign_in_with_google {
+    return Intl.message(
+      'Sign in with Google',
+      name: 'sign_in_with_google',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

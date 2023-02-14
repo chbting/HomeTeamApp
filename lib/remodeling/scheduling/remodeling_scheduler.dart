@@ -286,7 +286,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
 
     try {
       refMap.forEach((image, reference) async {
-        debugPrint('Uploading $image to $reference');
+        debugPrint('Uploading $image to $reference'); //todo debug line
         await reference.putFile(image);
       });
     } on FirebaseException catch (e) {

@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
+import 'package:tner_client/sign_in.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
@@ -20,6 +22,20 @@ class SettingsScreenState extends State<SettingsScreen> {
       SharedPreferencesHelper.getLocale());
 
   @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      setState(() {
+        if (user == null) {
+          debugPrint('User is currently signed out!');
+        } else {
+          debugPrint('User is signed in!');
+        }
+      });
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     for (var element in _localeStringList) {
       _languageList.add(_localeStringToLanguage(element, context));
@@ -33,6 +49,28 @@ class SettingsScreenState extends State<SettingsScreen> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
+              InkWell(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      child: CircleAvatar(
+                          radius: 36.0,
+                          child: FirebaseAuth.instance.currentUser == null
+                              ? const Icon(Icons.person, size: 36.0)
+                              : null),
+                    ),
+                    Text(FirebaseAuth.instance.currentUser == null
+                        ? S.of(context).sign_in
+                        : FirebaseAuth.instance.currentUser!.displayName ?? '')
+                  ],
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const SignInWidget()));
+                },
+              ),
               SettingsUI.getSettingsTitle(
                   context, S.of(context).general_settings),
               SwitchListTile(

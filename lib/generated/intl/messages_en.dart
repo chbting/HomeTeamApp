@@ -228,6 +228,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select from Gallery"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "sign_in_with_email":
+            MessageLookupByLibrary.simpleMessage("Sign in with email"),
+        "sign_in_with_google":
+            MessageLookupByLibrary.simpleMessage("Sign in with Google"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
         "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
         "sign_the_contract":

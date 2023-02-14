@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
 import 'package:tner_client/sign_in.dart';
@@ -16,6 +17,8 @@ class SettingsScreen extends StatefulWidget {
 class SettingsScreenState extends State<SettingsScreen> {
   final List<String> _localeStringList = ['zh_Hant', 'zh_Hans', 'en'];
   final List<String> _languageList = [];
+  final _avatarRadius = 36.0;
+  final _horizontalPadding = 16.0;
 
   bool _darkMode = SharedPreferencesHelper.isDarkMode();
   String _localeString = SharedPreferencesHelper.localeToString(
@@ -37,6 +40,8 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    var photoURL = currentUser?.photoURL;
     for (var element in _localeStringList) {
       _languageList.add(_localeStringToLanguage(element, context));
     }
@@ -49,27 +54,49 @@ class SettingsScreenState extends State<SettingsScreen> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              InkWell(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: CircleAvatar(
-                          radius: 36.0,
-                          child: FirebaseAuth.instance.currentUser == null
-                              ? const Icon(Icons.person, size: 36.0)
-                              : null),
+              Stack(
+                alignment: AlignmentDirectional.centerStart,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _horizontalPadding, vertical: 8.0),
+                    child: CircleAvatar(
+                        radius: _avatarRadius,
+                        foregroundImage:
+                            photoURL == null ? null : NetworkImage(photoURL),
+                        child: currentUser == null && photoURL == null
+                            ? Icon(Icons.person, size: _avatarRadius)
+                            : null),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: (_avatarRadius + _horizontalPadding) * 2),
+                    child: Text(currentUser == null
+                        ? S.of(context).not_signed_in
+                        : currentUser.displayName ?? ''),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: _horizontalPadding),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: OutlinedButton(
+                          onPressed: () {
+                            currentUser == null
+                                ? Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const SignInWidget()))
+                                : _signOut();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              shape: const StadiumBorder()),
+                          child: Text(currentUser == null
+                              ? S.of(context).sign_in
+                              : S.of(context).sign_out)),
                     ),
-                    Text(FirebaseAuth.instance.currentUser == null
-                        ? S.of(context).sign_in
-                        : FirebaseAuth.instance.currentUser!.displayName ?? '')
-                  ],
-                ),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SignInWidget()));
-                },
+                  ),
+                ],
+              ),
+              const Divider(
+                thickness: 1,
               ),
               SettingsUI.getSettingsTitle(
                   context, S.of(context).general_settings),
@@ -113,6 +140,12 @@ class SettingsScreenState extends State<SettingsScreen> {
       ],
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
+}
+
+Future<void> _signOut() async {
+  GoogleSignIn googleSignIn = GoogleSignIn(); //todo this is google specific
+  await googleSignIn.disconnect();
+  await FirebaseAuth.instance.signOut();
 }
 
 String _localeStringToLanguage(String locale, BuildContext context) {

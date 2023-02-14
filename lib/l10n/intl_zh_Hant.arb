@@ -168,5 +168,10 @@
 	"total": "總計",
 	"sign_in": "登入",
 	"sign_in_with_email": "使用電郵登入",
-	"sign_in_with_google": "使用Google登入"
+	"sign_in_with_google": "使用Google登入",
+	"sign_in_with_facebook": "使用Facebook登入",
+	"sign_in_with_sms": "使用短信登入",
+	"msg_cannot_sign_in": "無法登入",
+	"sign_out": "登出",
+	"not_signed_in": "(未登入)"
 }

@@ -165,5 +165,10 @@
 	"total": "Total",
 	"sign_in": "Sign in",
 	"sign_in_with_email": "Sign in with email",
-	"sign_in_with_google": "Sign in with Google"
+	"sign_in_with_google": "Sign in with Google",
+	"sign_in_with_facebook": "Sign in with Facebook",
+	"sign_in_with_sms": "Sign in with SMS",
+	"msg_cannot_sign_in": "Cannot sign in",
+	"sign_out": "Sign out",
+	"not_signed_in": "(Not signed in)"
 }

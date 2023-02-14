@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms": MessageLookupByLibrary.simpleMessage("Ms."),
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("Cannot recognize speech"),
+        "msg_cannot_sign_in":
+            MessageLookupByLibrary.simpleMessage("Cannot sign in"),
         "msg_select_remodeling_item": MessageLookupByLibrary.simpleMessage(
             "Please select an remodeling item"),
         "msg_voice_search_unavailable":
@@ -149,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New Territories"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "next_option": MessageLookupByLibrary.simpleMessage("Next"),
+        "not_signed_in":
+            MessageLookupByLibrary.simpleMessage("(Not signed in)"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("No. of rooms"),
         "offered": MessageLookupByLibrary.simpleMessage("Offered"),
@@ -231,10 +235,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_in_with_email":
             MessageLookupByLibrary.simpleMessage("Sign in with email"),
+        "sign_in_with_facebook":
+            MessageLookupByLibrary.simpleMessage("Sign in with Facebook"),
         "sign_in_with_google":
             MessageLookupByLibrary.simpleMessage("Sign in with Google"),
+        "sign_in_with_sms":
+            MessageLookupByLibrary.simpleMessage("Sign in with SMS"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
         "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
+        "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),
         "sign_the_contract":
             MessageLookupByLibrary.simpleMessage("Sign the Contract"),
         "signed": MessageLookupByLibrary.simpleMessage("Signed"),

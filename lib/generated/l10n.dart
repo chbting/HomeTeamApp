@@ -1709,6 +1709,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign in with Facebook`
+  String get sign_in_with_facebook {
+    return Intl.message(
+      'Sign in with Facebook',
+      name: 'sign_in_with_facebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with SMS`
+  String get sign_in_with_sms {
+    return Intl.message(
+      'Sign in with SMS',
+      name: 'sign_in_with_sms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot sign in`
+  String get msg_cannot_sign_in {
+    return Intl.message(
+      'Cannot sign in',
+      name: 'msg_cannot_sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get sign_out {
+    return Intl.message(
+      'Sign out',
+      name: 'sign_out',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(Not signed in)`
+  String get not_signed_in {
+    return Intl.message(
+      '(Not signed in)',
+      name: 'not_signed_in',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

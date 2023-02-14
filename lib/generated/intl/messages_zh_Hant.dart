@@ -122,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ms": MessageLookupByLibrary.simpleMessage("女士"),
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("未能辨識語音"),
+        "msg_cannot_sign_in": MessageLookupByLibrary.simpleMessage("無法登入"),
         "msg_select_remodeling_item":
             MessageLookupByLibrary.simpleMessage("請選擇所需的裝修項目"),
         "msg_voice_search_unavailable":
@@ -131,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "new_territories": MessageLookupByLibrary.simpleMessage("新界"),
         "next": MessageLookupByLibrary.simpleMessage("下一步"),
         "next_option": MessageLookupByLibrary.simpleMessage("下一項"),
+        "not_signed_in": MessageLookupByLibrary.simpleMessage("(未登入)"),
         "notes": MessageLookupByLibrary.simpleMessage("備註"),
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("房間數"),
         "offered": MessageLookupByLibrary.simpleMessage("提出"),
@@ -192,10 +194,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),
         "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用電郵登入"),
+        "sign_in_with_facebook":
+            MessageLookupByLibrary.simpleMessage("使用Facebook登入"),
         "sign_in_with_google":
             MessageLookupByLibrary.simpleMessage("使用Google登入"),
+        "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在簽署"),
+        "sign_out": MessageLookupByLibrary.simpleMessage("登出"),
         "sign_the_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "signed": MessageLookupByLibrary.simpleMessage("已簽署"),
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),

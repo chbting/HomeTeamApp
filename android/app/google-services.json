@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "345923835537-angg2r4fbhmdk3mq8rovmq9jtruljht5.apps.googleusercontent.com",
+          "client_id": "345923835537-r6ppq4jeqcvad91h2rfqalko692kfh05.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tner.tner_client",
+            "certificate_hash": "3055b664a1e945fc0dccef7b2238161e72bd78f9"
+          }
+        },
+        {
+          "client_id": "345923835537-cp0gnamkj1vlhguj0o6j2okvn81uvr03.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

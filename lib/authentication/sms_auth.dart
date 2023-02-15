@@ -84,9 +84,6 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
                         colorBuilder: PinListenColorBuilder(
                             Theme.of(context).colorScheme.primary,
                             Colors.grey.shade500)),
-                    onCodeSubmitted: (code) {
-                      debugPrint('submitted');
-                    }, //code submitted callback
                     onCodeChanged: (code) {
                       _smsCode = code;
                     }, //code changed callback
@@ -123,9 +120,7 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
               } else {
                 // Sign in
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                    verificationId: _verificationId,
-                    smsCode: _smsCode ?? ''); //todo
-
+                    verificationId: _verificationId, smsCode: _smsCode ?? '');
                 _auth.signInWithCredential(credential).then((value) {
                   Navigator.of(context).pop(true);
                 });

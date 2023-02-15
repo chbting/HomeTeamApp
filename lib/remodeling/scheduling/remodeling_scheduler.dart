@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -280,7 +281,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
         FirebaseStorage.instance.ref('remodeling_order_images/dev');
     Map<File, Reference> refMap = {};
 
-    for (var image in files) {
+    for (var image in files) {//todo bug: will upload old cached files
       refMap[image] = storageRef.child(basename(image.path));
     }
 

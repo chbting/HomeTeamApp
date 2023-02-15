@@ -32,18 +32,19 @@ class SignInWidget extends StatelessWidget {
             shape: const StadiumBorder(),
             onPressed: () {
               _signInWithGoogle()
-                  .then((credential) => Navigator.of(context).pop())
-                  .catchError((error) => ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(
-                          content: Text(S.of(context).msg_cannot_sign_in))));
+                  .then((credential) => _onVerificationSuccess(context))
+                  .catchError((error) => _onVerificationFailed(context));
             },
           ),
           SignInButtonBuilder(
             icon: Icons.phone_android,
             text: S.of(context).sign_in_with_sms,
+            //todo wording
             shape: const StadiumBorder(),
             backgroundColor: Colors.black26,
-            onPressed: () {},
+            onPressed: () {
+              _signInWithPhoneNumber('+852 6368 4330'); //todo
+            },
           ),
           SignInButton(
             Buttons.Email,
@@ -84,5 +85,33 @@ class SignInWidget extends StatelessWidget {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  /// [phoneNumber] format '+852 1234 5678'
+  void _signInWithPhoneNumber(String phoneNumber) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {
+        FirebaseAuth.instance.signInWithCredential(credential)
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        debugPrint('$e');
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        debugPrint('code sent!');
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        debugPrint('codeAutoRetrievalTimeout!');
+      },
+    );
+  }
+
+  void _onVerificationSuccess(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
+  void _onVerificationFailed(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).msg_cannot_sign_in)));
   }
 }

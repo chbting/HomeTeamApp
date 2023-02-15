@@ -49,8 +49,9 @@ class SignInWidget extends StatelessWidget {
                       builder: (_) {
                         return const SMSAuthDialog();
                       })
-                  .then((signInSuccess) =>
-                      signInSuccess ? Navigator.of(context).pop() : null);
+                  .then((signInSuccess) => signInSuccess
+                      ? _onVerificationSuccess(context)
+                      : _onVerificationFailed(context));
             },
           ),
           SignInButton(

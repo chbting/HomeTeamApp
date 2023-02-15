@@ -64,7 +64,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         radius: _avatarRadius,
                         foregroundImage:
                             photoURL == null ? null : NetworkImage(photoURL),
-                        child: currentUser == null && photoURL == null
+                        child: currentUser == null || photoURL == null
                             ? Icon(Icons.person, size: _avatarRadius)
                             : null),
                   ),
@@ -73,7 +73,10 @@ class SettingsScreenState extends State<SettingsScreen> {
                         left: (_avatarRadius + _horizontalPadding) * 2),
                     child: Text(currentUser == null
                         ? S.of(context).not_signed_in
-                        : currentUser.displayName ?? ''),
+                        : currentUser.displayName ??
+                            currentUser.phoneNumber ??
+                            currentUser.email ??
+                            ''),
                   ),
                   Padding(
                     padding: EdgeInsets.only(right: _horizontalPadding),

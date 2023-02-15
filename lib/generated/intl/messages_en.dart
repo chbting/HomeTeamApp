@@ -174,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
+        "please_manually_enter_sms_code": MessageLookupByLibrary.simpleMessage(
+            "Please manually enter the SMS Code"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
             "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
@@ -277,6 +279,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),
+        "waiting_for_sms_code_autofill": MessageLookupByLibrary.simpleMessage(
+            "Waiting for SMS code autofill"),
         "wallcoverings": MessageLookupByLibrary.simpleMessage("Wallcoverings")
       };
 }

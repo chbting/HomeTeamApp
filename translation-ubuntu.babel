@@ -2588,6 +2588,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>please_manually_enter_sms_code</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>please_put_in_a_valid_amount</name>
 						<description/>
 						<comment/>
@@ -4149,6 +4173,30 @@
 					</concept_node>
 					<concept_node>
 						<name>voice_search</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>waiting_for_sms_code_autofill</name>
 						<description/>
 						<comment/>
 						<default_text/>

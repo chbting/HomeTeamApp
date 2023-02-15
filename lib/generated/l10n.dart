@@ -1789,6 +1789,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Waiting for SMS code autofill`
+  String get waiting_for_sms_code_autofill {
+    return Intl.message(
+      'Waiting for SMS code autofill',
+      name: 'waiting_for_sms_code_autofill',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please manually enter the SMS Code`
+  String get please_manually_enter_sms_code {
+    return Intl.message(
+      'Please manually enter the SMS Code',
+      name: 'please_manually_enter_sms_code',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -176,5 +176,7 @@
 	"not_signed_in": "(未登入)",
 	"send_sms_code": "獲取驗證碼",
 	"phone_number": "電話號碼",
-	"msg_please_input_valid_phone_number": "請輸入有效的香港電話號碼"
+	"msg_please_input_valid_phone_number": "請輸入有效的香港電話號碼",
+	"waiting_for_sms_code_autofill": "等待自動填寫驗證碼",
+	"please_manually_enter_sms_code": "請手動輸入驗證碼"
 }

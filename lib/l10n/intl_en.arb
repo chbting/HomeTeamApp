@@ -173,5 +173,7 @@
 	"not_signed_in": "(Not signed in)",
 	"send_sms_code": "Send SMS code",
 	"phone_number": "Phone Number",
-	"msg_please_input_valid_phone_number": "Please input a valid Hong Kong phone number"
+	"msg_please_input_valid_phone_number": "Please input a valid Hong Kong phone number",
+	"waiting_for_sms_code_autofill": "Waiting for SMS code autofill",
+	"please_manually_enter_sms_code": "Please manually enter the SMS Code"
 }

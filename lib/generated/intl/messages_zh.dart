@@ -149,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_required": MessageLookupByLibrary.simpleMessage("需要照片"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("选择日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
+        "please_manually_enter_sms_code":
+            MessageLookupByLibrary.simpleMessage("请手动输入验证码"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
@@ -228,6 +230,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "undo": MessageLookupByLibrary.simpleMessage("还原"),
         "visited_properties": MessageLookupByLibrary.simpleMessage("已睇楼盘"),
         "voice_search": MessageLookupByLibrary.simpleMessage("语音搜寻"),
+        "waiting_for_sms_code_autofill":
+            MessageLookupByLibrary.simpleMessage("等待自动填写验证码"),
         "wallcoverings": MessageLookupByLibrary.simpleMessage("壁纸")
       };
 }

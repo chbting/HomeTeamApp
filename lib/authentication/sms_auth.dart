@@ -15,9 +15,11 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _controller = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _autoRetrievalTimeout = 30;
   bool _showProgressIndicator = false;
   bool _codeSent = false;
   bool _phoneNumberSent = false;
+  bool _autofillFailed = false;
   String _verificationId = '';
   String? _smsCode;
   int? _resendToken;
@@ -35,7 +37,11 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(S.of(context).sign_in_with_sms),
+            Text(!_codeSent
+                ? S.of(context).sign_in_with_sms
+                : !_autofillFailed
+                    ? S.of(context).waiting_for_sms_code_autofill
+                    : S.of(context).please_manually_enter_sms_code),
             Visibility(
               visible: _showProgressIndicator,
               child: const SizedBox(
@@ -100,33 +106,37 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
               Navigator.of(context).pop();
             },
           ),
-          TextButton(
-            child: Text(_codeSent
-                ? S.of(context).sign_in
-                : S.of(context).send_sms_code),
-            onPressed: () {
-              if (!_codeSent) {
-                if (_formKey.currentState!.validate() && !_phoneNumberSent) {
-                  _phoneNumberSent = true;
-                  // 1. Hide the keyboard, show Progress Dialog
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  setState(() {
-                    _showProgressIndicator = true;
-                  });
+          Visibility(
+              visible: !_codeSent,
+              child: TextButton(
+                child: Text(S.of(context).send_sms_code),
+                onPressed: () {
+                  if (_formKey.currentState!.validate() && !_phoneNumberSent) {
+                    _phoneNumberSent = true;
+                    // 1. Hide the keyboard, show Progress Dialog
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    setState(() {
+                      _showProgressIndicator = true;
+                    });
 
-                  // 2. Request the SMS code
-                  _signInWithPhoneNumber('+852 ${_controller.value.text}');
-                }
-              } else {
-                // Sign in
+                    // 2. Request the SMS code
+                    _signInWithPhoneNumber('+852 ${_controller.value.text}');
+                  }
+                },
+              )), // todo resend button
+          Visibility(
+            visible: _codeSent,
+            child: TextButton(
+              child: Text(S.of(context).sign_in),
+              onPressed: () {
                 PhoneAuthCredential credential = PhoneAuthProvider.credential(
                     verificationId: _verificationId, smsCode: _smsCode ?? '');
                 _auth.signInWithCredential(credential).then((value) {
                   Navigator.of(context).pop(true);
                 });
-                //todo onError, e.g. wrong sms code, UI for resend code
-              }
-            },
+                //todo onError, e.g. wrong sms code
+              },
+            ),
           )
         ]);
   }
@@ -135,8 +145,7 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
   void _signInWithPhoneNumber(String phoneNumber) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      timeout: const Duration(seconds: 60),
-      // todo do a timer
+      timeout: Duration(seconds: _autoRetrievalTimeout),
       verificationCompleted: (PhoneAuthCredential credential) async {
         // ANDROID ONLY!
         // This handler will only be called on Android devices which support automatic SMS code resolution.
@@ -146,21 +155,26 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
       },
       verificationFailed: (FirebaseAuthException e) {
         if (e.code == 'invalid-phone-number') {
-          debugPrint('The provided phone number is not valid.');
+          debugPrint('The provided phone number is not valid.'); //todo
         }
-        debugPrint('$e');
+        debugPrint('$e'); //todo
+        Navigator.of(context).pop(false);
       },
       codeSent: (String verificationId, int? resendToken) {
         _listenForCode();
         _verificationId = verificationId;
         _resendToken = resendToken;
         setState(() {
-          _showProgressIndicator = false;
           _codeSent = true;
           _controller.clear();
         });
       },
-      codeAutoRetrievalTimeout: (String verificationId) {},
+      codeAutoRetrievalTimeout: (String verificationId) {
+        setState(() {
+          _showProgressIndicator = false;
+          _autofillFailed = true;
+        });
+      },
     );
   }
 

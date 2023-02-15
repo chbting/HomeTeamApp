@@ -170,5 +170,8 @@
 	"sign_in_with_sms": "使用短信登入",
 	"msg_cannot_sign_in": "无法登入",
 	"sign_out": "登出",
-	"not_signed_in": "(未登入)"
+	"not_signed_in": "(未登入)",
+	"send_sms_code": "获取验证码",
+	"phone_number": "电话号码",
+	"msg_please_input_valid_phone_number": "请输入有效的香港电话号码"
 }

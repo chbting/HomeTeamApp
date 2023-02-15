@@ -170,5 +170,8 @@
 	"sign_in_with_sms": "Sign in with SMS",
 	"msg_cannot_sign_in": "Cannot sign in",
 	"sign_out": "Sign out",
-	"not_signed_in": "(Not signed in)"
+	"not_signed_in": "(Not signed in)",
+	"send_sms_code": "Send SMS code",
+	"phone_number": "Phone Number",
+	"msg_please_input_valid_phone_number": "Please input a valid Hong Kong phone number"
 }

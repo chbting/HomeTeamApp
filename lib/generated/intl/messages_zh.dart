@@ -123,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("未能辨识语音"),
         "msg_cannot_sign_in": MessageLookupByLibrary.simpleMessage("无法登入"),
+        "msg_please_input_valid_phone_number":
+            MessageLookupByLibrary.simpleMessage("请输入有效的香港电话号码"),
         "msg_select_remodeling_item":
             MessageLookupByLibrary.simpleMessage("请选择所需的装修项目"),
         "msg_voice_search_unavailable":
@@ -141,6 +143,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "owner": MessageLookupByLibrary.simpleMessage("业主"),
         "painting": MessageLookupByLibrary.simpleMessage("油潻"),
         "pest_control": MessageLookupByLibrary.simpleMessage("灭虫"),
+        "phone_number": MessageLookupByLibrary.simpleMessage("电话号码"),
         "photo_added": MessageLookupByLibrary.simpleMessage("照片已加入"),
         "photo_not_required": MessageLookupByLibrary.simpleMessage("无需照片"),
         "photo_required": MessageLookupByLibrary.simpleMessage("需要照片"),
@@ -190,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "search_properties_hint":
             MessageLookupByLibrary.simpleMessage("地区/屋苑名称"),
         "select_from_gallery": MessageLookupByLibrary.simpleMessage("从相薄选取"),
+        "send_sms_code": MessageLookupByLibrary.simpleMessage("获取验证码"),
         "settings": MessageLookupByLibrary.simpleMessage("设定"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("签署租约"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),

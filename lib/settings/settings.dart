@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tner_client/authentication/sign_in.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
-import 'package:tner_client/sign_in.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
@@ -143,8 +143,15 @@ class SettingsScreenState extends State<SettingsScreen> {
 }
 
 Future<void> _signOut() async {
-  GoogleSignIn googleSignIn = GoogleSignIn(); //todo this is google specific
-  await googleSignIn.disconnect();
+  List<UserInfo> providerData = FirebaseAuth.instance.currentUser!.providerData;
+  for (var userInfo in providerData) {
+    switch (userInfo.providerId) {
+      case 'google.com':
+        // This allows users to choose from their google accounts in their next sign in
+        await GoogleSignIn().disconnect();
+        break;
+    }
+  }
   await FirebaseAuth.instance.signOut();
 }
 

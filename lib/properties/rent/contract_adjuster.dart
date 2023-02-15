@@ -131,7 +131,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           S.of(context).lease_period,
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         )),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +154,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           S.of(context).tenant_pays_the_following,
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         )),
                     GridView.count(
                       crossAxisCount: _tenantFeesColumnCount,
@@ -274,8 +274,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     border: const OutlineInputBorder(),
                     labelText: S.of(context).start_date),
                 onTap: () {
-                  // Stop the keyboard from appearing
-                  FocusScope.of(context).requestFocus(FocusNode());
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
@@ -318,8 +316,6 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     border: const OutlineInputBorder(),
                     labelText: S.of(context).end_date),
                 onTap: () {
-                  // Stop the keyboard from appearing
-                  FocusScope.of(context).requestFocus(FocusNode());
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).end_date,

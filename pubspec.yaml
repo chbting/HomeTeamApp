@@ -55,6 +55,7 @@ dependencies:
   speech_to_text: ^6.1.1
   avatar_glow: ^2.0.2 # For glowing mic icon
   flutter_signin_button: ^2.0.0
+  sms_autofill: ^2.2.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -140,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cannot recognize speech"),
         "msg_cannot_sign_in":
             MessageLookupByLibrary.simpleMessage("Cannot sign in"),
+        "msg_please_input_valid_phone_number":
+            MessageLookupByLibrary.simpleMessage(
+                "Please input a valid Hong Kong phone number"),
         "msg_select_remodeling_item": MessageLookupByLibrary.simpleMessage(
             "Please select an remodeling item"),
         "msg_voice_search_unavailable":
@@ -161,6 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "painting": MessageLookupByLibrary.simpleMessage("Painting"),
         "pest_control": MessageLookupByLibrary.simpleMessage("Pest Control"),
+        "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "photo_added":
             MessageLookupByLibrary.simpleMessage("Photos have been added"),
         "photo_not_required":
@@ -230,6 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("District/Name of the estate"),
         "select_from_gallery":
             MessageLookupByLibrary.simpleMessage("Select from Gallery"),
+        "send_sms_code": MessageLookupByLibrary.simpleMessage("Send SMS code"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),

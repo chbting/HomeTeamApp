@@ -1759,6 +1759,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Send SMS code`
+  String get send_sms_code {
+    return Intl.message(
+      'Send SMS code',
+      name: 'send_sms_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phone_number {
+    return Intl.message(
+      'Phone Number',
+      name: 'phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input a valid Hong Kong phone number`
+  String get msg_please_input_valid_phone_number {
+    return Intl.message(
+      'Please input a valid Hong Kong phone number',
+      name: 'msg_please_input_valid_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

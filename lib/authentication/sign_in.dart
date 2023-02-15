@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:tner_client/authentication/sms_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 
 class SignInWidget extends StatelessWidget {
@@ -39,11 +40,17 @@ class SignInWidget extends StatelessWidget {
           SignInButtonBuilder(
             icon: Icons.phone_android,
             text: S.of(context).sign_in_with_sms,
-            //todo wording
             shape: const StadiumBorder(),
             backgroundColor: Colors.black26,
             onPressed: () {
-              _signInWithPhoneNumber('+852 6368 4330'); //todo
+              showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) {
+                        return const SMSAuthDialog();
+                      })
+                  .then((signInSuccess) =>
+                      signInSuccess ? Navigator.of(context).pop() : null);
             },
           ),
           SignInButton(
@@ -56,6 +63,8 @@ class SignInWidget extends StatelessWidget {
       ),
     );
   }
+
+  void _openEmailAuthDialog(BuildContext context) {}
 
   Future<UserCredential> _signInWithFacebook() async {
     // Trigger the sign-in flow
@@ -85,25 +94,6 @@ class SignInWidget extends StatelessWidget {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  /// [phoneNumber] format '+852 1234 5678'
-  void _signInWithPhoneNumber(String phoneNumber) async {
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) {
-        FirebaseAuth.instance.signInWithCredential(credential)
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        debugPrint('$e');
-      },
-      codeSent: (String verificationId, int? resendToken) {
-        debugPrint('code sent!');
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        debugPrint('codeAutoRetrievalTimeout!');
-      },
-    );
   }
 
   void _onVerificationSuccess(BuildContext context) {

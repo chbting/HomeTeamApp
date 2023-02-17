@@ -49,19 +49,25 @@ class SettingsScreenState extends State<SettingsScreen> {
     return Column(
       children: [
         AppBar(
-          title: Text(S
-              .of(context)
-              .settings),
+          title: Text(S.of(context).settings),
         ),
         Expanded(
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
               InkWell(
-                onTap: currentUser == null ? null : () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()));
-                },
+                onTap: currentUser == null
+                    ? null
+                    : () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProfileScreen(
+                                  actions: [
+                                    SignedOutAction((context) {
+                                      _signOut();
+                                    }),
+                                  ],
+                                )));
+                      },
                 child: Stack(
                   alignment: AlignmentDirectional.centerStart,
                   children: [
@@ -71,7 +77,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                       child: CircleAvatar(
                           radius: _avatarRadius,
                           foregroundImage:
-                          photoURL == null ? null : NetworkImage(photoURL),
+                              photoURL == null ? null : NetworkImage(photoURL),
                           child: currentUser == null || photoURL == null
                               ? Icon(Icons.person, size: _avatarRadius)
                               : null),
@@ -80,13 +86,11 @@ class SettingsScreenState extends State<SettingsScreen> {
                       padding: EdgeInsets.only(
                           left: (_avatarRadius + _horizontalPadding) * 2),
                       child: Text(currentUser == null
-                          ? S
-                          .of(context)
-                          .not_signed_in
+                          ? S.of(context).not_signed_in
                           : currentUser.displayName ??
-                          currentUser.phoneNumber ??
-                          currentUser.email ??
-                          ''),
+                              currentUser.phoneNumber ??
+                              currentUser.email ??
+                              ''),
                     ),
                     Padding(
                       padding: EdgeInsets.only(right: _horizontalPadding),
@@ -96,20 +100,16 @@ class SettingsScreenState extends State<SettingsScreen> {
                             onPressed: () {
                               currentUser == null
                                   ? Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                      const SignInWidget()))
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SignInWidget()))
                                   : _signOut();
                             },
                             style: ElevatedButton.styleFrom(
                                 shape: const StadiumBorder()),
                             child: Text(currentUser == null
-                                ? S
-                                .of(context)
-                                .sign_in
-                                : S
-                                .of(context)
-                                .sign_out)),
+                                ? S.of(context).sign_in
+                                : S.of(context).sign_out)),
                       ),
                     ),
                   ],
@@ -119,13 +119,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                 thickness: 1,
               ),
               SettingsUI.getSettingsTitle(
-                  context, S
-                  .of(context)
-                  .general_settings),
+                  context, S.of(context).general_settings),
               SwitchListTile(
-                title: Text(S
-                    .of(context)
-                    .darkMode),
+                title: Text(S.of(context).darkMode),
                 secondary: const Icon(Icons.dark_mode),
                 onChanged: (value) {
                   setState(() {
@@ -136,11 +132,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                 value: _darkMode,
               ),
               ListTile(
-                  title: Text(S
-                      .of(context)
-                      .language),
+                  title: Text(S.of(context).language),
                   subtitle:
-                  Text(_localeStringToLanguage(_localeString, context)),
+                      Text(_localeStringToLanguage(_localeString, context)),
                   leading: const SizedBox(
                     height: double.infinity,
                     child: Icon(Icons.language),
@@ -151,9 +145,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                         _localeStringList,
                         _languageList,
                         _localeString,
-                        S
-                            .of(context)
-                            .choose_language, (value) {
+                        S.of(context).choose_language, (value) {
                       _localeString = value;
                       SharedPreferencesHelper.setLocale(
                           SharedPreferencesHelper.stringToLocale(value));
@@ -171,15 +163,6 @@ class SettingsScreenState extends State<SettingsScreen> {
 }
 
 Future<void> _signOut() async {
-  List<UserInfo> providerData = FirebaseAuth.instance.currentUser!.providerData;
-  for (var userInfo in providerData) {
-    switch (userInfo.providerId) {
-      case 'google.com':
-      // This allows users to choose from their google accounts in their next sign in
-        await GoogleSignIn().disconnect();
-        break;
-    }
-  }
   await FirebaseAuth.instance.signOut();
 }
 

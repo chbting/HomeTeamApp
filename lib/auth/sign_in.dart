@@ -1,97 +1,74 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
-import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:tner_client/auth/email_auth.dart';
-import 'package:tner_client/auth/phone_auth.dart';
-import 'package:tner_client/auth/sms_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/id.dart';
+import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 class SignInWidget extends StatelessWidget {
   const SignInWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).sign_in),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        primary: false,
-        children: [
-          AuthStateListener<OAuthController>(
-            child: OAuthProviderButton(
-              provider: FacebookProvider(clientId: Id.facebookClientId),
+    return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        FirebaseUILocalizations.delegate
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      theme: _getCustomTheme(),
+      locale: SharedPreferencesHelper.getLocale(),
+      initialRoute: '/sign-in',
+      routes: {
+        '/sign-in': (context) {
+          return SignInScreen(
+            actions: [
+              AuthStateChangeAction<SignedIn>((context, state) {
+                Navigator.of(context).pop();
+              }),
+              EmailLinkSignInAction((context) {
+                Navigator.pushReplacementNamed(context, '/email-link-sign-in');
+              }),
+              VerifyPhoneAction((context, _) {
+                Navigator.pushNamed(context, '/phone');
+              })
+            ],
+          );
+        },
+        '/email-link-sign-in': (context) => EmailLinkSignInScreen(
+              actions: [
+                AuthStateChangeAction<SignedIn>((context, state) {
+                  Navigator.of(context).pop(); //todo pop causes black screen, consider ditching materialApp
+                }),
+              ],
             ),
-            listener: (oldState, newState, ctrl) {
-              if (newState is SignedIn) {
-                _onVerificationSuccess(context);
-              }
-              return null;
-            },
-          ),
-          AuthStateListener<OAuthController>(
-            child: OAuthProviderButton(
-              provider: GoogleProvider(clientId: Id.googleClientId),
-            ),
-            listener: (oldState, newState, ctrl) {
-              if (newState is SignedIn) {
-                _onVerificationSuccess(context);
-              }
-              return null;
-            },
-          ),
-          SignInButtonBuilder(
-            icon: Icons.phone_android,
-            text: S.of(context).sign_in_with_sms,
-            backgroundColor: Colors.black26,
-            onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PhoneAuth()));
-            },
-          ),
-          SignInButtonBuilder(
-            icon: Icons.phone_android,
-            text: S.of(context).sign_in_with_sms,
-            backgroundColor: Colors.black26,
-            onPressed: () {
-              showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (_) {
-                        return const SMSAuthDialog();
-                      })
-                  .then((signInSuccess) => signInSuccess
-                      ? _onVerificationSuccess(context)
-                      : _onVerificationFailed(context));
-            },
-          ),
-          SignInButton(
-            //todo rework the button, vertically center options
-            Buttons.Email,
-            text: S.of(context).sign_in_with_email,
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(
-                      builder: (context) => const EmailAuth()))
-                  .then((signInSuccess) =>
-                      signInSuccess ? _onVerificationSuccess(context) : null);
-            },
-          )
-        ],
-      ),
+        '/phone': (context) => PhoneInputScreen(actions: [
+              //todo verification action
+              SMSCodeRequestedAction((context, action, flowKey, phoneNumber) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => SMSCodeInputScreen(
+                      flowKey: flowKey,
+                    ),
+                  ),
+                );
+              }),
+            ]),
+      },
     );
   }
 
-  void _onVerificationSuccess(BuildContext context) {
-    Navigator.of(context).pop();
-  }
-
-  void _onVerificationFailed(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(S.of(context).msg_cannot_sign_in)));
+  ThemeData _getCustomTheme() {
+    var theme = SharedPreferencesHelper.isDarkMode()
+        ? AppTheme.getDarkTheme()
+        : AppTheme.getLightTheme();
+    return theme.copyWith(
+        inputDecorationTheme: InputDecorationTheme(
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(8))));
   }
 }

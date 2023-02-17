@@ -1,7 +1,10 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart'
+    hide PhoneAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
+import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +28,20 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseUIAuth.configureProviders([
-    FacebookProvider(clientId: ''),
     GoogleProvider(clientId: Id.googleClientId),
+    AppleProvider(), //todo not showing
+    FacebookProvider(clientId: ''), //todo
+    EmailLinkAuthProvider(// todo UI is buggy, cannot back from it
+      actionCodeSettings: ActionCodeSettings(//todo
+        url: 'https://<your-project-id>.page.link',
+        handleCodeInApp: true,
+        androidMinimumVersion: '1',
+        androidPackageName:
+        'io.flutter.plugins.firebase_ui.firebase_ui_example',
+        iOSBundleId: 'io.flutter.plugins.flutterfireui.flutterfireUIExample',
+      ),
+    ),
     PhoneAuthProvider(),
-    EmailAuthProvider(),
   ]);
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: 'recaptcha-v3-site-key',

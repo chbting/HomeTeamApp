@@ -46,8 +46,12 @@ dependencies:
   firebase_storage: ^11.0.10
   firebase_app_check: ^0.1.1+9
   firebase_auth: ^4.2.6
+  firebase_ui_auth: ^1.1.11
+  firebase_ui_localizations: ^1.2.0
+  firebase_ui_oauth_google: ^1.0.19
   google_sign_in: ^5.4.4
-  flutter_facebook_auth: ^5.0.7
+  firebase_ui_oauth_facebook: ^1.0.19
+  flutter_facebook_auth: ^4.4.1+1
 
   # 3rd party APIs
   # im_stepper: ^1.0.1+1 # Stepper for scheduler
@@ -129,5 +133,8 @@ flutter:
     - family: CustomIcons
       fonts:
         - asset: assets/fonts/CustomIcons.ttf
+    - family: SocialIcons
+      fonts:
+        - asset: packages/firebase_ui_auth/fonts/SocialIcons.ttf
 flutter_intl:
   enabled: true

@@ -1,10 +1,7 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_auth/firebase_auth.dart'
-    hide PhoneAuthProvider;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
-import 'package:firebase_ui_oauth_apple/firebase_ui_oauth_apple.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +12,7 @@ import 'package:tner_client/contracts/contracts.dart';
 import 'package:tner_client/firebase_options.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
+import 'package:tner_client/overrides/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:tner_client/owner/owner.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/remodeling/remodeling_screen.dart';
@@ -28,19 +26,20 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseUIAuth.configureProviders([
+    EmailAuthProvider(),
     GoogleProvider(clientId: Id.googleClientId),
-    AppleProvider(), //todo not showing
     FacebookProvider(clientId: ''), //todo
-    EmailLinkAuthProvider(// todo UI is buggy, cannot back from it
-      actionCodeSettings: ActionCodeSettings(//todo
-        url: 'https://<your-project-id>.page.link',
-        handleCodeInApp: true,
-        androidMinimumVersion: '1',
-        androidPackageName:
-        'io.flutter.plugins.firebase_ui.firebase_ui_example',
-        iOSBundleId: 'io.flutter.plugins.flutterfireui.flutterfireUIExample',
-      ),
-    ),
+    // EmailLinkAuthProvider(
+    //   actionCodeSettings: ActionCodeSettings(
+    //     //todo
+    //     url: 'https://<your-project-id>.page.link',
+    //     handleCodeInApp: true,
+    //     androidMinimumVersion: '1',
+    //     androidPackageName:
+    //         'io.flutter.plugins.firebase_ui.firebase_ui_example',
+    //     iOSBundleId: 'io.flutter.plugins.flutterfireui.flutterfireUIExample',
+    //   ),
+    // ),
     PhoneAuthProvider(),
   ]);
   await FirebaseAppCheck.instance.activate(
@@ -61,14 +60,15 @@ class App extends StatelessWidget {
     // TODO check to see if orientation works on ipad
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Consumer<SharedPreferencesChangedNotifier>(
-        builder: (context, _, child) {
+        builder: (innerContext, _, child) {
       return MaterialApp(
           localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-            FirebaseUILocalizations.delegate
+            FirebaseUIAuthLocalizationsOverrides.delegate,
+            FirebaseUILocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
           home: const AppHome(),

@@ -1700,36 +1700,6 @@ class S {
     );
   }
 
-  /// `Sign in with Google`
-  String get sign_in_with_google {
-    return Intl.message(
-      'Sign in with Google',
-      name: 'sign_in_with_google',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sign in with Facebook`
-  String get sign_in_with_facebook {
-    return Intl.message(
-      'Sign in with Facebook',
-      name: 'sign_in_with_facebook',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sign in with SMS`
-  String get sign_in_with_sms {
-    return Intl.message(
-      'Sign in with SMS',
-      name: 'sign_in_with_sms',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Cannot sign in`
   String get msg_cannot_sign_in {
     return Intl.message(
@@ -1805,6 +1775,26 @@ class S {
     return Intl.message(
       'Please manually enter the SMS Code',
       name: 'please_manually_enter_sms_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Facebook`
+  String get continue_with_facebook {
+    return Intl.message(
+      'Continue with Facebook',
+      name: 'continue_with_facebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Google`
+  String get continue_with_google {
+    return Intl.message(
+      'Continue with Google',
+      name: 'continue_with_google',
       desc: '',
       args: [],
     );

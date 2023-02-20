@@ -67,6 +67,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_remodeling": MessageLookupByLibrary.simpleMessage("確認預約"),
         "contact_number": MessageLookupByLibrary.simpleMessage("聯絡電話"),
         "contact_person": MessageLookupByLibrary.simpleMessage("聯絡人"),
+        "continue_with_facebook":
+            MessageLookupByLibrary.simpleMessage("以 Facebook 帳號繼續"),
+        "continue_with_google":
+            MessageLookupByLibrary.simpleMessage("以Google帳號繼續"),
         "contract_status": MessageLookupByLibrary.simpleMessage("租約進度"),
         "count": MessageLookupByLibrary.simpleMessage("數量"),
         "darkMode": MessageLookupByLibrary.simpleMessage("深色模式"),
@@ -200,11 +204,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),
         "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用電郵登入"),
-        "sign_in_with_facebook":
-            MessageLookupByLibrary.simpleMessage("使用Facebook登入"),
-        "sign_in_with_google":
-            MessageLookupByLibrary.simpleMessage("使用Google登入"),
-        "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在簽署"),
         "sign_out": MessageLookupByLibrary.simpleMessage("登出"),

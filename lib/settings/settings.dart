@@ -63,7 +63,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                             builder: (context) => ProfileScreen(
                                   actions: [
                                     SignedOutAction((context) {
-                                      _signOut();
+                                      _signOut(); //todo google account not disconnected
                                     }),
                                   ],
                                 )));

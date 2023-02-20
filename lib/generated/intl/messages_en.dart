@@ -77,6 +77,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contact Number"),
         "contact_person":
             MessageLookupByLibrary.simpleMessage("Contact Person"),
+        "continue_with_facebook":
+            MessageLookupByLibrary.simpleMessage("Continue with Facebook"),
+        "continue_with_google":
+            MessageLookupByLibrary.simpleMessage("Continue with Google"),
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
@@ -242,12 +246,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_in_with_email":
             MessageLookupByLibrary.simpleMessage("Sign in with email"),
-        "sign_in_with_facebook":
-            MessageLookupByLibrary.simpleMessage("Sign in with Facebook"),
-        "sign_in_with_google":
-            MessageLookupByLibrary.simpleMessage("Sign in with Google"),
-        "sign_in_with_sms":
-            MessageLookupByLibrary.simpleMessage("Sign in with SMS"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
         "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),

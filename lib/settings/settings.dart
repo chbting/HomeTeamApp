@@ -94,8 +94,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                           child: OutlinedButton(
                               onPressed: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignInWidget()));
+                                    builder: (context) => const AuthScreen()));
                               },
                               style: ElevatedButton.styleFrom(
                                   shape: const StadiumBorder()),

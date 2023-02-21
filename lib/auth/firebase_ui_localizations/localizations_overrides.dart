@@ -1,10 +1,10 @@
 import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tner_client/auth/firebase_ui_localizations/en.dart';
+import 'package:tner_client/auth/firebase_ui_localizations/zh.dart';
+import 'package:tner_client/auth/firebase_ui_localizations/zh_tw.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/overrides/firebase_ui_localizations/en.dart';
-import 'package:tner_client/overrides/firebase_ui_localizations/zh.dart';
-import 'package:tner_client/overrides/firebase_ui_localizations/zh_tw.dart';
 
 class FirebaseUIAuthLocalizationsOverrides {
   FirebaseUIAuthLocalizationsOverrides(this.locale);

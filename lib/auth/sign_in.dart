@@ -2,23 +2,28 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:tner_client/auth/auth_button.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
 
-class SignInWidget extends StatelessWidget {
-  const SignInWidget({Key? key}) : super(key: key);
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const horizontalPadding = 24.0;
+    const buttonHeight = 48.0;
+    double buttonWidth =
+        MediaQuery.of(context).size.width - horizontalPadding * 2;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const Icon(Icons.close),
+        leading: const CloseButton(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -52,38 +57,21 @@ class SignInWidget extends StatelessWidget {
                 return null;
               },
             ),
-            SignInButton(
-              Buttons.Email,
-              text: S.of(context).sign_in_with_email,
-              onPressed: () {},
-            ),
-            AuthStateListener<PhoneAuthController>(
-                listener: (oldState, newState, controller) {
-                  if (newState is SMSCodeSent) {
-                    // setState(() {
-                    //   child = SMSCodeInput(
-                    //     onSubmit: (code) {
-                    //       controller.verifySMSCode(
-                    //         code,
-                    //         verificationId: newState.verificationId,
-                    //         confirmationResult: newState.confirmationResult,
-                    //       );
-                    //     },
-                    //   );
-                    // });
-                  }
-                  return null;
-                },
-                child: SignInButtonBuilder(
-                    //todo button size
-                    onPressed: () {},
-                    icon: Icons.phone_android,
-                    text: S.of(context).sign_in_with_sms,
-                    backgroundColor: Colors.white10)),
+            AuthButton(
+                icon: Icons.email,
+                label: S.of(context).sign_in_with_email,
+                onPressed: () {}),
+            AuthButton(
+                icon: Icons.phone_android,
+                label: S.of(context).sign_in_with_sms,
+                onPressed: () {}),
             _getSeparator(context),
-            // todo "create a free account"
             ElevatedButton(
                 onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                    minimumSize: Size(buttonWidth, buttonHeight),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
                 child: Text(S.of(context).create_a_free_account))
           ],
         ),
@@ -93,7 +81,7 @@ class SignInWidget extends StatelessWidget {
 
   Widget _getSeparator(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: Row(children: <Widget>[
         const Expanded(child: Divider()),
         Padding(

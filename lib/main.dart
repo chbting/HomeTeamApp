@@ -1,17 +1,16 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:tner_client/auth/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:tner_client/contracts/contracts.dart';
 import 'package:tner_client/firebase_options.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
-import 'package:tner_client/overrides/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:tner_client/owner/owner.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/remodeling/remodeling_screen.dart';
@@ -27,7 +26,7 @@ void main() async {
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
     GoogleProvider(clientId: Id.googleClientId),
-   // FacebookProvider(clientId: ''), //todo
+    // FacebookProvider(clientId: ''), //todo
     // EmailLinkAuthProvider(
     //   actionCodeSettings: ActionCodeSettings(
     //     //todo

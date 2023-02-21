@@ -175,5 +175,7 @@
 	"please_manually_enter_sms_code": "Please manually enter the SMS Code",
 	"continue_with_facebook": "Continue with Facebook",
 	"continue_with_google": "Continue with Google",
-	"sign_in_with_sms": "Sign in with SMS"
+	"sign_in_with_sms": "Sign in with SMS",
+	"or": "or",
+	"create_a_free_account": "Create a free account"
 }

@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
+        "create_a_free_account":
+            MessageLookupByLibrary.simpleMessage("Create a free account"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "date_time_selected":
@@ -164,6 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("No. of rooms"),
         "offered": MessageLookupByLibrary.simpleMessage("Offered"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "or": MessageLookupByLibrary.simpleMessage("or"),
         "original": MessageLookupByLibrary.simpleMessage("Original"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "painting": MessageLookupByLibrary.simpleMessage("Painting"),

@@ -1809,6 +1809,26 @@ class S {
       args: [],
     );
   }
+
+  /// `or`
+  String get or {
+    return Intl.message(
+      'or',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a free account`
+  String get create_a_free_account {
+    return Intl.message(
+      'Create a free account',
+      name: 'create_a_free_account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

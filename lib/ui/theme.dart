@@ -22,7 +22,7 @@ class AppTheme {
       900: Colors.lightBlue[900]!,
     },
   );
-  static const bool useMaterial3Themes = false;
+  static const bool useMaterial3Themes = true;
 
   // todo define primary, onPrimary, secondary,...
   // todo try to standardize with fromSeed/fromSwatch without sacrificing the current theming

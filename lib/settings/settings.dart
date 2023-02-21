@@ -59,15 +59,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                     ? null
                     : () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProfileScreen(
-                                  actions: [
-                                    SignedOutAction((context) {
-                                      _signOut().then((success) => success
-                                          ? Navigator.of(context).pop()
-                                          : null); //todo delete account button
-                                    }),
-                                  ],
-                                )));
+                            builder: (context) => _getProfileScreen(context)));
                       },
                 child: Stack(
                   alignment: AlignmentDirectional.centerStart,
@@ -159,6 +151,18 @@ class SettingsScreenState extends State<SettingsScreen> {
       ],
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
+}
+
+Widget _getProfileScreen(BuildContext context) {
+  return ProfileScreen(
+    actions: [
+      SignedOutAction((context) {
+        _signOut().then((success) => success
+            ? Navigator.of(context).pop()
+            : null); //todo delete account button
+      }),
+    ],
+  );
 }
 
 Future<bool> _signOut() async {

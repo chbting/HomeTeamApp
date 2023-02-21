@@ -7,6 +7,7 @@ import 'package:tner_client/generated/l10n.dart';
 
 class SharedPreferencesHelper {
   static const String darkModeOnKey = 'darkMode';
+  static const String themeModeKey = 'themeMode';
   static const String localeKey = 'locale';
 
   static late SharedPreferences _prefs;
@@ -44,7 +45,25 @@ class SharedPreferencesHelper {
       _prefs.getBool(darkModeOnKey) ??
       (Brightness.dark == SchedulerBinding.instance.window.platformBrightness);
 
-  static setLocale(Locale locale) {
+  static ThemeMode getThemeMode() {
+    var value = _prefs.getString(themeModeKey);
+    switch (value) {
+      case 'light':
+        return ThemeMode.light;
+      case 'dark':
+        return ThemeMode.dark;
+      case 'system':
+        return ThemeMode.system;
+      default:
+        return ThemeMode.system;
+    }
+  }
+
+  static void setThemeMode(ThemeMode themeMode) {
+    _prefs.setString(themeModeKey, themeMode.name);
+  }
+
+  static void setLocale(Locale locale) {
     String newValue = localeToString(locale);
     _prefs.setString(localeKey, newValue);
     changeNotifier.notify();

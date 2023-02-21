@@ -31,36 +31,30 @@ class AppTheme {
       ColorScheme colorScheme = ColorScheme.fromSeed(
           brightness: Brightness.dark, seedColor: Colors.lightBlueAccent);
 
-      return _getDarkThemeWithColorScheme(colorScheme).copyWith(
-          scaffoldBackgroundColor: darkThemeBackground,
-          colorScheme: ThemeData.dark()
-              .colorScheme
-              .copyWith(error: const Color(0xFFCF6679)),
-          // Error color as defined in material design
-          appBarTheme: ThemeData.dark()
-              .appBarTheme
-              .copyWith(backgroundColor: colorScheme.surface),
-          checkboxTheme: ThemeData.dark()
-              .checkboxTheme
-              .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
-          snackBarTheme: ThemeData.dark()
-              .snackBarTheme
-              .copyWith(actionTextColor: Colors.blue));
+      return ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        // primarySwatch: customLightBlue
+        //colorScheme: colorScheme,
+      ).copyWith(
+          // scaffoldBackgroundColor: darkThemeBackground,
+          // colorScheme: ThemeData.dark()
+          //     .colorScheme
+          //     .copyWith(error: const Color(0xFFCF6679)),
+          // // Error color as defined in material design
+          // appBarTheme: ThemeData.dark()
+          //     .appBarTheme
+          //     .copyWith(backgroundColor: colorScheme.surface),
+          // checkboxTheme: ThemeData.dark()
+          //     .checkboxTheme
+          //     .copyWith(checkColor: MaterialStateProperty.all(Colors.black)),
+          // snackBarTheme: ThemeData.dark()
+          //     .snackBarTheme
+          //     .copyWith(actionTextColor: Colors.blue)
+          );
     } else {
       return _getMaterial2DarkTheme();
     }
-  }
-
-  /// Work around for the hardcoded Colors.tealAccent[200] teal accent color
-  static ThemeData _getDarkThemeWithColorScheme(ColorScheme colorScheme) {
-    // have artifacts when the sliverSearchBar
-    return ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      indicatorColor: colorScheme.primary,
-      //toggleableActiveColor: colorScheme.primary,
-      colorScheme: colorScheme,
-    );
   }
 
   static ThemeData _getMaterial2DarkTheme() {
@@ -94,7 +88,7 @@ class AppTheme {
 
   static ThemeData getLightTheme() {
     if (useMaterial3Themes) {
-      return ThemeData(useMaterial3: true, colorSchemeSeed: Colors.blue); //todo
+      return ThemeData(useMaterial3: true, brightness: Brightness.light); //todo
     } else {
       return _getMaterial2LightTheme();
     }

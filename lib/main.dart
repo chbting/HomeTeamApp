@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
@@ -7,15 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tner_client/auth/firebase_ui_localizations/localizations_overrides.dart';
-import 'package:tner_client/contracts/contracts.dart';
 import 'package:tner_client/firebase_options.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/home_screen.dart';
 import 'package:tner_client/id.dart';
-import 'package:tner_client/owner/owner.dart';
-import 'package:tner_client/properties/property_screen.dart';
-import 'package:tner_client/remodeling/remodeling_screen.dart';
-import 'package:tner_client/settings/settings.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:tner_client/ui/color/color_schemes.g.dart';
+import 'package:tner_client/ui/color/custom_color.g.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 void main() async {
@@ -59,78 +57,48 @@ class App extends StatelessWidget {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Consumer<SharedPreferencesChangedNotifier>(
         builder: (innerContext, _, child) {
-      return MaterialApp(
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            FirebaseUIAuthLocalizationsOverrides.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          home: const AppHome(),
-          theme: SharedPreferencesHelper.isDarkMode()
-              ? AppTheme.getDarkTheme()
-              : AppTheme.getLightTheme(),
-          locale: SharedPreferencesHelper.getLocale());
+      return DynamicColorBuilder(
+          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        ColorScheme lightScheme;
+        ColorScheme darkScheme;
+
+        if (lightDynamic != null && darkDynamic != null) {
+          lightScheme = lightDynamic.harmonized();
+          lightCustomColors = lightCustomColors.harmonized(lightScheme);
+
+          // Repeat for the dark color scheme.
+          darkScheme = darkDynamic.harmonized();
+          darkCustomColors = darkCustomColors.harmonized(darkScheme);
+        } else {
+          // Otherwise, use fallback schemes.
+          lightScheme = lightColorScheme;
+          darkScheme = darkColorScheme;
+        }
+        return MaterialApp(
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              FirebaseUIAuthLocalizationsOverrides.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorScheme: lightScheme,
+              extensions: [lightCustomColors],
+            ),
+            darkTheme: ThemeData(
+              useMaterial3: true,
+              colorScheme: darkScheme,
+              extensions: [darkCustomColors],
+            ),
+            themeMode: SharedPreferencesHelper.isDarkMode() //todo
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            locale: SharedPreferencesHelper.getLocale(),
+            home: const HomeScreen());
+      });
     });
-  }
-}
-
-class AppHome extends StatefulWidget {
-  const AppHome({Key? key}) : super(key: key);
-
-  @override
-  State<AppHome> createState() => AppHomeState();
-}
-
-class AppHomeState extends State<AppHome> {
-  int _selectedIndex = 0; // Default value
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const <Widget>[
-          PropertyScreen(),
-          RemodelingScreen(),
-          ContractsScreen(),
-          OwnerScreen(),
-          SettingsScreen()
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.apartment),
-            label: S.of(context).property,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.construction),
-            label: S.of(context).remodeling,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.description),
-            label: S.of(context).agreements,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.perm_identity),
-            label: S.of(context).owner,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings),
-            label: S.of(context).settings,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-      ),
-    );
   }
 }

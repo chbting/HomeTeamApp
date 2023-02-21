@@ -33,7 +33,7 @@ class AuthButton extends StatelessWidget {
               children: <Widget>[
                 Align(
                     alignment: Alignment.centerLeft,
-                    child: Icon(icon, color: Colors.white)),
+                    child: Icon(icon)),
                 Align(
                     alignment: Alignment.center,
                     child: Text(label,

@@ -1799,6 +1799,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign in with SMS`
+  String get sign_in_with_sms {
+    return Intl.message(
+      'Sign in with SMS',
+      name: 'sign_in_with_sms',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

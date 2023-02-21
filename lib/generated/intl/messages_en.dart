@@ -246,6 +246,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_in_with_email":
             MessageLookupByLibrary.simpleMessage("Sign in with email"),
+        "sign_in_with_sms":
+            MessageLookupByLibrary.simpleMessage("Sign in with SMS"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
         "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),

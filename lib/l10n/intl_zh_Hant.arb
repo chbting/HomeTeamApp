@@ -177,5 +177,6 @@
 	"waiting_for_sms_code_autofill": "等待自動填寫驗證碼",
 	"please_manually_enter_sms_code": "請手動輸入驗證碼",
 	"continue_with_facebook": "以 Facebook 帳號繼續",
-	"continue_with_google": "以Google帳號繼續"
+	"continue_with_google": "以Google帳號繼續",
+	"sign_in_with_sms": "使用短信登入"
 }

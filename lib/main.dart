@@ -1,7 +1,6 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
-import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ void main() async {
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
     GoogleProvider(clientId: Id.googleClientId),
-    FacebookProvider(clientId: ''), //todo
+   // FacebookProvider(clientId: ''), //todo
     // EmailLinkAuthProvider(
     //   actionCodeSettings: ActionCodeSettings(
     //     //todo
@@ -68,7 +67,6 @@ class App extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             FirebaseUIAuthLocalizationsOverrides.delegate,
-            FirebaseUILocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
           home: const AppHome(),

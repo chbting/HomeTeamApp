@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tner_client/auth/sign_in.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
@@ -63,7 +62,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                             builder: (context) => ProfileScreen(
                                   actions: [
                                     SignedOutAction((context) {
-                                      _signOut(); //todo google account not disconnected
+                                      _signOut().then((success) => success
+                                          ? Navigator.of(context).pop()
+                                          : null); //todo delete account button
                                     }),
                                   ],
                                 )));
@@ -92,24 +93,22 @@ class SettingsScreenState extends State<SettingsScreen> {
                               currentUser.email ??
                               ''),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: _horizontalPadding),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: OutlinedButton(
-                            onPressed: () {
-                              currentUser == null
-                                  ? Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignInWidget()))
-                                  : _signOut();
-                            },
-                            style: ElevatedButton.styleFrom(
-                                shape: const StadiumBorder()),
-                            child: Text(currentUser == null
-                                ? S.of(context).sign_in
-                                : S.of(context).sign_out)),
+                    Visibility(
+                      visible: currentUser == null,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: _horizontalPadding),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: OutlinedButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SignInWidget()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: const StadiumBorder()),
+                              child: Text(S.of(context).sign_in)),
+                        ),
                       ),
                     ),
                   ],
@@ -162,8 +161,9 @@ class SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-Future<void> _signOut() async {
+Future<bool> _signOut() async {
   await FirebaseAuth.instance.signOut();
+  return FirebaseAuth.instance.currentUser == null;
 }
 
 String _localeStringToLanguage(String locale, BuildContext context) {

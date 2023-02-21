@@ -174,5 +174,6 @@
 	"waiting_for_sms_code_autofill": "Waiting for SMS code autofill",
 	"please_manually_enter_sms_code": "Please manually enter the SMS Code",
 	"continue_with_facebook": "Continue with Facebook",
-	"continue_with_google": "Continue with Google"
+	"continue_with_google": "Continue with Google",
+	"sign_in_with_sms": "Sign in with SMS"
 }

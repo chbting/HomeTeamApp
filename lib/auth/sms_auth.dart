@@ -47,9 +47,7 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
               child: const SizedBox(
                   height: 24.0,
                   width: 24.0,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 3.0,
-                  )),
+                  child: CircularProgressIndicator(strokeWidth: 3.0)),
             )
           ],
         ),

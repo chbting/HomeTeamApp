@@ -174,5 +174,6 @@
 	"waiting_for_sms_code_autofill": "等待自动填写验证码",
 	"please_manually_enter_sms_code": "请手动输入验证码",
 	"continue_with_facebook": "以 Facebook 帐号继续",
-	"continue_with_google": "以Google帐号继续"
+	"continue_with_google": "以Google帐号继续",
+	"sign_in_with_sms": "使用短信登入"
 }

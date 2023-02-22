@@ -20,38 +20,21 @@ class SettingsScreenState extends State<SettingsScreen> {
   final List<String> _languageList = [];
   final _avatarRadius = 36.0;
   final _horizontalPadding = 16.0;
-  var _currentUser = FirebaseAuth.instance.currentUser;
-  String? photoURL;
-
   bool _darkMode = SharedPreferencesHelper.isDarkMode();
   String _localeString = SharedPreferencesHelper.localeToString(
       SharedPreferencesHelper.getLocale());
 
   @override
   void initState() {
-    _updatePhotoURL();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      photoURL = _currentUser?.photoURL;
-      setState(() {
-        _currentUser = user;
-        _updatePhotoURL();
-      });
+      setState(() {});
     });
     super.initState();
   }
 
-  void _updatePhotoURL() async {
-    if (_currentUser?.providerData[0].providerId == 'facebook.com') {
-      var accessToken = await FacebookAuth.instance.accessToken;
-      photoURL = '${_currentUser?.photoURL}?access_token=${accessToken!.token}';
-      setState(() {});
-    } else {
-      photoURL = _currentUser?.photoURL;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final currentUser = FirebaseAuth.instance.currentUser;
     for (var element in _localeStringList) {
       _languageList.add(_localeStringToLanguage(element, context));
     }
@@ -65,7 +48,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               InkWell(
-                onTap: _currentUser == null
+                onTap: currentUser == null
                     ? null
                     : () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -77,25 +60,18 @@ class SettingsScreenState extends State<SettingsScreen> {
                     Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: _horizontalPadding, vertical: 8.0),
-                        child: CircleAvatar(
-                            radius: _avatarRadius,
-                            foregroundImage: photoURL == null
-                                ? null
-                                : NetworkImage(photoURL!),
-                            child: _currentUser == null || photoURL == null
-                                ? Icon(Icons.person, size: _avatarRadius)
-                                : null)),
+                        child: _getAvatar()),
                     Padding(
                         padding: EdgeInsets.only(
                             left: (_avatarRadius + _horizontalPadding) * 2),
-                        child: Text(_currentUser == null
+                        child: Text(currentUser == null
                             ? S.of(context).not_signed_in
-                            : _currentUser!.displayName ??
-                                _currentUser!.phoneNumber ??
-                                _currentUser!.email ??
+                            : currentUser.displayName ??
+                                currentUser.phoneNumber ??
+                                currentUser.email ??
                                 '')),
                     Visibility(
-                      visible: _currentUser == null,
+                      visible: currentUser == null,
                       child: Padding(
                         padding: EdgeInsets.only(right: _horizontalPadding),
                         child: Align(
@@ -159,34 +135,60 @@ class SettingsScreenState extends State<SettingsScreen> {
       ],
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
-}
 
-Widget _getProfileScreen(BuildContext context) {
-  return ProfileScreen(
-    actions: [
-      SignedOutAction((context) {
-        _signOut().then((success) => success
-            ? Navigator.of(context).pop()
-            : null); //todo delete account button
-      }),
-    ],
-  );
-}
+  Widget _getAvatar() {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final facebookSignedIn =
+        currentUser?.providerData[0].providerId == 'facebook.com'
+            ? true
+            : false;
+    return FutureBuilder<Map<String, dynamic>>(
+        // todo the profile pic will not be available if the token expired
+        future: facebookSignedIn ? FacebookAuth.instance.getUserData() : null,
+        builder: (context, snapShot) {
+          ImageProvider? foregroundImage;
+          String? photoURL = facebookSignedIn
+              ? (snapShot.data?['picture']['data']['url'])
+              : currentUser?.photoURL;
+          if (photoURL != null) {
+            foregroundImage = NetworkImage(photoURL);
+          }
+          return CircleAvatar(
+              radius: _avatarRadius,
+              foregroundImage: foregroundImage,
+              child: currentUser == null || photoURL == null
+                  ? Icon(Icons.person, size: _avatarRadius)
+                  : null);
+        });
+  }
 
-Future<bool> _signOut() async {
-  await FirebaseAuth.instance.signOut();
-  return FirebaseAuth.instance.currentUser == null;
-}
+  Widget _getProfileScreen(BuildContext context) {
+    return ProfileScreen(
+      actions: [
+        SignedOutAction((context) {
+          _signOut().then((success) => success
+              ? Navigator.of(context).pop()
+              : null); //todo delete account button
+        }),
+      ],
+    );
+  }
 
-String _localeStringToLanguage(String locale, BuildContext context) {
-  switch (locale) {
-    case 'en':
-      return 'English';
-    case 'zh_Hant':
-      return '䌓體中文';
-    case 'zh_Hans':
-      return '简体中文';
-    default:
-      return 'English';
+  Future<bool> _signOut() async {
+    await FirebaseUIAuth.signOut();
+    return FirebaseAuth.instance.currentUser == null;
+  }
+
+  String _localeStringToLanguage(String locale, BuildContext context) {
+    switch (locale) {
+      case 'en':
+        return 'English';
+      case 'zh_Hant':
+        return '䌓體中文';
+      case 'zh_Hans':
+        return '简体中文';
+      default:
+        return 'English';
+    }
   }
 }

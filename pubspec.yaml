@@ -51,8 +51,8 @@ dependencies:
   firebase_ui_localizations: ^1.2.0
   firebase_ui_oauth_google: ^1.0.19
   google_sign_in: ^5.4.4
-  firebase_ui_oauth_facebook: ^1.0.19
-  flutter_facebook_auth: ^4.4.1+1
+  firebase_ui_oauth_facebook: ^1.0.21
+  flutter_facebook_auth: ^4.4.0+1
 
   # 3rd party APIs
   # im_stepper: ^1.0.1+1 # Stepper for scheduler

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:tner_client/auth/sign_in.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
@@ -19,6 +20,8 @@ class SettingsScreenState extends State<SettingsScreen> {
   final List<String> _languageList = [];
   final _avatarRadius = 36.0;
   final _horizontalPadding = 16.0;
+  var _currentUser = FirebaseAuth.instance.currentUser;
+  String? photoURL;
 
   bool _darkMode = SharedPreferencesHelper.isDarkMode();
   String _localeString = SharedPreferencesHelper.localeToString(
@@ -26,22 +29,29 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   @override
   void initState() {
+    _updatePhotoURL();
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      photoURL = _currentUser?.photoURL;
       setState(() {
-        if (user == null) {
-          debugPrint('User is currently signed out!');
-        } else {
-          debugPrint('User is signed in!');
-        }
+        _currentUser = user;
+        _updatePhotoURL();
       });
     });
     super.initState();
   }
 
+  void _updatePhotoURL() async {
+    if (_currentUser?.providerData[0].providerId == 'facebook.com') {
+      var accessToken = await FacebookAuth.instance.accessToken;
+      photoURL = '${_currentUser?.photoURL}?access_token=${accessToken!.token}';
+      setState(() {});
+    } else {
+      photoURL = _currentUser?.photoURL;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    var currentUser = FirebaseAuth.instance.currentUser;
-    var photoURL = currentUser?.photoURL;
     for (var element in _localeStringList) {
       _languageList.add(_localeStringToLanguage(element, context));
     }
@@ -55,7 +65,7 @@ class SettingsScreenState extends State<SettingsScreen> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               InkWell(
-                onTap: currentUser == null
+                onTap: _currentUser == null
                     ? null
                     : () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -65,28 +75,27 @@ class SettingsScreenState extends State<SettingsScreen> {
                   alignment: AlignmentDirectional.centerStart,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: _horizontalPadding, vertical: 8.0),
-                      child: CircleAvatar(
-                          radius: _avatarRadius,
-                          foregroundImage:
-                              photoURL == null ? null : NetworkImage(photoURL),
-                          child: currentUser == null || photoURL == null
-                              ? Icon(Icons.person, size: _avatarRadius)
-                              : null),
-                    ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: _horizontalPadding, vertical: 8.0),
+                        child: CircleAvatar(
+                            radius: _avatarRadius,
+                            foregroundImage: photoURL == null
+                                ? null
+                                : NetworkImage(photoURL!),
+                            child: _currentUser == null || photoURL == null
+                                ? Icon(Icons.person, size: _avatarRadius)
+                                : null)),
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: (_avatarRadius + _horizontalPadding) * 2),
-                      child: Text(currentUser == null
-                          ? S.of(context).not_signed_in
-                          : currentUser.displayName ??
-                              currentUser.phoneNumber ??
-                              currentUser.email ??
-                              ''),
-                    ),
+                        padding: EdgeInsets.only(
+                            left: (_avatarRadius + _horizontalPadding) * 2),
+                        child: Text(_currentUser == null
+                            ? S.of(context).not_signed_in
+                            : _currentUser!.displayName ??
+                                _currentUser!.phoneNumber ??
+                                _currentUser!.email ??
+                                '')),
                     Visibility(
-                      visible: currentUser == null,
+                      visible: _currentUser == null,
                       child: Padding(
                         padding: EdgeInsets.only(right: _horizontalPadding),
                         child: Align(

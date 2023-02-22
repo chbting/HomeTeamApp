@@ -35,11 +35,10 @@ class AuthScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge))),
             AuthStateListener<OAuthController>(
               child: OAuthProviderButton(
-                // or any other OAuthProvider
                 provider: GoogleProvider(clientId: Id.googleClientId),
               ),
               listener: (oldState, newState, ctrl) {
-                if (newState is SignedIn) {
+                if (newState is SignedIn || newState is UserCreated) {
                   Navigator.of(context).pop();
                 }
                 return null;
@@ -47,11 +46,10 @@ class AuthScreen extends StatelessWidget {
             ),
             AuthStateListener<OAuthController>(
               child: OAuthProviderButton(
-                // or any other OAuthProvider
                 provider: FacebookProvider(clientId: Id.facebookClientId),
               ),
               listener: (oldState, newState, ctrl) {
-                if (newState is SignedIn) {
+                if (newState is SignedIn || newState is UserCreated) {
                   Navigator.of(context).pop();
                 }
                 return null;

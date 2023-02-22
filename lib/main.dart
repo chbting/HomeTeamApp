@@ -2,6 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,18 +25,9 @@ void main() async {
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
     GoogleProvider(clientId: Id.googleClientId),
-    // FacebookProvider(clientId: ''), //todo
-    // EmailLinkAuthProvider(
-    //   actionCodeSettings: ActionCodeSettings(
-    //     //todo
-    //     url: 'https://<your-project-id>.page.link',
-    //     handleCodeInApp: true,
-    //     androidMinimumVersion: '1',
-    //     androidPackageName:
-    //         'io.flutter.plugins.firebase_ui.firebase_ui_example',
-    //     iOSBundleId: 'io.flutter.plugins.flutterfireui.flutterfireUIExample',
-    //   ),
-    // ),
+    FacebookProvider(
+        clientId: Id.facebookClientId,
+        redirectUri: 'https://tnerserver.firebaseapp.com/__/auth/handler'),
     PhoneAuthProvider(),
   ]);
   await FirebaseAppCheck.instance.activate(
@@ -93,7 +85,7 @@ class App extends StatelessWidget {
               colorScheme: darkScheme,
               extensions: [darkCustomColors],
             ),
-            themeMode: SharedPreferencesHelper.isDarkMode() //todo
+            themeMode: SharedPreferencesHelper.isDarkMode() //todo system
                 ? ThemeMode.dark
                 : ThemeMode.light,
             locale: SharedPreferencesHelper.getLocale(),

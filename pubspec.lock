@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "953f097772b5fd095e0ee6eeeab34e3a42de91d5f43fa86b5de8485a57494f96"
+      sha256: "64fcb0dbca4386356386c085142fa6e79c00a3326ceaa778a2d25f5d9ba61441"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.15"
+    version: "1.0.16"
   analyzer:
     dependency: transitive
     description:
@@ -277,34 +277,34 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_auth
-      sha256: "4238545c2dd88774195bbb588182eff7f383ffe8b83e47302f1cb50a79f3dc01"
+      sha256: "9907d80446466e638dad31c195150b305dffd145dc57610fcd12c72289432143"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.8"
+    version: "4.2.9"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
-      sha256: "32d31705603b335b140a73bf8c933ee57ecec9f31f2d82b2371bb5ce714a6535"
+      sha256: c645fec50b0391aa878288f58fa4fe9762c271380c457aedf5c7c9b718604f68
       url: "https://pub.dev"
     source: hosted
-    version: "6.11.10"
+    version: "6.11.11"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
-      sha256: d20d5c2d14fd0ec422d6a58caada47354a4066f981f0130abda15bce37e53fa4
+      sha256: "2dcf2a36852b9091741b4a4047a02e1f2c43a62c6cacec7df573a793a6543e6d"
       url: "https://pub.dev"
     source: hosted
-    version: "5.2.7"
+    version: "5.2.8"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "46b80acfb472d8abc500c2cb6ce65c4b5237d825e4c23bfc3efc70df9eec1a6e"
+      sha256: fe30ac230f12f8836bb97e6e09197340d3c584526825b1746ea362a82e1e43f7
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.7.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
@@ -325,18 +325,18 @@ packages:
     dependency: transitive
     description:
       name: firebase_dynamic_links
-      sha256: "912674c07a9fb36687af43773dee282023d0fb4424634a9f186d43cb1e3bd631"
+      sha256: "053d609129a6a077f784eb921ae666954849b834ba7c8213ba9895005c67149f"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.14"
+    version: "5.0.15"
   firebase_dynamic_links_platform_interface:
     dependency: transitive
     description:
       name: firebase_dynamic_links_platform_interface
-      sha256: f25092bfc6c6f97e72b2303db4172a68360b87a7afebe9c891e36aa11a35bd32
+      sha256: "3280394aad7b130aae26bc0d4efbcca5d7075745e9f2ae3c288d13dd04f91394"
       url: "https://pub.dev"
     source: hosted
-    version: "0.2.3+29"
+    version: "0.2.3+30"
   firebase_storage:
     dependency: "direct main"
     description:
@@ -365,10 +365,10 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_ui_auth
-      sha256: dab49d95b2a498a4de6413882d5f9d4896aa222acef673d2588b63332e970924
+      sha256: "67b52b2f7d607355a07bae28d67f28e7b52a1e555a7f7cd1455f2e95be4d0816"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.13"
+    version: "1.1.14"
   firebase_ui_localizations:
     dependency: "direct main"
     description:
@@ -381,18 +381,18 @@ packages:
     dependency: transitive
     description:
       name: firebase_ui_oauth
-      sha256: "87e8440b0da2197f72abf4cacac049a837b6fbb9b50d0beca201413b1ff6c2f3"
+      sha256: "77faba56761198f57b8939e4a93ef6dbabc1b972a22ff90ec1033dcff981a071"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.13"
+    version: "1.1.14"
   firebase_ui_oauth_facebook:
     dependency: "direct main"
     description:
       name: firebase_ui_oauth_facebook
-      sha256: "326f130caa8f0aacf7f3d392993759a2591a3769254116fdf4c12a5b7e5b1000"
+      sha256: b092d56bcc7934354c8132795d75d236f9ae8a405eea0d3647e6f3b8b9a71360
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.20"
+    version: "1.0.21"
   firebase_ui_oauth_google:
     dependency: "direct main"
     description:

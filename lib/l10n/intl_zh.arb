@@ -177,5 +177,8 @@
 	"continue_with_google": "以Google帐号继续",
 	"sign_in_with_sms": "使用短信登入",
 	"or": "或",
-	"create_a_free_account": "注册免费帐户"
+	"create_a_free_account": "注册免费帐户",
+	"account_found": "已有帐户",
+	"sign_in_with_the_following_method": "以下列方式登入",
+	"please_enter_password": "请输入密码"
 }

@@ -75,7 +75,7 @@ class ZhLocalizations extends FirebaseUILocalizationLabels {
   String get enterSMSCodeText => "输入短信验证码";
 
   @override
-  String get findProviderForEmailTitleText => "输入您的电子邮件地址以继续";
+  String get findProviderForEmailTitleText => "您的电子邮件是？";
 
   @override
   String get forgotPasswordButtonLabel => "忘记了密码？";

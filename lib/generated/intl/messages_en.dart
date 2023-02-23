@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("AC (Window Type)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("Accept / Make an offer"),
+        "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("e.g. Flat 25, 12/F, Block 1"),
@@ -181,6 +182,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
+        "please_enter_password":
+            MessageLookupByLibrary.simpleMessage("Please enter password"),
         "please_manually_enter_sms_code": MessageLookupByLibrary.simpleMessage(
             "Please manually enter the SMS Code"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
@@ -251,6 +254,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign in with email"),
         "sign_in_with_sms":
             MessageLookupByLibrary.simpleMessage("Sign in with SMS"),
+        "sign_in_with_the_following_method":
+            MessageLookupByLibrary.simpleMessage(
+                "Sign in with the following method"),
         "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
         "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),

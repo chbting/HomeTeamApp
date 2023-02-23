@@ -75,7 +75,7 @@ class ZhTWLocalizations extends FirebaseUILocalizationLabels {
   String get enterSMSCodeText => "輸入簡訊驗證碼";
 
   @override
-  String get findProviderForEmailTitleText => "如要繼續操作，請輸入電子郵件地址";
+  String get findProviderForEmailTitleText => "你的電子郵件是？";
 
   @override
   String get forgotPasswordButtonLabel => "忘記密碼？";

@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ac_window_type": MessageLookupByLibrary.simpleMessage("冷氣 (窗口式)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("接受/提出更改"),
+        "account_found": MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("例: 1座12樓25室"),
@@ -155,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_required": MessageLookupByLibrary.simpleMessage("需要照片"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("選擇日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("選擇日期和時間"),
+        "please_enter_password": MessageLookupByLibrary.simpleMessage("請輸入密碼"),
         "please_manually_enter_sms_code":
             MessageLookupByLibrary.simpleMessage("請手動輸入驗證碼"),
         "please_put_in_a_valid_amount":
@@ -207,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),
         "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用電郵登入"),
         "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
+        "sign_in_with_the_following_method":
+            MessageLookupByLibrary.simpleMessage("你可以以下列方式登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在簽署"),
         "sign_out": MessageLookupByLibrary.simpleMessage("登出"),

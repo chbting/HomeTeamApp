@@ -1829,6 +1829,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Account found`
+  String get account_found {
+    return Intl.message(
+      'Account found',
+      name: 'account_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with the following method`
+  String get sign_in_with_the_following_method {
+    return Intl.message(
+      'Sign in with the following method',
+      name: 'sign_in_with_the_following_method',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter password`
+  String get please_enter_password {
+    return Intl.message(
+      'Please enter password',
+      name: 'please_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

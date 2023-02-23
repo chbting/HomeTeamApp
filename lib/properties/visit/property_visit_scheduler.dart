@@ -68,7 +68,9 @@ class PropertyVisitSchedulingScreenState
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar: AppBar(title: Text(S.of(context).schedule_property_visit)),
+            appBar: AppBar(
+                title: Text(S.of(context).schedule_property_visit),
+                leading: const CloseButton()),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -63,7 +62,9 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
       var stepIconColor = Theme.of(context).colorScheme.onSecondary;
 
       return Scaffold(
-          appBar: AppBar(title: Text(S.of(context).schedule_remodeling)),
+          appBar: AppBar(
+              title: Text(S.of(context).schedule_remodeling),
+              leading: const CloseButton()),
           body: Stack(children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +282,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
         FirebaseStorage.instance.ref('remodeling_order_images/dev');
     Map<File, Reference> refMap = {};
 
-    for (var image in files) {//todo bug: will upload old cached files
+    for (var image in files) {
+      //todo bug: will upload old cached files
       refMap[image] = storageRef.child(basename(image.path));
     }
 

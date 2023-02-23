@@ -177,5 +177,8 @@
 	"continue_with_google": "Continue with Google",
 	"sign_in_with_sms": "Sign in with SMS",
 	"or": "or",
-	"create_a_free_account": "Create a free account"
+	"create_a_free_account": "Create a free account",
+	"account_found": "Account found",
+	"sign_in_with_the_following_method": "Sign in with the following method",
+	"please_enter_password": "Please enter password"
 }

@@ -79,7 +79,7 @@ class EnLocalizations extends FirebaseUILocalizationLabels {
   String get enterSMSCodeText => "Enter SMS code";
 
   @override
-  String get findProviderForEmailTitleText => "Enter your email to continue";
+  String get findProviderForEmailTitleText => "What is your email?";
 
   @override
   String get forgotPasswordButtonLabel => "Forgotten password?";

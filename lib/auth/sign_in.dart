@@ -3,6 +3,7 @@ import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/auth/auth_button.dart';
+import 'package:tner_client/auth/email_sign_in.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
 
@@ -15,62 +16,57 @@ class AuthScreen extends StatelessWidget {
     const buttonHeight = 48.0;
     double buttonWidth =
         MediaQuery.of(context).size.width - horizontalPadding * 2;
-
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: const CloseButton(),
-      ),
+          //backgroundColor: Colors.transparent,
+          //elevation: 0,
+          ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(S.of(context).sign_in,
-                        style: Theme.of(context).textTheme.titleLarge))),
-            AuthStateListener<OAuthController>(
-              child: OAuthProviderButton(
-                provider: GoogleProvider(clientId: Id.googleClientId),
-              ),
-              listener: (oldState, newState, ctrl) {
-                if (newState is SignedIn || newState is UserCreated) {
-                  Navigator.of(context).pop();
-                }
-                return null;
-              },
-            ),
-            AuthStateListener<OAuthController>(
-              child: OAuthProviderButton(
-                provider: FacebookProvider(clientId: Id.facebookClientId),
-              ),
-              listener: (oldState, newState, ctrl) {
-                if (newState is SignedIn || newState is UserCreated) {
-                  Navigator.of(context).pop();
-                }
-                return null;
-              },
+            FirebaseUIActions(
+              actions: [
+                AuthStateChangeAction<SignedIn>((context, state) {
+                  if (state.user != null) {
+                    Navigator.of(context).pop();
+                  }
+                }),
+              ],
+              child: LoginView(
+                  showAuthActionSwitch: false,
+                  providers: [
+                    GoogleProvider(clientId: Id.googleClientId),
+                    FacebookProvider(clientId: Id.facebookClientId)
+                  ],
+                  action: AuthAction.signIn),
             ),
             AuthButton(
                 icon: Icons.email,
                 label: S.of(context).sign_in_with_email,
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          const EmailSignInScreen(isRegistration: false)));
+                }),
             AuthButton(
                 icon: Icons.phone_android,
                 label: S.of(context).sign_in_with_sms,
                 onPressed: () {}),
             _getSeparator(context),
             ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(buttonWidth, buttonHeight),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5.0))),
-                child: Text(S.of(context).create_a_free_account))
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(buttonWidth, buttonHeight),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0))),
+              child: Text(S.of(context).create_a_free_account),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        const EmailSignInScreen(isRegistration: true)));
+              },
+            )
           ],
         ),
       ),

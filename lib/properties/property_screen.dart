@@ -21,7 +21,8 @@ class PropertyScreenState extends State<PropertyScreen>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
-        FocusScope.of(context).requestFocus(FocusNode());
+        // Close the keyboard
+        FocusManager.instance.primaryFocus?.unfocus();
       }
     });
   }

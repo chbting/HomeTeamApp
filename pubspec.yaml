@@ -48,18 +48,19 @@ dependencies:
   firebase_app_check: ^0.1.1+9
   firebase_auth: ^4.2.6
   firebase_ui_auth: ^1.1.11
-  firebase_ui_localizations: ^1.2.0
-  firebase_ui_oauth_google: ^1.0.19
-  google_sign_in: ^5.4.4
-  firebase_ui_oauth_facebook: ^1.0.21
   flutter_facebook_auth: ^4.4.0+1
+  firebase_ui_localizations: ^1.2.0
+  firebase_ui_oauth: ^1.1.14
+  firebase_ui_oauth_google: ^1.0.19
+  firebase_ui_oauth_facebook: ^1.0.21
+  google_sign_in: ^5.4.4
 
   # 3rd party APIs
   # im_stepper: ^1.0.1+1 # Stepper for scheduler
   material_floating_search_bar: ^0.3.6 # Property searchbar
   speech_to_text: ^6.1.1
   avatar_glow: ^2.0.2 # For glowing mic icon
-  flutter_signin_button: ^2.0.0
+  # flutter_signin_button: ^2.0.0
   sms_autofill: ^2.2.0
 
   # The following adds the Cupertino Icons font to your application.

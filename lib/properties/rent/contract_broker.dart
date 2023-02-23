@@ -66,7 +66,9 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
-            appBar: AppBar(title: Text(S.of(context).negotiate_contract)),
+            appBar: AppBar(
+                title: Text(S.of(context).negotiate_contract),
+                leading: const CloseButton()),
             body: Stack(children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

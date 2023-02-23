@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/utils/speech_to_text_helper.dart';
 import 'package:tner_client/ui/toggleable_icon_button.dart';
+import 'package:tner_client/utils/speech_to_text_helper.dart';
 
 class SliverSearchBar extends StatefulWidget {
   const SliverSearchBar(
@@ -192,14 +192,14 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                     onStartPressed: () {
                       bool searchHasFocused = _focusNode.hasFocus;
                       FocusScope.of(context).unfocus();
-                      SpeechToTextHelper.speechToText(context,
-                          (value) {
+                      SpeechToTextHelper.speechToText(context, (value) {
                         if (value != null) {
                           _setQuery(value);
                           _submit();
                         } else {
                           searchHasFocused
-                              ? FocusScope.of(context).requestFocus(_focusNode)
+                              ? // Close the keyboard
+                              FocusManager.instance.primaryFocus?.unfocus()
                               : null;
                         }
                       });
@@ -229,7 +229,8 @@ class SliverSearchBarState extends State<SliverSearchBar> {
 
   void _open() {
     if (!_isOpen) {
-      FocusScope.of(context).requestFocus(_focusNode);
+      // Close the keyboard
+      FocusManager.instance.primaryFocus?.unfocus();
       setState(() {
         _isOpen = true;
         _isSearchButtonNotifier.value = false;

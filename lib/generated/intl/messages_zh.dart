@@ -236,10 +236,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "toilet_replacement": MessageLookupByLibrary.simpleMessage("坐厕更换"),
         "total": MessageLookupByLibrary.simpleMessage("总计"),
         "undo": MessageLookupByLibrary.simpleMessage("还原"),
+        "verify": MessageLookupByLibrary.simpleMessage("验证"),
         "visited_properties": MessageLookupByLibrary.simpleMessage("已睇楼盘"),
         "voice_search": MessageLookupByLibrary.simpleMessage("语音搜寻"),
         "waiting_for_sms_code_autofill":
             MessageLookupByLibrary.simpleMessage("等待自动填写验证码"),
-        "wallcoverings": MessageLookupByLibrary.simpleMessage("壁纸")
+        "wallcoverings": MessageLookupByLibrary.simpleMessage("壁纸"),
+        "what_is_your_phone_number":
+            MessageLookupByLibrary.simpleMessage("你的电话号码是？")
       };
 }

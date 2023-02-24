@@ -179,7 +179,9 @@
 	"account_found": "Account found",
 	"sign_in_with_the_following_method": "Sign in with the following method",
 	"please_enter_password": "Please enter password",
-	"continue_with_email": "Sign in with email",
+	"continue_with_email": "Continue with email",
 	"continue_with_sms": "Continue with SMS",
-	"or_create_a_free_account": "or create a free account"
+	"or_create_a_free_account": "or create a free account",
+	"what_is_your_phone_number": "What's your phone number?",
+	"verify": "Verify"
 }

@@ -79,7 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_person":
             MessageLookupByLibrary.simpleMessage("Contact Person"),
         "continue_with_email":
-            MessageLookupByLibrary.simpleMessage("Sign in with email"),
+            MessageLookupByLibrary.simpleMessage("Continue with email"),
         "continue_with_facebook":
             MessageLookupByLibrary.simpleMessage("Continue with Facebook"),
         "continue_with_google":
@@ -287,11 +287,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Toilet Replacement"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),
         "waiting_for_sms_code_autofill": MessageLookupByLibrary.simpleMessage(
             "Waiting for SMS code autofill"),
-        "wallcoverings": MessageLookupByLibrary.simpleMessage("Wallcoverings")
+        "wallcoverings": MessageLookupByLibrary.simpleMessage("Wallcoverings"),
+        "what_is_your_phone_number":
+            MessageLookupByLibrary.simpleMessage("What\'s your phone number?")
       };
 }

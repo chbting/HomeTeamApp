@@ -184,5 +184,7 @@
 	"please_enter_password": "請輸入密碼",
 	"continue_with_email": "以電郵繼續",
 	"continue_with_sms": "以短信繼續",
-	"or_create_a_free_account": "或創建新帳戶"
+	"or_create_a_free_account": "或創建新帳戶",
+	"what_is_your_phone_number": "你的電話號碼是？",
+	"verify": "驗證"
 }

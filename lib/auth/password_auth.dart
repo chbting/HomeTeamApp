@@ -1,8 +1,8 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 
-class PasswordSignInWidget extends StatelessWidget {
-  const PasswordSignInWidget(
+class PasswordAuthWidget extends StatelessWidget {
+  const PasswordAuthWidget(
       {Key? key, required this.email, required this.showRegistrationUI})
       : super(key: key);
 

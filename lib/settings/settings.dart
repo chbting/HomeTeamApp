@@ -164,6 +164,7 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   Widget _getProfileScreen(BuildContext context) {
     return ProfileScreen(
+      appBar: AppBar(),
       actions: [
         SignedOutAction((context) {
           _signOut().then((success) => success

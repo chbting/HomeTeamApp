@@ -1840,10 +1840,10 @@ class S {
     );
   }
 
-  /// `Sign in with email`
+  /// `Continue with email`
   String get continue_with_email {
     return Intl.message(
-      'Sign in with email',
+      'Continue with email',
       name: 'continue_with_email',
       desc: '',
       args: [],
@@ -1865,6 +1865,26 @@ class S {
     return Intl.message(
       'or create a free account',
       name: 'or_create_a_free_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's your phone number?`
+  String get what_is_your_phone_number {
+    return Intl.message(
+      'What\'s your phone number?',
+      name: 'what_is_your_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
       desc: '',
       args: [],
     );

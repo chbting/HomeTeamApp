@@ -1,7 +1,7 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/auth/account_found.dart';
-import 'package:tner_client/auth/password_sign_in.dart';
+import 'package:tner_client/auth/password_auth.dart';
 
 class EmailCheckScreen extends StatefulWidget {
   const EmailCheckScreen({Key? key}) : super(key: key);
@@ -44,12 +44,12 @@ class EmailCheckScreenState extends State<EmailCheckScreen> {
 
   Widget _getNextPage() {
     if (providerIDs.contains('password')) {
-      return PasswordSignInWidget(email: email, showRegistrationUI: false);
+      return PasswordAuthWidget(email: email, showRegistrationUI: false);
     } else if (providerIDs.contains('google.com') ||
         providerIDs.contains('facebook.com')) {
       return AccountFoundWidget(providerIDs: providerIDs);
     } else {
-      return PasswordSignInWidget(email: email, showRegistrationUI: true);
+      return PasswordAuthWidget(email: email, showRegistrationUI: true);
     }
   }
 }

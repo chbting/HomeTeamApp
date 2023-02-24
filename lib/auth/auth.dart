@@ -4,6 +4,7 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/auth/auth_button.dart';
 import 'package:tner_client/auth/email_check.dart';
+import 'package:tner_client/auth/sms_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
 
@@ -12,14 +13,10 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const horizontalPadding = 24.0;
-    const buttonHeight = 48.0;
-    double buttonWidth =
-        MediaQuery.of(context).size.width - horizontalPadding * 2;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -56,7 +53,17 @@ class AuthScreen extends StatelessWidget {
             AuthButton(
                 icon: Icons.phone_android,
                 label: S.of(context).continue_with_sms,
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(
+                          builder: (context) => const SMSAuthScreen()))
+                      .then((signedIn) =>
+                          signedIn ? Navigator.of(context).pop() : null);
+                  // showDialog(
+                  //     context: context,
+                  //     barrierDismissible: false,
+                  //     builder: (context) => SMSAuthDialog());
+                }),
           ],
         ),
       ),

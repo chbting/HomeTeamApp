@@ -180,5 +180,7 @@
 	"create_a_free_account": "Create a free account",
 	"account_found": "Account found",
 	"sign_in_with_the_following_method": "Sign in with the following method",
-	"please_enter_password": "Please enter password"
+	"please_enter_password": "Please enter password",
+	"is_registered_prompt_password_sign_in": "is a registered account, you can sign in with your password",
+	"is_not_registered_prompt_registration": "has not been registered. You can register with the following method."
 }

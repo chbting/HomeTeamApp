@@ -104,6 +104,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("冷氣機所在的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
+        "is_not_registered_prompt_registration":
+            MessageLookupByLibrary.simpleMessage("尚未註冊，你可以用下列方式註冊"),
+        "is_registered_prompt_password_sign_in":
+            MessageLookupByLibrary.simpleMessage("已為註冊用戶，你可以使用你的密碼來登入"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("業主接受/提出更改"),
@@ -210,7 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用電郵登入"),
         "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
         "sign_in_with_the_following_method":
-            MessageLookupByLibrary.simpleMessage("你可以以下列方式登入"),
+            MessageLookupByLibrary.simpleMessage("你可以使用下列方式登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在簽署"),
         "sign_out": MessageLookupByLibrary.simpleMessage("登出"),

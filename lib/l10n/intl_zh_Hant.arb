@@ -182,6 +182,8 @@
 	"or": "或",
 	"create_a_free_account": "註冊免費帳戶",
 	"account_found": "已有帳戶",
-	"sign_in_with_the_following_method": "你可以以下列方式登入",
-	"please_enter_password": "請輸入密碼"
+	"sign_in_with_the_following_method": "你可以使用下列方式登入",
+	"please_enter_password": "請輸入密碼",
+	"is_registered_prompt_password_sign_in": "已為註冊用戶，你可以使用你的密碼來登入",
+	"is_not_registered_prompt_registration": "尚未註冊，你可以用下列方式註冊"
 }

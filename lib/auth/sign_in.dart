@@ -48,7 +48,7 @@ class AuthScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>
-                          const EmailSignInScreen(isRegistration: false)));
+                          const EmailSignInScreen(fromRegistration: false)));
                 }),
             AuthButton(
                 icon: Icons.phone_android,
@@ -64,7 +64,7 @@ class AuthScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>
-                        const EmailSignInScreen(isRegistration: true)));
+                        const EmailSignInScreen(fromRegistration: true)));
               },
             )
           ],

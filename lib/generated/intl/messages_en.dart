@@ -118,6 +118,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "The room where the AC unit will be installed"),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
+        "is_not_registered_prompt_registration":
+            MessageLookupByLibrary.simpleMessage(
+                "has not been registered. You can register with the following method."),
+        "is_registered_prompt_password_sign_in":
+            MessageLookupByLibrary.simpleMessage(
+                "is a registered account, you can sign in with your password"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
             "Landlord accepts / counteroffer"),

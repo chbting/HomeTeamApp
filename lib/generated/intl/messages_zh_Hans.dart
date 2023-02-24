@@ -104,6 +104,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("空调所在的房间"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填写资料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期无效"),
+        "is_not_registered_prompt_registration":
+            MessageLookupByLibrary.simpleMessage("尚未注册，你可以用下列方式注册"),
+        "is_registered_prompt_password_sign_in":
+            MessageLookupByLibrary.simpleMessage("已为注册用户，你可以使用你的密码来登入"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龙"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("业主接受/提出更改"),
@@ -210,7 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用电邮登入"),
         "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
         "sign_in_with_the_following_method":
-            MessageLookupByLibrary.simpleMessage("以下列方式登入"),
+            MessageLookupByLibrary.simpleMessage("你可以使用下列方式登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時签署"),
         "sign_now": MessageLookupByLibrary.simpleMessage("現在签署"),
         "sign_out": MessageLookupByLibrary.simpleMessage("登出"),

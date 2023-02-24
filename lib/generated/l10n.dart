@@ -1859,6 +1859,26 @@ class S {
       args: [],
     );
   }
+
+  /// `is a registered account, you can sign in with your password`
+  String get is_registered_prompt_password_sign_in {
+    return Intl.message(
+      'is a registered account, you can sign in with your password',
+      name: 'is_registered_prompt_password_sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `has not been registered. You can register with the following method.`
+  String get is_not_registered_prompt_registration {
+    return Intl.message(
+      'has not been registered. You can register with the following method.',
+      name: 'is_not_registered_prompt_registration',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

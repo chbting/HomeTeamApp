@@ -179,6 +179,8 @@
 	"or": "或",
 	"create_a_free_account": "注册免费帐户",
 	"account_found": "已有帐户",
-	"sign_in_with_the_following_method": "以下列方式登入",
-	"please_enter_password": "请输入密码"
+	"sign_in_with_the_following_method": "你可以使用下列方式登入",
+	"please_enter_password": "请输入密码",
+	"is_registered_prompt_password_sign_in": "已为注册用户，你可以使用你的密码来登入",
+	"is_not_registered_prompt_registration": "尚未注册，你可以用下列方式注册"
 }

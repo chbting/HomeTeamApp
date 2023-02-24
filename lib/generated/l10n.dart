@@ -1690,16 +1690,6 @@ class S {
     );
   }
 
-  /// `Sign in with email`
-  String get sign_in_with_email {
-    return Intl.message(
-      'Sign in with email',
-      name: 'sign_in_with_email',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Cannot sign in`
   String get msg_cannot_sign_in {
     return Intl.message(
@@ -1800,16 +1790,6 @@ class S {
     );
   }
 
-  /// `Sign in with SMS`
-  String get sign_in_with_sms {
-    return Intl.message(
-      'Sign in with SMS',
-      name: 'sign_in_with_sms',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `or`
   String get or {
     return Intl.message(
@@ -1860,21 +1840,31 @@ class S {
     );
   }
 
-  /// `is a registered account, you can sign in with your password`
-  String get is_registered_prompt_password_sign_in {
+  /// `Sign in with email`
+  String get continue_with_email {
     return Intl.message(
-      'is a registered account, you can sign in with your password',
-      name: 'is_registered_prompt_password_sign_in',
+      'Sign in with email',
+      name: 'continue_with_email',
       desc: '',
       args: [],
     );
   }
 
-  /// `has not been registered. You can register with the following method.`
-  String get is_not_registered_prompt_registration {
+  /// `Continue with SMS`
+  String get continue_with_sms {
     return Intl.message(
-      'has not been registered. You can register with the following method.',
-      name: 'is_not_registered_prompt_registration',
+      'Continue with SMS',
+      name: 'continue_with_sms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or create a free account`
+  String get or_create_a_free_account {
+    return Intl.message(
+      'or create a free account',
+      name: 'or_create_a_free_account',
       desc: '',
       args: [],
     );

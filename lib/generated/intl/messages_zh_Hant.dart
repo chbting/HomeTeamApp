@@ -68,10 +68,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_remodeling": MessageLookupByLibrary.simpleMessage("確認預約"),
         "contact_number": MessageLookupByLibrary.simpleMessage("聯絡電話"),
         "contact_person": MessageLookupByLibrary.simpleMessage("聯絡人"),
+        "continue_with_email": MessageLookupByLibrary.simpleMessage("以電郵繼續"),
         "continue_with_facebook":
             MessageLookupByLibrary.simpleMessage("以 Facebook 帳號繼續"),
         "continue_with_google":
             MessageLookupByLibrary.simpleMessage("以Google帳號繼續"),
+        "continue_with_sms": MessageLookupByLibrary.simpleMessage("以短信繼續"),
         "contract_status": MessageLookupByLibrary.simpleMessage("租約進度"),
         "count": MessageLookupByLibrary.simpleMessage("數量"),
         "create_a_free_account": MessageLookupByLibrary.simpleMessage("註冊免費帳戶"),
@@ -104,10 +106,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("冷氣機所在的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
-        "is_not_registered_prompt_registration":
-            MessageLookupByLibrary.simpleMessage("尚未註冊，你可以用下列方式註冊"),
-        "is_registered_prompt_password_sign_in":
-            MessageLookupByLibrary.simpleMessage("已為註冊用戶，你可以使用你的密碼來登入"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("業主接受/提出更改"),
@@ -150,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "offered": MessageLookupByLibrary.simpleMessage("提出"),
         "ok": MessageLookupByLibrary.simpleMessage("確認"),
         "or": MessageLookupByLibrary.simpleMessage("或"),
+        "or_create_a_free_account":
+            MessageLookupByLibrary.simpleMessage("或創建新帳戶"),
         "original": MessageLookupByLibrary.simpleMessage("原定"),
         "owner": MessageLookupByLibrary.simpleMessage("業主"),
         "painting": MessageLookupByLibrary.simpleMessage("油潻"),
@@ -211,8 +211,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),
-        "sign_in_with_email": MessageLookupByLibrary.simpleMessage("使用電郵登入"),
-        "sign_in_with_sms": MessageLookupByLibrary.simpleMessage("使用短信登入"),
         "sign_in_with_the_following_method":
             MessageLookupByLibrary.simpleMessage("你可以使用下列方式登入"),
         "sign_later": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),

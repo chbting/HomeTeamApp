@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:tner_client/auth/sign_in.dart';
+import 'package:tner_client/auth/auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/settings/settings_ui.dart';
 import 'package:tner_client/ui/radio_list_dialog.dart';

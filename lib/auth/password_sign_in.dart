@@ -1,21 +1,18 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
 
 class PasswordSignInWidget extends StatelessWidget {
   const PasswordSignInWidget(
-      {Key? key, required this.email, required this.isRegistration})
+      {Key? key, required this.email, required this.showRegistrationUI})
       : super(key: key);
 
   final String email;
-  final bool isRegistration;
+  final bool showRegistrationUI;
 
   @override
   Widget build(BuildContext context) {
     var subtitle = email;
-    if (isRegistration) {
-      subtitle += ' ${S.of(context).is_registered_prompt_password_sign_in}';
-    }
+
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -32,7 +29,8 @@ class PasswordSignInWidget extends StatelessWidget {
               }),
             ],
             child: LoginView(
-                action: AuthAction.signIn,
+                action:
+                    showRegistrationUI ? AuthAction.signUp : AuthAction.signIn,
                 showAuthActionSwitch: false,
                 subtitleBuilder: (context, _) => Text(subtitle),
                 email: email,

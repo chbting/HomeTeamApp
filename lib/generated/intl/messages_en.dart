@@ -78,10 +78,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contact Number"),
         "contact_person":
             MessageLookupByLibrary.simpleMessage("Contact Person"),
+        "continue_with_email":
+            MessageLookupByLibrary.simpleMessage("Sign in with email"),
         "continue_with_facebook":
             MessageLookupByLibrary.simpleMessage("Continue with Facebook"),
         "continue_with_google":
             MessageLookupByLibrary.simpleMessage("Continue with Google"),
+        "continue_with_sms":
+            MessageLookupByLibrary.simpleMessage("Continue with SMS"),
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
@@ -118,12 +122,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "The room where the AC unit will be installed"),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
-        "is_not_registered_prompt_registration":
-            MessageLookupByLibrary.simpleMessage(
-                "has not been registered. You can register with the following method."),
-        "is_registered_prompt_password_sign_in":
-            MessageLookupByLibrary.simpleMessage(
-                "is a registered account, you can sign in with your password"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
             "Landlord accepts / counteroffer"),
@@ -174,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "offered": MessageLookupByLibrary.simpleMessage("Offered"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
+        "or_create_a_free_account":
+            MessageLookupByLibrary.simpleMessage("or create a free account"),
         "original": MessageLookupByLibrary.simpleMessage("Original"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "painting": MessageLookupByLibrary.simpleMessage("Painting"),
@@ -256,10 +256,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
-        "sign_in_with_email":
-            MessageLookupByLibrary.simpleMessage("Sign in with email"),
-        "sign_in_with_sms":
-            MessageLookupByLibrary.simpleMessage("Sign in with SMS"),
         "sign_in_with_the_following_method":
             MessageLookupByLibrary.simpleMessage(
                 "Sign in with the following method"),

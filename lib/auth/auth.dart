@@ -3,7 +3,7 @@ import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/auth/auth_button.dart';
-import 'package:tner_client/auth/email_sign_in.dart';
+import 'package:tner_client/auth/email_check.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/id.dart';
 
@@ -17,10 +17,7 @@ class AuthScreen extends StatelessWidget {
     double buttonWidth =
         MediaQuery.of(context).size.width - horizontalPadding * 2;
     return Scaffold(
-      appBar: AppBar(
-          //backgroundColor: Colors.transparent,
-          //elevation: 0,
-          ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Column(
@@ -36,6 +33,10 @@ class AuthScreen extends StatelessWidget {
               ],
               child: LoginView(
                   showAuthActionSwitch: false,
+                  subtitleBuilder: (context, _) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Text(S.of(context).or_create_a_free_account),
+                      ),
                   providers: [
                     GoogleProvider(clientId: Id.googleClientId),
                     FacebookProvider(clientId: Id.facebookClientId)
@@ -44,47 +45,21 @@ class AuthScreen extends StatelessWidget {
             ),
             AuthButton(
                 icon: Icons.email,
-                label: S.of(context).sign_in_with_email,
+                label: S.of(context).continue_with_email,
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          const EmailSignInScreen(fromRegistration: false)));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(
+                          builder: (context) => const EmailCheckScreen()))
+                      .then((signedIn) =>
+                          signedIn ? Navigator.of(context).pop() : null);
                 }),
             AuthButton(
                 icon: Icons.phone_android,
-                label: S.of(context).sign_in_with_sms,
+                label: S.of(context).continue_with_sms,
                 onPressed: () {}),
-            _getSeparator(context),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  minimumSize: Size(buttonWidth, buttonHeight),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0))),
-              child: Text(S.of(context).create_a_free_account),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        const EmailSignInScreen(fromRegistration: true)));
-              },
-            )
           ],
         ),
       ),
-    );
-  }
-
-  Widget _getSeparator(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
-      child: Row(children: <Widget>[
-        const Expanded(child: Divider()),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(S.of(context).or,
-              style: Theme.of(context).textTheme.titleMedium),
-        ),
-        const Expanded(child: Divider()),
-      ]),
     );
   }
 }

@@ -36,7 +36,7 @@ class AccountFoundWidget extends StatelessWidget {
               primary: false,
               shrinkWrap: true,
               itemCount: providerIDs.length,
-              itemBuilder: (context, index) {//todo password option?
+              itemBuilder: (context, index) {
                 OAuthProvider provider;
                 switch (providerIDs[index]) {
                   case 'google.com':

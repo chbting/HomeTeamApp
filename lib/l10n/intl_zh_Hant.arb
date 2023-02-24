@@ -167,7 +167,6 @@
 	"tenant": "租客",
 	"total": "總計",
 	"sign_in": "登入",
-	"sign_in_with_email": "使用電郵登入",
 	"msg_cannot_sign_in": "無法登入",
 	"sign_out": "登出",
 	"not_signed_in": "(未登入)",
@@ -178,12 +177,12 @@
 	"please_manually_enter_sms_code": "請手動輸入驗證碼",
 	"continue_with_facebook": "以 Facebook 帳號繼續",
 	"continue_with_google": "以Google帳號繼續",
-	"sign_in_with_sms": "使用短信登入",
 	"or": "或",
 	"create_a_free_account": "註冊免費帳戶",
 	"account_found": "已有帳戶",
 	"sign_in_with_the_following_method": "你可以使用下列方式登入",
 	"please_enter_password": "請輸入密碼",
-	"is_registered_prompt_password_sign_in": "已為註冊用戶，你可以使用你的密碼來登入",
-	"is_not_registered_prompt_registration": "尚未註冊，你可以用下列方式註冊"
+	"continue_with_email": "以電郵繼續",
+	"continue_with_sms": "以短信繼續",
+	"or_create_a_free_account": "或創建新帳戶"
 }

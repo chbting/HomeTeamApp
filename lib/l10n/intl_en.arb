@@ -164,7 +164,6 @@
 	"tenant": "Tenant",
 	"total": "Total",
 	"sign_in": "Sign in",
-	"sign_in_with_email": "Sign in with email",
 	"msg_cannot_sign_in": "Cannot sign in",
 	"sign_out": "Sign out",
 	"not_signed_in": "(Not signed in)",
@@ -175,12 +174,12 @@
 	"please_manually_enter_sms_code": "Please manually enter the SMS Code",
 	"continue_with_facebook": "Continue with Facebook",
 	"continue_with_google": "Continue with Google",
-	"sign_in_with_sms": "Sign in with SMS",
 	"or": "or",
 	"create_a_free_account": "Create a free account",
 	"account_found": "Account found",
 	"sign_in_with_the_following_method": "Sign in with the following method",
 	"please_enter_password": "Please enter password",
-	"is_registered_prompt_password_sign_in": "is a registered account, you can sign in with your password",
-	"is_not_registered_prompt_registration": "has not been registered. You can register with the following method."
+	"continue_with_email": "Sign in with email",
+	"continue_with_sms": "Continue with SMS",
+	"or_create_a_free_account": "or create a free account"
 }

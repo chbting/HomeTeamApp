@@ -38,7 +38,7 @@ class SMSAuthDialogState extends State<SMSAuthDialog> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(!_codeSent
-                ? S.of(context).sign_in_with_sms
+                ? S.of(context).continue_with_sms
                 : !_autofillFailed
                     ? S.of(context).waiting_for_sms_code_autofill
                     : S.of(context).please_manually_enter_sms_code),

@@ -21,16 +21,15 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   bool _showProgressIndicator = false;
   bool _codeRequested = false;
   bool _autofillFailed = false;
-  String _verificationId = '';
-  String? _smsCode;
-  int? _resendToken;
   final _horizontalPadding = 24.0;
   final _buttonHeight = 48.0;
   double _buttonWidth = 0.0;
+  String _verificationId = '';
+  String? _smsCode;
 
   @override
   void initState() {
-    _listenForCode();
+    listenForSMSCode();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _buttonWidth =
@@ -52,7 +51,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
     return Scaffold(
         appBar: AppBar(leading: const CloseButton()),
         body: PageView(
-          // physics: const NeverScrollableScrollPhysics(), //todo
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
             _getPhoneInputWidget(),
@@ -99,15 +98,13 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
                     minimumSize: Size(_buttonWidth, _buttonHeight),
                     shape: const StadiumBorder()),
                 onPressed: () {
-                  if (!_codeRequested) {
-                    if (_formKey.currentState!.validate()) {
-                      setState(() {
-                        _codeRequested = true;
-                        _showProgressIndicator = true;
-                      });
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      _requestSMSCode('+852 ${_controller.value.text}');
-                    }
+                  if (!_codeRequested && _formKey.currentState!.validate()) {
+                    setState(() {
+                      _codeRequested = true;
+                      _showProgressIndicator = true;
+                    });
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    _requestSMSCode('+852 ${_controller.value.text}');
                   }
                 },
                 child: _codeRequested
@@ -124,20 +121,20 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
 
   Widget _getPinInputWidget() {
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(_horizontalPadding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                     !_autofillFailed
                         ? S.of(context).waiting_for_sms_code_autofill
                         : S.of(context).please_manually_enter_sms_code,
                     style: Theme.of(context).textTheme.titleLarge),
+                Container(width: 16.0),
                 Visibility(
                     visible: _showProgressIndicator,
                     child: const SizedBox(
@@ -147,34 +144,23 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
               ],
             ),
           ),
-          PinFieldAutoFill(
-              //todo need to tap two times to type
-              decoration: UnderlineDecoration(
-                  lineStrokeCap: StrokeCap.square,
-                  colorBuilder: PinListenColorBuilder(
-                      Theme.of(context).colorScheme.primary,
-                      Colors.grey.shade500)),
-              onCodeChanged: (code) {
-                _smsCode = code;
-              }, //code changed callback
-              codeLength: 6 //code length, default 6
-              ),
+          PinInputTextField(
+            autoFocus: _autofillFailed,
+            decoration: UnderlineDecoration(
+              lineStrokeCap: StrokeCap.square,
+              colorBuilder: PinListenColorBuilder(
+                  Theme.of(context).colorScheme.primary, Colors.grey.shade500),
+            ),
+            onChanged: (code) => _smsCode = code,
+            onSubmit: (code) => _verifySMSCode(),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   shape: const StadiumBorder(),
                   minimumSize: Size(_buttonWidth, _buttonHeight)),
-              onPressed: () {
-                if (_smsCode?.length == 6) {
-                  PhoneAuthCredential credential = PhoneAuthProvider.credential(
-                      verificationId: _verificationId, smsCode: _smsCode ?? '');
-                  _auth.signInWithCredential(credential).then((value) {
-                    Navigator.of(context).pop(true);
-                  });
-                }
-                //todo onError, e.g. wrong sms code, expired Verification id
-              },
+              onPressed: () => _verifySMSCode(),
               child: Text(S.of(context).verify),
             ),
           ),
@@ -201,38 +187,70 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
       verificationCompleted: (PhoneAuthCredential credential) async {
         // ANDROID ONLY!
         // This handler will only be called on Android devices which support automatic SMS code resolution.
-        await _auth.signInWithCredential(credential).then((value) {
-          Navigator.of(context).pop(true);
-        });
+
+        if (mounted) {
+          await _auth.signInWithCredential(credential).then((value) {
+            Navigator.of(context).pop(true);
+          });
+
+          //todo remove
+          // debugPrint('verificationCompleted!!');
+          // setState(() {
+          //   _showProgressIndicator = false;
+          //   _autofillFailed = true;
+          // });
+        }
       },
       verificationFailed: (FirebaseAuthException e) {
-        if (e.code == 'invalid-phone-number') {
-          debugPrint('The provided phone number is not valid.'); //todo
+        if (mounted) {
+          if (e.code == 'invalid-phone-number') {
+            debugPrint('The provided phone number is not valid.'); //todo
+          }
+          Navigator.of(context).pop(false);
         }
-        Navigator.of(context).pop(false);
       },
       codeSent: (String verificationId, int? resendToken) {
-        _pageController.nextPage(
-            //todo failsafe for double call
-            duration: const Duration(milliseconds: 250),
-            curve: Curves.easeIn);
-        _verificationId = verificationId;
-        _resendToken = resendToken;
-        setState(() {
-          _codeRequested = false;
-          _controller.clear();
-        });
+        if (mounted) {
+          _pageController.nextPage(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeIn);
+          setState(() {
+            _codeRequested = false;
+            _controller.clear();
+            _verificationId = verificationId;
+          });
+        }
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        setState(() {
-          _showProgressIndicator = false;
-          _autofillFailed = true;
-        });
+        if (mounted) {
+          setState(() {
+            _showProgressIndicator = false;
+            _autofillFailed = true;
+          });
+        }
       },
     );
   }
 
-  void _listenForCode() async {
+  void _verifySMSCode() {
+    if (_smsCode?.length == 6) {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: _verificationId, smsCode: _smsCode ?? '');
+      _auth.signInWithCredential(credential).then((value) {
+        Navigator.of(context).pop(true);
+      });
+    }
+    //todo onError, e.g. wrong sms code, expired Verification id
+  }
+
+  void listenForSMSCode() async {
     await SmsAutoFill().listenForCode();
+  }
+
+  Future<void> sampleRequest() {
+    return Future.delayed(
+      const Duration(seconds: 4),
+      () => debugPrint('Your code is 54321'),
+    );
   }
 }

@@ -33,6 +33,9 @@ dependencies:
     sdk: flutter
 
   # Official APIs
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.5
   intl: ^0.17.0 # For language localizations
   shared_preferences: ^2.0.17
   dynamic_color: ^1.6.2
@@ -60,12 +63,7 @@ dependencies:
   material_floating_search_bar: ^0.3.6 # Property searchbar
   speech_to_text: ^6.1.1
   avatar_glow: ^2.0.2 # For glowing mic icon
-  # flutter_signin_button: ^2.0.0
-  sms_autofill: ^2.2.0
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
+  sms_autofill: ^2.3.0
 
 dev_dependencies:
   flutter_test:

@@ -47,8 +47,9 @@ class AuthScreen extends StatelessWidget {
                   Navigator.of(context)
                       .push(MaterialPageRoute(
                           builder: (context) => const EmailCheckScreen()))
-                      .then((signedIn) =>
-                          signedIn ? Navigator.of(context).pop() : null);
+                      .then((signedIn) => signedIn != null && signedIn
+                          ? Navigator.of(context).pop()
+                          : null);
                 }),
             AuthButton(
                 icon: Icons.phone_android,
@@ -57,8 +58,9 @@ class AuthScreen extends StatelessWidget {
                   Navigator.of(context)
                       .push(MaterialPageRoute(
                           builder: (context) => const SMSAuthScreen()))
-                      .then((signedIn) =>
-                          signedIn ? Navigator.of(context).pop() : null);
+                      .then((signedIn) => signedIn != null && signedIn
+                          ? Navigator.of(context).pop()
+                          : null);
                   // showDialog(
                   //     context: context,
                   //     barrierDismissible: false,

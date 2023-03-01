@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/visit/property_visit_data.dart';
 import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/ui/property_list_tile.dart';
+import 'package:tner_client/properties/property_list_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 
 class PropertyVisitSequencerWidget extends StatefulWidget {

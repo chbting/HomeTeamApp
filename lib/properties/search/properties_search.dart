@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/ui/property_list_tile.dart';
+import 'package:tner_client/properties/property_list_tile.dart';
 import 'package:tner_client/ui/sliver_search_bar.dart';
 
 class PropertySearchScreen extends StatefulWidget {
@@ -42,11 +42,8 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
         },
         childCount: _propertyList.length,
       ),
-      searchSuggestions: [
-        S.of(context).hong_kong,
-        S.of(context).kowloon,
-        S.of(context).new_territories
-      ],
+      // todo implement search history
+      searchSuggestions: const [],
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/properties/property.dart';
 import 'package:tner_client/properties/rent/contract_broker.dart';
-import 'package:tner_client/ui/property_list_tile.dart';
+import 'package:tner_client/properties/property_list_tile.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
   const VisitedPropertiesScreen({Key? key}) : super(key: key);

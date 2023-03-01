@@ -45,8 +45,7 @@ class SliverSearchBarState extends State<SliverSearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    // Note: toolbarHeight = iconSize + (icon padding + card padding +
-    //  vertical margins) * 2
+    // toolbarHeight = iconSize + (icon padding + card padding + vertical margins) * 2
     double sliverAppBarHeight = (Theme.of(context).iconTheme.size ?? 24.0) +
         (8.0 + 4.0 + SliverSearchBar.verticalMargins) * 2;
 
@@ -63,6 +62,7 @@ class SliverSearchBarState extends State<SliverSearchBar> {
             toolbarHeight: sliverAppBarHeight,
             pinned: true,
             backgroundColor: Colors.transparent,
+            surfaceTintColor: Colors.transparent,
             elevation: 0.0,
             titleSpacing: 0.0,
             flexibleSpace: Stack(
@@ -75,9 +75,10 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                           end: Alignment.topCenter,
                           colors: [
                         Theme.of(context)
-                            .scaffoldBackgroundColor
+                            .colorScheme
+                            .background
                             .withOpacity(0.0),
-                        Theme.of(context).scaffoldBackgroundColor
+                        Theme.of(context).colorScheme.background
                       ])),
                 ),
                 // Search suggestion backdrop (top part)
@@ -198,8 +199,7 @@ class SliverSearchBarState extends State<SliverSearchBar> {
                           _submit();
                         } else {
                           searchHasFocused
-                              ? // Close the keyboard
-                              FocusManager.instance.primaryFocus?.unfocus()
+                              ? FocusManager.instance.primaryFocus?.unfocus()
                               : null;
                         }
                       });

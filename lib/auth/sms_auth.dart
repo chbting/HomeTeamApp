@@ -12,10 +12,11 @@ class SMSAuthScreen extends StatefulWidget {
   State<StatefulWidget> createState() => SMSAuthScreenState();
 }
 
-class SMSAuthScreenState extends State<SMSAuthScreen> {
+class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController(initialPage: 0);
   final TextEditingController _controller = TextEditingController();
+  final TextEditingController _codeController = TextEditingController();
   final _autoRetrievalTimeout = 30;
   bool _showProgressIndicator = false;
   bool _codeRequested = false;
@@ -24,13 +25,13 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   final _buttonHeight = 48.0;
   double _buttonWidth = 0.0;
   String _verificationId = '';
-  String? _smsCode;
+  String? _userInputSmsCode;
   String _phoneErrorMessage = '';
   String _codeErrorMessage = '';
 
   @override
   void initState() {
-    listenForSMSCode();
+    listenForCode();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       setState(() {
         _buttonWidth =
@@ -43,7 +44,8 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   @override
   void dispose() {
     _controller.dispose();
-    SmsAutoFill().unregisterListener();
+    _codeController.dispose();
+    unregisterListener();
     super.dispose();
   }
 
@@ -52,7 +54,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
     return Scaffold(
         appBar: AppBar(leading: const CloseButton()),
         body: PageView(
-          //todo physics: const NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
             _getPhoneInputWidget(),
@@ -157,9 +159,9 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
               ],
             ),
           ),
-          PinFieldAutoFill(
-            //todo double tap issue, clear on submit issue
+          PinInputTextField(
             autoFocus: _autofillFailed,
+            controller: _codeController,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
             ],
@@ -169,8 +171,8 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
                   Theme.of(context).colorScheme.primary,
                   Colors.grey.shade500), //todo color
             ),
-            onCodeChanged: (code) => _smsCode = code,
-            onCodeSubmitted: (code) => _verifySMSCode(),
+            onChanged: (code) => _userInputSmsCode = code,
+            onSubmit: (code) => _verifySMSCode(),
           ),
           Padding(
               padding: const EdgeInsets.only(top: 16.0),
@@ -259,13 +261,15 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   }
 
   void _verifySMSCode() {
-    if (_smsCode?.length == 6) {
+    if (_userInputSmsCode?.length == 6) {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
-          verificationId: _verificationId, smsCode: _smsCode ?? '');
+          verificationId: _verificationId, smsCode: _userInputSmsCode ?? '');
       FirebaseAuth.instance.signInWithCredential(credential).then((value) {
         Navigator.of(context).pop(true);
       }).catchError((error, stackTrace) {
-        _codeErrorMessage = S.of(context).msg_sms_verification_failed;
+        setState(() {
+          _codeErrorMessage = S.of(context).msg_sms_verification_failed;
+        });
       });
     } else {
       setState(() {
@@ -274,7 +278,11 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
     }
   }
 
-  void listenForSMSCode() async {
-    await SmsAutoFill().listenForCode();
+  @override
+  void codeUpdated() {
+    debugPrint('code received:$code');
+    if (code != null) {
+      _codeController.text = code!;
+    }
   }
 }

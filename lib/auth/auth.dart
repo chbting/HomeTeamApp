@@ -6,7 +6,7 @@ import 'package:tner_client/auth/auth_button.dart';
 import 'package:tner_client/auth/email_check.dart';
 import 'package:tner_client/auth/sms_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/id.dart';
+import 'package:tner_client/auth_info.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -35,8 +35,8 @@ class AuthScreen extends StatelessWidget {
                         child: Text(S.of(context).or_create_a_free_account),
                       ),
                   providers: [
-                    GoogleProvider(clientId: Id.googleClientId),
-                    FacebookProvider(clientId: Id.facebookClientId)
+                    GoogleProvider(clientId: AuthInfo.googleClientId),
+                    FacebookProvider(clientId: AuthInfo.facebookClientId)
                   ],
                   action: AuthAction.signIn),
             ),

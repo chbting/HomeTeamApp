@@ -4,7 +4,7 @@ import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/id.dart';
+import 'package:tner_client/auth_info.dart';
 
 class AccountFoundWidget extends StatelessWidget {
   const AccountFoundWidget({Key? key, required this.providerIDs})
@@ -40,13 +40,13 @@ class AccountFoundWidget extends StatelessWidget {
                 OAuthProvider provider;
                 switch (providerIDs[index]) {
                   case 'google.com':
-                    provider = GoogleProvider(clientId: Id.googleClientId);
+                    provider = GoogleProvider(clientId: AuthInfo.googleClientId);
                     break;
                   case 'facebook.com':
-                    provider = FacebookProvider(clientId: Id.facebookClientId);
+                    provider = FacebookProvider(clientId: AuthInfo.facebookClientId);
                     break;
                   default:
-                    provider = GoogleProvider(clientId: Id.googleClientId);
+                    provider = GoogleProvider(clientId: AuthInfo.googleClientId);
                     break;
                 }
 

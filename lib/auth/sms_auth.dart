@@ -169,7 +169,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
               lineStrokeCap: StrokeCap.square,
               colorBuilder: PinListenColorBuilder(
                   Theme.of(context).colorScheme.primary,
-                  Colors.grey.shade500), //todo color
+                  Theme.of(context).colorScheme.onBackground),
             ),
             onChanged: (code) => _userInputSmsCode = code,
             onSubmit: (code) => _verifySMSCode(),

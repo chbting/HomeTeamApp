@@ -14,30 +14,36 @@ class AuthButton extends StatelessWidget {
   final Color? backgroundColor;
   final VoidCallback? onPressed;
 
+  final _horizontalPadding = 24.0;
+
   @override
   Widget build(BuildContext context) {
-    const horizontalPadding = 24.0;
     double buttonWidth =
-        MediaQuery.of(context).size.width - horizontalPadding * 2;
+        MediaQuery.of(context).size.width - _horizontalPadding * 2;
 
     return Padding(
         padding: const EdgeInsets.symmetric(vertical: 4.0),
-        child: ElevatedButton(
+        child: FilledButton.tonal(
             onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
+            style: FilledButton.styleFrom(
                 minimumSize: Size(buttonWidth, 48.0),
                 backgroundColor: backgroundColor,
+                elevation: 1.0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0))),
+                    borderRadius: BorderRadius.circular(8.0))),
             child: Stack(
               children: <Widget>[
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Icon(icon)),
+                Align(alignment: Alignment.centerLeft, child: Icon(icon)),
                 Align(
                     alignment: Alignment.center,
-                    child: Text(label,
-                        style: Theme.of(context).textTheme.titleMedium))
+                    child: Text(
+                      label,
+                      style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .fontSize),
+                    ))
               ],
             )));
   }

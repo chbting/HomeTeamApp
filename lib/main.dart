@@ -9,10 +9,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tner_client/auth/firebase_ui_localizations/localizations_overrides.dart';
+import 'package:tner_client/auth_info.dart';
 import 'package:tner_client/firebase_options.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/home_screen.dart';
-import 'package:tner_client/id.dart';
 import 'package:tner_client/ui/color/color_schemes.g.dart';
 import 'package:tner_client/ui/color/custom_color.g.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
@@ -24,15 +24,14 @@ void main() async {
   );
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
-    GoogleProvider(clientId: Id.googleClientId),
+    GoogleProvider(clientId: AuthInfo.googleClientId),
     FacebookProvider(
-        clientId: Id.facebookClientId,
-        redirectUri: 'https://tnerserver.firebaseapp.com/__/auth/handler'),
+        clientId: AuthInfo.facebookClientId,
+        redirectUri: AuthInfo.facebookRedirectUri),
     PhoneAuthProvider(),
   ]);
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: 'recaptcha-v3-site-key',
-    //androidProvider: AndroidProvider.debug,
   );
   await SharedPreferencesHelper.ensureInitialized();
 
@@ -45,7 +44,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO check to see if orientation works on ipad
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return Consumer<SharedPreferencesChangedNotifier>(
         builder: (innerContext, _, child) {

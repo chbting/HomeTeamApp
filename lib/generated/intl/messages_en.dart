@@ -151,11 +151,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cannot recognize speech"),
         "msg_cannot_sign_in":
             MessageLookupByLibrary.simpleMessage("Cannot sign in"),
+        "msg_invalid_phone_number":
+            MessageLookupByLibrary.simpleMessage("Invalid phone number"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage(
                 "Please input a valid Hong Kong phone number"),
         "msg_select_remodeling_item": MessageLookupByLibrary.simpleMessage(
             "Please select an remodeling item"),
+        "msg_sms_verification_failed":
+            MessageLookupByLibrary.simpleMessage("SMS Verification failed"),
         "msg_voice_search_unavailable":
             MessageLookupByLibrary.simpleMessage("Voice search is unavailable"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),

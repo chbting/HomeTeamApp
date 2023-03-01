@@ -183,5 +183,7 @@
 	"continue_with_sms": "以短信继续",
 	"or_create_a_free_account": "或创建新帐户",
 	"what_is_your_phone_number": "你的电话号码是？",
-	"verify": "验证"
+	"verify": "验证",
+	"msg_sms_verification_failed": "短信验证失败",
+	"msg_invalid_phone_number": "电话号码无效"
 }

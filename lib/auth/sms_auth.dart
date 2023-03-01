@@ -16,7 +16,6 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final PageController _pageController = PageController(initialPage: 0);
   final TextEditingController _controller = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _autoRetrievalTimeout = 30;
   bool _showProgressIndicator = false;
   bool _codeRequested = false;
@@ -26,6 +25,8 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
   double _buttonWidth = 0.0;
   String _verificationId = '';
   String? _smsCode;
+  String _phoneErrorMessage = '';
+  String _codeErrorMessage = '';
 
   @override
   void initState() {
@@ -51,7 +52,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
     return Scaffold(
         appBar: AppBar(leading: const CloseButton()),
         body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
+          //todo physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
             _getPhoneInputWidget(),
@@ -85,10 +86,19 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
                 decoration: InputDecoration(
                     labelText: S.of(context).phone_number,
                     helperText: S.of(context).hong_kong_number_only),
+                onChanged: (value) {
+                  _phoneErrorMessage = '';
+                },
                 validator: (value) {
-                  return (value == null || value.isEmpty || value.length < 8)
-                      ? S.of(context).msg_please_input_valid_phone_number
-                      : null;
+                  if (_phoneErrorMessage.isNotEmpty) {
+                    return _phoneErrorMessage;
+                  } else if (value == null ||
+                      value.isEmpty ||
+                      value.length < 8) {
+                    return S.of(context).msg_please_input_valid_phone_number;
+                  } else {
+                    return null;
+                  }
                 }),
           ),
           Padding(
@@ -101,7 +111,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
                   if (!_codeRequested && _formKey.currentState!.validate()) {
                     setState(() {
                       _codeRequested = true;
-                      _showProgressIndicator = true;
+                      _codeErrorMessage = '';
                     });
                     FocusManager.instance.primaryFocus?.unfocus();
                     _requestSMSCode('+852 ${_controller.value.text}');
@@ -124,6 +134,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
       padding: EdgeInsets.all(_horizontalPadding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
@@ -134,26 +145,42 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
                         ? S.of(context).waiting_for_sms_code_autofill
                         : S.of(context).please_manually_enter_sms_code,
                     style: Theme.of(context).textTheme.titleLarge),
-                Container(width: 16.0),
                 Visibility(
                     visible: _showProgressIndicator,
-                    child: const SizedBox(
-                        height: 24.0,
-                        width: 24.0,
-                        child: CircularProgressIndicator(strokeWidth: 3.0)))
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 16.0),
+                      child: SizedBox(
+                          height: 24.0,
+                          width: 24.0,
+                          child: CircularProgressIndicator(strokeWidth: 3.0)),
+                    ))
               ],
             ),
           ),
-          PinInputTextField(
+          PinFieldAutoFill(
+            //todo double tap issue, clear on submit issue
             autoFocus: _autofillFailed,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
             decoration: UnderlineDecoration(
               lineStrokeCap: StrokeCap.square,
               colorBuilder: PinListenColorBuilder(
-                  Theme.of(context).colorScheme.primary, Colors.grey.shade500),
+                  Theme.of(context).colorScheme.primary,
+                  Colors.grey.shade500), //todo color
             ),
-            onChanged: (code) => _smsCode = code,
-            onSubmit: (code) => _verifySMSCode(),
+            onCodeChanged: (code) => _smsCode = code,
+            onCodeSubmitted: (code) => _verifySMSCode(),
           ),
+          Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Text(
+                _codeErrorMessage,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium!
+                    .copyWith(color: Theme.of(context).colorScheme.error),
+              )),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
@@ -181,32 +208,31 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
 
   /// [phoneNumber] format '+852 12345678'
   void _requestSMSCode(String phoneNumber) async {
-    await _auth.verifyPhoneNumber(
+    await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       timeout: Duration(seconds: _autoRetrievalTimeout),
       verificationCompleted: (PhoneAuthCredential credential) async {
         // ANDROID ONLY!
         // This handler will only be called on Android devices which support automatic SMS code resolution.
-
         if (mounted) {
-          await _auth.signInWithCredential(credential).then((value) {
+          await FirebaseAuth.instance
+              .signInWithCredential(credential)
+              .then((value) {
             Navigator.of(context).pop(true);
           });
-
-          //todo remove
-          // debugPrint('verificationCompleted!!');
-          // setState(() {
-          //   _showProgressIndicator = false;
-          //   _autofillFailed = true;
-          // });
         }
       },
       verificationFailed: (FirebaseAuthException e) {
         if (mounted) {
           if (e.code == 'invalid-phone-number') {
-            debugPrint('The provided phone number is not valid.'); //todo
+            _phoneErrorMessage = S.of(context).msg_invalid_phone_number;
+          } else {
+            _phoneErrorMessage = S.of(context).msg_sms_verification_failed;
           }
-          Navigator.of(context).pop(false);
+          _formKey.currentState!.validate();
+          setState(() {
+            _codeRequested = false;
+          });
         }
       },
       codeSent: (String verificationId, int? resendToken) {
@@ -216,7 +242,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
               curve: Curves.easeIn);
           setState(() {
             _codeRequested = false;
-            _controller.clear();
+            _showProgressIndicator = true;
             _verificationId = verificationId;
           });
         }
@@ -236,21 +262,19 @@ class SMSAuthScreenState extends State<SMSAuthScreen> {
     if (_smsCode?.length == 6) {
       PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: _verificationId, smsCode: _smsCode ?? '');
-      _auth.signInWithCredential(credential).then((value) {
+      FirebaseAuth.instance.signInWithCredential(credential).then((value) {
         Navigator.of(context).pop(true);
+      }).catchError((error, stackTrace) {
+        _codeErrorMessage = S.of(context).msg_sms_verification_failed;
+      });
+    } else {
+      setState(() {
+        _codeErrorMessage = S.of(context).msg_sms_verification_failed;
       });
     }
-    //todo onError, e.g. wrong sms code, expired Verification id
   }
 
   void listenForSMSCode() async {
     await SmsAutoFill().listenForCode();
-  }
-
-  Future<void> sampleRequest() {
-    return Future.delayed(
-      const Duration(seconds: 4),
-      () => debugPrint('Your code is 54321'),
-    );
   }
 }

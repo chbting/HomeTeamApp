@@ -183,5 +183,7 @@
 	"continue_with_sms": "Continue with SMS",
 	"or_create_a_free_account": "or create a free account",
 	"what_is_your_phone_number": "What's your phone number?",
-	"verify": "Verify"
+	"verify": "Verify",
+	"msg_sms_verification_failed": "SMS Verification failed",
+	"msg_invalid_phone_number": "Invalid phone number"
 }

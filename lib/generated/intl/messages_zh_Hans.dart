@@ -131,10 +131,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("未能辨识语音"),
         "msg_cannot_sign_in": MessageLookupByLibrary.simpleMessage("无法登入"),
+        "msg_invalid_phone_number":
+            MessageLookupByLibrary.simpleMessage("电话号码无效"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage("请输入有效的香港电话号码"),
         "msg_select_remodeling_item":
             MessageLookupByLibrary.simpleMessage("请选择所需的装修项目"),
+        "msg_sms_verification_failed":
+            MessageLookupByLibrary.simpleMessage("短信验证失败"),
         "msg_voice_search_unavailable":
             MessageLookupByLibrary.simpleMessage("无法使用语音搜寻"),
         "name": MessageLookupByLibrary.simpleMessage("姓名"),

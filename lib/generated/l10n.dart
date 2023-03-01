@@ -1889,6 +1889,26 @@ class S {
       args: [],
     );
   }
+
+  /// `SMS Verification failed`
+  String get msg_sms_verification_failed {
+    return Intl.message(
+      'SMS Verification failed',
+      name: 'msg_sms_verification_failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid phone number`
+  String get msg_invalid_phone_number {
+    return Intl.message(
+      'Invalid phone number',
+      name: 'msg_invalid_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

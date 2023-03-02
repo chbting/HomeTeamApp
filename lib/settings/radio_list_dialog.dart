@@ -3,12 +3,12 @@ import 'package:tner_client/generated/l10n.dart';
 
 class RadioListDialog {
   static show(
-      BuildContext context,
-      List<String> valueList,
-      List<String> titleList,
-      String defaultValue,
-      String title,
-      Function(String) callback) {
+      {required BuildContext context,
+      required List<String> values,
+      required List<String> labels,
+      required String defaultValue,
+      required String title,
+      required Function(String) callback}) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -17,7 +17,7 @@ class RadioListDialog {
               contentPadding: EdgeInsets.zero,
               content: SizedBox(
                   width: double.minPositive,
-                  child: _RadioListView(valueList, titleList, defaultValue,
+                  child: _RadioListView(values, labels, defaultValue,
                       (value) {
                     callback(value);
                   })),

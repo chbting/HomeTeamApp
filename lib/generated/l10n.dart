@@ -1749,6 +1749,46 @@ class S {
       args: [],
     );
   }
+
+  /// `App Settings`
+  String get app_settings {
+    return Intl.message(
+      'App Settings',
+      name: 'app_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get setting_off {
+    return Intl.message(
+      'Off',
+      name: 'setting_off',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On`
+  String get setting_on {
+    return Intl.message(
+      'On',
+      name: 'setting_on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use system settings`
+  String get use_system_settings {
+    return Intl.message(
+      'Use system settings',
+      name: 'use_system_settings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "afternoon": MessageLookupByLibrary.simpleMessage("Afternoon"),
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "am": MessageLookupByLibrary.simpleMessage("AM"),
+        "app_settings": MessageLookupByLibrary.simpleMessage("App Settings"),
         "area_gross": MessageLookupByLibrary.simpleMessage("Area (Gross)"),
         "area_gross_abr": MessageLookupByLibrary.simpleMessage("Gross"),
         "area_net": MessageLookupByLibrary.simpleMessage("Area (S.A.)"),
@@ -234,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_from_gallery":
             MessageLookupByLibrary.simpleMessage("Select from Gallery"),
         "send_sms_code": MessageLookupByLibrary.simpleMessage("Send SMS code"),
+        "setting_off": MessageLookupByLibrary.simpleMessage("Off"),
+        "setting_on": MessageLookupByLibrary.simpleMessage("On"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
@@ -266,6 +269,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
+        "use_system_settings":
+            MessageLookupByLibrary.simpleMessage("Use system settings"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),

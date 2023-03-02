@@ -72,7 +72,7 @@ class PropertyVisitDatePickerWidgetState
                 DateFormat(Format.dateLong,
                         SharedPreferencesHelper.getLocale().languageCode)
                     .format(widget.data.dateTimePicked),
-                style: Theme.of(context).textTheme.subtitle1),
+                style: Theme.of(context).textTheme.titleMedium),
             onExpansionChanged: (isExpanded) {
               if (isExpanded && _timePickerKey.currentState!.isExpanded()) {
                 _timePickerKey.currentState!.setExpanded(false);
@@ -105,7 +105,7 @@ class PropertyVisitDatePickerWidgetState
                         hour: widget.data.dateTimePicked.hour,
                         minute: widget.data.dateTimePicked.minute)
                     .format(context),
-                style: Theme.of(context).textTheme.subtitle1),
+                style: Theme.of(context).textTheme.titleMedium),
             onExpansionChanged: (isExpanded) {
               if (isExpanded && _datePickerKey.currentState!.isExpanded()) {
                 _datePickerKey.currentState!.setExpanded(false);

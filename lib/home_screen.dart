@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/contracts/contracts.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/owner/owner.dart';
 import 'package:tner_client/properties/property_screen.dart';
 import 'package:tner_client/settings/settings.dart';
 

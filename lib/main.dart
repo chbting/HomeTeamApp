@@ -83,10 +83,8 @@ class App extends StatelessWidget {
               colorScheme: darkScheme,
               extensions: [darkCustomColors],
             ),
-            themeMode: SharedPreferencesHelper.isDarkMode() //todo system
-                ? ThemeMode.dark
-                : ThemeMode.light,
-            locale: SharedPreferencesHelper.getLocale(),
+            themeMode: SharedPreferencesHelper.getThemeMode(),
+            locale: SharedPreferencesHelper.getLocale(), //todo null for system default
             home: const HomeScreen());
       });
     });

@@ -169,5 +169,9 @@
 	"what_is_your_phone_number": "你的电话号码是？",
 	"verify": "验证",
 	"msg_sms_verification_failed": "短信验证失败",
-	"msg_invalid_phone_number": "电话号码无效"
+	"msg_invalid_phone_number": "电话号码无效",
+	"app_settings": "App 设定",
+	"setting_off": "关闭",
+	"setting_on": "开启",
+	"use_system_settings": "使用系统设定"
 }

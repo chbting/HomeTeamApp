@@ -172,5 +172,9 @@
 	"what_is_your_phone_number": "你的電話號碼是？",
 	"verify": "驗證",
 	"msg_sms_verification_failed": "短信驗証失敗",
-	"msg_invalid_phone_number": "電話號碼無效"
+	"msg_invalid_phone_number": "電話號碼無效",
+	"app_settings": "App 設定",
+	"setting_off": "關閉",
+	"setting_on": "開啓",
+	"use_system_settings": "使用系統設定"
 }

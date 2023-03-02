@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:tner_client/settings/locale_helper.dart';
 
 class SpeechToTextHelper {
   static final _speechToText = SpeechToText();
@@ -37,7 +37,7 @@ class SpeechToTextHelper {
         onSpeechToTextResult(null);
       } else {
         _context = context;
-        String localeId = SharedPreferencesHelper.getVoiceRecognitionLocaleId();
+        String localeId = LocaleHelper.getVoiceRecognitionLocaleId(context);
 
         _showSpeechToTextDialog(context, localeId);
         log('${DateTime.now()} begin listening');
@@ -87,7 +87,7 @@ class SpeechToTextHelper {
                           child: const Icon(Icons.mic, size: 32.0),
                         ),
                       )),
-                  Text(SharedPreferencesHelper.getVoiceRecognitionLanguage(
+                  Text(LocaleHelper.getVoiceRecognitionLanguage(
                       localeId, context))
                 ],
               ),

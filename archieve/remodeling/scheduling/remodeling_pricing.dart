@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
+
+import '../remodeling_types.dart';
 
 class RemodelingPricing {
   static int getEstimate(RemodelingItem item) {

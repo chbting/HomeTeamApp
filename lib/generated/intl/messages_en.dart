@@ -22,8 +22,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "ac_window_type":
-            MessageLookupByLibrary.simpleMessage("AC (Window Type)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("Accept / Make an offer"),
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
@@ -114,12 +112,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("hr"),
         "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
-        "imaging_instruction_ac_1": MessageLookupByLibrary.simpleMessage(
-            "A front closeup of the current AC unit"),
-        "imaging_instruction_ac_2": MessageLookupByLibrary.simpleMessage(
-            "The wall on which the AC unit will be installed"),
-        "imaging_instruction_ac_3": MessageLookupByLibrary.simpleMessage(
-            "The room where the AC unit will be installed"),
         "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
@@ -156,8 +148,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage(
                 "Please input a valid Hong Kong phone number"),
-        "msg_select_remodeling_item": MessageLookupByLibrary.simpleMessage(
-            "Please select an remodeling item"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("SMS Verification failed"),
         "msg_voice_search_unavailable":
@@ -180,8 +170,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("or create a free account"),
         "original": MessageLookupByLibrary.simpleMessage("Original"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
-        "painting": MessageLookupByLibrary.simpleMessage("Painting"),
-        "pest_control": MessageLookupByLibrary.simpleMessage("Pest Control"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "photo_added":
             MessageLookupByLibrary.simpleMessage("Photos have been added"),
@@ -221,17 +209,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "reason_sign_rental_contract": MessageLookupByLibrary.simpleMessage(
             "Sign the rental contract with biometric authentication"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
-        "remodeling": MessageLookupByLibrary.simpleMessage("Remodeling"),
-        "remodeling_address":
-            MessageLookupByLibrary.simpleMessage("Remodeling Address"),
-        "remodeling_address_and_contacts": MessageLookupByLibrary.simpleMessage(
-            "Contacts & Remodeling Address"),
-        "remodeling_options":
-            MessageLookupByLibrary.simpleMessage("Remodeling Options"),
-        "remodeling_start_date":
-            MessageLookupByLibrary.simpleMessage("Remodeling Start Date"),
-        "remodeling_status": MessageLookupByLibrary.simpleMessage("Status"),
-        "removals": MessageLookupByLibrary.simpleMessage("Removals"),
         "remove_property_from_cart":
             MessageLookupByLibrary.simpleMessage("Remove"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("Rent"),
@@ -287,8 +264,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tenant signs the contract"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
-        "toilet_replacement":
-            MessageLookupByLibrary.simpleMessage("Toilet Replacement"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
@@ -297,7 +272,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),
         "waiting_for_sms_code_autofill": MessageLookupByLibrary.simpleMessage(
             "Waiting for SMS code autofill"),
-        "wallcoverings": MessageLookupByLibrary.simpleMessage("Wallcoverings"),
         "what_is_your_phone_number":
             MessageLookupByLibrary.simpleMessage("What\'s your phone number?")
       };

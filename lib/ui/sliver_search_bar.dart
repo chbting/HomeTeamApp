@@ -33,8 +33,8 @@ class SliverSearchBarState extends State<SliverSearchBar> {
 
   @override
   void initState() {
-    super.initState();
     _focusNode = FocusNode();
+    super.initState();
   }
 
   @override

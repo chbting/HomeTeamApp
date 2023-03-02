@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_pricing.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/custom_stepper.dart' as custom;
+
+import '../remodeling_types.dart';
+import 'remodeling_inherited_data.dart';
+import 'remodeling_order.dart';
+import 'remodeling_pricing.dart';
+import 'remodeling_scheduler.dart';
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget({Key? key}) : super(key: key);

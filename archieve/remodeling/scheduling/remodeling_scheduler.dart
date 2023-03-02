@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_confirmation.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_contacts.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_images.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/file_helper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+
+import 'remodeling_confirmation.dart';
+import 'remodeling_contacts.dart';
+import 'remodeling_images.dart';
+import 'remodeling_inherited_data.dart';
+import 'remodeling_options.dart';
 
 class RemodelingScheduler extends StatefulWidget {
   const RemodelingScheduler({Key? key}) : super(key: key);

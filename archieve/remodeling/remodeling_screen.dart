@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/remodeling/remodeling_status.dart';
-import 'package:tner_client/remodeling/remodeling_selections.dart';
 import 'package:tner_client/generated/l10n.dart';
+
+import 'remodeling_selections.dart';
+import 'remodeling_status.dart';
 
 class RemodelingScreen extends StatelessWidget {
   const RemodelingScreen({Key? key}) : super(key: key);

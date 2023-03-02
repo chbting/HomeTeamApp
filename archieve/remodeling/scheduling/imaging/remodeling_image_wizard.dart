@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
 import 'package:tner_client/ui/custom_im_stepper/first_stepper/number_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/ui/two_button_bar.dart';
 import 'package:tner_client/utils/file_helper.dart';
+
+import '../../remodeling_types.dart';
 
 /// if [retake] is true, returns after taking the picture indicated by
 /// initialIndex

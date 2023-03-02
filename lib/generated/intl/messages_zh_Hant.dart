@@ -22,7 +22,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "ac_window_type": MessageLookupByLibrary.simpleMessage("冷氣 (窗口式)"),
         "accept_or_make_an_offer":
             MessageLookupByLibrary.simpleMessage("接受/提出更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帳戶"),
@@ -98,12 +97,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("小時"),
         "hours": MessageLookupByLibrary.simpleMessage("小時"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
-        "imaging_instruction_ac_1":
-            MessageLookupByLibrary.simpleMessage("現有冷氣機的正面特寫"),
-        "imaging_instruction_ac_2":
-            MessageLookupByLibrary.simpleMessage("冷氣機所在的牆身"),
-        "imaging_instruction_ac_3":
-            MessageLookupByLibrary.simpleMessage("冷氣機所在的房間"),
         "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
@@ -135,8 +128,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("電話號碼無效"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage("請輸入有效的香港電話號碼"),
-        "msg_select_remodeling_item":
-            MessageLookupByLibrary.simpleMessage("請選擇所需的裝修項目"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("短信驗証失敗"),
         "msg_voice_search_unavailable":
@@ -156,8 +147,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("或創建新帳戶"),
         "original": MessageLookupByLibrary.simpleMessage("原定"),
         "owner": MessageLookupByLibrary.simpleMessage("業主"),
-        "painting": MessageLookupByLibrary.simpleMessage("油潻"),
-        "pest_control": MessageLookupByLibrary.simpleMessage("滅蟲"),
         "phone_number": MessageLookupByLibrary.simpleMessage("電話號碼"),
         "photo_added": MessageLookupByLibrary.simpleMessage("照片已加入"),
         "photo_not_required": MessageLookupByLibrary.simpleMessage("無需照片"),
@@ -187,14 +176,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "reason_sign_rental_contract":
             MessageLookupByLibrary.simpleMessage("使用生物認證簽署租约"),
         "region": MessageLookupByLibrary.simpleMessage("地域"),
-        "remodeling": MessageLookupByLibrary.simpleMessage("裝修"),
-        "remodeling_address": MessageLookupByLibrary.simpleMessage("裝修地址"),
-        "remodeling_address_and_contacts":
-            MessageLookupByLibrary.simpleMessage("聯絡及裝修地址"),
-        "remodeling_options": MessageLookupByLibrary.simpleMessage("裝修選項"),
-        "remodeling_start_date": MessageLookupByLibrary.simpleMessage("裝修開始日期"),
-        "remodeling_status": MessageLookupByLibrary.simpleMessage("工程進度"),
-        "removals": MessageLookupByLibrary.simpleMessage("清拆"),
         "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租樓"),
         "reset": MessageLookupByLibrary.simpleMessage("重設"),
@@ -237,7 +218,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "tenant_sign_contract": MessageLookupByLibrary.simpleMessage("租客簽約"),
         "time": MessageLookupByLibrary.simpleMessage("時間"),
         "title": MessageLookupByLibrary.simpleMessage("稱謂"),
-        "toilet_replacement": MessageLookupByLibrary.simpleMessage("坐廁更換"),
         "total": MessageLookupByLibrary.simpleMessage("總計"),
         "undo": MessageLookupByLibrary.simpleMessage("還原"),
         "verify": MessageLookupByLibrary.simpleMessage("驗證"),
@@ -245,7 +225,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("語音搜尋"),
         "waiting_for_sms_code_autofill":
             MessageLookupByLibrary.simpleMessage("等待自動填寫驗證碼"),
-        "wallcoverings": MessageLookupByLibrary.simpleMessage("牆紙"),
         "what_is_your_phone_number":
             MessageLookupByLibrary.simpleMessage("你的電話號碼是？")
       };

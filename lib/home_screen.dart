@@ -18,35 +18,30 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _selectedIndex, children: const <Widget>[
-        PropertyScreen(),
-        ContractsScreen(),
-        OwnerScreen(),
-        SettingsScreen()
-      ]),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).colorScheme.onSurfaceVariant,
-        onTap: (index) => setState(() {
+      body: <Widget>[
+        const PropertyScreen(),
+        const ContractsScreen(),
+        const SettingsScreen()
+      ][_selectedIndex],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) => setState(() {
           _selectedIndex = index;
         }),
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.apartment),
+        destinations: <Widget>[
+          NavigationDestination(
+            icon: const Icon(Icons.apartment_outlined),
+            selectedIcon: const Icon(Icons.apartment),
             label: S.of(context).property,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.description),
+          NavigationDestination(
+            icon: const Icon(Icons.description_outlined),
+            selectedIcon: const Icon(Icons.description),
             label: S.of(context).agreements,
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.perm_identity),
-            label: S.of(context).owner,
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings),
+          NavigationDestination(
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
             label: S.of(context).settings,
           )
         ],

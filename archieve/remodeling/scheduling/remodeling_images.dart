@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
-import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_viewer.dart';
-import 'package:tner_client/remodeling/scheduling/imaging/remodeling_image_wizard.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
+
+import '../remodeling_types.dart';
+import 'imaging/remodeling_image_viewer.dart';
+import 'imaging/remodeling_image_wizard.dart';
+import 'remodeling_inherited_data.dart';
+import 'remodeling_scheduler.dart';
 
 class RemodelingImagesWidget extends StatefulWidget {
   const RemodelingImagesWidget({Key? key}) : super(key: key);

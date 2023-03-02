@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
 import 'package:tner_client/ui/address_form.dart';
 import 'package:tner_client/ui/contact_person_form.dart';
 import 'package:tner_client/ui/theme.dart';
+
+import 'remodeling_inherited_data.dart';
+import 'remodeling_order.dart';
+import 'remodeling_scheduler.dart';
 
 class RemodelingContactsWidget extends StatefulWidget {
   const RemodelingContactsWidget({Key? key}) : super(key: key);

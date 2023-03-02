@@ -50,16 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Remodeling`
-  String get remodeling {
-    return Intl.message(
-      'Remodeling',
-      name: 'remodeling',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Agreements`
   String get agreements {
     return Intl.message(
@@ -150,16 +140,6 @@ class S {
     );
   }
 
-  /// `Status`
-  String get remodeling_status {
-    return Intl.message(
-      'Status',
-      name: 'remodeling_status',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Owner`
   String get owner {
     return Intl.message(
@@ -170,51 +150,11 @@ class S {
     );
   }
 
-  /// `Painting`
-  String get painting {
-    return Intl.message(
-      'Painting',
-      name: 'painting',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Wallcoverings`
-  String get wallcoverings {
-    return Intl.message(
-      'Wallcoverings',
-      name: 'wallcoverings',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Pest Control`
-  String get pest_control {
-    return Intl.message(
-      'Pest Control',
-      name: 'pest_control',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Suspended Ceiling`
   String get suspended_ceiling {
     return Intl.message(
       'Suspended Ceiling',
       name: 'suspended_ceiling',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Toilet Replacement`
-  String get toilet_replacement {
-    return Intl.message(
-      'Toilet Replacement',
-      name: 'toilet_replacement',
       desc: '',
       args: [],
     );
@@ -240,31 +180,11 @@ class S {
     );
   }
 
-  /// `Please select an remodeling item`
-  String get msg_select_remodeling_item {
-    return Intl.message(
-      'Please select an remodeling item',
-      name: 'msg_select_remodeling_item',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Dismiss`
   String get dismiss {
     return Intl.message(
       'Dismiss',
       name: 'dismiss',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Removals`
-  String get removals {
-    return Intl.message(
-      'Removals',
-      name: 'removals',
       desc: '',
       args: [],
     );
@@ -400,16 +320,6 @@ class S {
     );
   }
 
-  /// `Remodeling Address`
-  String get remodeling_address {
-    return Intl.message(
-      'Remodeling Address',
-      name: 'remodeling_address',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Hong Kong number only`
   String get hong_kong_number_only {
     return Intl.message(
@@ -420,41 +330,11 @@ class S {
     );
   }
 
-  /// `Remodeling Start Date`
-  String get remodeling_start_date {
-    return Intl.message(
-      'Remodeling Start Date',
-      name: 'remodeling_start_date',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Remodeling Options`
-  String get remodeling_options {
-    return Intl.message(
-      'Remodeling Options',
-      name: 'remodeling_options',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Unit, floor, name of the building`
   String get address_line1_label {
     return Intl.message(
       'Unit, floor, name of the building',
       name: 'address_line1_label',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contacts & Remodeling Address`
-  String get remodeling_address_and_contacts {
-    return Intl.message(
-      'Contacts & Remodeling Address',
-      name: 'remodeling_address_and_contacts',
       desc: '',
       args: [],
     );
@@ -575,16 +455,6 @@ class S {
     return Intl.message(
       'Ms.',
       name: 'ms',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `AC (Window Type)`
-  String get ac_window_type {
-    return Intl.message(
-      'AC (Window Type)',
-      name: 'ac_window_type',
       desc: '',
       args: [],
     );
@@ -1535,36 +1405,6 @@ class S {
     return Intl.message(
       'Cameras are not available',
       name: 'cameras_not_available',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `A front closeup of the current AC unit`
-  String get imaging_instruction_ac_1 {
-    return Intl.message(
-      'A front closeup of the current AC unit',
-      name: 'imaging_instruction_ac_1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The wall on which the AC unit will be installed`
-  String get imaging_instruction_ac_2 {
-    return Intl.message(
-      'The wall on which the AC unit will be installed',
-      name: 'imaging_instruction_ac_2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The room where the AC unit will be installed`
-  String get imaging_instruction_ac_3 {
-    return Intl.message(
-      'The room where the AC unit will be installed',
-      name: 'imaging_instruction_ac_3',
       desc: '',
       args: [],
     );

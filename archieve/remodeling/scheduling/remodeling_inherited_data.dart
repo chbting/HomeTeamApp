@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
+
+import '../remodeling_types.dart';
+import 'remodeling_order.dart';
 
 class RemodelingInheritedData extends InheritedWidget {
   const RemodelingInheritedData(

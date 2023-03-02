@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/remodeling/remodeling_types.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_order.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_inherited_data.dart';
-import 'package:tner_client/remodeling/scheduling/remodeling_scheduler.dart';
+
+import 'remodeling_types.dart';
+import 'scheduling/remodeling_inherited_data.dart';
+import 'scheduling/remodeling_order.dart';
+import 'scheduling/remodeling_scheduler.dart';
 
 class RemodelingSelectionsScreen extends StatefulWidget {
   const RemodelingSelectionsScreen({Key? key}) : super(key: key);

@@ -263,7 +263,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     }
                   },
                 ),
-                ElevatedButton.icon(
+                FilledButton.icon(
                   icon: Icon(_activeStep == 2
                       ? Icons.fingerprint
                       : (_activeStep == 3 ? Icons.check : Icons.arrow_forward)),
@@ -272,7 +272,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                       : (_activeStep == 3
                           ? S.of(context).submit
                           : S.of(context).next)),
-                  style: ElevatedButton.styleFrom(
+                  style: FilledButton.styleFrom(
                       minimumSize:
                           Size(_buttonWidth, ContractBrokerScreen.buttonHeight),
                       shape: const StadiumBorder()),

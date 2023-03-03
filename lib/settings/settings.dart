@@ -68,12 +68,12 @@ class SettingsScreenState extends State<SettingsScreen> {
                   padding: EdgeInsets.only(right: _horizontalPadding),
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child: OutlinedButton(
+                    child: FilledButton.tonal(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const AuthScreen()));
                         },
-                        style: ElevatedButton.styleFrom(
+                        style: FilledButton.styleFrom(
                             shape: const StadiumBorder()),
                         child: Text(S.of(context).sign_in)),
                   ),

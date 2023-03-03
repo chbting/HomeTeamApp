@@ -105,8 +105,8 @@ class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
+            child: FilledButton(
+                style: FilledButton.styleFrom(
                     minimumSize: Size(_buttonWidth, _buttonHeight),
                     shape: const StadiumBorder()),
                 onPressed: () {
@@ -185,8 +185,8 @@ class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
               )),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
+            child: FilledButton(
+              style: FilledButton.styleFrom(
                   shape: const StadiumBorder(),
                   minimumSize: Size(_buttonWidth, _buttonHeight)),
               onPressed: () => _verifySMSCode(),

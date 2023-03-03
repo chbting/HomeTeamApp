@@ -256,10 +256,10 @@ class PropertyVisitSchedulingScreenState
             Container(
                 alignment: Alignment.topCenter,
                 child: _activeStep == 2
-                    ? ElevatedButton.icon(
+                    ? FilledButton.icon(
                         icon: const Icon(Icons.fingerprint),
                         label: Text(S.of(context).sign_now),
-                        style: ElevatedButton.styleFrom(
+                        style: FilledButton.styleFrom(
                             minimumSize: Size(_biometricButtonWidth,
                                 PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),
@@ -310,14 +310,14 @@ class PropertyVisitSchedulingScreenState
                           }
                         },
                       )
-                    : ElevatedButton.icon(
+                    : FilledButton.icon(
                         icon: Icon(_activeStep < _totalSteps - 1
                             ? Icons.arrow_forward
                             : Icons.check),
                         label: Text(_activeStep < _totalSteps - 1
                             ? S.of(context).next
                             : S.of(context).confirm),
-                        style: ElevatedButton.styleFrom(
+                        style: FilledButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
                                 PropertyVisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),

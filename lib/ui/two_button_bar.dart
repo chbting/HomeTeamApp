@@ -55,10 +55,10 @@ class TwoButtonBar extends StatelessWidget {
                     backgroundColor: Theme.of(context).scaffoldBackgroundColor),
                 onPressed: onLeftButtonPressed),
             //Right button
-            ElevatedButton.icon(
+            FilledButton.icon(
                 icon: rightButtonIcon,
                 label: rightButtonLabel,
-                style: ElevatedButton.styleFrom(
+                style: FilledButton.styleFrom(
                   minimumSize: Size(buttonWidth, buttonHeight),
                   shape: const StadiumBorder(),
                 ),

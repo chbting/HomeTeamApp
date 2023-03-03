@@ -173,5 +173,7 @@
 	"app_settings": "App Settings",
 	"setting_off": "Off",
 	"setting_on": "On",
-	"use_system_settings": "Use system settings"
+	"use_system_settings": "Use system settings",
+	"landlord_mode": "Landlord mode",
+	"dashboard": "Dashboard"
 }

@@ -1789,6 +1789,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Landlord mode`
+  String get landlord_mode {
+    return Intl.message(
+      'Landlord mode',
+      name: 'landlord_mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dashboard`
+  String get dashboard {
+    return Intl.message(
+      'Dashboard',
+      name: 'dashboard',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

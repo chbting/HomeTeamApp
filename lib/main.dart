@@ -85,7 +85,8 @@ class BaseApp extends StatelessWidget {
           ),
           themeMode: SharedPreferencesHelper.getThemeMode(),
           locale: SharedPreferencesHelper.getLocale(),
-          home: const HomeScreen(),
+          // ignore: prefer_const_constructors
+          home: HomeScreen(),
         );
       });
     });

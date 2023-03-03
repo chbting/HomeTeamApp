@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "count": MessageLookupByLibrary.simpleMessage("数量"),
         "create_a_free_account": MessageLookupByLibrary.simpleMessage("注册免费帐户"),
         "darkMode": MessageLookupByLibrary.simpleMessage("深色模式"),
+        "dashboard": MessageLookupByLibrary.simpleMessage("仪表板"),
         "date": MessageLookupByLibrary.simpleMessage("日期"),
         "date_time_selected": MessageLookupByLibrary.simpleMessage("己选择"),
         "deposit": MessageLookupByLibrary.simpleMessage("保证金"),
@@ -103,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kowloon": MessageLookupByLibrary.simpleMessage("九龙"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("业主接受/提出更改"),
+        "landlord_mode": MessageLookupByLibrary.simpleMessage("业主模式"),
         "landlord_sign_contract": MessageLookupByLibrary.simpleMessage("業主簽約"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "last_name": MessageLookupByLibrary.simpleMessage("姓氏"),

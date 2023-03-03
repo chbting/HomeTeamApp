@@ -87,6 +87,29 @@ class SettingsScreenState extends State<SettingsScreen> {
         ),
         _getSettingsTitle(context, S.of(context).general_settings),
         ListTile(
+            title: Text(S.of(context).language),
+            subtitle: Text(LocaleHelper.localeToLabel(
+                SharedPreferencesHelper.getLocale())),
+            leading: const SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.language),
+            ),
+            onTap: () {
+              RadioListDialog.show(
+                  context: context,
+                  values: LocaleHelper.supportedLocaleValues,
+                  labels: LocaleHelper.supportedLocaleValues
+                      .map((value) => LocaleHelper.valueToLabel(value))
+                      .toList(),
+                  defaultValue: LocaleHelper.localeToValue(
+                      SharedPreferencesHelper.getLocale()),
+                  title: S.of(context).choose_language,
+                  callback: (value) {
+                    SharedPreferencesHelper.setLocale(
+                        LocaleHelper.parseLocale(value));
+                  });
+            }),
+        ListTile(
             title: Text(S.of(context).darkMode),
             subtitle: Text(ThemeModeHelper.getThemeModeLabel(
                 context, SharedPreferencesHelper.getThemeMode())),
@@ -115,40 +138,23 @@ class SettingsScreenState extends State<SettingsScreen> {
                             value, ThemeMode.system));
                   });
             }),
-        ListTile(
-            title: Text(S.of(context).language),
-            subtitle: Text(LocaleHelper.localeToLabel(
-                SharedPreferencesHelper.getLocale())),
-            leading: const SizedBox(
-              height: double.infinity,
-              child: Icon(Icons.language),
-            ),
-            onTap: () {
-              RadioListDialog.show(
-                  context: context,
-                  values: LocaleHelper.supportedLocaleValues,
-                  labels: LocaleHelper.supportedLocaleValues
-                      .map((value) => LocaleHelper.valueToLabel(value))
-                      .toList(),
-                  defaultValue: LocaleHelper.localeToValue(
-                      SharedPreferencesHelper.getLocale()),
-                  title: S.of(context).choose_language,
-                  callback: (value) {
-                    SharedPreferencesHelper.setLocale(
-                        LocaleHelper.parseLocale(value));
-                  });
-            }),
         const Divider(
           thickness: 1,
         ),
         _getSettingsTitle(context, S.of(context).app_settings),
-        ListTile(
-            title: Text(S.of(context).language),
-            leading: const SizedBox(
+        SwitchListTile(
+            secondary: const SizedBox(
               height: double.infinity,
               child: Icon(Icons.person),
             ),
-            onTap: () {})
+            title: Text(S.of(context).landlord_mode),
+            subtitle: Text(SharedPreferencesHelper.getLandlordMode()
+                ? S.of(context).setting_on
+                : S.of(context).setting_off),
+            value: SharedPreferencesHelper.getLandlordMode(),
+            onChanged: (landlordMode) {
+              SharedPreferencesHelper.setLandlordMode(landlordMode);
+            }),
       ],
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }

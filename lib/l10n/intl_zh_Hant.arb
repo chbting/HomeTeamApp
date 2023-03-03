@@ -176,5 +176,7 @@
 	"app_settings": "App 設定",
 	"setting_off": "關閉",
 	"setting_on": "開啓",
-	"use_system_settings": "使用系統設定"
+	"use_system_settings": "使用系統設定",
+	"landlord_mode": "業主模式",
+	"dashboard": "儀表板"
 }

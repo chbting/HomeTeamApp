@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_a_free_account":
             MessageLookupByLibrary.simpleMessage("Create a free account"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "date_time_selected":
             MessageLookupByLibrary.simpleMessage("Preferred date and time"),
@@ -118,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
             "Landlord accepts / counteroffer"),
+        "landlord_mode": MessageLookupByLibrary.simpleMessage("Landlord mode"),
         "landlord_sign_contract":
             MessageLookupByLibrary.simpleMessage("Landlord signs the contract"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),

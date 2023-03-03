@@ -17,8 +17,7 @@ class RadioListDialog {
               contentPadding: EdgeInsets.zero,
               content: SizedBox(
                   width: double.minPositive,
-                  child: _RadioListView(values, labels, defaultValue,
-                      (value) {
+                  child: _RadioListView(values, labels, defaultValue, (value) {
                     callback(value);
                   })),
               actions: <Widget>[

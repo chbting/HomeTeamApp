@@ -11,11 +11,12 @@ class LocaleHelper {
 
   /// valueToLocale
   static Locale parseLocale(String value) {
-    List<String> list = value.split('_');
-    if (list.length == 1) {
+    List<String> localeCodes = value.split('_');
+    if (localeCodes.length == 1) {
       return Locale.fromSubtags(languageCode: value);
     } else {
-      return Locale.fromSubtags(languageCode: list[0], scriptCode: list[1]);
+      return Locale.fromSubtags(
+          languageCode: localeCodes[0], scriptCode: localeCodes[1]);
     }
   }
 

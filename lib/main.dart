@@ -36,11 +36,11 @@ void main() async {
   await SharedPreferencesHelper.ensureInitialized();
 
   runApp(ChangeNotifierProvider.value(
-      value: SharedPreferencesHelper.changeNotifier, child: const App()));
+      value: SharedPreferencesHelper.changeNotifier, child: const BaseApp()));
 }
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class BaseApp extends StatelessWidget {
+  const BaseApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,27 +65,28 @@ class App extends StatelessWidget {
           darkScheme = darkColorScheme;
         }
         return MaterialApp(
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              FirebaseUIAuthLocalizationsOverrides.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            theme: ThemeData(
-              useMaterial3: true,
-              colorScheme: lightScheme,
-              extensions: [lightCustomColors],
-            ),
-            darkTheme: ThemeData(
-              useMaterial3: true,
-              colorScheme: darkScheme,
-              extensions: [darkCustomColors],
-            ),
-            themeMode: SharedPreferencesHelper.getThemeMode(),
-            locale: SharedPreferencesHelper.getLocale(), //todo null for system default
-            home: const HomeScreen());
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            FirebaseUIAuthLocalizationsOverrides.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightScheme,
+            extensions: [lightCustomColors],
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkScheme,
+            extensions: [darkCustomColors],
+          ),
+          themeMode: SharedPreferencesHelper.getThemeMode(),
+          locale: SharedPreferencesHelper.getLocale(),
+          home: const HomeScreen(),
+        );
       });
     });
   }

@@ -13,23 +13,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  final _landlordWidgets = <Widget>[
+    const Center(child: Text('Dashboard')),
+    const Center(child: Text('Properties')),
+    const Center(child: Text('Contract: Landlord View')),
+    const SettingsScreen()
+  ];
+  final _tenantWidgets = <Widget>[
+    const PropertyScreen(),
+    const ContractsScreen(),
+    const SettingsScreen()
+  ];
   int _selectedIndex = 0;
+  bool _onSettingPage = false;
 
   @override
   Widget build(BuildContext context) {
     var isLandlordMode = SharedPreferencesHelper.getLandlordMode();
     List<Widget> widgets, destinations;
     if (isLandlordMode) {
-      widgets = <Widget>[
-        const Center(child: Text('Dashboard')),
-        const Center(child: Text('Contract: Landlord View')),
-        const SettingsScreen()
-      ];
+      widgets = _landlordWidgets;
       destinations = <Widget>[
         NavigationDestination(
           icon: const Icon(Icons.dashboard_outlined),
           selectedIcon: const Icon(Icons.dashboard),
           label: S.of(context).dashboard,
+        ),
+        NavigationDestination(
+          icon: const Icon(Icons.apartment_outlined),
+          selectedIcon: const Icon(Icons.apartment),
+          label: S.of(context).properties,
         ),
         NavigationDestination(
           icon: const Icon(Icons.description_outlined),
@@ -43,16 +56,12 @@ class HomeScreenState extends State<HomeScreen> {
         )
       ];
     } else {
-      widgets = <Widget>[
-        const PropertyScreen(),
-        const ContractsScreen(),
-        const SettingsScreen()
-      ];
+      widgets = _tenantWidgets;
       destinations = <Widget>[
         NavigationDestination(
           icon: const Icon(Icons.apartment_outlined),
           selectedIcon: const Icon(Icons.apartment),
-          label: S.of(context).property,
+          label: S.of(context).rentals,
         ),
         NavigationDestination(
           icon: const Icon(Icons.description_outlined),
@@ -67,12 +76,17 @@ class HomeScreenState extends State<HomeScreen> {
       ];
     }
 
+    if (_onSettingPage) {
+      _selectedIndex = widgets.length - 1;
+    }
+
     return Scaffold(
       body: widgets[_selectedIndex],
       bottomNavigationBar: NavigationBar(
           selectedIndex: _selectedIndex,
           onDestinationSelected: (index) => setState(() {
                 _selectedIndex = index;
+                _onSettingPage = (_selectedIndex == widgets.length - 1);
               }),
           destinations: destinations),
     );

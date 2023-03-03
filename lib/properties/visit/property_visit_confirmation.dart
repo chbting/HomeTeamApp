@@ -32,7 +32,7 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
                       height: double.infinity,
                       child: Icon(Icons.place),
                     ),
-                    title: Text(S.of(context).property,
+                    title: Text(S.of(context).properties,
                         style: AppTheme.getCardTitleTextStyle(context)),
                     subtitle: Text('康翠臺 → 聚賢居 → 尚翹峰', //todo
                         style: AppTheme.getCardBodyTextStyle(context))))),

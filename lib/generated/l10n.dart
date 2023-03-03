@@ -1290,16 +1290,6 @@ class S {
     );
   }
 
-  /// `Properties`
-  String get property {
-    return Intl.message(
-      'Properties',
-      name: 'property',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Agreement`
   String get property_visit_agreement {
     return Intl.message(
@@ -1805,6 +1795,26 @@ class S {
     return Intl.message(
       'Dashboard',
       name: 'dashboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Properties`
+  String get properties {
+    return Intl.message(
+      'Properties',
+      name: 'properties',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rentals`
+  String get rentals {
+    return Intl.message(
+      'Rentals',
+      name: 'rentals',
       desc: '',
       args: [],
     );

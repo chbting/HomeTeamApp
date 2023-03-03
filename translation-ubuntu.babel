@@ -2852,9 +2852,9 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>properties_visited_last_thirty_days</name>
+						<name>properties</name>
 						<description/>
-						<comment/>
+						<comment>找租盤</comment>
 						<default_text/>
 						<translations>
 							<translation>
@@ -2876,9 +2876,9 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>property</name>
+						<name>properties_visited_last_thirty_days</name>
 						<description/>
-						<comment>找租盤</comment>
+						<comment/>
 						<default_text/>
 						<translations>
 							<translation>
@@ -3141,6 +3141,30 @@
 					</concept_node>
 					<concept_node>
 						<name>rent_properties</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>rentals</name>
 						<description/>
 						<comment/>
 						<default_text/>

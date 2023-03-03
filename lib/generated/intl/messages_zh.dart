@@ -163,9 +163,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
         "processing": MessageLookupByLibrary.simpleMessage("处理中"),
+        "properties": MessageLookupByLibrary.simpleMessage("物业"),
         "properties_visited_last_thirty_days":
             MessageLookupByLibrary.simpleMessage("过去30日到访过的租盘"),
-        "property": MessageLookupByLibrary.simpleMessage("租盘"),
         "property_address": MessageLookupByLibrary.simpleMessage("物业地址"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("租盘已从清单中移除"),
@@ -181,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "region": MessageLookupByLibrary.simpleMessage("地域"),
         "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租房"),
+        "rentals": MessageLookupByLibrary.simpleMessage("租盘"),
         "reset": MessageLookupByLibrary.simpleMessage("重设"),
         "review_before_submission":
             MessageLookupByLibrary.simpleMessage("签署租约后，你可在提交之前确认细节"),

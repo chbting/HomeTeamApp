@@ -191,10 +191,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
+        "properties": MessageLookupByLibrary.simpleMessage("Properties"),
         "properties_visited_last_thirty_days":
             MessageLookupByLibrary.simpleMessage(
                 "Properties visited in the last 30 days"),
-        "property": MessageLookupByLibrary.simpleMessage("Properties"),
         "property_address":
             MessageLookupByLibrary.simpleMessage("Property Address"),
         "property_has_been_removed":
@@ -215,6 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_property_from_cart":
             MessageLookupByLibrary.simpleMessage("Remove"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("Rent"),
+        "rentals": MessageLookupByLibrary.simpleMessage("Rentals"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),

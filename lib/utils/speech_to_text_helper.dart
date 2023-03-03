@@ -78,13 +78,12 @@ class SpeechToTextHelper {
                   Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: AvatarGlow(
-                        glowColor: Theme.of(context).colorScheme.secondary,
+                        glowColor:
+                            Theme.of(context).colorScheme.onSurfaceVariant,
                         endRadius: 72.0,
-                        child: CircleAvatar(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.secondary,
+                        child: const CircleAvatar(
                           radius: 40.0,
-                          child: const Icon(Icons.mic, size: 32.0),
+                          child: Icon(Icons.mic, size: 32.0),
                         ),
                       )),
                   Text(LocaleHelper.getVoiceRecognitionLanguage(
@@ -116,6 +115,7 @@ class SpeechToTextHelper {
   static void _onError(SpeechRecognitionError error, BuildContext context) {
     log('${DateTime.now()} onError:$error');
     if (_context != null) {
+      // todo To safely refer to a widget's ancestor in its dispose() method, save a reference to the ancestor by calling dependOnInheritedWidgetOfExactType() in the widget's didChangeDependencies() method.
       ScaffoldMessenger.of(_context!).showSnackBar(
           SnackBar(content: Text(S.of(context).msg_cannot_recognize_speech)));
       if (_isDialogShowing) {

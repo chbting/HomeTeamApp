@@ -42,7 +42,7 @@ dependencies:
   local_auth: ^2.1.6 # For biometric authentication
   http: ^0.13.5
   json_annotation: ^4.6.0
-  image_picker: ^0.8.6+1
+  image_picker: ^0.8.6+4
   path_provider: ^2.0.12
   path: ^1.8.2
   provider: ^6.0.0

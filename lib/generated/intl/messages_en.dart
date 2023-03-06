@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Accept / Make an offer"),
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
+        "add_property": MessageLookupByLibrary.simpleMessage("Add Property"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("e.g. Flat 25, 12/F, Block 1"),
         "address_line1_label": MessageLookupByLibrary.simpleMessage(
@@ -90,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "count": MessageLookupByLibrary.simpleMessage("Count"),
         "create_a_free_account":
             MessageLookupByLibrary.simpleMessage("Create a free account"),
+        "create_listing":
+            MessageLookupByLibrary.simpleMessage("Create Listing"),
         "darkMode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
@@ -199,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Property Address"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("Property has been removed"),
+        "property_info": MessageLookupByLibrary.simpleMessage("Property Info"),
         "property_visit": MessageLookupByLibrary.simpleMessage("Visit"),
         "property_visit_agreement":
             MessageLookupByLibrary.simpleMessage("Agreement"),
@@ -223,10 +227,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_for_later":
             MessageLookupByLibrary.simpleMessage("Save for later"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schedule"),
-        "schedule_property_visit":
-            MessageLookupByLibrary.simpleMessage("Schedule Properties Visit"),
         "schedule_remodeling":
             MessageLookupByLibrary.simpleMessage("Schedule Remodeling"),
+        "schedule_visit":
+            MessageLookupByLibrary.simpleMessage("Schedule Visit"),
         "scrape_old_paint":
             MessageLookupByLibrary.simpleMessage("Scrape old paint"),
         "scrape_old_paint_no":

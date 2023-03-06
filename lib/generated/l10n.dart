@@ -1320,16 +1320,6 @@ class S {
     );
   }
 
-  /// `Schedule Properties Visit`
-  String get schedule_property_visit {
-    return Intl.message(
-      'Schedule Properties Visit',
-      name: 'schedule_property_visit',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Choose the route`
   String get choose_the_route {
     return Intl.message(
@@ -1815,6 +1805,46 @@ class S {
     return Intl.message(
       'Rentals',
       name: 'rentals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Property`
+  String get add_property {
+    return Intl.message(
+      'Add Property',
+      name: 'add_property',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Schedule Visit`
+  String get schedule_visit {
+    return Intl.message(
+      'Schedule Visit',
+      name: 'schedule_visit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Property Info`
+  String get property_info {
+    return Intl.message(
+      'Property Info',
+      name: 'property_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Listing`
+  String get create_listing {
+    return Intl.message(
+      'Create Listing',
+      name: 'create_listing',
       desc: '',
       args: [],
     );

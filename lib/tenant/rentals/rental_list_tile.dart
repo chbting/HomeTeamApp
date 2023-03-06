@@ -6,9 +6,9 @@ import 'package:tner_client/utils/format.dart';
 
 class RentalListTile extends StatelessWidget {
   const RentalListTile(
-      {required this.property,
-      required this.imageSize,
-      Key? key,
+      {Key? key,
+      required this.property,
+      this.imageSize = 120.0,
       this.leading,
       this.trailing,
       this.secondaryTrailing})

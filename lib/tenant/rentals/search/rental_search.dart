@@ -12,7 +12,6 @@ class RentalSearchScreen extends StatefulWidget {
 }
 
 class RentalSearchScreenState extends State<RentalSearchScreen> {
-  final double _imageSize = 120.0;
   final List<Property> _propertyList = getSampleProperties();
 
   @override
@@ -26,7 +25,6 @@ class RentalSearchScreenState extends State<RentalSearchScreen> {
         (BuildContext context, int index) {
           return RentalListTile(
               property: _propertyList[index],
-              imageSize: _imageSize,
               trailing: RentalListTileTrailingButton(
                   text: S.of(context).property_visit,
                   icon: Icons.check_box_outline_blank,

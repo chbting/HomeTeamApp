@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("接受/提出更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帐户"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
+        "add_property": MessageLookupByLibrary.simpleMessage("新增物业"),
         "address_line1_helper":
             MessageLookupByLibrary.simpleMessage("例: 1座12楼25室"),
         "address_line1_label":
@@ -77,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contract_status": MessageLookupByLibrary.simpleMessage("租约进度"),
         "count": MessageLookupByLibrary.simpleMessage("数量"),
         "create_a_free_account": MessageLookupByLibrary.simpleMessage("注册免费帐户"),
+        "create_listing": MessageLookupByLibrary.simpleMessage("创建广告"),
         "darkMode": MessageLookupByLibrary.simpleMessage("深色模式"),
         "dashboard": MessageLookupByLibrary.simpleMessage("仪表板"),
         "date": MessageLookupByLibrary.simpleMessage("日期"),
@@ -169,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_address": MessageLookupByLibrary.simpleMessage("物业地址"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("租盘已从清单中移除"),
+        "property_info": MessageLookupByLibrary.simpleMessage("物业资料"),
         "property_visit": MessageLookupByLibrary.simpleMessage("看房"),
         "property_visit_agreement": MessageLookupByLibrary.simpleMessage("睇楼纸"),
         "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
@@ -188,8 +191,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("收藏"),
         "save_for_later": MessageLookupByLibrary.simpleMessage("迟些看"),
         "schedule": MessageLookupByLibrary.simpleMessage("预约"),
-        "schedule_property_visit": MessageLookupByLibrary.simpleMessage("预约睇楼"),
         "schedule_remodeling": MessageLookupByLibrary.simpleMessage("预约装修"),
+        "schedule_visit": MessageLookupByLibrary.simpleMessage("预约睇楼"),
         "scrape_old_paint": MessageLookupByLibrary.simpleMessage("铲底"),
         "scrape_old_paint_no": MessageLookupByLibrary.simpleMessage("不铲底"),
         "scrape_old_paint_yes": MessageLookupByLibrary.simpleMessage("铲底"),

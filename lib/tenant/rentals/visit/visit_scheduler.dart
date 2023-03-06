@@ -60,13 +60,13 @@ class VisitSchedulingScreenState extends State<VisitSchedulingScreen> {
         2;
     _biometricButtonWidth = MediaQuery.of(context).size.width -
         VisitSchedulingScreen.buttonSpacing * 2;
-    var stepIconColor = Theme.of(context).colorScheme.onSecondary;
+    var stepIconColor = Theme.of(context).colorScheme.onPrimary;
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
             appBar: AppBar(
-                title: Text(S.of(context).schedule_property_visit),
+                title: Text(S.of(context).schedule_visit),
                 leading: const CloseButton()),
             body: Stack(children: [
               Column(
@@ -82,7 +82,7 @@ class VisitSchedulingScreenState extends State<VisitSchedulingScreen> {
                     ],
                     activeStep: _activeStep,
                     activeStepBorderWidth: 2,
-                    activeStepColor: Theme.of(context).colorScheme.secondary,
+                    activeStepColor: Theme.of(context).colorScheme.primary,
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
                     stepRadius: VisitSchedulingScreen.buttonSpacing * 3 / 2,

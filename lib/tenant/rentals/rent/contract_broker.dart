@@ -4,14 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_adjuster.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_viewer.dart';
+import 'package:tner_client/tenant/rentals/rent/offer_confirmation.dart';
+import 'package:tner_client/tenant/rentals/rent/tenant_info.dart';
 import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
-
-import 'contract_adjuster.dart';
-import 'contract_offer_data.dart';
-import 'contract_viewer.dart';
-import 'offer_confirmation.dart';
-import 'tenant_info.dart';
 
 class ContractBrokerScreen extends StatefulWidget {
   const ContractBrokerScreen({Key? key, required this.property})
@@ -57,12 +56,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
-
     _buttonWidth = (MediaQuery.of(context).size.width -
             ContractBrokerScreen.buttonSpacing * 3) /
         2;
 
-    var stepIconColor = Theme.of(context).colorScheme.onSecondary;
+    var stepIconColor = Theme.of(context).colorScheme.onPrimary;
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
         return Scaffold(
@@ -83,7 +81,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
                     ],
                     activeStep: _activeStep,
                     activeStepBorderWidth: 2,
-                    activeStepColor: Theme.of(context).colorScheme.secondary,
+                    activeStepColor: Theme.of(context).colorScheme.primary,
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
                     showIsStepCompleted: true,

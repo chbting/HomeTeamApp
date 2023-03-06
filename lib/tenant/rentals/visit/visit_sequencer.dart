@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/property_visit_data.dart';
-import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/properties/property_list_tile.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
 
-class PropertyVisitSequencerWidget extends StatefulWidget {
-  const PropertyVisitSequencerWidget(
+class VisitSequencerWidget extends StatefulWidget {
+  const VisitSequencerWidget(
       {Key? key, required this.data, required this.updateEstimatedTime})
       : super(key: key);
 
-  final PropertyVisitData data;
+  final VisitData data;
   final Function updateEstimatedTime;
 
   @override
-  State<PropertyVisitSequencerWidget> createState() =>
-      PropertyVisitSequencerWidgetState();
+  State<VisitSequencerWidget> createState() => VisitSequencerWidgetState();
 }
 
-class PropertyVisitSequencerWidgetState
-    extends State<PropertyVisitSequencerWidget> {
+class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
   final double _imageSize = 120.0;
 
   @override
@@ -38,14 +36,13 @@ class PropertyVisitSequencerWidgetState
       padding: const EdgeInsets.only(
           left: 4.0,
           right: 4.0,
-          top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom:
-              PropertyVisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
+          top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
+          bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
       primary: false,
       itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {
         Property property = widget.data.selectedPath[index];
-        return PropertyListTile(
+        return RentalListTile(
           key: ValueKey(property.id),
           property: property,
           imageSize: _imageSize,

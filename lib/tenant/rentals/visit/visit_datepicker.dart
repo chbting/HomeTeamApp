@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/visit/property_visit_data.dart';
-import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/ui/collapsable_expansion_tile.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:tner_client/tenant/rentals/rent/collapsable_expansion_tile.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
-class PropertyVisitDatePickerWidget extends StatefulWidget {
-  const PropertyVisitDatePickerWidget({Key? key, required this.data})
-      : super(key: key);
+class VisitDatePickerWidget extends StatefulWidget {
+  const VisitDatePickerWidget({Key? key, required this.data}) : super(key: key);
 
-  final PropertyVisitData data;
+  final VisitData data;
 
   @override
-  State<PropertyVisitDatePickerWidget> createState() =>
-      PropertyVisitDatePickerWidgetState();
+  State<VisitDatePickerWidget> createState() => VisitDatePickerWidgetState();
 }
 
-class PropertyVisitDatePickerWidgetState
-    extends State<PropertyVisitDatePickerWidget> {
+class VisitDatePickerWidgetState extends State<VisitDatePickerWidget> {
   final GlobalKey<CollapsableExpansionTileState> _datePickerKey =
       GlobalKey<CollapsableExpansionTileState>();
   final GlobalKey<CollapsableExpansionTileState> _timePickerKey =
@@ -40,7 +37,7 @@ class PropertyVisitDatePickerWidgetState
     final firstDate = DateTime(
         now.year,
         now.month,
-        now.day + PropertyVisitData.firstAvailableDay,
+        now.day + VisitData.firstAvailableDay,
         earliestAvailableTime.hour,
         earliestAvailableTime.minute);
     final lastDate = DateTime(
@@ -54,9 +51,8 @@ class PropertyVisitDatePickerWidgetState
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom: PropertyVisitSchedulingScreen.bottomButtonContainerHeight -
-                4.0),
+            top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
+            bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
         primary: false,
         children: [
           Card(

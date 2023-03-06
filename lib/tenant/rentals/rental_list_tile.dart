@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 
-class PropertyListTile extends StatelessWidget {
-  const PropertyListTile(
+class RentalListTile extends StatelessWidget {
+  const RentalListTile(
       {required this.property,
       required this.imageSize,
       Key? key,
@@ -121,8 +121,8 @@ class PropertyListTile extends StatelessWidget {
   }
 }
 
-class PropertyListTileTrailingButton extends StatelessWidget {
-  const PropertyListTileTrailingButton(
+class RentalListTileTrailingButton extends StatelessWidget {
+  const RentalListTileTrailingButton(
       {Key? key, required this.text, this.icon, this.onTap})
       : super(key: key);
 

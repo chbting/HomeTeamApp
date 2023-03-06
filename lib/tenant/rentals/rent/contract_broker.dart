@@ -3,8 +3,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 import 'contract_adjuster.dart';

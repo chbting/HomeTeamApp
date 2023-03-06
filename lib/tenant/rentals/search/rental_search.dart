@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/property_list_tile.dart';
-import 'package:tner_client/ui/sliver_search_bar.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
+import 'package:tner_client/tenant/rentals/search/sliver_search_bar.dart';
 
-class PropertySearchScreen extends StatefulWidget {
-  const PropertySearchScreen({Key? key}) : super(key: key);
+class RentalSearchScreen extends StatefulWidget {
+  const RentalSearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<PropertySearchScreen> createState() => PropertySearchScreenState();
+  State<RentalSearchScreen> createState() => RentalSearchScreenState();
 }
 
-class PropertySearchScreenState extends State<PropertySearchScreen> {
+class RentalSearchScreenState extends State<RentalSearchScreen> {
   final double _imageSize = 120.0;
   final List<Property> _propertyList = getSampleProperties();
 
@@ -24,16 +24,16 @@ class PropertySearchScreenState extends State<PropertySearchScreen> {
       },
       itemBuilderDelegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return PropertyListTile(
+          return RentalListTile(
               property: _propertyList[index],
               imageSize: _imageSize,
-              trailing: PropertyListTileTrailingButton(
+              trailing: RentalListTileTrailingButton(
                   text: S.of(context).property_visit,
                   icon: Icons.check_box_outline_blank,
                   onTap: () {
                     // todo implement checkbox & list add/remove
                   }),
-              secondaryTrailing: PropertyListTileTrailingButton(
+              secondaryTrailing: RentalListTileTrailingButton(
                   text: S.of(context).save,
                   icon: Icons.favorite_outline,
                   onTap: () {

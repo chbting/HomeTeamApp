@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/properties/rent/visited_properties.dart';
-import 'package:tner_client/properties/search/properties_search.dart';
-import 'package:tner_client/properties/visit/property_visit_cart.dart';
 import 'package:tner_client/generated/l10n.dart';
+import 'package:tner_client/tenant/rentals/rent/visited_properties.dart';
+import 'package:tner_client/tenant/rentals/search/rental_search.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_cart.dart';
 
-class PropertyScreen extends StatefulWidget {
-  const PropertyScreen({Key? key}) : super(key: key);
+class RentalsScreen extends StatefulWidget {
+  const RentalsScreen({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => PropertyScreenState();
+  State<StatefulWidget> createState() => RentalsScreenState();
 }
 
-class PropertyScreenState extends State<PropertyScreen>
+class RentalsScreenState extends State<RentalsScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
 
@@ -59,8 +59,8 @@ class PropertyScreenState extends State<PropertyScreen>
       body: TabBarView(
         controller: _tabController,
         children: const <Widget>[
-          PropertySearchScreen(),
-          PropertyVisitCartScreen(),
+          RentalSearchScreen(),
+          VisitCartScreen(),
           VisitedPropertiesScreen(),
         ],
       ),

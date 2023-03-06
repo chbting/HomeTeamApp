@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/visit/property_visit_data.dart';
-import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
-class PropertyVisitConfirmationWidget extends StatelessWidget {
-  const PropertyVisitConfirmationWidget({Key? key, required this.data})
+class VisitConfirmationWidget extends StatelessWidget {
+  const VisitConfirmationWidget({Key? key, required this.data})
       : super(key: key);
 
-  final PropertyVisitData data;
+  final VisitData data;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,8 @@ class PropertyVisitConfirmationWidget extends StatelessWidget {
       padding: const EdgeInsets.only(
           left: 12.0,
           right: 12.0,
-          top: PropertyVisitSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom:
-              PropertyVisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
+          top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
+          bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
       children: [
         Card(
             child: Padding(

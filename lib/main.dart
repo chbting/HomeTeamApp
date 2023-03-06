@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:tner_client/auth/firebase_ui_localizations/localizations_overrides.dart';
-import 'package:tner_client/auth_info.dart';
+import 'package:tner_client/auth/auth_info.dart';
 import 'package:tner_client/firebase_options.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/home_screen.dart';

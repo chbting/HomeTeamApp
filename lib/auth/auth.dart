@@ -6,7 +6,7 @@ import 'package:tner_client/auth/auth_button.dart';
 import 'package:tner_client/auth/email_check.dart';
 import 'package:tner_client/auth/sms_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/auth_info.dart';
+import 'package:tner_client/auth/auth_info.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);

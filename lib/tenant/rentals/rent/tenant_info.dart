@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/rent/contract_broker.dart';
-import 'package:tner_client/properties/rent/contract_offer_data.dart';
-import 'package:tner_client/ui/address_form.dart';
-import 'package:tner_client/ui/contact_person_form.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:tner_client/ui/shared/address_form.dart';
+import 'package:tner_client/ui/shared/contact_person_form.dart';
 import 'package:tner_client/ui/theme.dart';
 
 class TenantInformationScreen extends StatefulWidget {

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/contracts/contracts.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property_screen.dart';
+import 'package:tner_client/landlord/contracts_landlord.dart';
+import 'package:tner_client/landlord/dashboard_screen.dart';
+import 'package:tner_client/landlord/properties/properties_screen.dart';
 import 'package:tner_client/settings/settings.dart';
+import 'package:tner_client/tenant/rentals/rentals_screen.dart';
 import 'package:tner_client/utils/shared_preferences_helper.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,13 +17,13 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   final _landlordWidgets = <Widget>[
-    const Center(child: Text('Dashboard')),
-    const Center(child: Text('Properties')),
-    const Center(child: Text('Contract: Landlord View')),
+    const DashboardScreen(),
+    const PropertiesScreen(),
+    const LandlordContractsScreen(),
     const SettingsScreen()
   ];
   final _tenantWidgets = <Widget>[
-    const PropertyScreen(),
+    const RentalsScreen(),
     const ContractsScreen(),
     const SettingsScreen()
   ];

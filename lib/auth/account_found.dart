@@ -4,7 +4,7 @@ import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/auth_info.dart';
+import 'package:tner_client/auth/auth_info.dart';
 
 class AccountFoundWidget extends StatelessWidget {
   const AccountFoundWidget({Key? key, required this.providerIDs})

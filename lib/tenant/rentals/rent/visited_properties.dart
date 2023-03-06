@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/rent/contract_broker.dart';
-import 'package:tner_client/properties/property_list_tile.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
   const VisitedPropertiesScreen({Key? key}) : super(key: key);
@@ -31,10 +31,10 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-            return PropertyListTile(
+            return RentalListTile(
                 property: _propertiesInCart[index],
                 imageSize: _imageSize,
-                trailing: PropertyListTileTrailingButton(
+                trailing: RentalListTileTrailingButton(
                     text: S.of(context).negotiate_contract,
                     icon: Icons.description_outlined,
                     onTap: () {

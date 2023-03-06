@@ -6,21 +6,20 @@ import 'package:tner_client/configs/keys.dart';
 import 'package:tner_client/generated/l10n.dart';
 import 'package:tner_client/http_request/distance_matrix_request.dart';
 import 'package:tner_client/json_model/distance_matrix.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/property_visit_data.dart';
-import 'package:tner_client/properties/visit/property_visit_scheduler.dart';
-import 'package:tner_client/properties/property_list_tile.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:tner_client/ui/theme.dart';
 
-class PropertyVisitCartScreen extends StatefulWidget {
-  const PropertyVisitCartScreen({Key? key}) : super(key: key);
+class VisitCartScreen extends StatefulWidget {
+  const VisitCartScreen({Key? key}) : super(key: key);
 
   @override
-  State<PropertyVisitCartScreen> createState() =>
-      PropertyVisitCartScreenState();
+  State<VisitCartScreen> createState() => VisitCartScreenState();
 }
 
-class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
+class VisitCartScreenState extends State<VisitCartScreen>
     with AutomaticKeepAliveClientMixin {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
@@ -65,8 +64,8 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
                         _getOptimizedRoute();
 
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PropertyVisitSchedulingScreen(
-                                data: PropertyVisitData(
+                            builder: (context) => VisitSchedulingScreen(
+                                data: VisitData(
                                     properties: _propertiesCart,
                                     optimizedPath: _optimizedPath,
                                     selectedPath: _optimizedPath.toList(),
@@ -88,15 +87,15 @@ class PropertyVisitCartScreenState extends State<PropertyVisitCartScreen>
                   primary: false,
                   itemCount: _propertiesCart.length,
                   itemBuilder: (context, index) {
-                    return PropertyListTile(
+                    return RentalListTile(
                       property: _propertiesCart[index],
                       imageSize: _imageSize,
-                      trailing: PropertyListTileTrailingButton(
+                      trailing: RentalListTileTrailingButton(
                         text: S.of(context).save_for_later,
                         icon: Icons.favorite_outline,
                         onTap: () {},
                       ),
-                      secondaryTrailing: PropertyListTileTrailingButton(
+                      secondaryTrailing: RentalListTileTrailingButton(
                         text: S.of(context).remove_property_from_cart,
                         icon: Icons.delete_outline,
                         onTap: () {

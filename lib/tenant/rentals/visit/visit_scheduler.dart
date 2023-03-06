@@ -3,34 +3,31 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/properties/property.dart';
-import 'package:tner_client/properties/visit/property_visit_agreement.dart';
-import 'package:tner_client/properties/visit/property_visit_confirmation.dart';
-import 'package:tner_client/properties/visit/property_visit_data.dart';
-import 'package:tner_client/properties/visit/property_visit_datepicker.dart';
-import 'package:tner_client/properties/visit/property_visit_sequencer.dart';
-import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_agreement.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_confirmation.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_datepicker.dart';
+import 'package:tner_client/tenant/rentals/visit/visit_sequencer.dart';
+import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
 import 'package:tner_client/ui/theme.dart';
 import 'package:tner_client/utils/format.dart';
 import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
-class PropertyVisitSchedulingScreen extends StatefulWidget {
-  const PropertyVisitSchedulingScreen({Key? key, required this.data})
-      : super(key: key);
+class VisitSchedulingScreen extends StatefulWidget {
+  const VisitSchedulingScreen({Key? key, required this.data}) : super(key: key);
 
-  final PropertyVisitData data;
+  final VisitData data;
   static const stepTitleBarHeight = 40.0;
   static const buttonHeight = 48.0; // Same as an extended floatingActionButton
   static const buttonSpacing = 16.0;
   static const bottomButtonContainerHeight = buttonHeight + buttonSpacing * 2;
 
   @override
-  State<PropertyVisitSchedulingScreen> createState() =>
-      PropertyVisitSchedulingScreenState();
+  State<VisitSchedulingScreen> createState() => VisitSchedulingScreenState();
 }
 
-class PropertyVisitSchedulingScreenState
-    extends State<PropertyVisitSchedulingScreen> {
+class VisitSchedulingScreenState extends State<VisitSchedulingScreen> {
   final GlobalKey _stepperKey = GlobalKey();
   final PageController _pageController = PageController(initialPage: 0);
   final _totalSteps = 4;
@@ -59,10 +56,10 @@ class PropertyVisitSchedulingScreenState
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
     _buttonWidth = (MediaQuery.of(context).size.width -
-            PropertyVisitSchedulingScreen.buttonSpacing * 3) /
+            VisitSchedulingScreen.buttonSpacing * 3) /
         2;
     _biometricButtonWidth = MediaQuery.of(context).size.width -
-        PropertyVisitSchedulingScreen.buttonSpacing * 2;
+        VisitSchedulingScreen.buttonSpacing * 2;
     var stepIconColor = Theme.of(context).colorScheme.onSecondary;
 
     return KeyboardVisibilityBuilder(
@@ -88,8 +85,7 @@ class PropertyVisitSchedulingScreenState
                     activeStepColor: Theme.of(context).colorScheme.secondary,
                     enableNextPreviousButtons: false,
                     enableStepTapping: false,
-                    stepRadius:
-                        PropertyVisitSchedulingScreen.buttonSpacing * 3 / 2,
+                    stepRadius: VisitSchedulingScreen.buttonSpacing * 3 / 2,
                     showIsStepCompleted: true,
                     lineColor: Colors.grey,
                     onStepReached: (index) {
@@ -103,12 +99,12 @@ class PropertyVisitSchedulingScreenState
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
-                        PropertyVisitSequencerWidget(
+                        VisitSequencerWidget(
                             data: widget.data,
                             updateEstimatedTime: _updateEstimatedTime),
-                        PropertyVisitDatePickerWidget(data: widget.data),
-                        PropertyVisitAgreementWidget(data: widget.data),
-                        PropertyVisitConfirmationWidget(data: widget.data)
+                        VisitDatePickerWidget(data: widget.data),
+                        VisitAgreementWidget(data: widget.data),
+                        VisitConfirmationWidget(data: widget.data)
                       ],
                     ),
                   ),
@@ -116,7 +112,7 @@ class PropertyVisitSchedulingScreenState
               ),
               Container(
                 width: double.infinity,
-                height: PropertyVisitSchedulingScreen.stepTitleBarHeight,
+                height: VisitSchedulingScreen.stepTitleBarHeight,
                 margin: EdgeInsets.only(top: _stepTitleBarTopMargin),
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -235,13 +231,12 @@ class PropertyVisitSchedulingScreenState
   Widget _getBottomButtons() {
     return Container(
         height: _activeStep == 2
-            ? PropertyVisitSchedulingScreen.buttonHeight * 2 +
-                PropertyVisitSchedulingScreen.buttonSpacing * 3
-            : PropertyVisitSchedulingScreen.buttonHeight +
-                PropertyVisitSchedulingScreen.buttonSpacing * 2,
+            ? VisitSchedulingScreen.buttonHeight * 2 +
+                VisitSchedulingScreen.buttonSpacing * 3
+            : VisitSchedulingScreen.buttonHeight +
+                VisitSchedulingScreen.buttonSpacing * 2,
         width: double.infinity,
-        padding:
-            const EdgeInsets.all(PropertyVisitSchedulingScreen.buttonSpacing),
+        padding: const EdgeInsets.all(VisitSchedulingScreen.buttonSpacing),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
@@ -261,7 +256,7 @@ class PropertyVisitSchedulingScreenState
                         label: Text(S.of(context).sign_now),
                         style: FilledButton.styleFrom(
                             minimumSize: Size(_biometricButtonWidth,
-                                PropertyVisitSchedulingScreen.buttonHeight),
+                                VisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),
                         onPressed: () {
                           _isButtonEnabled ? _signWithBiometrics() : null;
@@ -277,8 +272,8 @@ class PropertyVisitSchedulingScreenState
                       ? S.of(context).reset
                       : S.of(context).back),
                   style: OutlinedButton.styleFrom(
-                      minimumSize: Size(_buttonWidth,
-                          PropertyVisitSchedulingScreen.buttonHeight),
+                      minimumSize: Size(
+                          _buttonWidth, VisitSchedulingScreen.buttonHeight),
                       shape: const StadiumBorder(),
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor),
@@ -299,7 +294,7 @@ class PropertyVisitSchedulingScreenState
                         label: Text(S.of(context).sign_later),
                         style: OutlinedButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
-                                PropertyVisitSchedulingScreen.buttonHeight),
+                                VisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder(),
                             backgroundColor:
                                 Theme.of(context).scaffoldBackgroundColor),
@@ -319,7 +314,7 @@ class PropertyVisitSchedulingScreenState
                             : S.of(context).confirm),
                         style: FilledButton.styleFrom(
                             minimumSize: Size(_buttonWidth,
-                                PropertyVisitSchedulingScreen.buttonHeight),
+                                VisitSchedulingScreen.buttonHeight),
                             shape: const StadiumBorder()),
                         onPressed: () {
                           if (_isButtonEnabled) {

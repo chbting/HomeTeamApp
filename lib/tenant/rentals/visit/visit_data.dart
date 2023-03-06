@@ -1,6 +1,6 @@
-import 'package:tner_client/properties/property.dart';
+import 'package:tner_client/tenant/rentals/property.dart';
 
-class PropertyVisitData {
+class VisitData {
   final List<Property> properties;
 
   // Sequencer
@@ -20,7 +20,7 @@ class PropertyVisitData {
   String? lastName;
   String? prefix;
 
-  PropertyVisitData(
+  VisitData(
       {required this.properties,
       required this.optimizedPath,
       required this.selectedPath,

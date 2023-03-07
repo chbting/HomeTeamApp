@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 class SMSAuthScreen extends StatefulWidget {
   const SMSAuthScreen({Key? key}) : super(key: key);
@@ -120,10 +120,12 @@ class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
                   }
                 },
                 child: _codeRequested
-                    ? const SizedBox(
+                    ? SizedBox(
                         height: 24.0,
                         width: 24.0,
-                        child: CircularProgressIndicator(strokeWidth: 3.0))
+                        child: CircularProgressIndicator(
+                            strokeWidth: 3.0,
+                            color: Theme.of(context).colorScheme.onPrimary))
                     : Text(S.of(context).send_sms_code)),
           )
         ],

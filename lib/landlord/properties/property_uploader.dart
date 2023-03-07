@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:hometeam_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_agreement.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/utils/keyboard_visibility_builder.dart';
 
 class PropertyUploader extends StatefulWidget {
@@ -21,22 +20,24 @@ class PropertyUploader extends StatefulWidget {
 class PropertyUploaderState extends State<PropertyUploader> {
   final GlobalKey _stepperKey = GlobalKey();
   final PageController _pageController = PageController(initialPage: 0);
-  final _totalSteps = 4;
+  final Duration _transitionDuration = const Duration(milliseconds: 250);
+
   int _activeStep = 0;
   double _stepTitleBarTopMargin = 0.0;
   bool _isButtonEnabled = true;
 
+  late int _totalSteps;
   late double _buttonWidth;
-
-  final int durationPerProperty = 900; // 15 minutes
 
   @override
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      final box = _stepperKey.currentContext!.findRenderObject() as RenderBox;
+      final stepper =
+          _stepperKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
-        _stepTitleBarTopMargin = box.size.height - 1; // -1 rounding error?
+        _stepTitleBarTopMargin = stepper.size.height - 1; // -1 rounding error?
+        debugPrint('top margin:$_stepTitleBarTopMargin');
       });
     });
   }
@@ -44,10 +45,21 @@ class PropertyUploaderState extends State<PropertyUploader> {
   @override
   Widget build(BuildContext context) {
     // TODO backpressed warning: quit scheduling?
+    final steps = [
+      EasyStep(
+          icon: const Icon(Icons.apartment),
+          title: S.of(context).property_info),
+      EasyStep(
+          icon: const Icon(Icons.camera_alt), title: S.of(context).add_photos),
+      EasyStep(
+          icon: const Icon(Icons.format_list_bulleted_add),
+          title: S.of(context).create_listing),
+      EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
+    ];
+    _totalSteps = steps.length;
     _buttonWidth = (MediaQuery.of(context).size.width -
-            VisitSchedulingScreen.buttonSpacing * 3) /
+            PropertyUploader.buttonSpacing * 3) /
         2;
-    var stepIconColor = Theme.of(context).colorScheme.onPrimary;
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
@@ -59,84 +71,66 @@ class PropertyUploaderState extends State<PropertyUploader> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomIconStepper(
-                    key: _stepperKey,
-                    icons: [
-                      Icon(Icons.apartment, color: stepIconColor),
-                      Icon(Icons.camera_alt, color: stepIconColor),
-                      Icon(Icons.format_list_bulleted_add,
-                          color: stepIconColor),
-                      Icon(Icons.check, color: stepIconColor)
-                    ],
-                    activeStep: _activeStep,
-                    activeStepBorderWidth: 2,
-                    activeStepColor: Theme.of(context).colorScheme.primary,
-                    enableNextPreviousButtons: false,
-                    enableStepTapping: false,
-                    stepRadius: VisitSchedulingScreen.buttonSpacing * 3 / 2,
-                    showIsStepCompleted: true,
-                    lineColor: Colors.grey,
-                    onStepReached: (index) {
-                      setState(() {
-                        _activeStep = index;
-                      });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: EasyStepper(
+                        key: _stepperKey,
+                        steps: steps,
+                        activeStep: _activeStep,
+                        borderThickness: 8.0,
+                        padding: 0.0,
+                        lineLength: 48.0,
+                        lineSpace: 6.0,
+                        enableStepTapping: false,
+                        showLoadingAnimation: false,
+                        lineColor: Theme.of(context).colorScheme.onSurface,
+                        finishedStepIconColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        stepAnimationCurve: Curves.bounceOut,
+                        stepAnimationDuration: _transitionDuration,
+                        onStepReached: (index) =>
+                            setState(() => _activeStep = index)),
                   ),
                   Expanded(
                     child: PageView(
                       controller: _pageController,
                       physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        Center(child: Text('1')),
-                        Center(child: Text('2')),
-                        Center(child: Text('3')),
-                        Center(child: Text('4')),
+                      children: <Widget>[
+                        VisitAgreementWidget(
+                            data: VisitData(
+                                properties: [],
+                                optimizedPath: [],
+                                selectedPath: [],
+                                travelMap: {})),
+                        const Center(child: Text('2')),
+                        const Center(child: Text('3')),
+                        const Center(child: Text('4')),
                       ],
                     ),
                   ),
                 ],
               ),
-              Container(
-                width: double.infinity,
-                height: VisitSchedulingScreen.stepTitleBarHeight,
-                margin: EdgeInsets.only(top: _stepTitleBarTopMargin),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: const Alignment(0.0, 0.5),
-                        colors: [
-                      Theme.of(context)
-                          .scaffoldBackgroundColor
-                          .withOpacity(0.0),
-                      Theme.of(context).scaffoldBackgroundColor
-                    ])),
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 16.0),
-                    child: Text(_getStepTitle(),
-                        style: AppTheme.getStepTitleTextStyle(context))),
-              ),
+              // Container(
+              //   width: double.infinity,
+              //   height: VisitSchedulingScreen.stepTitleBarHeight,
+              //   margin: EdgeInsets.only(top: _stepTitleBarTopMargin),
+              //   decoration: BoxDecoration(
+              //       gradient: LinearGradient(
+              //           begin: Alignment.bottomCenter,
+              //           end: const Alignment(0.0, 0.5),
+              //           colors: [
+              //         Theme.of(context)
+              //             .scaffoldBackgroundColor
+              //             .withOpacity(0.0),
+              //         Theme.of(context).scaffoldBackgroundColor
+              //       ])),
+              // ),
               Container(
                   alignment: Alignment.bottomCenter,
                   child: isKeyboardVisible ? null : _getBottomButtons())
             ]));
       },
     );
-  }
-
-  String _getStepTitle() {
-    switch (_activeStep) {
-      case 0:
-        return S.of(context).property_info;
-      case 1:
-        return S.of(context).add_photos;
-      case 2:
-        return S.of(context).create_listing;
-      case 3:
-        return S.of(context).confirm;
-      default:
-        return '';
-    }
   }
 
   void _nextStep() {
@@ -146,8 +140,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
         _activeStep++;
       });
       _pageController
-          .nextPage(
-              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .nextPage(duration: _transitionDuration, curve: Curves.easeIn)
           .whenComplete(() => _isButtonEnabled = true);
     }
   }
@@ -159,8 +152,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
         _activeStep--;
       });
       _pageController
-          .previousPage(
-              duration: const Duration(milliseconds: 250), curve: Curves.easeIn)
+          .previousPage(duration: _transitionDuration, curve: Curves.easeIn)
           .whenComplete(() => _isButtonEnabled = true);
     }
   }
@@ -171,10 +163,10 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
   Widget _getBottomButtons() {
     return Container(
-        height: VisitSchedulingScreen.buttonHeight +
-            VisitSchedulingScreen.buttonSpacing * 2,
+        height:
+            PropertyUploader.buttonHeight + PropertyUploader.buttonSpacing * 2,
         width: double.infinity,
-        padding: const EdgeInsets.all(VisitSchedulingScreen.buttonSpacing),
+        padding: const EdgeInsets.all(PropertyUploader.buttonSpacing),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
@@ -193,8 +185,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
                       ? S.of(context).reset
                       : S.of(context).back),
                   style: OutlinedButton.styleFrom(
-                      minimumSize: Size(
-                          _buttonWidth, VisitSchedulingScreen.buttonHeight),
+                      minimumSize:
+                          Size(_buttonWidth, PropertyUploader.buttonHeight),
                       shape: const StadiumBorder(),
                       backgroundColor:
                           Theme.of(context).scaffoldBackgroundColor),
@@ -210,15 +202,15 @@ class PropertyUploaderState extends State<PropertyUploader> {
             Container(
                 alignment: Alignment.bottomRight,
                 child: FilledButton.icon(
-                  icon: Icon(_activeStep < _totalSteps - 1
-                      ? Icons.arrow_forward
-                      : Icons.check),
-                  label: Text(_activeStep < _totalSteps - 1
-                      ? S.of(context).next
-                      : S.of(context).confirm),
+                  icon: Icon(_activeStep == _totalSteps - 1
+                      ? Icons.check
+                      : Icons.arrow_forward),
+                  label: Text(_activeStep == _totalSteps - 1
+                      ? S.of(context).confirm
+                      : S.of(context).next),
                   style: FilledButton.styleFrom(
-                      minimumSize: Size(
-                          _buttonWidth, VisitSchedulingScreen.buttonHeight),
+                      minimumSize:
+                          Size(_buttonWidth, PropertyUploader.buttonHeight),
                       shape: const StadiumBorder()),
                   onPressed: () {
                     if (_isButtonEnabled) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:sms_autofill/sms_autofill.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 class SMSAuthScreen extends StatefulWidget {
   const SMSAuthScreen({Key? key}) : super(key: key);

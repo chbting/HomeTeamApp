@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/theme.dart';
 
 class VisitSequencerWidget extends StatefulWidget {
   const VisitSequencerWidget(

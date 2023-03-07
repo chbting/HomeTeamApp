@@ -1,5 +1,5 @@
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/utils/client_data.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/utils/client_data.dart';
 
 class ContractOffer {
   Property property;

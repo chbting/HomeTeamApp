@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/rent/contract_broker.dart';
-import 'package:tner_client/tenant/rentals/rent/contract_offer_data.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/format.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/utils/format.dart';
 
 class ContractAdjusterScreen extends StatefulWidget {
   const ContractAdjusterScreen({Key? key, required this.offer})

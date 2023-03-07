@@ -5,7 +5,7 @@ class AppTheme {
       Colors.lightBlueAccent[100]!; // #FF80D8FF
   static const Color lightThemeAccent = Colors.white;
   static final Color? darkThemeBackground = Colors.grey[900];
-  static final Color tnerBlue = Colors.lightBlueAccent[700]!;
+  static final Color hometeamBlue = Colors.lightBlueAccent[700]!;
   static MaterialColor customLightBlue = MaterialColor(
     darkThemeAccent.value,
     // Affects button, button text, textField border colors

@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:tner_client/auth/auth.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/settings/locale_helper.dart';
-import 'package:tner_client/settings/radio_list_dialog.dart';
-import 'package:tner_client/settings/theme_mode_setting.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:hometeam_client/auth/auth.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/settings/locale_helper.dart';
+import 'package:hometeam_client/settings/radio_list_dialog.dart';
+import 'package:hometeam_client/settings/theme_mode_setting.dart';
+import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);

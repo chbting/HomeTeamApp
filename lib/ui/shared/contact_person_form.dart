@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tner_client/utils/client_data.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/utils/client_data.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 class ContactPersonForm extends StatefulWidget {
   const ContactPersonForm({Key? key, required this.client}) : super(key: key);

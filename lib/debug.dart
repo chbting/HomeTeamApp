@@ -1,5 +1,5 @@
-import 'package:tner_client/utils/client_data.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:hometeam_client/utils/client_data.dart';
+import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 Client getSampleClientData() {
   var chinese = SharedPreferencesHelper.getLocale().languageCode == 'zh';

@@ -4,8 +4,8 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/settings/locale_helper.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/settings/locale_helper.dart';
 
 class SpeechToTextHelper {
   static final _speechToText = SpeechToText();

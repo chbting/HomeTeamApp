@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/utils/client_data.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/utils/client_data.dart';
 
 class AddressForm extends StatefulWidget {
   const AddressForm({Key? key, required this.data}) : super(key: key);

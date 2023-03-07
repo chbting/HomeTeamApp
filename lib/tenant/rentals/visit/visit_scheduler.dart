@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_agreement.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_confirmation.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_datepicker.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_sequencer.dart';
-import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/format.dart';
-import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_agreement.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_confirmation.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_datepicker.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_sequencer.dart';
+import 'package:hometeam_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
+import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/utils/format.dart';
+import 'package:hometeam_client/utils/keyboard_visibility_builder.dart';
 
 class VisitSchedulingScreen extends StatefulWidget {
   const VisitSchedulingScreen({Key? key, required this.data}) : super(key: key);

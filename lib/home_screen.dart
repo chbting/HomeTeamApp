@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/contracts/contracts.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/landlord/contracts_landlord.dart';
-import 'package:tner_client/landlord/dashboard_screen.dart';
-import 'package:tner_client/landlord/properties/properties_screen.dart';
-import 'package:tner_client/settings/settings.dart';
-import 'package:tner_client/tenant/rentals/rentals_screen.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:hometeam_client/contracts/contracts.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/landlord/contracts_landlord.dart';
+import 'package:hometeam_client/landlord/dashboard_screen.dart';
+import 'package:hometeam_client/landlord/properties/properties_screen.dart';
+import 'package:hometeam_client/settings/settings.dart';
+import 'package:hometeam_client/tenant/rentals/rentals_screen.dart';
+import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

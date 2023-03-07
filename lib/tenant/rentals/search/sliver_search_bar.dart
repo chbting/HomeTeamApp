@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/toggleable_icon_button.dart';
-import 'package:tner_client/utils/speech_to_text_helper.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/ui/toggleable_icon_button.dart';
+import 'package:hometeam_client/utils/speech_to_text_helper.dart';
 
 class SliverSearchBar extends StatefulWidget {
   const SliverSearchBar(

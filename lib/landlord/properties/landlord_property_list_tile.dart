@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/format.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/utils/format.dart';
 
 class LandlordPropertyListTile extends StatelessWidget {
   const LandlordPropertyListTile({

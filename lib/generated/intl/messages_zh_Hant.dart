@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_visit": MessageLookupByLibrary.simpleMessage("睇樓"),
         "property_visit_agreement": MessageLookupByLibrary.simpleMessage("睇樓紙"),
         "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
-            "1. “代理”: 本人David， (“租客”) 現按照本協議條款的規限下就擬承租本協議附表1所列物業(“物業”)一事委任Tner Property Management And Agency Limited 為本人的代理。\n\n2. “有效期”: 本協議由2021年1月1日起生效至同年3月31日屆滿 (首尾兩天包括在內) 。\n\n3. 代理與租客之間就物業而有的代理關係屬本協議附表1第4欄所指明的雙邊代理。\n\n4. 如屬雙邊代理關係，則代理須在切實可行的範圍內，盡快以書面向租客披露代理將向有關業主收取的佣金的數額或收費率。\n\n5. 代理除須履行本協議或任何成文法則委予代理的責任外，亦須履行本協議附表2內所列的責任。\n\n6. “佣金”: 本協議適用於租客須向代理支付的佣金的規定，列於本協議附表1、3及5內(4)。\n\n7. “物業資料”: 代理須就物業向租客提供《地產代理常規(一般責任及香港住宅物業)規例》訂明的所有有關的出租資料表格。\n\n8. 如屬雙邊代理的關係，或在業主並沒有持牌地產代理代表的情況下，該等表格須由代理填妥和簽署。\n\n9. “佣金”: 本協議適用於租客須向代理支付的佣金的規定，列於本協議附表1、3及5內(4)。"),
+            "1. “代理”: 本人David， (“租客”) 現按照本協議條款的規限下就擬承租本協議附表1所列物業(“物業”)一事委任hometeam Property Management And Agency Limited 為本人的代理。\n\n2. “有效期”: 本協議由2021年1月1日起生效至同年3月31日屆滿 (首尾兩天包括在內) 。\n\n3. 代理與租客之間就物業而有的代理關係屬本協議附表1第4欄所指明的雙邊代理。\n\n4. 如屬雙邊代理關係，則代理須在切實可行的範圍內，盡快以書面向租客披露代理將向有關業主收取的佣金的數額或收費率。\n\n5. 代理除須履行本協議或任何成文法則委予代理的責任外，亦須履行本協議附表2內所列的責任。\n\n6. “佣金”: 本協議適用於租客須向代理支付的佣金的規定，列於本協議附表1、3及5內(4)。\n\n7. “物業資料”: 代理須就物業向租客提供《地產代理常規(一般責任及香港住宅物業)規例》訂明的所有有關的出租資料表格。\n\n8. 如屬雙邊代理的關係，或在業主並沒有持牌地產代理代表的情況下，該等表格須由代理填妥和簽署。\n\n9. “佣金”: 本協議適用於租客須向代理支付的佣金的規定，列於本協議附表1、3及5內(4)。"),
         "property_visit_date": MessageLookupByLibrary.simpleMessage("睇樓日期"),
         "reason_sign_property_visit_agreement":
             MessageLookupByLibrary.simpleMessage("使用生物認證簽署睇樓紙"),

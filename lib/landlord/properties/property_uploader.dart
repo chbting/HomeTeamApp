@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
+import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/utils/keyboard_visibility_builder.dart';
 
 class PropertyUploader extends StatefulWidget {
   const PropertyUploader({Key? key}) : super(key: key);

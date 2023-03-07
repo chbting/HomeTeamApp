@@ -1,6 +1,6 @@
-# tner_client
+# hometeam_client
 
-Tner Client App
+HomeTeam Client App
 
 ## Getting Started
 

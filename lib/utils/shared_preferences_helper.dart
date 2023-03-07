@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tner_client/settings/locale_helper.dart';
-import 'package:tner_client/settings/theme_mode_setting.dart';
+import 'package:hometeam_client/settings/locale_helper.dart';
+import 'package:hometeam_client/settings/theme_mode_setting.dart';
 
 class SharedPreferencesHelper {
   // Keys

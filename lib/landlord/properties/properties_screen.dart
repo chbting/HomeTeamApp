@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/landlord/properties/landlord_property_list_tile.dart';
-import 'package:tner_client/landlord/properties/property_uploader.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
+import 'package:hometeam_client/landlord/properties/property_uploader.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);

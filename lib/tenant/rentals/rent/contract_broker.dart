@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/tenant/rentals/rent/contract_adjuster.dart';
-import 'package:tner_client/tenant/rentals/rent/contract_offer_data.dart';
-import 'package:tner_client/tenant/rentals/rent/contract_viewer.dart';
-import 'package:tner_client/tenant/rentals/rent/offer_confirmation.dart';
-import 'package:tner_client/tenant/rentals/rent/tenant_info.dart';
-import 'package:tner_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
-import 'package:tner_client/utils/keyboard_visibility_builder.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';
+import 'package:hometeam_client/tenant/rentals/rent/offer_confirmation.dart';
+import 'package:hometeam_client/tenant/rentals/rent/tenant_info.dart';
+import 'package:hometeam_client/ui/shared/custom_im_stepper/first_stepper/icon_stepper.dart';
+import 'package:hometeam_client/utils/keyboard_visibility_builder.dart';
 
 class ContractBrokerScreen extends StatefulWidget {
   const ContractBrokerScreen({Key? key, required this.property})

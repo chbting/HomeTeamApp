@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:tner_client/tenant/rentals/rent/collapsable_expansion_tile.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/format.dart';
-import 'package:tner_client/utils/shared_preferences_helper.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/tenant/rentals/rent/collapsable_expansion_tile.dart';
+import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/utils/format.dart';
+import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class VisitDatePickerWidget extends StatefulWidget {
   const VisitDatePickerWidget({Key? key, required this.data}) : super(key: key);

@@ -2,11 +2,11 @@ import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
-import 'package:tner_client/auth/auth_button.dart';
-import 'package:tner_client/auth/email_check.dart';
-import 'package:tner_client/auth/sms_auth.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/auth/auth_info.dart';
+import 'package:hometeam_client/auth/auth_button.dart';
+import 'package:hometeam_client/auth/email_check.dart';
+import 'package:hometeam_client/auth/sms_auth.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/auth/auth_info.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);

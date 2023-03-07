@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tner.tner_client">
+    package="com.hometeamhk.hometeam_client">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -16,7 +16,7 @@
     </queries>
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="tner_client">
+        android:label="HomeTeam">
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

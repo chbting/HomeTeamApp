@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
 
 class VisitAgreementWidget extends StatefulWidget {
   const VisitAgreementWidget({Key? key, required this.data}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/tenant/rentals/rent/visited_properties.dart';
-import 'package:tner_client/tenant/rentals/search/rental_search.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_cart.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/tenant/rentals/rent/visited_properties.dart';
+import 'package:hometeam_client/tenant/rentals/search/rental_search.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_cart.dart';
 
 class RentalsScreen extends StatefulWidget {
   const RentalsScreen({Key? key}) : super(key: key);

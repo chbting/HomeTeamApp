@@ -1,7 +1,7 @@
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tner_client/auth/account_found.dart';
-import 'package:tner_client/auth/password_auth.dart';
+import 'package:hometeam_client/auth/account_found.dart';
+import 'package:hometeam_client/auth/password_auth.dart';
 
 class EmailCheckScreen extends StatefulWidget {
   const EmailCheckScreen({Key? key}) : super(key: key);

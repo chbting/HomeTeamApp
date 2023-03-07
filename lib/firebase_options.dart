@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDqipy3u1DzNCKIzFYoFAuV85cHEDOmaSQ',
-    appId: '1:345923835537:android:efa565fdb7dc43d73c9130',
+    appId: '1:345923835537:android:2927f359ca111f6a3c9130',
     messagingSenderId: '345923835537',
     projectId: 'tnerserver',
     storageBucket: 'tnerserver.appspot.com',
@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '345923835537',
     projectId: 'tnerserver',
     storageBucket: 'tnerserver.appspot.com',
+    androidClientId: '345923835537-6jqbhn1rkuo2kuu0m89v30p6t4b986rg.apps.googleusercontent.com',
     iosClientId: '345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf.apps.googleusercontent.com',
     iosBundleId: 'com.tner.tnerClient',
   );

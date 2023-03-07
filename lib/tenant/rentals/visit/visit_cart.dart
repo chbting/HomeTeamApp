@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:tner_client/configs/keys.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/http_request/distance_matrix_request.dart';
-import 'package:tner_client/json_model/distance_matrix.dart';
-import 'package:tner_client/tenant/rentals/property.dart';
-import 'package:tner_client/tenant/rentals/rental_list_tile.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_data.dart';
-import 'package:tner_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:hometeam_client/configs/keys.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/http_request/distance_matrix_request.dart';
+import 'package:hometeam_client/json_model/distance_matrix.dart';
+import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/theme.dart';
 
 class VisitCartScreen extends StatefulWidget {
   const VisitCartScreen({Key? key}) : super(key: key);

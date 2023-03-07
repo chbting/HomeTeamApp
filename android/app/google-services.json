@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:345923835537:android:efa565fdb7dc43d73c9130",
+        "mobilesdk_app_id": "1:345923835537:android:2927f359ca111f6a3c9130",
         "android_client_info": {
-          "package_name": "com.tner.tner_client"
+          "package_name": "com.hometeamhk.hometeam_client"
         }
       },
       "oauth_client": [
         {
-          "client_id": "345923835537-r6ppq4jeqcvad91h2rfqalko692kfh05.apps.googleusercontent.com",
+          "client_id": "345923835537-6jqbhn1rkuo2kuu0m89v30p6t4b986rg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.tner.tner_client",
+            "package_name": "com.hometeamhk.hometeam_client",
             "certificate_hash": "3055b664a1e945fc0dccef7b2238161e72bd78f9"
           }
         },
@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf.apps.googleusercontent.com",
+              "client_id": "345923835537-eemcs8mkd4j78uiuoo5s4r5oa7cl7spg.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.tner.tnerClient"
+                "bundle_id": "com.hometeamhk.hometeamclient"
               }
             }
           ]

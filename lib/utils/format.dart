@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 class Format {
   /// The long format requires the use of locale

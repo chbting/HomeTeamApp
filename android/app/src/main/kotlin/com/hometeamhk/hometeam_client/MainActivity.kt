@@ -1,4 +1,4 @@
-package com.tner.tner_client
+package com.hometeamhk.hometeam_client
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine

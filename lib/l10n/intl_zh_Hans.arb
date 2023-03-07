@@ -65,8 +65,6 @@
 	"pm": "下午",
 	"afternoon": "下午",
 	"morning": "上午",
-	"sign_later": "睇樓時签署",
-	"sign_now": "現在签署",
 	"biometric_authentication_failed": "生物认证失败",
 	"reason_sign_property_visit_agreement": "使用生物认证签署睇楼纸",
 	"name": "姓名",
@@ -179,5 +177,8 @@
 	"add_property": "新增物业",
 	"schedule_visit": "预约睇楼",
 	"property_info": "物业资料",
-	"create_listing": "创建广告"
+	"create_listing": "创建广告",
+	"sign_on_site": "睇樓時签署",
+	"skip": "跳过",
+	"sign": "签署"
 }

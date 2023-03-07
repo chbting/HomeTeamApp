@@ -700,26 +700,6 @@ class S {
     );
   }
 
-  /// `Sign on Visit`
-  String get sign_later {
-    return Intl.message(
-      'Sign on Visit',
-      name: 'sign_later',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sign Now`
-  String get sign_now {
-    return Intl.message(
-      'Sign Now',
-      name: 'sign_now',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Biometric authentication failed`
   String get biometric_authentication_failed {
     return Intl.message(
@@ -1845,6 +1825,36 @@ class S {
     return Intl.message(
       'Create Listing',
       name: 'create_listing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign on site`
+  String get sign_on_site {
+    return Intl.message(
+      'Sign on site',
+      name: 'sign_on_site',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign`
+  String get sign {
+    return Intl.message(
+      'Sign',
+      name: 'sign',
       desc: '',
       args: [],
     );

@@ -3644,6 +3644,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>sign</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>sign_contract</name>
 						<description/>
 						<comment/>
@@ -3716,31 +3740,7 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>sign_later</name>
-						<description/>
-						<comment/>
-						<default_text/>
-						<translations>
-							<translation>
-								<language>en-US</language>
-								<approved>false</approved>
-							</translation>
-							<translation>
-								<language>zh-CHS</language>
-								<approved>false</approved>
-							</translation>
-							<translation>
-								<language>zh-CHT</language>
-								<approved>false</approved>
-							</translation>
-							<translation>
-								<language>zh-CN</language>
-								<approved>false</approved>
-							</translation>
-						</translations>
-					</concept_node>
-					<concept_node>
-						<name>sign_now</name>
+						<name>sign_on_site</name>
 						<description/>
 						<comment/>
 						<default_text/>
@@ -3813,6 +3813,30 @@
 					</concept_node>
 					<concept_node>
 						<name>signed</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>skip</name>
 						<description/>
 						<comment/>
 						<default_text/>

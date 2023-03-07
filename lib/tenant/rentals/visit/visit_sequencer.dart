@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hometeam_client/tenant/rentals/property.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 import 'package:hometeam_client/ui/theme.dart';
 
 class VisitSequencerWidget extends StatefulWidget {
@@ -34,10 +34,7 @@ class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
     return ReorderableListView.builder(
       // note: ListView has 4.0 internal padding on all sides
       padding: const EdgeInsets.only(
-          left: 4.0,
-          right: 4.0,
-          top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
+          left: 4.0, right: 4.0, bottom: StandardStepper.bottomMargin - 4.0),
       primary: false,
       itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {

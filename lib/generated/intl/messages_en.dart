@@ -245,17 +245,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_off": MessageLookupByLibrary.simpleMessage("Off"),
         "setting_on": MessageLookupByLibrary.simpleMessage("On"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "sign": MessageLookupByLibrary.simpleMessage("Sign"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),
         "sign_in_with_the_following_method":
             MessageLookupByLibrary.simpleMessage(
                 "Sign in with the following method"),
-        "sign_later": MessageLookupByLibrary.simpleMessage("Sign on Visit"),
-        "sign_now": MessageLookupByLibrary.simpleMessage("Sign Now"),
+        "sign_on_site": MessageLookupByLibrary.simpleMessage("Sign on site"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),
         "sign_the_contract":
             MessageLookupByLibrary.simpleMessage("Sign the Contract"),
         "signed": MessageLookupByLibrary.simpleMessage("Signed"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),

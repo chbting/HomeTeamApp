@@ -65,8 +65,6 @@
 	"pm": "PM",
 	"afternoon": "Afternoon",
 	"morning": "Morning",
-	"sign_later": "Sign on Visit",
-	"sign_now": "Sign Now",
 	"biometric_authentication_failed": "Biometric authentication failed",
 	"reason_sign_property_visit_agreement": "Sign the property visit agreement with biometric authentication",
 	"name": "Name",
@@ -179,5 +177,8 @@
 	"add_property": "Add Property",
 	"schedule_visit": "Schedule Visit",
 	"property_info": "Property Info",
-	"create_listing": "Create Listing"
+	"create_listing": "Create Listing",
+	"sign_on_site": "Sign on site",
+	"skip": "Skip",
+	"sign": "Sign"
 }

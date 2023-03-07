@@ -151,12 +151,6 @@ class AppTheme {
           .labelLarge!
           .copyWith(color: getTertiaryColor(context));
 
-  static TextStyle? getStepTitleTextStyle(BuildContext context) =>
-      Theme.of(context)
-          .textTheme
-          .titleMedium!
-          .copyWith(color: Theme.of(context).colorScheme.secondary);
-
   static TextStyle? getStepSubtitleTextStyle(BuildContext context) =>
       Theme.of(context)
           .textTheme

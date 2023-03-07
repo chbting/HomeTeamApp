@@ -59,7 +59,6 @@ dependencies:
   google_sign_in: ^5.4.4
 
   # 3rd party APIs
-  # im_stepper: ^1.0.1+1 # Stepper for scheduler
   easy_stepper: ^0.3.2
   material_floating_search_bar: ^0.3.6 # Property searchbar
   speech_to_text: ^6.1.1

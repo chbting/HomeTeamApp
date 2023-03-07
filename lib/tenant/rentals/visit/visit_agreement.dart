@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
 class VisitAgreementWidget extends StatefulWidget {
   const VisitAgreementWidget({Key? key, required this.data}) : super(key: key);
@@ -20,8 +20,7 @@ class VisitAgreementWidgetState extends State<VisitAgreementWidget> {
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom: 48.0 * 2 + 16.0 * 3 - 4.0),
+            bottom: StandardStepper.bottomMargin - 4.0),
         primary: false,
         children: [
           Card(

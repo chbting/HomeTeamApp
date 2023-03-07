@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:hometeam_client/tenant/rentals/rent/collapsable_expansion_tile.dart';
+import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
+import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
+import 'package:intl/intl.dart';
 
 class VisitDatePickerWidget extends StatefulWidget {
   const VisitDatePickerWidget({Key? key, required this.data}) : super(key: key);
@@ -51,13 +51,13 @@ class VisitDatePickerWidgetState extends State<VisitDatePickerWidget> {
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
-            bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
+            bottom: StandardStepper.bottomMargin - 4.0),
         primary: false,
         children: [
           Card(
               child: CollapsableExpansionTile(
             key: _datePickerKey,
+            initiallyExpanded: true,
             leading: const SizedBox(
               height: double.infinity,
               child: Icon(Icons.calendar_today),
@@ -84,6 +84,7 @@ class VisitDatePickerWidgetState extends State<VisitDatePickerWidget> {
                       widget.data.dateTimePicked = value;
                     });
                     _datePickerKey.currentState?.setExpanded(false);
+                    _timePickerKey.currentState?.setExpanded(true);
                   })
             ],
           )),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
+import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
+import 'package:intl/intl.dart';
 
 class VisitConfirmationWidget extends StatelessWidget {
   const VisitConfirmationWidget({Key? key, required this.data})
@@ -18,10 +18,7 @@ class VisitConfirmationWidget extends StatelessWidget {
     return ListView(
       primary: false,
       padding: const EdgeInsets.only(
-          left: 12.0,
-          right: 12.0,
-          top: VisitSchedulingScreen.stepTitleBarHeight - 4.0,
-          bottom: VisitSchedulingScreen.bottomButtonContainerHeight - 4.0),
+          left: 12.0, right: 12.0, bottom: StandardStepper.bottomMargin - 4.0),
       children: [
         Card(
             child: Padding(
@@ -76,7 +73,7 @@ class VisitConfirmationWidget extends StatelessWidget {
             subtitle: Text(
                 data.agreementSigned
                     ? S.of(context).signed
-                    : S.of(context).sign_later,
+                    : S.of(context).sign_on_site,
                 style: AppTheme.getCardBodyTextStyle(context)),
           ),
         )

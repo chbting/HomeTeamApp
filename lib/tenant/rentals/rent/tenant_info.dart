@@ -37,7 +37,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
           Card(
               child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Form(
+            child: Form(// todo validate dropdowns are not null
                 key: _formKey,
                 child: Wrap(
                   children: [
@@ -56,7 +56,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.branding_watermark),
+                            icon: const Icon(Icons.badge),
                             labelText: S.of(context).id_card_number),
                         onChanged: (value) {
                           //widget.offer.addressLine2 = value;

@@ -1,5 +1,5 @@
-import 'package:hometeam_client/tenant/rentals/property.dart';
-import 'package:hometeam_client/utils/client_data.dart';
+import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/data/tenant.dart';
 
 class ContractOffer {
   Property property;
@@ -8,7 +8,7 @@ class ContractOffer {
   Duration? minLeaseDuration;
   DateTime? startDate, endDate, offeredStartDate, offeredEndDate;
 
-  late Client client;
+  late Tenant tenant;
 
   // Tenant paid fees
   late bool offeredWater,
@@ -23,6 +23,6 @@ class ContractOffer {
     offeredGas = property.gas;
     offeredRates = property.rates;
     offeredManagement = property.water;
-    client = Client();
+    tenant = Tenant();
   }
 }

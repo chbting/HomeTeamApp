@@ -117,7 +117,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("hr"),
         "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
-        "info_required": MessageLookupByLibrary.simpleMessage("Info Required"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
@@ -149,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cannot recognize speech"),
         "msg_cannot_sign_in":
             MessageLookupByLibrary.simpleMessage("Cannot sign in"),
+        "msg_info_required":
+            MessageLookupByLibrary.simpleMessage("Info required"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("Invalid phone number"),
         "msg_please_input_valid_phone_number":

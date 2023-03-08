@@ -1110,16 +1110,6 @@ class S {
     );
   }
 
-  /// `Info Required`
-  String get info_required {
-    return Intl.message(
-      'Info Required',
-      name: 'info_required',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `ID card no.`
   String get id_card_number {
     return Intl.message(
@@ -1855,6 +1845,16 @@ class S {
     return Intl.message(
       'Sign',
       name: 'sign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Info required`
+  String get msg_info_required {
+    return Intl.message(
+      'Info required',
+      name: 'msg_info_required',
       desc: '',
       args: [],
     );

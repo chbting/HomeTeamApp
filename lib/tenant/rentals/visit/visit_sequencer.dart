@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';

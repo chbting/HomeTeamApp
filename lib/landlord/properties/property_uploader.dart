@@ -1,5 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/landlord/properties/property_info.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
 class PropertyUploader extends StatefulWidget {
@@ -16,12 +17,13 @@ class PropertyUploader extends StatefulWidget {
 
 class PropertyUploaderState extends State<PropertyUploader> {
   final StandardStepperController _controller = StandardStepperController();
+  final PropertyInfoWidgetController _propertyInfoWidgetController =
+      PropertyInfoWidgetController();
 
   int _activeStep = 0;
 
   @override
   Widget build(BuildContext context) {
-    // TODO backpressed warning: quit scheduling?
     final steps = [
       EasyStep(
           icon: const Icon(Icons.apartment),
@@ -34,7 +36,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
-      const Center(child: Text('1')),
+      PropertyInfoWidget(controller: _propertyInfoWidgetController),
       const Center(child: Text('2')),
       const Center(child: Text('3')),
       const Center(child: Text('4'))
@@ -53,7 +55,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
           Text(_activeStep == 0 ? S.of(context).reset : S.of(context).back),
       onLeftButtonPressed: () {
         _activeStep == 0
-            ? null // todo reset
+            ? _propertyInfoWidgetController.resetForm()
             : _controller.previousStep();
       },
       rightButtonIcon:

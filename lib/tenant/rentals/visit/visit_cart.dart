@@ -1,16 +1,16 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:hometeam_client/configs/keys.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/distance_matrix_request.dart';
 import 'package:hometeam_client/json_model/distance_matrix.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:hometeam_client/ui/theme.dart';
+import 'package:http/http.dart';
 
 class VisitCartScreen extends StatefulWidget {
   const VisitCartScreen({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class VisitCartScreenState extends State<VisitCartScreen>
   //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
-  final List<Property> _propertiesCart = getSamplePropertyVisitList2();
+  final List<Property> _propertiesCart = getSampleProperties().sublist(3, 9);
   final Map<Property, Map<Property, int>> _travelMap =
       {}; // Map<originId, Map<destinationId, duration>>
   late List<Property> _currentPath, _optimizedPath;

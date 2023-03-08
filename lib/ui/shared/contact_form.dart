@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/utils/client_data.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/ui/shared/form_controller.dart';
+import 'package:hometeam_client/data/tenant.dart';
 
-class ContactPersonForm extends StatefulWidget {
-  const ContactPersonForm({Key? key, required this.client}) : super(key: key);
+class ContactForm extends StatefulWidget {
+  const ContactForm({Key? key, required this.client, required this.controller})
+      : super(key: key);
 
-  final Client client;
+  final Tenant client;
+  final FormController controller;
 
   @override
-  State<StatefulWidget> createState() => ContactPersonFormState();
+  State<StatefulWidget> createState() => ContactFormState();
 }
 
-class ContactPersonFormState extends State<ContactPersonForm> {
+class ContactFormState extends State<ContactForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FocusNode _lastNameFieldFocus = FocusNode();
   final FocusNode _firstNameFieldFocus = FocusNode();
 
   @override
   void initState() {
+    widget.controller.validate = _validate;
     _lastNameFieldFocus.addListener(() {
       setState(() {});
     });
@@ -74,21 +78,22 @@ class ContactPersonFormState extends State<ContactPersonForm> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         return (value == null || value.isEmpty)
-                            ? S.of(context).info_required
+                            ? S.of(context).msg_info_required
                             : null;
                       }),
                 ),
                 Container(width: 16.0),
-                Expanded(// todo validate
-                  child: DropdownButton<String>(
+                Expanded(
+                  // todo validate
+                  child: DropdownButtonFormField<String>(
                     hint: Text(S.of(context).title),
                     isExpanded: true,
                     value: widget.client.title,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        widget.client.title = newValue!;
-                      });
-                    },
+                    onChanged: (String? newValue) =>
+                        setState(() => widget.client.title = newValue!),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) =>
+                        value == null ? S.of(context).msg_info_required : null,
                     items: <String>[
                       S.of(context).mr,
                       S.of(context).mrs,
@@ -114,13 +119,11 @@ class ContactPersonFormState extends State<ContactPersonForm> {
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText: S.of(context).first_name),
-                  onChanged: (value) {
-                    widget.client.firstName = value;
-                  },
+                  onChanged: (value) => widget.client.firstName = value,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   validator: (value) {
                     return (value == null || value.isEmpty)
-                        ? S.of(context).info_required
+                        ? S.of(context).msg_info_required
                         : null;
                   }),
             ),
@@ -137,17 +140,14 @@ class ContactPersonFormState extends State<ContactPersonForm> {
                     labelText: S.of(context).contact_number,
                     helperText: S.of(context).hong_kong_number_only,
                     icon: const Icon(Icons.phone)),
-                onChanged: (value) {
-                  widget.client.phoneNumber = value;
-                },
-                validator: (value) {
-                  return (value == null || value.isEmpty || value.length < 8)
-                      ? S.of(context).info_required
-                      : null;
-                }),
+                onChanged: (value) => widget.client.phoneNumber = value,
+                validator: (value) =>
+                    (value == null || value.isEmpty || value.length < 8)
+                        ? S.of(context).msg_info_required
+                        : null),
           ],
         ));
   }
 
-  bool validate() => _formKey.currentState!.validate();
+  bool _validate() => _formKey.currentState!.validate();
 }

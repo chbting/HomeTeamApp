@@ -1,7 +1,7 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_agreement.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';

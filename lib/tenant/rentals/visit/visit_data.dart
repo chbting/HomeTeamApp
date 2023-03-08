@@ -1,4 +1,4 @@
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 
 class VisitData {
   final List<Property> properties;

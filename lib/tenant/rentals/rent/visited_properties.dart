@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 

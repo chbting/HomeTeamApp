@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/data/address.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/utils/client_data.dart';
+import 'package:hometeam_client/ui/shared/form_controller.dart';
 
 class AddressForm extends StatefulWidget {
-  const AddressForm({Key? key, required this.data}) : super(key: key);
+  const AddressForm({Key? key, required this.address, required this.controller})
+      : super(key: key);
 
-  final Client data;
+  final Address address;
+  final FormController controller;
 
   @override
   State<StatefulWidget> createState() => AddressFormState();
@@ -19,6 +22,8 @@ class AddressFormState extends State<AddressForm> {
 
   @override
   void initState() {
+    widget.controller.reset = _reset;
+    widget.controller.validate = _validate;
     _addressLine1FieldFocus.addListener(() {
       setState(() {});
     });
@@ -50,7 +55,7 @@ class AddressFormState extends State<AddressForm> {
           runSpacing: 16.0,
           children: [
             TextFormField(
-              initialValue: widget.data.addressLine1 ?? '',
+              initialValue: widget.address.addressLine1 ?? '',
               keyboardType: TextInputType.text,
               // todo autocomplete with the gov address api
               textInputAction: TextInputAction.next,
@@ -65,14 +70,12 @@ class AddressFormState extends State<AddressForm> {
                               _districtFieldFocus.hasFocus)
                           ? Theme.of(context).colorScheme.primary
                           : Theme.of(context).iconTheme.color)),
-              onChanged: (value) {
-                widget.data.addressLine1 = value;
-              },
+              onChanged: (value) => widget.address.addressLine1 = value,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: TextFormField(
-                  initialValue: widget.data.addressLine2 ?? '',
+                  initialValue: widget.address.addressLine2,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   focusNode: _addressLine2FieldFocus,
@@ -80,15 +83,11 @@ class AddressFormState extends State<AddressForm> {
                       border: const OutlineInputBorder(),
                       labelText: S.of(context).address_line2_label,
                       helperText: S.of(context).address_line2_helper),
-                  onChanged: (value) {
-                    widget.data.addressLine2 = value;
-                  },
+                  onChanged: (value) => widget.address.addressLine2 = value,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) {
-                    return (value == null || value.isEmpty)
-                        ? S.of(context).info_required
-                        : null;
-                  }),
+                  validator: (value) => (value == null || value.isEmpty)
+                      ? S.of(context).msg_info_required
+                      : null),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 40.0),
@@ -97,41 +96,35 @@ class AddressFormState extends State<AddressForm> {
                 children: [
                   Expanded(
                     child: TextFormField(
-                        initialValue: widget.data.district ?? '',
+                        initialValue: widget.address.district,
                         keyboardType: TextInputType.text,
                         focusNode: _districtFieldFocus,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: S.of(context).district),
-                        onChanged: (value) {
-                          widget.data.district = value;
-                        },
+                        onChanged: (value) => widget.address.district = value,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          return (value == null || value.isEmpty)
-                              ? S.of(context).info_required
-                              : null;
-                        }),
+                        validator: (value) => (value == null || value.isEmpty)
+                            ? S.of(context).msg_info_required
+                            : null),
                   ),
                   Container(width: 16.0),
                   Expanded(
-                    child: DropdownButton<String>(
+                    child: DropdownButtonFormField<Region>(
                       hint: Text(S.of(context).region),
                       isExpanded: true,
-                      value: widget.data.region, //todo validate
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          widget.data.region = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        S.of(context).hong_kong,
-                        S.of(context).kowloon,
-                        S.of(context).new_territories
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
+                      value: widget.address.region,
+                      onChanged: (Region? newValue) =>
+                          setState(() => widget.address.region = newValue!),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) => value == null
+                          ? S.of(context).msg_info_required
+                          : null,
+                      items: Region.values
+                          .map<DropdownMenuItem<Region>>((Region region) {
+                        return DropdownMenuItem<Region>(
+                          value: region,
+                          child: Text(RegionHelper.getName(context, region)),
                         );
                       }).toList(),
                     ),
@@ -143,5 +136,14 @@ class AddressFormState extends State<AddressForm> {
         ));
   }
 
-  bool validate() => _formKey.currentState!.validate();
+  void _reset() {
+    setState(() {
+      widget.address.addressLine1 = '';
+      widget.address.addressLine2 = '';
+      widget.address.district = '';
+      widget.address.region = null;
+    });
+  }
+
+  bool _validate() => _formKey.currentState!.validate();
 }

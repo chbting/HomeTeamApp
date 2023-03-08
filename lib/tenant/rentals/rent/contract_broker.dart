@@ -1,7 +1,7 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';

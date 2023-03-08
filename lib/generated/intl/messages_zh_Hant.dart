@@ -101,7 +101,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("小時"),
         "hours": MessageLookupByLibrary.simpleMessage("小時"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
-        "info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
         "landlord_accept_offer":
@@ -129,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("未能辨識語音"),
         "msg_cannot_sign_in": MessageLookupByLibrary.simpleMessage("無法登入"),
+        "msg_info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("電話號碼無效"),
         "msg_please_input_valid_phone_number":

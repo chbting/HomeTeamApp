@@ -3,7 +3,8 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
 import 'package:hometeam_client/ui/shared/address_form.dart';
-import 'package:hometeam_client/ui/shared/contact_person_form.dart';
+import 'package:hometeam_client/ui/shared/contact_form.dart';
+import 'package:hometeam_client/ui/shared/form_controller.dart';
 import 'package:hometeam_client/ui/theme.dart';
 
 class TenantInformationScreen extends StatefulWidget {
@@ -18,10 +19,8 @@ class TenantInformationScreen extends StatefulWidget {
 
 class TenantInformationScreenState extends State<TenantInformationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<ContactPersonFormState> _contactPersonFormKey =
-      GlobalKey<ContactPersonFormState>();
-  final GlobalKey<AddressFormState> _addressFormKey =
-      GlobalKey<AddressFormState>();
+  final FormController _contactFormController = FormController();
+  final FormController _addressFormController = FormController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,8 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
           Card(
               child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Form(// todo validate dropdowns are not null
+            child: Form(
+                // todo validate dropdowns are not null
                 key: _formKey,
                 child: Wrap(
                   children: [
@@ -47,9 +47,9 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                           S.of(context).tenant,
                           style: AppTheme.getCardTitleTextStyle(context),
                         )),
-                    ContactPersonForm(
-                        key: _contactPersonFormKey,
-                        client: widget.offer.client),
+                    ContactForm(
+                        client: widget.offer.tenant,
+                        controller: _contactFormController),
                     Container(height: 16.0),
                     TextFormField(
                         keyboardType: TextInputType.text,
@@ -75,7 +75,9 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                           S.of(context).mailing_address,
                           style: AppTheme.getCardTitleTextStyle(context),
                         )),
-                    AddressForm(key: _addressFormKey, data: widget.offer.client)
+                    AddressForm(
+                        address: widget.offer.tenant.address,
+                        controller: _addressFormController)
                   ],
                 )),
           ))
@@ -83,12 +85,10 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
   }
 
   bool validate() {
-    // note: In "return form1.validate() && form2.validate();", the second
-    // statement won't execute if the first return false
-    bool contactPersonFormValidated =
-        _contactPersonFormKey.currentState!.validate();
+    // note: In "return form1.validate() && form2.validate();", the second statement won't execute if the first one returns false
+    bool contactPersonFormValidated = _contactFormController.validate();
     bool tenantFormValidated = _formKey.currentState!.validate(); // Validate ID
-    bool addressFormValidated = _addressFormKey.currentState!.validate();
+    bool addressFormValidated = _addressFormController.validate();
     return contactPersonFormValidated &&
         tenantFormValidated &&
         addressFormValidated;

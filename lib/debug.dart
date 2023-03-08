@@ -1,18 +1,19 @@
-import 'package:hometeam_client/utils/client_data.dart';
+import 'package:hometeam_client/data/address.dart';
+import 'package:hometeam_client/data/tenant.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
-Client getSampleClientData() {
+Tenant getSampleClientData() {
   var chinese = SharedPreferencesHelper.getLocale().languageCode == 'zh';
-  Client client = Client();
-  client.firstName = chinese ? '大明' : 'David';
-  client.lastName = chinese ? '陳' : 'Johnson';
-  client.title = chinese ? '先生' : 'Mr.';
-  client.idCardNumber = 'A123456(7)';
-  client.phoneNumber = '12345678';
-  client.email = 'demo@email.com';
-  client.addressLine1 = chinese ? '1座2樓C室' : 'Flat C, 2/F, Block 1';
-  client.addressLine2 = chinese ? '雅佳花園' : 'Bayview Garden';
-  client.district = chinese ? '上環' : 'Sheung Wan';
-  client.region = chinese ? '香港' : 'Hong Kong';
-  return client;
+  Tenant tenant = Tenant();
+  tenant.firstName = chinese ? '大明' : 'David';
+  tenant.lastName = chinese ? '陳' : 'Johnson';
+  tenant.title = chinese ? '先生' : 'Mr.';
+  tenant.idCardNumber = 'A123456(7)';
+  tenant.phoneNumber = '12345678';
+  tenant.email = 'demo@email.com';
+  tenant.address.addressLine1 = chinese ? '1座2樓C室' : 'Flat C, 2/F, Block 1';
+  tenant.address.addressLine2 = chinese ? '雅佳花園' : 'Bayview Garden';
+  tenant.address.district = chinese ? '上環' : 'Sheung Wan';
+  tenant.address.region = Region.hongKong;
+  return tenant;
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:hometeam_client/data/address.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
@@ -7,6 +7,7 @@ import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
+import 'package:intl/intl.dart';
 
 class OfferConfirmationScreen extends StatelessWidget {
   const OfferConfirmationScreen({Key? key, required this.offer})
@@ -22,8 +23,8 @@ class OfferConfirmationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (offer.client.firstName == null) {
-      offer.client = getSampleClientData();
+    if (offer.tenant.firstName == null) {
+      offer.tenant = getSampleClientData();
     } // todo debug line
     return ListView(
         primary: false,
@@ -118,23 +119,25 @@ class OfferConfirmationScreen extends StatelessWidget {
                           Container(height: _itemSpacing),
                           Text(S.of(context).id_card_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(offer.client.idCardNumber ?? '',
+                          Text(offer.tenant.idCardNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).contact_number,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(offer.client.phoneNumber ?? '',
+                          Text(offer.tenant.phoneNumber ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).mailing_address,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(offer.client.addressLine1!,
+                          Text(offer.tenant.address.addressLine1 ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(offer.client.addressLine2!,
+                          Text(offer.tenant.address.addressLine2 ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(offer.client.district!,
+                          Text(offer.tenant.address.district ?? '',
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(offer.client.region!,
+                          Text(
+                              RegionHelper.getName(
+                                  context, offer.tenant.address.region!),
                               style: AppTheme.getCardBodyTextStyle(context))
                         ],
                       )
@@ -211,9 +214,9 @@ class OfferConfirmationScreen extends StatelessWidget {
 
   String _getTenantName() {
     if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
-      return '${offer.client.lastName}${offer.client.firstName}';
+      return '${offer.tenant.lastName}${offer.tenant.firstName}';
     } else {
-      return '${offer.client.lastName}, ${offer.client.firstName}';
+      return '${offer.tenant.lastName}, ${offer.tenant.firstName}';
     }
   }
 }

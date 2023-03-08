@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/property.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 
@@ -60,13 +60,13 @@ class LandlordPropertyListTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  property.name!,
+                                  property.title!,
                                   style:
                                       Theme.of(context).textTheme.titleMedium!,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                Text(property.district!,
+                                Text(property.address.district,
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
                                     maxLines: 1,

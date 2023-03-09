@@ -1,9 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';
 import 'package:hometeam_client/tenant/rentals/rent/offer_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/rent/tenant_info.dart';
@@ -33,11 +33,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
 
   int _activeStep = 0;
 
-  late final ContractOffer _offer = ContractOffer(widget.property);
+  late final ContractBid _bid =
+      ContractBid(contract: widget.property.contract.copyWith());
 
   @override
   Widget build(BuildContext context) {
-    // TODO backpressed warning: quit scheduling?
     //1. Accept/make changes
     //2. Personal information
     //3. View the actual contract (aka confirmation page)
@@ -56,10 +56,11 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           title: S.of(context).confirm_and_submit),
     ];
     final pages = [
-      ContractAdjusterScreen(key: adjusterKey, offer: _offer),
-      TenantInformationScreen(key: tenantInfoKey, offer: _offer),
-      ContractViewerScreen(offer: _offer),
-      OfferConfirmationScreen(offer: _offer)
+      ContractAdjusterScreen(
+          key: adjusterKey, property: widget.property, bid: _bid),
+      TenantInformationScreen(key: tenantInfoKey, offer: _bid),
+      ContractViewerScreen(offer: _bid),
+      OfferConfirmationScreen(property: widget.property, bid: _bid)
     ];
 
     return StandardStepper(

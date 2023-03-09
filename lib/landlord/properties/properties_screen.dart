@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
 import 'package:hometeam_client/landlord/properties/property_uploader.dart';
-import 'package:hometeam_client/data/property.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -44,7 +45,7 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               return LandlordPropertyListTile(
                 property: _propertyList[index],
                 onTap: () {
-                  debugPrint('${_propertyList[index].title}'); // todo
+                  debugPrint(_propertyList[index].listing.title);
                 },
               );
             },

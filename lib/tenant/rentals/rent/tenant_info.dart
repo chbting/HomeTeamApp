@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/ui/shared/address_form.dart';
 import 'package:hometeam_client/ui/shared/contact_form.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
@@ -11,7 +11,7 @@ class TenantInformationScreen extends StatefulWidget {
   const TenantInformationScreen({Key? key, required this.offer})
       : super(key: key);
 
-  final ContractOffer offer;
+  final ContractBid offer;
 
   @override
   State<StatefulWidget> createState() => TenantInformationScreenState();
@@ -37,7 +37,6 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
               child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-                // todo validate dropdowns are not null
                 key: _formKey,
                 child: Wrap(
                   children: [

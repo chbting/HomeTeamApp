@@ -1,5 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/address.dart';
+import 'package:hometeam_client/json_model/contract.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/landlord/properties/property_info.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
@@ -20,6 +24,11 @@ class PropertyUploaderState extends State<PropertyUploader> {
   final PropertyInfoWidgetController _propertyInfoWidgetController =
       PropertyInfoWidgetController();
 
+  final Property _property = Property(
+      address: Address(),
+      coverImage: const AssetImage(''), //todo default
+      contract: Contract(),
+      listing: Listing(title: ''));
   int _activeStep = 0;
 
   @override
@@ -36,7 +45,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
-      PropertyInfoWidget(controller: _propertyInfoWidgetController),
+      PropertyInfoWidget(
+          property: _property, controller: _propertyInfoWidgetController),
       const Center(child: Text('2')),
       const Center(child: Text('3')),
       const Center(child: Text('4'))
@@ -63,7 +73,19 @@ class PropertyUploaderState extends State<PropertyUploader> {
       rightButtonLabel:
           Text(_activeStep == 3 ? S.of(context).submit : S.of(context).next),
       onRightButtonPressed: () {
-        _activeStep == steps.length - 1 ? _confirm() : _controller.nextStep();
+        switch (_activeStep) {
+          case 0:
+            if (_propertyInfoWidgetController.validate()) {
+              _controller.nextStep();
+            }
+            break;
+          case 3:
+            _confirm();
+            break;
+          default:
+            _controller.nextStep();
+            break;
+        }
       },
     );
   }

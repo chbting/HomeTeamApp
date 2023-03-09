@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/debug.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 
@@ -25,7 +26,8 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
           S.of(context).properties_visited_last_thirty_days,
-          style: TextStyle(color: Theme.of(context).textTheme.subtitle1!.color),
+          style:
+              TextStyle(color: Theme.of(context).textTheme.titleMedium!.color),
         ),
       ),
       SliverList(

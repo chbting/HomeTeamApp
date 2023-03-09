@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
+import 'package:intl/intl.dart';
 
 class ContractAdjusterScreen extends StatefulWidget {
-  const ContractAdjusterScreen({Key? key, required this.offer})
+  const ContractAdjusterScreen(
+      {Key? key, required this.property, required this.bid})
       : super(key: key);
 
-  final ContractOffer offer;
+  final Property property;
+  final ContractBid bid;
 
   @override
   State<StatefulWidget> createState() => ContractAdjusterScreenState();
@@ -46,8 +49,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   @override
   void initState() {
     super.initState();
-    widget.offer.offeredStartDate ??= _leaseStartDefault;
-    widget.offer.offeredEndDate ??= _leaseEndDefault;
+    widget.bid.contract.startDate ??= _leaseStartDefault;
+    widget.bid.contract.endDate ??= _leaseEndDefault;
     _updateLeaseEndRange();
   }
 
@@ -71,7 +74,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             title: Text(S.of(context).property_address,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-              '${widget.offer.property.address}',
+              '${widget.property.address}',
               style: AppTheme.getCardBodyTextStyle(context),
             ),
             isThreeLine: true, //todo address format
@@ -87,21 +90,20 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     TextFormField(
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
-                        initialValue: '${widget.offer.property.monthlyRent}',
+                        initialValue: '${widget.property.contract.monthlyRent}',
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             icon: const Icon(Icons.attach_money),
-                            labelText:
-                                S.of(context).monthly_rent),
+                            labelText: S.of(context).monthly_rent),
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return S.of(context).please_put_in_a_valid_amount;
                           } else {
-                            widget.offer.offeredMonthlyRent = int.parse(value);
+                            widget.bid.contract.monthlyRent = int.parse(value);
                             return null;
                           }
                         }),
@@ -109,7 +111,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     TextFormField(
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.done,
-                        initialValue: '${widget.offer.property.deposit}',
+                        initialValue: '${widget.property.contract.deposit}',
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
@@ -122,7 +124,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                           if (value == null || value.isEmpty) {
                             return S.of(context).please_put_in_a_valid_amount;
                           } else {
-                            widget.offer.offeredDeposit = int.parse(value);
+                            widget.bid.contract.deposit = int.parse(value);
                             return null;
                           }
                         }),
@@ -166,7 +168,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       primary: false,
                       children: [
                         CheckboxListTile(
-                            value: widget.offer.offeredWater,
+                            value: widget.bid.contract.waterRequired,
                             dense: true,
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
@@ -176,11 +178,11 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
                               setState(() {
-                                widget.offer.offeredWater = value!;
+                                widget.bid.contract.waterRequired = value!;
                               });
                             }),
                         CheckboxListTile(
-                            value: widget.offer.offeredRates,
+                            value: widget.bid.contract.ratesRequired,
                             dense: true,
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
@@ -190,41 +192,40 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
                               setState(() {
-                                widget.offer.offeredRates = value!;
+                                widget.bid.contract.ratesRequired = value!;
                               });
                             }),
                         CheckboxListTile(
-                            value: widget.offer.offeredElectricity,
+                            value: widget.bid.contract.electricityRequired,
                             dense: true,
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(
-                                S.of(context).bill_electricity,
+                            title: Text(S.of(context).bill_electricity,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
                               setState(() {
-                                widget.offer.offeredElectricity = value!;
+                                widget.bid.contract.electricityRequired =
+                                    value!;
                               });
                             }),
                         CheckboxListTile(
-                            value: widget.offer.offeredManagement,
+                            value: widget.bid.contract.managementRequired,
                             dense: true,
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(
-                                S.of(context).bill_management,
+                            title: Text(S.of(context).bill_management,
                                 style:
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
                               setState(() {
-                                widget.offer.offeredManagement = value!;
+                                widget.bid.contract.managementRequired = value!;
                               });
                             }),
                         CheckboxListTile(
-                            value: widget.offer.offeredGas,
+                            value: widget.bid.contract.gasRequired,
                             dense: true,
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding:
@@ -234,7 +235,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                     AppTheme.getListTileBodyTextStyle(context)),
                             onChanged: (bool? value) {
                               setState(() {
-                                widget.offer.offeredGas = value!;
+                                widget.bid.contract.gasRequired = value!;
                               });
                             }),
                       ],
@@ -250,7 +251,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                             icon: const Icon(Icons.notes),
                             labelText: S.of(context).notes),
                         onChanged: (value) {
-                          widget.offer.notes = value;
+                          widget.bid.notes = value;
                         },
                         validator: (value) {
                           return null;
@@ -277,7 +278,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
-                          initialDate: widget.offer.offeredStartDate!,
+                          initialDate: widget.bid.contract.startDate!,
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
                       .then((value) {
@@ -285,12 +286,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       _startDateController.text = DateFormat(
                         Format.date,
                       ).format(value);
-                      widget.offer.offeredStartDate = value;
+                      widget.bid.contract.startDate = value;
                       // auto update end date
-                      widget.offer.offeredEndDate =
+                      widget.bid.contract.endDate =
                           DateTime(value.year + 1, value.month, value.day - 1);
                       _endDateController.text = DateFormat(Format.date)
-                          .format(widget.offer.offeredEndDate!);
+                          .format(widget.bid.contract.endDate!);
                       _updateLeaseEndRange();
                     }
                   });
@@ -319,24 +320,24 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).end_date,
-                          initialDate: widget.offer.offeredEndDate!,
+                          initialDate: widget.bid.contract.endDate!,
                           firstDate: _leaseEndFirstDate,
                           lastDate: _leaseEndLastDate)
                       .then((value) {
                     if (value != null) {
                       _endDateController.text =
                           DateFormat(Format.date).format(value);
-                      widget.offer.offeredEndDate = value;
+                      widget.bid.contract.endDate = value;
                     }
                   });
                 },
                 validator: (value) {
                   try {
                     var end = DateFormat(Format.date).parse(value!);
-                    if (widget.offer.offeredStartDate == null) {
+                    if (widget.bid.contract.startDate == null) {
                       return null;
                     }
-                    if (end.isBefore(widget.offer.offeredStartDate!)) {
+                    if (end.isBefore(widget.bid.contract.startDate!)) {
                       return S.of(context).invalid_date;
                     } else {
                       return null;
@@ -351,27 +352,30 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
 
   void _updateLeaseEndRange() {
     _leaseEndFirstDate = DateTime(
-        widget.offer.offeredStartDate!.year,
-        widget.offer.offeredStartDate!.month,
-        widget.offer.offeredStartDate!.day + 1); // 1 day after lease start
+        widget.bid.contract.startDate!.year,
+        widget.bid.contract.startDate!.month,
+        widget.bid.contract.startDate!.day + 1); // 1 day after lease start
     _leaseEndLastDate = DateTime(
-        widget.offer.offeredStartDate!.year + _leaseEndRangeInYears,
-        widget.offer.offeredStartDate!.month,
-        widget.offer.offeredStartDate!.day - 1);
+        widget.bid.contract.startDate!.year + _leaseEndRangeInYears,
+        widget.bid.contract.startDate!.month,
+        widget.bid.contract.startDate!.day - 1);
   }
 
   void reset() {
     _formKey.currentState!.reset();
     _startDateController.text =
         DateFormat(Format.date).format(_leaseStartDefault);
-    _endDateController.text =
-        DateFormat(Format.date).format(_leaseEndDefault);
+    _endDateController.text = DateFormat(Format.date).format(_leaseEndDefault);
     setState(() {
-      widget.offer.offeredWater = widget.offer.property.water;
-      widget.offer.offeredElectricity = widget.offer.property.electricity;
-      widget.offer.offeredGas = widget.offer.property.gas;
-      widget.offer.offeredRates = widget.offer.property.rates;
-      widget.offer.offeredManagement = widget.offer.property.management;
+      widget.bid.contract.waterRequired =
+          widget.property.contract.waterRequired;
+      widget.bid.contract.electricityRequired =
+          widget.property.contract.electricityRequired;
+      widget.bid.contract.gasRequired = widget.property.contract.gasRequired;
+      widget.bid.contract.ratesRequired =
+          widget.property.contract.ratesRequired;
+      widget.bid.contract.managementRequired =
+          widget.property.contract.managementRequired;
     });
   }
 }

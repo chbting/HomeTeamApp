@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/address.dart';
+import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/ui/shared/address_form.dart';
+import 'package:hometeam_client/ui/shared/form_card.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
+import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
-  const PropertyInfoWidget({Key? key, required this.controller})
+  const PropertyInfoWidget(
+      {Key? key, required this.property, required this.controller})
       : super(key: key);
 
+  final Property property;
   final PropertyInfoWidgetController controller;
 
   @override
@@ -16,7 +21,6 @@ class PropertyInfoWidget extends StatefulWidget {
 class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
-  final Address address = Address();
 
   @override
   void initState() {
@@ -32,13 +36,20 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
       child: ListView(
         primary: false,
         shrinkWrap: true,
+        padding: const EdgeInsets.only(
+            left: 8.0, right: 8.0, bottom: StandardStepper.bottomMargin),
         children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: AddressForm(
-                  address: address, controller: _addressFormController),
-            ),
+          FormCard(
+            title: S.of(context).property_address,
+            body: AddressForm(
+                address: widget.property.address,
+                controller: _addressFormController),
+          ),
+          FormCard(
+            title: S.of(context).property_info,
+            body: AddressForm(
+                address: widget.property.address,
+                controller: _addressFormController),
           )
         ],
       ),
@@ -50,7 +61,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   }
 
   bool _validate() {
-    return _formKey.currentState!.validate();
+    var addressValidate = _addressFormController.validate();
+    var formValidate = _formKey.currentState!.validate();
+    return addressValidate && formValidate;
   }
 }
 

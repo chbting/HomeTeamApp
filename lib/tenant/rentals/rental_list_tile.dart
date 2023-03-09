@@ -56,7 +56,7 @@ class RentalListTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                property.title!,
+                                property.address.addressLine2, //todo
                                 style: Theme.of(context).textTheme.titleMedium!,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
@@ -73,7 +73,7 @@ class RentalListTile extends StatelessWidget {
                             children: [
                               Text(
                                   '${S.of(context).area_net_abr}'
-                                  ': ${property.sqFtNet}'
+                                  ': ${property.netArea}'
                                   ' ${S.of(context).sq_ft_abr}',
                                   style: AppTheme.getListTileBodyTextStyle(
                                       context),
@@ -81,7 +81,7 @@ class RentalListTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis),
                               Text(
                                   '${S.of(context).area_gross_abr}'
-                                  ': ${property.sqFtGross}'
+                                  ': ${property.grossArea}'
                                   ' ${S.of(context).sq_ft_abr}',
                                   style: AppTheme.getListTileBodyTextStyle(
                                       context),
@@ -107,7 +107,7 @@ class RentalListTile extends StatelessWidget {
                             ],
                           ),
                           Text(
-                              '${Format.currency.format(property.monthlyRent)}'
+                              '${Format.currency.format(property.contract.monthlyRent)}'
                               '/${S.of(context).month}',
                               style: AppTheme.getRentTextStyle(context))
                         ],

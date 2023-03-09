@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
-import 'package:hometeam_client/data/tenant.dart';
+import 'package:hometeam_client/json_model/tenant.dart';
 
 class ContactForm extends StatefulWidget {
   const ContactForm({Key? key, required this.client, required this.controller})

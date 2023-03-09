@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 
@@ -60,7 +60,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  property.title!,
+                                  property.listing.title,
                                   style:
                                       Theme.of(context).textTheme.titleMedium!,
                                   maxLines: 2,
@@ -78,7 +78,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                               children: [
                                 Text(
                                     '${S.of(context).area_net_abr}'
-                                    ': ${property.sqFtNet}'
+                                    ': ${property.netArea}'
                                     ' ${S.of(context).sq_ft_abr}',
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
@@ -86,7 +86,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis),
                                 Text(
                                     '${S.of(context).area_gross_abr}'
-                                    ': ${property.sqFtGross}'
+                                    ': ${property.grossArea}'
                                     ' ${S.of(context).sq_ft_abr}',
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
@@ -112,7 +112,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                               ],
                             ),
                             Text(
-                                '${Format.currency.format(property.monthlyRent)}'
+                                '${Format.currency.format(property.contract.monthlyRent)}'
                                 '/${S.of(context).month}',
                                 style: AppTheme.getRentTextStyle(context))
                           ],

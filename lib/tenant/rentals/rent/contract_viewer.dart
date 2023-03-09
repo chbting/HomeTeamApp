@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_offer_data.dart';
+import 'package:hometeam_client/json_model/contract_bid.dart';
 
 class ContractViewerScreen extends StatefulWidget {
   const ContractViewerScreen({Key? key, required this.offer}) : super(key: key);
 
-  final ContractOffer offer;
+  final ContractBid offer;
 
   @override
   State<StatefulWidget> createState() => ContractViewerScreenState();

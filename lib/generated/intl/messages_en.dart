@@ -39,12 +39,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "am": MessageLookupByLibrary.simpleMessage("AM"),
         "app_settings": MessageLookupByLibrary.simpleMessage("App Settings"),
-        "area_gross": MessageLookupByLibrary.simpleMessage("Area (Gross)"),
+        "area_gross": MessageLookupByLibrary.simpleMessage("Gross area"),
         "area_gross_abr": MessageLookupByLibrary.simpleMessage("Gross"),
-        "area_net": MessageLookupByLibrary.simpleMessage("Area (S.A.)"),
-        "area_net_abr": MessageLookupByLibrary.simpleMessage("S.A."),
+        "area_net": MessageLookupByLibrary.simpleMessage("Net area"),
+        "area_net_abr": MessageLookupByLibrary.simpleMessage("Net"),
         "area_sq_ft": MessageLookupByLibrary.simpleMessage("Area (Sq. ft)"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
+        "bathroom_count":
+            MessageLookupByLibrary.simpleMessage("Bathroom count"),
         "bill_electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "bill_gas": MessageLookupByLibrary.simpleMessage("Gas"),
         "bill_management": MessageLookupByLibrary.simpleMessage("Management"),
@@ -89,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
+        "covered_parking_count":
+            MessageLookupByLibrary.simpleMessage("Covered parking count"),
         "create_a_free_account":
             MessageLookupByLibrary.simpleMessage("Create a free account"),
         "create_listing":
@@ -172,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("No. of rooms"),
         "offered": MessageLookupByLibrary.simpleMessage("Offered"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "open_parking_count":
+            MessageLookupByLibrary.simpleMessage("Open parking count"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "or_create_a_free_account":
             MessageLookupByLibrary.simpleMessage("or create a free account"),
@@ -224,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),
+        "room_count": MessageLookupByLibrary.simpleMessage("Room count"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "save_for_later":
             MessageLookupByLibrary.simpleMessage("Save for later"),

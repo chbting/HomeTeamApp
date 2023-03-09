@@ -8,8 +8,10 @@ class Property {
   final Address address;
   int netArea;
   int grossArea;
-  int roomCount;
-  int bathroomCount; // todo 0.5
+  int room;
+  int bathroom; // todo 0.5
+  int coveredParking;
+  int openParking;
   ImageProvider coverImage;
   Contract contract;
   Listing listing;
@@ -21,8 +23,10 @@ class Property {
       required this.address,
       this.netArea = -1,
       this.grossArea = -1,
-      this.roomCount = -1,
-      this.bathroomCount = -1,
+      this.room = -1,
+      this.bathroom = -1,
+      this.coveredParking = -1,
+      this.openParking = -1,
       required this.coverImage,
       required this.contract,
       required this.listing});

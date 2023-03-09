@@ -570,20 +570,20 @@ class S {
     );
   }
 
-  /// `Area (Gross)`
+  /// `Gross area`
   String get area_gross {
     return Intl.message(
-      'Area (Gross)',
+      'Gross area',
       name: 'area_gross',
       desc: '',
       args: [],
     );
   }
 
-  /// `Area (S.A.)`
+  /// `Net area`
   String get area_net {
     return Intl.message(
-      'Area (S.A.)',
+      'Net area',
       name: 'area_net',
       desc: '',
       args: [],
@@ -610,10 +610,10 @@ class S {
     );
   }
 
-  /// `S.A.`
+  /// `Net`
   String get area_net_abr {
     return Intl.message(
-      'S.A.',
+      'Net',
       name: 'area_net_abr',
       desc: '',
       args: [],
@@ -1855,6 +1855,46 @@ class S {
     return Intl.message(
       'Info required',
       name: 'msg_info_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bathroom count`
+  String get bathroom_count {
+    return Intl.message(
+      'Bathroom count',
+      name: 'bathroom_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Room count`
+  String get room_count {
+    return Intl.message(
+      'Room count',
+      name: 'room_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Covered parking count`
+  String get covered_parking_count {
+    return Intl.message(
+      'Covered parking count',
+      name: 'covered_parking_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open parking count`
+  String get open_parking_count {
+    return Intl.message(
+      'Open parking count',
+      name: 'open_parking_count',
       desc: '',
       args: [],
     );

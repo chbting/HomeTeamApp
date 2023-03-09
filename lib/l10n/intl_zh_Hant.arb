@@ -183,5 +183,9 @@
 	"sign_on_site": "睇樓時簽署",
 	"skip": "跳過",
 	"sign": "簽署",
-	"msg_info_required": "需填寫資料"
+	"msg_info_required": "需填寫資料",
+	"bathroom_count": "浴室數",
+	"room_count": "房間數",
+	"covered_parking_count": "有蓋車位數",
+	"open_parking_count": "露天車位數"
 }

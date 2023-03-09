@@ -52,11 +52,11 @@
 	"cantonese": "Chinese (Cantonese)",
 	"mandarin": "Chinese (Mandarin)",
 	"english_voice_input": "English",
-	"area_gross": "Area (Gross)",
-	"area_net": "Area (S.A.)",
+	"area_gross": "Gross area",
+	"area_net": "Net area",
 	"pick_datetime": "Pick the date and time",
 	"area_gross_abr": "Gross",
-	"area_net_abr": "S.A.",
+	"area_net_abr": "Net",
 	"sq_ft_abr": "sq. ft",
 	"date_time_selected": "Preferred date and time",
 	"time": "Time",
@@ -180,5 +180,9 @@
 	"sign_on_site": "Sign on site",
 	"skip": "Skip",
 	"sign": "Sign",
-	"msg_info_required": "Info required"
+	"msg_info_required": "Info required",
+	"bathroom_count": "Bathroom count",
+	"room_count": "Room count",
+	"covered_parking_count": "Covered parking count",
+	"open_parking_count": "Open parking count"
 }

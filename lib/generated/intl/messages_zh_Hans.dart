@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "area_net_abr": MessageLookupByLibrary.simpleMessage("实用"),
         "area_sq_ft": MessageLookupByLibrary.simpleMessage("面积 (平方呎)"),
         "back": MessageLookupByLibrary.simpleMessage("返回"),
+        "bathroom_count": MessageLookupByLibrary.simpleMessage("浴室数"),
         "bill_electricity": MessageLookupByLibrary.simpleMessage("电费"),
         "bill_gas": MessageLookupByLibrary.simpleMessage("煤气费"),
         "bill_management": MessageLookupByLibrary.simpleMessage("管理费"),
@@ -77,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "continue_with_sms": MessageLookupByLibrary.simpleMessage("以短信继续"),
         "contract_status": MessageLookupByLibrary.simpleMessage("租约进度"),
         "count": MessageLookupByLibrary.simpleMessage("数量"),
+        "covered_parking_count": MessageLookupByLibrary.simpleMessage("有盖车位数"),
         "create_a_free_account": MessageLookupByLibrary.simpleMessage("注册免费帐户"),
         "create_listing": MessageLookupByLibrary.simpleMessage("创建广告"),
         "darkMode": MessageLookupByLibrary.simpleMessage("深色模式"),
@@ -147,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("房间数"),
         "offered": MessageLookupByLibrary.simpleMessage("提出"),
         "ok": MessageLookupByLibrary.simpleMessage("确认"),
+        "open_parking_count": MessageLookupByLibrary.simpleMessage("露天车位数"),
         "or": MessageLookupByLibrary.simpleMessage("或"),
         "or_create_a_free_account":
             MessageLookupByLibrary.simpleMessage("或创建新帐户"),
@@ -188,6 +191,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset": MessageLookupByLibrary.simpleMessage("重设"),
         "review_before_submission":
             MessageLookupByLibrary.simpleMessage("签署租约后，你可在提交之前确认细节"),
+        "room_count": MessageLookupByLibrary.simpleMessage("房间数"),
         "save": MessageLookupByLibrary.simpleMessage("收藏"),
         "save_for_later": MessageLookupByLibrary.simpleMessage("迟些看"),
         "schedule": MessageLookupByLibrary.simpleMessage("预约"),

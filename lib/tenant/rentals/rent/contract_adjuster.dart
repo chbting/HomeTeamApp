@@ -111,9 +111,10 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     TextFormField(
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.done,
-                        initialValue: '${widget.property.contract.deposit}',
+                        initialValue:
+                            widget.property.contract.deposit.toString(),
                         inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly
                         ],
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),

@@ -55,10 +55,9 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.badge),
+                            icon: const Icon(Icons.badge_outlined), // todo better icon
                             labelText: S.of(context).id_card_number),
                         onChanged: (value) {
-                          //widget.offer.addressLine2 = value;
                         },
                         // todo format input
                         autovalidateMode: AutovalidateMode.onUserInteraction,

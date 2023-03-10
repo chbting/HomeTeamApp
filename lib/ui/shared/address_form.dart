@@ -16,35 +16,12 @@ class AddressForm extends StatefulWidget {
 
 class AddressFormState extends State<AddressForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final FocusNode _addressLine1FieldFocus = FocusNode();
-  final FocusNode _addressLine2FieldFocus = FocusNode();
-  final FocusNode _districtFieldFocus = FocusNode();
 
   @override
   void initState() {
     widget.controller.reset = _reset;
     widget.controller.validate = _validate;
-    _addressLine1FieldFocus.addListener(() {
-      setState(() {});
-    });
-    _addressLine2FieldFocus.addListener(() {
-      setState(() {});
-    });
-    _districtFieldFocus.addListener(() {
-      setState(() {});
-    });
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _addressLine1FieldFocus.removeListener(() {});
-    _addressLine1FieldFocus.dispose();
-    _addressLine2FieldFocus.removeListener(() {});
-    _addressLine2FieldFocus.dispose();
-    _districtFieldFocus.removeListener(() {});
-    _districtFieldFocus.dispose();
-    super.dispose();
   }
 
   @override
@@ -59,17 +36,11 @@ class AddressFormState extends State<AddressForm> {
               keyboardType: TextInputType.text,
               // todo autocomplete with the gov address api
               textInputAction: TextInputAction.next,
-              focusNode: _addressLine1FieldFocus,
               decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: S.of(context).address_line1_label,
                   helperText: S.of(context).address_line1_helper,
-                  icon: Icon(Icons.location_pin,
-                      color: (_addressLine1FieldFocus.hasPrimaryFocus ||
-                              _addressLine2FieldFocus.hasFocus ||
-                              _districtFieldFocus.hasFocus)
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).iconTheme.color)),
+                  icon: const Icon(Icons.location_pin)),
               onChanged: (value) => widget.address.addressLine1 = value,
             ),
             Padding(
@@ -78,7 +49,6 @@ class AddressFormState extends State<AddressForm> {
                   initialValue: widget.address.addressLine2,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
-                  focusNode: _addressLine2FieldFocus,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText: S.of(context).address_line2_label,
@@ -98,7 +68,7 @@ class AddressFormState extends State<AddressForm> {
                     child: TextFormField(
                         initialValue: widget.address.district,
                         keyboardType: TextInputType.text,
-                        focusNode: _districtFieldFocus,
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: S.of(context).district),

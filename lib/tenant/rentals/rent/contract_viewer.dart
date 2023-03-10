@@ -27,8 +27,8 @@ class ContractViewerScreenState extends State<ContractViewerScreen> {
           Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(S.of(context).review_before_submission,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      color: Theme.of(context).textTheme.caption!.color))),
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      color: Theme.of(context).textTheme.bodySmall!.color))),
           Card(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),

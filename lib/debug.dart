@@ -84,7 +84,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[0],
-      contract: Contract(monthlyRent: _rents[0]),
+      contract: Contract(monthlyRent: _rents[0], deposit: _rents[0] * 2),
       listing: Listing(title: addresses[0].addressLine2)),
   Property(
       address: addresses[1],
@@ -93,7 +93,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[1],
-      contract: Contract(monthlyRent: _rents[1]),
+      contract: Contract(monthlyRent: _rents[1], deposit: _rents[1] * 2),
       listing: Listing(title: addresses[1].addressLine2)),
   Property(
       address: addresses[2],
@@ -102,7 +102,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[2],
-      contract: Contract(monthlyRent: _rents[2]),
+      contract: Contract(monthlyRent: _rents[2], deposit: _rents[2] * 2),
       listing: Listing(title: addresses[2].addressLine2)),
   Property(
       address: addresses[3],
@@ -111,7 +111,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[3],
-      contract: Contract(monthlyRent: _rents[3]),
+      contract: Contract(monthlyRent: _rents[3], deposit: _rents[3] * 2),
       listing: Listing(title: addresses[3].addressLine2)),
   Property(
       address: addresses[4],
@@ -120,7 +120,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[4],
-      contract: Contract(monthlyRent: _rents[4]),
+      contract: Contract(monthlyRent: _rents[4], deposit: _rents[4] * 2),
       listing: Listing(title: addresses[4].addressLine2)),
   Property(
       address: addresses[5],
@@ -129,7 +129,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[5],
-      contract: Contract(monthlyRent: _rents[5]),
+      contract: Contract(monthlyRent: _rents[5], deposit: _rents[5] * 2),
       listing: Listing(title: addresses[5].addressLine2)),
   Property(
       address: addresses[6],
@@ -138,7 +138,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[6],
-      contract: Contract(monthlyRent: _rents[6]),
+      contract: Contract(monthlyRent: _rents[6], deposit: _rents[6] * 2),
       listing: Listing(title: addresses[6].addressLine2)),
   Property(
       address: addresses[7],
@@ -147,7 +147,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[7],
-      contract: Contract(monthlyRent: _rents[7]),
+      contract: Contract(monthlyRent: _rents[7], deposit: _rents[7] * 2),
       listing: Listing(title: addresses[7].addressLine2)),
   Property(
       address: addresses[8],
@@ -156,7 +156,7 @@ final List<Property> _sampleProperties = [
       room: 2,
       bathroom: 1,
       coverImage: _sampleCoverImage[8],
-      contract: Contract(monthlyRent: _rents[8]),
+      contract: Contract(monthlyRent: _rents[8], deposit: _rents[8] * 2),
       listing: Listing(title: addresses[8].addressLine2))
 ];
 

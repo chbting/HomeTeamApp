@@ -31,7 +31,7 @@ class Contract {
       bool? managementRequired}) {
     return Contract(
       monthlyRent: monthlyRent ?? this.monthlyRent,
-      deposit: monthlyRent ?? this.deposit,
+      deposit: deposit ?? this.deposit,
       waterRequired: waterRequired ?? this.waterRequired,
       electricityRequired: electricityRequired ?? this.electricityRequired,
       gasRequired: gasRequired ?? this.gasRequired,

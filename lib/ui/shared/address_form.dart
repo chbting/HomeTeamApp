@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/http_request/place_autocomplete_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
 
@@ -34,14 +35,18 @@ class AddressFormState extends State<AddressForm> {
             TextFormField(
               initialValue: widget.address.addressLine1,
               keyboardType: TextInputType.text,
-              // todo autocomplete with the gov address api
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: S.of(context).address_line1_label,
                   helperText: S.of(context).address_line1_helper,
                   icon: const Icon(Icons.location_pin)),
-              onChanged: (value) => widget.address.addressLine1 = value,
+              onChanged: (value) {
+                //todo
+                widget.address.addressLine1 = value;
+                PlaceAutocompleteHelper.query(context, value)
+                    .then((response) => debugPrint('Response:${response.body}'));
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(left: 40.0),

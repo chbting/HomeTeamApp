@@ -23,8 +23,8 @@ class Address {
   @override
   String toString() {
     var s =
-        addressLine1.isNotEmpty ? '$addressLine1\n$addressLine2' : addressLine2;
-    s += '\n$district\n$region';
+        addressLine1.isNotEmpty ? '$addressLine1,$addressLine2' : addressLine2;
+    s += ',$district,$region';
     return s;
   }
 

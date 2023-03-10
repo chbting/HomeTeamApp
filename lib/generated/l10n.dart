@@ -50,16 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Agreements`
-  String get agreements {
-    return Intl.message(
-      'Agreements',
-      name: 'agreements',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Settings`
   String get settings {
     return Intl.message(
@@ -1895,6 +1885,36 @@ class S {
     return Intl.message(
       'Open parking count',
       name: 'open_parking_count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract`
+  String get contracts {
+    return Intl.message(
+      'Contract',
+      name: 'contracts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contract`
+  String get contract {
+    return Intl.message(
+      'Contract',
+      name: 'contract',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to generate the path of visit`
+  String get msg_failed_to_generate_visit_path {
+    return Intl.message(
+      'Failed to generate the path of visit',
+      name: 'msg_failed_to_generate_visit_path',
       desc: '',
       args: [],
     );

@@ -50,7 +50,7 @@ class HomeScreenState extends State<HomeScreen> {
         NavigationDestination(
           icon: const Icon(Icons.description_outlined),
           selectedIcon: const Icon(Icons.description),
-          label: S.of(context).agreements,
+          label: S.of(context).contracts,
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),
@@ -69,7 +69,7 @@ class HomeScreenState extends State<HomeScreen> {
         NavigationDestination(
           icon: const Icon(Icons.description_outlined),
           selectedIcon: const Icon(Icons.description),
-          label: S.of(context).agreements,
+          label: S.of(context).contracts,
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

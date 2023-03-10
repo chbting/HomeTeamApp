@@ -1,6 +1,5 @@
 {
 	"@@locale": "zh_Hant",
-	"agreements": "租約",
 	"settings": "設定",
 	"general_settings": "一般設定",
 	"darkMode": "深色模式",
@@ -187,5 +186,8 @@
 	"bathroom_count": "浴室數",
 	"room_count": "房間數",
 	"covered_parking_count": "有蓋車位數",
-	"open_parking_count": "露天車位數"
+	"open_parking_count": "露天車位數",
+	"contracts": "租約",
+	"contract": "租約",
+	"msg_failed_to_generate_visit_path": "無法生成睇樓路線"
 }

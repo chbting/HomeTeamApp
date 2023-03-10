@@ -36,7 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "address_line2_label":
             MessageLookupByLibrary.simpleMessage("屋苑 或 街道门牌"),
         "afternoon": MessageLookupByLibrary.simpleMessage("下午"),
-        "agreements": MessageLookupByLibrary.simpleMessage("租約"),
         "am": MessageLookupByLibrary.simpleMessage("上午"),
         "app_settings": MessageLookupByLibrary.simpleMessage("App 设定"),
         "area_gross": MessageLookupByLibrary.simpleMessage("建筑面积"),
@@ -76,7 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "continue_with_google":
             MessageLookupByLibrary.simpleMessage("以Google帐号继续"),
         "continue_with_sms": MessageLookupByLibrary.simpleMessage("以短信繼續"),
+        "contract": MessageLookupByLibrary.simpleMessage("租約"),
         "contract_status": MessageLookupByLibrary.simpleMessage("租约进度"),
+        "contracts": MessageLookupByLibrary.simpleMessage("租約"),
         "count": MessageLookupByLibrary.simpleMessage("数量"),
         "covered_parking_count": MessageLookupByLibrary.simpleMessage("有盖车位数"),
         "create_a_free_account": MessageLookupByLibrary.simpleMessage("注册免费帐户"),
@@ -130,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_cannot_recognize_speech":
             MessageLookupByLibrary.simpleMessage("未能辨识语音"),
         "msg_cannot_sign_in": MessageLookupByLibrary.simpleMessage("无法登入"),
+        "msg_failed_to_generate_visit_path":
+            MessageLookupByLibrary.simpleMessage("无法生成睇楼路线"),
         "msg_info_required": MessageLookupByLibrary.simpleMessage("需填写资料"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("电话号码无效"),

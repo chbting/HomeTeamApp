@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/ui/shared/address_form.dart';
 import 'package:hometeam_client/ui/shared/contact_form.dart';
+import 'package:hometeam_client/ui/shared/form_card.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
-import 'package:hometeam_client/ui/theme.dart';
 
 class TenantInformationScreen extends StatefulWidget {
   const TenantInformationScreen({Key? key, required this.offer})
@@ -33,52 +33,44 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
             top: ContractBrokerScreen.stepTitleBarHeight - 4.0,
             bottom: ContractBrokerScreen.bottomButtonContainerHeight - 4.0),
         children: [
-          Card(
-              child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-                key: _formKey,
-                child: Wrap(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          S.of(context).tenant,
-                          style: AppTheme.getCardTitleTextStyle(context),
-                        )),
-                    ContactForm(
-                        client: widget.offer.tenant,
-                        controller: _contactFormController),
-                    Container(height: 16.0),
-                    TextFormField(
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.badge_outlined), // todo better icon
-                            labelText: S.of(context).id_card_number),
-                        onChanged: (value) {
-                        },
-                        // todo format input
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          //todo id card validator
-                          return null;
-                        }),
-                    Container(height: 16.0),
-                    const Divider(thickness: 1.0),
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        child: Text(
-                          S.of(context).mailing_address,
-                          style: AppTheme.getCardTitleTextStyle(context),
-                        )),
-                    AddressForm(
-                        address: widget.offer.tenant.address,
-                        controller: _addressFormController)
-                  ],
-                )),
-          ))
+          FormCard(
+              title: S.of(context).tenant,
+              body: Form(
+                  key: _formKey,
+                  child: Wrap(
+                    children: [
+                      ContactForm(
+                          client: widget.offer.tenant,
+                          controller: _contactFormController),
+                      Container(height: 16.0),
+                      TextFormField(
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              icon: const Icon(Icons.badge_outlined),
+                              // todo better icon
+                              labelText: S.of(context).id_card_number),
+                          onChanged: (value) {},
+                          // todo format input
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            //todo id card validator
+                            return null;
+                          }),
+                      Container(height: 16.0),
+                      const Divider(thickness: 1.0),
+                      Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: Text(
+                            S.of(context).mailing_address,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          )),
+                      AddressForm(
+                          address: widget.offer.tenant.address,
+                          controller: _addressFormController)
+                    ],
+                  )))
         ]);
   }
 

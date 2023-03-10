@@ -4,6 +4,7 @@ import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/ui/shared/form_card.dart';
 import 'package:hometeam_client/ui/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:intl/intl.dart';
@@ -80,186 +81,184 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             isThreeLine: true, //todo address format
           ),
         ),
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-                key: _formKey,
-                child: Wrap(
-                  children: [
-                    TextFormField(
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        initialValue: '${widget.property.contract.monthlyRent}',
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.attach_money),
-                            labelText: S.of(context).monthly_rent),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return S.of(context).please_put_in_a_valid_amount;
-                          } else {
-                            widget.bid.contract.monthlyRent = int.parse(value);
-                            return null;
-                          }
-                        }),
-                    Container(height: 16.0),
-                    TextFormField(
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        initialValue:
-                            widget.property.contract.deposit.toString(),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.savings),
-                            labelText: S.of(context).deposit),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return S.of(context).please_put_in_a_valid_amount;
-                          } else {
-                            widget.bid.contract.deposit = int.parse(value);
-                            return null;
-                          }
-                        }),
-                    Container(height: 8.0),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          S.of(context).lease_period,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        )),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            width: 40.0,
-                            height: 76.0, // 60 + 8 x 2 (paddings)
-                            child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Icon(Icons.calendar_today,
-                                    color: AppTheme.getTextFieldIconColor(
-                                        context)))),
-                        _getLeaseStartDatePicker(),
-                        Container(width: 16.0),
-                        _getLeaseEndDatePicker(),
+        FormCard(
+          title: S.of(context).contract,
+          body: Form(
+              key: _formKey,
+              child: Wrap(
+                children: [
+                  TextFormField(
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      initialValue: '${widget.property.contract.monthlyRent}',
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
                       ],
-                    ),
-                    Container(height: 8.0),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          S.of(context).tenant_pays_the_following,
-                          style: Theme.of(context).textTheme.titleMedium,
-                        )),
-                    GridView.count(
-                      crossAxisCount: _tenantFeesColumnCount,
-                      childAspectRatio:
-                          (MediaQuery.of(context).size.width - 64.0) /
-                              _tenantFeesColumnCount /
-                              _tenantFeesRowHeight,
-                      shrinkWrap: true,
-                      primary: false,
-                      children: [
-                        CheckboxListTile(
-                            value: widget.bid.contract.waterRequired,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(S.of(context).bill_water,
-                                style:
-                                    AppTheme.getListTileBodyTextStyle(context)),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                widget.bid.contract.waterRequired = value!;
-                              });
-                            }),
-                        CheckboxListTile(
-                            value: widget.bid.contract.ratesRequired,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(S.of(context).bill_rates,
-                                style:
-                                    AppTheme.getListTileBodyTextStyle(context)),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                widget.bid.contract.ratesRequired = value!;
-                              });
-                            }),
-                        CheckboxListTile(
-                            value: widget.bid.contract.electricityRequired,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(S.of(context).bill_electricity,
-                                style:
-                                    AppTheme.getListTileBodyTextStyle(context)),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                widget.bid.contract.electricityRequired =
-                                    value!;
-                              });
-                            }),
-                        CheckboxListTile(
-                            value: widget.bid.contract.managementRequired,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(S.of(context).bill_management,
-                                style:
-                                    AppTheme.getListTileBodyTextStyle(context)),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                widget.bid.contract.managementRequired = value!;
-                              });
-                            }),
-                        CheckboxListTile(
-                            value: widget.bid.contract.gasRequired,
-                            dense: true,
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 4.0),
-                            title: Text(S.of(context).bill_gas,
-                                style:
-                                    AppTheme.getListTileBodyTextStyle(context)),
-                            onChanged: (bool? value) {
-                              setState(() {
-                                widget.bid.contract.gasRequired = value!;
-                              });
-                            }),
-                      ],
-                    ),
-                    Container(height: 16.0),
-                    TextFormField(
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.done,
-                        maxLines: 5,
-                        maxLength: 100,
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.notes),
-                            labelText: S.of(context).notes),
-                        onChanged: (value) {
-                          widget.bid.notes = value;
-                        },
-                        validator: (value) {
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          icon: const Icon(Icons.attach_money),
+                          labelText: S.of(context).monthly_rent),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return S.of(context).please_put_in_a_valid_amount;
+                        } else {
+                          widget.bid.contract.monthlyRent = int.parse(value);
                           return null;
-                        })
-                  ],
-                )),
-          ),
+                        }
+                      }),
+                  Container(height: 16.0),
+                  TextFormField(
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
+                      initialValue:
+                          widget.property.contract.deposit.toString(),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          icon: const Icon(Icons.savings),
+                          labelText: S.of(context).deposit),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return S.of(context).please_put_in_a_valid_amount;
+                        } else {
+                          widget.bid.contract.deposit = int.parse(value);
+                          return null;
+                        }
+                      }),
+                  Container(height: 8.0),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        S.of(context).lease_period,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                          width: 40.0,
+                          height: 76.0, // 60 + 8 x 2 (paddings)
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(Icons.calendar_today,
+                                  color: AppTheme.getTextFieldIconColor(
+                                      context)))),
+                      _getLeaseStartDatePicker(),
+                      Container(width: 16.0),
+                      _getLeaseEndDatePicker(),
+                    ],
+                  ),
+                  Container(height: 8.0),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Text(
+                        S.of(context).tenant_pays_the_following,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      )),
+                  GridView.count(
+                    crossAxisCount: _tenantFeesColumnCount,
+                    childAspectRatio:
+                        (MediaQuery.of(context).size.width - 64.0) /
+                            _tenantFeesColumnCount /
+                            _tenantFeesRowHeight,
+                    shrinkWrap: true,
+                    primary: false,
+                    children: [
+                      CheckboxListTile(
+                          value: widget.bid.contract.waterRequired,
+                          dense: true,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 4.0),
+                          title: Text(S.of(context).bill_water,
+                              style:
+                                  AppTheme.getListTileBodyTextStyle(context)),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.bid.contract.waterRequired = value!;
+                            });
+                          }),
+                      CheckboxListTile(
+                          value: widget.bid.contract.ratesRequired,
+                          dense: true,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 4.0),
+                          title: Text(S.of(context).bill_rates,
+                              style:
+                                  AppTheme.getListTileBodyTextStyle(context)),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.bid.contract.ratesRequired = value!;
+                            });
+                          }),
+                      CheckboxListTile(
+                          value: widget.bid.contract.electricityRequired,
+                          dense: true,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 4.0),
+                          title: Text(S.of(context).bill_electricity,
+                              style:
+                                  AppTheme.getListTileBodyTextStyle(context)),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.bid.contract.electricityRequired =
+                                  value!;
+                            });
+                          }),
+                      CheckboxListTile(
+                          value: widget.bid.contract.managementRequired,
+                          dense: true,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 4.0),
+                          title: Text(S.of(context).bill_management,
+                              style:
+                                  AppTheme.getListTileBodyTextStyle(context)),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.bid.contract.managementRequired = value!;
+                            });
+                          }),
+                      CheckboxListTile(
+                          value: widget.bid.contract.gasRequired,
+                          dense: true,
+                          controlAffinity: ListTileControlAffinity.leading,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 4.0),
+                          title: Text(S.of(context).bill_gas,
+                              style:
+                                  AppTheme.getListTileBodyTextStyle(context)),
+                          onChanged: (bool? value) {
+                            setState(() {
+                              widget.bid.contract.gasRequired = value!;
+                            });
+                          }),
+                    ],
+                  ),
+                  Container(height: 16.0),
+                  TextFormField(
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.done,
+                      maxLines: 5,
+                      maxLength: 100,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          icon: const Icon(Icons.notes),
+                          labelText: S.of(context).notes),
+                      onChanged: (value) {
+                        widget.bid.notes = value;
+                      },
+                      validator: (value) {
+                        return null;
+                      })
+                ],
+              )),
         ),
       ],
     );

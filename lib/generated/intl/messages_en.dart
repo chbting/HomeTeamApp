@@ -36,7 +36,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "address_line2_label": MessageLookupByLibrary.simpleMessage(
             "Housing estate or street number"),
         "afternoon": MessageLookupByLibrary.simpleMessage("Afternoon"),
-        "agreements": MessageLookupByLibrary.simpleMessage("Agreements"),
         "am": MessageLookupByLibrary.simpleMessage("AM"),
         "app_settings": MessageLookupByLibrary.simpleMessage("App Settings"),
         "area_gross": MessageLookupByLibrary.simpleMessage("Gross area"),
@@ -88,8 +87,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Continue with Google"),
         "continue_with_sms":
             MessageLookupByLibrary.simpleMessage("Continue with SMS"),
+        "contract": MessageLookupByLibrary.simpleMessage("Contract"),
         "contract_status":
             MessageLookupByLibrary.simpleMessage("Contract Status"),
+        "contracts": MessageLookupByLibrary.simpleMessage("Contract"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
         "covered_parking_count":
             MessageLookupByLibrary.simpleMessage("Covered parking count"),
@@ -152,6 +153,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cannot recognize speech"),
         "msg_cannot_sign_in":
             MessageLookupByLibrary.simpleMessage("Cannot sign in"),
+        "msg_failed_to_generate_visit_path":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to generate the path of visit"),
         "msg_info_required":
             MessageLookupByLibrary.simpleMessage("Info required"),
         "msg_invalid_phone_number":

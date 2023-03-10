@@ -8,10 +8,10 @@ class ContractsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).agreements),
+        title: Text(S.of(context).contracts),
       ),
       body: Center(
-        child: Text(S.of(context).agreements),
+        child: Text(S.of(context).contracts),
       ),
     );
   }

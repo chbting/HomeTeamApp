@@ -1,6 +1,5 @@
 {
 	"@@locale": "en",
-	"agreements": "Agreements",
 	"settings": "Settings",
 	"general_settings": "General Settings",
 	"darkMode": "Dark Mode",
@@ -184,5 +183,8 @@
 	"bathroom_count": "Bathroom count",
 	"room_count": "Room count",
 	"covered_parking_count": "Covered parking count",
-	"open_parking_count": "Open parking count"
+	"open_parking_count": "Open parking count",
+	"contracts": "Contract",
+	"contract": "Contract",
+	"msg_failed_to_generate_visit_path": "Failed to generate the path of visit"
 }

@@ -1,6 +1,5 @@
 {
 	"@@locale": "zh_Hans",
-	"agreements": "租约",
 	"settings": "设定",
 	"general_settings": "一般设定",
 	"darkMode": "深色模式",
@@ -184,5 +183,8 @@
 	"bathroom_count": "浴室数",
 	"room_count": "房间数",
 	"covered_parking_count": "有盖车位数",
-	"open_parking_count": "露天车位数"
+	"open_parking_count": "露天车位数",
+	"contracts": "租约",
+	"contract": "租约",
+	"msg_failed_to_generate_visit_path": "无法生成睇楼路线"
 }

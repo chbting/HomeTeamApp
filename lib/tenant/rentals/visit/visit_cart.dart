@@ -1,17 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/configs/keys.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/http_request/distance_matrix_request.dart';
-import 'package:hometeam_client/json_model/distance_matrix.dart';
+import 'package:hometeam_client/http_request/distance_matrix_helper.dart';
+import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
 import 'package:hometeam_client/ui/theme.dart';
-import 'package:http/http.dart';
 
 class VisitCartScreen extends StatefulWidget {
   const VisitCartScreen({Key? key}) : super(key: key);
@@ -20,8 +16,7 @@ class VisitCartScreen extends StatefulWidget {
   State<VisitCartScreen> createState() => VisitCartScreenState();
 }
 
-class VisitCartScreenState extends State<VisitCartScreen>
-    with AutomaticKeepAliveClientMixin {
+class VisitCartScreenState extends State<VisitCartScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
   late bool _showFab = _propertiesCart.isNotEmpty;
@@ -30,20 +25,15 @@ class VisitCartScreenState extends State<VisitCartScreen>
 
   final double _imageSize = 120.0;
   final List<Property> _propertiesCart = getSampleProperties().sublist(3, 9);
-  final Map<Property, Map<Property, int>> _travelMap =
-      {}; // Map<originId, Map<destinationId, duration>>
+  Map<Property, Map<Property, int>> _travelMap =
+      {}; // todo use ID instead of objects Map<originId, Map<destinationId, duration>>
   late List<Property> _currentPath, _optimizedPath;
   late int _optimizedTravelTime;
   bool _showProgressIndicator = false;
   bool _fabEnabled = true;
 
   @override
-  bool get wantKeepAlive => true;
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
       child: Scaffold(
@@ -60,21 +50,34 @@ class VisitCartScreenState extends State<VisitCartScreen>
                         _fabEnabled = false;
                         _showProgressIndicator = true;
                       });
-                      _findOptimizedPath().then((response) {
-                        _parseDistanceMatrixResponse(response);
-                        _getOptimizedRoute();
-
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => VisitSchedulingScreen(
-                                data: VisitData(
-                                    properties: _propertiesCart,
-                                    optimizedPath: _optimizedPath,
-                                    selectedPath: _optimizedPath.toList(),
-                                    travelMap: _travelMap))));
+                      List<Address> addresses =
+                          _propertiesCart.map((e) => e.address).toList();
+                      DistanceMatrixHelper.getMatrix(addresses)
+                          .then((response) {
+                        var map =
+                            DistanceMatrixHelper.parseDistanceMatrixResponse(
+                                response, _propertiesCart);
+                        if (map != null) {
+                          _travelMap = map;
+                          _getOptimizedRoute();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VisitSchedulingScreen(
+                                  data: VisitData(
+                                      properties: _propertiesCart,
+                                      optimizedPath: _optimizedPath,
+                                      selectedPath: _optimizedPath.toList(),
+                                      travelMap: _travelMap))));
+                        } else {
+                          _scaffoldMessengerKey.currentState!.showSnackBar(
+                              SnackBar(
+                                  content: Text(S
+                                      .of(context)
+                                      .msg_failed_to_generate_visit_path)));
+                        }
                       }).whenComplete(() => setState(() {
-                            _showProgressIndicator = false;
-                            _fabEnabled = true;
-                          }));
+                                _showProgressIndicator = false;
+                                _fabEnabled = true;
+                              }));
                     }
                   })),
           floatingActionButtonLocation:
@@ -130,47 +133,6 @@ class VisitCartScreenState extends State<VisitCartScreen>
             ],
           )),
     );
-  }
-
-  Future<Response> _findOptimizedPath() async {
-    String origins = '';
-    for (var element in _propertiesCart) {
-      origins += '|${element.address}';
-    }
-    origins =
-        origins.substring(1, origins.length - 1); // remove the starting '|'
-    String destinations = origins;
-
-    Uri request = Uri.parse('$distanceMatrixURL'
-        '$distanceMatrixResponseFormat?'
-        'origins=$origins'
-        '&destinations=$destinations'
-        '&language=$distanceMatrixResponseLanguage'
-        '&key=$distanceMatrixDebugKey');
-
-    debugPrint('request:\n$request');
-    return get(request);
-  }
-
-  void _parseDistanceMatrixResponse(Response response) {
-    // Parse the response into a map of travel times
-    if (response.statusCode == 200) {
-      Map<String, dynamic> distanceMatrixMap = jsonDecode(response.body);
-      DistanceMatrix distanceMatrix =
-          DistanceMatrix.fromJson(distanceMatrixMap);
-      for (var ori = 0; ori < _propertiesCart.length; ori++) {
-        Property origin = _propertiesCart[ori];
-        _travelMap[origin] = <Property, int>{};
-
-        for (var dest = 0; dest < _propertiesCart.length; dest++) {
-          Property destination = _propertiesCart[dest];
-          if (origin != destination) {
-            _travelMap[origin]![destination] =
-                distanceMatrix.rows[ori].elements[dest].duration.value;
-          }
-        }
-      }
-    }
   }
 
   // The entry point

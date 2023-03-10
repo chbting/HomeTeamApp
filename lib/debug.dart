@@ -78,6 +78,7 @@ final List<Address> addresses = [
 
 final List<Property> _sampleProperties = [
   Property(
+      id: 1,
       address: addresses[0],
       netArea: 630,
       grossArea: 720,
@@ -87,6 +88,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[0], deposit: _rents[0] * 2),
       listing: Listing(title: addresses[0].addressLine2)),
   Property(
+      id: 2,
       address: addresses[1],
       netArea: 631,
       grossArea: 721,
@@ -96,6 +98,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[1], deposit: _rents[1] * 2),
       listing: Listing(title: addresses[1].addressLine2)),
   Property(
+      id: 3,
       address: addresses[2],
       netArea: 520,
       grossArea: 601,
@@ -105,6 +108,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[2], deposit: _rents[2] * 2),
       listing: Listing(title: addresses[2].addressLine2)),
   Property(
+      id: 4,
       address: addresses[3],
       netArea: 407,
       grossArea: 494,
@@ -114,6 +118,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[3], deposit: _rents[3] * 2),
       listing: Listing(title: addresses[3].addressLine2)),
   Property(
+      id: 5,
       address: addresses[4],
       netArea: 783,
       grossArea: 906,
@@ -123,6 +128,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[4], deposit: _rents[4] * 2),
       listing: Listing(title: addresses[4].addressLine2)),
   Property(
+      id: 6,
       address: addresses[5],
       netArea: 592,
       grossArea: 722,
@@ -132,6 +138,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[5], deposit: _rents[5] * 2),
       listing: Listing(title: addresses[5].addressLine2)),
   Property(
+      id: 7,
       address: addresses[6],
       netArea: 517,
       grossArea: 639,
@@ -141,6 +148,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[6], deposit: _rents[6] * 2),
       listing: Listing(title: addresses[6].addressLine2)),
   Property(
+      id: 8,
       address: addresses[7],
       netArea: 1068,
       grossArea: 1362,
@@ -150,6 +158,7 @@ final List<Property> _sampleProperties = [
       contract: Contract(monthlyRent: _rents[7], deposit: _rents[7] * 2),
       listing: Listing(title: addresses[7].addressLine2)),
   Property(
+      id: 9,
       address: addresses[8],
       netArea: 369,
       grossArea: 500,

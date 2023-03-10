@@ -23,8 +23,8 @@ DistanceMatrix _$DistanceMatrixFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DistanceMatrixToJson(DistanceMatrix instance) =>
     <String, dynamic>{
-      'destination_addresses': instance.destination_addresses,
-      'origin_addresses': instance.origin_addresses,
+      'destination_addresses': instance.destinationAddresses,
+      'origin_addresses': instance.originAddresses,
       'rows': instance.rows,
       'status': instance.status,
     };

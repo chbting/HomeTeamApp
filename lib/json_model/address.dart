@@ -1,8 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-@JsonSerializable()
 class Address {
   String addressLine1;
   String addressLine2;

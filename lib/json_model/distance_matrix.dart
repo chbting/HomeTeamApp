@@ -5,11 +5,13 @@ part 'distance_matrix.g.dart';
 
 @JsonSerializable()
 class DistanceMatrix {
-  DistanceMatrix(this.destination_addresses, this.origin_addresses, this.rows,
+  DistanceMatrix(this.destinationAddresses, this.originAddresses, this.rows,
       this.status);
 
-  List<String> destination_addresses;
-  List<String> origin_addresses;
+  @JsonKey(name: 'destination_addresses')
+  List<String> destinationAddresses;
+  @JsonKey(name: 'origin_addresses')
+  List<String> originAddresses;
   List<DistanceMatrixElements> rows;
   String status;
 

@@ -45,7 +45,7 @@ class AddressFormState extends State<AddressForm> {
                 //todo
                 widget.address.addressLine1 = value;
                 PlaceAutocompleteHelper.query(context, value)
-                    .then((response) => debugPrint('Response:${response.body}'));
+                    .then((response) => PlaceAutocompleteHelper.parseResponse(response));
               },
             ),
             Padding(

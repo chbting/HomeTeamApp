@@ -33,7 +33,7 @@ class DistanceMatrixHelper {
   /// Parse the response into a map of travel times
   /// return Map<originId, Map<destinationId, duration>>
   /// todo use property id in instead of the object itself
-  static Map<Property, Map<Property, int>>? parseDistanceMatrixResponse(
+  static Map<Property, Map<Property, int>>? parseResponse(
       Response response, List<Property> propertiesCart) {
     Map<Property, Map<Property, int>> travelMap = {};
 

@@ -55,7 +55,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                       DistanceMatrixHelper.getMatrix(addresses)
                           .then((response) {
                         var map =
-                            DistanceMatrixHelper.parseDistanceMatrixResponse(
+                            DistanceMatrixHelper.parseResponse(
                                 response, _propertiesCart);
                         if (map != null) {
                           _travelMap = map;

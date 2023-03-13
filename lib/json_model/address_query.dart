@@ -7,11 +7,11 @@ import 'dart:convert';
 class AddressQuery {
   AddressQuery({
     required this.requestAddress,
-    required this.suggestedAddress,
+    this.suggestedAddress,
   });
 
   final RequestAddress requestAddress;
-  final List<SuggestedAddress> suggestedAddress;
+  final List<SuggestedAddress>? suggestedAddress;
 
   factory AddressQuery.fromRawJson(String str) =>
       AddressQuery.fromJson(json.decode(str));
@@ -20,14 +20,17 @@ class AddressQuery {
 
   factory AddressQuery.fromJson(Map<String, dynamic> json) => AddressQuery(
         requestAddress: RequestAddress.fromJson(json["RequestAddress"]),
-        suggestedAddress: List<SuggestedAddress>.from(
-            json["SuggestedAddress"].map((x) => SuggestedAddress.fromJson(x))),
+        suggestedAddress: json["SuggestedAddress"] == null
+            ? null
+            : List<SuggestedAddress>.from(json["SuggestedAddress"]
+                .map((x) => SuggestedAddress.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "RequestAddress": requestAddress.toJson(),
-        "SuggestedAddress":
-            List<dynamic>.from(suggestedAddress.map((x) => x.toJson())),
+        "SuggestedAddress": suggestedAddress == null
+            ? null
+            : List<dynamic>.from(suggestedAddress!.map((x) => x.toJson())),
       };
 }
 
@@ -119,10 +122,12 @@ class PremisesAddress {
 
   factory PremisesAddress.fromJson(Map<String, dynamic> json) =>
       PremisesAddress(
-        engPremisesAddress:
-            EngPremisesAddress.fromJson(json["EngPremisesAddress"]),
-        chiPremisesAddress:
-            ChiPremisesAddress.fromJson(json["ChiPremisesAddress"]),
+        engPremisesAddress: json['EngPremisesAddress'] == null
+            ? null
+            : EngPremisesAddress.fromJson(json['EngPremisesAddress']),
+        chiPremisesAddress: json['ChiPremisesAddress'] == null
+            ? null
+            : ChiPremisesAddress.fromJson(json['ChiPremisesAddress']),
         geoAddress: json["GeoAddress"],
         geospatialInformation:
             GeospatialInformation.fromJson(json["GeospatialInformation"]),

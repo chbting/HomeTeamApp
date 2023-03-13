@@ -3,7 +3,7 @@ import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
-import 'package:hometeam_client/landlord/properties/property_uploader.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_uploader.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);

@@ -162,7 +162,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                           ],
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              icon: const Icon(Icons.garage),
+                              icon: const Icon(Icons.garage_outlined),
                               labelText: S.of(context).covered_parking_count),
                           onChanged: (value) =>
                               widget.property.coveredParking = int.parse(value),

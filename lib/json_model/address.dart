@@ -2,6 +2,9 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 
 class Address {
+  // String room;
+  // String floor;
+  // String block;
   String addressLine1;
   String addressLine2;
   String district;

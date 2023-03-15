@@ -189,11 +189,11 @@ class ChiPremisesAddress {
 
 class ChiBlock {
   ChiBlock({
-    required this.blockDescriptor,
+    this.blockDescriptor,
     required this.blockNo,
   });
 
-  final String blockDescriptor;
+  final String? blockDescriptor;
   final String blockNo;
 
   factory ChiBlock.fromRawJson(String str) =>
@@ -257,12 +257,12 @@ class Street {
   Street({
     this.locationName,
     required this.streetName,
-    required this.buildingNoFrom,
+    this.buildingNoFrom,
   });
 
   final String? locationName;
   final String streetName;
-  final String buildingNoFrom;
+  final String? buildingNoFrom;
 
   factory Street.fromRawJson(String str) => Street.fromJson(json.decode(str));
 

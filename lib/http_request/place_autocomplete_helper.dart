@@ -11,8 +11,15 @@ class PlaceAutocompleteHelper {
   static const authority = 'www.als.ogcio.gov.hk';
   static const path = '/lookup';
 
-  static Future<Response> query(BuildContext context, String query,
-      {int suggestionCount = 5}) async {
+  static Future<List<property.Address>> getSuggestions(
+      BuildContext context, String query) async {
+    if (query.isEmpty) return [];
+    Response response = await PlaceAutocompleteHelper._query(context, query);
+    return _parseResponse(response);
+  }
+
+  static Future<Response> _query(BuildContext context, String query,
+      {int suggestionCount = 5}) {
     Uri request = Uri.https(
         authority, path, {'q': query, 'n': suggestionCount.toString()});
 
@@ -33,7 +40,7 @@ class PlaceAutocompleteHelper {
     return get(request, headers: headers);
   }
 
-  static List<property.Address> parseResponse(Response response) {
+  static List<property.Address> _parseResponse(Response response) {
     List<property.Address> suggestions = [];
 
     if (response.statusCode == 200) {
@@ -44,23 +51,47 @@ class PlaceAutocompleteHelper {
         for (var suggestedAddress in addressQuery.suggestedAddress!) {
           PremisesAddress premises = suggestedAddress.address.premisesAddress;
 
-          late String region, district;
+          String? buildingName, estateName, blockNumber, blockDescriptor;
+          late String streetAddress;
+          late String addressLine1, addressLine2, region, district;
           if (premises.chiPremisesAddress != null) {
             var address = premises.chiPremisesAddress!;
+            buildingName = address.buildingName;
+            estateName = address.chiEstate?.estateName;
+            blockNumber = address.chiBlock?.blockNo;
+            blockDescriptor = address.chiBlock?.blockDescriptor;
+            streetAddress =
+                '${address.chiStreet.streetName}${address.chiStreet.buildingNoFrom}號';
             district = address.chiStreet.locationName ?? '';
             region = address.region;
           } else {
-            //
             var address = premises.engPremisesAddress!;
+            buildingName = address.buildingName;
+            estateName = address.engEstate?.estateName;
+            blockNumber = address.engBlock?.blockNo;
+            blockDescriptor = address.engBlock?.blockDescriptor;
+            streetAddress =
+                '${address.engStreet.buildingNoFrom} ${address.engStreet.streetName}';
             district = address.engStreet.locationName ?? '';
             region = _getRegionName(address.region);
           }
-          //todo parse more details
-          suggestions.add(property.Address(district: district, region: region));
+          // todo block number, block descriptor may not be present, try querying 'r'
+          addressLine1 = buildingName ?? estateName ?? '';
+          if (buildingName != null) {
+            addressLine2 = estateName ?? streetAddress;
+          } else {
+            addressLine2 = streetAddress;
+          }
+          // todo if district is empty, try querying for it, example: 曉翠苑
+          suggestions.add(property.Address(
+              addressLine1: addressLine1,
+              addressLine2: addressLine2,
+              district: district,
+              region: region));
         }
       }
     }
-    debugPrint('$suggestions');
+    debugPrint('$suggestions'); //todo
     return suggestions;
   }
 

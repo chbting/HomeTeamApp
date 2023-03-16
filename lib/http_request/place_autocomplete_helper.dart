@@ -51,38 +51,61 @@ class PlaceAutocompleteHelper {
         for (var suggestedAddress in addressQuery.suggestedAddress!) {
           PremisesAddress premises = suggestedAddress.address.premisesAddress;
 
-          String? buildingName, estateName, blockNumber, blockDescriptor;
+          String? blockNumber,
+              blockDescriptor,
+              buildingName,
+              estateName,
+              streetName,
+              streetNumberFrom,
+              streetNumberTo;
           late String streetAddress;
           late String addressLine1, addressLine2, region, district;
           if (premises.chiPremisesAddress != null) {
             var address = premises.chiPremisesAddress!;
-            buildingName = address.buildingName;
-            estateName = address.chiEstate?.estateName;
             blockNumber = address.chiBlock?.blockNo;
             blockDescriptor = address.chiBlock?.blockDescriptor;
-            streetAddress = address.chiStreet == null
-                ? ''
-                : address.chiStreet!.buildingNoFrom == null
-                    ? address.chiStreet!.streetName
-                    : '${address.chiStreet!.streetName}${address.chiStreet!.buildingNoFrom}號';
+            buildingName = address.buildingName;
+            estateName = address.chiEstate?.estateName;
+            streetName = address.chiStreet?.streetName;
+            streetNumberFrom = address.chiStreet?.buildingNoFrom;
+            streetNumberTo = address.chiStreet?.buildingNoTo;
             district = address.chiStreet?.locationName ?? '';
             region = address.region;
+
+            streetAddress = streetName ?? '';
+            if (streetAddress.isNotEmpty) {
+              streetAddress += streetNumberFrom ?? '';
+              streetAddress +=
+                  streetNumberTo == null ? '號' : '-$streetNumberTo號';
+            }
           } else {
+            String? blockDescriptorPrecedenceIndicator;
             var address = premises.engPremisesAddress!;
-            buildingName = address.buildingName;
-            estateName = address.engEstate?.estateName;
             blockNumber = address.engBlock?.blockNo;
             blockDescriptor = address.engBlock?.blockDescriptor;
-            streetAddress = address.engStreet == null
-                ? ''
-                : address.engStreet!.buildingNoFrom == null
-                    ? address.engStreet!.streetName
-                    : '${address.engStreet!.buildingNoFrom} ${address.engStreet!.streetName}';
+            blockDescriptorPrecedenceIndicator =
+                address.engBlock?.blockDescriptorPrecedenceIndicator;
+            buildingName = address.buildingName;
+            estateName = address.engEstate?.estateName;
+            streetName = address.engStreet?.streetName;
+            streetNumberFrom = address.engStreet?.buildingNoFrom;
+            streetNumberTo = address.engStreet?.buildingNoTo;
             district = address.engStreet?.locationName ?? '';
             region = _getRegionName(address.region);
+
+            streetAddress = streetName ?? '';
+            if (streetAddress.isNotEmpty) {
+              var streetNumber = streetNumberFrom ?? '';
+              if (streetNumber.isNotEmpty) {
+                streetNumber +=
+                    streetNumberTo == null ? '' : '-$streetNumberTo';
+                streetAddress = '$streetNumber $streetAddress';
+              }
+            }
           }
           // todo block number, block descriptor may not be present, try querying 'r'
           addressLine1 = buildingName ?? estateName ?? '';
+          if (addressLine1 == estateName) {}
           if (buildingName != null) {
             addressLine2 = estateName ?? streetAddress;
           } else {

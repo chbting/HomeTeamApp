@@ -260,11 +260,13 @@ class Street {
     this.locationName,
     required this.streetName,
     this.buildingNoFrom,
+    this.buildingNoTo
   });
 
   final String? locationName;
   final String streetName;
   final String? buildingNoFrom;
+  final String? buildingNoTo;
 
   factory Street.fromRawJson(String str) => Street.fromJson(json.decode(str));
 
@@ -274,12 +276,14 @@ class Street {
         locationName: json["LocationName"],
         streetName: json["StreetName"],
         buildingNoFrom: json["BuildingNoFrom"],
+        buildingNoTo: json["BuildingNoTo"],
       );
 
   Map<String, dynamic> toJson() => {
         "LocationName": locationName,
         "StreetName": streetName,
         "BuildingNoFrom": buildingNoFrom,
+        "BuildingNoTo": buildingNoTo,
       };
 }
 

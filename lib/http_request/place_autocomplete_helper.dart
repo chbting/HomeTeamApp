@@ -51,6 +51,7 @@ class PlaceAutocompleteHelper {
         for (var suggestedAddress in addressQuery.suggestedAddress!) {
           PremisesAddress premises = suggestedAddress.address.premisesAddress;
 
+          bool chinese = premises.chiPremisesAddress != null;
           String? blockNumber,
               blockDescriptor,
               buildingName,
@@ -58,9 +59,9 @@ class PlaceAutocompleteHelper {
               streetName,
               streetNumberFrom,
               streetNumberTo;
-          late String streetAddress;
+          late String blockName, streetAddress;
           late String addressLine1, addressLine2, region, district;
-          if (premises.chiPremisesAddress != null) {
+          if (chinese) {
             var address = premises.chiPremisesAddress!;
             blockNumber = address.chiBlock?.blockNo;
             blockDescriptor = address.chiBlock?.blockDescriptor;
@@ -71,6 +72,8 @@ class PlaceAutocompleteHelper {
             streetNumberTo = address.chiStreet?.buildingNoTo;
             district = address.chiStreet?.locationName ?? '';
             region = address.region;
+
+            blockName = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
 
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
@@ -93,6 +96,15 @@ class PlaceAutocompleteHelper {
             district = address.engStreet?.locationName ?? '';
             region = _getRegionName(address.region);
 
+            blockName = blockNumber ?? '';
+            if (blockName.isNotEmpty) {
+              if(blockDescriptor != null) {
+                blockName = blockDescriptorPrecedenceIndicator == 'Y'
+                  ? '$blockDescriptor $blockName'
+                  : '$blockName $blockDescriptor';
+              }
+            }
+
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
               var streetNumber = streetNumberFrom ?? '';
@@ -105,7 +117,15 @@ class PlaceAutocompleteHelper {
           }
           // todo block number, block descriptor may not be present, try querying 'r'
           addressLine1 = buildingName ?? estateName ?? '';
-          if (addressLine1 == estateName) {}
+          if (addressLine1 == estateName) {
+            if (blockName.isNotEmpty) {
+              addressLine1 = chinese
+                  ? blockDescriptor == null
+                      ? '$estateName $blockName'
+                      : '$estateName$blockName'
+                  : '$blockName $estateName';
+            }
+          }
           if (buildingName != null) {
             addressLine2 = estateName ?? streetAddress;
           } else {

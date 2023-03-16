@@ -19,7 +19,7 @@ class PlaceAutocompleteHelper {
   }
 
   static Future<Response> _query(BuildContext context, String query,
-      {int suggestionCount = 5}) {
+      {int suggestionCount = 3}) {
     Uri request = Uri.https(
         authority, path, {'q': query, 'n': suggestionCount.toString()});
 
@@ -60,9 +60,12 @@ class PlaceAutocompleteHelper {
             estateName = address.chiEstate?.estateName;
             blockNumber = address.chiBlock?.blockNo;
             blockDescriptor = address.chiBlock?.blockDescriptor;
-            streetAddress =
-                '${address.chiStreet.streetName}${address.chiStreet.buildingNoFrom}號';
-            district = address.chiStreet.locationName ?? '';
+            streetAddress = address.chiStreet == null
+                ? ''
+                : address.chiStreet!.buildingNoFrom == null
+                    ? address.chiStreet!.streetName
+                    : '${address.chiStreet!.streetName}${address.chiStreet!.buildingNoFrom}號';
+            district = address.chiStreet?.locationName ?? '';
             region = address.region;
           } else {
             var address = premises.engPremisesAddress!;
@@ -70,9 +73,12 @@ class PlaceAutocompleteHelper {
             estateName = address.engEstate?.estateName;
             blockNumber = address.engBlock?.blockNo;
             blockDescriptor = address.engBlock?.blockDescriptor;
-            streetAddress =
-                '${address.engStreet.buildingNoFrom} ${address.engStreet.streetName}';
-            district = address.engStreet.locationName ?? '';
+            streetAddress = address.engStreet == null
+                ? ''
+                : address.engStreet!.buildingNoFrom == null
+                    ? address.engStreet!.streetName
+                    : '${address.engStreet!.buildingNoFrom} ${address.engStreet!.streetName}';
+            district = address.engStreet?.locationName ?? '';
             region = _getRegionName(address.region);
           }
           // todo block number, block descriptor may not be present, try querying 'r'

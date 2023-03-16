@@ -153,7 +153,7 @@ class ChiPremisesAddress {
 
   final String region;
   final District chiDistrict;
-  final Street chiStreet;
+  final Street? chiStreet;
   final String? buildingName;
   final Estate? chiEstate;
   final ChiBlock? chiBlock;
@@ -167,7 +167,9 @@ class ChiPremisesAddress {
       ChiPremisesAddress(
         region: json["Region"],
         chiDistrict: District.fromJson(json["ChiDistrict"]),
-        chiStreet: Street.fromJson(json["ChiStreet"]),
+        chiStreet: json["ChiStreet"] == null
+            ? null
+            : Street.fromJson(json["ChiStreet"]),
         buildingName: json["BuildingName"],
         chiEstate: json["ChiEstate"] == null
             ? null
@@ -180,7 +182,7 @@ class ChiPremisesAddress {
   Map<String, dynamic> toJson() => {
         "Region": region,
         "ChiDistrict": chiDistrict.toJson(),
-        "ChiStreet": chiStreet.toJson(),
+        "ChiStreet": chiStreet?.toJson(),
         "BuildingName": buildingName,
         "ChiEstate": chiEstate?.toJson(),
         "ChiBlock": chiBlock?.toJson(),
@@ -283,7 +285,7 @@ class Street {
 
 class EngPremisesAddress {
   EngPremisesAddress({
-    required this.engStreet,
+    this.engStreet,
     required this.engDistrict,
     required this.region,
     this.buildingName,
@@ -291,7 +293,7 @@ class EngPremisesAddress {
     this.engEstate,
   });
 
-  final Street engStreet;
+  final Street? engStreet;
   final District engDistrict;
   final String region;
   final String? buildingName;
@@ -305,7 +307,9 @@ class EngPremisesAddress {
 
   factory EngPremisesAddress.fromJson(Map<String, dynamic> json) =>
       EngPremisesAddress(
-        engStreet: Street.fromJson(json["EngStreet"]),
+        engStreet: json["EngStreet"] == null
+            ? null
+            : Street.fromJson(json["EngStreet"]),
         engDistrict: District.fromJson(json["EngDistrict"]),
         region: json["Region"],
         buildingName: json["BuildingName"],
@@ -318,7 +322,7 @@ class EngPremisesAddress {
       );
 
   Map<String, dynamic> toJson() => {
-        "EngStreet": engStreet.toJson(),
+        "EngStreet": engStreet?.toJson(),
         "EngDistrict": engDistrict.toJson(),
         "Region": region,
         "BuildingName": buildingName,

@@ -27,10 +27,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_found": MessageLookupByLibrary.simpleMessage("已有帐户"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
         "add_property": MessageLookupByLibrary.simpleMessage("新增物业"),
+        "address_flat": MessageLookupByLibrary.simpleMessage("室"),
+        "address_floor": MessageLookupByLibrary.simpleMessage("楼层"),
         "address_line1_helper":
-            MessageLookupByLibrary.simpleMessage("例: 1座12楼25室"),
-        "address_line1_label":
-            MessageLookupByLibrary.simpleMessage("大厦名称, 楼层, 单位"),
+            MessageLookupByLibrary.simpleMessage("例: 雅佳花园 或 雅佳大厦"),
+        "address_line1_label": MessageLookupByLibrary.simpleMessage("大厦名称"),
         "address_line2_helper":
             MessageLookupByLibrary.simpleMessage("例: 雅佳花园 或 坚尼地道105号"),
         "address_line2_label":

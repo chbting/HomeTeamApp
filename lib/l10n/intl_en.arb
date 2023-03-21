@@ -27,9 +27,9 @@
 	"confirm_remodeling": "Confirm Scheduling",
 	"contact_number": "Contact Number",
 	"hong_kong_number_only": "Hong Kong number only",
-	"address_line1_label": "Unit, floor, name of the building",
+	"address_line1_label": "Name of the building",
 	"address_line2_label": "Housing estate or street number",
-	"address_line1_helper": "e.g. Flat 25, 12/F, Block 1",
+	"address_line1_helper": "e.g. Acacia Garden or Acacia Building",
 	"address_line2_helper": "e.g. Acacia Garden or 105 Kennedy Road",
 	"district": "District",
 	"hong_kong": "Hong Kong",
@@ -186,5 +186,7 @@
 	"open_parking_count": "Open parking count",
 	"contracts": "Contract",
 	"contract": "Contract",
-	"msg_failed_to_generate_visit_path": "Failed to generate the path of visit"
+	"msg_failed_to_generate_visit_path": "Failed to generate the path of visit",
+	"address_floor": "Floor",
+	"address_flat": "Flat"
 }

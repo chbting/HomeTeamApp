@@ -27,9 +27,9 @@
 	"confirm_remodeling": "确认预约",
 	"contact_number": "联络电话",
 	"hong_kong_number_only": "只限香港电话号码",
-	"address_line1_label": "大厦名称, 楼层, 单位",
+	"address_line1_label": "大厦名称",
 	"address_line2_label": "屋苑 或 街道门牌",
-	"address_line1_helper": "例: 1座12楼25室",
+	"address_line1_helper": "例: 雅佳花园 或 雅佳大厦",
 	"address_line2_helper": "例: 雅佳花园 或 坚尼地道105号",
 	"district": "地区",
 	"hong_kong": "香港",
@@ -186,5 +186,7 @@
 	"open_parking_count": "露天车位数",
 	"contracts": "租約",
 	"contract": "租約",
-	"msg_failed_to_generate_visit_path": "无法生成睇楼路线"
+	"msg_failed_to_generate_visit_path": "无法生成睇楼路线",
+	"address_floor": "楼层",
+	"address_flat": "室"
 }

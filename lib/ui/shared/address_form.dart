@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/place_autocomplete_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
@@ -38,7 +39,7 @@ class AddressFormState extends State<AddressForm> {
       final RenderBox renderBox =
           _addressLine1Key.currentContext!.findRenderObject() as RenderBox;
       setState(() {
-        _suggestionWidgetWidth = renderBox.size.width - _iconPadding;
+        _suggestionWidgetWidth = renderBox.size.width;
       });
     });
     super.initState();
@@ -59,6 +60,36 @@ class AddressFormState extends State<AddressForm> {
         child: Wrap(
           runSpacing: 16.0,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.location_pin,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant),
+                Container(width: 16.0),
+                Expanded(
+                  child: TextFormField(
+                      initialValue: widget.address.flat,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).address_flat),
+                      onChanged: (value) => widget.address.flat = value),
+                ),
+                Container(width: 16.0),
+                Expanded(
+                  child: TextFormField(
+                      initialValue: widget.address.floor,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.next,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).address_floor),
+                      onChanged: (value) => widget.address.floor = value),
+                )
+              ],
+            ),
             Autocomplete<Address>(
                 optionsBuilder: (TextEditingValue textEdit) =>
                     PlaceAutocompleteHelper.getSuggestions(
@@ -103,22 +134,24 @@ class AddressFormState extends State<AddressForm> {
                     TextEditingController textEditingController,
                     FocusNode focusNode,
                     VoidCallback onFieldSubmitted) {
-                  return TextFormField(
-                    key: _addressLine1Key,
-                    controller: _addressLine1Controller,
-                    focusNode: focusNode,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (value) => onFieldSubmitted(),
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: S.of(context).address_line1_label,
-                        helperText: S.of(context).address_line1_helper,
-                        icon: const Icon(Icons.location_pin)),
-                    onChanged: (value) {
-                      textEditingController.text = value;
-                      widget.address.addressLine1 = value;
-                    },
+                  return Padding(
+                    padding: EdgeInsets.only(left: _iconPadding),
+                    child: TextFormField(
+                      key: _addressLine1Key,
+                      controller: _addressLine1Controller,
+                      focusNode: focusNode,
+                      keyboardType: TextInputType.streetAddress,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (value) => onFieldSubmitted(),
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: S.of(context).address_line1_label,
+                          helperText: S.of(context).address_line1_helper),
+                      onChanged: (value) {
+                        textEditingController.text = value;
+                        widget.address.addressLine1 = value;
+                      },
+                    ),
                   );
                 },
                 onSelected: (address) {
@@ -138,7 +171,7 @@ class AddressFormState extends State<AddressForm> {
               padding: EdgeInsets.only(left: _iconPadding),
               child: TextFormField(
                   controller: _addressLine2Controller,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.streetAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),

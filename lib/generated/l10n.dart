@@ -320,10 +320,10 @@ class S {
     );
   }
 
-  /// `Unit, floor, name of the building`
+  /// `Name of the building`
   String get address_line1_label {
     return Intl.message(
-      'Unit, floor, name of the building',
+      'Name of the building',
       name: 'address_line1_label',
       desc: '',
       args: [],
@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `e.g. Flat 25, 12/F, Block 1`
+  /// `e.g. Acacia Garden or Acacia Building`
   String get address_line1_helper {
     return Intl.message(
-      'e.g. Flat 25, 12/F, Block 1',
+      'e.g. Acacia Garden or Acacia Building',
       name: 'address_line1_helper',
       desc: '',
       args: [],
@@ -1915,6 +1915,26 @@ class S {
     return Intl.message(
       'Failed to generate the path of visit',
       name: 'msg_failed_to_generate_visit_path',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Floor`
+  String get address_floor {
+    return Intl.message(
+      'Floor',
+      name: 'address_floor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flat`
+  String get address_flat {
+    return Intl.message(
+      'Flat',
+      name: 'address_flat',
       desc: '',
       args: [],
     );

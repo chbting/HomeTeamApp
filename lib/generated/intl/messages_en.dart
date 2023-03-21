@@ -27,10 +27,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_property": MessageLookupByLibrary.simpleMessage("Add Property"),
-        "address_line1_helper":
-            MessageLookupByLibrary.simpleMessage("e.g. Flat 25, 12/F, Block 1"),
-        "address_line1_label": MessageLookupByLibrary.simpleMessage(
-            "Unit, floor, name of the building"),
+        "address_flat": MessageLookupByLibrary.simpleMessage("Flat"),
+        "address_floor": MessageLookupByLibrary.simpleMessage("Floor"),
+        "address_line1_helper": MessageLookupByLibrary.simpleMessage(
+            "e.g. Acacia Garden or Acacia Building"),
+        "address_line1_label":
+            MessageLookupByLibrary.simpleMessage("Name of the building"),
         "address_line2_helper": MessageLookupByLibrary.simpleMessage(
             "e.g. Acacia Garden or 105 Kennedy Road"),
         "address_line2_label": MessageLookupByLibrary.simpleMessage(

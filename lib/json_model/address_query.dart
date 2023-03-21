@@ -192,11 +192,11 @@ class ChiPremisesAddress {
 class ChiBlock {
   ChiBlock({
     this.blockDescriptor,
-    required this.blockNo,
+    this.blockNo,
   });
 
   final String? blockDescriptor;
-  final String blockNo;
+  final String? blockNo;
 
   factory ChiBlock.fromRawJson(String str) =>
       ChiBlock.fromJson(json.decode(str));

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/json_model/address.dart' as property;
 import 'package:hometeam_client/json_model/address_query.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
+import 'package:hometeam_client/utils/utils.dart';
 import 'package:http/http.dart';
 
 /// As defined on https://data.gov.hk/en-data/dataset/hk-ogcio-st_div_02-als
@@ -19,7 +20,7 @@ class PlaceAutocompleteHelper {
   }
 
   static Future<Response> _query(BuildContext context, String query,
-      {int suggestionCount = 3}) {
+      {int suggestionCount = 5}) {
     Uri request = Uri.https(
         authority, path, {'q': query, 'n': suggestionCount.toString()});
 
@@ -65,7 +66,7 @@ class PlaceAutocompleteHelper {
             var address = premises.chiPremisesAddress!;
             blockNumber = address.chiBlock?.blockNo;
             blockDescriptor = address.chiBlock?.blockDescriptor;
-            buildingName = address.buildingName;
+            buildingName = address.buildingName?.toHalfWidth();
             estateName = address.chiEstate?.estateName;
             streetName = address.chiStreet?.streetName;
             streetNumberFrom = address.chiStreet?.buildingNoFrom;
@@ -88,7 +89,8 @@ class PlaceAutocompleteHelper {
             blockDescriptor = address.engBlock?.blockDescriptor;
             blockDescriptorPrecedenceIndicator =
                 address.engBlock?.blockDescriptorPrecedenceIndicator;
-            buildingName = address.buildingName;
+            buildingName = address
+                .buildingName; //todo building name may be "estateName + blockName"
             estateName = address.engEstate?.estateName;
             streetName = address.engStreet?.streetName;
             streetNumberFrom = address.engStreet?.buildingNoFrom;
@@ -98,10 +100,10 @@ class PlaceAutocompleteHelper {
 
             blockName = blockNumber ?? '';
             if (blockName.isNotEmpty) {
-              if(blockDescriptor != null) {
+              if (blockDescriptor != null) {
                 blockName = blockDescriptorPrecedenceIndicator == 'Y'
-                  ? '$blockDescriptor $blockName'
-                  : '$blockName $blockDescriptor';
+                    ? '$blockDescriptor $blockName'
+                    : '$blockName $blockDescriptor';
               }
             }
 
@@ -126,8 +128,17 @@ class PlaceAutocompleteHelper {
                   : '$blockName $estateName';
             }
           }
+
           if (buildingName != null) {
             addressLine2 = estateName ?? streetAddress;
+            if (estateName != null) {
+              if (buildingName.contains(estateName)) {
+                var blockStr = buildingName.replaceAll(estateName, '').trim();
+                debugPrint('S:$blockStr');
+                // addressLine1 = '';
+                // todo extract the block number, e.g. A, 1, A1, 二
+              }
+            }
           } else {
             addressLine2 = streetAddress;
           }

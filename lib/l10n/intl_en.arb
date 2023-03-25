@@ -188,5 +188,6 @@
 	"contract": "Contract",
 	"msg_failed_to_generate_visit_path": "Failed to generate the path of visit",
 	"address_floor": "Floor",
-	"address_flat": "Flat"
+	"address_flat": "Flat",
+	"address_block": "Block"
 }

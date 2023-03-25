@@ -1939,6 +1939,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Block`
+  String get address_block {
+    return Intl.message(
+      'Block',
+      name: 'address_block',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

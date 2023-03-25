@@ -53,15 +53,15 @@ class PlaceAutocompleteHelper {
           PremisesAddress premises = suggestedAddress.address.premisesAddress;
 
           bool chinese = premises.chiPremisesAddress != null;
-          String? blockNumber,
-              blockDescriptor,
+          String? blockDescriptor,
+              blockNumber,
               buildingName,
               estateName,
               streetName,
               streetNumberFrom,
               streetNumberTo;
-          late String blockName, streetAddress;
-          late String addressLine1, addressLine2, region, district;
+          late String streetAddress;
+          late String block, addressLine1, addressLine2, region, district;
           if (chinese) {
             var address = premises.chiPremisesAddress!;
             blockNumber = address.chiBlock?.blockNo;
@@ -74,7 +74,7 @@ class PlaceAutocompleteHelper {
             district = address.chiStreet?.locationName ?? '';
             region = address.region;
 
-            blockName = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
+            // todo block = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
 
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
@@ -89,8 +89,7 @@ class PlaceAutocompleteHelper {
             blockDescriptor = address.engBlock?.blockDescriptor;
             blockDescriptorPrecedenceIndicator =
                 address.engBlock?.blockDescriptorPrecedenceIndicator;
-            buildingName = address
-                .buildingName; //todo building name may be "estateName + blockName"
+            buildingName = address.buildingName;
             estateName = address.engEstate?.estateName;
             streetName = address.engStreet?.streetName;
             streetNumberFrom = address.engStreet?.buildingNoFrom;
@@ -98,14 +97,14 @@ class PlaceAutocompleteHelper {
             district = address.engStreet?.locationName ?? '';
             region = _getRegionName(address.region);
 
-            blockName = blockNumber ?? '';
-            if (blockName.isNotEmpty) {
-              if (blockDescriptor != null) {
-                blockName = blockDescriptorPrecedenceIndicator == 'Y'
-                    ? '$blockDescriptor $blockName'
-                    : '$blockName $blockDescriptor';
-              }
-            }
+            // todo block number, block descriptor may not be present, try querying 'r'
+            // if (block.isNotEmpty) {
+            //   if (blockDescriptor != null) {
+            //     block = blockDescriptorPrecedenceIndicator == 'Y'
+            //         ? '$blockDescriptor $block'
+            //         : '$block $blockDescriptor';
+            //   }
+            // }
 
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
@@ -117,15 +116,37 @@ class PlaceAutocompleteHelper {
               }
             }
           }
-          // todo block number, block descriptor may not be present, try querying 'r'
+
+          // Standardize address
+          // Sometimes the API returns unnecessary block name
+          if(buildingName != null) {
+            if(estateName != null) {
+              block = '';
+            } else {
+
+            }
+          }
+          if(buildingName != null && estateName != null) {
+            block = '';
+          } else {
+            if (buildingName.contains(estateName)) {
+
+            }
+            block = blockNumber ?? '';
+          }
+          block = buildingName != null && estateName != null
+              ? ''
+              : blockNumber ?? '';
+          // todo extract block name from building name
+
           addressLine1 = buildingName ?? estateName ?? '';
           if (addressLine1 == estateName) {
-            if (blockName.isNotEmpty) {
+            if (block.isNotEmpty) {
               addressLine1 = chinese
                   ? blockDescriptor == null
-                      ? '$estateName $blockName'
-                      : '$estateName$blockName'
-                  : '$blockName $estateName';
+                      ? '$estateName $block'
+                      : '$estateName$block'
+                  : '$block $estateName';
             }
           }
 
@@ -135,6 +156,7 @@ class PlaceAutocompleteHelper {
               if (buildingName.contains(estateName)) {
                 var blockStr = buildingName.replaceAll(estateName, '').trim();
                 debugPrint('S:$blockStr');
+                // todo remove block descriptor
                 // addressLine1 = '';
                 // todo extract the block number, e.g. A, 1, A1, 二
               }
@@ -144,6 +166,7 @@ class PlaceAutocompleteHelper {
           }
           // todo if district is empty, try querying for it, example: 曉翠苑
           suggestions.add(property.Address(
+              block: block,
               addressLine1: addressLine1,
               addressLine2: addressLine2,
               district: district,

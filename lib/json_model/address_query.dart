@@ -155,7 +155,7 @@ class ChiPremisesAddress {
   final District chiDistrict;
   final Street? chiStreet;
   final String? buildingName;
-  final Estate? chiEstate;
+  final ChiEstate? chiEstate;
   final ChiBlock? chiBlock;
 
   factory ChiPremisesAddress.fromRawJson(String str) =>
@@ -173,7 +173,7 @@ class ChiPremisesAddress {
         buildingName: json["BuildingName"],
         chiEstate: json["ChiEstate"] == null
             ? null
-            : Estate.fromJson(json["ChiEstate"]),
+            : ChiEstate.fromJson(json["ChiEstate"]),
         chiBlock: json["ChiBlock"] == null
             ? null
             : ChiBlock.fromJson(json["ChiBlock"]),
@@ -235,33 +235,68 @@ class District {
       };
 }
 
-class Estate {
-  Estate({
-    required this.estateName,
-  });
+class ChiEstate {
+  ChiEstate({required this.estateName, this.phase});
 
   final String estateName;
+  final Phase? phase;
 
-  factory Estate.fromRawJson(String str) => Estate.fromJson(json.decode(str));
+  factory ChiEstate.fromRawJson(String str) =>
+      ChiEstate.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory Estate.fromJson(Map<String, dynamic> json) => Estate(
-        estateName: json["EstateName"],
+  factory ChiEstate.fromJson(Map<String, dynamic> json) =>
+      ChiEstate(estateName: json["EstateName"], phase: json["ChiPhase"]);
+
+  Map<String, dynamic> toJson() =>
+      {"EstateName": estateName, "ChiPhase": phase};
+}
+
+class EngEstate {
+  EngEstate({required this.estateName, this.phase});
+
+  final String estateName;
+  final Phase? phase;
+
+  factory EngEstate.fromRawJson(String str) =>
+      EngEstate.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory EngEstate.fromJson(Map<String, dynamic> json) =>
+      EngEstate(estateName: json["EstateName"], phase: json["EngPhase"]);
+
+  Map<String, dynamic> toJson() =>
+      {"EstateName": estateName, "EngPhase": phase};
+}
+
+class Phase {
+  Phase({
+    required this.phaseName,
+  });
+
+  final String phaseName;
+
+  factory Phase.fromRawJson(String str) => Phase.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Phase.fromJson(Map<String, dynamic> json) => Phase(
+        phaseName: json["PhaseName"],
       );
 
   Map<String, dynamic> toJson() => {
-        "EstateName": estateName,
+        "PhaseName": phaseName,
       };
 }
 
 class Street {
-  Street({
-    this.locationName,
-    required this.streetName,
-    this.buildingNoFrom,
-    this.buildingNoTo
-  });
+  Street(
+      {this.locationName,
+      required this.streetName,
+      this.buildingNoFrom,
+      this.buildingNoTo});
 
   final String? locationName;
   final String streetName;
@@ -302,7 +337,7 @@ class EngPremisesAddress {
   final String region;
   final String? buildingName;
   final EngBlock? engBlock;
-  final Estate? engEstate;
+  final EngEstate? engEstate;
 
   factory EngPremisesAddress.fromRawJson(String str) =>
       EngPremisesAddress.fromJson(json.decode(str));
@@ -322,7 +357,7 @@ class EngPremisesAddress {
             : EngBlock.fromJson(json["EngBlock"]),
         engEstate: json["EngEstate"] == null
             ? null
-            : Estate.fromJson(json["EngEstate"]),
+            : EngEstate.fromJson(json["EngEstate"]),
       );
 
   Map<String, dynamic> toJson() => {

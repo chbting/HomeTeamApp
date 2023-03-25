@@ -188,5 +188,6 @@
 	"contract": "租約",
 	"msg_failed_to_generate_visit_path": "无法生成睇楼路线",
 	"address_floor": "楼层",
-	"address_flat": "室"
+	"address_flat": "室",
+	"address_block": "座"
 }

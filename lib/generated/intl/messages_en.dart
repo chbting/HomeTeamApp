@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_property": MessageLookupByLibrary.simpleMessage("Add Property"),
+        "address_block": MessageLookupByLibrary.simpleMessage("Block"),
         "address_flat": MessageLookupByLibrary.simpleMessage("Flat"),
         "address_floor": MessageLookupByLibrary.simpleMessage("Floor"),
         "address_line1_helper": MessageLookupByLibrary.simpleMessage(

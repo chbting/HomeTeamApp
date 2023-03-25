@@ -4,6 +4,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 class Address {
   String flat;
   String floor;
+  String block;
   String addressLine1;
   String addressLine2;
   String district;
@@ -12,6 +13,7 @@ class Address {
   Address(
       {this.flat = '',
       this.floor = '',
+        this.block = '',
       this.addressLine1 = '',
       this.addressLine2 = '',
       this.district = '',
@@ -26,6 +28,7 @@ class Address {
   String toString() {
     var s = flat.isNotEmpty ? 'Flat $flat,' : '';
     s += floor.isNotEmpty ? '$floor/F,' : '';
+    s += block.isNotEmpty ? 'BLOCK $block,' : '';
     s += addressLine1.isNotEmpty ? '$addressLine1,$addressLine2' : addressLine2;
     s += ',$district,$region';
     return s;

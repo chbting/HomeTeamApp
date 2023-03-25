@@ -22,7 +22,7 @@ class AddressFormState extends State<AddressForm> {
   final GlobalKey _addressLine1Key = GlobalKey();
   final _iconPadding = 40.0;
   double _suggestionWidgetWidth = 0.0;
-  late TextEditingController _addressLine1Controller,
+  late TextEditingController _blockController, _addressLine1Controller,
       _addressLine2Controller,
       _districtController;
 
@@ -30,6 +30,8 @@ class AddressFormState extends State<AddressForm> {
   void initState() {
     widget.controller.reset = _reset;
     widget.controller.validate = _validate;
+    _blockController =
+        TextEditingController(text: widget.address.block);
     _addressLine1Controller =
         TextEditingController(text: widget.address.addressLine1);
     _addressLine2Controller =
@@ -47,6 +49,7 @@ class AddressFormState extends State<AddressForm> {
 
   @override
   void dispose() {
+    _blockController.dispose();
     _addressLine1Controller.dispose();
     _addressLine2Controller.dispose();
     _districtController.dispose();
@@ -90,83 +93,23 @@ class AddressFormState extends State<AddressForm> {
                 )
               ],
             ),
-            Autocomplete<Address>(
-                optionsBuilder: (TextEditingValue textEdit) =>
-                    PlaceAutocompleteHelper.getSuggestions(
-                        context, textEdit.text),
-                optionsViewBuilder: (context, onSelect, options) {
-                  return Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: _iconPadding),
-                      child: Material(
-                        child: SizedBox(
-                          width: _suggestionWidgetWidth,
-                          child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              primary: false,
-                              itemCount: options.length,
-                              itemBuilder: (context, index) {
-                                Address address = options.elementAt(index);
-                                String title = address.addressLine1.isNotEmpty
-                                    ? address.addressLine1
-                                    : address.addressLine2;
-                                String subtitle = address
-                                        .addressLine1.isNotEmpty
-                                    ? '${address.addressLine2}, ${address.district.isNotEmpty ? address.district : address.region}'
-                                    : address.district.isNotEmpty
-                                        ? address.district
-                                        : address.region;
-                                return ListTile(
-                                  onTap: () =>
-                                      onSelect(options.elementAt(index)),
-                                  title: Text(title),
-                                  subtitle: Text(subtitle),
-                                );
-                              }),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                fieldViewBuilder: (BuildContext context,
-                    TextEditingController textEditingController,
-                    FocusNode focusNode,
-                    VoidCallback onFieldSubmitted) {
-                  return Padding(
-                    padding: EdgeInsets.only(left: _iconPadding),
+            Row(
+              children: [
+                Expanded(flex: 4, child: _getAddressAutocomplete(context)),
+                Container(width: 16.0),
+                Expanded(
+                    flex: 1,
                     child: TextFormField(
-                      key: _addressLine1Key,
-                      controller: _addressLine1Controller,
-                      focusNode: focusNode,
-                      keyboardType: TextInputType.streetAddress,
-                      textInputAction: TextInputAction.next,
-                      onFieldSubmitted: (value) => onFieldSubmitted(),
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).address_line1_label,
-                          helperText: S.of(context).address_line1_helper),
-                      onChanged: (value) {
-                        textEditingController.text = value;
-                        widget.address.addressLine1 = value;
-                      },
-                    ),
-                  );
-                },
-                onSelected: (address) {
-                  _addressLine1Controller.text = address.addressLine1;
-                  _addressLine2Controller.text = address.addressLine2;
-                  _districtController.text = address.district;
-
-                  setState(() {
-                    widget.address.addressLine1 = address.addressLine1;
-                    widget.address.addressLine2 = address.addressLine2;
-                    widget.address.district = address.district;
-                    widget.address.region = address.region;
-                  });
-                  FocusManager.instance.primaryFocus?.unfocus();
-                }),
+                        controller: _blockController,
+                        keyboardType: TextInputType.text,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            labelText: S.of(context).address_block,
+                            helperText: ''),
+                        onChanged: (value) => widget.address.block = value))
+              ],
+            ),
             Padding(
               padding: EdgeInsets.only(left: _iconPadding),
               child: TextFormField(
@@ -230,6 +173,85 @@ class AddressFormState extends State<AddressForm> {
             ),
           ],
         ));
+  }
+
+  Widget _getAddressAutocomplete(BuildContext context) {
+    return Autocomplete<Address>(
+        fieldViewBuilder: (BuildContext context,
+            TextEditingController textEditingController,
+            FocusNode focusNode,
+            VoidCallback onFieldSubmitted) {
+          return Padding(
+            padding: EdgeInsets.only(left: _iconPadding),
+            child: TextFormField(
+              key: _addressLine1Key,
+              controller: _addressLine1Controller,
+              focusNode: focusNode,
+              keyboardType: TextInputType.streetAddress,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (value) => onFieldSubmitted(),
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: S.of(context).address_line1_label,
+                  helperText: S.of(context).address_line1_helper),
+              onChanged: (value) {
+                textEditingController.text = value;
+                widget.address.addressLine1 = value;
+              },
+            ),
+          );
+        },
+        optionsBuilder: (TextEditingValue textEdit) =>
+            PlaceAutocompleteHelper.getSuggestions(context, textEdit.text),
+        optionsViewBuilder: (context, onSelect, options) {
+          return Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: EdgeInsets.only(left: _iconPadding),
+              child: Material(
+                child: SizedBox(
+                  width: _suggestionWidgetWidth, //todo
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: options.length,
+                      itemBuilder: (context, index) {
+                        Address address = options.elementAt(index);
+                        String title = address.addressLine1.isNotEmpty
+                            ? address.addressLine1
+                            : address.addressLine2;
+                        String subtitle = address.addressLine1.isNotEmpty
+                            ? '${address.addressLine2}, ${address.district.isNotEmpty ? address.district : address.region}'
+                            : address.district.isNotEmpty
+                            ? address.district
+                            : address.region;
+                        return ListTile(
+                          onTap: () => onSelect(options.elementAt(index)),
+                          title: Text(title),
+                          subtitle: Text(subtitle),
+                        );
+                      }),
+                ),
+              ),
+            ),
+          );
+        },
+        onSelected: (address) {
+          _blockController.text = address.block;
+          _addressLine1Controller.text = address.addressLine1;
+          _addressLine2Controller.text = address.addressLine2;
+          _districtController.text = address.district;
+
+          setState(() {
+            widget.address.block = address.block;//todo
+            widget.address.addressLine1 = address.addressLine1;
+            widget.address.addressLine2 = address.addressLine2;
+            widget.address.district = address.district;
+            widget.address.region = address.region;
+          });
+          FocusManager.instance.primaryFocus?.unfocus();
+        });
   }
 
   void _reset() {

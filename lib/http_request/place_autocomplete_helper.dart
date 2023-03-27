@@ -13,9 +13,11 @@ class PlaceAutocompleteHelper {
   static const path = '/lookup';
 
   static Future<List<property.Address>> getSuggestions(
-      BuildContext context, String query) async {
+      BuildContext context, String query,
+      {int suggestionCount = 5}) async {
     if (query.isEmpty) return [];
-    Response response = await PlaceAutocompleteHelper._query(context, query);
+    Response response = await PlaceAutocompleteHelper._query(context, query,
+        suggestionCount: suggestionCount);
     return _parseResponse(response);
   }
 
@@ -57,6 +59,7 @@ class PlaceAutocompleteHelper {
               blockNumber,
               buildingName,
               estateName,
+              phaseName,
               streetName,
               streetNumberFrom,
               streetNumberTo;
@@ -68,6 +71,7 @@ class PlaceAutocompleteHelper {
             blockDescriptor = address.chiBlock?.blockDescriptor;
             buildingName = address.buildingName?.toHalfWidth();
             estateName = address.chiEstate?.estateName;
+            phaseName = address.chiEstate?.phase?.phaseName;
             streetName = address.chiStreet?.streetName;
             streetNumberFrom = address.chiStreet?.buildingNoFrom;
             streetNumberTo = address.chiStreet?.buildingNoTo;
@@ -91,6 +95,7 @@ class PlaceAutocompleteHelper {
                 address.engBlock?.blockDescriptorPrecedenceIndicator;
             buildingName = address.buildingName;
             estateName = address.engEstate?.estateName;
+            phaseName = address.engEstate?.phase?.phaseName;
             streetName = address.engStreet?.streetName;
             streetNumberFrom = address.engStreet?.buildingNoFrom;
             streetNumberTo = address.engStreet?.buildingNoTo;
@@ -117,38 +122,38 @@ class PlaceAutocompleteHelper {
             }
           }
 
-          // Standardize address
+          // todo Standardize address (parse into address line 1 and 2)
           // Sometimes the API returns unnecessary block name
-          if(buildingName != null) {
-            if(estateName != null) {
-              block = '';
-            } else {
-
-            }
-          }
-          if(buildingName != null && estateName != null) {
-            block = '';
-          } else {
-            if (buildingName.contains(estateName)) {
-
-            }
-            block = blockNumber ?? '';
-          }
-          block = buildingName != null && estateName != null
-              ? ''
-              : blockNumber ?? '';
+          // if(buildingName != null) {
+          //   if(estateName != null) {
+          //     block = '';
+          //   } else {
+          //
+          //   }
+          // }
+          // if(buildingName != null && estateName != null) {
+          //   block = '';
+          // } else {
+          //   if (buildingName.contains(estateName)) {
+          //
+          //   }
+          //   block = blockNumber ?? '';
+          // }
+          // block = buildingName != null && estateName != null
+          //     ? ''
+          //     : blockNumber ?? '';
           // todo extract block name from building name
 
           addressLine1 = buildingName ?? estateName ?? '';
-          if (addressLine1 == estateName) {
-            if (block.isNotEmpty) {
-              addressLine1 = chinese
-                  ? blockDescriptor == null
-                      ? '$estateName $block'
-                      : '$estateName$block'
-                  : '$block $estateName';
-            }
-          }
+          // if (addressLine1 == estateName) {
+          //   if (block.isNotEmpty) {
+          //     addressLine1 = chinese
+          //         ? blockDescriptor == null
+          //             ? '$estateName $block'
+          //             : '$estateName$block'
+          //         : '$block $estateName';
+          //   }
+          // }
 
           if (buildingName != null) {
             addressLine2 = estateName ?? streetAddress;
@@ -166,7 +171,7 @@ class PlaceAutocompleteHelper {
           }
           // todo if district is empty, try querying for it, example: 曉翠苑
           suggestions.add(property.Address(
-              block: block,
+              //todo block: block,
               addressLine1: addressLine1,
               addressLine2: addressLine2,
               district: district,

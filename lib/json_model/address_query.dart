@@ -272,11 +272,10 @@ class EngEstate {
 }
 
 class Phase {
-  Phase({
-    required this.phaseName,
-  });
+  Phase({this.phaseName, this.phaseNo});
 
-  final String phaseName;
+  final String? phaseName;
+  final String? phaseNo;
 
   factory Phase.fromRawJson(String str) => Phase.fromJson(json.decode(str));
 
@@ -284,10 +283,12 @@ class Phase {
 
   factory Phase.fromJson(Map<String, dynamic> json) => Phase(
         phaseName: json["PhaseName"],
+        phaseNo: json["PhaseNo"],
       );
 
   Map<String, dynamic> toJson() => {
         "PhaseName": phaseName,
+        "PhaseNo": phaseNo,
       };
 }
 

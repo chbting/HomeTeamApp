@@ -22,7 +22,8 @@ class AddressFormState extends State<AddressForm> {
   final GlobalKey _addressLine1Key = GlobalKey();
   final _iconPadding = 40.0;
   double _suggestionWidgetWidth = 0.0;
-  late TextEditingController _blockController, _addressLine1Controller,
+  late TextEditingController _blockController,
+      _addressLine1Controller,
       _addressLine2Controller,
       _districtController;
 
@@ -30,8 +31,7 @@ class AddressFormState extends State<AddressForm> {
   void initState() {
     widget.controller.reset = _reset;
     widget.controller.validate = _validate;
-    _blockController =
-        TextEditingController(text: widget.address.block);
+    _blockController = TextEditingController(text: widget.address.block);
     _addressLine1Controller =
         TextEditingController(text: widget.address.addressLine1);
     _addressLine2Controller =
@@ -202,7 +202,8 @@ class AddressFormState extends State<AddressForm> {
           );
         },
         optionsBuilder: (TextEditingValue textEdit) =>
-            PlaceAutocompleteHelper.getSuggestions(context, textEdit.text),
+            PlaceAutocompleteHelper.getSuggestions(context, textEdit.text,
+                suggestionCount: 3),
         optionsViewBuilder: (context, onSelect, options) {
           return Align(
             alignment: Alignment.topLeft,
@@ -224,8 +225,8 @@ class AddressFormState extends State<AddressForm> {
                         String subtitle = address.addressLine1.isNotEmpty
                             ? '${address.addressLine2}, ${address.district.isNotEmpty ? address.district : address.region}'
                             : address.district.isNotEmpty
-                            ? address.district
-                            : address.region;
+                                ? address.district
+                                : address.region;
                         return ListTile(
                           onTap: () => onSelect(options.elementAt(index)),
                           title: Text(title),
@@ -244,7 +245,7 @@ class AddressFormState extends State<AddressForm> {
           _districtController.text = address.district;
 
           setState(() {
-            widget.address.block = address.block;//todo
+            widget.address.block = address.block; //todo
             widget.address.addressLine1 = address.addressLine1;
             widget.address.addressLine2 = address.addressLine2;
             widget.address.district = address.district;

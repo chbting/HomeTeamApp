@@ -5,6 +5,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/place_autocomplete_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
+import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class AddressForm extends StatefulWidget {
   const AddressForm({Key? key, required this.address, required this.controller})
@@ -131,7 +132,8 @@ class AddressFormState extends State<AddressForm> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(//todo autocomplete
+                  Expanded(
+                    //todo autocomplete
                     child: TextFormField(
                         controller: _districtController,
                         keyboardType: TextInputType.text,
@@ -222,6 +224,13 @@ class AddressFormState extends State<AddressForm> {
                         String title = address.addressLine1.isNotEmpty
                             ? address.addressLine1
                             : address.addressLine2;
+                        if (address.block.isNotEmpty) {
+                          title += SharedPreferencesHelper.getLocale()
+                                      .languageCode ==
+                                  'en'
+                              ? '${S.of(context).address_block} ${address.block}'
+                              : '${address.block}${S.of(context).address_block}';
+                        }
                         String subtitle = address.addressLine1.isNotEmpty
                             ? '${address.addressLine2}, ${address.district.isNotEmpty ? address.district : address.region}'
                             : address.district.isNotEmpty
@@ -245,7 +254,7 @@ class AddressFormState extends State<AddressForm> {
           _districtController.text = address.district;
 
           setState(() {
-            widget.address.block = address.block; //todo
+            widget.address.block = address.block;
             widget.address.addressLine1 = address.addressLine1;
             widget.address.addressLine2 = address.addressLine2;
             widget.address.district = address.district;

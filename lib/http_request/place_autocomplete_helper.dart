@@ -11,6 +11,7 @@ import 'package:http/http.dart';
 class PlaceAutocompleteHelper {
   static const authority = 'www.als.ogcio.gov.hk';
   static const path = '/lookup';
+  static const _blockIdentifiers = '座|BLK|BLKS|BLOCK';
 
   static Future<List<property.Address>> getSuggestions(
       BuildContext context, String query,
@@ -60,11 +61,13 @@ class PlaceAutocompleteHelper {
               buildingName,
               estateName,
               phaseName,
+              phaseNumber,
               streetName,
               streetNumberFrom,
               streetNumberTo;
           late String streetAddress;
-          late String block, addressLine1, addressLine2, region, district;
+          String block = '';
+          late String addressLine1, addressLine2, region, district;
           if (chinese) {
             var address = premises.chiPremisesAddress!;
             blockNumber = address.chiBlock?.blockNo;
@@ -72,6 +75,7 @@ class PlaceAutocompleteHelper {
             buildingName = address.buildingName?.toHalfWidth();
             estateName = address.chiEstate?.estateName;
             phaseName = address.chiEstate?.phase?.phaseName;
+            phaseNumber = address.chiEstate?.phase?.phaseNo;
             streetName = address.chiStreet?.streetName;
             streetNumberFrom = address.chiStreet?.buildingNoFrom;
             streetNumberTo = address.chiStreet?.buildingNoTo;
@@ -85,29 +89,21 @@ class PlaceAutocompleteHelper {
                   streetNumberTo == null ? '號' : '-$streetNumberTo號';
             }
           } else {
-            String? blockDescriptorPrecedenceIndicator;
+            //String? blockDescriptorPrecedenceIndicator;
             var address = premises.engPremisesAddress!;
             blockNumber = address.engBlock?.blockNo;
             blockDescriptor = address.engBlock?.blockDescriptor;
-            blockDescriptorPrecedenceIndicator =
-                address.engBlock?.blockDescriptorPrecedenceIndicator;
+            // blockDescriptorPrecedenceIndicator =
+            //     address.engBlock?.blockDescriptorPrecedenceIndicator;
             buildingName = address.buildingName;
             estateName = address.engEstate?.estateName;
             phaseName = address.engEstate?.phase?.phaseName;
+            phaseNumber = address.engEstate?.phase?.phaseNo;
             streetName = address.engStreet?.streetName;
             streetNumberFrom = address.engStreet?.buildingNoFrom;
             streetNumberTo = address.engStreet?.buildingNoTo;
             district = address.engStreet?.locationName ?? '';
             region = _getRegionName(address.region);
-
-            // todo block number, block descriptor may not be present, try querying 'r'
-            // if (block.isNotEmpty) {
-            //   if (blockDescriptor != null) {
-            //     block = blockDescriptorPrecedenceIndicator == 'Y'
-            //         ? '$blockDescriptor $block'
-            //         : '$block $blockDescriptor';
-            //   }
-            // }
 
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
@@ -120,66 +116,33 @@ class PlaceAutocompleteHelper {
             }
           }
 
-          // todo only extract alphanumerical "blocks"
-          if (blockDescriptor == '座' ||
-              blockDescriptor == 'BLK' ||
-              blockDescriptor == 'BLKS' ||
-              blockDescriptor == 'BLOCK') {
+          if (blockDescriptor != null &&
+              RegExp(_blockIdentifiers).hasMatch(blockDescriptor) &&
+              buildingName == null) {
+            //todo verify the last condition
             block = blockNumber ?? '';
           } else {
-            // todo extract block name from building name
-            // todo block = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
-          }
-          // todo Standardize address (parse into address line 1 and 2)
-          // Sometimes the API returns unnecessary block name
-          // if(buildingName != null) {
-          //   if(estateName != null) {
-          //     block = '';
-          //   } else {
-          //
-          //   }
-          // }
-          // if(buildingName != null && estateName != null) {
-          //   block = '';
-          // } else {
-          //   if (buildingName.contains(estateName)) {
-          //
-          //   }
-          //   block = blockNumber ?? '';
-          // }
-          // block = buildingName != null && estateName != null
-          //     ? ''
-          //     : blockNumber ?? '';
-          // todo extract block name from building name
-
-          addressLine1 = buildingName ?? estateName ?? '';
-          // if (addressLine1 == estateName) {
-          //   if (block.isNotEmpty) {
-          //     addressLine1 = chinese
-          //         ? blockDescriptor == null
-          //             ? '$estateName $block'
-          //             : '$estateName$block'
-          //         : '$block $estateName';
-          //   }
-          // }
-
-          if (buildingName != null) {
-            addressLine2 = estateName ?? streetAddress;
-            if (estateName != null) {
-              if (buildingName.contains(estateName)) {
-                var blockStr = buildingName.replaceAll(estateName, '').trim();
-                debugPrint('S:$blockStr');
-                // todo remove block descriptor
-                // addressLine1 = '';
-                // todo extract the block number, e.g. A, 1, A1, 二
+            // Sometimes the API returns block name inside building name, extract if necessary
+            if (buildingName != null &&
+                estateName != null &&
+                buildingName.contains(estateName)) {
+              var blockStr = buildingName.replaceAll(estateName, '').trim();
+              if (blockStr.contains(RegExp(_blockIdentifiers))) {
+                block =
+                    blockStr.replaceAll(RegExp(_blockIdentifiers), '').trim();
               }
             }
+          }
+          // todo Standardize address (parse into address line 1 and 2)
+          //todo phaseName, phaseNumber
+          addressLine1 = buildingName ?? estateName ?? '';
+          if (buildingName != null) {
+            addressLine2 = estateName ?? streetAddress;
           } else {
             addressLine2 = streetAddress;
           }
-          // todo if district is empty, try querying for it, example: 曉翠苑
           suggestions.add(property.Address(
-              //todo block: block,
+              block: block,
               addressLine1: addressLine1,
               addressLine2: addressLine2,
               district: district,

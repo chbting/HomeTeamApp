@@ -78,8 +78,6 @@ class PlaceAutocompleteHelper {
             district = address.chiStreet?.locationName ?? '';
             region = address.region;
 
-            // todo block = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
-
             streetAddress = streetName ?? '';
             if (streetAddress.isNotEmpty) {
               streetAddress += streetNumberFrom ?? '';
@@ -122,6 +120,16 @@ class PlaceAutocompleteHelper {
             }
           }
 
+          // todo only extract alphanumerical "blocks"
+          if (blockDescriptor == '座' ||
+              blockDescriptor == 'BLK' ||
+              blockDescriptor == 'BLKS' ||
+              blockDescriptor == 'BLOCK') {
+            block = blockNumber ?? '';
+          } else {
+            // todo extract block name from building name
+            // todo block = '${blockNumber ?? ''}${blockDescriptor ?? ''}';
+          }
           // todo Standardize address (parse into address line 1 and 2)
           // Sometimes the API returns unnecessary block name
           // if(buildingName != null) {

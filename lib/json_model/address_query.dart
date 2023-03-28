@@ -246,8 +246,10 @@ class ChiEstate {
 
   String toRawJson() => json.encode(toJson());
 
-  factory ChiEstate.fromJson(Map<String, dynamic> json) =>
-      ChiEstate(estateName: json["EstateName"], phase: json["ChiPhase"]);
+  factory ChiEstate.fromJson(Map<String, dynamic> json) => ChiEstate(
+      estateName: json["EstateName"],
+      phase:
+          json["ChiPhase"] == null ? null : Phase.fromJson(json["ChiPhase"]));
 
   Map<String, dynamic> toJson() =>
       {"EstateName": estateName, "ChiPhase": phase};
@@ -264,8 +266,10 @@ class EngEstate {
 
   String toRawJson() => json.encode(toJson());
 
-  factory EngEstate.fromJson(Map<String, dynamic> json) =>
-      EngEstate(estateName: json["EstateName"], phase: json["EngPhase"]);
+  factory EngEstate.fromJson(Map<String, dynamic> json) => EngEstate(
+      estateName: json["EstateName"],
+      phase:
+          json["EngPhase"] == null ? null : Phase.fromJson(json["EngPhase"]));
 
   Map<String, dynamic> toJson() =>
       {"EstateName": estateName, "EngPhase": phase};

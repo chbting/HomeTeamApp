@@ -11,7 +11,8 @@ import 'package:http/http.dart';
 class PlaceAutocompleteHelper {
   static const authority = 'www.als.ogcio.gov.hk';
   static const path = '/lookup';
-  static const _blockIdentifiers = '座|BLK|BLKS|BLOCK';
+  static const _blockIdentifiers = '座|BLK|BLKS|BLOCK|TOWER|大廈|樓|BLDG';
+  static const _houseIdentifiers = '屋|洋房|房屋|村屋|HSE|HOUSE|別墅|VILLA';
 
   static Future<List<property.Address>> getSuggestions(
       BuildContext context, String query,
@@ -71,7 +72,7 @@ class PlaceAutocompleteHelper {
           if (chinese) {
             var address = premises.chiPremisesAddress!;
             blockNumber = address.chiBlock?.blockNo;
-            blockDescriptor = address.chiBlock?.blockDescriptor;
+            blockDescriptor = address.chiBlock?.blockDescriptor ?? '';
             buildingName = address.buildingName?.toHalfWidth();
             estateName = address.chiEstate?.estateName;
             phaseName = address.chiEstate?.phase?.phaseName;
@@ -89,12 +90,11 @@ class PlaceAutocompleteHelper {
                   streetNumberTo == null ? '號' : '-$streetNumberTo號';
             }
           } else {
-            //String? blockDescriptorPrecedenceIndicator;
             var address = premises.engPremisesAddress!;
+            String? blockDescriptorPrecedenceIndicator =
+                address.engBlock?.blockDescriptorPrecedenceIndicator;
             blockNumber = address.engBlock?.blockNo;
-            blockDescriptor = address.engBlock?.blockDescriptor;
-            // blockDescriptorPrecedenceIndicator =
-            //     address.engBlock?.blockDescriptorPrecedenceIndicator;
+            blockDescriptor = address.engBlock?.blockDescriptor ?? '';
             buildingName = address.buildingName;
             estateName = address.engEstate?.estateName;
             phaseName = address.engEstate?.phase?.phaseName;
@@ -116,16 +116,20 @@ class PlaceAutocompleteHelper {
             }
           }
 
-          if (blockDescriptor != null &&
-              RegExp(_blockIdentifiers).hasMatch(blockDescriptor) &&
-              buildingName == null) {
-            //todo verify the last condition
-            block = blockNumber ?? '';
+          if (buildingName == null) {
+            //todo verify by parsing all JSON entries into address object and find exception cases
+            //todo verify: Block name is present only when there is no building name
+            if (RegExp(_blockIdentifiers).hasMatch(blockDescriptor)) {
+              block = blockNumber ?? '';
+            } else if (RegExp(_houseIdentifiers).hasMatch(blockDescriptor)) {
+              //todo append 號, house
+            } else {
+              //todo other block descriptors, just append
+              //todo use blockDescriptorPrecedenceIndicator
+            }
           } else {
             // Sometimes the API returns block name inside building name, extract if necessary
-            if (buildingName != null &&
-                estateName != null &&
-                buildingName.contains(estateName)) {
+            if (estateName != null && buildingName.contains(estateName)) {
               var blockStr = buildingName.replaceAll(estateName, '').trim();
               if (blockStr.contains(RegExp(_blockIdentifiers))) {
                 block =
@@ -133,8 +137,10 @@ class PlaceAutocompleteHelper {
               }
             }
           }
+
           // todo Standardize address (parse into address line 1 and 2)
           //todo phaseName, phaseNumber
+          // todo other block descriptor cases
           addressLine1 = buildingName ?? estateName ?? '';
           if (buildingName != null) {
             addressLine2 = estateName ?? streetAddress;
@@ -143,6 +149,7 @@ class PlaceAutocompleteHelper {
           }
           suggestions.add(property.Address(
               block: block,
+              //blockDescriptor: blockDescriptor, //todo ignore certain descriptor
               addressLine1: addressLine1,
               addressLine2: addressLine2,
               district: district,

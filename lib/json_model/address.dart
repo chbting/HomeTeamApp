@@ -5,6 +5,7 @@ class Address {
   String flat;
   String floor;
   String block;
+  String blockDescriptor;// block or tower or 座
   String addressLine1;
   String addressLine2;
   String district;
@@ -13,7 +14,8 @@ class Address {
   Address(
       {this.flat = '',
       this.floor = '',
-        this.block = '',
+      this.block = '',
+      this.blockDescriptor = '',
       this.addressLine1 = '',
       this.addressLine2 = '',
       this.district = '',
@@ -26,9 +28,9 @@ class Address {
 
   @override
   String toString() {
-    var s = flat.isNotEmpty ? 'Flat $flat,' : '';
-    s += floor.isNotEmpty ? '$floor/F,' : '';
-    s += block.isNotEmpty ? 'BLOCK $block,' : '';
+    var s = flat.isNotEmpty ? '$flat室' : '';
+    s += floor.isNotEmpty ? '$floor樓,' : '';
+    s += block.isNotEmpty ? '$block $blockDescriptor,' : '';
     s += addressLine1.isNotEmpty ? '$addressLine1,$addressLine2' : addressLine2;
     s += ',$district,$region';
     return s;

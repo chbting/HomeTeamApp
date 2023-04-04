@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/ui/shared/address_form.dart';
 import 'package:hometeam_client/ui/shared/form_card.dart';
 import 'package:hometeam_client/ui/shared/form_controller.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
-  const PropertyInfoWidget(
-      {Key? key, required this.property, required this.controller})
+  const PropertyInfoWidget({Key? key, required this.controller})
       : super(key: key);
 
-  final Property property;
   final PropertyInfoWidgetController controller;
 
   @override
@@ -22,16 +21,14 @@ class PropertyInfoWidget extends StatefulWidget {
 class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
-
-  @override
-  void initState() {
-    widget.controller.resetForm = _resetForm;
-    widget.controller.validate = _validate;
-    super.initState();
-  }
+  late Property _property;
 
   @override
   Widget build(BuildContext context) {
+    _property = PropertyUploaderInheritedData.of(context)!.property;
+    widget.controller.resetForm = _resetForm;
+    widget.controller.validate = _validate;
+
     return Form(
       key: _formKey,
       child: ListView(
@@ -43,8 +40,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
           FormCard(
             title: S.of(context).property_address,
             body: AddressForm(
-                address: widget.property.address,
-                controller: _addressFormController),
+                address: _property.address, controller: _addressFormController),
           ),
           FormCard(
             title: S.of(context).property_info,
@@ -56,9 +52,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.netArea == -1
+                          initialValue: _property.netArea == -1
                               ? null
-                              : widget.property.netArea.toString(),
+                              : _property.netArea.toString(),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
@@ -68,8 +64,8 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                               border: const OutlineInputBorder(),
                               labelText:
                                   '${S.of(context).area_net} (${S.of(context).sq_ft})'),
-                          onChanged: (value) =>
-                              widget.property.netArea = int.parse(value),
+                          onChanged: (value) => _property.netArea =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -78,9 +74,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                     Container(width: 16.0),
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.grossArea == -1
+                          initialValue: _property.grossArea == -1
                               ? null
-                              : widget.property.grossArea.toString(),
+                              : _property.grossArea.toString(),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
@@ -90,8 +86,8 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                               border: const OutlineInputBorder(),
                               labelText:
                                   '${S.of(context).area_gross} (${S.of(context).sq_ft})'),
-                          onChanged: (value) =>
-                              widget.property.grossArea = int.parse(value),
+                          onChanged: (value) => _property.grossArea =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -104,9 +100,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.room == -1
+                          initialValue: _property.bedroom == -1
                               ? null
-                              : widget.property.room.toString(),
+                              : _property.bedroom.toString(),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
@@ -115,9 +111,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               icon: const Icon(Icons.bed_outlined),
-                              labelText: S.of(context).room_count),
-                          onChanged: (value) =>
-                              widget.property.room = int.parse(value),
+                              labelText: S.of(context).bedroom),
+                          onChanged: (value) => _property.bedroom =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -126,9 +122,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                     Container(width: 16.0),
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.bathroom == -1
+                          initialValue: _property.bathroom == -1
                               ? null
-                              : widget.property.bathroom.toString(),
+                              : _property.bathroom.toString(),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
@@ -137,9 +133,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               icon: const Icon(Icons.bathtub_outlined),
-                              labelText: S.of(context).bathroom_count),
-                          onChanged: (value) =>
-                              widget.property.grossArea = int.parse(value),
+                              labelText: S.of(context).bathroom),
+                          onChanged: (value) => _property.bathroom =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -152,9 +148,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.coveredParking == -1
+                          initialValue: _property.coveredParking == -1
                               ? null
-                              : widget.property.coveredParking.toString(),
+                              : _property.coveredParking.toString(),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
@@ -163,9 +159,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               icon: const Icon(Icons.garage_outlined),
-                              labelText: S.of(context).covered_parking_count),
-                          onChanged: (value) =>
-                              widget.property.coveredParking = int.parse(value),
+                              labelText: S.of(context).covered_parking),
+                          onChanged: (value) => _property.coveredParking =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -174,20 +170,20 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                     Container(width: 16.0),
                     Expanded(
                       child: TextFormField(
-                          initialValue: widget.property.openParking == -1
+                          initialValue: _property.openParking == -1
                               ? null
-                              : widget.property.openParking.toString(),
+                              : _property.openParking.toString(),
                           keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
+                          textInputAction: TextInputAction.done,
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(),
                               icon: const Icon(Icons.local_parking),
-                              labelText: S.of(context).open_parking_count),
-                          onChanged: (value) =>
-                              widget.property.openParking = int.parse(value),
+                              labelText: S.of(context).open_parking),
+                          onChanged: (value) => _property.openParking =
+                              value.isNotEmpty ? int.parse(value) : 0,
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) => (value == null || value.isEmpty)
                               ? S.of(context).msg_info_required
@@ -207,12 +203,12 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
     _addressFormController.reset();
     _formKey.currentState!.reset();
     setState(() {
-      widget.property.netArea = -1;
-      widget.property.grossArea = -1;
-      widget.property.room = -1;
-      widget.property.bathroom = -1;
-      widget.property.coveredParking = -1;
-      widget.property.openParking = -1;
+      _property.netArea = -1;
+      _property.grossArea = -1;
+      _property.bedroom = -1;
+      _property.bathroom = -1;
+      _property.coveredParking = -1;
+      _property.openParking = -1;
     });
   }
 

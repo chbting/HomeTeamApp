@@ -87,12 +87,12 @@ class StandardStepperState extends State<StandardStepper> {
                         steps: widget.steps,
                         activeStep: _activeStep,
                         borderThickness: 8.0,
-                        padding: 0.0,
-                        lineLength: 48.0,
-                        lineSpace: 6.0,
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 8.0),
                         enableStepTapping: false,
                         showLoadingAnimation: false,
-                        lineColor: Theme.of(context).colorScheme.onSurface,
+                        defaultLineColor:
+                            Theme.of(context).colorScheme.onSurface,
                         finishedStepIconColor:
                             Theme.of(context).colorScheme.onPrimary,
                         stepAnimationCurve: Curves.bounceOut,

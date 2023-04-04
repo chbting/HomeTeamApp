@@ -183,14 +183,15 @@
 	"skip": "跳過",
 	"sign": "簽署",
 	"msg_info_required": "需填寫資料",
-	"bathroom_count": "浴室數",
-	"room_count": "房間數",
-	"covered_parking_count": "有蓋車位數",
-	"open_parking_count": "露天車位數",
 	"contracts": "租約",
 	"contract": "租約",
 	"msg_failed_to_generate_visit_path": "無法生成睇樓路線",
 	"address_floor": "樓層",
 	"address_flat": "室",
-	"address_block": "座"
+	"address_block": "座",
+	"living_dining_room": "客/飯廳",
+	"bedroom": "睡房",
+	"bathroom": "浴室",
+	"covered_parking": "有蓋車位",
+	"open_parking": "露天車位"
 }

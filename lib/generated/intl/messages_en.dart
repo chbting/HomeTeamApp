@@ -47,8 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "area_net_abr": MessageLookupByLibrary.simpleMessage("Net"),
         "area_sq_ft": MessageLookupByLibrary.simpleMessage("Area (Sq. ft)"),
         "back": MessageLookupByLibrary.simpleMessage("Back"),
-        "bathroom_count":
-            MessageLookupByLibrary.simpleMessage("Bathroom count"),
+        "bathroom": MessageLookupByLibrary.simpleMessage("Bathroom"),
+        "bedroom": MessageLookupByLibrary.simpleMessage("Bedroom"),
         "bill_electricity": MessageLookupByLibrary.simpleMessage("Electricity"),
         "bill_gas": MessageLookupByLibrary.simpleMessage("Gas"),
         "bill_management": MessageLookupByLibrary.simpleMessage("Management"),
@@ -95,8 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contract Status"),
         "contracts": MessageLookupByLibrary.simpleMessage("Contract"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
-        "covered_parking_count":
-            MessageLookupByLibrary.simpleMessage("Covered parking count"),
+        "covered_parking":
+            MessageLookupByLibrary.simpleMessage("Covered parking"),
         "create_a_free_account":
             MessageLookupByLibrary.simpleMessage("Create a free account"),
         "create_listing":
@@ -140,6 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "residential lease\n\nThis contract was signed on (day/month/year) 05/06/2021 by the landlord and the tenant. The details of the two parties are listed in Schedule 1.\n\nThe Landlord and the Tenant both rent out and lease the properties detailed in Table 1 for the lease terms and rents detailed in Table 1, and agree to abide by and perform the following terms:\n\n1. The tenant must pay the specified rent to the landlord on or before the 1st of each month of the lease term. If the tenant does not pay the rent within seven days of the date when the rent is due, the landlord has the right to take appropriate action to recover the rent at the tenant\'s expense, and all costs and Expenses will constitute a debt of the tenant\'s landlord, and the landlord will be entitled to recover the full amount of all monies together with the tenant.\n\n2. The Tenant shall not make any alterations and/or additions to the property without the written consent of the Landlord.\n\n3. The tenant shall not assign, sublet or sublet the property or any other part or transfer the right to occupy the property or any other part to any other person\nWait. This leasehold interest is owned by the tenant personally.\n\n4. Tenants are required to abide by a number of Hong Kong laws and regulations and the terms of the mutual covenant in relation to the building to which the property belongs. The tenant shall also not violate the\nany restrictive clauses in the official title deed within the lot.\n\n5. The tenant is required to settle the water, electricity, gas, telephone and other similar miscellaneous charges for the property within the lease term.\n\n6. The tenant must keep the property in good repair during the lease term (except for natural wear and tear and damage caused by inherent defects) and must hand over the property in the same state of repair at the expiration or termination of the lease. Ji back to the owner."),
         "lease_period": MessageLookupByLibrary.simpleMessage("Lease Period"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("Lease Terms"),
+        "living_dining_room":
+            MessageLookupByLibrary.simpleMessage("Living/Dining room"),
         "mailing_address":
             MessageLookupByLibrary.simpleMessage("Mailing address"),
         "mandarin": MessageLookupByLibrary.simpleMessage("Chinese (Mandarin)"),
@@ -183,8 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "number_of_rooms": MessageLookupByLibrary.simpleMessage("No. of rooms"),
         "offered": MessageLookupByLibrary.simpleMessage("Offered"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
-        "open_parking_count":
-            MessageLookupByLibrary.simpleMessage("Open parking count"),
+        "open_parking": MessageLookupByLibrary.simpleMessage("Open parking"),
         "or": MessageLookupByLibrary.simpleMessage("or"),
         "or_create_a_free_account":
             MessageLookupByLibrary.simpleMessage("or create a free account"),
@@ -237,7 +238,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "review_before_submission": MessageLookupByLibrary.simpleMessage(
             "After signing the contract, you can review the offer before submission"),
-        "room_count": MessageLookupByLibrary.simpleMessage("Room count"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "save_for_later":
             MessageLookupByLibrary.simpleMessage("Save for later"),

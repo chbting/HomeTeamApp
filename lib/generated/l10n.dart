@@ -1850,46 +1850,6 @@ class S {
     );
   }
 
-  /// `Bathroom count`
-  String get bathroom_count {
-    return Intl.message(
-      'Bathroom count',
-      name: 'bathroom_count',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Room count`
-  String get room_count {
-    return Intl.message(
-      'Room count',
-      name: 'room_count',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Covered parking count`
-  String get covered_parking_count {
-    return Intl.message(
-      'Covered parking count',
-      name: 'covered_parking_count',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Open parking count`
-  String get open_parking_count {
-    return Intl.message(
-      'Open parking count',
-      name: 'open_parking_count',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Contract`
   String get contracts {
     return Intl.message(
@@ -1945,6 +1905,56 @@ class S {
     return Intl.message(
       'Block',
       name: 'address_block',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Living/Dining room`
+  String get living_dining_room {
+    return Intl.message(
+      'Living/Dining room',
+      name: 'living_dining_room',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bedroom`
+  String get bedroom {
+    return Intl.message(
+      'Bedroom',
+      name: 'bedroom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bathroom`
+  String get bathroom {
+    return Intl.message(
+      'Bathroom',
+      name: 'bathroom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Covered parking`
+  String get covered_parking {
+    return Intl.message(
+      'Covered parking',
+      name: 'covered_parking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open parking`
+  String get open_parking {
+    return Intl.message(
+      'Open parking',
+      name: 'open_parking',
       desc: '',
       args: [],
     );

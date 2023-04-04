@@ -4,7 +4,9 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/contract.dart';
 import 'package:hometeam_client/json_model/listing.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';
 
 class PropertyUploader extends StatefulWidget {
@@ -23,12 +25,6 @@ class PropertyUploaderState extends State<PropertyUploader> {
   final StandardStepperController _controller = StandardStepperController();
   final PropertyInfoWidgetController _propertyInfoWidgetController =
       PropertyInfoWidgetController();
-
-  final Property _property = Property(
-      address: Address(),
-      coverImage: const AssetImage(''), //todo default
-      contract: Contract(),
-      listing: Listing(title: ''));
   int _activeStep = 0;
 
   @override
@@ -45,9 +41,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
-      PropertyInfoWidget(
-          property: _property, controller: _propertyInfoWidgetController),
-      const Center(child: Text('2')),
+      PropertyInfoWidget(controller: _propertyInfoWidgetController),
+      const PropertyImagesWidget(),
       const Center(child: Text('3')),
       const Center(child: Text('4'))
     ];

@@ -180,14 +180,15 @@
 	"skip": "Skip",
 	"sign": "Sign",
 	"msg_info_required": "Info required",
-	"bathroom_count": "Bathroom count",
-	"room_count": "Room count",
-	"covered_parking_count": "Covered parking count",
-	"open_parking_count": "Open parking count",
 	"contracts": "Contract",
 	"contract": "Contract",
 	"msg_failed_to_generate_visit_path": "Failed to generate the path of visit",
 	"address_floor": "Floor",
 	"address_flat": "Flat",
-	"address_block": "Block"
+	"address_block": "Block",
+	"living_dining_room": "Living/Dining room",
+	"bedroom": "Bedroom",
+	"bathroom": "Bathroom",
+	"covered_parking": "Covered parking",
+	"open_parking": "Open parking"
 }

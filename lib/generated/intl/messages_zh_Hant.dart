@@ -22,8 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accept_or_make_an_offer":
-            MessageLookupByLibrary.simpleMessage("接受/提出更改"),
+        "accept_or_offer": MessageLookupByLibrary.simpleMessage("接受/更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
         "add_property": MessageLookupByLibrary.simpleMessage("新增物業"),
@@ -67,7 +66,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_language": MessageLookupByLibrary.simpleMessage("選擇語言"),
         "choose_the_route": MessageLookupByLibrary.simpleMessage("選擇路線"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認"),
-        "confirm_and_submit": MessageLookupByLibrary.simpleMessage("確認並提交"),
         "confirm_contract": MessageLookupByLibrary.simpleMessage(""),
         "confirm_remodeling": MessageLookupByLibrary.simpleMessage("確認預約"),
         "contact_number": MessageLookupByLibrary.simpleMessage("聯絡電話"),
@@ -96,8 +94,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英語"),
         "estimate": MessageLookupByLibrary.simpleMessage("預算:"),
         "estimated_duration": MessageLookupByLibrary.simpleMessage("需時"),
-        "fill_in_personal_information":
-            MessageLookupByLibrary.simpleMessage("填寫個人資料"),
         "find_properties": MessageLookupByLibrary.simpleMessage("搵樓"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),
         "general_settings": MessageLookupByLibrary.simpleMessage("一般設定"),
@@ -221,7 +217,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("你可以使用下列方式登入"),
         "sign_on_site": MessageLookupByLibrary.simpleMessage("睇樓時簽署"),
         "sign_out": MessageLookupByLibrary.simpleMessage("登出"),
-        "sign_the_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "signed": MessageLookupByLibrary.simpleMessage("已簽署"),
         "skip": MessageLookupByLibrary.simpleMessage("跳過"),
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),

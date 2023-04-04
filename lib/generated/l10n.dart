@@ -810,46 +810,6 @@ class S {
     );
   }
 
-  /// `Fill in Personal Information`
-  String get fill_in_personal_information {
-    return Intl.message(
-      'Fill in Personal Information',
-      name: 'fill_in_personal_information',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Accept / Make an offer`
-  String get accept_or_make_an_offer {
-    return Intl.message(
-      'Accept / Make an offer',
-      name: 'accept_or_make_an_offer',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sign the Contract`
-  String get sign_the_contract {
-    return Intl.message(
-      'Sign the Contract',
-      name: 'sign_the_contract',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirm and Submit`
-  String get confirm_and_submit {
-    return Intl.message(
-      'Confirm and Submit',
-      name: 'confirm_and_submit',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Property Address`
   String get property_address {
     return Intl.message(
@@ -1140,10 +1100,10 @@ class S {
     );
   }
 
-  /// `Tenant Information`
+  /// `Tenant Info`
   String get tenant_info {
     return Intl.message(
-      'Tenant Information',
+      'Tenant Info',
       name: 'tenant_info',
       desc: '',
       args: [],
@@ -1965,6 +1925,16 @@ class S {
     return Intl.message(
       'Others',
       name: 'others',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept/Offer`
+  String get accept_or_offer {
+    return Intl.message(
+      'Accept/Offer',
+      name: 'accept_or_offer',
       desc: '',
       args: [],
     );

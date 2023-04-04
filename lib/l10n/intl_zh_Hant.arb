@@ -76,10 +76,6 @@
 	"landlord_accept_offer": "業主接受/提出更改",
 	"landlord_sign_contract": "業主簽約",
 	"confirm_contract": "",
-	"fill_in_personal_information": "填寫個人資料",
-	"accept_or_make_an_offer": "接受/提出更改",
-	"sign_the_contract": "簽署租約",
-	"confirm_and_submit": "確認並提交",
 	"property_address": "物業地址",
 	"property_has_been_removed": "租盤已從清單中移除",
 	"undo": "還原",
@@ -194,5 +190,6 @@
 	"bathroom": "浴室",
 	"covered_parking": "有蓋車位",
 	"open_parking": "露天車位",
-	"others": "其他"
+	"others": "其他",
+	"accept_or_offer": "接受/更改"
 }

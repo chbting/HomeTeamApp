@@ -22,8 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "accept_or_make_an_offer":
-            MessageLookupByLibrary.simpleMessage("Accept / Make an offer"),
+        "accept_or_offer": MessageLookupByLibrary.simpleMessage("Accept/Offer"),
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_property": MessageLookupByLibrary.simpleMessage("Add Property"),
@@ -73,8 +72,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "choose_the_route":
             MessageLookupByLibrary.simpleMessage("Choose the route"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
-        "confirm_and_submit":
-            MessageLookupByLibrary.simpleMessage("Confirm and Submit"),
         "confirm_contract": MessageLookupByLibrary.simpleMessage(""),
         "confirm_remodeling":
             MessageLookupByLibrary.simpleMessage("Confirm Scheduling"),
@@ -113,8 +110,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),
         "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
-        "fill_in_personal_information": MessageLookupByLibrary.simpleMessage(
-            "Fill in Personal Information"),
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
         "general_settings":
@@ -269,8 +264,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Sign in with the following method"),
         "sign_on_site": MessageLookupByLibrary.simpleMessage("Sign on site"),
         "sign_out": MessageLookupByLibrary.simpleMessage("Sign out"),
-        "sign_the_contract":
-            MessageLookupByLibrary.simpleMessage("Sign the Contract"),
         "signed": MessageLookupByLibrary.simpleMessage("Signed"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
@@ -281,8 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),
         "take_photo": MessageLookupByLibrary.simpleMessage("Take photo"),
         "tenant": MessageLookupByLibrary.simpleMessage("Tenant"),
-        "tenant_info":
-            MessageLookupByLibrary.simpleMessage("Tenant Information"),
+        "tenant_info": MessageLookupByLibrary.simpleMessage("Tenant Info"),
         "tenant_paid_fees_colon":
             MessageLookupByLibrary.simpleMessage("Tenant Paid Fees:"),
         "tenant_pays_the_following":

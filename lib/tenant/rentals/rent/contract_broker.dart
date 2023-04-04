@@ -45,15 +45,15 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     final steps = [
       EasyStep(
           icon: const Icon(Icons.edit_note),
-          title: S.of(context).accept_or_make_an_offer),
+          title: S.of(context).accept_or_offer),
       EasyStep(
           icon: const Icon(Icons.person),
-          title: S.of(context).fill_in_personal_information),
+          title: S.of(context).tenant_info),
       EasyStep(
-          icon: const Icon(Icons.draw), title: S.of(context).sign_the_contract),
+          icon: const Icon(Icons.draw), title: S.of(context).sign_contract),
       EasyStep(
           icon: const Icon(Icons.check),
-          title: S.of(context).confirm_and_submit),
+          title: S.of(context).confirm),
     ];
     final pages = [
       ContractAdjusterScreen(

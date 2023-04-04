@@ -37,8 +37,8 @@ class Property {
       {this.id = -1,
       this.netArea = -1,
       this.grossArea = -1,
-      this.bedroom = 2,
-      this.bathroom = 2, // todo
+      this.bedroom = -1,
+      this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1});
 }

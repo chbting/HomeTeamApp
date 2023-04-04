@@ -51,11 +51,13 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Text(
-          'instruction',
+          'Imaging instructions go here',
           style: AppTheme.getTitleLargeTextStyle(context),
         ),
       ),
     ];
+
+    // todo single instruction
     return StandardStepper(
       controller: _controller,
       title:
@@ -81,16 +83,18 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
     _picker.pickImage(source: source).then((image) {
       if (image != null) {
         // Standardize image names with enum type and step number
+        //todo count
+        int count = 1;
         var imageName =
-            '${widget.roomKey}_${_activeStep + 1}${extension(image.path)}';
+            '${widget.roomKey}_$count${extension(image.path)}';
         FileHelper.moveToCache(
                 file: File(image.path),
-                child: FileHelper.remodelingCache,
+                child: FileHelper.propertyUploaderCache,
                 newFileName: imageName)
             .then((newFile) {
           if (widget.retake) {
-            _imageList.removeAt(widget.imageIndex);
-            _imageList.insert(widget.imageIndex, newFile);
+            // _imageList.removeAt(widget.imageIndex);
+            // _imageList.insert(widget.imageIndex, newFile);
             Navigator.of(context).pop(_imageList);
           } else {
             _imageList.add(newFile);

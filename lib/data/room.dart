@@ -38,7 +38,7 @@ class RoomHelper {
       case RoomType.bathroom:
         return S.of(context).bathroom;
       case RoomType.others:
-        return 'other areas'; S.of(context).other_areas;
+        return S.of(context).others;
     }
   }
 }

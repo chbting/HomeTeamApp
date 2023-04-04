@@ -24,9 +24,9 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   Widget build(BuildContext context) {
     _property = PropertyUploaderInheritedData.of(context)!.property;
 
-    // Initialize image lists, if empty or
-    // todo persistence unless room number changes, remove unnecessary images
-    if (_property.rooms.isEmpty || _check()) {
+    // todo remove unnecessary images (remove bedroom and bathroom images only)
+    if (_isInitializationNeeded()) {
+      _property.rooms.clear();
       _property.rooms[0] = Room(RoomType.livingDiningRoom);
       for (int i = 1; i <= _property.bedroom; i++) {
         _property.rooms[i] = Room(RoomType.bedroom);
@@ -47,7 +47,23 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         itemCount: _property.rooms.length,
         itemBuilder: (context, index) {
           Room room = _property.rooms[index]!;
-
+          String title = RoomHelper.getName(context, room.type);
+          switch (room.type) {
+            case RoomType.bedroom:
+              if (_property.bedroom > 1) {
+                title += ' $index';
+              }
+              break;
+            case RoomType.bathroom:
+              if (_property.bathroom > 1) {
+                int count = index - _property.bedroom;
+                title += ' $count';
+              }
+              break;
+            default:
+              break;
+          }
+          // todo allow user to add any number of photos
           return Card(
             child: ListTile(
               contentPadding:
@@ -56,7 +72,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                   // Explicitly center the icon only when there are images
                   height: room.images.isEmpty ? double.infinity : 0.0,
                   child: Icon(RoomHelper.getIconData(room.type))),
-              title: Text(RoomHelper.getName(context, room.type)),
+              title: Text(title),
               subtitle: room.images.isEmpty
                   ? Text(S.of(context).photo_required,
                       style: AppTheme.getListTileBodyTextStyle(context))
@@ -95,8 +111,26 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         });
   }
 
-  bool _check() {
-    return false;
+  /// Returns true if the map is empty or bedroom or bathroom count changed
+  bool _isInitializationNeeded() {
+    if (_property.rooms.isEmpty) {
+      return true;
+    }
+    int bedroom = 0;
+    int bathroom = 0;
+    for (var room in _property.rooms.values) {
+      switch (room.type) {
+        case RoomType.bedroom:
+          bedroom++;
+          break;
+        case RoomType.bathroom:
+          bathroom++;
+          break;
+        default:
+          break;
+      }
+    }
+    return _property.bedroom != bedroom || _property.bathroom != bathroom;
   }
 
   void _openImageWizard(BuildContext context, int roomKey) {
@@ -122,7 +156,6 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         .then((images) {
       if (images != null) {
         setState(() {
-          //todo image not updating
           _property.rooms[roomKey]!.images = images;
           //todo RemodelingInheritedData.of(context)!.updateRightButtonState();
         });

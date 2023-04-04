@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileHelper {
-  static const remodelingCache = 'remodeling_scheduler';
+  static const propertyUploaderCache = 'propertyUploader';
 
   static Future<File> moveFile(File sourceFile, String newPath) async {
     try {

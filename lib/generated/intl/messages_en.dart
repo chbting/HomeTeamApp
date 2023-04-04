@@ -190,6 +190,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "or_create_a_free_account":
             MessageLookupByLibrary.simpleMessage("or create a free account"),
         "original": MessageLookupByLibrary.simpleMessage("Original"),
+        "others": MessageLookupByLibrary.simpleMessage("Others"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "photo_added":

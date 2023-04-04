@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 
+/// If the FloatingActionButton is press, this widget will pop [true], the
+/// parent of this widget needs to handle that.
 class ImageViewer extends StatelessWidget {
   const ImageViewer({Key? key, required this.image, required this.heroTag})
       : super(key: key);

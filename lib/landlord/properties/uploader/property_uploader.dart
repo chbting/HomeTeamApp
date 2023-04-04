@@ -1,13 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/json_model/contract.dart';
-import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/ui/shared/standard_stepper.dart';
+import 'package:hometeam_client/utils/file_helper.dart';
 
 class PropertyUploader extends StatefulWidget {
   const PropertyUploader({Key? key}) : super(key: key);
@@ -26,6 +22,13 @@ class PropertyUploaderState extends State<PropertyUploader> {
   final PropertyInfoWidgetController _propertyInfoWidgetController =
       PropertyInfoWidgetController();
   int _activeStep = 0;
+
+  @override
+  void dispose() {
+    //todo this may not run if user swipe close the app
+    FileHelper.clearCache(child: FileHelper.propertyUploaderCache);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -190,5 +190,6 @@
 	"bedroom": "Bedroom",
 	"bathroom": "Bathroom",
 	"covered_parking": "Covered parking",
-	"open_parking": "Open parking"
+	"open_parking": "Open parking",
+	"others": "Others"
 }

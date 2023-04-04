@@ -190,5 +190,6 @@
 	"bedroom": "睡房",
 	"bathroom": "浴室",
 	"covered_parking": "有盖车位",
-	"open_parking": "露天车位"
+	"open_parking": "露天车位",
+	"others": "其他"
 }

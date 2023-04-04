@@ -161,6 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "or_create_a_free_account":
             MessageLookupByLibrary.simpleMessage("或創建新帳戶"),
         "original": MessageLookupByLibrary.simpleMessage("原定"),
+        "others": MessageLookupByLibrary.simpleMessage("其他"),
         "owner": MessageLookupByLibrary.simpleMessage("業主"),
         "phone_number": MessageLookupByLibrary.simpleMessage("電話號碼"),
         "photo_added": MessageLookupByLibrary.simpleMessage("照片已加入"),

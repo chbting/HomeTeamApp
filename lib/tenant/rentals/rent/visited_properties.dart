@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
@@ -41,8 +43,13 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                     icon: Icons.description_outlined,
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ContractBrokerScreen(
-                              property: _propertiesInCart[index])));
+                          builder: (context) => ContractBrokerInheritedData(
+                              bid: ContractBid(
+                                  contract: _propertiesInCart[index]
+                                      .contract
+                                      .copyWith()),
+                              child: ContractBrokerScreen(
+                                  property: _propertiesInCart[index]))));
                     }));
           },
           childCount: _propertiesInCart.length,

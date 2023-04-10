@@ -21,7 +21,7 @@ class AuthScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FirebaseUIActions(
-              actions: [
+              actions: [//todo user created doesn't return as <SignedIn>
                 AuthStateChangeAction<SignedIn>((context, state) {
                   if (state.user != null) {
                     Navigator.of(context).pop();

@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,21 +53,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDqipy3u1DzNCKIzFYoFAuV85cHEDOmaSQ',
-    appId: '1:345923835537:android:2927f359ca111f6a3c9130',
-    messagingSenderId: '345923835537',
-    projectId: 'tnerserver',
-    storageBucket: 'tnerserver.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAplIum-t1zwZI_Dr0up_iWyTyFhxfsP3s',
-    appId: '1:345923835537:ios:0d4ee2f2860dd45a3c9130',
-    messagingSenderId: '345923835537',
-    projectId: 'tnerserver',
-    storageBucket: 'tnerserver.appspot.com',
-    androidClientId: '345923835537-6jqbhn1rkuo2kuu0m89v30p6t4b986rg.apps.googleusercontent.com',
-    iosClientId: '345923835537-ffs7ppumkok7dt244vo28t773ofdr8mf.apps.googleusercontent.com',
-    iosBundleId: 'com.tner.tnerClient',
+    apiKey: 'AIzaSyC-_BwlVZzHT6q6oae2tBrFryylszituL0',
+    appId: '1:910200385379:android:ca5d303a394235f83c6d56',
+    messagingSenderId: '910200385379',
+    projectId: 'hometeamhk-383301',
+    databaseURL: 'https://hometeamhk-383301-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'hometeamhk-383301.appspot.com',
   );
 }

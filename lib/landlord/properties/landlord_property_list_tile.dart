@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/ui/theme.dart';
-import 'package:hometeam_client/utils/format.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 
 class LandlordPropertyListTile extends StatelessWidget {
   const LandlordPropertyListTile({
@@ -60,7 +59,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  property.listing.title,
+                                  property.address.addressLine1, //todo
                                   style:
                                       Theme.of(context).textTheme.titleMedium!,
                                   maxLines: 2,
@@ -111,9 +110,8 @@ class LandlordPropertyListTile extends StatelessWidget {
                                 secondaryTrailing ?? Container(),
                               ],
                             ),
-                            Text(
-                                '${Format.currency.format(property.contract.monthlyRent)}'
-                                '/${S.of(context).month}',
+                            Text(//todo
+                                'Status',
                                 style: AppTheme.getRentTextStyle(context))
                           ],
                         ),

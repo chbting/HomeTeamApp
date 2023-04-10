@@ -48,7 +48,8 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               return LandlordPropertyListTile(
                 property: _propertyList[index],
                 onTap: () {
-                  debugPrint(_propertyList[index].listing.title);
+                  //todo
+                  debugPrint(_propertyList[index].address.toString());
                 },
               );
             },

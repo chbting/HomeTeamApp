@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/rent/collapsable_expansion_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/ui/shared/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/ui/collapsable_expansion_tile.dart';
+import 'package:hometeam_client/ui/standard_stepper.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:intl/intl.dart';

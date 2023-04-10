@@ -21,11 +21,6 @@ class Address {
       this.district = '',
       this.region = ''});
 
-  // factory Address.fromJson(Map<String, dynamic> json) =>
-  //     _$Address(json);
-  //
-  // Map<String, dynamic> toJson() => _$Address(this);
-
   @override
   String toString() {
     var s = flat.isNotEmpty ? '$flat室' : '';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
@@ -17,7 +17,7 @@ class VisitedPropertiesScreen extends StatefulWidget {
 
 class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
   final double _imageSize = 120.0;
-  final List<Property> _propertiesInCart = getSampleProperties();
+  final List<Listing> _listingInCart = getSampleListing();
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
-            return RentalListTile(
-                property: _propertiesInCart[index],
+            return ListingListTile(
+                listing: _listingInCart[index],
                 imageSize: _imageSize,
                 trailing: RentalListTileTrailingButton(
                     text: S.of(context).negotiate_contract,
@@ -45,14 +45,13 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ContractBrokerInheritedData(
                               bid: ContractBid(
-                                  contract: _propertiesInCart[index]
+                                  contractOriginal: _listingInCart[index]
                                       .contract
                                       .copyWith()),
-                              child: ContractBrokerScreen(
-                                  property: _propertiesInCart[index]))));
+                              child: const ContractBrokerScreen())));
                     }));
           },
-          childCount: _propertiesInCart.length,
+          childCount: _listingInCart.length,
         ),
       )
     ]);

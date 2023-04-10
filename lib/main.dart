@@ -7,15 +7,15 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:hometeam_client/auth/auth_info.dart';
+import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:hometeam_client/firebase_options.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/home_screen.dart';
-import 'package:hometeam_client/ui/color/color_schemes.g.dart';
-import 'package:hometeam_client/ui/color/custom_color.g.dart';
+import 'package:hometeam_client/ui/theme/color_schemes.g.dart';
+import 'package:hometeam_client/ui/theme/custom_color.g.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

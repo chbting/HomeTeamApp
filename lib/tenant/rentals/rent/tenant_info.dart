@@ -2,28 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
-import 'package:hometeam_client/ui/shared/address_form.dart';
-import 'package:hometeam_client/ui/shared/contact_form.dart';
-import 'package:hometeam_client/ui/shared/form_card.dart';
-import 'package:hometeam_client/ui/shared/form_controller.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
+import 'package:hometeam_client/ui/contact_form.dart';
+import 'package:hometeam_client/ui/form_card.dart';
+import 'package:hometeam_client/ui/form_controller.dart';
 
-class TenantInformationScreen extends StatefulWidget {
-  const TenantInformationScreen({Key? key, required this.offer})
+class TenantInfoScreen extends StatefulWidget {
+  const TenantInfoScreen({Key? key, required this.controller})
       : super(key: key);
 
-  final ContractBid offer;
+  final TenantInfoScreenController controller;
 
   @override
-  State<StatefulWidget> createState() => TenantInformationScreenState();
+  State<StatefulWidget> createState() => TenantInfoScreenState();
 }
 
-class TenantInformationScreenState extends State<TenantInformationScreen> {
+class TenantInfoScreenState extends State<TenantInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _contactFormController = FormController();
-  final FormController _addressFormController = FormController();
+  late ContractBid _bid;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.controller.validate = _validate;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _bid = ContractBrokerInheritedData.of(context)!.bid;
     return ListView(
         primary: false,
         // note: ListView has 4.0 internal padding on all sides
@@ -40,7 +48,7 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                   child: Wrap(
                     children: [
                       ContactForm(
-                          client: widget.offer.tenant,
+                          client: _bid.tenant,
                           controller: _contactFormController),
                       Container(height: 16.0),
                       TextFormField(
@@ -58,29 +66,19 @@ class TenantInformationScreenState extends State<TenantInformationScreen> {
                             //todo id card validator
                             return null;
                           }),
-                      Container(height: 16.0),
-                      const Divider(thickness: 1.0),
-                      Padding(
-                          padding: const EdgeInsets.only(bottom: 16.0),
-                          child: Text(
-                            S.of(context).mailing_address,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          )),
-                      AddressForm(
-                          address: widget.offer.tenant.address,
-                          controller: _addressFormController)
                     ],
                   )))
         ]);
   }
 
-  bool validate() {
+  bool _validate() {
     // note: In "return form1.validate() && form2.validate();", the second statement won't execute if the first one returns false
     bool contactPersonFormValidated = _contactFormController.validate();
     bool tenantFormValidated = _formKey.currentState!.validate(); // Validate ID
-    bool addressFormValidated = _addressFormController.validate();
-    return contactPersonFormValidated &&
-        tenantFormValidated &&
-        addressFormValidated;
+    return contactPersonFormValidated && tenantFormValidated;
   }
+}
+
+class TenantInfoScreenController {
+  late bool Function() validate;
 }

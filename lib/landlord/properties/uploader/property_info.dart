@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
-import 'package:hometeam_client/ui/shared/address_form.dart';
-import 'package:hometeam_client/ui/shared/form_card.dart';
-import 'package:hometeam_client/ui/shared/form_controller.dart';
-import 'package:hometeam_client/ui/shared/standard_stepper.dart';
+import 'package:hometeam_client/ui/address_form.dart';
+import 'package:hometeam_client/ui/form_card.dart';
+import 'package:hometeam_client/ui/form_controller.dart';
+import 'package:hometeam_client/ui/standard_stepper.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
   const PropertyInfoWidget({Key? key, required this.controller})
@@ -24,10 +24,15 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   late Property _property;
 
   @override
-  Widget build(BuildContext context) {
-    _property = PropertyUploaderInheritedData.of(context)!.property;
+  void initState() {
     widget.controller.resetForm = _resetForm;
     widget.controller.validate = _validate;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _property = PropertyUploaderInheritedData.of(context)!.property;
 
     return Form(
       key: _formKey,

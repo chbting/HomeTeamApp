@@ -3,8 +3,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/ui/shared/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/ui/standard_stepper.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 
 class VisitSequencerWidget extends StatefulWidget {
   const VisitSequencerWidget(
@@ -38,14 +38,14 @@ class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
       primary: false,
       itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {
-        Property property = widget.data.selectedPath[index];
-        return RentalListTile(
-          key: ValueKey(property.id),
-          property: property,
+        Property listing = widget.data.selectedPath[index];
+        return ListingListTile(
+          key: ValueKey(listing.id),
+          listing: listing,
           imageSize: _imageSize,
           leading: const Icon(Icons.reorder),
           trailing: Text(
-            '${widget.data.selectedPath.indexOf(property) + 1}',
+            '${widget.data.selectedPath.indexOf(listing) + 1}',
             style: AppTheme.getTitleLargeTextStyle(context),
           ),
         );

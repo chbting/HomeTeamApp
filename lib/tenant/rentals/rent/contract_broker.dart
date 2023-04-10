@@ -1,20 +1,16 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';
 import 'package:hometeam_client/tenant/rentals/rent/offer_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/rent/tenant_info.dart';
-import 'package:hometeam_client/ui/shared/standard_stepper.dart';
+import 'package:hometeam_client/ui/standard_stepper.dart';
 import 'package:local_auth/local_auth.dart';
 
 class ContractBrokerScreen extends StatefulWidget {
-  const ContractBrokerScreen({Key? key, required this.property})
-      : super(key: key);
+  const ContractBrokerScreen({Key? key}) : super(key: key);
 
-  final Property property;
   static const stepTitleBarHeight = 4.0;
   static const buttonHeight = 48.0; // Same as an extended floatingActionButton
   static const buttonSpacing = 16.0;
@@ -26,15 +22,11 @@ class ContractBrokerScreen extends StatefulWidget {
 
 class ContractBrokerScreenState extends State<ContractBrokerScreen> {
   final StandardStepperController _controller = StandardStepperController();
-  final GlobalKey<ContractAdjusterScreenState> adjusterKey =
-      GlobalKey<ContractAdjusterScreenState>();
-  final GlobalKey<TenantInformationScreenState> tenantInfoKey =
-      GlobalKey<TenantInformationScreenState>();
-
+  final ContractAdjusterScreenController _contractAdjusterScreenController =
+      ContractAdjusterScreenController();
+  final TenantInfoScreenController _tenantInfoScreenController =
+      TenantInfoScreenController();
   int _activeStep = 0;
-
-  late final ContractBid _bid =
-      ContractBid(contract: widget.property.contract.copyWith());
 
   @override
   Widget build(BuildContext context) {
@@ -47,20 +39,16 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           icon: const Icon(Icons.edit_note),
           title: S.of(context).accept_or_offer),
       EasyStep(
-          icon: const Icon(Icons.person),
-          title: S.of(context).tenant_info),
+          icon: const Icon(Icons.person), title: S.of(context).tenant_info),
       EasyStep(
           icon: const Icon(Icons.draw), title: S.of(context).sign_contract),
-      EasyStep(
-          icon: const Icon(Icons.check),
-          title: S.of(context).confirm),
+      EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
-      ContractAdjusterScreen(
-          key: adjusterKey, property: widget.property, bid: _bid),
-      TenantInformationScreen(key: tenantInfoKey, offer: _bid),
-      ContractViewerScreen(offer: _bid),
-      OfferConfirmationScreen(property: widget.property, bid: _bid)
+      ContractAdjusterScreen(controller: _contractAdjusterScreenController),
+      TenantInfoScreen(controller: _tenantInfoScreenController),
+      const ContractViewerScreen(),
+      const OfferConfirmationScreen()
     ];
 
     return StandardStepper(
@@ -75,7 +63,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           Text(_activeStep == 0 ? S.of(context).reset : S.of(context).back),
       onLeftButtonPressed: () {
         _activeStep == 0
-            ? adjusterKey.currentState?.reset()
+            ? _contractAdjusterScreenController.reset()
             : _controller.previousStep();
       },
       rightButtonIcon: Icon(_activeStep == 2
@@ -87,12 +75,12 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
-            if (adjusterKey.currentState!.validate()) {
+            if (_contractAdjusterScreenController.validate()) {
               _controller.nextStep();
             }
             break;
           case 1:
-            if (tenantInfoKey.currentState!.validate()) {
+            if (_tenantInfoScreenController.validate()) {
               _controller.nextStep();
             }
             break;

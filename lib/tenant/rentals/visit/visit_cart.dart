@@ -4,10 +4,11 @@ import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/distance_matrix_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 
 class VisitCartScreen extends StatefulWidget {
   const VisitCartScreen({Key? key}) : super(key: key);
@@ -19,12 +20,12 @@ class VisitCartScreen extends StatefulWidget {
 class VisitCartScreenState extends State<VisitCartScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  late bool _showFab = _propertiesCart.isNotEmpty;
+  late bool _showFab = _listingInCart.isNotEmpty;
 
   //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
-  final List<Property> _propertiesCart = getSampleProperties().sublist(3, 9);
+  final List<Listing> _listingInCart = getSampleListing().sublist(3, 9);
   Map<Property, Map<Property, int>> _travelMap =
       {}; // todo use ID instead of objects Map<originId, Map<destinationId, duration>>
   late List<Property> _currentPath, _optimizedPath;
@@ -51,19 +52,19 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                         _showProgressIndicator = true;
                       });
                       List<Address> addresses =
-                          _propertiesCart.map((e) => e.address).toList();
+                          _listingInCart.map((e) => e.address).toList();
                       DistanceMatrixHelper.getMatrix(addresses)
                           .then((response) {
                         var map =
                             DistanceMatrixHelper.parseResponse(
-                                response, _propertiesCart);
+                                response, _listingInCart);
                         if (map != null) {
                           _travelMap = map;
                           _getOptimizedRoute();
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => VisitSchedulingScreen(
                                   data: VisitData(
-                                      properties: _propertiesCart,
+                                      listings: _listingInCart,
                                       optimizedPath: _optimizedPath,
                                       selectedPath: _optimizedPath.toList(),
                                       travelMap: _travelMap))));
@@ -89,10 +90,10 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                   padding: const EdgeInsets.only(
                       left: 4.0, right: 4.0, top: 8.0, bottom: 68.0),
                   primary: false,
-                  itemCount: _propertiesCart.length,
+                  itemCount: _listingInCart.length,
                   itemBuilder: (context, index) {
-                    return RentalListTile(
-                      property: _propertiesCart[index],
+                    return ListingListTile(
+                      listing: _listingInCart[index],
                       imageSize: _imageSize,
                       trailing: RentalListTileTrailingButton(
                         text: S.of(context).save_for_later,
@@ -104,9 +105,9 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                         icon: Icons.delete_outline,
                         onTap: () {
                           setState(() {
-                            var removedProperty = _propertiesCart[index];
-                            _propertiesCart.removeAt(index);
-                            _showFab = _propertiesCart.isNotEmpty;
+                            var removedProperty = _listingInCart[index];
+                            _listingInCart.removeAt(index);
+                            _showFab = _listingInCart.isNotEmpty;
                             _scaffoldMessengerKey.currentState!.showSnackBar(
                                 SnackBar(
                                     content: Text(S
@@ -116,7 +117,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                                         label: S.of(context).undo,
                                         onPressed: () {
                                           setState(() {
-                                            _propertiesCart.insert(
+                                            _listingInCart.insert(
                                                 index, removedProperty);
                                           });
                                         })));
@@ -157,7 +158,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
   void _checkTravelTimeFromOrigin(Property origin, culminatedTIme) {
     _currentPath.add(origin);
 
-    if (_currentPath.length == _propertiesCart.length) {
+    if (_currentPath.length == _listingInCart.length) {
       if (culminatedTIme < _optimizedTravelTime || _optimizedTravelTime == -1) {
         _optimizedTravelTime = culminatedTIme;
         _optimizedPath.clear();

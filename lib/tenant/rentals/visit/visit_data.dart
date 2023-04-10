@@ -1,12 +1,14 @@
-import 'package:hometeam_client/data/property.dart';
+
+
+import 'package:hometeam_client/json_model/listing.dart';
 
 class VisitData {
-  final List<Property> properties;
+  final List<Listing> listings;
 
   // Sequencer
-  final List<Property> optimizedPath;
-  final List<Property> selectedPath;
-  final Map<Property, Map<Property, int>> travelMap;
+  final List<Listing> optimizedPath;
+  final List<Listing> selectedPath;
+  final Map<Listing, Map<Listing, int>> travelMap;
 
   // Date Picker
   static const firstAvailableDay = 1;
@@ -21,7 +23,7 @@ class VisitData {
   String? prefix;
 
   VisitData(
-      {required this.properties,
+      {required this.listings,
       required this.optimizedPath,
       required this.selectedPath,
       required this.travelMap}) {

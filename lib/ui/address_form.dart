@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/place_autocomplete_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/ui/shared/form_controller.dart';
+import 'package:hometeam_client/ui/form_controller.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class AddressForm extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/search/sliver_search_bar.dart';
 
@@ -13,7 +13,7 @@ class RentalSearchScreen extends StatefulWidget {
 }
 
 class RentalSearchScreenState extends State<RentalSearchScreen> {
-  final List<Property> _propertyList = getSampleProperties();
+  final List<Listing> _listings = getSampleListing();
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +24,8 @@ class RentalSearchScreenState extends State<RentalSearchScreen> {
       },
       itemBuilderDelegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          return RentalListTile(
-              property: _propertyList[index],
+          return ListingListTile(
+              listing: _listings[index],
               trailing: RentalListTileTrailingButton(
                   text: S.of(context).property_visit,
                   icon: Icons.check_box_outline_blank,
@@ -39,7 +39,7 @@ class RentalSearchScreenState extends State<RentalSearchScreen> {
                     // todo implement save to favorites
                   }));
         },
-        childCount: _propertyList.length,
+        childCount: _listings.length,
       ),
       // todo implement search history
       searchSuggestions: const [],

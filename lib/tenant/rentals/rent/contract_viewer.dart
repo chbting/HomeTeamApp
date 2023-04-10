@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 
 class ContractViewerScreen extends StatefulWidget {
-  const ContractViewerScreen({Key? key, required this.offer}) : super(key: key);
-
-  final ContractBid offer;
+  const ContractViewerScreen({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ContractViewerScreenState();
 }
 
 class ContractViewerScreenState extends State<ContractViewerScreen> {
+  late ContractBid _bid;
+
   @override
   Widget build(BuildContext context) {
+    _bid = ContractBrokerInheritedData.of(context)!.bid;
     return ListView(
         // note: ListView has 4.0 internal padding on all sides
         padding: const EdgeInsets.only(

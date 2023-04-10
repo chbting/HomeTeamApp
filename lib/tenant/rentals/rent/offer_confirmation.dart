@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
-import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/json_model/contract.dart';
 import 'package:hometeam_client/json_model/contract_bid.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/json_model/tenant.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:intl/intl.dart';
 
 class OfferConfirmationScreen extends StatelessWidget {
-  const OfferConfirmationScreen({Key? key, required this.property, required this.bid})
-      : super(key: key);
+  const OfferConfirmationScreen({Key? key}) : super(key: key);
 
-  final Property property;
-  final ContractBid bid;
   final double _leadSpacing = 56.0;
   final double _itemSpacing = 12.0; // Spacing between title-item pairs
   final double _listViewPadding = 16.0;
@@ -25,6 +24,8 @@ class OfferConfirmationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ContractBid bid = ContractBrokerInheritedData.of(context)!.bid;
+
     if (bid.tenant.firstName.isEmpty) {
       bid.tenant = getSampleClientData();
     } // todo debug line
@@ -44,7 +45,7 @@ class OfferConfirmationScreen extends StatelessWidget {
               title: Text(S.of(context).property_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                '${property.address}',
+                '${PropertyHelper.getFromId(bid.contractOriginal.propertyId).address}',
                 style: AppTheme.getCardBodyTextStyle(context),
               ),
               isThreeLine: true, //todo address format
@@ -71,25 +72,25 @@ class OfferConfirmationScreen extends StatelessWidget {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _getPricingColumn(context, ClientType.tenant),
-                              _getPricingColumn(context, ClientType.landLord)
+                              _getPricingColumn(context, S.of(context).offered,
+                                  bid.contractBid),
+                              _getPricingColumn(context, S.of(context).original,
+                                  bid.contractOriginal)
                             ],
                           ),
                           Container(height: _itemSpacing),
                           const Divider(thickness: 1.0),
                           Text(S.of(context).lease_period,
                               style: AppTheme.getCardTitleTextStyle(context)),
+                          // todo show original contract
                           Text(
-                              '${DateFormat(Format.date).format(bid.contract.startDate!)} '
-                                  '- ${DateFormat(Format.date).format(bid.contract.endDate!)}',
+                              '${DateFormat(Format.date).format(bid.contractBid.startDate!)} '
+                              '- ${DateFormat(Format.date).format(bid.contractBid.endDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).notes,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(
-                              bid.notes.isEmpty
-                                      ? '-'
-                                  : bid.notes,
+                          Text(bid.notes.isEmpty ? '-' : bid.notes,
                               style: AppTheme.getCardBodyTextStyle(context)),
                         ],
                       ))
@@ -114,7 +115,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                           Container(height: _itemSpacing),
                           Text(S.of(context).name,
                               style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(_getTenantName(),
+                          Text(_getTenantName(bid.tenant),
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).id_card_number,
@@ -126,17 +127,6 @@ class OfferConfirmationScreen extends StatelessWidget {
                               style: AppTheme.getCardTitleTextStyle(context)),
                           Text(bid.tenant.phoneNumber,
                               style: AppTheme.getCardBodyTextStyle(context)),
-                          Container(height: _itemSpacing),
-                          Text(S.of(context).mailing_address,
-                              style: AppTheme.getCardTitleTextStyle(context)),
-                          Text(bid.tenant.address.addressLine1,
-                              style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(bid.tenant.address.addressLine2,
-                              style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(bid.tenant.address.district,
-                              style: AppTheme.getCardBodyTextStyle(context)),
-                          Text(bid.tenant.address.region,
-                              style: AppTheme.getCardBodyTextStyle(context))
                         ],
                       )
                     ],
@@ -144,33 +134,20 @@ class OfferConfirmationScreen extends StatelessWidget {
         ]);
   }
 
-  Widget _getPricingColumn(BuildContext context, ClientType clientType) {
+  Widget _getPricingColumn(
+      BuildContext context, String title, Contract contract) {
     String title;
     int monthlyRent, deposit;
     bool water, electricity, gas, rates, management;
 
-    switch (clientType) {
-      case ClientType.tenant:
-        title = S.of(context).offered;
-        monthlyRent = bid.contract.monthlyRent;
-        deposit = bid.contract.deposit;
-        water = bid.contract.waterRequired;
-        electricity = bid.contract.electricityRequired;
-        gas = bid.contract.gasRequired;
-        rates = bid.contract.ratesRequired;
-        management = bid.contract.managementRequired;
-        break;
-      case ClientType.landLord:
-        title = S.of(context).original;
-        monthlyRent = property.contract.monthlyRent;
-        deposit = property.contract.deposit;
-        water = property.contract.waterRequired;
-        electricity = property.contract.electricityRequired;
-        gas = property.contract.gasRequired;
-        rates = property.contract.ratesRequired;
-        management = property.contract.managementRequired;
-        break;
-    }
+    title = S.of(context).offered;
+    monthlyRent = contract.monthlyRent;
+    deposit = contract.deposit;
+    water = contract.waterRequired;
+    electricity = contract.electricityRequired;
+    gas = contract.gasRequired;
+    rates = contract.ratesRequired;
+    management = contract.managementRequired;
 
     return SizedBox(
         width: MediaQuery.of(context).size.width / 2 -
@@ -210,11 +187,11 @@ class OfferConfirmationScreen extends StatelessWidget {
             : null);
   }
 
-  String _getTenantName() {
+  String _getTenantName(Tenant tenant) {
     if (SharedPreferencesHelper.getLocale().languageCode == 'zh') {
-      return '${bid.tenant.lastName}${bid.tenant.firstName}';
+      return '${tenant.lastName}${tenant.firstName}';
     } else {
-      return '${bid.tenant.lastName}, ${bid.tenant.firstName}';
+      return '${tenant.lastName}, ${tenant.firstName}';
     }
   }
 }

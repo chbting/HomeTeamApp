@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/ui/shared/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/ui/standard_stepper.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';

@@ -1,4 +1,5 @@
 class Contract {
+  int propertyId;
   int monthlyRent;
   int deposit;
 
@@ -13,7 +14,8 @@ class Contract {
   DateTime? startDate, endDate;
 
   Contract(
-      {this.monthlyRent = -1,
+      {required this.propertyId,
+      this.monthlyRent = -1,
       this.deposit = -1,
       this.waterRequired = true,
       this.electricityRequired = true,
@@ -22,7 +24,8 @@ class Contract {
       this.managementRequired = true});
 
   Contract copyWith(
-      {int? monthlyRent,
+      {int? propertyId,
+      int? monthlyRent,
       int? deposit,
       bool? waterRequired,
       bool? electricityRequired,
@@ -30,6 +33,7 @@ class Contract {
       bool? ratesRequired,
       bool? managementRequired}) {
     return Contract(
+      propertyId: propertyId ?? this.propertyId,
       monthlyRent: monthlyRent ?? this.monthlyRent,
       deposit: deposit ?? this.deposit,
       waterRequired: waterRequired ?? this.waterRequired,

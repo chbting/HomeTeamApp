@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room.dart';
+import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/json_model/contract.dart';
-import 'package:hometeam_client/json_model/listing.dart';
 
 class Property {
   final int id;
@@ -15,9 +14,6 @@ class Property {
   int openParking;
   final Map<int, Room> rooms = {};
   ImageProvider coverImage = const AssetImage('');
-  Contract contract = Contract();
-  Listing listing = Listing(title: '');
-
   //todo list of images
 
   Property(
@@ -29,9 +25,7 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1,
-      required this.coverImage,
-      required this.contract,
-      required this.listing});
+      required this.coverImage});
 
   Property.empty(
       {this.id = -1,
@@ -41,4 +35,11 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1});
+}
+
+class PropertyHelper {
+  static Property getFromId(int propertyId) {
+    //todo
+    return getSampleProperties()[propertyId];
+  }
 }

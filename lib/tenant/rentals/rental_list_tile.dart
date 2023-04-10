@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/ui/theme.dart';
+import 'package:hometeam_client/json_model/listing.dart';
+import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 
-class RentalListTile extends StatelessWidget {
-  const RentalListTile(
+class ListingListTile extends StatelessWidget {
+  const ListingListTile(
       {Key? key,
-      required this.property,
+      required this.listing,
       this.imageSize = 120.0,
       this.leading,
       this.trailing,
       this.secondaryTrailing})
       : super(key: key);
 
-  final Property property;
+  final Listing listing;
   final double imageSize;
   final Widget? leading;
   final Widget? trailing;
@@ -22,6 +23,7 @@ class RentalListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Property property = PropertyHelper.getFromId(listing.propertyId);
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
@@ -107,7 +109,7 @@ class RentalListTile extends StatelessWidget {
                             ],
                           ),
                           Text(
-                              '${Format.currency.format(property.contract.monthlyRent)}'
+                              '${Format.currency.format(listing.contract.monthlyRent)}'
                               '/${S.of(context).month}',
                               style: AppTheme.getRentTextStyle(context))
                         ],

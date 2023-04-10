@@ -3,10 +3,10 @@ import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/auth/auth_button.dart';
+import 'package:hometeam_client/auth/auth_info.dart';
 import 'package:hometeam_client/auth/email_check.dart';
 import 'package:hometeam_client/auth/sms_auth.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/auth/auth_info.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -21,11 +21,14 @@ class AuthScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FirebaseUIActions(
-              actions: [//todo user created doesn't return as <SignedIn>
+              actions: [
                 AuthStateChangeAction<SignedIn>((context, state) {
                   if (state.user != null) {
                     Navigator.of(context).pop();
                   }
+                }),
+                AuthStateChangeAction<UserCreated>((context, state) {
+                  Navigator.of(context).pop();
                 }),
               ],
               child: LoginView(
@@ -37,6 +40,7 @@ class AuthScreen extends StatelessWidget {
                   providers: [
                     GoogleProvider(clientId: AuthInfo.googleClientId),
                     FacebookProvider(clientId: AuthInfo.facebookClientId)
+                    // todo facebook login shows error if the email is used for google login
                   ],
                   action: AuthAction.signIn),
             ),
@@ -61,10 +65,6 @@ class AuthScreen extends StatelessWidget {
                       .then((signedIn) => signedIn != null && signedIn
                           ? Navigator.of(context).pop()
                           : null);
-                  // showDialog(
-                  //     context: context,
-                  //     barrierDismissible: false,
-                  //     builder: (context) => SMSAuthDialog());
                 }),
           ],
         ),

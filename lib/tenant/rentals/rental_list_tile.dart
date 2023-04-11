@@ -109,7 +109,7 @@ class ListingListTile extends StatelessWidget {
                             ],
                           ),
                           Text(
-                              '${Format.currency.format(listing.contract.monthlyRent)}'
+                              '${Format.currency.format(listing.contract.rent)}'
                               '/${S.of(context).month}',
                               style: AppTheme.getRentTextStyle(context))
                         ],

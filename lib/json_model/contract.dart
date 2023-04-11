@@ -1,31 +1,47 @@
+import 'package:hometeam_client/json_model/expenditure.dart';
+
 class Contract {
   int propertyId;
-  int monthlyRent;
+  int rent;
   int deposit;
-
-  //todo startDate, endDate, gracePeriod, minLeaseDuration;
-  bool waterRequired;
-  bool electricityRequired;
-  bool gasRequired;
-  bool ratesRequired;
-  bool managementRequired;
 
   // todo serializable
   DateTime? startDate, endDate;
 
-  Contract(
-      {required this.propertyId,
-      this.monthlyRent = -1,
-      this.deposit = -1,
-      this.waterRequired = true,
-      this.electricityRequired = true,
-      this.gasRequired = true,
-      this.ratesRequired = true,
-      this.managementRequired = true});
+  String gracePeriodStart; // todo string <-> datetime conversion
+  String gracePeriodEnd;
+  String terminationRight; // landlord, tenant, both
+  String terminationRightStartDate;
+  int terminationNotificationPeriod; // Dates before terminationRightStartDate
+
+  Expenditure structure,
+      fixture,
+      furniture,
+      water,
+      electricity,
+      gas,
+      rates,
+      management;
+
+  Contract({required this.propertyId, this.rent = -1, this.deposit = -1})
+      : structure =
+            Expenditure(type: ExpenditureType.structure, landlordPay: true),
+        fixture =
+            Expenditure(type: ExpenditureType.structure, landlordPay: true),
+        furniture =
+            Expenditure(type: ExpenditureType.structure, landlordPay: true),
+        water =
+            Expenditure(type: ExpenditureType.structure, landlordPay: false),
+        electricity =
+            Expenditure(type: ExpenditureType.structure, landlordPay: false),
+        gas = Expenditure(type: ExpenditureType.structure, landlordPay: false),
+        rates = Expenditure(type: ExpenditureType.structure, landlordPay: true),
+        management =
+            Expenditure(type: ExpenditureType.structure, landlordPay: true);
 
   Contract copyWith(
       {int? propertyId,
-      int? monthlyRent,
+      int? rent,
       int? deposit,
       bool? waterRequired,
       bool? electricityRequired,
@@ -34,13 +50,8 @@ class Contract {
       bool? managementRequired}) {
     return Contract(
       propertyId: propertyId ?? this.propertyId,
-      monthlyRent: monthlyRent ?? this.monthlyRent,
+      rent: rent ?? this.rent,
       deposit: deposit ?? this.deposit,
-      waterRequired: waterRequired ?? this.waterRequired,
-      electricityRequired: electricityRequired ?? this.electricityRequired,
-      gasRequired: gasRequired ?? this.gasRequired,
-      ratesRequired: ratesRequired ?? this.ratesRequired,
-      managementRequired: managementRequired ?? this.managementRequired,
     );
   }
 }

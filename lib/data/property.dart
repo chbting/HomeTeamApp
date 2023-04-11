@@ -14,6 +14,7 @@ class Property {
   int openParking;
   final Map<int, Room> rooms = {};
   ImageProvider coverImage = const AssetImage('');
+
   //todo list of images
 
   Property(
@@ -40,6 +41,6 @@ class Property {
 class PropertyHelper {
   static Property getFromId(int propertyId) {
     //todo
-    return getSampleProperties()[propertyId-1];
+    return getSampleProperties()[propertyId - 1];
   }
 }

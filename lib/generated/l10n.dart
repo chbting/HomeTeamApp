@@ -1939,6 +1939,36 @@ class S {
       args: [],
     );
   }
+
+  /// `structure`
+  String get structure {
+    return Intl.message(
+      'structure',
+      name: 'structure',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `fixture`
+  String get fixture {
+    return Intl.message(
+      'fixture',
+      name: 'fixture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Furniture`
+  String get furniture {
+    return Intl.message(
+      'Furniture',
+      name: 'furniture',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

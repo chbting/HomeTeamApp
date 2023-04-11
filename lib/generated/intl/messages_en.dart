@@ -112,6 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
+        "fixture": MessageLookupByLibrary.simpleMessage("fixture"),
+        "furniture": MessageLookupByLibrary.simpleMessage("Furniture"),
         "general_settings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
         "hong_kong": MessageLookupByLibrary.simpleMessage("Hong Kong"),
@@ -269,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "structure": MessageLookupByLibrary.simpleMessage("structure"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),

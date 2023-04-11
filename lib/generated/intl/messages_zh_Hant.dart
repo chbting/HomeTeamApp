@@ -96,6 +96,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "estimated_duration": MessageLookupByLibrary.simpleMessage("需時"),
         "find_properties": MessageLookupByLibrary.simpleMessage("搵樓"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),
+        "fixture": MessageLookupByLibrary.simpleMessage("裝修"),
+        "furniture": MessageLookupByLibrary.simpleMessage("傢俬"),
         "general_settings": MessageLookupByLibrary.simpleMessage("一般設定"),
         "hong_kong": MessageLookupByLibrary.simpleMessage("香港"),
         "hong_kong_number_only":
@@ -222,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("呎"),
         "start_date": MessageLookupByLibrary.simpleMessage("開始日期"),
+        "structure": MessageLookupByLibrary.simpleMessage("結構"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
         "take_photo": MessageLookupByLibrary.simpleMessage("拍照"),

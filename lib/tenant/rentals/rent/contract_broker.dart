@@ -1,7 +1,11 @@
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
+import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
+import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';
 import 'package:hometeam_client/tenant/rentals/rent/offer_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/rent/tenant_info.dart';
@@ -74,21 +78,21 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
           : (_activeStep == 3 ? S.of(context).submit : S.of(context).next)),
       onRightButtonPressed: () {
         switch (_activeStep) {
-          case 0:
-            if (_contractAdjusterScreenController.validate()) {
-              _controller.nextStep();
-            }
-            break;
-          case 1:
-            if (_tenantInfoScreenController.validate()) {
-              _controller.nextStep();
-            }
-            break;
-          case 2:
-            _signWithBiometrics(context);
-            break;
+          // case 0:
+          //   if (_contractAdjusterScreenController.validate()) {
+          //     _controller.nextStep();
+          //   }
+          //   break;
+          // case 1:
+          //   if (_tenantInfoScreenController.validate()) {
+          //     _controller.nextStep();
+          //   }
+          //   break;
+          // case 2:
+          //   _signWithBiometrics(context);
+          //   break;
           case 3:
-            _confirm();
+            _submit();
             break;
           default:
             _controller.nextStep();
@@ -133,7 +137,20 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     }
   }
 
-  void _confirm() {
-    // todo
+  //todo disable the button until result returns
+  void _submit() {
+    var propertyId = ContractBrokerInheritedData.of(context)!.bid.contractBid.propertyId;
+    var listingId = propertyId;
+    var address = PropertyHelper.getFromId(propertyId).address;
+
+    debugPrint('submitting');
+    DatabaseReference ref = FirebaseDatabase.instance.ref('offer/$listingId/');
+
+    ref.set(address.toJson()).onError((error, stackTrace) {
+      debugPrint('error $error');
+    }).then((value) {
+      //todo show snackBar and pop, show the property in "offer pending"
+      debugPrint('submitted');
+    });
   }
 }

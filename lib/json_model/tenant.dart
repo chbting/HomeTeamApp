@@ -1,3 +1,9 @@
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'tenant.g.dart';
+
+@JsonSerializable()
 class Tenant {
   String lastName;
   String firstName;
@@ -13,4 +19,9 @@ class Tenant {
       this.idCardNumber = '',
       this.phoneNumber = '',
       this.email = ''});
+
+  factory Tenant.fromJson(Map<String, dynamic> json) =>
+      _$TenantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TenantToJson(this);
 }

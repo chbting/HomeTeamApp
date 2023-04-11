@@ -53,15 +53,15 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   void initState() {
     widget.controller.validate = _validate;
     widget.controller.reset = _reset;
-    _bid.contractBid.startDate ??= _leaseStartDefault;
-    _bid.contractBid.endDate ??= _leaseEndDefault;
-    _updateLeaseEndRange();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     _bid = ContractBrokerInheritedData.of(context)!.bid;
+    _bid.contractBid.startDate ??= _leaseStartDefault;
+    _bid.contractBid.endDate ??= _leaseEndDefault;
+    _updateLeaseEndRange();
 
     return ListView(
       primary: false,
@@ -96,7 +96,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   TextFormField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
-                      initialValue: '${_bid.contractBid.monthlyRent}',
+                      initialValue: '${_bid.contractBid.rent}',
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                       ],
@@ -109,7 +109,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         if (value == null || value.isEmpty) {
                           return S.of(context).please_put_in_a_valid_amount;
                         } else {
-                          _bid.contractBid.monthlyRent = int.parse(value);
+                          _bid.contractBid.rent = int.parse(value);
                           return null;
                         }
                       }),

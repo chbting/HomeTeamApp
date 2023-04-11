@@ -188,5 +188,8 @@
 	"covered_parking": "Covered parking",
 	"open_parking": "Open parking",
 	"others": "Others",
-	"accept_or_offer": "Accept/Offer"
+	"accept_or_offer": "Accept/Offer",
+	"structure": "structure",
+	"fixture": "fixture",
+	"furniture": "Furniture"
 }

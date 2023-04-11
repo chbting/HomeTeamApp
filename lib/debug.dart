@@ -27,7 +27,7 @@ List<Listing> getSampleListing() {
         propertyId: properties[i].id,
         contract: Contract(
             propertyId: properties[i].id,
-            monthlyRent: _rents[i],
+            rent: _rents[i],
             deposit: _rents[i] * 2)));
   }
   return listings;

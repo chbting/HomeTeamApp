@@ -136,12 +136,10 @@ class OfferConfirmationScreen extends StatelessWidget {
 
   Widget _getPricingColumn(
       BuildContext context, String title, Contract contract) {
-    String title;
     int monthlyRent, deposit;
     bool water, electricity, gas, rates, management;
 
-    title = S.of(context).offered;
-    monthlyRent = contract.monthlyRent;
+    monthlyRent = contract.rent;
     deposit = contract.deposit;
     water = contract.waterRequired;
     electricity = contract.electricityRequired;

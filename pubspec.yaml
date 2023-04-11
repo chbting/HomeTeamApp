@@ -57,6 +57,7 @@ dependencies:
   firebase_ui_oauth_google: ^1.1.0
   firebase_ui_oauth_facebook: ^1.1.0
   google_sign_in: ^6.0.2
+  firebase_database: ^10.1.0
 
   # 3rd party APIs
   easy_stepper: ^0.5.0
@@ -90,7 +91,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  generate: true # this line causes build runner to fail
+  generate: false # todo setting this to true will cause build runner to fail
 
   # To add assets to your application, add an assets section, like this:
   # assets:

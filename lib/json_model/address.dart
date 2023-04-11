@@ -1,11 +1,15 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'address.g.dart';
+
+@JsonSerializable()
 class Address {
   String flat;
   String floor;
   String block;
-  String blockDescriptor;// block or tower or 座
+  String blockDescriptor; // block or tower or 座
   String addressLine1;
   String addressLine2;
   String district;
@@ -38,4 +42,9 @@ class Address {
       S.of(context).hong_kong
     ];
   }
+
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddressToJson(this);
 }

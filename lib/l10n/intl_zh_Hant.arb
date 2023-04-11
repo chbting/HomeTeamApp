@@ -191,5 +191,8 @@
 	"covered_parking": "有蓋車位",
 	"open_parking": "露天車位",
 	"others": "其他",
-	"accept_or_offer": "接受/更改"
+	"accept_or_offer": "接受/更改",
+	"structure": "結構",
+	"fixture": "裝修",
+	"furniture": "傢俬"
 }

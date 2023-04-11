@@ -1,7 +1,7 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_agreement.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
@@ -143,8 +143,8 @@ class VisitSchedulingScreenState extends State<VisitSchedulingScreen> {
   void _updateEstimatedTime() {
     int duration = 0;
     for (int i = 0; i < widget.data.selectedPath.length - 1; i++) {
-      Property origin = widget.data.selectedPath[i];
-      Property destination = widget.data.selectedPath[i + 1];
+      Listing origin = widget.data.selectedPath[i];
+      Listing destination = widget.data.selectedPath[i + 1];
       duration += widget.data.travelMap[origin]![destination]!;
     }
     duration += durationPerProperty * widget.data.selectedPath.length;

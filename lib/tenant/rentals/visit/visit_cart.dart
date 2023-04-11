@@ -26,9 +26,9 @@ class VisitCartScreenState extends State<VisitCartScreen> {
 
   final double _imageSize = 120.0;
   final List<Listing> _listingInCart = getSampleListing().sublist(3, 9);
-  Map<Property, Map<Property, int>> _travelMap =
+  Map<Listing, Map<Listing, int>> _travelMap =
       {}; // todo use ID instead of objects Map<originId, Map<destinationId, duration>>
-  late List<Property> _currentPath, _optimizedPath;
+  late List<Listing> _currentPath, _optimizedPath;
   late int _optimizedTravelTime;
   bool _showProgressIndicator = false;
   bool _fabEnabled = true;
@@ -51,13 +51,15 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                         _fabEnabled = false;
                         _showProgressIndicator = true;
                       });
-                      List<Address> addresses =
-                          _listingInCart.map((e) => e.address).toList();
+                      List<Address> addresses = _listingInCart
+                          .map((listing) =>
+                              PropertyHelper.getFromId(listing.propertyId)
+                                  .address)
+                          .toList();
                       DistanceMatrixHelper.getMatrix(addresses)
                           .then((response) {
-                        var map =
-                            DistanceMatrixHelper.parseResponse(
-                                response, _listingInCart);
+                        var map = DistanceMatrixHelper.parseResponse(
+                            response, _listingInCart);
                         if (map != null) {
                           _travelMap = map;
                           _getOptimizedRoute();
@@ -142,20 +144,20 @@ class VisitCartScreenState extends State<VisitCartScreen> {
     _optimizedPath = [];
     _optimizedTravelTime = -1;
 
-    for (Property origin in _travelMap.keys) {
+    for (Listing origin in _travelMap.keys) {
       _checkTravelTimeFromOrigin(origin, 0);
     }
 
     var path = '';
-    for (var property in _optimizedPath) {
-      path += ' ${property.id}';
+    for (var listing in _optimizedPath) {
+      path += ' ${listing.propertyId}';
     }
     debugPrint('Optimized Path:$path');
     debugPrint('Travel Time (seconds): $_optimizedTravelTime');
   }
 
   // Recursive function
-  void _checkTravelTimeFromOrigin(Property origin, culminatedTIme) {
+  void _checkTravelTimeFromOrigin(Listing origin, culminatedTIme) {
     _currentPath.add(origin);
 
     if (_currentPath.length == _listingInCart.length) {
@@ -165,7 +167,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
         _optimizedPath.addAll(_currentPath);
       }
     } else {
-      Map<Property, int> destinationMap = _travelMap[origin]!;
+      Map<Listing, int> destinationMap = _travelMap[origin]!;
 
       destinationMap.forEach((destId, duration) {
         if (!_currentPath.contains(destId)) {

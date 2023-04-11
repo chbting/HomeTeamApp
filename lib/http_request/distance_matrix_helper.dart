@@ -4,6 +4,7 @@ import 'package:hometeam_client/configs/keys.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/distance_matrix.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:http/http.dart';
 
 class DistanceMatrixHelper {
@@ -33,21 +34,21 @@ class DistanceMatrixHelper {
   /// Parse the response into a map of travel times
   /// return Map<originId, Map<destinationId, duration>>
   /// todo use property id in instead of the object itself
-  static Map<Property, Map<Property, int>>? parseResponse(
-      Response response, List<Property> propertiesCart) {
-    Map<Property, Map<Property, int>> travelMap = {};
+  static Map<Listing, Map<Listing, int>>? parseResponse(
+      Response response, List<Listing> listingsInCart) {
+    Map<Listing, Map<Listing, int>> travelMap = {};
 
     if (response.statusCode == 200) {
       Map<String, dynamic> distanceMatrixMap = jsonDecode(response.body);
       DistanceMatrix distanceMatrix =
       DistanceMatrix.fromJson(distanceMatrixMap);
       if (distanceMatrix.status == 'OK') {
-        for (var ori = 0; ori < propertiesCart.length; ori++) {
-          Property origin = propertiesCart[ori];
-          travelMap[origin] = <Property, int>{};
+        for (var ori = 0; ori < listingsInCart.length; ori++) {
+          Listing origin = listingsInCart[ori];
+          travelMap[origin] = <Listing, int>{};
 
-          for (var dest = 0; dest < propertiesCart.length; dest++) {
-            Property destination = propertiesCart[dest];
+          for (var dest = 0; dest < listingsInCart.length; dest++) {
+            Listing destination = listingsInCart[dest];
             if (origin != destination) {
               travelMap[origin]![destination] =
                   distanceMatrix.rows[ori].elements[dest].duration.value;

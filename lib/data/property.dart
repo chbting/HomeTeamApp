@@ -40,6 +40,6 @@ class Property {
 class PropertyHelper {
   static Property getFromId(int propertyId) {
     //todo
-    return getSampleProperties()[propertyId];
+    return getSampleProperties()[propertyId-1];
   }
 }

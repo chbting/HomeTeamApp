@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/ui/standard_stepper.dart';
@@ -38,9 +38,9 @@ class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
       primary: false,
       itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {
-        Property listing = widget.data.selectedPath[index];
+        Listing listing = widget.data.selectedPath[index];
         return ListingListTile(
-          key: ValueKey(listing.id),
+          key: ValueKey(listing.propertyId),
           listing: listing,
           imageSize: _imageSize,
           leading: const Icon(Icons.reorder),
@@ -52,7 +52,7 @@ class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
       },
       onReorder: (int oldIndex, int newIndex) {
         setState(() {
-          Property property = widget.data.selectedPath[oldIndex];
+          Listing property = widget.data.selectedPath[oldIndex];
           widget.data.selectedPath.removeAt(oldIndex);
           widget.data.selectedPath
               .insert(newIndex > oldIndex ? newIndex - 1 : newIndex, property);

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/contract.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/terms.dart';
+import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
@@ -24,7 +24,7 @@ class OfferConfirmationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ContractBid bid = ContractBrokerInheritedData.of(context)!.bid;
+    Bid bid = ContractBrokerInheritedData.of(context)!.bid;
 
     if (bid.tenant.firstName.isEmpty) {
       bid.tenant = getSampleClientData();
@@ -135,7 +135,7 @@ class OfferConfirmationScreen extends StatelessWidget {
   }
 
   Widget _getPricingColumn(
-      BuildContext context, String title, Contract contract) {
+      BuildContext context, String title, Terms contract) {
     int monthlyRent, deposit;
     bool water, electricity, gas, rates, management;
 

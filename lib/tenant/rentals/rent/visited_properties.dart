@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
@@ -44,9 +44,9 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ContractBrokerInheritedData(
-                              bid: ContractBid(
+                              bid: Bid(
                                   contractOriginal: _listingInCart[index]
-                                      .contract
+                                      .terms
                                       .copyWith()),
                               child: const ContractBrokerScreen())));
                     }));

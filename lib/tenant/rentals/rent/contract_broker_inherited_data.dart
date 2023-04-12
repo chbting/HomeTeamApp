@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/bid.dart';
 
 class ContractBrokerInheritedData extends InheritedWidget {
   const ContractBrokerInheritedData({
@@ -8,7 +8,7 @@ class ContractBrokerInheritedData extends InheritedWidget {
     required Widget child,
   }) : super(key: key, child: child);
 
-  final ContractBid bid;
+  final Bid bid;
 
   static ContractBrokerInheritedData? of(BuildContext context) => context
       .dependOnInheritedWidgetOfExactType<ContractBrokerInheritedData>();

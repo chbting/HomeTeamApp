@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/json_model/contract.dart';
+import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
@@ -25,7 +25,7 @@ List<Listing> getSampleListing() {
     listings.add(Listing(
         title: properties[i].address.addressLine2,
         propertyId: properties[i].id,
-        contract: Contract(
+        terms: Terms(
             propertyId: properties[i].id,
             rent: _rents[i],
             deposit: _rents[i] * 2)));

@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'expenditure.g.dart';
+part 'expense.g.dart';
 
 @JsonSerializable()
-class Expenditure {
-  ExpenditureType type;
+class Expense {
+  ExpenseType type;
   bool landlordPay;
   bool negotiable;
-  bool hidden;
+  bool show;
 
-  Expenditure(
+  Expense(
       {required this.type,
       required this.landlordPay,
       this.negotiable = true,
-      this.hidden = false});
+      this.show = true});
 
-  factory Expenditure.fromJson(Map<String, dynamic> json) =>
-      _$ExpenditureFromJson(json);
+  factory Expense.fromJson(Map<String, dynamic> json) =>
+      _$ExpenseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ExpenditureToJson(this);
+  Map<String, dynamic> toJson() => _$ExpenseToJson(this);
 }
 
-enum ExpenditureType {
+enum ExpenseType {
   structure,
   fixture,
   furniture,
@@ -34,24 +34,24 @@ enum ExpenditureType {
   management
 }
 
-class ExpenditureHelper {
-  static getName(BuildContext context, ExpenditureType type) {
+class ExpenseHelper {
+  static getName(BuildContext context, ExpenseType type) {
     switch (type) {
-      case ExpenditureType.structure:
+      case ExpenseType.structure:
         return S.of(context).structure;
-      case ExpenditureType.fixture:
+      case ExpenseType.fixture:
         return S.of(context).fixture;
-      case ExpenditureType.furniture:
+      case ExpenseType.furniture:
         return S.of(context).furniture;
-      case ExpenditureType.water:
+      case ExpenseType.water:
         return S.of(context).bill_water;
-      case ExpenditureType.electricity:
+      case ExpenseType.electricity:
         return S.of(context).bill_electricity;
-      case ExpenditureType.gas:
+      case ExpenseType.gas:
         return S.of(context).bill_gas;
-      case ExpenditureType.rates:
+      case ExpenseType.rates:
         return S.of(context).bill_rates;
-      case ExpenditureType.management:
+      case ExpenseType.management:
         return S.of(context).bill_electricity;
     }
   }

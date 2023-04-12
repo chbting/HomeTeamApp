@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/ui/contact_form.dart';
@@ -20,7 +20,7 @@ class TenantInfoScreen extends StatefulWidget {
 class TenantInfoScreenState extends State<TenantInfoScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _contactFormController = FormController();
-  late ContractBid _bid;
+  late Bid _bid;
 
   @override
   void initState() {

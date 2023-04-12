@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+/// This file is for the address response from www.als.ogcio.gov.hk
+
 class AddressQuery {
   AddressQuery({
     required this.requestAddress,

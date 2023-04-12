@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/contract_bid.dart';
+import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/ui/form_card.dart';
@@ -29,7 +29,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   final _leaseEndRangeInYears = 10;
   final _now = DateTime.now();
 
-  late ContractBid _bid;
+  late Bid _bid;
 
   late final _leaseStartDefault = DateTime(_now.year, _now.month, _now.day + 1);
   late final _leaseEndDefault = DateTime(

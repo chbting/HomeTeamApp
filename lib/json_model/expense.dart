@@ -5,25 +5,23 @@ import 'package:json_annotation/json_annotation.dart';
 part 'expense.g.dart';
 
 @JsonSerializable()
-class Expense {
-  ExpenseType type;
-  bool landlordPay;
+class ExpenseData {
+  bool landlordPaid;
   bool negotiable;
   bool show;
 
-  Expense(
-      {required this.type,
-      required this.landlordPay,
+  ExpenseData(
+      {required this.landlordPaid,
       this.negotiable = true,
       this.show = true});
 
-  factory Expense.fromJson(Map<String, dynamic> json) =>
-      _$ExpenseFromJson(json);
+  factory ExpenseData.fromJson(Map<String, dynamic> json) =>
+      _$ExpenseDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ExpenseToJson(this);
+  Map<String, dynamic> toJson() => _$ExpenseDataToJson(this);
 }
 
-enum ExpenseType {
+enum Expense {
   structure,
   fixture,
   furniture,
@@ -35,23 +33,23 @@ enum ExpenseType {
 }
 
 class ExpenseHelper {
-  static getName(BuildContext context, ExpenseType type) {
+  static getName(BuildContext context, Expense type) {
     switch (type) {
-      case ExpenseType.structure:
+      case Expense.structure:
         return S.of(context).structure;
-      case ExpenseType.fixture:
+      case Expense.fixture:
         return S.of(context).fixture;
-      case ExpenseType.furniture:
+      case Expense.furniture:
         return S.of(context).furniture;
-      case ExpenseType.water:
+      case Expense.water:
         return S.of(context).bill_water;
-      case ExpenseType.electricity:
+      case Expense.electricity:
         return S.of(context).bill_electricity;
-      case ExpenseType.gas:
+      case Expense.gas:
         return S.of(context).bill_gas;
-      case ExpenseType.rates:
+      case Expense.rates:
         return S.of(context).bill_rates;
-      case ExpenseType.management:
+      case Expense.management:
         return S.of(context).bill_electricity;
     }
   }

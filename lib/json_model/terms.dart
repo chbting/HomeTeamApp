@@ -9,13 +9,13 @@ class Terms {
   int rent, deposit;
   bool rentNegotiable, depositNegotiable;
 
-  DateTime earliestStartDate;
+  DateTime startDate; // earliest start date
   DateTime? latestStartDate;
   bool showLatestStartDate;
 
   // User fills in either lease length or fixed endDate, not both
   DateTime? leaseLength;
-  DateTime? endDate;
+  DateTime? leaseEndDate;
 
   DateTime? gracePeriodStart, gracePeriodEnd;
   bool showGracePeriod;
@@ -25,16 +25,16 @@ class Terms {
   DateTime terminationRightStartDate;
   int terminationNotificationPeriod; // Dates before terminationRightStartDate
 
-  List<Expense> expenses = [
-    Expense(type: ExpenseType.structure, landlordPay: true),
-    Expense(type: ExpenseType.fixture, landlordPay: true),
-    Expense(type: ExpenseType.furniture, landlordPay: true),
-    Expense(type: ExpenseType.water, landlordPay: false),
-    Expense(type: ExpenseType.electricity, landlordPay: false),
-    Expense(type: ExpenseType.gas, landlordPay: false),
-    Expense(type: ExpenseType.rates, landlordPay: true),
-    Expense(type: ExpenseType.management, landlordPay: true)
-  ];
+  Map<Expense, ExpenseData> expenses = {
+    Expense.structure: ExpenseData(landlordPaid: true),
+    Expense.fixture: ExpenseData(landlordPaid: true),
+    Expense.furniture: ExpenseData(landlordPaid: true),
+    Expense.water: ExpenseData(landlordPaid: false),
+    Expense.electricity: ExpenseData(landlordPaid: false),
+    Expense.gas: ExpenseData(landlordPaid: false),
+    Expense.rates: ExpenseData(landlordPaid: true),
+    Expense.management: ExpenseData(landlordPaid: true),
+  };
 
   Terms(
       {required this.propertyId,
@@ -46,7 +46,7 @@ class Terms {
       this.latestStartDate,
       this.showLatestStartDate = false,
       this.leaseLength,
-      this.endDate,
+      this.leaseEndDate,
       this.gracePeriodStart,
       this.gracePeriodEnd,
       this.showGracePeriod = false,
@@ -54,7 +54,7 @@ class Terms {
       this.terminationRight = PartyType.both,
       DateTime? terminationRightStartDate,
       this.terminationNotificationPeriod = -1})
-      : earliestStartDate = earliestStartDate ?? DateTime.now(),
+      : startDate = earliestStartDate ?? DateTime.now(),
         terminationRightStartDate = terminationRightStartDate ?? DateTime.now();
 
   Terms copyWith(

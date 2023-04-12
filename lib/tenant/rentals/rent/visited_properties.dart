@@ -3,6 +3,7 @@ import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/json_model/listing.dart';
+import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
@@ -45,9 +46,10 @@ class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ContractBrokerInheritedData(
                               bid: Bid(
-                                  contractOriginal: _listingInCart[index]
-                                      .terms
-                                      .copyWith()),
+                                  listingId: _listingInCart[index].id,
+                                  biddingTerms: Terms(
+                                      propertyId:
+                                          _listingInCart[index].propertyId)),
                               child: const ContractBrokerScreen())));
                     }));
           },

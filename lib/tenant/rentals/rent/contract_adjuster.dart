@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
+import 'package:hometeam_client/json_model/expense.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/ui/form_card.dart';
@@ -59,8 +60,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   @override
   Widget build(BuildContext context) {
     _bid = ContractBrokerInheritedData.of(context)!.bid;
-    _bid.contractBid.startDate ??= _leaseStartDefault;
-    _bid.contractBid.endDate ??= _leaseEndDefault;
+    _bid.biddingTerms.startDate ??= _leaseStartDefault;
+    _bid.biddingTerms.leaseEndDate ??= _leaseEndDefault;
     _updateLeaseEndRange();
 
     return ListView(
@@ -81,7 +82,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             title: Text(S.of(context).property_address,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-              '${PropertyHelper.getFromId(_bid.contractOriginal.propertyId).address}',
+              '${PropertyHelper.getFromId(_bid.biddingTerms.propertyId).address}',
               style: AppTheme.getCardBodyTextStyle(context),
             ),
             isThreeLine: true, //todo address format
@@ -96,7 +97,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   TextFormField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
-                      initialValue: '${_bid.contractBid.rent}',
+                      initialValue: '${_bid.biddingTerms.rent}',
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
                       ],
@@ -109,7 +110,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         if (value == null || value.isEmpty) {
                           return S.of(context).please_put_in_a_valid_amount;
                         } else {
-                          _bid.contractBid.rent = int.parse(value);
+                          _bid.biddingTerms.rent = int.parse(value);
                           return null;
                         }
                       }),
@@ -117,7 +118,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   TextFormField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
-                      initialValue: _bid.contractBid.deposit.toString(),
+                      initialValue: _bid.biddingTerms.deposit.toString(),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       decoration: InputDecoration(
                           border: const OutlineInputBorder(),
@@ -128,7 +129,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                         if (value == null || value.isEmpty) {
                           return S.of(context).please_put_in_a_valid_amount;
                         } else {
-                          _bid.contractBid.deposit = int.parse(value);
+                          _bid.biddingTerms.deposit = int.parse(value);
                           return null;
                         }
                       }),
@@ -172,7 +173,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     primary: false,
                     children: [
                       CheckboxListTile(
-                          value: _bid.contractBid.waterRequired,
+                          value: !_bid.biddingTerms.expenses[Expense.water]!
+                              .landlordPaid,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -182,11 +184,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.contractBid.waterRequired = value!;
+                              _bid.biddingTerms.expenses[Expense.water]!
+                                  .landlordPaid = !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: _bid.contractBid.ratesRequired,
+                          value: !_bid.biddingTerms.expenses[Expense.rates]!
+                              .landlordPaid,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -196,11 +200,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.contractBid.ratesRequired = value!;
+                              _bid.biddingTerms.expenses[Expense.water]!
+                                  .landlordPaid = !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: _bid.contractBid.electricityRequired,
+                          value: !_bid.biddingTerms
+                              .expenses[Expense.electricity]!.landlordPaid,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -210,11 +216,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.contractBid.electricityRequired = value!;
+                              _bid.biddingTerms.expenses[Expense.electricity]!
+                                  .landlordPaid = !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: _bid.contractBid.managementRequired,
+                          value: !_bid.biddingTerms
+                              .expenses[Expense.management]!.landlordPaid,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -224,11 +232,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.contractBid.managementRequired = value!;
+                              _bid.biddingTerms.expenses[Expense.management]!
+                                  .landlordPaid = !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: _bid.contractBid.gasRequired,
+                          value: !_bid
+                              .biddingTerms.expenses[Expense.gas]!.landlordPaid,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -238,7 +248,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.contractBid.gasRequired = value!;
+                              _bid.biddingTerms.expenses[Expense.gas]!
+                                  .landlordPaid = !value!;
                             });
                           }),
                     ],
@@ -280,7 +291,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
-                          initialDate: _bid.contractBid.startDate!,
+                          initialDate: _bid.biddingTerms.startDate,
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
                       .then((value) {
@@ -288,12 +299,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       _startDateController.text = DateFormat(
                         Format.date,
                       ).format(value);
-                      _bid.contractBid.startDate = value;
+                      _bid.biddingTerms.startDate = value;
                       // auto update end date
-                      _bid.contractBid.endDate =
+                      _bid.biddingTerms.leaseEndDate =
                           DateTime(value.year + 1, value.month, value.day - 1);
                       _endDateController.text = DateFormat(Format.date)
-                          .format(_bid.contractBid.endDate!);
+                          .format(_bid.biddingTerms.leaseEndDate!);
                       _updateLeaseEndRange();
                     }
                   });
@@ -322,24 +333,21 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).end_date,
-                          initialDate: _bid.contractBid.endDate!,
+                          initialDate: _bid.biddingTerms.leaseEndDate!,
                           firstDate: _leaseEndFirstDate,
                           lastDate: _leaseEndLastDate)
                       .then((value) {
                     if (value != null) {
                       _endDateController.text =
                           DateFormat(Format.date).format(value);
-                      _bid.contractBid.endDate = value;
+                      _bid.biddingTerms.leaseEndDate = value;
                     }
                   });
                 },
                 validator: (value) {
                   try {
                     var end = DateFormat(Format.date).parse(value!);
-                    if (_bid.contractBid.startDate == null) {
-                      return null;
-                    }
-                    if (end.isBefore(_bid.contractBid.startDate!)) {
+                    if (end.isBefore(_bid.biddingTerms.startDate)) {
                       return S.of(context).invalid_date;
                     } else {
                       return null;
@@ -354,13 +362,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
 
   void _updateLeaseEndRange() {
     _leaseEndFirstDate = DateTime(
-        _bid.contractBid.startDate!.year,
-        _bid.contractBid.startDate!.month,
-        _bid.contractBid.startDate!.day + 1); // 1 day after lease start
+        _bid.biddingTerms.startDate.year,
+        _bid.biddingTerms.startDate.month,
+        _bid.biddingTerms.startDate.day + 1); // 1 day after lease start
     _leaseEndLastDate = DateTime(
-        _bid.contractBid.startDate!.year + _leaseEndRangeInYears,
-        _bid.contractBid.startDate!.month,
-        _bid.contractBid.startDate!.day - 1);
+        _bid.biddingTerms.startDate.year + _leaseEndRangeInYears,
+        _bid.biddingTerms.startDate.month,
+        _bid.biddingTerms.startDate.day - 1);
   }
 
   void _reset() {
@@ -369,13 +377,16 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
         DateFormat(Format.date).format(_leaseStartDefault);
     _endDateController.text = DateFormat(Format.date).format(_leaseEndDefault);
     setState(() {
-      _bid.contractBid.waterRequired = _bid.contractOriginal.waterRequired;
-      _bid.contractBid.electricityRequired =
-          _bid.contractOriginal.electricityRequired;
-      _bid.contractBid.gasRequired = _bid.contractOriginal.gasRequired;
-      _bid.contractBid.ratesRequired = _bid.contractOriginal.ratesRequired;
-      _bid.contractBid.managementRequired =
-          _bid.contractOriginal.managementRequired;
+      _bid.biddingTerms.expenses[Expense.water]!.landlordPaid =
+          _bid.originalTerms.expenses[Expense.water]!.landlordPaid;
+      _bid.biddingTerms.expenses[Expense.electricity]!.landlordPaid =
+          _bid.originalTerms.expenses[Expense.electricity]!.landlordPaid;
+      _bid.biddingTerms.expenses[Expense.gas]!.landlordPaid =
+          _bid.originalTerms.expenses[Expense.gas]!.landlordPaid;
+      _bid.biddingTerms.expenses[Expense.rates]!.landlordPaid =
+          _bid.originalTerms.expenses[Expense.rates]!.landlordPaid;
+      _bid.biddingTerms.expenses[Expense.management]!.landlordPaid =
+          _bid.originalTerms.expenses[Expense.management]!.landlordPaid;
     });
   }
 }

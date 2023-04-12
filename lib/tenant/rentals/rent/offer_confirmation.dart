@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/bid.dart';
+import 'package:hometeam_client/json_model/expense.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
+import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/ui/theme/theme.dart';
@@ -45,7 +47,7 @@ class OfferConfirmationScreen extends StatelessWidget {
               title: Text(S.of(context).property_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                '${PropertyHelper.getFromId(bid.contractOriginal.propertyId).address}',
+                '${PropertyHelper.getFromId(bid.biddingTerms.propertyId).address}',
                 style: AppTheme.getCardBodyTextStyle(context),
               ),
               isThreeLine: true, //todo address format
@@ -73,9 +75,9 @@ class OfferConfirmationScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _getPricingColumn(context, S.of(context).offered,
-                                  bid.contractBid),
+                                  bid.biddingTerms),
                               _getPricingColumn(context, S.of(context).original,
-                                  bid.contractOriginal)
+                                  ListingHelper.getFromId(bid.listingId).terms)
                             ],
                           ),
                           Container(height: _itemSpacing),
@@ -84,8 +86,8 @@ class OfferConfirmationScreen extends StatelessWidget {
                               style: AppTheme.getCardTitleTextStyle(context)),
                           // todo show original contract
                           Text(
-                              '${DateFormat(Format.date).format(bid.contractBid.startDate!)} '
-                              '- ${DateFormat(Format.date).format(bid.contractBid.endDate!)}',
+                              '${DateFormat(Format.date).format(bid.biddingTerms.startDate)} '
+                              '- ${DateFormat(Format.date).format(bid.biddingTerms.leaseEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).notes,
@@ -134,18 +136,17 @@ class OfferConfirmationScreen extends StatelessWidget {
         ]);
   }
 
-  Widget _getPricingColumn(
-      BuildContext context, String title, Terms contract) {
-    int monthlyRent, deposit;
+  Widget _getPricingColumn(BuildContext context, String title, Terms terms) {
+    int rent, deposit;
     bool water, electricity, gas, rates, management;
 
-    monthlyRent = contract.rent;
-    deposit = contract.deposit;
-    water = contract.waterRequired;
-    electricity = contract.electricityRequired;
-    gas = contract.gasRequired;
-    rates = contract.ratesRequired;
-    management = contract.managementRequired;
+    rent = terms.rent;
+    deposit = terms.deposit;
+    water = !terms.expenses[Expense.water]!.landlordPaid;
+    electricity = !terms.expenses[Expense.electricity]!.landlordPaid;
+    gas = !terms.expenses[Expense.gas]!.landlordPaid;
+    rates = !terms.expenses[Expense.rates]!.landlordPaid;
+    management = !terms.expenses[Expense.management]!.landlordPaid;
 
     return SizedBox(
         width: MediaQuery.of(context).size.width / 2 -
@@ -159,7 +160,7 @@ class OfferConfirmationScreen extends StatelessWidget {
             Container(height: _itemSpacing),
             Text(S.of(context).monthly_rent,
                 style: AppTheme.getCardTitleTextStyle(context)),
-            Text(Format.currency.format(monthlyRent),
+            Text(Format.currency.format(rent),
                 style: AppTheme.getCardBodyTextStyle(context)),
             Container(height: _itemSpacing),
             Text(S.of(context).deposit,

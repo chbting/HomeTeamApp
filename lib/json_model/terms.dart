@@ -3,23 +3,21 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'terms.g.dart';
 
+/// Should contains only data goes into the final contract, except reference IDs
+
 @JsonSerializable()
 class Terms {
   int propertyId;
   int rent, deposit;
-  bool rentNegotiable, depositNegotiable;
 
-  DateTime startDate; // earliest start date
+  DateTime earliestStartDate; // earliest start date
   DateTime? latestStartDate;
-  bool showLatestStartDate;
 
   // User fills in either lease length or fixed endDate, not both
   DateTime? leaseLength;
   DateTime? leaseEndDate;
 
   DateTime? gracePeriodStart, gracePeriodEnd;
-  bool showGracePeriod;
-  bool gracePeriodNegotiable;
 
   PartyType terminationRight; // landlord, tenant, both
   DateTime terminationRightStartDate;
@@ -40,21 +38,16 @@ class Terms {
       {required this.propertyId,
       this.rent = -1,
       this.deposit = -1,
-      this.rentNegotiable = true,
-      this.depositNegotiable = false,
       DateTime? earliestStartDate,
       this.latestStartDate,
-      this.showLatestStartDate = false,
       this.leaseLength,
       this.leaseEndDate,
       this.gracePeriodStart,
       this.gracePeriodEnd,
-      this.showGracePeriod = false,
-      this.gracePeriodNegotiable = false,
       this.terminationRight = PartyType.both,
       DateTime? terminationRightStartDate,
       this.terminationNotificationPeriod = -1})
-      : startDate = earliestStartDate ?? DateTime.now(),
+      : earliestStartDate = earliestStartDate ?? DateTime.now(),
         terminationRightStartDate = terminationRightStartDate ?? DateTime.now();
 
   Terms copyWith(

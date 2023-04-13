@@ -1969,6 +1969,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Negotiable`
+  String get negotiable {
+    return Intl.message(
+      'Negotiable',
+      name: 'negotiable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show to tenant`
+  String get show_to_tenant {
+    return Intl.message(
+      'Show to tenant',
+      name: 'show_to_tenant',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

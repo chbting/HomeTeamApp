@@ -170,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_voice_search_unavailable":
             MessageLookupByLibrary.simpleMessage("Voice search is unavailable"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "negotiable": MessageLookupByLibrary.simpleMessage("Negotiable"),
         "negotiate_contract":
             MessageLookupByLibrary.simpleMessage("Make an Offer"),
         "new_territories":
@@ -258,6 +259,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_off": MessageLookupByLibrary.simpleMessage("Off"),
         "setting_on": MessageLookupByLibrary.simpleMessage("On"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "show_to_tenant":
+            MessageLookupByLibrary.simpleMessage("Show to tenant"),
         "sign": MessageLookupByLibrary.simpleMessage("Sign"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Sign in"),

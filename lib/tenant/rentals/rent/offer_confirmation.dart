@@ -86,7 +86,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                               style: AppTheme.getCardTitleTextStyle(context)),
                           // todo show original contract
                           Text(
-                              '${DateFormat(Format.date).format(bid.biddingTerms.startDate)} '
+                              '${DateFormat(Format.date).format(bid.biddingTerms.earliestStartDate)} '
                               '- ${DateFormat(Format.date).format(bid.biddingTerms.leaseEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),

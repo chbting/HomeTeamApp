@@ -145,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_voice_search_unavailable":
             MessageLookupByLibrary.simpleMessage("无法使用语音搜寻"),
         "name": MessageLookupByLibrary.simpleMessage("姓名"),
+        "negotiable": MessageLookupByLibrary.simpleMessage("可商议"),
         "negotiate_contract": MessageLookupByLibrary.simpleMessage("谈租约"),
         "new_territories": MessageLookupByLibrary.simpleMessage("新界"),
         "next": MessageLookupByLibrary.simpleMessage("下一步"),
@@ -212,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_off": MessageLookupByLibrary.simpleMessage("关闭"),
         "setting_on": MessageLookupByLibrary.simpleMessage("开启"),
         "settings": MessageLookupByLibrary.simpleMessage("设定"),
+        "show_to_tenant": MessageLookupByLibrary.simpleMessage("对租客显示"),
         "sign": MessageLookupByLibrary.simpleMessage("签署"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("签署租约"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),

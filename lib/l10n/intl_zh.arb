@@ -191,5 +191,7 @@
 	"accept_or_offer": "接受/更改",
 	"structure": "结构",
 	"fixture": "装修",
-	"furniture": "家俬"
+	"furniture": "家俬",
+	"negotiable": "可商议",
+	"show_to_tenant": "对租客显示"
 }

@@ -11,7 +11,10 @@ Bid _$BidFromJson(Map<String, dynamic> json) => Bid(
       biddingTerms:
           Terms.fromJson(json['biddingTerms'] as Map<String, dynamic>),
       notes: json['notes'] as String? ?? '',
-    )..tenant = Tenant.fromJson(json['tenant'] as Map<String, dynamic>);
+    )
+      ..tenant = Tenant.fromJson(json['tenant'] as Map<String, dynamic>)
+      ..originalTerms =
+          Terms.fromJson(json['originalTerms'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$BidToJson(Bid instance) => <String, dynamic>{
       'listingId': instance.listingId,

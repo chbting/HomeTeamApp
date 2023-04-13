@@ -191,5 +191,7 @@
 	"accept_or_offer": "Accept/Offer",
 	"structure": "structure",
 	"fixture": "fixture",
-	"furniture": "Furniture"
+	"furniture": "Furniture",
+	"negotiable": "Negotiable",
+	"show_to_tenant": "Show to tenant"
 }

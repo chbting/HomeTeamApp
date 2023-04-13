@@ -60,7 +60,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   @override
   Widget build(BuildContext context) {
     _bid = ContractBrokerInheritedData.of(context)!.bid;
-    _bid.biddingTerms.startDate ??= _leaseStartDefault;
+    _bid.biddingTerms.earliestStartDate ??= _leaseStartDefault;
     _bid.biddingTerms.leaseEndDate ??= _leaseEndDefault;
     _updateLeaseEndRange();
 
@@ -200,7 +200,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.water]!
+                              _bid.biddingTerms.expenses[Expense.rates]!
                                   .landlordPaid = !value!;
                             });
                           }),
@@ -291,7 +291,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
-                          initialDate: _bid.biddingTerms.startDate,
+                          initialDate: _bid.biddingTerms.earliestStartDate,
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
                       .then((value) {
@@ -299,7 +299,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       _startDateController.text = DateFormat(
                         Format.date,
                       ).format(value);
-                      _bid.biddingTerms.startDate = value;
+                      _bid.biddingTerms.earliestStartDate = value;
                       // auto update end date
                       _bid.biddingTerms.leaseEndDate =
                           DateTime(value.year + 1, value.month, value.day - 1);
@@ -347,7 +347,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 validator: (value) {
                   try {
                     var end = DateFormat(Format.date).parse(value!);
-                    if (end.isBefore(_bid.biddingTerms.startDate)) {
+                    if (end.isBefore(_bid.biddingTerms.earliestStartDate)) {
                       return S.of(context).invalid_date;
                     } else {
                       return null;
@@ -362,13 +362,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
 
   void _updateLeaseEndRange() {
     _leaseEndFirstDate = DateTime(
-        _bid.biddingTerms.startDate.year,
-        _bid.biddingTerms.startDate.month,
-        _bid.biddingTerms.startDate.day + 1); // 1 day after lease start
+        _bid.biddingTerms.earliestStartDate.year,
+        _bid.biddingTerms.earliestStartDate.month,
+        _bid.biddingTerms.earliestStartDate.day + 1); // 1 day after lease start
     _leaseEndLastDate = DateTime(
-        _bid.biddingTerms.startDate.year + _leaseEndRangeInYears,
-        _bid.biddingTerms.startDate.month,
-        _bid.biddingTerms.startDate.day - 1);
+        _bid.biddingTerms.earliestStartDate.year + _leaseEndRangeInYears,
+        _bid.biddingTerms.earliestStartDate.month,
+        _bid.biddingTerms.earliestStartDate.day - 1);
   }
 
   void _reset() {

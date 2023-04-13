@@ -12,8 +12,8 @@ import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_ove
 import 'package:hometeam_client/firebase_options.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/home_screen.dart';
-import 'package:hometeam_client/ui/theme/color_schemes.g.dart';
-import 'package:hometeam_client/ui/theme/custom_color.g.dart';
+import 'package:hometeam_client/shared/theme/color_schemes.g.dart';
+import 'package:hometeam_client/shared/theme/custom_color.g.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:provider/provider.dart';
 

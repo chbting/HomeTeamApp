@@ -196,5 +196,9 @@
 	"fixture": "裝修",
 	"furniture": "傢俬",
 	"negotiable": "可商議",
-	"show_to_tenant": "對租客顯示"
+	"show_to_tenant": "對租客顯示",
+	"lease_earliest_start_date": "最早起租日",
+	"lease_latest_start_date": "最遲起租日",
+	"grace_period": "免租期",
+	"landlord_expenses": "業主負責費用"
 }

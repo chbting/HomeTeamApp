@@ -2,7 +2,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 
 class PropertyUploader extends StatefulWidget {

@@ -14,7 +14,7 @@ Listing _$ListingFromJson(Map<String, dynamic> json) => Listing(
           : Terms.fromJson(json['terms'] as Map<String, dynamic>),
     )
       ..id = json['id'] as int
-      ..items = (json['items'] as Map<String, dynamic>).map(
+      ..settings = (json['settings'] as Map<String, dynamic>).map(
         (k, e) => MapEntry($enumDecode(_$TermsItemEnumMap, k),
             TermsItemSettings.fromJson(e as Map<String, dynamic>)),
       );
@@ -24,8 +24,8 @@ Map<String, dynamic> _$ListingToJson(Listing instance) => <String, dynamic>{
       'propertyId': instance.propertyId,
       'title': instance.title,
       'terms': instance.terms,
-      'items':
-          instance.items.map((k, e) => MapEntry(_$TermsItemEnumMap[k]!, e)),
+      'settings':
+          instance.settings.map((k, e) => MapEntry(_$TermsItemEnumMap[k]!, e)),
     };
 
 const _$TermsItemEnumMap = {
@@ -39,6 +39,14 @@ const _$TermsItemEnumMap = {
   TermsItem.terminationRight: 'terminationRight',
   TermsItem.terminationRightStartDate: 'terminationRightStartDate',
   TermsItem.terminationNotificationPeriod: 'terminationNotificationPeriod',
+  TermsItem.structure: 'structure',
+  TermsItem.fixture: 'fixture',
+  TermsItem.furniture: 'furniture',
+  TermsItem.water: 'water',
+  TermsItem.electricity: 'electricity',
+  TermsItem.gas: 'gas',
+  TermsItem.rates: 'rates',
+  TermsItem.management: 'management',
 };
 
 TermsItemSettings _$TermsItemSettingsFromJson(Map<String, dynamic> json) =>

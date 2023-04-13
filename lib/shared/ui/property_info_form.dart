@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/ui/form_controller.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
+
 class PropertyInfoForm extends StatefulWidget {
   const PropertyInfoForm(
       {Key? key, required this.property, required this.controller})

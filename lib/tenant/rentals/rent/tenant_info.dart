@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
+import 'package:hometeam_client/shared/ui/contact_form.dart';
+import 'package:hometeam_client/shared/ui/form_card.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
-import 'package:hometeam_client/ui/contact_form.dart';
-import 'package:hometeam_client/ui/form_card.dart';
-import 'package:hometeam_client/ui/form_controller.dart';
 
 class TenantInfoScreen extends StatefulWidget {
   const TenantInfoScreen({Key? key, required this.controller})

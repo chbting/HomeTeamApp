@@ -2,13 +2,13 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_agreement.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_datepicker.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_sequencer.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:local_auth/local_auth.dart';
 

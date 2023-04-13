@@ -3,12 +3,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_viewer.dart';
 import 'package:hometeam_client/tenant/rentals/rent/offer_confirmation.dart';
 import 'package:hometeam_client/tenant/rentals/rent/tenant_info.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
 import 'package:local_auth/local_auth.dart';
 
 class ContractBrokerScreen extends StatefulWidget {

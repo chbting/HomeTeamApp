@@ -193,5 +193,9 @@
 	"fixture": "fixture",
 	"furniture": "Furniture",
 	"negotiable": "Negotiable",
-	"show_to_tenant": "Show to tenant"
+	"show_to_tenant": "Show to tenant",
+	"lease_earliest_start_date": "Lease earliest start date",
+	"lease_latest_start_date": "Lease latest start date",
+	"grace_period": "Grace period",
+	"landlord_expenses": "Landlord expenses"
 }

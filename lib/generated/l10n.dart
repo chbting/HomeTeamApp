@@ -1989,6 +1989,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Lease earliest start date`
+  String get lease_earliest_start_date {
+    return Intl.message(
+      'Lease earliest start date',
+      name: 'lease_earliest_start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lease latest start date`
+  String get lease_latest_start_date {
+    return Intl.message(
+      'Lease latest start date',
+      name: 'lease_latest_start_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grace period`
+  String get grace_period {
+    return Intl.message(
+      'Grace period',
+      name: 'grace_period',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Landlord expenses`
+  String get landlord_expenses {
+    return Intl.message(
+      'Landlord expenses',
+      name: 'landlord_expenses',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

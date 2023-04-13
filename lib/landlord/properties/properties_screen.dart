@@ -4,7 +4,7 @@ import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
+import 'package:hometeam_client/shared/listing_inherited_data.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class PropertiesScreenState extends State<PropertiesScreen> {
             icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PropertyUploaderInheritedData(
+                  builder: (context) => ListingInheritedData(
                       property: Property.empty(),
                       child: const PropertyUploader())));
             },

@@ -37,8 +37,7 @@ Terms _$TermsFromJson(Map<String, dynamic> json) => Terms(
       terminationNotificationPeriod:
           json['terminationNotificationPeriod'] as int? ?? -1,
     )..expenses = (json['expenses'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry($enumDecode(_$ExpenseEnumMap, k),
-            ExpenseData.fromJson(e as Map<String, dynamic>)),
+        (k, e) => MapEntry($enumDecode(_$ExpenseEnumMap, k), e as bool),
       );
 
 Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{

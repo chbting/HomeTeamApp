@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
+
 class VisitAgreementWidget extends StatefulWidget {
   const VisitAgreementWidget({Key? key, required this.data}) : super(key: key);
 

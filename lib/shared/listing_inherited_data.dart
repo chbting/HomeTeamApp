@@ -3,8 +3,8 @@ import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 
-class PropertyUploaderInheritedData extends InheritedWidget {
-  PropertyUploaderInheritedData({
+class ListingInheritedData extends InheritedWidget {
+  ListingInheritedData({
     Key? key,
     required this.property,
     required Widget child,
@@ -16,11 +16,11 @@ class PropertyUploaderInheritedData extends InheritedWidget {
   final Terms terms;
   final Listing listing;
 
-  static PropertyUploaderInheritedData? of(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<PropertyUploaderInheritedData>();
+  static ListingInheritedData? of(BuildContext context) => context
+      .dependOnInheritedWidgetOfExactType<ListingInheritedData>();
 
   @override
-  bool updateShouldNotify(covariant PropertyUploaderInheritedData oldWidget) {
+  bool updateShouldNotify(covariant ListingInheritedData oldWidget) {
     return false;
   }
 }

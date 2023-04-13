@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
-import 'package:hometeam_client/ui/address_form.dart';
-import 'package:hometeam_client/ui/form_card.dart';
-import 'package:hometeam_client/ui/form_controller.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
-import 'package:hometeam_client/ui/terms_form.dart';
+import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/ui/address_form.dart';
+import 'package:hometeam_client/shared/ui/form_card.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
+import 'package:hometeam_client/shared/ui/terms_form.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
   const PropertyInfoWidget({Key? key, required this.controller})
@@ -34,7 +34,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _property = PropertyUploaderInheritedData.of(context)!.property;
+    _property = ListingInheritedData.of(context)!.property;
 
     return Form(
       key: _formKey,
@@ -203,10 +203,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
           ),
           FormCard(
             title: S.of(context).lease_terms,
-            body: TermsForm(
-                controller: _termsFormController,
-                terms: PropertyUploaderInheritedData.of(context)!.terms,
-                listing: PropertyUploaderInheritedData.of(context)!.listing),
+            body: TermsForm(controller: _termsFormController),
           )
         ],
       ),

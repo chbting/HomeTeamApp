@@ -23,15 +23,15 @@ class Terms {
   DateTime terminationRightStartDate;
   int terminationNotificationPeriod; // Dates before terminationRightStartDate
 
-  Map<Expense, ExpenseData> expenses = {
-    Expense.structure: ExpenseData(landlordPaid: true),
-    Expense.fixture: ExpenseData(landlordPaid: true),
-    Expense.furniture: ExpenseData(landlordPaid: true),
-    Expense.water: ExpenseData(landlordPaid: false),
-    Expense.electricity: ExpenseData(landlordPaid: false),
-    Expense.gas: ExpenseData(landlordPaid: false),
-    Expense.rates: ExpenseData(landlordPaid: true),
-    Expense.management: ExpenseData(landlordPaid: true),
+  Map<Expense, bool> expenses = {
+    Expense.structure: true,
+    Expense.fixture: true,
+    Expense.furniture: true,
+    Expense.water: false,
+    Expense.electricity: false,
+    Expense.gas: false,
+    Expense.rates: true,
+    Expense.management: true,
   };
 
   Terms(

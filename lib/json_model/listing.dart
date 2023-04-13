@@ -10,15 +10,15 @@ class Listing {
   int propertyId;
   String title;
   Terms terms;
-  Map<TermsItem, TermsItemSettings> items;
+  Map<TermsItem, TermsItemSettings> settings = {};
 
   Listing({required this.propertyId, required this.title, Terms? terms})
       : id = propertyId,
-        terms = terms ?? Terms(propertyId: propertyId),
-        items = {
-          TermsItem.rent: TermsItemSettings(
-              negotiable: true, showToTenant: true, showToTenantLocked: true)
-        };
+        terms = terms ?? Terms(propertyId: propertyId) {
+    for (var item in TermsItem.values) {
+      settings[item] = TermsItemHelper.getDefaultSettings(item);
+    }
+  }
 
   factory Listing.fromJson(Map<String, dynamic> json) =>
       _$ListingFromJson(json);
@@ -36,7 +36,46 @@ enum TermsItem {
   gracePeriod,
   terminationRight,
   terminationRightStartDate,
-  terminationNotificationPeriod
+  terminationNotificationPeriod,
+  structure,
+  fixture,
+  furniture,
+  water,
+  electricity,
+  gas,
+  rates,
+  management
+}
+
+class TermsItemHelper {
+  static TermsItemSettings getDefaultSettings(TermsItem item) {
+    switch (item) {
+      case TermsItem.rent:
+      case TermsItem.deposit:
+      case TermsItem.earliestStartDate:
+      case TermsItem.leaseLength:
+      case TermsItem.leaseEndDate:
+        return TermsItemSettings(
+            negotiable: true, showToTenant: true, showToTenantLocked: true);
+      case TermsItem.latestStartDate:
+      case TermsItem.gracePeriod:
+      case TermsItem.terminationRight:
+      case TermsItem.terminationRightStartDate:
+      case TermsItem.terminationNotificationPeriod:
+        return TermsItemSettings(
+            negotiable: true, showToTenant: false, showToTenantLocked: false);
+      case TermsItem.structure:
+      case TermsItem.fixture:
+      case TermsItem.furniture:
+      case TermsItem.water:
+      case TermsItem.electricity:
+      case TermsItem.gas:
+      case TermsItem.rates:
+      case TermsItem.management:
+      return TermsItemSettings(
+          negotiable: false, showToTenant: true, showToTenantLocked: false);
+    }
+  }
 }
 
 @JsonSerializable()

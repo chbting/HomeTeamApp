@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -85,8 +85,7 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
         // Standardize image names with enum type and step number
         //todo count
         int count = 1;
-        var imageName =
-            '${widget.roomKey}_$count${extension(image.path)}';
+        var imageName = '${widget.roomKey}_$count${extension(image.path)}';
         FileHelper.moveToCache(
                 file: File(image.path),
                 child: FileHelper.propertyUploaderCache,

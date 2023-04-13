@@ -4,10 +4,10 @@ import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/json_model/expense.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/shared/ui/form_card.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
-import 'package:hometeam_client/ui/form_card.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:intl/intl.dart';
 
@@ -55,6 +55,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
     widget.controller.validate = _validate;
     widget.controller.reset = _reset;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _startDateController.dispose();
+    _endDateController.dispose();
+    super.dispose();
   }
 
   @override
@@ -173,8 +180,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     primary: false,
                     children: [
                       CheckboxListTile(
-                          value: !_bid.biddingTerms.expenses[Expense.water]!
-                              .landlordPaid,
+                          value: !_bid.biddingTerms.expenses[Expense.water]!,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -184,13 +190,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.water]!
-                                  .landlordPaid = !value!;
+                              _bid.biddingTerms.expenses[Expense.water] =
+                                  !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: !_bid.biddingTerms.expenses[Expense.rates]!
-                              .landlordPaid,
+                          value: !_bid.biddingTerms.expenses[Expense.rates]!,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -200,13 +205,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.rates]!
-                                  .landlordPaid = !value!;
+                              _bid.biddingTerms.expenses[Expense.rates] =
+                                  !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: !_bid.biddingTerms
-                              .expenses[Expense.electricity]!.landlordPaid,
+                          value:
+                              !_bid.biddingTerms.expenses[Expense.electricity]!,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -216,13 +221,13 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.electricity]!
-                                  .landlordPaid = !value!;
+                              _bid.biddingTerms.expenses[Expense.electricity] =
+                                  !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: !_bid.biddingTerms
-                              .expenses[Expense.management]!.landlordPaid,
+                          value:
+                              !_bid.biddingTerms.expenses[Expense.management]!,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -232,13 +237,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.management]!
-                                  .landlordPaid = !value!;
+                              _bid.biddingTerms.expenses[Expense.management] =
+                                  !value!;
                             });
                           }),
                       CheckboxListTile(
-                          value: !_bid
-                              .biddingTerms.expenses[Expense.gas]!.landlordPaid,
+                          value: !_bid.biddingTerms.expenses[Expense.gas]!,
                           dense: true,
                           controlAffinity: ListTileControlAffinity.leading,
                           contentPadding:
@@ -248,8 +252,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                                   AppTheme.getListTileBodyTextStyle(context)),
                           onChanged: (bool? value) {
                             setState(() {
-                              _bid.biddingTerms.expenses[Expense.gas]!
-                                  .landlordPaid = !value!;
+                              _bid.biddingTerms.expenses[Expense.gas] = !value!;
                             });
                           }),
                     ],
@@ -288,10 +291,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                     border: const OutlineInputBorder(),
                     labelText: S.of(context).start_date),
                 onTap: () {
+                  //todo should override and not able to type
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
                           initialDate: _bid.biddingTerms.earliestStartDate,
+                          //todo change to startDate, this is different for the landlord's earliestStartDate
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
                       .then((value) {
@@ -377,16 +382,16 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
         DateFormat(Format.date).format(_leaseStartDefault);
     _endDateController.text = DateFormat(Format.date).format(_leaseEndDefault);
     setState(() {
-      _bid.biddingTerms.expenses[Expense.water]!.landlordPaid =
-          _bid.originalTerms.expenses[Expense.water]!.landlordPaid;
-      _bid.biddingTerms.expenses[Expense.electricity]!.landlordPaid =
-          _bid.originalTerms.expenses[Expense.electricity]!.landlordPaid;
-      _bid.biddingTerms.expenses[Expense.gas]!.landlordPaid =
-          _bid.originalTerms.expenses[Expense.gas]!.landlordPaid;
-      _bid.biddingTerms.expenses[Expense.rates]!.landlordPaid =
-          _bid.originalTerms.expenses[Expense.rates]!.landlordPaid;
-      _bid.biddingTerms.expenses[Expense.management]!.landlordPaid =
-          _bid.originalTerms.expenses[Expense.management]!.landlordPaid;
+      _bid.biddingTerms.expenses[Expense.water] =
+          _bid.originalTerms.expenses[Expense.water]!;
+      _bid.biddingTerms.expenses[Expense.electricity] =
+          _bid.originalTerms.expenses[Expense.electricity]!;
+      _bid.biddingTerms.expenses[Expense.gas] =
+          _bid.originalTerms.expenses[Expense.gas]!;
+      _bid.biddingTerms.expenses[Expense.rates] =
+          _bid.originalTerms.expenses[Expense.rates]!;
+      _bid.biddingTerms.expenses[Expense.management] =
+          _bid.originalTerms.expenses[Expense.management]!;
     });
   }
 }

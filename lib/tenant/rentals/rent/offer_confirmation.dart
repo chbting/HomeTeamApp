@@ -7,9 +7,9 @@ import 'package:hometeam_client/json_model/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/json_model/terms.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:intl/intl.dart';
@@ -142,11 +142,11 @@ class OfferConfirmationScreen extends StatelessWidget {
 
     rent = terms.rent;
     deposit = terms.deposit;
-    water = !terms.expenses[Expense.water]!.landlordPaid;
-    electricity = !terms.expenses[Expense.electricity]!.landlordPaid;
-    gas = !terms.expenses[Expense.gas]!.landlordPaid;
-    rates = !terms.expenses[Expense.rates]!.landlordPaid;
-    management = !terms.expenses[Expense.management]!.landlordPaid;
+    water = !terms.expenses[Expense.water]!;
+    electricity = !terms.expenses[Expense.electricity]!;
+    gas = !terms.expenses[Expense.gas]!;
+    rates = !terms.expenses[Expense.rates]!;
+    management = !terms.expenses[Expense.management]!;
 
     return SizedBox(
         width: MediaQuery.of(context).size.width / 2 -

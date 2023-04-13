@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/data/room.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_image_wizard.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_uploader_inherited_data.dart';
-import 'package:hometeam_client/ui/image_viewer.dart';
-import 'package:hometeam_client/ui/standard_stepper.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/shared/ui/image_viewer.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:path/path.dart';
 
 class PropertyImagesWidget extends StatefulWidget {
@@ -22,7 +22,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _property = PropertyUploaderInheritedData.of(context)!.property;
+    _property = ListingInheritedData.of(context)!.property;
 
     // todo remove unnecessary images (remove bedroom and bathroom images only)
     if (_isInitializationNeeded()) {

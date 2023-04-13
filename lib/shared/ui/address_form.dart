@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/http_request/place_autocomplete_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
-import 'package:hometeam_client/ui/form_controller.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class AddressForm extends StatefulWidget {
@@ -274,5 +274,6 @@ class AddressFormState extends State<AddressForm> {
     });
   }
 
-  bool _validate() => _formKey.currentState!.validate();
+  bool _validate() => _formKey.currentState!
+      .validate(); //todo currentState is null when user scroll this part of the form off the screen
 }

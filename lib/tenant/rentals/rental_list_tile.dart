@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
-import 'package:hometeam_client/ui/theme/theme.dart';
+import 'package:hometeam_client/shared/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 
 class ListingListTile extends StatelessWidget {

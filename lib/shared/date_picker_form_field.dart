@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/utils/format.dart';
 
-class DatePickerTextFormField extends StatefulWidget {
-  const DatePickerTextFormField(
+class DatePickerFormField extends StatefulWidget {
+  const DatePickerFormField(
       {super.key,
-      this.labelText,
-      this.helpText,
+      required this.labelText,
+      required this.helpText,
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
       this.validator,
       required this.onChanged});
 
-  final String? labelText, helpText;
+  final String labelText, helpText;
   final DateTime initialDate, firstDate, lastDate;
   final String? Function(DateTime dateTime)? validator;
   final void Function(DateTime dateTime) onChanged;
 
   @override
-  State<StatefulWidget> createState() => DatePickerTextFormFieldState();
+  State<StatefulWidget> createState() => DatePickerFormFieldState();
 }
 
-class DatePickerTextFormFieldState extends State<DatePickerTextFormField> {
+class DatePickerFormFieldState extends State<DatePickerFormField> {
   late TextEditingController _controller;
 
   @override

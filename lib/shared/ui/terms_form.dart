@@ -4,7 +4,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
-import 'package:hometeam_client/shared/datepicker_textformfield.dart';
+import 'package:hometeam_client/shared/date_picker_form_field.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/terms_item.dart';
@@ -83,7 +83,8 @@ class TermsFormState extends State<TermsForm> {
             TermsItemWidget(
                 termsItemSettings:
                     listing.settings[TermsItem.earliestStartDate]!,
-                child: DatePickerTextFormField(
+                child: DatePickerFormField(
+                  labelText: S.of(context).lease_earliest_start_date,
                   helpText: S.of(context).lease_earliest_start_date,
                   initialDate: terms.earliestStartDate,
                   firstDate: DateTime.now(),
@@ -94,7 +95,8 @@ class TermsFormState extends State<TermsForm> {
                 )),
             TermsItemWidget(
                 termsItemSettings: listing.settings[TermsItem.latestStartDate]!,
-                child: DatePickerTextFormField(
+                child: DatePickerFormField(
+                  labelText: S.of(context).lease_latest_start_date,
                   helpText: S.of(context).lease_latest_start_date,
                   initialDate: terms.latestStartDate ?? DateTime.now(),
                   firstDate: DateTime.now(),
@@ -107,7 +109,8 @@ class TermsFormState extends State<TermsForm> {
                 // todo if only the the beginning, that use number of days instead and show from which to which date
                 // todo gracePeriod start/end combo
                 termsItemSettings: listing.settings[TermsItem.gracePeriod]!,
-                child: DatePickerTextFormField(
+                child: DatePickerFormField(
+                  labelText: S.of(context).grace_period,
                   helpText: S.of(context).grace_period,
                   initialDate: terms.gracePeriodStart ?? DateTime.now(),
                   firstDate: DateTime.now(),

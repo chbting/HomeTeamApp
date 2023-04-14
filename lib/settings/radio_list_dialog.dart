@@ -8,7 +8,7 @@ class RadioListDialog {
       required List<String> labels,
       required String defaultValue,
       required String title,
-      required Function(String) callback}) {
+      required Function(String) onChanged}) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -17,9 +17,8 @@ class RadioListDialog {
               contentPadding: EdgeInsets.zero,
               content: SizedBox(
                   width: double.minPositive,
-                  child: _RadioListView(values, labels, defaultValue, (value) {
-                    callback(value);
-                  })),
+                  child: _RadioListView(values, labels, defaultValue,
+                      (value) => onChanged(value))),
               actions: <Widget>[
                 TextButton(
                   child: Text(S.of(context).cancel),
@@ -34,11 +33,11 @@ class RadioListDialog {
 
 class _RadioListView extends StatefulWidget {
   final List<String> _valueList, _titleList;
-  final Function(String) _callback;
+  final Function(String) _onChanged;
   final String _defaultValue;
 
   const _RadioListView(
-      this._valueList, this._titleList, this._defaultValue, this._callback,
+      this._valueList, this._titleList, this._defaultValue, this._onChanged,
       {Key? key})
       : super(key: key);
 
@@ -71,7 +70,7 @@ class _RadioListViewState extends State<_RadioListView> {
             setState(() {
               _currentValue = value!;
               Navigator.of(context).pop();
-              widget._callback(value);
+              widget._onChanged(value);
             });
           },
         );

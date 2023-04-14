@@ -2,38 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
+/// 3 levels of data: String (label), String (locale value), Locale
 class LocaleHelper {
-  static final List<String> supportedLocaleValues = [
+  static final List<String> supportedLocales = [
     'zh_Hant',
     'zh_Hans',
     'en'
   ];
 
-  /// valueToLocale
-  static Locale parseLocale(String value) {
-    List<String> localeCodes = value.split('_');
-    if (localeCodes.length == 1) {
-      return Locale.fromSubtags(languageCode: value);
-    } else {
-      return Locale.fromSubtags(
-          languageCode: localeCodes[0], scriptCode: localeCodes[1]);
+  /// Sting (locale value) => Locale
+  static Locale parse(String value) {
+    switch (value) {
+      case 'zh_Hant':
+        return const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
+      case 'zh_Hans':
+        return const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans');
+      case 'en':
+      default:
+        return const Locale.fromSubtags(languageCode: 'en');
     }
   }
 
-  static String valueToLabel(String value) {
+  /// String (locale value) => String (label)
+  static String getLabel(String value) {
     switch (value) {
-      case 'en':
-        return 'English';
       case 'zh_Hant':
         return '䌓體中文';
       case 'zh_Hans':
         return '简体中文';
+      case 'en':
       default:
         return 'English';
     }
   }
 
-  static String localeToValue(Locale locale) {
+  /// Locale => String (locale value)
+  static String getString(Locale locale) {
     String value = locale.languageCode;
     if (locale.scriptCode != null) {
       value += '_${locale.scriptCode}';
@@ -41,32 +45,31 @@ class LocaleHelper {
     return value;
   }
 
-  static String localeToLabel(Locale locale) =>
-      valueToLabel(localeToValue(locale));
+  /// Locale => String (label)
+  static String localeToLabel(Locale locale) => getLabel(getString(locale));
 
   static String getVoiceRecognitionLocaleId(BuildContext context) {
-    String value = localeToValue(SharedPreferencesHelper.getLocale());
+    String value = getString(SharedPreferencesHelper.getLocale());
     switch (value) {
-      case 'en':
-        return 'en_GB';
       case 'zh_Hant':
         return 'yue_HK';
       case 'zh_Hans':
         return 'cmn_CN';
+      case 'en':
       default:
-        return 'en_GB';
+        return 'en_GB'; //todo
     }
   }
 
   static String getVoiceRecognitionLanguage(
       String localeId, BuildContext context) {
     switch (localeId) {
-      case 'en_GB':
-        return S.of(context).english_voice_input;
       case 'yue_HK':
         return S.of(context).cantonese;
       case 'cmn_CN':
         return S.of(context).mandarin;
+      case 'en':
+        return S.of(context).english_voice_input;
       default:
         return 'English';
     }

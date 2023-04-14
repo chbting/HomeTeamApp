@@ -12,7 +12,6 @@ import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/utils/format.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
-import 'package:intl/intl.dart';
 
 class OfferConfirmationScreen extends StatelessWidget {
   const OfferConfirmationScreen({Key? key}) : super(key: key);
@@ -86,8 +85,8 @@ class OfferConfirmationScreen extends StatelessWidget {
                               style: AppTheme.getCardTitleTextStyle(context)),
                           // todo show original contract
                           Text(
-                              '${DateFormat(Format.date).format(bid.biddingTerms.earliestStartDate)} '
-                              '- ${DateFormat(Format.date).format(bid.biddingTerms.leaseEndDate!)}',
+                              '${Format.date.format(bid.biddingTerms.earliestStartDate)} '
+                              '- ${Format.date.format(bid.biddingTerms.leaseEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
                           Text(S.of(context).notes,

@@ -97,16 +97,16 @@ class SettingsScreenState extends State<SettingsScreen> {
             onTap: () {
               RadioListDialog.show(
                   context: context,
-                  values: LocaleHelper.supportedLocaleValues,
-                  labels: LocaleHelper.supportedLocaleValues
-                      .map((value) => LocaleHelper.valueToLabel(value))
+                  values: LocaleHelper.supportedLocales,
+                  labels: LocaleHelper.supportedLocales
+                      .map((value) => LocaleHelper.getLabel(value))
                       .toList(),
-                  defaultValue: LocaleHelper.localeToValue(
+                  defaultValue: LocaleHelper.getString(
                       SharedPreferencesHelper.getLocale()),
                   title: S.of(context).choose_language,
-                  callback: (value) {
+                  onChanged: (value) {
                     SharedPreferencesHelper.setLocale(
-                        LocaleHelper.parseLocale(value));
+                        LocaleHelper.parse(value));
                   });
             }),
         ListTile(
@@ -132,7 +132,7 @@ class SettingsScreenState extends State<SettingsScreen> {
                   ],
                   defaultValue: SharedPreferencesHelper.getThemeMode().name,
                   title: S.of(context).darkMode,
-                  callback: (value) {
+                  onChanged: (value) {
                     SharedPreferencesHelper.setThemeMode(
                         ThemeModeHelper.parseThemeMode(
                             value, ThemeMode.system));

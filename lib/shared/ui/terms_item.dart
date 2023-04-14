@@ -58,7 +58,7 @@ class TermExpenseItem extends StatefulWidget {
   const TermExpenseItem(
       {super.key,
       required this.expense,
-      required this.termsItem}); //todo try to remove as much variable as possible
+      required this.termsItem});
 
   final Expense expense;
   final TermsItem termsItem;

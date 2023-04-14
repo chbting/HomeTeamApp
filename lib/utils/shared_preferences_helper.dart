@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hometeam_client/settings/locale_helper.dart';
 import 'package:hometeam_client/settings/theme_mode_setting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
   // Keys
@@ -29,16 +29,16 @@ class SharedPreferencesHelper {
     _prefs.getBool(landlordModeKey) ??
         _prefs.setBool(landlordModeKey, defaultLandlordMode);
   }
-
-  static Locale getLocale() => _getInitialLocale() ?? defaultLocale;
-
-  static Locale? _getInitialLocale() {
+  
+  static Locale getLocale() {
     String? value = _prefs.getString(localeKey);
-    return value == null ? null : LocaleHelper.parseLocale(value);
+    return value == null
+        ? defaultLocale
+        : LocaleHelper.parse(value);
   }
 
   static void setLocale(Locale locale) {
-    _prefs.setString(localeKey, LocaleHelper.localeToValue(locale));
+    _prefs.setString(localeKey, LocaleHelper.getString(locale));
     changeNotifier.notify();
   }
 
@@ -67,7 +67,7 @@ class SharedPreferencesHelper {
         locale = defaultLocale;
         break;
     }
-    _prefs.setString(localeKey, LocaleHelper.localeToValue(locale));
+    _prefs.setString(localeKey, LocaleHelper.getString(locale));
   }
 
   /// Returns [ThemeMode.system] by default

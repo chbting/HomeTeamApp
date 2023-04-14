@@ -5,7 +5,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 class Format {
   /// The long format requires the use of locale
   static String dateLong = 'd/M/y (EEEE)';
-  static String date = 'd/M/y';
+  static final DateFormat date = DateFormat.yMd('zh'); // without day of the week, using 'zh' is fine
   static NumberFormat currency =
       NumberFormat.currency(symbol: '\$', decimalDigits: 0);
 

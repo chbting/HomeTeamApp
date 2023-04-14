@@ -46,9 +46,9 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   late DateTime _leaseEndFirstDate, _leaseEndLastDate;
 
   late final _startDateController = TextEditingController(
-      text: DateFormat(Format.date).format(_leaseStartDefault));
+      text: Format.date.format(_leaseStartDefault));
   late final _endDateController = TextEditingController(
-      text: DateFormat(Format.date).format(_leaseEndDefault));
+      text: Format.date.format(_leaseEndDefault));
 
   @override
   void initState() {
@@ -301,14 +301,12 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                           lastDate: _leaseStartLastDate)
                       .then((value) {
                     if (value != null) {
-                      _startDateController.text = DateFormat(
-                        Format.date,
-                      ).format(value);
+                      _startDateController.text = Format.date.format(value);
                       _bid.biddingTerms.earliestStartDate = value;
                       // auto update end date
                       _bid.biddingTerms.leaseEndDate =
                           DateTime(value.year + 1, value.month, value.day - 1);
-                      _endDateController.text = DateFormat(Format.date)
+                      _endDateController.text = Format.date
                           .format(_bid.biddingTerms.leaseEndDate!);
                       _updateLeaseEndRange();
                     }
@@ -316,7 +314,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 },
                 validator: (value) {
                   try {
-                    DateFormat(Format.date).parse(value!);
+                    Format.date.parse(value!);
                     return null;
                   } on Exception {
                     return S.of(context).invalid_date;
@@ -344,14 +342,14 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       .then((value) {
                     if (value != null) {
                       _endDateController.text =
-                          DateFormat(Format.date).format(value);
+                          Format.date.format(value);
                       _bid.biddingTerms.leaseEndDate = value;
                     }
                   });
                 },
                 validator: (value) {
                   try {
-                    var end = DateFormat(Format.date).parse(value!);
+                    var end = Format.date.parse(value!);
                     if (end.isBefore(_bid.biddingTerms.earliestStartDate)) {
                       return S.of(context).invalid_date;
                     } else {
@@ -379,8 +377,8 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   void _reset() {
     _formKey.currentState!.reset();
     _startDateController.text =
-        DateFormat(Format.date).format(_leaseStartDefault);
-    _endDateController.text = DateFormat(Format.date).format(_leaseEndDefault);
+        Format.date.format(_leaseStartDefault);
+    _endDateController.text = Format.date.format(_leaseEndDefault);
     setState(() {
       _bid.biddingTerms.expenses[Expense.water] =
           _bid.originalTerms.expenses[Expense.water]!;

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FormCard extends StatelessWidget {
-  const FormCard({Key? key, required this.title, required this.body})
-      : super(key: key);
+  const FormCard({Key? key, this.title, required this.body}) : super(key: key);
 
-  final String title;
+  final String? title;
   final Widget body;
 
   @override
@@ -15,8 +14,13 @@ class FormCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: Theme.of(context).textTheme.bodyLarge),
-            Container(height: 16.0),
+            title == null
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(title!,
+                        style: Theme.of(context).textTheme.bodyLarge),
+                  ),
             body
           ],
         ),

@@ -7,7 +7,6 @@ import 'package:hometeam_client/shared/ui/address_form.dart';
 import 'package:hometeam_client/shared/ui/form_card.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
-import 'package:hometeam_client/shared/ui/terms_form.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
   const PropertyInfoWidget({Key? key, required this.controller})
@@ -22,7 +21,6 @@ class PropertyInfoWidget extends StatefulWidget {
 class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
-  final FormController _termsFormController = FormController();
   late Property _property;
 
   @override
@@ -201,10 +199,6 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
               ],
             ),
           ),
-          FormCard(
-            title: S.of(context).lease_terms,
-            body: TermsForm(controller: _termsFormController),
-          )
         ],
       ),
     );

@@ -1140,16 +1140,6 @@ class S {
     );
   }
 
-  /// `Lease Period`
-  String get lease_period {
-    return Intl.message(
-      'Lease Period',
-      name: 'lease_period',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Lease Terms`
   String get lease_terms {
     return Intl.message(
@@ -2010,21 +2000,101 @@ class S {
     );
   }
 
-  /// `Grace period`
-  String get grace_period {
-    return Intl.message(
-      'Grace period',
-      name: 'grace_period',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Landlord expenses`
   String get landlord_expenses {
     return Intl.message(
       'Landlord expenses',
       name: 'landlord_expenses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grace period (days)`
+  String get grace_period_days {
+    return Intl.message(
+      'Grace period (days)',
+      name: 'grace_period_days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lease Period`
+  String get lease_length {
+    return Intl.message(
+      'Lease Period',
+      name: 'lease_length',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lease Period (Months)`
+  String get lease_length_months {
+    return Intl.message(
+      'Lease Period (Months)',
+      name: 'lease_length_months',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Termination notice (days)`
+  String get termination_notice_days {
+    return Intl.message(
+      'Termination notice (days)',
+      name: 'termination_notice_days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Earliest termination day`
+  String get earliest_termination_day {
+    return Intl.message(
+      'Earliest termination day',
+      name: 'earliest_termination_day',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Days notice before termination`
+  String get termination_notice_helper_text {
+    return Intl.message(
+      'Days notice before termination',
+      name: 'termination_notice_helper_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Both`
+  String get both_party {
+    return Intl.message(
+      'Both',
+      name: 'both_party',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Early termination right`
+  String get early_termination_right {
+    return Intl.message(
+      'Early termination right',
+      name: 'early_termination_right',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Landlord`
+  String get landlord {
+    return Intl.message(
+      'Landlord',
+      name: 'landlord',
       desc: '',
       args: [],
     );

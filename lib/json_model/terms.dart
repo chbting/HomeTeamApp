@@ -1,3 +1,5 @@
+import 'package:easy_stepper/easy_stepper.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/expense.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -14,14 +16,14 @@ class Terms {
   DateTime? latestStartDate;
 
   // User fills in either lease length or fixed endDate, not both
-  DateTime? leaseLength;
+  int? leaseLength;
   DateTime? leaseEndDate;
 
-  DateTime? gracePeriodStart, gracePeriodEnd;
+  int gracePeriod;
 
   PartyType terminationRight; // landlord, tenant, both
-  DateTime terminationRightStartDate;
-  int terminationNotificationPeriod; // Dates before terminationRightStartDate
+  DateTime earliestTerminationDate;
+  int terminationNotice; // Dates before terminationRightStartDate
 
   Map<Expense, bool> expenses = {
     Expense.structure: true,
@@ -42,29 +44,12 @@ class Terms {
       this.latestStartDate,
       this.leaseLength,
       this.leaseEndDate,
-      this.gracePeriodStart,
-      this.gracePeriodEnd,
+      this.gracePeriod = -1,
       this.terminationRight = PartyType.both,
       DateTime? terminationRightStartDate,
-      this.terminationNotificationPeriod = -1})
+      this.terminationNotice = -1})
       : earliestStartDate = earliestStartDate ?? DateTime.now(),
-        terminationRightStartDate = terminationRightStartDate ?? DateTime.now();
-
-  Terms copyWith(
-      {int? propertyId,
-      int? rent,
-      int? deposit,
-      bool? waterRequired,
-      bool? electricityRequired,
-      bool? gasRequired,
-      bool? ratesRequired,
-      bool? managementRequired}) {
-    return Terms(
-      propertyId: propertyId ?? this.propertyId,
-      rent: rent ?? this.rent,
-      deposit: deposit ?? this.deposit,
-    );
-  }
+        earliestTerminationDate = terminationRightStartDate ?? DateTime.now();
 
   factory Terms.fromJson(Map<String, dynamic> json) => _$TermsFromJson(json);
 
@@ -72,3 +57,16 @@ class Terms {
 }
 
 enum PartyType { landlord, tenant, both }
+
+class PartyTypeHelper {
+  static String getName(BuildContext context, PartyType type) {
+    switch (type) {
+      case PartyType.landlord:
+        return S.of(context).landlord;
+      case PartyType.tenant:
+        return S.of(context).tenant;
+      case PartyType.both:
+        return S.of(context).both_party;
+    }
+  }
+}

@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "biometric_authentication_unavailable_agreement":
             MessageLookupByLibrary.simpleMessage(
                 "This device cannot use biometric authentication, please choose \"Sign on Visit\""),
+        "both_party": MessageLookupByLibrary.simpleMessage("Both"),
         "cameras_not_available":
             MessageLookupByLibrary.simpleMessage("Cameras are not available"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -106,6 +107,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "district": MessageLookupByLibrary.simpleMessage("District"),
+        "earliest_termination_day":
+            MessageLookupByLibrary.simpleMessage("Earliest termination day"),
+        "early_termination_right":
+            MessageLookupByLibrary.simpleMessage("Early termination right"),
         "end_date": MessageLookupByLibrary.simpleMessage("End Date"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),
@@ -116,7 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "furniture": MessageLookupByLibrary.simpleMessage("Furniture"),
         "general_settings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
-        "grace_period": MessageLookupByLibrary.simpleMessage("Grace period"),
+        "grace_period_days":
+            MessageLookupByLibrary.simpleMessage("Grace period (days)"),
         "hong_kong": MessageLookupByLibrary.simpleMessage("Hong Kong"),
         "hong_kong_number_only":
             MessageLookupByLibrary.simpleMessage("Hong Kong number only"),
@@ -125,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
+        "landlord": MessageLookupByLibrary.simpleMessage("Landlord"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
             "Landlord accepts / counteroffer"),
         "landlord_expenses":
@@ -142,7 +149,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lease earliest start date"),
         "lease_latest_start_date":
             MessageLookupByLibrary.simpleMessage("Lease latest start date"),
-        "lease_period": MessageLookupByLibrary.simpleMessage("Lease Period"),
+        "lease_length": MessageLookupByLibrary.simpleMessage("Lease Period"),
+        "lease_length_months":
+            MessageLookupByLibrary.simpleMessage("Lease Period (Months)"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("Lease Terms"),
         "living_dining_room":
             MessageLookupByLibrary.simpleMessage("Living/Dining room"),
@@ -294,6 +303,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tenant pays the following:"),
         "tenant_sign_contract":
             MessageLookupByLibrary.simpleMessage("Tenant signs the contract"),
+        "termination_notice_days":
+            MessageLookupByLibrary.simpleMessage("Termination notice (days)"),
+        "termination_notice_helper_text": MessageLookupByLibrary.simpleMessage(
+            "Days notice before termination"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),

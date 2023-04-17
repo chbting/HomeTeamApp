@@ -109,7 +109,6 @@
 	"original": "原定",
 	"offered": "提出",
 	"tenant_paid_fees_colon": "租客负担费用︰",
-	"lease_period": "租期",
 	"lease_terms": "租约条款",
 	"month": "月",
 	"save_for_later": "迟些看",
@@ -196,6 +195,14 @@
 	"show_to_tenant": "对租客显示",
 	"lease_earliest_start_date": "最早起租日",
 	"lease_latest_start_date": "最遲起租日",
-	"grace_period": "免租期",
-	"landlord_expenses": "业主负责费用"
+	"landlord_expenses": "业主负责费用",
+	"grace_period_days": "免租期 (日)",
+	"lease_length": "租期",
+	"lease_length_months": "租期 (月)",
+	"termination_notice_days": "退租通知 (日)",
+	"earliest_termination_day": "最早退租日",
+	"termination_notice_helper_text": "退租前需多少天通知",
+	"both_party": "双方",
+	"early_termination_right": "退租权",
+	"landlord": "业主"
 }

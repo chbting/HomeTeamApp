@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("本裝置未能使用生物認證"),
         "biometric_authentication_unavailable_agreement":
             MessageLookupByLibrary.simpleMessage("本裝置未能使用生物認證，請選擇“睇樓時簽署”"),
+        "both_party": MessageLookupByLibrary.simpleMessage("雙方"),
         "cameras_not_available":
             MessageLookupByLibrary.simpleMessage("無法使用拍照功能"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
@@ -90,6 +91,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deposit": MessageLookupByLibrary.simpleMessage("保證金"),
         "dismiss": MessageLookupByLibrary.simpleMessage("隱藏"),
         "district": MessageLookupByLibrary.simpleMessage("地區"),
+        "earliest_termination_day":
+            MessageLookupByLibrary.simpleMessage("最早退租日"),
+        "early_termination_right": MessageLookupByLibrary.simpleMessage("退租權"),
         "end_date": MessageLookupByLibrary.simpleMessage("結束日期"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英語"),
         "estimate": MessageLookupByLibrary.simpleMessage("預算:"),
@@ -99,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fixture": MessageLookupByLibrary.simpleMessage("裝修"),
         "furniture": MessageLookupByLibrary.simpleMessage("傢俬"),
         "general_settings": MessageLookupByLibrary.simpleMessage("一般設定"),
-        "grace_period": MessageLookupByLibrary.simpleMessage("免租期"),
+        "grace_period_days": MessageLookupByLibrary.simpleMessage("免租期 (日)"),
         "hong_kong": MessageLookupByLibrary.simpleMessage("香港"),
         "hong_kong_number_only":
             MessageLookupByLibrary.simpleMessage("只限香港電話號碼"),
@@ -108,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份證號碼"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期無效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龍"),
+        "landlord": MessageLookupByLibrary.simpleMessage("業主"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("業主接受/提出更改"),
         "landlord_expenses": MessageLookupByLibrary.simpleMessage("業主負責費用"),
@@ -122,7 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("最早起租日"),
         "lease_latest_start_date":
             MessageLookupByLibrary.simpleMessage("最遲起租日"),
-        "lease_period": MessageLookupByLibrary.simpleMessage("租期"),
+        "lease_length": MessageLookupByLibrary.simpleMessage("租期"),
+        "lease_length_months": MessageLookupByLibrary.simpleMessage("租期 (月)"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("租約條款"),
         "living_dining_room": MessageLookupByLibrary.simpleMessage("客/飯廳"),
         "mailing_address": MessageLookupByLibrary.simpleMessage("郵寄地址"),
@@ -243,6 +249,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "tenant_pays_the_following":
             MessageLookupByLibrary.simpleMessage("租客負責下列費用︰"),
         "tenant_sign_contract": MessageLookupByLibrary.simpleMessage("租客簽約"),
+        "termination_notice_days":
+            MessageLookupByLibrary.simpleMessage("退租通知 (日)"),
+        "termination_notice_helper_text":
+            MessageLookupByLibrary.simpleMessage("退租前需多少天通知"),
         "time": MessageLookupByLibrary.simpleMessage("時間"),
         "title": MessageLookupByLibrary.simpleMessage("稱謂"),
         "total": MessageLookupByLibrary.simpleMessage("總計"),

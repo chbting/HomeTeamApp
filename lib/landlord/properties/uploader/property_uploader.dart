@@ -1,7 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 
@@ -21,6 +23,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
   final StandardStepperController _controller = StandardStepperController();
   final PropertyInfoWidgetController _propertyInfoWidgetController =
       PropertyInfoWidgetController();
+  final FormController _leaseTermsWidgetController = FormController();
   int _activeStep = 0;
 
   @override
@@ -39,15 +42,18 @@ class PropertyUploaderState extends State<PropertyUploader> {
       EasyStep(
           icon: const Icon(Icons.camera_alt), title: S.of(context).add_photos),
       EasyStep(
+          icon: const Icon(Icons.edit_note), title: S.of(context).lease_terms),
+      EasyStep(
           icon: const Icon(Icons.format_list_bulleted_add),
           title: S.of(context).create_listing),
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
       PropertyInfoWidget(controller: _propertyInfoWidgetController),
-      const PropertyImagesWidget(),
-      const Center(child: Text('3')),
-      const Center(child: Text('4'))
+      const Text('2'),//PropertyImagesWidget(),
+      LeaseTermsWidget(controller: _leaseTermsWidgetController),
+      const Center(child: Text('4')),
+      const Center(child: Text('5'))
     ];
 
     return StandardStepper(
@@ -73,9 +79,9 @@ class PropertyUploaderState extends State<PropertyUploader> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
-            if (_propertyInfoWidgetController.validate()) {
+           //if (_propertyInfoWidgetController.validate()) {
               _controller.nextStep();
-            }
+           // }
             break;
           case 3:
             _confirm();

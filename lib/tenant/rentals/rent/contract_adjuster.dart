@@ -144,7 +144,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        S.of(context).lease_period,
+                        S.of(context).lease_length,
                         style: Theme.of(context).textTheme.titleMedium,
                       )),
                   Row(

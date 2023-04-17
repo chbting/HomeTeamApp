@@ -81,7 +81,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                           ),
                           Container(height: _itemSpacing),
                           const Divider(thickness: 1.0),
-                          Text(S.of(context).lease_period,
+                          Text(S.of(context).lease_length,
                               style: AppTheme.getCardTitleTextStyle(context)),
                           // todo show original contract
                           Text(

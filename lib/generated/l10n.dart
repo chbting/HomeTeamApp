@@ -2099,6 +2099,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Rent`
+  String get rent {
+    return Intl.message(
+      'Rent',
+      name: 'rent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will be shown as this date or today, which ever is the latest`
+  String get lease_earliest_start_date_helper_text {
+    return Intl.message(
+      'Will be shown as this date or today, which ever is the latest',
+      name: 'lease_earliest_start_date_helper_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please put in a valid date`
+  String get please_put_in_a_date {
+    return Intl.message(
+      'Please put in a valid date',
+      name: 'please_put_in_a_date',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

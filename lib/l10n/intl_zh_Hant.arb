@@ -207,5 +207,8 @@
 	"termination_notice_helper_text": "退租前需多少天通知",
 	"both_party": "雙方",
 	"early_termination_right": "退租權",
-	"landlord": "業主"
+	"landlord": "業主",
+	"rent": "租金",
+	"lease_earliest_start_date_helper_text": "會顯示為這天或即日，根據哪一天較後",
+	"please_put_in_a_date": "請輸入有效的日期"
 }

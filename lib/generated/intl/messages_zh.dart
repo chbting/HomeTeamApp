@@ -125,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "住宅租约\n\n本合约订于(⽇/⽉/年) 05/06/2021 由业主及租客订⽴ , 双⽅资料详列于附表⼀。\n\n业主及租客双⽅以详列于附表⼀的租期及租⾦分别租出及租⼊详列于附表⼀的物业，并同意遵守及履⾏下列条款：\n\n1. 租客须在租期内每个⽉份的1号或以前上期缴付指定的租⾦予业主。倘租客于应缴租⾦之⽇的七天内仍未清付该租⾦，则业主有权采取适当⾏动追讨租客所⽋的租⾦，⽽由此⽽引起的⼀切费⽤及开⽀将构成租客所⽋业主的债项，业主将有权向租 客⼀并追讨所⽋款项全数。\n\n2. 租客在没有业主书⾯同意前，不得对该物业作任何改动及/或加建。\n\n3. 租客不得转让、转租或分租该物业或其他任何部份或将该物业或其他任何部份的占⽤权让予任何其他⼈\n等。此租约权益为租客个⼈拥有。\n\n4. 租客须遵守⾹港⼀⼲法律条例和规则及该物业所属的⼤厦有关的公契内的条款。租客亦不可违反属该物\n业地段内的官批地契 上的任何制约性条款。\n\n5. 租客须在租约期内清缴有关物业的⽔费、电费、煤气费、电话费及其他类似的杂费。\n\n6. 租客须在租约期内保持物业内部的维修状态良好(⾃然损耗及因固有的缺陷所产⽣的损坏除外)并须于租约期满或终⽌时将物业在同样维修状态下交吉回业主。"),
         "lease_earliest_start_date":
             MessageLookupByLibrary.simpleMessage("最早起租日"),
+        "lease_earliest_start_date_helper_text":
+            MessageLookupByLibrary.simpleMessage("会显示为这天或即日，根据哪一天较后"),
         "lease_latest_start_date":
             MessageLookupByLibrary.simpleMessage("最遲起租日"),
         "lease_length": MessageLookupByLibrary.simpleMessage("租期"),
@@ -183,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "please_enter_password": MessageLookupByLibrary.simpleMessage("请输入密码"),
         "please_manually_enter_sms_code":
             MessageLookupByLibrary.simpleMessage("请手动输入验证码"),
+        "please_put_in_a_date":
+            MessageLookupByLibrary.simpleMessage("请输入有效的日期"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
@@ -205,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("使用生物认证签署租约"),
         "region": MessageLookupByLibrary.simpleMessage("地域"),
         "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
+        "rent": MessageLookupByLibrary.simpleMessage("租金"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租房"),
         "rentals": MessageLookupByLibrary.simpleMessage("租盘"),
         "reset": MessageLookupByLibrary.simpleMessage("重设"),

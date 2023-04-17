@@ -204,5 +204,8 @@
 	"termination_notice_helper_text": "Days notice before termination",
 	"both_party": "Both",
 	"early_termination_right": "Early termination right",
-	"landlord": "Landlord"
+	"landlord": "Landlord",
+	"rent": "Rent",
+	"lease_earliest_start_date_helper_text": "Will be shown as this date or today, which ever is the latest",
+	"please_put_in_a_date": "Please put in a valid date"
 }

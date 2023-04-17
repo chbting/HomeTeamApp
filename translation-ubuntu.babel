@@ -2156,6 +2156,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>lease_earliest_start_date_helper_text</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>lease_latest_start_date</name>
 						<description/>
 						<comment/>
@@ -3332,6 +3356,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>please_put_in_a_date</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>please_put_in_a_valid_amount</name>
 						<description/>
 						<comment/>
@@ -3693,6 +3741,30 @@
 					</concept_node>
 					<concept_node>
 						<name>remove_property_from_cart</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>rent</name>
 						<description/>
 						<comment/>
 						<default_text/>

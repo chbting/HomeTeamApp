@@ -179,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Failed to generate the path of visit"),
         "msg_info_required":
             MessageLookupByLibrary.simpleMessage("Info required"),
+        "msg_input_before_earliest_start": MessageLookupByLibrary.simpleMessage(
+            "The date should be after the earliest start date"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("Invalid phone number"),
         "msg_please_input_valid_phone_number":
@@ -223,10 +225,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter password"),
         "please_manually_enter_sms_code": MessageLookupByLibrary.simpleMessage(
             "Please manually enter the SMS Code"),
-        "please_put_in_a_date":
-            MessageLookupByLibrary.simpleMessage("Please put in a valid date"),
         "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
             "Please put in a valid amount"),
+        "please_put_in_a_valid_date":
+            MessageLookupByLibrary.simpleMessage("Please put in a valid date"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "properties": MessageLookupByLibrary.simpleMessage("Properties"),

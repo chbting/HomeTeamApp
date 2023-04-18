@@ -2121,10 +2121,20 @@ class S {
   }
 
   /// `Please put in a valid date`
-  String get please_put_in_a_date {
+  String get please_put_in_a_valid_date {
     return Intl.message(
       'Please put in a valid date',
-      name: 'please_put_in_a_date',
+      name: 'please_put_in_a_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The date should be after the earliest start date`
+  String get msg_input_before_earliest_start {
+    return Intl.message(
+      'The date should be after the earliest start date',
+      name: 'msg_input_before_earliest_start',
       desc: '',
       args: [],
     );

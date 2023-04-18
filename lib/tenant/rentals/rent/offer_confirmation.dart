@@ -85,7 +85,7 @@ class OfferConfirmationScreen extends StatelessWidget {
                               style: AppTheme.getCardTitleTextStyle(context)),
                           // todo show original contract
                           Text(
-                              '${Format.date.format(bid.biddingTerms.earliestStartDate)} '
+                              '${Format.date.format(bid.biddingTerms.earliestStartDate ?? DateTime.now())} '
                               '- ${Format.date.format(bid.biddingTerms.leaseEndDate!)}',
                               style: AppTheme.getCardBodyTextStyle(context)),
                           Container(height: _itemSpacing),
@@ -139,8 +139,8 @@ class OfferConfirmationScreen extends StatelessWidget {
     int rent, deposit;
     bool water, electricity, gas, rates, management;
 
-    rent = terms.rent;
-    deposit = terms.deposit;
+    rent = terms.rent ?? 0;
+    deposit = terms.deposit ?? 0;
     water = !terms.expenses[Expense.water]!;
     electricity = !terms.expenses[Expense.electricity]!;
     gas = !terms.expenses[Expense.gas]!;

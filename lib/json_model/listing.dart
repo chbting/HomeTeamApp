@@ -36,7 +36,7 @@ enum TermsItem {
   gracePeriod,
   terminationRight,
   earliestTerminationDate,
-  terminationNotice,
+  daysNoticeBeforeTermination,
   structure,
   fixture,
   furniture,
@@ -61,7 +61,7 @@ class TermsItemHelper {
       case TermsItem.gracePeriod:
       case TermsItem.terminationRight:
       case TermsItem.earliestTerminationDate:
-      case TermsItem.terminationNotice:
+      case TermsItem.daysNoticeBeforeTermination:
         return TermsItemSettings(
             negotiable: true, showToTenant: false, showToTenantLocked: false);
       case TermsItem.structure:

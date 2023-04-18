@@ -150,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "msg_failed_to_generate_visit_path":
             MessageLookupByLibrary.simpleMessage("無法生成睇樓路線"),
         "msg_info_required": MessageLookupByLibrary.simpleMessage("需填寫資料"),
+        "msg_input_before_earliest_start":
+            MessageLookupByLibrary.simpleMessage("日期需在最早起租日之後"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("電話號碼無效"),
         "msg_please_input_valid_phone_number":
@@ -185,10 +187,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "please_enter_password": MessageLookupByLibrary.simpleMessage("請輸入密碼"),
         "please_manually_enter_sms_code":
             MessageLookupByLibrary.simpleMessage("請手動輸入驗證碼"),
-        "please_put_in_a_date":
-            MessageLookupByLibrary.simpleMessage("請輸入有效的日期"),
         "please_put_in_a_valid_amount":
             MessageLookupByLibrary.simpleMessage("請輸入有效的金額"),
+        "please_put_in_a_valid_date":
+            MessageLookupByLibrary.simpleMessage("請輸入有效的日期"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
         "processing": MessageLookupByLibrary.simpleMessage("處理中"),
         "properties": MessageLookupByLibrary.simpleMessage("物業"),

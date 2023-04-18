@@ -10,20 +10,19 @@ part 'terms.g.dart';
 @JsonSerializable()
 class Terms {
   int propertyId;
-  int rent, deposit;
+  int? rent, deposit;
 
-  DateTime earliestStartDate; // earliest start date
-  DateTime? latestStartDate;
+  DateTime? earliestStartDate, latestStartDate; // earliest start date
 
   // User fills in either lease length or fixed endDate, not both
   int? leaseLength;
   DateTime? leaseEndDate;
 
-  int gracePeriod;
+  int? gracePeriod;
 
-  PartyType terminationRight; // landlord, tenant, both
-  DateTime earliestTerminationDate;
-  int terminationNotice; // Dates before terminationRightStartDate
+  PartyType? terminationRight; // landlord, tenant, both
+  DateTime? earliestTerminationDate;
+  int? daysNoticeBeforeTermination; // Dates before terminationRightStartDate
 
   Map<Expense, bool> expenses = {
     Expense.structure: true,
@@ -38,18 +37,16 @@ class Terms {
 
   Terms(
       {required this.propertyId,
-      this.rent = -1,
-      this.deposit = -1,
-      DateTime? earliestStartDate,
+      this.rent,
+      this.deposit,
+      this.earliestStartDate,
       this.latestStartDate,
       this.leaseLength,
       this.leaseEndDate,
-      this.gracePeriod = -1,
-      this.terminationRight = PartyType.both,
-      DateTime? terminationRightStartDate,
-      this.terminationNotice = -1})
-      : earliestStartDate = earliestStartDate ?? DateTime.now(),
-        earliestTerminationDate = terminationRightStartDate ?? DateTime.now();
+      this.gracePeriod,
+      this.terminationRight,
+      this.earliestTerminationDate,
+      this.daysNoticeBeforeTermination});
 
   factory Terms.fromJson(Map<String, dynamic> json) => _$TermsFromJson(json);
 

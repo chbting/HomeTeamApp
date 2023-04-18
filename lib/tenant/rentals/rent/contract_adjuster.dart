@@ -295,7 +295,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                   showDatePicker(
                           context: context,
                           helpText: S.of(context).start_date,
-                          initialDate: _bid.biddingTerms.earliestStartDate,
+                          initialDate: _bid.biddingTerms.earliestStartDate ?? DateTime.now(),
                           //todo change to startDate, this is different for the landlord's earliestStartDate
                           firstDate: _leaseStartFirstDate,
                           lastDate: _leaseStartLastDate)
@@ -350,7 +350,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                 validator: (value) {
                   try {
                     var end = Format.date.parse(value!);
-                    if (end.isBefore(_bid.biddingTerms.earliestStartDate)) {
+                    if (end.isBefore(_bid.biddingTerms.earliestStartDate ?? DateTime.now())) {
                       return S.of(context).invalid_date;
                     } else {
                       return null;
@@ -364,14 +364,14 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
   bool _validate() => _formKey.currentState!.validate();
 
   void _updateLeaseEndRange() {
-    _leaseEndFirstDate = DateTime(
-        _bid.biddingTerms.earliestStartDate.year,
-        _bid.biddingTerms.earliestStartDate.month,
-        _bid.biddingTerms.earliestStartDate.day + 1); // 1 day after lease start
-    _leaseEndLastDate = DateTime(
-        _bid.biddingTerms.earliestStartDate.year + _leaseEndRangeInYears,
-        _bid.biddingTerms.earliestStartDate.month,
-        _bid.biddingTerms.earliestStartDate.day - 1);
+    // _leaseEndFirstDate = DateTime(
+    //     _bid.biddingTerms.earliestStartDate.year,
+    //     _bid.biddingTerms.earliestStartDate.month,
+    //     _bid.biddingTerms.earliestStartDate.day + 1); // 1 day after lease start
+    // _leaseEndLastDate = DateTime(
+    //     _bid.biddingTerms.earliestStartDate.year + _leaseEndRangeInYears,
+    //     _bid.biddingTerms.earliestStartDate.month,
+    //     _bid.biddingTerms.earliestStartDate.day - 1);
   }
 
   void _reset() {

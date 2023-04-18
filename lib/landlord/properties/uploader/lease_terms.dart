@@ -23,6 +23,9 @@ class LeaseTermsWidget extends StatefulWidget {
 
 class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final DateTime _today = DateUtils.dateOnly(DateTime.now());
+  late DateTime _withinOneYearFromToday;
+
   late Listing _listing;
   late Terms _terms;
 
@@ -30,6 +33,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   void initState() {
     widget.controller.reset = _reset;
     widget.controller.validate = _validate;
+    _withinOneYearFromToday =
+        _today.copyWith(year: _today.year + 1, day: _today.day - 1);
     super.initState();
   }
 
@@ -62,8 +67,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.rent]!,
               child: TextFormField(
-                  initialValue:
-                      _terms.rent == -1 ? null : _terms.rent.toString(),
+                  initialValue: _terms.rent?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -83,8 +87,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.deposit]!,
               child: TextFormField(
-                  initialValue:
-                      _terms.deposit == -1 ? null : _terms.deposit.toString(),
+                  initialValue: _terms.deposit?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -106,6 +109,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
     );
   }
 
+//todo almost every line is too long to show in english
   Widget _getRentalPeriodSection(BuildContext context) {
     return FormCard(
       title: S.of(context).lease_length,
@@ -118,29 +122,38 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   _listing.settings[TermsItem.earliestStartDate]!,
               child: DatePickerFormField(
                 labelText: S.of(context).lease_earliest_start_date,
-                helperText: S.of(context).lease_earliest_start_date_helper_text,
                 pickerHelpText: S.of(context).lease_earliest_start_date,
                 initialDate: _terms.earliestStartDate,
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now().add(const Duration(days: 180)),
+                firstDate: _today,
+                lastDate: _withinOneYearFromToday,
                 onChanged: (DateTime dateTime) =>
-                    _terms.earliestStartDate = dateTime,
-                validator: null,
+                    setState(() => _terms.earliestStartDate = dateTime),
+                validator: (DateTime? dateTime) {
+                  return dateTime == null
+                      ? S.of(context).please_put_in_a_valid_date
+                      : null;
+                },
               )),
           TermsItemWidget(
+              //todo optional
               termsItemSettings: _listing.settings[TermsItem.latestStartDate]!,
               child: DatePickerFormField(
                 labelText: S.of(context).lease_latest_start_date,
                 pickerHelpText: S.of(context).lease_latest_start_date,
-                initialDate: _terms.latestStartDate ?? DateTime.now(),
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now().add(const Duration(days: 180)),
-                onChanged: (DateTime dateTime) =>
-                    _terms.latestStartDate = dateTime, //todo should not happen without validation
-                validator: (DateTime dateTime) {
-                  if (dateTime.isBefore(_terms.earliestStartDate)) {
-                    return S.of(context).please_put_in_a_date;
+                initialDate: _terms.latestStartDate,
+                firstDate: _terms.earliestStartDate ?? _today,
+                lastDate: _withinOneYearFromToday,
+                validator: (DateTime? dateTime) {
+                  if (dateTime == null) {
+                    return S.of(context).please_put_in_a_valid_date;
                   } else {
+                    if (_terms.earliestStartDate != null) {
+                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                        //todo text is too long to show
+                        return S.of(context).msg_input_before_earliest_start;
+                      }
+                    }
+                    _terms.latestStartDate = dateTime;
                     return null;
                   }
                 },
@@ -148,9 +161,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.leaseLength]!,
               child: TextFormField(
-                  initialValue: _terms.leaseLength == null
-                      ? ''
-                      : _terms.leaseLength.toString(),
+                  initialValue: _terms.leaseLength?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -170,8 +181,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
               child: TextFormField(
-                  initialValue:
-                      _terms.deposit == -1 ? null : _terms.deposit.toString(),
+                  initialValue: _terms.deposit?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -215,20 +225,28 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                 labelText: S.of(context).earliest_termination_day,
                 pickerHelpText: S.of(context).earliest_termination_day,
                 initialDate: _terms.earliestTerminationDate,
-                firstDate: DateTime.now(),
-                lastDate: DateTime.now().add(const Duration(days: 180)),
-                onChanged: (DateTime dateTime) =>
-                    _terms.earliestTerminationDate = dateTime,
-                validator: null, //todo validator, eg not before today
+                firstDate: _terms.earliestStartDate ?? _today,
+                lastDate: _today.copyWith(year: _today.year + 3),
+                validator: (DateTime? dateTime) {
+                  if (dateTime == null) {
+                    return S.of(context).please_put_in_a_valid_date;
+                  } else {
+                    if (_terms.earliestStartDate != null) {
+                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                        return S.of(context).msg_input_before_earliest_start;
+                      }
+                    }
+                    _terms.latestStartDate = dateTime;
+                    return null;
+                  }
+                },
               )),
           TermsItemWidget(
-              // todo if only the the beginning, that use number of days instead and show from which to which date
-              // todo gracePeriod start/end combo
               termsItemSettings:
-                  _listing.settings[TermsItem.terminationNotice]!,
+                  _listing.settings[TermsItem.daysNoticeBeforeTermination]!,
               child: TextFormField(
                   initialValue:
-                      _terms.deposit == -1 ? null : _terms.deposit.toString(),
+                      _terms.daysNoticeBeforeTermination?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,

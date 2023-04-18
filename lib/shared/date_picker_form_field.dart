@@ -17,8 +17,9 @@ class DatePickerFormField extends StatefulWidget {
 
   final String labelText, pickerHelpText;
   final String? helperText;
-  final DateTime initialDate, firstDate, lastDate;
-  final String? Function(DateTime dateTime)? validator;
+  final DateTime? initialDate;
+  final DateTime firstDate, lastDate;
+  final String? Function(DateTime? dateTime)? validator;
   final void Function(DateTime dateTime)? onChanged;
 
   @override
@@ -30,8 +31,10 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
 
   @override
   void initState() {
-    _controller =
-        TextEditingController(text: Format.date.format(widget.initialDate));
+    String initialDateText = widget.initialDate == null
+        ? ''
+        : Format.date.format(widget.initialDate!);
+    _controller = TextEditingController(text: initialDateText);
     super.initState();
   }
 
@@ -43,6 +46,11 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime initialDate = widget.initialDate ?? widget.firstDate;
+    // Failsafe check
+    if (initialDate.isBefore(widget.firstDate)) {
+      initialDate = widget.firstDate;
+    }
     return TextFormField(
         controller: _controller,
         keyboardType: TextInputType.none,
@@ -52,12 +60,12 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
             border: const OutlineInputBorder(),
             labelText: widget.labelText,
             helperText: widget.helperText,
-            helperMaxLines: 3),
+            helperMaxLines: 2),
         onTap: () {
           showDatePicker(
                   context: context,
                   helpText: widget.pickerHelpText,
-                  initialDate: widget.initialDate,
+                  initialDate: initialDate,
                   firstDate: widget.firstDate,
                   lastDate: widget.lastDate)
               .then((value) {
@@ -70,9 +78,17 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
           });
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          var dateTime = Format.date.parse(value!);
-          return widget.validator == null ? null : widget.validator!(dateTime);
+        validator: (String? value) {
+          if (widget.validator == null) {
+            return null;
+          } else {
+            if (value == null) {
+              return widget.validator!(null);
+            } else {
+              var dateTime = Format.date.parse(value);
+              return widget.validator!(dateTime);
+            }
+          }
         });
   }
 }

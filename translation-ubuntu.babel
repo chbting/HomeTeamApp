@@ -2660,6 +2660,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>msg_input_before_earliest_start</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>msg_invalid_phone_number</name>
 						<description/>
 						<comment/>
@@ -3356,7 +3380,7 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>please_put_in_a_date</name>
+						<name>please_put_in_a_valid_amount</name>
 						<description/>
 						<comment/>
 						<default_text/>
@@ -3380,7 +3404,7 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>please_put_in_a_valid_amount</name>
+						<name>please_put_in_a_valid_date</name>
 						<description/>
 						<comment/>
 						<default_text/>

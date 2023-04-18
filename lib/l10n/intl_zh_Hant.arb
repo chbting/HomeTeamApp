@@ -210,5 +210,6 @@
 	"landlord": "業主",
 	"rent": "租金",
 	"lease_earliest_start_date_helper_text": "會顯示為這天或即日，根據哪一天較後",
-	"please_put_in_a_date": "請輸入有效的日期"
+	"please_put_in_a_valid_date": "請輸入有效的日期",
+	"msg_input_before_earliest_start": "日期需在最早起租日之後"
 }

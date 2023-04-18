@@ -1930,20 +1930,20 @@ class S {
     );
   }
 
-  /// `structure`
+  /// `Structure`
   String get structure {
     return Intl.message(
-      'structure',
+      'Structure',
       name: 'structure',
       desc: '',
       args: [],
     );
   }
 
-  /// `fixture`
+  /// `Fixture`
   String get fixture {
     return Intl.message(
-      'fixture',
+      'Fixture',
       name: 'fixture',
       desc: '',
       args: [],
@@ -1980,20 +1980,20 @@ class S {
     );
   }
 
-  /// `Lease earliest start date`
+  /// `Earliest start date`
   String get lease_earliest_start_date {
     return Intl.message(
-      'Lease earliest start date',
+      'Earliest start date',
       name: 'lease_earliest_start_date',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lease latest start date`
+  /// `Latest start date`
   String get lease_latest_start_date {
     return Intl.message(
-      'Lease latest start date',
+      'Latest start date',
       name: 'lease_latest_start_date',
       desc: '',
       args: [],
@@ -2020,20 +2020,10 @@ class S {
     );
   }
 
-  /// `Lease Period`
-  String get lease_length {
-    return Intl.message(
-      'Lease Period',
-      name: 'lease_length',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lease Period (Months)`
+  /// `Lease length (months)`
   String get lease_length_months {
     return Intl.message(
-      'Lease Period (Months)',
+      'Lease length (months)',
       name: 'lease_length_months',
       desc: '',
       args: [],
@@ -2135,6 +2125,26 @@ class S {
     return Intl.message(
       'The date should be after the earliest start date',
       name: 'msg_input_before_earliest_start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lease Period`
+  String get lease_period {
+    return Intl.message(
+      'Lease Period',
+      name: 'lease_period',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End date`
+  String get lease_end_date {
+    return Intl.message(
+      'End date',
+      name: 'lease_end_date',
       desc: '',
       args: [],
     );

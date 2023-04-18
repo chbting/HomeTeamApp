@@ -51,7 +51,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
               left: 8.0, right: 8.0, bottom: StandardStepper.bottomMargin),
           children: [
             _getRentSection(context),
-            _getRentalPeriodSection(context),
+            _getLeasePeriodSection(context),
             _getExpensesSection(context),
           ],
         ));
@@ -110,9 +110,9 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   }
 
 //todo almost every line is too long to show in english
-  Widget _getRentalPeriodSection(BuildContext context) {
+  Widget _getLeasePeriodSection(BuildContext context) {
     return FormCard(
-      title: S.of(context).lease_length,
+      title: S.of(context).lease_period,
       body: Wrap(
         runSpacing: 16.0,
         children: [
@@ -135,7 +135,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                 },
               )),
           TermsItemWidget(
-              //todo optional
+              //todo make optional
               termsItemSettings: _listing.settings[TermsItem.latestStartDate]!,
               child: DatePickerFormField(
                 labelText: S.of(context).lease_latest_start_date,
@@ -178,6 +178,30 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                       return null;
                     }
                   })),
+          TermsItemWidget(
+              //todo make optional
+              termsItemSettings: _listing.settings[TermsItem.leaseEndDate]!,
+              child: DatePickerFormField(
+                labelText: S.of(context).lease_end_date,
+                pickerHelpText: S.of(context).lease_end_date,
+                initialDate: _terms.leaseEndDate,
+                firstDate: _terms.earliestStartDate ?? _today,
+                lastDate: _today.copyWith(year: _today.year + 3),
+                validator: (DateTime? dateTime) {
+                  if (dateTime == null) {
+                    return S.of(context).please_put_in_a_valid_date;
+                  } else {
+                    if (_terms.earliestStartDate != null) {
+                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                        //todo text is too long to show
+                        return S.of(context).msg_input_before_earliest_start;
+                      }
+                    }
+                    _terms.latestStartDate = dateTime;
+                    return null;
+                  }
+                },
+              )),
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
               child: TextFormField(
@@ -291,7 +315,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             const TermExpenseItem(
                 expense: Expense.rates, termsItem: TermsItem.rates),
             const TermExpenseItem(
-                expense: Expense.management, termsItem: TermsItem.management),
+                expense: Expense.management, termsItem: TermsItem.management),//todo line is too long for english
           ],
         ));
   }

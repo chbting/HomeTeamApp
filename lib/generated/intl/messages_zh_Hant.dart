@@ -124,13 +124,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "lease_contract": MessageLookupByLibrary.simpleMessage(
             "住宅租約\n\n本合約訂於(⽇/⽉/年) 05/06/2021 由業主及租客訂⽴ , 雙⽅資料詳列於附表⼀。\n\n業主及租客雙⽅以詳列於附表⼀的租期及租⾦分別租出及租⼊詳列於附表⼀的物業，並同意遵守及履⾏下列條款：\n\n1. 租客須在租期內每個⽉份的1號或以前上期繳付指定的租⾦予業主。倘租客於應繳租⾦之⽇的七天內仍未清付該租⾦，則業主有權採取適當⾏動追討租客所⽋的租⾦，⽽由此⽽引起的⼀切費⽤及開⽀將構成租客所⽋業主的債項，業主將有權向租 客⼀併追討所⽋款項全數。\n\n2. 租客在沒有業主書⾯同意前，不得對該物業作任何改動及/或加建。\n\n3. 租客不得轉讓、轉租或分租該物業或其他任何部份或將該物業或其他任何部份的佔⽤權讓予任何其他⼈\n等。此租約權益為租客個⼈擁有。\n\n4. 租客須遵守⾹港⼀⼲法律條例和規則及該物業所屬的⼤廈有關的公契內的條款。租客亦不可違反屬該物\n業地段內的官批地契 上的任何制約性條款。\n\n5. 租客須在租約期內清繳有關物業的⽔費、電費、煤氣費、電話費及其他類似的雜費。\n\n6. 租客須在租約期內保持物業內部的維修狀態良好(⾃然損耗及因固有的缺陷所產⽣的損壞除外)並須於租約期滿或終⽌時將物業在同樣維修狀態下交吉回業主。"),
         "lease_earliest_start_date":
-            MessageLookupByLibrary.simpleMessage("最早起租日"),
+            MessageLookupByLibrary.simpleMessage("最早起租日期"),
         "lease_earliest_start_date_helper_text":
             MessageLookupByLibrary.simpleMessage("會顯示為這天或即日，根據哪一天較後"),
+        "lease_end_date": MessageLookupByLibrary.simpleMessage("租約結束日期"),
         "lease_latest_start_date":
             MessageLookupByLibrary.simpleMessage("最遲起租日"),
-        "lease_length": MessageLookupByLibrary.simpleMessage("租期"),
         "lease_length_months": MessageLookupByLibrary.simpleMessage("租期 (月)"),
+        "lease_period": MessageLookupByLibrary.simpleMessage("租期"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("租約條款"),
         "living_dining_room": MessageLookupByLibrary.simpleMessage("客/飯廳"),
         "mailing_address": MessageLookupByLibrary.simpleMessage("郵寄地址"),

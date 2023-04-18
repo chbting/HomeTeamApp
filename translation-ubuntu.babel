@@ -2180,6 +2180,30 @@
 						</translations>
 					</concept_node>
 					<concept_node>
+						<name>lease_end_date</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
 						<name>lease_latest_start_date</name>
 						<description/>
 						<comment/>
@@ -2204,7 +2228,7 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>lease_length</name>
+						<name>lease_length_months</name>
 						<description/>
 						<comment/>
 						<default_text/>
@@ -2228,7 +2252,7 @@
 						</translations>
 					</concept_node>
 					<concept_node>
-						<name>lease_length_months</name>
+						<name>lease_period</name>
 						<description/>
 						<comment/>
 						<default_text/>

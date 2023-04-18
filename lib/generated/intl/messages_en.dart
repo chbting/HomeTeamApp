@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
-        "fixture": MessageLookupByLibrary.simpleMessage("fixture"),
+        "fixture": MessageLookupByLibrary.simpleMessage("Fixture"),
         "furniture": MessageLookupByLibrary.simpleMessage("Furniture"),
         "general_settings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
@@ -146,15 +146,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "lease_contract": MessageLookupByLibrary.simpleMessage(
             "residential lease\n\nThis contract was signed on (day/month/year) 05/06/2021 by the landlord and the tenant. The details of the two parties are listed in Schedule 1.\n\nThe Landlord and the Tenant both rent out and lease the properties detailed in Table 1 for the lease terms and rents detailed in Table 1, and agree to abide by and perform the following terms:\n\n1. The tenant must pay the specified rent to the landlord on or before the 1st of each month of the lease term. If the tenant does not pay the rent within seven days of the date when the rent is due, the landlord has the right to take appropriate action to recover the rent at the tenant\'s expense, and all costs and Expenses will constitute a debt of the tenant\'s landlord, and the landlord will be entitled to recover the full amount of all monies together with the tenant.\n\n2. The Tenant shall not make any alterations and/or additions to the property without the written consent of the Landlord.\n\n3. The tenant shall not assign, sublet or sublet the property or any other part or transfer the right to occupy the property or any other part to any other person\nWait. This leasehold interest is owned by the tenant personally.\n\n4. Tenants are required to abide by a number of Hong Kong laws and regulations and the terms of the mutual covenant in relation to the building to which the property belongs. The tenant shall also not violate the\nany restrictive clauses in the official title deed within the lot.\n\n5. The tenant is required to settle the water, electricity, gas, telephone and other similar miscellaneous charges for the property within the lease term.\n\n6. The tenant must keep the property in good repair during the lease term (except for natural wear and tear and damage caused by inherent defects) and must hand over the property in the same state of repair at the expiration or termination of the lease. Ji back to the owner."),
         "lease_earliest_start_date":
-            MessageLookupByLibrary.simpleMessage("Lease earliest start date"),
+            MessageLookupByLibrary.simpleMessage("Earliest start date"),
         "lease_earliest_start_date_helper_text":
             MessageLookupByLibrary.simpleMessage(
                 "Will be shown as this date or today, which ever is the latest"),
+        "lease_end_date": MessageLookupByLibrary.simpleMessage("End date"),
         "lease_latest_start_date":
-            MessageLookupByLibrary.simpleMessage("Lease latest start date"),
-        "lease_length": MessageLookupByLibrary.simpleMessage("Lease Period"),
+            MessageLookupByLibrary.simpleMessage("Latest start date"),
         "lease_length_months":
-            MessageLookupByLibrary.simpleMessage("Lease Period (Months)"),
+            MessageLookupByLibrary.simpleMessage("Lease length (months)"),
+        "lease_period": MessageLookupByLibrary.simpleMessage("Lease Period"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("Lease Terms"),
         "living_dining_room":
             MessageLookupByLibrary.simpleMessage("Living/Dining room"),
@@ -298,7 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
-        "structure": MessageLookupByLibrary.simpleMessage("structure"),
+        "structure": MessageLookupByLibrary.simpleMessage("Structure"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),

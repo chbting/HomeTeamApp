@@ -158,15 +158,25 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   }
                 },
               )),
-          TermsItemWidget(
-              termsItemSettings: _listing.settings[TermsItem.leaseLength]!,
+          const Divider(thickness: 1.0),
+          Row(children: [
+            Radio<LeasePeriodType>(
+                value: LeasePeriodType.specificLength,
+                groupValue: _terms.leasePeriodType,
+                onChanged: (value) => setState(() {
+                      _terms.leasePeriodType = value!;
+                      //todo disable/enable textfield
+                    })),
+            Expanded(
               child: TextFormField(
+                  enabled:
+                      _terms.leasePeriodType == LeasePeriodType.specificLength,
                   initialValue: _terms.leaseLength?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       labelText: S.of(context).lease_length_months),
@@ -177,16 +187,25 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                       _terms.leaseLength = int.parse(value);
                       return null;
                     }
-                  })),
-          TermsItemWidget(
-              //todo make optional
-              termsItemSettings: _listing.settings[TermsItem.leaseEndDate]!,
+                  }),
+            )
+          ]),
+          Row(children: [
+            Radio<LeasePeriodType>(
+                value: LeasePeriodType.specificEndDate,
+                groupValue: _terms.leasePeriodType,
+                onChanged: (value) => setState(() {
+                      _terms.leasePeriodType = value!;
+                    })),
+            Expanded(
               child: DatePickerFormField(
                 labelText: S.of(context).lease_end_date,
                 pickerHelpText: S.of(context).lease_end_date,
                 initialDate: _terms.leaseEndDate,
                 firstDate: _terms.earliestStartDate ?? _today,
                 lastDate: _today.copyWith(year: _today.year + 3),
+                enabled:
+                    _terms.leasePeriodType == LeasePeriodType.specificEndDate,
                 validator: (DateTime? dateTime) {
                   if (dateTime == null) {
                     return S.of(context).please_put_in_a_valid_date;
@@ -201,7 +220,10 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                     return null;
                   }
                 },
-              )),
+              ),
+            )
+          ]),
+          const Divider(thickness: 1.0),
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
               child: TextFormField(
@@ -315,7 +337,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             const TermExpenseItem(
                 expense: Expense.rates, termsItem: TermsItem.rates),
             const TermExpenseItem(
-                expense: Expense.management, termsItem: TermsItem.management),//todo line is too long for english
+                expense: Expense.management, termsItem: TermsItem.management),
+            //todo line is too long for english
           ],
         ));
   }

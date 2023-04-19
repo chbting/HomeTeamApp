@@ -12,6 +12,7 @@ class DatePickerFormField extends StatefulWidget {
       required this.initialDate,
       required this.firstDate,
       required this.lastDate,
+      this.enabled = true,
       this.validator,
       this.onChanged});
 
@@ -21,6 +22,7 @@ class DatePickerFormField extends StatefulWidget {
   final DateTime firstDate, lastDate;
   final String? Function(DateTime? dateTime)? validator;
   final void Function(DateTime dateTime)? onChanged;
+  final bool enabled;
 
   @override
   State<StatefulWidget> createState() => DatePickerFormFieldState();
@@ -53,6 +55,7 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
     }
     return TextFormField(
         controller: _controller,
+        enabled: widget.enabled,
         keyboardType: TextInputType.none,
         showCursor: false,
         enableInteractiveSelection: false,

@@ -1,7 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -50,7 +49,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
     ];
     final pages = [
       PropertyInfoWidget(controller: _propertyInfoWidgetController),
-      const Text('2'),//PropertyImagesWidget(),
+      const Text('2'), //PropertyImagesWidget(),
       LeaseTermsWidget(controller: _leaseTermsWidgetController),
       const Center(child: Text('4')),
       const Center(child: Text('5'))
@@ -72,18 +71,19 @@ class PropertyUploaderState extends State<PropertyUploader> {
             ? _propertyInfoWidgetController.resetForm()
             : _controller.previousStep();
       },
-      rightButtonIcon:
-          Icon(_activeStep == 3 ? Icons.check : Icons.arrow_forward),
-      rightButtonLabel:
-          Text(_activeStep == 3 ? S.of(context).submit : S.of(context).next),
+      rightButtonIcon: Icon(
+          _activeStep == steps.length - 1 ? Icons.check : Icons.arrow_forward),
+      rightButtonLabel: Text(_activeStep == steps.length - 1
+          ? S.of(context).submit
+          : S.of(context).next),
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
-           //if (_propertyInfoWidgetController.validate()) {
-              _controller.nextStep();
-           // }
+            //if (_propertyInfoWidgetController.validate()) {
+            _controller.nextStep();
+            // }
             break;
-          case 3:
+          case 4:
             _confirm();
             break;
           default:

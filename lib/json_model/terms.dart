@@ -15,6 +15,7 @@ class Terms {
   DateTime? earliestStartDate, latestStartDate; // earliest start date
 
   // User fills in either lease length or fixed endDate, not both
+  LeasePeriodType leasePeriodType;
   int? leaseLength;
   DateTime? leaseEndDate;
 
@@ -41,6 +42,7 @@ class Terms {
       this.deposit,
       this.earliestStartDate,
       this.latestStartDate,
+      this.leasePeriodType = LeasePeriodType.specificLength,
       this.leaseLength,
       this.leaseEndDate,
       this.gracePeriod,
@@ -67,3 +69,5 @@ class PartyTypeHelper {
     }
   }
 }
+
+enum LeasePeriodType { specificLength, specificEndDate }

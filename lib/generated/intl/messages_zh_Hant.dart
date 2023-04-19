@@ -129,7 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("會顯示為這天或即日，根據哪一天較後"),
         "lease_end_date": MessageLookupByLibrary.simpleMessage("租約結束日期"),
         "lease_latest_start_date":
-            MessageLookupByLibrary.simpleMessage("最遲起租日"),
+            MessageLookupByLibrary.simpleMessage("最遲起租日期"),
         "lease_length_months": MessageLookupByLibrary.simpleMessage("租期 (月)"),
         "lease_period": MessageLookupByLibrary.simpleMessage("租期"),
         "lease_terms": MessageLookupByLibrary.simpleMessage("租約條款"),

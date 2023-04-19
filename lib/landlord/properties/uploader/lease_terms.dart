@@ -57,6 +57,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
         ));
   }
 
+  //todo negotiable only, don't need to show: show to tenant
   Widget _getRentSection(BuildContext context) {
     return FormCard(
       title: S.of(context).rent,
@@ -116,57 +117,73 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
       body: Wrap(
         runSpacing: 16.0,
         children: [
-          TermsItemWidget.getTitleBar(context),
-          TermsItemWidget(
-              termsItemSettings:
-                  _listing.settings[TermsItem.earliestStartDate]!,
-              child: DatePickerFormField(
-                labelText: S.of(context).lease_earliest_start_date,
-                pickerHelpText: S.of(context).lease_earliest_start_date,
-                initialDate: _terms.earliestStartDate,
-                firstDate: _today,
-                lastDate: _withinOneYearFromToday,
-                onChanged: (DateTime dateTime) =>
-                    setState(() => _terms.earliestStartDate = dateTime),
-                validator: (DateTime? dateTime) {
-                  return dateTime == null
-                      ? S.of(context).please_put_in_a_valid_date
-                      : null;
-                },
-              )),
-          TermsItemWidget(
-              //todo make optional
-              termsItemSettings: _listing.settings[TermsItem.latestStartDate]!,
-              child: DatePickerFormField(
-                labelText: S.of(context).lease_latest_start_date,
-                pickerHelpText: S.of(context).lease_latest_start_date,
-                initialDate: _terms.latestStartDate,
-                firstDate: _terms.earliestStartDate ?? _today,
-                lastDate: _withinOneYearFromToday,
-                validator: (DateTime? dateTime) {
-                  if (dateTime == null) {
-                    return S.of(context).please_put_in_a_valid_date;
-                  } else {
-                    if (_terms.earliestStartDate != null) {
-                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                        //todo text is too long to show
-                        return S.of(context).msg_input_before_earliest_start;
-                      }
-                    }
-                    _terms.latestStartDate = dateTime;
-                    return null;
-                  }
-                },
-              )),
+          IntrinsicHeight(
+            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Expanded(
+                child: DatePickerFormField(
+                  labelText: S.of(context).lease_earliest_start_date,
+                  pickerHelpText: S.of(context).lease_earliest_start_date,
+                  initialDate: _terms.earliestStartDate,
+                  firstDate: _today,
+                  lastDate: _withinOneYearFromToday,
+                  onChanged: (DateTime dateTime) =>
+                      setState(() => _terms.earliestStartDate = dateTime),
+                  validator: (DateTime? dateTime) {
+                    return dateTime == null
+                        ? S.of(context).please_put_in_a_valid_date
+                        : null;
+                  },
+                ),
+              ),
+              const VerticalDivider(thickness: 1.0),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: DatePickerFormField(
+                        enabled: _terms.latestStartDateEnabled,
+                        labelText: S.of(context).lease_latest_start_date,
+                        pickerHelpText: S.of(context).lease_latest_start_date,
+                        initialDate: _terms.latestStartDate,
+                        firstDate: _terms.earliestStartDate ?? _today,
+                        lastDate: _withinOneYearFromToday,
+                        validator: (DateTime? dateTime) {
+                          if (dateTime == null) {
+                            return S.of(context).please_put_in_a_valid_date;
+                          } else {
+                            if (_terms.earliestStartDate != null) {
+                              if (dateTime
+                                  .isBefore(_terms.earliestStartDate!)) {
+                                //todo text is too long to show
+                                return S
+                                    .of(context)
+                                    .msg_input_before_earliest_start;
+                              }
+                            }
+                            _terms.latestStartDate = dateTime;
+                            return null;
+                          }
+                        },
+                      ),
+                    ),
+                    Checkbox(
+                        //todo error text is still showing after toggling to disable
+                        value: _terms.latestStartDateEnabled,
+                        onChanged: (value) => setState(
+                            () => _terms.latestStartDateEnabled = value!))
+                  ],
+                ),
+              ),
+            ]),
+          ),
           const Divider(thickness: 1.0),
           Row(children: [
             Radio<LeasePeriodType>(
                 value: LeasePeriodType.specificLength,
                 groupValue: _terms.leasePeriodType,
-                onChanged: (value) => setState(() {
-                      _terms.leasePeriodType = value!;
-                      //todo disable/enable textfield
-                    })),
+                onChanged: (value) =>
+                    setState(() => _terms.leasePeriodType = value!)),
             Expanded(
               child: TextFormField(
                   enabled:
@@ -194,9 +211,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             Radio<LeasePeriodType>(
                 value: LeasePeriodType.specificEndDate,
                 groupValue: _terms.leasePeriodType,
-                onChanged: (value) => setState(() {
-                      _terms.leasePeriodType = value!;
-                    })),
+                onChanged: (value) =>
+                    setState(() => _terms.leasePeriodType = value!)),
             Expanded(
               child: DatePickerFormField(
                 labelText: S.of(context).lease_end_date,

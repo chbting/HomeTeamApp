@@ -197,7 +197,7 @@
 	"negotiable": "可商議",
 	"show_to_tenant": "對租客顯示",
 	"lease_earliest_start_date": "最早起租日期",
-	"lease_latest_start_date": "最遲起租日",
+	"lease_latest_start_date": "最遲起租日期",
 	"landlord_expenses": "業主負責費用",
 	"grace_period_days": "免租期 (日)",
 	"lease_length_months": "租期 (月)",

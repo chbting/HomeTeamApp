@@ -26,11 +26,10 @@ class Listing {
   Map<String, dynamic> toJson() => _$ListingToJson(this);
 }
 
+// todo confusing enum type
 enum TermsItem {
   rent,
   deposit,
-  earliestStartDate,
-  latestStartDate,
   leaseLength,
   leaseEndDate,
   gracePeriod,
@@ -52,12 +51,10 @@ class TermsItemHelper {
     switch (item) {
       case TermsItem.rent:
       case TermsItem.deposit:
-      case TermsItem.earliestStartDate:
       case TermsItem.leaseLength:
       case TermsItem.leaseEndDate:
         return TermsItemSettings(
             negotiable: true, showToTenant: true, showToTenantLocked: true);
-      case TermsItem.latestStartDate:
       case TermsItem.gracePeriod:
       case TermsItem.terminationRight:
       case TermsItem.earliestTerminationDate:

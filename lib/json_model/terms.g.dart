@@ -16,6 +16,9 @@ Terms _$TermsFromJson(Map<String, dynamic> json) => Terms(
       latestStartDate: json['latestStartDate'] == null
           ? null
           : DateTime.parse(json['latestStartDate'] as String),
+      leasePeriodType: $enumDecodeNullable(
+              _$LeasePeriodTypeEnumMap, json['leasePeriodType']) ??
+          LeasePeriodType.specificLength,
       leaseLength: json['leaseLength'] as int?,
       leaseEndDate: json['leaseEndDate'] == null
           ? null
@@ -37,6 +40,7 @@ Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{
       'deposit': instance.deposit,
       'earliestStartDate': instance.earliestStartDate?.toIso8601String(),
       'latestStartDate': instance.latestStartDate?.toIso8601String(),
+      'leasePeriodType': _$LeasePeriodTypeEnumMap[instance.leasePeriodType]!,
       'leaseLength': instance.leaseLength,
       'leaseEndDate': instance.leaseEndDate?.toIso8601String(),
       'gracePeriod': instance.gracePeriod,
@@ -47,6 +51,11 @@ Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{
       'expenses':
           instance.expenses.map((k, e) => MapEntry(_$ExpenseEnumMap[k]!, e)),
     };
+
+const _$LeasePeriodTypeEnumMap = {
+  LeasePeriodType.specificLength: 'specificLength',
+  LeasePeriodType.specificEndDate: 'specificEndDate',
+};
 
 const _$PartyTypeEnumMap = {
   PartyType.landlord: 'landlord',

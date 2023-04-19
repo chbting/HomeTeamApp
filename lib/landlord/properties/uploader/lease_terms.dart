@@ -64,10 +64,22 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
       body: Wrap(
         runSpacing: 16.0,
         children: [
-          TermsItemWidget.getTitleBar(context),
-          TermsItemWidget(
-              termsItemSettings: _listing.settings[TermsItem.rent]!,
-              child: TextFormField(
+          // todo alignment
+          Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                child:
+                    Text(S.of(context).negotiable, textAlign: TextAlign.center),
+              )),
+          ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.monetization_on), // todo center icon
+              trailing: Checkbox(
+                  value: _listing.settings[TermsItem.rent]!.negotiable,
+                  onChanged: (value) => setState(() =>
+                      _listing.settings[TermsItem.rent]!.negotiable = value!)),
+              title: TextFormField( //todo comma separated numbers
                   initialValue: _terms.rent?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -76,6 +88,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
+                      prefix: const Text('\$ '),
                       labelText: S.of(context).monthly_rent),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -85,9 +98,14 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                       return null;
                     }
                   })),
-          TermsItemWidget(
-              termsItemSettings: _listing.settings[TermsItem.deposit]!,
-              child: TextFormField(
+          ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Icons.savings), // todo center icon
+              trailing: Checkbox(
+                  value: _listing.settings[TermsItem.deposit]!.negotiable,
+                  onChanged: (value) => setState(() => _listing
+                      .settings[TermsItem.deposit]!.negotiable = value!)),
+              title: TextFormField(
                   initialValue: _terms.deposit?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -96,6 +114,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
+                      prefix: const Text('\$ '),
                       labelText: S.of(context).deposit),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -115,130 +134,124 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
     return FormCard(
       title: S.of(context).lease_period,
       body: Wrap(
-        runSpacing: 16.0,
+        runSpacing: 8.0, //note: ListTile has 4.0 internal vertical padding
         children: [
-          IntrinsicHeight(
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Expanded(
-                child: DatePickerFormField(
-                  labelText: S.of(context).lease_earliest_start_date,
-                  pickerHelpText: S.of(context).lease_earliest_start_date,
-                  initialDate: _terms.earliestStartDate,
-                  firstDate: _today,
-                  lastDate: _withinOneYearFromToday,
-                  onChanged: (DateTime dateTime) =>
-                      setState(() => _terms.earliestStartDate = dateTime),
-                  validator: (DateTime? dateTime) {
-                    return dateTime == null
-                        ? S.of(context).please_put_in_a_valid_date
-                        : null;
-                  },
-                ),
+          DatePickerFormField(
+            labelText: S.of(context).lease_earliest_start_date,
+            pickerHelpText: S.of(context).lease_earliest_start_date,
+            initialDate: _terms.earliestStartDate,
+            firstDate: _today,
+            lastDate: _withinOneYearFromToday,
+            leading: Opacity(
+              opacity: 0.0,
+              child: Checkbox(
+                value: true,
+                onChanged: (_) {},
               ),
-              const VerticalDivider(thickness: 1.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: DatePickerFormField(
-                        enabled: _terms.latestStartDateEnabled,
-                        labelText: S.of(context).lease_latest_start_date,
-                        pickerHelpText: S.of(context).lease_latest_start_date,
-                        initialDate: _terms.latestStartDate,
-                        firstDate: _terms.earliestStartDate ?? _today,
-                        lastDate: _withinOneYearFromToday,
-                        validator: (DateTime? dateTime) {
-                          if (dateTime == null) {
-                            return S.of(context).please_put_in_a_valid_date;
-                          } else {
-                            if (_terms.earliestStartDate != null) {
-                              if (dateTime
-                                  .isBefore(_terms.earliestStartDate!)) {
-                                //todo text is too long to show
-                                return S
-                                    .of(context)
-                                    .msg_input_before_earliest_start;
-                              }
-                            }
-                            _terms.latestStartDate = dateTime;
-                            return null;
-                          }
-                        },
-                      ),
-                    ),
-                    Checkbox(
-                        //todo error text is still showing after toggling to disable
-                        value: _terms.latestStartDateEnabled,
-                        onChanged: (value) => setState(
-                            () => _terms.latestStartDateEnabled = value!))
-                  ],
-                ),
-              ),
-            ]),
+            ),
+            onChanged: (DateTime dateTime) =>
+                setState(() => _terms.earliestStartDate = dateTime),
+            validator: (DateTime? dateTime) {
+              return dateTime == null
+                  ? S.of(context).please_put_in_a_valid_date
+                  : null;
+            },
+          ),
+          DatePickerFormField(
+            enabled: _terms.latestStartDateEnabled,
+            labelText: S.of(context).lease_latest_start_date,
+            pickerHelpText: S.of(context).lease_latest_start_date,
+            initialDate: _terms.latestStartDate,
+            firstDate: _terms.earliestStartDate ?? _today,
+            lastDate: _withinOneYearFromToday,
+            leading: Checkbox(
+                //todo error text is still showing after toggling to disable
+                value: _terms.latestStartDateEnabled,
+                onChanged: (value) =>
+                    setState(() => _terms.latestStartDateEnabled = value!)),
+            validator: (DateTime? dateTime) {
+              if (dateTime == null) {
+                return S.of(context).please_put_in_a_valid_date;
+              } else {
+                if (_terms.earliestStartDate != null) {
+                  if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                    //todo text is too long to show
+                    return S.of(context).msg_input_before_earliest_start;
+                  }
+                }
+                _terms.latestStartDate = dateTime;
+                return null;
+              }
+            },
           ),
           const Divider(thickness: 1.0),
-          Row(children: [
-            Radio<LeasePeriodType>(
+          // todo negotiable checkbox
+          ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Checkbox(value: true, onChanged: (value) {}),
+              title: Text(S.of(context).negotiable),
+              trailing: Checkbox(value: true, onChanged: (value) {})),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            minVerticalPadding: 0.0,
+            leading: Radio<LeasePeriodType>(
                 value: LeasePeriodType.specificLength,
                 groupValue: _terms.leasePeriodType,
                 onChanged: (value) =>
                     setState(() => _terms.leasePeriodType = value!)),
-            Expanded(
-              child: TextFormField(
-                  enabled:
-                      _terms.leasePeriodType == LeasePeriodType.specificLength,
-                  initialValue: _terms.leaseLength?.toString() ?? '',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: S.of(context).lease_length_months),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return S.of(context).please_put_in_a_valid_amount;
-                    } else {
-                      _terms.leaseLength = int.parse(value);
-                      return null;
-                    }
-                  }),
-            )
-          ]),
-          Row(children: [
-            Radio<LeasePeriodType>(
+            title: TextFormField(
+                enabled:
+                    _terms.leasePeriodType == LeasePeriodType.specificLength,
+                initialValue: _terms.leaseLength?.toString() ?? '',
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: S.of(context).lease_length_months),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S.of(context).please_put_in_a_valid_amount;
+                  } else {
+                    _terms.leaseLength = int.parse(value);
+                    return null;
+                  }
+                }),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            minVerticalPadding: 0.0,
+            leading: Radio<LeasePeriodType>(
                 value: LeasePeriodType.specificEndDate,
                 groupValue: _terms.leasePeriodType,
                 onChanged: (value) =>
                     setState(() => _terms.leasePeriodType = value!)),
-            Expanded(
-              child: DatePickerFormField(
-                labelText: S.of(context).lease_end_date,
-                pickerHelpText: S.of(context).lease_end_date,
-                initialDate: _terms.leaseEndDate,
-                firstDate: _terms.earliestStartDate ?? _today,
-                lastDate: _today.copyWith(year: _today.year + 3),
-                enabled:
-                    _terms.leasePeriodType == LeasePeriodType.specificEndDate,
-                validator: (DateTime? dateTime) {
-                  if (dateTime == null) {
-                    return S.of(context).please_put_in_a_valid_date;
-                  } else {
-                    if (_terms.earliestStartDate != null) {
-                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                        //todo text is too long to show
-                        return S.of(context).msg_input_before_earliest_start;
-                      }
+            title: DatePickerFormField(
+              labelText: S.of(context).lease_end_date,
+              pickerHelpText: S.of(context).lease_end_date,
+              initialDate: _terms.leaseEndDate,
+              firstDate: _terms.earliestStartDate ?? _today,
+              lastDate: _today.copyWith(year: _today.year + 3),
+              enabled:
+                  _terms.leasePeriodType == LeasePeriodType.specificEndDate,
+              validator: (DateTime? dateTime) {
+                if (dateTime == null) {
+                  return S.of(context).please_put_in_a_valid_date;
+                } else {
+                  if (_terms.earliestStartDate != null) {
+                    if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                      //todo text is too long to show
+                      return S.of(context).msg_input_before_earliest_start;
                     }
-                    _terms.latestStartDate = dateTime;
-                    return null;
                   }
-                },
-              ),
-            )
-          ]),
+                  _terms.latestStartDate = dateTime;
+                  return null;
+                }
+              },
+            ),
+          ),
           const Divider(thickness: 1.0),
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,

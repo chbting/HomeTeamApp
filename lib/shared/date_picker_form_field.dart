@@ -13,6 +13,8 @@ class DatePickerFormField extends StatefulWidget {
       required this.firstDate,
       required this.lastDate,
       this.enabled = true,
+      this.leading,
+      this.trailing,
       this.validator,
       this.onChanged});
 
@@ -23,6 +25,7 @@ class DatePickerFormField extends StatefulWidget {
   final String? Function(DateTime? dateTime)? validator;
   final void Function(DateTime dateTime)? onChanged;
   final bool enabled;
+  final Widget? leading, trailing;
 
   @override
   State<StatefulWidget> createState() => DatePickerFormFieldState();
@@ -53,45 +56,50 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
     if (initialDate.isBefore(widget.firstDate)) {
       initialDate = widget.firstDate;
     }
-    return TextFormField(
-        controller: _controller,
-        enabled: widget.enabled,
-        keyboardType: TextInputType.none,
-        showCursor: false,
-        enableInteractiveSelection: false,
-        decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: widget.labelText,
-            helperText: widget.helperText,
-            helperMaxLines: 2),
-        onTap: () {
-          showDatePicker(
-                  context: context,
-                  helpText: widget.pickerHelpText,
-                  initialDate: initialDate,
-                  firstDate: widget.firstDate,
-                  lastDate: widget.lastDate)
-              .then((value) {
-            if (value != null) {
-              _controller.text = Format.date.format(value);
-              if (widget.onChanged != null) {
-                widget.onChanged!(value);
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: widget.leading,
+      trailing: widget.trailing,
+      title: TextFormField(
+          controller: _controller,
+          enabled: widget.enabled,
+          keyboardType: TextInputType.none,
+          showCursor: false,
+          enableInteractiveSelection: false,
+          decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: widget.labelText,
+              helperText: widget.helperText,
+              helperMaxLines: 2),
+          onTap: () {
+            showDatePicker(
+                    context: context,
+                    helpText: widget.pickerHelpText,
+                    initialDate: initialDate,
+                    firstDate: widget.firstDate,
+                    lastDate: widget.lastDate)
+                .then((value) {
+              if (value != null) {
+                _controller.text = Format.date.format(value);
+                if (widget.onChanged != null) {
+                  widget.onChanged!(value);
+                }
+              }
+            });
+          },
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (String? value) {
+            if (widget.validator == null) {
+              return null;
+            } else {
+              if (value == null) {
+                return widget.validator!(null);
+              } else {
+                var dateTime = Format.date.parse(value);
+                return widget.validator!(dateTime);
               }
             }
-          });
-        },
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (String? value) {
-          if (widget.validator == null) {
-            return null;
-          } else {
-            if (value == null) {
-              return widget.validator!(null);
-            } else {
-              var dateTime = Format.date.parse(value);
-              return widget.validator!(dateTime);
-            }
-          }
-        });
+          }),
+    );
   }
 }

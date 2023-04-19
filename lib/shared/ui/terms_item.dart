@@ -27,6 +27,16 @@ class TermsItemWidget extends StatefulWidget {
               Text(S.of(context).show_to_tenant, textAlign: TextAlign.center))
     ]);
   }
+
+  static Widget getTitleBarNegotiableOnly(BuildContext context) {
+    return Row(children: [
+      Expanded(flex: 3, child: Container()),
+      Expanded(
+          flex: 1,
+          child:
+          Text(S.of(context).negotiable, textAlign: TextAlign.center))
+    ]);
+  }
 }
 
 class TermsItemWidgetState extends State<TermsItemWidget> {

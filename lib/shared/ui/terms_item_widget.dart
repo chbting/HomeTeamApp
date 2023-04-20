@@ -3,6 +3,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
+import 'package:hometeam_client/json_model/terms_item.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 
 class TermsItemWidget extends StatefulWidget {
@@ -18,9 +19,14 @@ class TermsItemWidget extends StatefulWidget {
   static Widget getTitleBar(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
       Expanded(child: Container()),
-      SizedBox(width: 48.0, child: Text(S.of(context).show_to_tenant, textAlign: TextAlign.center)),
+      SizedBox(
+          width: 48.0,
+          child:
+              Text(S.of(context).show_to_tenant, textAlign: TextAlign.center)),
       const SizedBox(width: 16.0),
-      SizedBox(width: 48.0, child: Text(S.of(context).negotiable, textAlign: TextAlign.center))
+      SizedBox(
+          width: 48.0,
+          child: Text(S.of(context).negotiable, textAlign: TextAlign.center))
     ]);
   }
 }
@@ -30,26 +36,16 @@ class TermsItemWidgetState extends State<TermsItemWidget> {
   Widget build(BuildContext context) {
     return Row(children: [
       Expanded(child: widget.child),
-      SizedBox(
-        width: 48.0,
-        child: Checkbox(
-            value: widget.termsItemSettings.showToTenant,
-            onChanged: widget.termsItemSettings.showToTenantLocked
-                ? null
-                : (bool? value) => setState(
-                    () => widget.termsItemSettings.showToTenant = value!)),
-      ),
       const SizedBox(width: 16.0),
-      SizedBox(
-        width: 48.0,
-        child: Checkbox(
-            value: widget.termsItemSettings.negotiable,
-            onChanged: (bool? value) =>
-                setState(() => widget.termsItemSettings.negotiable = value!)),
-      )
-    ]);
-    return Row(children: [
-      Expanded(flex: 2, child: widget.child),
+      Checkbox(
+          value: widget.termsItemSettings.showToTenant,
+          onChanged: (bool? value) =>
+              setState(() => widget.termsItemSettings.showToTenant = value!)),
+      const SizedBox(width: 16.0),
+      Checkbox(
+          value: widget.termsItemSettings.negotiable,
+          onChanged: (bool? value) =>
+              setState(() => widget.termsItemSettings.negotiable = value!))
     ]);
   }
 }

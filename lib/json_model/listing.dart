@@ -1,5 +1,6 @@
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/terms.dart';
+import 'package:hometeam_client/json_model/terms_item.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'listing.g.dart';
@@ -24,70 +25,6 @@ class Listing {
       _$ListingFromJson(json);
 
   Map<String, dynamic> toJson() => _$ListingToJson(this);
-}
-
-// todo confusing enum type
-enum TermsItem {
-  rent,
-  deposit,
-  leasePeriod,
-  gracePeriod,
-  terminationRight,
-  earliestTerminationDate,
-  daysNoticeBeforeTermination,
-  structure,
-  fixture,
-  furniture,
-  water,
-  electricity,
-  gas,
-  rates,
-  management
-}
-
-class TermsItemHelper {
-  static TermsItemSettings getDefaultSettings(TermsItem item) {
-    switch (item) {
-      case TermsItem.rent:
-      case TermsItem.deposit:
-      case TermsItem.leasePeriod:
-        return TermsItemSettings(
-            negotiable: true, showToTenant: true, showToTenantLocked: true);
-      case TermsItem.gracePeriod:
-      case TermsItem.terminationRight:
-      case TermsItem.earliestTerminationDate:
-      case TermsItem.daysNoticeBeforeTermination:
-        return TermsItemSettings(
-            negotiable: true, showToTenant: false, showToTenantLocked: false);
-      case TermsItem.structure:
-      case TermsItem.fixture:
-      case TermsItem.furniture:
-      case TermsItem.water:
-      case TermsItem.electricity:
-      case TermsItem.gas:
-      case TermsItem.rates:
-      case TermsItem.management:
-      return TermsItemSettings(
-          negotiable: false, showToTenant: true, showToTenantLocked: false);
-    }
-  }
-}
-
-@JsonSerializable()
-class TermsItemSettings {
-  bool negotiable;
-  bool showToTenant;
-  final bool showToTenantLocked;
-
-  TermsItemSettings(
-      {required this.negotiable,
-      required this.showToTenant,
-      required this.showToTenantLocked});
-
-  factory TermsItemSettings.fromJson(Map<String, dynamic> json) =>
-      _$TermsItemSettingsFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TermsItemSettingsToJson(this);
 }
 
 class ListingHelper {

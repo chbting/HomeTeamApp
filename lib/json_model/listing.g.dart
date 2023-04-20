@@ -45,17 +45,3 @@ const _$TermsItemEnumMap = {
   TermsItem.rates: 'rates',
   TermsItem.management: 'management',
 };
-
-TermsItemSettings _$TermsItemSettingsFromJson(Map<String, dynamic> json) =>
-    TermsItemSettings(
-      negotiable: json['negotiable'] as bool,
-      showToTenant: json['showToTenant'] as bool,
-      showToTenantLocked: json['showToTenantLocked'] as bool,
-    );
-
-Map<String, dynamic> _$TermsItemSettingsToJson(TermsItemSettings instance) =>
-    <String, dynamic>{
-      'negotiable': instance.negotiable,
-      'showToTenant': instance.showToTenant,
-      'showToTenantLocked': instance.showToTenantLocked,
-    };

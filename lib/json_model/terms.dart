@@ -13,7 +13,6 @@ class Terms {
   int? rent, deposit;
 
   DateTime? earliestStartDate, latestStartDate; // earliest start date
-  bool latestStartDateEnabled;
 
   // User fills in either lease length or fixed endDate, not both
   LeasePeriodType leasePeriodType;
@@ -43,7 +42,6 @@ class Terms {
       this.deposit,
       this.earliestStartDate,
       this.latestStartDate,
-      this.latestStartDateEnabled = true,
       this.leasePeriodType = LeasePeriodType.specificLength,
       this.leaseLength,
       this.leaseEndDate,

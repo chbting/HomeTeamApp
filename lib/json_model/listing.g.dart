@@ -31,8 +31,7 @@ Map<String, dynamic> _$ListingToJson(Listing instance) => <String, dynamic>{
 const _$TermsItemEnumMap = {
   TermsItem.rent: 'rent',
   TermsItem.deposit: 'deposit',
-  TermsItem.leaseLength: 'leaseLength',
-  TermsItem.leaseEndDate: 'leaseEndDate',
+  TermsItem.leasePeriod: 'leasePeriod',
   TermsItem.gracePeriod: 'gracePeriod',
   TermsItem.terminationRight: 'terminationRight',
   TermsItem.earliestTerminationDate: 'earliestTerminationDate',

@@ -30,8 +30,7 @@ class Listing {
 enum TermsItem {
   rent,
   deposit,
-  leaseLength,
-  leaseEndDate,
+  leasePeriod,
   gracePeriod,
   terminationRight,
   earliestTerminationDate,
@@ -51,8 +50,7 @@ class TermsItemHelper {
     switch (item) {
       case TermsItem.rent:
       case TermsItem.deposit:
-      case TermsItem.leaseLength:
-      case TermsItem.leaseEndDate:
+      case TermsItem.leasePeriod:
         return TermsItemSettings(
             negotiable: true, showToTenant: true, showToTenantLocked: true);
       case TermsItem.gracePeriod:

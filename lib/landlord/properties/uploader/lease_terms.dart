@@ -23,6 +23,7 @@ class LeaseTermsWidget extends StatefulWidget {
 
 class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final double _leadingPadding = 48.0;
   final DateTime _today = DateUtils.dateOnly(DateTime.now());
   late DateTime _withinOneYearFromToday;
 
@@ -57,14 +58,12 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
         ));
   }
 
-  //todo negotiable only, don't need to show: show to tenant
   Widget _getRentSection(BuildContext context) {
     return FormCard(
       title: S.of(context).rent,
       body: Wrap(
         runSpacing: 16.0,
         children: [
-          // todo alignment
           Align(
               alignment: Alignment.centerRight,
               child: Padding(
@@ -74,12 +73,12 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
               )),
           ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.monetization_on), // todo center icon
               trailing: Checkbox(
                   value: _listing.settings[TermsItem.rent]!.negotiable,
                   onChanged: (value) => setState(() =>
                       _listing.settings[TermsItem.rent]!.negotiable = value!)),
-              title: TextFormField( //todo comma separated numbers
+              title: TextFormField(
+                  //todo comma separated numbers
                   initialValue: _terms.rent?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -88,6 +87,9 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
+                      icon: SizedBox(
+                          width: _leadingPadding,
+                          child: const Icon(Icons.monetization_on)),
                       prefix: const Text('\$ '),
                       labelText: S.of(context).monthly_rent),
                   validator: (value) {
@@ -100,7 +102,6 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   })),
           ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.savings), // todo center icon
               trailing: Checkbox(
                   value: _listing.settings[TermsItem.deposit]!.negotiable,
                   onChanged: (value) => setState(() => _listing
@@ -114,6 +115,9 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
+                      icon: SizedBox(
+                          width: _leadingPadding,
+                          child: const Icon(Icons.savings)),
                       prefix: const Text('\$ '),
                       labelText: S.of(context).deposit),
                   validator: (value) {
@@ -129,7 +133,6 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
     );
   }
 
-//todo almost every line is too long to show in english
   Widget _getLeasePeriodSection(BuildContext context) {
     return FormCard(
       title: S.of(context).lease_period,
@@ -142,13 +145,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             initialDate: _terms.earliestStartDate,
             firstDate: _today,
             lastDate: _withinOneYearFromToday,
-            leading: Opacity(
-              opacity: 0.0,
-              child: Checkbox(
-                value: true,
-                onChanged: (_) {},
-              ),
-            ),
+            leading: SizedBox(width: _leadingPadding),
             onChanged: (DateTime dateTime) =>
                 setState(() => _terms.earliestStartDate = dateTime),
             validator: (DateTime? dateTime) {
@@ -165,32 +162,32 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             firstDate: _terms.earliestStartDate ?? _today,
             lastDate: _withinOneYearFromToday,
             leading: Checkbox(
-                //todo error text is still showing after toggling to disable
+                //todo clear error text before disabling
                 value: _terms.latestStartDateEnabled,
                 onChanged: (value) =>
                     setState(() => _terms.latestStartDateEnabled = value!)),
             validator: (DateTime? dateTime) {
               if (dateTime == null) {
                 return S.of(context).please_put_in_a_valid_date;
-              } else {
-                if (_terms.earliestStartDate != null) {
-                  if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                    //todo text is too long to show
-                    return S.of(context).msg_input_before_earliest_start;
-                  }
+              } else if (_terms.earliestStartDate != null) {
+                if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                  return S.of(context).msg_input_before_earliest_start;
                 }
-                _terms.latestStartDate = dateTime;
-                return null;
               }
+              _terms.latestStartDate = dateTime;
+              return null;
             },
           ),
           const Divider(thickness: 1.0),
-          // todo negotiable checkbox
           ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading: Checkbox(value: true, onChanged: (value) {}),
-              title: Text(S.of(context).negotiable),
-              trailing: Checkbox(value: true, onChanged: (value) {})),
+            contentPadding: EdgeInsets.zero,
+            leading: SizedBox(width: _leadingPadding),
+            trailing: Checkbox(
+                value: _listing.settings[TermsItem.leasePeriod]!.negotiable,
+                onChanged: (value) => setState(() => _listing
+                    .settings[TermsItem.leasePeriod]!.negotiable = value!)),
+            title: Align(alignment: Alignment.centerRight, child: Text(S.of(context).negotiable)),
+          ),
           ListTile(
             contentPadding: EdgeInsets.zero,
             minVerticalPadding: 0.0,
@@ -253,6 +250,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             ),
           ),
           const Divider(thickness: 1.0),
+          TermsItemWidget.getTitleBar(context),
           TermsItemWidget(
               termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
               child: TextFormField(

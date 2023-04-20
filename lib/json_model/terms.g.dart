@@ -16,6 +16,7 @@ Terms _$TermsFromJson(Map<String, dynamic> json) => Terms(
       latestStartDate: json['latestStartDate'] == null
           ? null
           : DateTime.parse(json['latestStartDate'] as String),
+      latestStartDateEnabled: json['latestStartDateEnabled'] as bool? ?? true,
       leasePeriodType: $enumDecodeNullable(
               _$LeasePeriodTypeEnumMap, json['leasePeriodType']) ??
           LeasePeriodType.specificLength,
@@ -40,6 +41,7 @@ Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{
       'deposit': instance.deposit,
       'earliestStartDate': instance.earliestStartDate?.toIso8601String(),
       'latestStartDate': instance.latestStartDate?.toIso8601String(),
+      'latestStartDateEnabled': instance.latestStartDateEnabled,
       'leasePeriodType': _$LeasePeriodTypeEnumMap[instance.leasePeriodType]!,
       'leaseLength': instance.leaseLength,
       'leaseEndDate': instance.leaseEndDate?.toIso8601String(),

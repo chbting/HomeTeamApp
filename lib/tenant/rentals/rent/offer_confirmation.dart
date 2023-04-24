@@ -3,7 +3,7 @@ import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
-import 'package:hometeam_client/json_model/expense.dart';
+import 'package:hometeam_client/data/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/json_model/terms.dart';

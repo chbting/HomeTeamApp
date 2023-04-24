@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+//part '../json_model/property.g.dart';
+
+@JsonSerializable()
 class Property {
   final int id;
   Address address = Address();
@@ -13,7 +17,7 @@ class Property {
   int coveredParking;
   int openParking;
   final Map<int, Room> rooms = {};
-  ImageProvider coverImage = const AssetImage('');
+  ImageProvider coverImage = const AssetImage(''); //todo problem serializing
 
   //todo list of images
 
@@ -36,6 +40,11 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1});
+
+  // factory Property.fromJson(Map<String, dynamic> json) =>
+  //     _$PropertyFromJson(json);
+  //
+  // Map<String, dynamic> toJson() => _$PropertyToJson(this);
 }
 
 class PropertyHelper {

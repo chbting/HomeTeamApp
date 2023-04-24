@@ -38,6 +38,7 @@ const _$TermsItemEnumMap = {
   TermsItem.daysNoticeBeforeTermination: 'daysNoticeBeforeTermination',
   TermsItem.structure: 'structure',
   TermsItem.fixture: 'fixture',
+  TermsItem.electricalAppliances: 'electricalAppliances',
   TermsItem.furniture: 'furniture',
   TermsItem.water: 'water',
   TermsItem.electricity: 'electricity',

@@ -209,5 +209,6 @@
 	"lease_period": "Lease Period",
 	"lease_end_date": "End date",
 	"show_to_tenant_two_lines": "Show to tenant",
-	"expenses_paid_by_the_landlord_except": "Expenses paid by the Landlord\n(except for normal wear and tear)"
+	"expenses_paid_by_the_landlord_except": "Expenses paid by the Landlord\n(except for normal wear and tear)",
+	"electrical_appliances": "Electrical appliance"
 }

@@ -1,6 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/expense.dart';
+import 'package:hometeam_client/data/expense.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'terms.g.dart';
@@ -25,16 +25,7 @@ class Terms {
   DateTime? earliestTerminationDate;
   int? daysNoticeBeforeTermination; // Dates before terminationRightStartDate
 
-  Map<Expense, bool> expenses = {
-    Expense.structure: true,
-    Expense.fixture: true,
-    Expense.furniture: true,
-    Expense.water: false,
-    Expense.electricity: false,
-    Expense.gas: false,
-    Expense.rates: true,
-    Expense.management: true,
-  };
+  Map<Expense, bool> expenses;
 
   Terms(
       {required this.propertyId,
@@ -48,7 +39,12 @@ class Terms {
       this.gracePeriod,
       this.terminationRight,
       this.earliestTerminationDate,
-      this.daysNoticeBeforeTermination});
+      this.daysNoticeBeforeTermination})
+      : expenses = {} {
+    for (var expense in Expense.values) {
+      expenses[expense] = ExpenseHelper.isPaidByLandlordDefault(expense);
+    }
+  }
 
   factory Terms.fromJson(Map<String, dynamic> json) => _$TermsFromJson(json);
 

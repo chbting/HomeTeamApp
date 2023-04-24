@@ -111,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Earliest termination day"),
         "early_termination_right":
             MessageLookupByLibrary.simpleMessage("Early termination right"),
+        "electrical_appliances":
+            MessageLookupByLibrary.simpleMessage("Electrical appliance"),
         "end_date": MessageLookupByLibrary.simpleMessage("End Date"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),

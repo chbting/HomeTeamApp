@@ -94,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "earliest_termination_day":
             MessageLookupByLibrary.simpleMessage("最早退租日"),
         "early_termination_right": MessageLookupByLibrary.simpleMessage("退租權"),
+        "electrical_appliances": MessageLookupByLibrary.simpleMessage("電器"),
         "end_date": MessageLookupByLibrary.simpleMessage("結束日期"),
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英語"),
         "estimate": MessageLookupByLibrary.simpleMessage("預算:"),

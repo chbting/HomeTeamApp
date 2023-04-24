@@ -25,6 +25,7 @@ enum TermsItem {
   daysNoticeBeforeTermination,
   structure,
   fixture,
+  electricalAppliances,
   furniture,
   water,
   electricity,
@@ -48,6 +49,7 @@ class TermsItemHelper {
       case TermsItem.structure:
       case TermsItem.fixture:
       case TermsItem.furniture:
+      case TermsItem.electricalAppliances:
       case TermsItem.water:
       case TermsItem.electricity:
       case TermsItem.gas:

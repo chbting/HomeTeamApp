@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/json_model/expense.dart';
+import 'package:hometeam_client/data/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/terms_item.dart';
@@ -55,6 +55,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             _getRentSection(context),
             _getLeasePeriodSection(context),
             _getExpensesSection(context),
+            // todo a section of provided electrical appliances
+            // todo move negotiable, show to tenant checkboxes to "create listing"?
           ],
         ));
   }
@@ -140,128 +142,220 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
       body: Wrap(
         runSpacing: 8.0,
         children: [
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: SizedBox(width: _leadingPadding),
-            title: DatePickerFormField(
-              labelText: S.of(context).lease_earliest_start_date,
-              pickerHelpText: S.of(context).lease_earliest_start_date,
-              initialDate: _terms.earliestStartDate,
-              firstDate: _today,
-              lastDate: _withinOneYearFromToday,
-              onChanged: (DateTime dateTime) =>
-                  setState(() => _terms.earliestStartDate = dateTime),
-              validator: (DateTime? dateTime) {
-                return dateTime == null
-                    ? S.of(context).please_put_in_a_valid_date
-                    : null;
-              },
-            ),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Checkbox(
-                //todo clear error text before disabling
-                value: _latestStartDateEnabled,
-                onChanged: (value) =>
-                    setState(() => _latestStartDateEnabled = value!)),
-            title: DatePickerFormField(
-              enabled: _latestStartDateEnabled,
-              labelText: S.of(context).lease_latest_start_date,
-              pickerHelpText: S.of(context).lease_latest_start_date,
-              initialDate: _terms.latestStartDate,
-              firstDate: _terms.earliestStartDate ?? _today,
-              lastDate: _withinOneYearFromToday,
-              validator: (DateTime? dateTime) {
-                if (dateTime == null) {
-                  return S.of(context).please_put_in_a_valid_date;
-                } else if (_terms.earliestStartDate != null) {
-                  if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                    return S.of(context).msg_input_before_earliest_start;
-                  }
-                }
-                _terms.latestStartDate = dateTime;
-                return null;
-              },
-            ),
-          ),
+          _getStartDateSubSection(context),
           const Divider(thickness: 1.0),
-          CheckboxListTile(
-            contentPadding: EdgeInsets.only(left: _leadingPadding),
-            title: Align(
-                alignment: Alignment.centerRight,
-                child: Text(S.of(context).negotiable)),
-            value: _listing.settings[TermsItem.leasePeriod]!.negotiable,
-            onChanged: (value) => setState(() =>
-                _listing.settings[TermsItem.leasePeriod]!.negotiable = value!),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Radio<LeasePeriodType>(
-                value: LeasePeriodType.specificLength,
-                groupValue: _terms.leasePeriodType,
-                onChanged: (value) =>
-                    setState(() => _terms.leasePeriodType = value!)),
-            title: TextFormField(
-                enabled:
-                    _terms.leasePeriodType == LeasePeriodType.specificLength,
-                initialValue: _terms.leaseLength?.toString() ?? '',
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                ],
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    labelText: S.of(context).lease_length_months),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return S.of(context).please_put_in_a_valid_amount;
-                  } else {
-                    _terms.leaseLength = int.parse(value);
-                    return null;
-                  }
-                }),
-          ),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Radio<LeasePeriodType>(
-                value: LeasePeriodType.specificEndDate,
-                groupValue: _terms.leasePeriodType,
-                onChanged: (value) =>
-                    setState(() => _terms.leasePeriodType = value!)),
-            title: DatePickerFormField(
-              labelText: S.of(context).lease_end_date,
-              pickerHelpText: S.of(context).lease_end_date,
-              initialDate: _terms.leaseEndDate,
-              firstDate: _terms.earliestStartDate ?? _today,
-              lastDate: _today.copyWith(year: _today.year + 3),
-              enabled:
-                  _terms.leasePeriodType == LeasePeriodType.specificEndDate,
-              validator: (DateTime? dateTime) {
-                if (dateTime == null) {
-                  return S.of(context).please_put_in_a_valid_date;
+          _getLeaseLengthSubSection(context),
+          const Divider(thickness: 1.0),
+          _getLeasePeriodOptionalItems(context)
+        ],
+      ),
+    );
+  }
+
+  Widget _getStartDateSubSection(BuildContext context) {
+    return Wrap(runSpacing: 8.0, children: [
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: SizedBox(width: _leadingPadding),
+        title: DatePickerFormField(
+          labelText: S.of(context).lease_earliest_start_date,
+          pickerHelpText: S.of(context).lease_earliest_start_date,
+          initialDate: _terms.earliestStartDate,
+          firstDate: _today,
+          lastDate: _withinOneYearFromToday,
+          onChanged: (DateTime dateTime) =>
+              setState(() => _terms.earliestStartDate = dateTime),
+          validator: (DateTime? dateTime) {
+            return dateTime == null
+                ? S.of(context).please_put_in_a_valid_date
+                : null;
+          },
+        ),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Checkbox(
+            //todo clear error text before disabling
+            value: _latestStartDateEnabled,
+            onChanged: (value) =>
+                setState(() => _latestStartDateEnabled = value!)),
+        title: DatePickerFormField(
+          enabled: _latestStartDateEnabled,
+          labelText: S.of(context).lease_latest_start_date,
+          pickerHelpText: S.of(context).lease_latest_start_date,
+          initialDate: _terms.latestStartDate,
+          firstDate: _terms.earliestStartDate ?? _today,
+          lastDate: _withinOneYearFromToday,
+          validator: (DateTime? dateTime) {
+            if (dateTime == null) {
+              return S.of(context).please_put_in_a_valid_date;
+            } else if (_terms.earliestStartDate != null) {
+              if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                return S.of(context).msg_input_before_earliest_start;
+              }
+            }
+            _terms.latestStartDate = dateTime;
+            return null;
+          },
+        ),
+      )
+    ]);
+  }
+
+  Widget _getLeaseLengthSubSection(BuildContext context) {
+    return Wrap(runSpacing: 8.0, children: [
+      CheckboxListTile(
+        contentPadding: EdgeInsets.only(left: _leadingPadding),
+        title: Align(
+            alignment: Alignment.centerRight,
+            child: Text(S.of(context).negotiable)),
+        value: _listing.settings[TermsItem.leasePeriod]!.negotiable,
+        onChanged: (value) => setState(() =>
+            _listing.settings[TermsItem.leasePeriod]!.negotiable = value!),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Radio<LeasePeriodType>(
+            value: LeasePeriodType.specificLength,
+            groupValue: _terms.leasePeriodType,
+            onChanged: (value) =>
+                setState(() => _terms.leasePeriodType = value!)),
+        title: TextFormField(
+            enabled: _terms.leasePeriodType == LeasePeriodType.specificLength,
+            initialValue: _terms.leaseLength?.toString() ?? '',
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
+            textInputAction: TextInputAction.done,
+            decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: S.of(context).lease_length_months),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return S.of(context).please_put_in_a_valid_amount;
+              } else {
+                _terms.leaseLength = int.parse(value);
+                return null;
+              }
+            }),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Radio<LeasePeriodType>(
+            value: LeasePeriodType.specificEndDate,
+            groupValue: _terms.leasePeriodType,
+            onChanged: (value) =>
+                setState(() => _terms.leasePeriodType = value!)),
+        title: DatePickerFormField(
+          labelText: S.of(context).lease_end_date,
+          pickerHelpText: S.of(context).lease_end_date,
+          initialDate: _terms.leaseEndDate,
+          firstDate: _terms.earliestStartDate ?? _today,
+          lastDate: _today.copyWith(year: _today.year + 3),
+          enabled: _terms.leasePeriodType == LeasePeriodType.specificEndDate,
+          validator: (DateTime? dateTime) {
+            if (dateTime == null) {
+              return S.of(context).please_put_in_a_valid_date;
+            } else {
+              if (_terms.earliestStartDate != null) {
+                if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                  return S.of(context).msg_input_before_earliest_start;
+                }
+              }
+              _terms.latestStartDate = dateTime;
+              return null;
+            }
+          },
+        ),
+      ),
+    ]);
+  }
+
+  Widget _getLeasePeriodOptionalItems(BuildContext context) {
+    return Wrap(runSpacing: 8.0, children: [
+      TermsItemWidget.getTitleBar(context),
+      // note: add 4 vertical padding to match minVerticalPadding of ListTile
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: TermsItemWidget(
+          termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
+          child: TextFormField(
+              initialValue: _terms.deposit?.toString() ?? '',
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+              ],
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: S.of(context).grace_period_days),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return S.of(context).please_put_in_a_valid_amount;
                 } else {
-                  if (_terms.earliestStartDate != null) {
-                    if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                      return S.of(context).msg_input_before_earliest_start;
-                    }
-                  }
-                  _terms.latestStartDate = dateTime;
+                  _terms.gracePeriod = int.parse(value);
                   return null;
                 }
-              },
-            ),
-          ),
-          const Divider(thickness: 1.0),
-          TermsItemWidget.getTitleBar(context),
-          // note: add 4 vertical padding to match minVerticalPadding of ListTile
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: TermsItemWidget(
-              termsItemSettings: _listing.settings[TermsItem.gracePeriod]!,
+              }),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4.0),
+        child: TermsItemWidget(
+            termsItemSettings: _listing.settings[TermsItem.terminationRight]!,
+            child: DropdownButtonFormField<PartyType>(
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    labelText: S.of(context).early_termination_right),
+                isExpanded: true,
+                value: _terms.terminationRight,
+                onChanged: (PartyType? newValue) =>
+                    setState(() => _terms.terminationRight = newValue!),
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) =>
+                    value == null ? S.of(context).msg_info_required : null,
+                items: PartyType.values
+                    .map<DropdownMenuItem<PartyType>>((PartyType value) {
+                  return DropdownMenuItem<PartyType>(
+                    value: value,
+                    child: Text(PartyTypeHelper.getName(context, value)),
+                  );
+                }).toList())),
+      ),
+      Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: TermsItemWidget(
+              termsItemSettings:
+                  _listing.settings[TermsItem.earliestTerminationDate]!,
+              child: DatePickerFormField(
+                labelText: S.of(context).earliest_termination_day,
+                pickerHelpText: S.of(context).earliest_termination_day,
+                initialDate: _terms.earliestTerminationDate,
+                firstDate: _terms.earliestStartDate ?? _today,
+                lastDate: _today.copyWith(year: _today.year + 3),
+                validator: (DateTime? dateTime) {
+                  if (dateTime == null) {
+                    return S.of(context).please_put_in_a_valid_date;
+                  } else {
+                    if (_terms.earliestStartDate != null) {
+                      if (dateTime.isBefore(_terms.earliestStartDate!)) {
+                        return S.of(context).msg_input_before_earliest_start;
+                      }
+                    }
+                    _terms.latestStartDate = dateTime;
+                    return null;
+                  }
+                },
+              ))),
+      Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: TermsItemWidget(
+              termsItemSettings:
+                  _listing.settings[TermsItem.daysNoticeBeforeTermination]!,
               child: TextFormField(
-                  initialValue: _terms.deposit?.toString() ?? '',
+                  initialValue:
+                      _terms.daysNoticeBeforeTermination?.toString() ?? '',
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -269,7 +363,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: S.of(context).grace_period_days),
+                      labelText: S.of(context).termination_notice_days,
+                      helperText: S.of(context).termination_notice_helper_text),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return S.of(context).please_put_in_a_valid_amount;
@@ -277,89 +372,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                       _terms.gracePeriod = int.parse(value);
                       return null;
                     }
-                  }),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
-            child: TermsItemWidget(
-                termsItemSettings:
-                    _listing.settings[TermsItem.terminationRight]!,
-                child: DropdownButtonFormField<PartyType>(
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        labelText: S.of(context).early_termination_right),
-                    isExpanded: true,
-                    value: _terms.terminationRight,
-                    onChanged: (PartyType? newValue) =>
-                        setState(() => _terms.terminationRight = newValue!),
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) =>
-                        value == null ? S.of(context).msg_info_required : null,
-                    items: PartyType.values
-                        .map<DropdownMenuItem<PartyType>>((PartyType value) {
-                      return DropdownMenuItem<PartyType>(
-                        value: value,
-                        child: Text(PartyTypeHelper.getName(context, value)),
-                      );
-                    }).toList())),
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: TermsItemWidget(
-                  termsItemSettings:
-                      _listing.settings[TermsItem.earliestTerminationDate]!,
-                  child: DatePickerFormField(
-                    labelText: S.of(context).earliest_termination_day,
-                    pickerHelpText: S.of(context).earliest_termination_day,
-                    initialDate: _terms.earliestTerminationDate,
-                    firstDate: _terms.earliestStartDate ?? _today,
-                    lastDate: _today.copyWith(year: _today.year + 3),
-                    validator: (DateTime? dateTime) {
-                      if (dateTime == null) {
-                        return S.of(context).please_put_in_a_valid_date;
-                      } else {
-                        if (_terms.earliestStartDate != null) {
-                          if (dateTime.isBefore(_terms.earliestStartDate!)) {
-                            return S
-                                .of(context)
-                                .msg_input_before_earliest_start;
-                          }
-                        }
-                        _terms.latestStartDate = dateTime;
-                        return null;
-                      }
-                    },
-                  ))),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: TermsItemWidget(
-                  termsItemSettings:
-                      _listing.settings[TermsItem.daysNoticeBeforeTermination]!,
-                  child: TextFormField(
-                      initialValue:
-                          _terms.daysNoticeBeforeTermination?.toString() ?? '',
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          labelText: S.of(context).termination_notice_days,
-                          helperText:
-                              S.of(context).termination_notice_helper_text),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).please_put_in_a_valid_amount;
-                        } else {
-                          _terms.gracePeriod = int.parse(value);
-                          return null;
-                        }
-                      })))
-        ],
-      ),
-    );
+                  })))
+    ]);
   }
 
   Widget _getExpensesSection(BuildContext context) {
@@ -375,6 +389,9 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                 expense: Expense.fixture, termsItem: TermsItem.fixture),
             const TermsItemCheckBoxListTile(
                 expense: Expense.furniture, termsItem: TermsItem.furniture),
+            const TermsItemCheckBoxListTile(
+                expense: Expense.electricalAppliances,
+                termsItem: TermsItem.electricalAppliances),
             const TermsItemCheckBoxListTile(
                 expense: Expense.water, termsItem: TermsItem.water),
             const TermsItemCheckBoxListTile(

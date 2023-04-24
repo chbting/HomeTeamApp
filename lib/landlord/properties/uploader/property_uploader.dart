@@ -1,7 +1,10 @@
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
+import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
@@ -79,6 +82,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
+            //todo
             //if (_propertyInfoWidgetController.validate()) {
             _controller.nextStep();
             // }
@@ -95,6 +99,17 @@ class PropertyUploaderState extends State<PropertyUploader> {
   }
 
   void _confirm() {
-    // todo
+    var listing = ListingInheritedData.of(context)!.listing;
+    Property property = ListingInheritedData.of(context)!.property;
+    //todo push a property, it should receive an id
+
+    debugPrint('submitting');
+    DatabaseReference ref = FirebaseDatabase.instance.ref('property/');
+    // ref.set(property.toJson()).onError((error, stackTrace) {
+    //   debugPrint('error $error');
+    // }).then((value) {
+    //   //todo show snackBar with property submitted and an option to view it
+    //   debugPrint('submitted');
+    // });
   }
 }

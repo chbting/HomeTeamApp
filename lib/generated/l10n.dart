@@ -2149,6 +2149,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Electrical appliance`
+  String get electrical_appliances {
+    return Intl.message(
+      'Electrical appliance',
+      name: 'electrical_appliances',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

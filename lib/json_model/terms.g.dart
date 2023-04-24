@@ -67,6 +67,7 @@ const _$ExpenseEnumMap = {
   Expense.structure: 'structure',
   Expense.fixture: 'fixture',
   Expense.furniture: 'furniture',
+  Expense.electricalAppliances: 'electricalAppliances',
   Expense.water: 'water',
   Expense.electricity: 'electricity',
   Expense.gas: 'gas',

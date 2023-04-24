@@ -209,5 +209,6 @@
 	"lease_period": "租期",
 	"lease_end_date": "租约结束日期",
 	"show_to_tenant_two_lines": "对租客\n显示",
-	"expenses_paid_by_the_landlord_except": "业主所负责费用\n(除自然损耗外)"
+	"expenses_paid_by_the_landlord_except": "业主所负责费用\n(除自然损耗外)",
+	"electrical_appliances": "电器"
 }

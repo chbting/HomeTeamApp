@@ -98,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_voice_input": MessageLookupByLibrary.simpleMessage("英語"),
         "estimate": MessageLookupByLibrary.simpleMessage("預算:"),
         "estimated_duration": MessageLookupByLibrary.simpleMessage("需時"),
+        "expenses_paid_by_the_landlord_except":
+            MessageLookupByLibrary.simpleMessage("業主所負責費用\n(除自然損耗外)"),
         "find_properties": MessageLookupByLibrary.simpleMessage("搵樓"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),
         "fixture": MessageLookupByLibrary.simpleMessage("裝修"),
@@ -115,7 +117,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "landlord": MessageLookupByLibrary.simpleMessage("業主"),
         "landlord_accept_offer":
             MessageLookupByLibrary.simpleMessage("業主接受/提出更改"),
-        "landlord_expenses": MessageLookupByLibrary.simpleMessage("業主負責費用"),
         "landlord_mode": MessageLookupByLibrary.simpleMessage("業主模式"),
         "landlord_sign_contract": MessageLookupByLibrary.simpleMessage("業主簽約"),
         "language": MessageLookupByLibrary.simpleMessage("語言"),
@@ -233,7 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_off": MessageLookupByLibrary.simpleMessage("關閉"),
         "setting_on": MessageLookupByLibrary.simpleMessage("開啓"),
         "settings": MessageLookupByLibrary.simpleMessage("設定"),
-        "show_to_tenant": MessageLookupByLibrary.simpleMessage("對租客顯示"),
+        "show_to_tenant_two_lines":
+            MessageLookupByLibrary.simpleMessage("對租客\n顯示"),
         "sign": MessageLookupByLibrary.simpleMessage("簽署"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("簽署租約"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登入"),

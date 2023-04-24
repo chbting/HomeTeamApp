@@ -364,7 +364,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
 
   Widget _getExpensesSection(BuildContext context) {
     return FormCard(
-        title: S.of(context).landlord_expenses,
+        title: S.of(context).expenses_paid_by_the_landlord_except,
         body: Wrap(
           runSpacing: 8.0,
           children: [

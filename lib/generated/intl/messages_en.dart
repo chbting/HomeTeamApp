@@ -115,6 +115,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_voice_input": MessageLookupByLibrary.simpleMessage("English"),
         "estimate": MessageLookupByLibrary.simpleMessage("Estimate:"),
         "estimated_duration": MessageLookupByLibrary.simpleMessage("Est."),
+        "expenses_paid_by_the_landlord_except":
+            MessageLookupByLibrary.simpleMessage(
+                "Expenses paid by the Landlord\n(except for normal wear and tear)"),
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
         "fixture": MessageLookupByLibrary.simpleMessage("Fixture"),
@@ -134,8 +137,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "landlord": MessageLookupByLibrary.simpleMessage("Landlord"),
         "landlord_accept_offer": MessageLookupByLibrary.simpleMessage(
             "Landlord accepts / counteroffer"),
-        "landlord_expenses":
-            MessageLookupByLibrary.simpleMessage("Landlord expenses"),
         "landlord_mode": MessageLookupByLibrary.simpleMessage("Landlord mode"),
         "landlord_sign_contract":
             MessageLookupByLibrary.simpleMessage("Landlord signs the contract"),
@@ -284,7 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting_off": MessageLookupByLibrary.simpleMessage("Off"),
         "setting_on": MessageLookupByLibrary.simpleMessage("On"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "show_to_tenant":
+        "show_to_tenant_two_lines":
             MessageLookupByLibrary.simpleMessage("Show to tenant"),
         "sign": MessageLookupByLibrary.simpleMessage("Sign"),
         "sign_contract": MessageLookupByLibrary.simpleMessage("Sign Contract"),

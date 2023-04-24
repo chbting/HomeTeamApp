@@ -1970,16 +1970,6 @@ class S {
     );
   }
 
-  /// `Show to tenant`
-  String get show_to_tenant {
-    return Intl.message(
-      'Show to tenant',
-      name: 'show_to_tenant',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Earliest start date`
   String get lease_earliest_start_date {
     return Intl.message(
@@ -1995,16 +1985,6 @@ class S {
     return Intl.message(
       'Latest start date',
       name: 'lease_latest_start_date',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Landlord expenses`
-  String get landlord_expenses {
-    return Intl.message(
-      'Landlord expenses',
-      name: 'landlord_expenses',
       desc: '',
       args: [],
     );
@@ -2145,6 +2125,26 @@ class S {
     return Intl.message(
       'End date',
       name: 'lease_end_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show to tenant`
+  String get show_to_tenant_two_lines {
+    return Intl.message(
+      'Show to tenant',
+      name: 'show_to_tenant_two_lines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expenses paid by the Landlord\n(except for normal wear and tear)`
+  String get expenses_paid_by_the_landlord_except {
+    return Intl.message(
+      'Expenses paid by the Landlord\n(except for normal wear and tear)',
+      name: 'expenses_paid_by_the_landlord_except',
       desc: '',
       args: [],
     );

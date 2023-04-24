@@ -21,8 +21,8 @@ class TermsItemWidget extends StatefulWidget {
       const Expanded(flex: 3, child: SizedBox()),
       Expanded(
           flex: 1,
-          child:
-              Text(S.of(context).show_to_tenant, textAlign: TextAlign.center)),
+          child: Text(S.of(context).show_to_tenant_two_lines,
+              textAlign: TextAlign.center)),
       Expanded(
           flex: 1,
           child: Text(S.of(context).negotiable, textAlign: TextAlign.center))

@@ -192,10 +192,8 @@
 	"fixture": "Fixture",
 	"furniture": "Furniture",
 	"negotiable": "Negotiable",
-	"show_to_tenant": "Show to tenant",
 	"lease_earliest_start_date": "Earliest start date",
 	"lease_latest_start_date": "Latest start date",
-	"landlord_expenses": "Landlord expenses",
 	"grace_period_days": "Grace period (days)",
 	"lease_length_months": "Lease length (months)",
 	"termination_notice_days": "Termination notice (days)",
@@ -209,5 +207,7 @@
 	"please_put_in_a_valid_date": "Please put in a valid date",
 	"msg_input_before_earliest_start": "The date should be after the earliest start date",
 	"lease_period": "Lease Period",
-	"lease_end_date": "End date"
+	"lease_end_date": "End date",
+	"show_to_tenant_two_lines": "Show to tenant",
+	"expenses_paid_by_the_landlord_except": "Expenses paid by the Landlord\n(except for normal wear and tear)"
 }

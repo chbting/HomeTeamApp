@@ -192,10 +192,8 @@
 	"fixture": "装修",
 	"furniture": "家俬",
 	"negotiable": "可商议",
-	"show_to_tenant": "对租客显示",
 	"lease_earliest_start_date": "最早起租日期",
 	"lease_latest_start_date": "最遲起租日期",
-	"landlord_expenses": "业主负责费用",
 	"grace_period_days": "免租期 (日)",
 	"lease_length_months": "租期 (月)",
 	"termination_notice_days": "退租通知 (日)",
@@ -209,5 +207,7 @@
 	"please_put_in_a_valid_date": "请输入有效的日期",
 	"msg_input_before_earliest_start": "日期需在最早起租日之后",
 	"lease_period": "租期",
-	"lease_end_date": "租约结束日期"
+	"lease_end_date": "租约结束日期",
+	"show_to_tenant_two_lines": "对租客\n显示",
+	"expenses_paid_by_the_landlord_except": "业主所负责费用\n(除自然损耗外)"
 }

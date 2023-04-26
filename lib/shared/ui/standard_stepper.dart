@@ -47,12 +47,17 @@ class StandardStepper extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => StandardStepperState();
 
-  static Widget getSectionTitle(BuildContext context, String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Text(text, style: Theme.of(context).textTheme.bodyLarge),
-    );
-  }
+  /// TopPadding and bottomPadding have precedence to verticalPadding
+  static Widget getSectionTitle(BuildContext context, String text,
+          {double verticalPadding = 8.0,
+          double? topPadding,
+          double? bottomPadding}) =>
+      Padding(
+        padding: EdgeInsets.only(
+            top: topPadding ?? verticalPadding,
+            bottom: bottomPadding ?? verticalPadding),
+        child: Text(text, style: Theme.of(context).textTheme.bodyLarge),
+      );
 }
 
 class StandardStepperState extends State<StandardStepper> {

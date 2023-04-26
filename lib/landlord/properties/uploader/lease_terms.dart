@@ -69,7 +69,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
     return Wrap(
       runSpacing: 8.0,
       children: [
-        StandardStepper.getSectionTitle(context, S.of(context).rent),
+        StandardStepper.getSectionTitle(context, S.of(context).rent,
+            bottomPadding: 0.0),
         Align(
             alignment: Alignment.centerRight,
             child: Padding(
@@ -142,7 +143,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
     return Wrap(
       runSpacing: 8.0,
       children: [
-        StandardStepper.getSectionTitle(context, S.of(context).lease_period),
+        StandardStepper.getSectionTitle(context, S.of(context).lease_period,
+            bottomPadding: 0.0),
         _getStartDateSubSection(context),
         const Divider(thickness: 1.0),
         _getLeaseLengthSubSection(context),
@@ -381,7 +383,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
       runSpacing: 8.0,
       children: [
         StandardStepper.getSectionTitle(
-            context, S.of(context).expenses_paid_by_the_landlord_except),
+            context, S.of(context).expenses_paid_by_the_landlord_except,
+            bottomPadding: 0.0),
         TermsItemWidget.getTitleBar(context),
         const TermsItemCheckBoxListTile(
             expense: Expense.structure, termsItem: TermsItem.structure),

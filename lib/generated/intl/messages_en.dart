@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "ac": MessageLookupByLibrary.simpleMessage("AC"),
         "accept_or_offer": MessageLookupByLibrary.simpleMessage("Accept/Offer"),
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
@@ -107,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "district": MessageLookupByLibrary.simpleMessage("District"),
+        "dryer": MessageLookupByLibrary.simpleMessage("Dryer"),
         "earliest_termination_day":
             MessageLookupByLibrary.simpleMessage("Earliest termination day"),
         "early_termination_right":
@@ -123,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "find_properties": MessageLookupByLibrary.simpleMessage("Find"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
         "fixture": MessageLookupByLibrary.simpleMessage("Fixture"),
+        "fridge": MessageLookupByLibrary.simpleMessage("Fridge"),
         "furniture": MessageLookupByLibrary.simpleMessage("Furniture"),
         "general_settings":
             MessageLookupByLibrary.simpleMessage("General Settings"),
@@ -251,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "1. \"Agent\": I, David, (\"Tenant\"), hereby appoint hometeam Property Management And Agency Limited as myself in connection with the proposed tenancy of the property set forth in Schedule 1 to this Agreement (the \"Property\") subject to the terms of this Agreement \'s agent.\n\n2. \"Validity period\": This agreement will take effect from January 1, 2021 to March 31 of the same year (both days inclusive).\n\n3. The agency relationship between the Agent and the Tenant in relation to the Property is a bilateral agency as specified in Column 4 of Schedule 1 to this Agreement.\n\n4. In the case of a bilateral agency relationship, the agency must disclose to the tenant in writing as soon as practicable the amount or rate of commission that the agency will charge the relevant landlord.\n\n5. In addition to the obligations imposed on the Agent by this Agreement or any statute, the Agent shall also perform the obligations set forth in Schedule 2 to this Agreement.\n\n6. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4).\n\n7. \"Property Information\": The agent shall provide the tenant with all relevant rental information forms prescribed in the Estate Agents Practice (General Duties and Hong Kong Residential Properties) Regulation in respect of the property.\n\n8. In the case of a bilateral agency relationship, or where the owner is not represented by a licensed estate agent, these forms must be completed and signed by the agent.\n\n9. \"Commission\": The provisions of this Agreement governing the commission payable by the Tenant to the Agent are set forth in Schedules 1, 3 and 5 to this Agreement (4)."),
         "property_visit_date":
             MessageLookupByLibrary.simpleMessage("Visiting Date"),
+        "range_hood": MessageLookupByLibrary.simpleMessage("Range hood"),
         "reason_sign_property_visit_agreement":
             MessageLookupByLibrary.simpleMessage(
                 "Sign the property visit agreement with biometric authentication"),
@@ -302,6 +306,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("sq. ft"),
         "start_date": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "stove": MessageLookupByLibrary.simpleMessage("Stove"),
         "structure": MessageLookupByLibrary.simpleMessage("Structure"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "suspended_ceiling":
@@ -331,6 +336,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),
         "waiting_for_sms_code_autofill": MessageLookupByLibrary.simpleMessage(
             "Waiting for SMS code autofill"),
+        "washer": MessageLookupByLibrary.simpleMessage("Washer"),
+        "washer_dryer_combo_two_lines":
+            MessageLookupByLibrary.simpleMessage("Washer dryer combo"),
+        "water_heater": MessageLookupByLibrary.simpleMessage("Water heater"),
         "what_is_your_phone_number":
             MessageLookupByLibrary.simpleMessage("What\'s your phone number?")
       };

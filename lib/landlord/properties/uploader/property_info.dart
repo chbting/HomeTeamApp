@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/address_form.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
+import 'package:hometeam_client/shared/ui/standard_ui.dart';
 
 class PropertyInfoWidget extends StatefulWidget {
   const PropertyInfoWidget({Key? key, required this.controller})
@@ -20,6 +21,7 @@ class PropertyInfoWidget extends StatefulWidget {
 class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
+  late Function(String?) standardValidator;
   late Property _property;
 
   @override
@@ -32,6 +34,9 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   @override
   Widget build(BuildContext context) {
     _property = ListingInheritedData.of(context)!.property;
+    standardValidator = (value) => (value == null || value.isEmpty)
+        ? S.of(context).msg_info_required
+        : null;
 
     return Form(
       key: _formKey,
@@ -42,163 +47,141 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
             left: 16.0, right: 16.0, bottom: StandardStepper.bottomMargin),
         children: [
           StandardStepper.getSectionTitle(
-              context, S.of(context).property_address, verticalPadding: 16.0),
+              context, S.of(context).property_address,
+              verticalPadding: 16.0),
           AddressForm(
               address: _property.address, controller: _addressFormController),
           const Divider(),
-          StandardStepper.getSectionTitle(
-              context, S.of(context).property_info, verticalPadding: 16.0),
-          Wrap(
-            runSpacing: 16.0,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.netArea == -1
-                            ? null
-                            : _property.netArea.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText:
-                                '${S.of(context).area_net} (${S.of(context).sq_ft})'),
-                        onChanged: (value) => _property.netArea =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  ),
-                  Container(width: 16.0),
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.grossArea == -1
-                            ? null
-                            : _property.grossArea.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText:
-                                '${S.of(context).area_gross} (${S.of(context).sq_ft})'),
-                        onChanged: (value) => _property.grossArea =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.bedroom == -1
-                            ? null
-                            : _property.bedroom.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.bed_outlined),
-                            labelText: S.of(context).bedroom),
-                        onChanged: (value) => _property.bedroom =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  ),
-                  Container(width: 16.0),
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.bathroom == -1
-                            ? null
-                            : _property.bathroom.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.bathtub_outlined),
-                            labelText: S.of(context).bathroom),
-                        onChanged: (value) => _property.bathroom =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  )
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.coveredParking == -1
-                            ? null
-                            : _property.coveredParking.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.garage_outlined),
-                            labelText: S.of(context).covered_parking),
-                        onChanged: (value) => _property.coveredParking =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  ),
-                  Container(width: 16.0),
-                  Expanded(
-                    child: TextFormField(
-                        initialValue: _property.openParking == -1
-                            ? null
-                            : _property.openParking.toString(),
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
-                        decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            icon: const Icon(Icons.local_parking),
-                            labelText: S.of(context).open_parking),
-                        onChanged: (value) => _property.openParking =
-                            value.isNotEmpty ? int.parse(value) : 0,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) => (value == null || value.isEmpty)
-                            ? S.of(context).msg_info_required
-                            : null),
-                  )
-                ],
-              ),
-            ],
-          ),
+          _getPhysicalInfoSection(context),
+          const Divider(),
+          _getAppliancesSection(context)
         ],
       ),
+    );
+  }
+
+  Widget _getPhysicalInfoSection(BuildContext context) {
+    return Wrap(
+      runSpacing: 16.0,
+      children: [
+        StandardStepper.getSectionTitle(context, S.of(context).property_info,
+            bottomPadding: 0.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.netArea,
+                labelText: '${S.of(context).area_net} (${S.of(context).sq_ft})',
+                onChanged: (value) => _property.netArea = value,
+                validator: standardValidator),
+            const SizedBox(width: 16.0),
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.grossArea,
+                labelText:
+                    '${S.of(context).area_gross} (${S.of(context).sq_ft})',
+                onChanged: (value) => _property.grossArea = value,
+                validator: standardValidator),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.bedroom,
+                labelText: S.of(context).bedroom,
+                icon: const Icon(Icons.bed_outlined),
+                onChanged: (value) => _property.bedroom = value,
+                validator: standardValidator),
+            const SizedBox(width: 16.0),
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.bathroom,
+                labelText: S.of(context).bathroom,
+                icon: const Icon(Icons.bathtub_outlined),
+                onChanged: (value) => _property.bathroom = value,
+                validator: standardValidator),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.coveredParking,
+                labelText: S.of(context).covered_parking,
+                icon: const Icon(Icons.garage_outlined),
+                onChanged: (value) => _property.coveredParking = value,
+                validator: standardValidator),
+            const SizedBox(width: 16.0),
+            StandardUI.getExpandedIntTextFormField(
+                initialValue: _property.openParking,
+                labelText: S.of(context).open_parking,
+                icon: const Icon(Icons.local_parking),
+                onChanged: (value) => _property.openParking = value,
+                validator: standardValidator),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _getAppliancesSection(BuildContext context) {
+    return Wrap(
+      runSpacing: 16.0,
+      children: [
+        StandardStepper.getSectionTitle(
+            context, S.of(context).electrical_appliances,
+            bottomPadding: 0.0),
+        GridView.count(
+            shrinkWrap: true,
+            primary: false,
+            crossAxisCount: 2,
+            childAspectRatio: 3,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: StandardUI.getIntTextFormField(
+                    initialValue: _property.appliances[Appliance.ac]!,
+                    labelText: S.of(context).ac,
+                    onChanged: (value) =>
+                        _property.appliances[Appliance.ac] = value,
+                    validator: standardValidator),
+              ),
+              CheckboxListTile(
+                  title: Text(S.of(context).water_heater),
+                  value: _property.appliances[Appliance.waterHeater],
+                  onChanged: (value) => setState(() =>
+                      _property.appliances[Appliance.waterHeater] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).washer),
+                  value: _property.appliances[Appliance.washer],
+                  onChanged: (value) => setState(
+                      () => _property.appliances[Appliance.washer] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).dryer),
+                  value: _property.appliances[Appliance.dryer],
+                  onChanged: (value) => setState(
+                      () => _property.appliances[Appliance.dryer] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).washer_dryer_combo_two_lines),
+                  value: _property.appliances[Appliance.washerDryerCombo],
+                  onChanged: (value) => setState(() => _property
+                      .appliances[Appliance.washerDryerCombo] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).fridge),
+                  value: _property.appliances[Appliance.fridge],
+                  onChanged: (value) => setState(
+                      () => _property.appliances[Appliance.fridge] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).stove),
+                  value: _property.appliances[Appliance.stove],
+                  onChanged: (value) => setState(
+                      () => _property.appliances[Appliance.stove] = value)),
+              CheckboxListTile(
+                  title: Text(S.of(context).range_hood),
+                  value: _property.appliances[Appliance.rangeHood],
+                  onChanged: (value) => setState(
+                      () => _property.appliances[Appliance.rangeHood] = value)),
+            ]),
+      ],
     );
   }
 

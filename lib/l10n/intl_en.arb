@@ -210,5 +210,13 @@
 	"lease_end_date": "End date",
 	"show_to_tenant_two_lines": "Show to tenant",
 	"expenses_paid_by_the_landlord_except": "Expenses paid by the Landlord\n(except for normal wear and tear)",
-	"electrical_appliances": "Electrical appliance"
+	"electrical_appliances": "Electrical appliance",
+	"washer": "Washer",
+	"dryer": "Dryer",
+	"ac": "AC",
+	"fridge": "Fridge",
+	"water_heater": "Water heater",
+	"stove": "Stove",
+	"range_hood": "Range hood",
+	"washer_dryer_combo_two_lines": "Washer dryer combo"
 }

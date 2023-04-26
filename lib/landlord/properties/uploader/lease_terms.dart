@@ -394,7 +394,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             expense: Expense.furniture, termsItem: TermsItem.furniture),
         const TermsItemCheckBoxListTile(
             expense: Expense.electricalAppliances,
-            termsItem: TermsItem.electricalAppliances),
+            termsItem: TermsItem.electricalAppliances),//todo show only if there are appliances
         const TermsItemCheckBoxListTile(
             expense: Expense.water, termsItem: TermsItem.water),
         const TermsItemCheckBoxListTile(

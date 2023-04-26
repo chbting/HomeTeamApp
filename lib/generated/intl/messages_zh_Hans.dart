@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "ac": MessageLookupByLibrary.simpleMessage("空调"),
         "accept_or_offer": MessageLookupByLibrary.simpleMessage("接受/更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帐户"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
@@ -91,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deposit": MessageLookupByLibrary.simpleMessage("保证金"),
         "dismiss": MessageLookupByLibrary.simpleMessage("隐藏"),
         "district": MessageLookupByLibrary.simpleMessage("地区"),
+        "dryer": MessageLookupByLibrary.simpleMessage("干衣机"),
         "earliest_termination_day":
             MessageLookupByLibrary.simpleMessage("最早退租日"),
         "early_termination_right": MessageLookupByLibrary.simpleMessage("退租权"),
@@ -104,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "find_properties": MessageLookupByLibrary.simpleMessage("找房"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),
         "fixture": MessageLookupByLibrary.simpleMessage("装修"),
+        "fridge": MessageLookupByLibrary.simpleMessage("冰箱"),
         "furniture": MessageLookupByLibrary.simpleMessage("家俬"),
         "general_settings": MessageLookupByLibrary.simpleMessage("一般设定"),
         "grace_period_days": MessageLookupByLibrary.simpleMessage("免租期 (日)"),
@@ -208,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(
             "1. “代理”: 本人David， (“租客”) 现按照本协议条款的规限下就拟承租本协议附表1所列物业(“物业”)一事委任hometeam Property Management And Agency Limited 为本人的代理。\n\n2. “有效期”: 本协议由2021年1月1日起生效至同年3月31日届满 (首尾两天包括在内) 。\n\n3. 代理与租客之间就物业而有的代理关系属本协议附表1第4栏所指明的双边代理。\n\n4. 如属双边代理关系，则代理须在切实可行的范围内，尽快以书面向租客披露代理将向有关业主收取的佣金的数额或收费率。\n\n5. 代理除须履行本协议或任何成文法则委予代理的责任外，亦须履行本协议附表2内所列的责任。\n\n6. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。\n\n7. “物业资料”: 代理须就物业向租客提供《地产代理常规(一般责任及香港住宅物业)规例》订明的所有有关的出租资料表格。\n\n8. 如属双边代理的关系，或在业主并没有持牌地产代理代表的情况下，该等表格须由代理填妥和签署。\n\n9. “佣金”: 本协议适用于租客须向代理支付的佣金的规定，列于本协议附表1、3及5内(4)。"),
         "property_visit_date": MessageLookupByLibrary.simpleMessage("睇楼日期"),
+        "range_hood": MessageLookupByLibrary.simpleMessage("抽油烟机"),
         "reason_sign_property_visit_agreement":
             MessageLookupByLibrary.simpleMessage("使用生物认证签署睇楼纸"),
         "reason_sign_rental_contract":
@@ -249,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sq_ft": MessageLookupByLibrary.simpleMessage("平方呎"),
         "sq_ft_abr": MessageLookupByLibrary.simpleMessage("呎"),
         "start_date": MessageLookupByLibrary.simpleMessage("开始日期"),
+        "stove": MessageLookupByLibrary.simpleMessage("煮食炉"),
         "structure": MessageLookupByLibrary.simpleMessage("结构"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
@@ -274,6 +279,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("语音搜寻"),
         "waiting_for_sms_code_autofill":
             MessageLookupByLibrary.simpleMessage("等待自动填写验证码"),
+        "washer": MessageLookupByLibrary.simpleMessage("洗衣机"),
+        "washer_dryer_combo_two_lines":
+            MessageLookupByLibrary.simpleMessage("2合1\n洗衣干衣机"),
+        "water_heater": MessageLookupByLibrary.simpleMessage("热水炉"),
         "what_is_your_phone_number":
             MessageLookupByLibrary.simpleMessage("你的电话号码是？")
       };

@@ -2159,6 +2159,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Washer`
+  String get washer {
+    return Intl.message(
+      'Washer',
+      name: 'washer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dryer`
+  String get dryer {
+    return Intl.message(
+      'Dryer',
+      name: 'dryer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AC`
+  String get ac {
+    return Intl.message(
+      'AC',
+      name: 'ac',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fridge`
+  String get fridge {
+    return Intl.message(
+      'Fridge',
+      name: 'fridge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Water heater`
+  String get water_heater {
+    return Intl.message(
+      'Water heater',
+      name: 'water_heater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stove`
+  String get stove {
+    return Intl.message(
+      'Stove',
+      name: 'stove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Range hood`
+  String get range_hood {
+    return Intl.message(
+      'Range hood',
+      name: 'range_hood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Washer dryer combo`
+  String get washer_dryer_combo_two_lines {
+    return Intl.message(
+      'Washer dryer combo',
+      name: 'washer_dryer_combo_two_lines',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

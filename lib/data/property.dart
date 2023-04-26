@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/appliances.dart';
+import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/data/room.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
@@ -18,7 +18,7 @@ class Property {
   int coveredParking;
   int openParking;
   final Map<int, Room> rooms = {};
-  final Map<Appliances, int> appliances = {};
+  Map<Appliance, dynamic> appliances;
   ImageProvider coverImage = const AssetImage(''); //todo problem serializing
 
   //todo list of images
@@ -32,7 +32,8 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1,
-      required this.coverImage});
+      required this.coverImage})
+      : appliances = {};
 
   Property.empty(
       {this.id = -1,
@@ -41,12 +42,17 @@ class Property {
       this.bedroom = -1,
       this.bathroom = -1,
       this.coveredParking = -1,
-      this.openParking = -1});
+      this.openParking = -1})
+      : appliances = {} {
+    for (var appliance in Appliance.values) {
+      appliances[appliance] = ApplianceHelper.getDefaultValue(appliance);
+    }
+  }
 
-  // factory Property.fromJson(Map<String, dynamic> json) =>
-  //     _$PropertyFromJson(json);
-  //
-  // Map<String, dynamic> toJson() => _$PropertyToJson(this);
+// factory Property.fromJson(Map<String, dynamic> json) =>
+//     _$PropertyFromJson(json);
+//
+// Map<String, dynamic> toJson() => _$PropertyToJson(this);
 }
 
 class PropertyHelper {

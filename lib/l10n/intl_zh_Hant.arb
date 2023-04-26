@@ -213,5 +213,13 @@
 	"lease_end_date": "租約結束日期",
 	"show_to_tenant_two_lines": "對租客\n顯示",
 	"expenses_paid_by_the_landlord_except": "業主所負責費用\n(除自然損耗外)",
-	"electrical_appliances": "電器"
+	"electrical_appliances": "電器",
+	"washer": "洗衣機",
+	"dryer": "乾衣機",
+	"ac": "冷氣機",
+	"fridge": "雪櫃",
+	"water_heater": "熱水爐",
+	"stove": "煮食爐",
+	"range_hood": "抽油煙機",
+	"washer_dryer_combo_two_lines": "2合1\n洗衣乾衣機"
 }

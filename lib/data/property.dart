@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/data/appliances.dart';
 import 'package:hometeam_client/data/room.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
@@ -17,6 +18,7 @@ class Property {
   int coveredParking;
   int openParking;
   final Map<int, Room> rooms = {};
+  final Map<Appliances, int> appliances = {};
   ImageProvider coverImage = const AssetImage(''); //todo problem serializing
 
   //todo list of images

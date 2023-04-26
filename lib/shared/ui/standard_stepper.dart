@@ -46,6 +46,13 @@ class StandardStepper extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => StandardStepperState();
+
+  static Widget getSectionTitle(BuildContext context, String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Text(text, style: Theme.of(context).textTheme.bodyLarge),
+    );
+  }
 }
 
 class StandardStepperState extends State<StandardStepper> {
@@ -104,6 +111,7 @@ class StandardStepperState extends State<StandardStepper> {
                     padding: const EdgeInsets.only(left: 16.0),
                     child: widget.subtitle,
                   ),
+                  const Divider(height: 1.0),
                   Expanded(
                     child: PageView(
                       controller: _pageController,

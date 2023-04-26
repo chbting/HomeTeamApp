@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/data/expense.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/terms_item.dart';
 import 'package:hometeam_client/shared/date_picker_form_field.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
-import 'package:hometeam_client/shared/ui/form_card.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/shared/ui/terms_item_widget.dart';
@@ -50,10 +49,15 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           primary: false,
           shrinkWrap: true,
           padding: const EdgeInsets.only(
-              left: 8.0, right: 8.0, bottom: StandardStepper.bottomMargin),
+              left: 16.0,
+              right: 16.0,
+              top: 8.0,
+              bottom: StandardStepper.bottomMargin),
           children: [
             _getRentSection(context),
+            const Divider(),
             _getLeasePeriodSection(context),
+            const Divider(),
             _getExpensesSection(context),
             // todo a section of provided electrical appliances
             // todo move negotiable, show to tenant checkboxes to "create listing"?
@@ -62,93 +66,89 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   }
 
   Widget _getRentSection(BuildContext context) {
-    return FormCard(
-      title: S.of(context).rent,
-      body: Wrap(
-        runSpacing: 8.0,
-        children: [
-          Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                child:
-                    Text(S.of(context).negotiable, textAlign: TextAlign.center),
-              )),
-          ListTile(
-              contentPadding: EdgeInsets.zero,
-              trailing: Checkbox(
-                  value: _listing.settings[TermsItem.rent]!.negotiable,
-                  onChanged: (value) => setState(() =>
-                      _listing.settings[TermsItem.rent]!.negotiable = value!)),
-              title: TextFormField(
-                  //todo comma separated numbers
-                  initialValue: _terms.rent?.toString() ?? '',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      icon: SizedBox(
-                          width: _leadingPadding,
-                          child: const Icon(Icons.monetization_on)),
-                      prefix: const Text('\$ '),
-                      labelText: S.of(context).monthly_rent),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return S.of(context).please_put_in_a_valid_amount;
-                    } else {
-                      _terms.rent = int.parse(value);
-                      return null;
-                    }
-                  })),
-          ListTile(
-              contentPadding: EdgeInsets.zero,
-              trailing: Checkbox(
-                  value: _listing.settings[TermsItem.deposit]!.negotiable,
-                  onChanged: (value) => setState(() => _listing
-                      .settings[TermsItem.deposit]!.negotiable = value!)),
-              title: TextFormField(
-                  initialValue: _terms.deposit?.toString() ?? '',
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      icon: SizedBox(
-                          width: _leadingPadding,
-                          child: const Icon(Icons.savings)),
-                      prefix: const Text('\$ '),
-                      labelText: S.of(context).deposit),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return S.of(context).please_put_in_a_valid_amount;
-                    } else {
-                      _terms.deposit = int.parse(value);
-                      return null;
-                    }
-                  })),
-        ],
-      ),
+    return Wrap(
+      runSpacing: 8.0,
+      children: [
+        StandardStepper.getSectionTitle(context, S.of(context).rent),
+        Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child:
+                  Text(S.of(context).negotiable, textAlign: TextAlign.center),
+            )),
+        ListTile(
+            contentPadding: EdgeInsets.zero,
+            trailing: Checkbox(
+                value: _listing.settings[TermsItem.rent]!.negotiable,
+                onChanged: (value) => setState(() =>
+                    _listing.settings[TermsItem.rent]!.negotiable = value!)),
+            title: TextFormField(
+                //todo comma separated numbers
+                initialValue: _terms.rent?.toString() ?? '',
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    icon: SizedBox(
+                        width: _leadingPadding,
+                        child: const Icon(Icons.monetization_on)),
+                    prefix: const Text('\$ '),
+                    labelText: S.of(context).monthly_rent),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S.of(context).please_put_in_a_valid_amount;
+                  } else {
+                    _terms.rent = int.parse(value);
+                    return null;
+                  }
+                })),
+        ListTile(
+            contentPadding: EdgeInsets.zero,
+            trailing: Checkbox(
+                value: _listing.settings[TermsItem.deposit]!.negotiable,
+                onChanged: (value) => setState(() =>
+                    _listing.settings[TermsItem.deposit]!.negotiable = value!)),
+            title: TextFormField(
+                initialValue: _terms.deposit?.toString() ?? '',
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    icon: SizedBox(
+                        width: _leadingPadding,
+                        child: const Icon(Icons.savings)),
+                    prefix: const Text('\$ '),
+                    labelText: S.of(context).deposit),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return S.of(context).please_put_in_a_valid_amount;
+                  } else {
+                    _terms.deposit = int.parse(value);
+                    return null;
+                  }
+                })),
+      ],
     );
   }
 
   Widget _getLeasePeriodSection(BuildContext context) {
-    return FormCard(
-      title: S.of(context).lease_period,
-      body: Wrap(
-        runSpacing: 8.0,
-        children: [
-          _getStartDateSubSection(context),
-          const Divider(thickness: 1.0),
-          _getLeaseLengthSubSection(context),
-          const Divider(thickness: 1.0),
-          _getLeasePeriodOptionalItems(context)
-        ],
-      ),
+    return Wrap(
+      runSpacing: 8.0,
+      children: [
+        StandardStepper.getSectionTitle(context, S.of(context).lease_period),
+        _getStartDateSubSection(context),
+        const Divider(thickness: 1.0),
+        _getLeaseLengthSubSection(context),
+        const Divider(thickness: 1.0),
+        _getLeasePeriodOptionalItems(context)
+      ],
     );
   }
 
@@ -377,33 +377,33 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
   }
 
   Widget _getExpensesSection(BuildContext context) {
-    return FormCard(
-        title: S.of(context).expenses_paid_by_the_landlord_except,
-        body: Wrap(
-          runSpacing: 8.0,
-          children: [
-            TermsItemWidget.getTitleBar(context),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.structure, termsItem: TermsItem.structure),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.fixture, termsItem: TermsItem.fixture),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.furniture, termsItem: TermsItem.furniture),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.electricalAppliances,
-                termsItem: TermsItem.electricalAppliances),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.water, termsItem: TermsItem.water),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.electricity, termsItem: TermsItem.electricity),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.gas, termsItem: TermsItem.gas),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.rates, termsItem: TermsItem.rates),
-            const TermsItemCheckBoxListTile(
-                expense: Expense.management, termsItem: TermsItem.management),
-          ],
-        ));
+    return Wrap(
+      runSpacing: 8.0,
+      children: [
+        StandardStepper.getSectionTitle(
+            context, S.of(context).expenses_paid_by_the_landlord_except),
+        TermsItemWidget.getTitleBar(context),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.structure, termsItem: TermsItem.structure),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.fixture, termsItem: TermsItem.fixture),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.furniture, termsItem: TermsItem.furniture),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.electricalAppliances,
+            termsItem: TermsItem.electricalAppliances),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.water, termsItem: TermsItem.water),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.electricity, termsItem: TermsItem.electricity),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.gas, termsItem: TermsItem.gas),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.rates, termsItem: TermsItem.rates),
+        const TermsItemCheckBoxListTile(
+            expense: Expense.management, termsItem: TermsItem.management),
+      ],
+    );
   }
 
   void _reset() {

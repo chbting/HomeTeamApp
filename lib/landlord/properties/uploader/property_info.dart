@@ -21,6 +21,7 @@ class PropertyInfoWidget extends StatefulWidget {
 class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
+  final appliancesWithBoolValue = ApplianceHelper.valuesWithBoolValue();
   late Function(String?) standardValidator;
   late Property _property;
 
@@ -130,13 +131,10 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
         StandardStepper.getSectionTitle(
             context, S.of(context).electrical_appliances,
             bottomPadding: 0.0),
-        GridView.count(
-            shrinkWrap: true,
-            primary: false,
-            crossAxisCount: 2,
-            childAspectRatio: 3,
-            children: [
-              Padding(
+        Row(children: [
+          Expanded(
+              flex: 1,
+              child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: StandardUI.getIntTextFormField(
                     initialValue: _property.appliances[Appliance.ac]!,
@@ -144,43 +142,69 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                     onChanged: (value) =>
                         _property.appliances[Appliance.ac] = value,
                     validator: standardValidator),
-              ),
-              CheckboxListTile(
-                  title: Text(S.of(context).water_heater),
-                  value: _property.appliances[Appliance.waterHeater],
-                  onChanged: (value) => setState(() =>
-                      _property.appliances[Appliance.waterHeater] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).washer),
-                  value: _property.appliances[Appliance.washer],
-                  onChanged: (value) => setState(
-                      () => _property.appliances[Appliance.washer] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).dryer),
-                  value: _property.appliances[Appliance.dryer],
-                  onChanged: (value) => setState(
-                      () => _property.appliances[Appliance.dryer] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).washer_dryer_combo_two_lines),
-                  value: _property.appliances[Appliance.washerDryerCombo],
-                  onChanged: (value) => setState(() => _property
-                      .appliances[Appliance.washerDryerCombo] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).fridge),
-                  value: _property.appliances[Appliance.fridge],
-                  onChanged: (value) => setState(
-                      () => _property.appliances[Appliance.fridge] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).stove),
-                  value: _property.appliances[Appliance.stove],
-                  onChanged: (value) => setState(
-                      () => _property.appliances[Appliance.stove] = value)),
-              CheckboxListTile(
-                  title: Text(S.of(context).range_hood),
-                  value: _property.appliances[Appliance.rangeHood],
-                  onChanged: (value) => setState(
-                      () => _property.appliances[Appliance.rangeHood] = value)),
-            ]),
+              )),
+          const Expanded(flex: 1, child: SizedBox())
+        ]),
+        GridView.builder(
+            shrinkWrap: true,
+            primary: false,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, childAspectRatio: 3.0),
+            itemCount: Appliance.values.length - 1,
+            itemBuilder: (BuildContext context, int index) {
+              [index + 1];
+              var appliance = appliancesWithBoolValue[index];
+              return Align(
+                alignment: Alignment.centerLeft,
+                child: CheckboxListTile(
+                    title: Text(ApplianceHelper.getName(context, appliance)),
+                    value: _property.appliances[appliance],
+                    onChanged: (value) => setState(
+                        () => _property.appliances[appliance] = value)),
+              );
+            }),
+
+        // 3 = (MediaQuery.of(context).size.width - 32.0 {horizontalPadding}) / crossAxisCount / (48.0 {ListTileHeight} + 16.0 {verticalPadding})
+        // children: [
+        //   Align(
+        //     alignment: Alignment.centerLeft,
+        //     child: CheckboxListTile(
+        //         title: Text(S.of(context).water_heater),
+        //         value: _property.appliances[Appliance.waterHeater],
+        //         onChanged: (value) => setState(() =>
+        //             _property.appliances[Appliance.waterHeater] = value)),
+        //   ),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).washer),
+        //       value: _property.appliances[Appliance.washer],
+        //       onChanged: (value) => setState(
+        //           () => _property.appliances[Appliance.washer] = value)),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).dryer),
+        //       value: _property.appliances[Appliance.dryer],
+        //       onChanged: (value) => setState(
+        //           () => _property.appliances[Appliance.dryer] = value)),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).washer_dryer_combo_two_lines),
+        //       value: _property.appliances[Appliance.washerDryerCombo],
+        //       onChanged: (value) => setState(() => _property
+        //           .appliances[Appliance.washerDryerCombo] = value)),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).fridge),
+        //       value: _property.appliances[Appliance.fridge],
+        //       onChanged: (value) => setState(
+        //           () => _property.appliances[Appliance.fridge] = value)),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).stove),
+        //       value: _property.appliances[Appliance.stove],
+        //       onChanged: (value) => setState(
+        //           () => _property.appliances[Appliance.stove] = value)),
+        //   CheckboxListTile(
+        //       title: Text(S.of(context).range_hood),
+        //       value: _property.appliances[Appliance.rangeHood],
+        //       onChanged: (value) => setState(
+        //           () => _property.appliances[Appliance.rangeHood] = value)),
+        // ]),
       ],
     );
   }

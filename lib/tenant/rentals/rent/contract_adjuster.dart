@@ -172,7 +172,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       )),
                   GridView.count(
                     crossAxisCount: _tenantFeesColumnCount,
-                    childAspectRatio:
+                    childAspectRatio://todo 64.0 is the horizontal padding, pay attention when removing FormCard
                         (MediaQuery.of(context).size.width - 64.0) /
                             _tenantFeesColumnCount /
                             _tenantFeesRowHeight,

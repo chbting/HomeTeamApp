@@ -1,9 +1,10 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:hometeam_client/data/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_uploader_confirmation.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -27,6 +28,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
       PropertyInfoWidgetController();
   final FormController _leaseTermsWidgetController = FormController();
   int _activeStep = 0;
+  bool _submitting = false;
 
   @override
   void dispose() {
@@ -55,7 +57,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
       const Text('2'), //PropertyImagesWidget(),
       LeaseTermsWidget(controller: _leaseTermsWidgetController),
       const Center(child: Text('4')),
-      const Center(child: Text('5'))
+      const PropertyUploaderConfirmationWidget()
     ];
 
     return StandardStepper(
@@ -74,8 +76,16 @@ class PropertyUploaderState extends State<PropertyUploader> {
             ? _propertyInfoWidgetController.resetForm()
             : _controller.previousStep();
       },
-      rightButtonIcon: Icon(
-          _activeStep == steps.length - 1 ? Icons.check : Icons.arrow_forward),
+      rightButtonIcon: _activeStep == steps.length - 1
+          ? _submitting
+              ? SizedBox(
+                  height: 24.0,
+                  width: 24.0,
+                  child: CircularProgressIndicator(
+                      strokeWidth: 3.0,
+                      color: Theme.of(context).colorScheme.onPrimary))
+              : const Icon(Icons.check)
+          : const Icon(Icons.arrow_forward),
       rightButtonLabel: Text(_activeStep == steps.length - 1
           ? S.of(context).submit
           : S.of(context).next),
@@ -88,7 +98,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
             // }
             break;
           case 4:
-            _confirm();
+            _submitting ? null : _confirm(context);
             break;
           default:
             _controller.nextStep();
@@ -98,18 +108,27 @@ class PropertyUploaderState extends State<PropertyUploader> {
     );
   }
 
-  void _confirm() {
+  void _confirm(BuildContext context) {
+    //setState(() => _submitting = true);
     var listing = ListingInheritedData.of(context)!.listing;
     Property property = ListingInheritedData.of(context)!.property;
     //todo push a property, it should receive an id
 
     debugPrint('submitting');
     DatabaseReference ref = FirebaseDatabase.instance.ref('property/');
-    // ref.set(property.toJson()).onError((error, stackTrace) {
-    //   debugPrint('error $error');
-    // }).then((value) {
-    //   //todo show snackBar with property submitted and an option to view it
-    //   debugPrint('submitted');
-    // });
+    debugPrint('${property.toJson()}');
+    ref.set(property.toJson()).onError((error, stackTrace) {
+      debugPrint('error $error');
+    }).then((value) {
+      //todo still fires on error
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(S.of(context).property_has_been_uploaded),
+        showCloseIcon: true,
+        behavior: SnackBarBehavior.floating,
+        dismissDirection: DismissDirection.none, //todo shouldn't need margin unless it's an error (already exited the uploader)
+        margin: const EdgeInsets.only(bottom: StandardStepper.buttonBarHeight),
+        //action: SnackBarAction(label: S.of(context).view, onPressed: ,),
+      ));
+    }).whenComplete(() => setState(() => _submitting = false));
   }
 }

@@ -52,7 +52,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
               left: 16.0,
               right: 16.0,
               top: 8.0,
-              bottom: StandardStepper.bottomMargin),
+              bottom: StandardStepper.buttonBarHeight),
           children: [
             _getRentSection(context),
             const Divider(),

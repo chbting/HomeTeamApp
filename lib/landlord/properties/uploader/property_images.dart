@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/property.dart';
-import 'package:hometeam_client/data/room.dart';
+import 'package:hometeam_client/json_model/property.dart';
+import 'package:hometeam_client/json_model/room.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_image_wizard.dart';
@@ -42,7 +42,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
 
     return ListView.builder(
         padding: const EdgeInsets.only(
-            left: 8.0, right: 8.0, bottom: StandardStepper.bottomMargin),
+            left: 8.0, right: 8.0, bottom: StandardStepper.buttonBarHeight),
         primary: false,
         itemCount: _property.rooms.length,
         itemBuilder: (context, index) {

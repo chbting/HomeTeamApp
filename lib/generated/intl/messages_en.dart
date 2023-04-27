@@ -246,6 +246,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Property Address"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("Property has been removed"),
+        "property_has_been_uploaded": MessageLookupByLibrary.simpleMessage(
+            "The property has been uploaded"),
         "property_info": MessageLookupByLibrary.simpleMessage("Property Info"),
         "property_visit": MessageLookupByLibrary.simpleMessage("Visit"),
         "property_visit_agreement":
@@ -331,6 +333,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_system_settings":
             MessageLookupByLibrary.simpleMessage("Use system settings"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "view": MessageLookupByLibrary.simpleMessage("View"),
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),

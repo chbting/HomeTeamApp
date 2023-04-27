@@ -29,20 +29,20 @@ class StandardStepper extends StatefulWidget {
   final ValueChanged<int> onActiveStepChanged;
   final List<EasyStep> steps;
   final List<Widget> pages;
-  final Icon leftButtonIcon;
+  final Widget leftButtonIcon;
   final Widget leftButtonLabel;
   final VoidCallback onLeftButtonPressed;
-  final Icon? middleButtonIcon;
+  final Widget? middleButtonIcon;
   final Widget? middleButtonLabel;
   final VoidCallback? onMiddleButtonPressed;
   final bool showMiddleButton;
-  final Icon rightButtonIcon;
+  final Widget rightButtonIcon;
   final Widget rightButtonLabel;
   final VoidCallback onRightButtonPressed;
 
   static const buttonHeight = 48.0; // Same as an extended floatingActionButton
   static const buttonContainerPadding = 16.0;
-  static const bottomMargin = buttonHeight + buttonContainerPadding * 2;
+  static const buttonBarHeight = buttonHeight + buttonContainerPadding * 2;
 
   @override
   State<StatefulWidget> createState() => StandardStepperState();
@@ -136,8 +136,7 @@ class StandardStepperState extends State<StandardStepper> {
 
   Widget _getBottomButtons() {
     return Container(
-        height: StandardStepper.buttonHeight +
-            StandardStepper.buttonContainerPadding * 2,
+        height: StandardStepper.buttonBarHeight,
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(

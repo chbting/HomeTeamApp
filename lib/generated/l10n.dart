@@ -2239,6 +2239,26 @@ class S {
       args: [],
     );
   }
+
+  /// `The property has been uploaded`
+  String get property_has_been_uploaded {
+    return Intl.message(
+      'The property has been uploaded',
+      name: 'property_has_been_uploaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View`
+  String get view {
+    return Intl.message(
+      'View',
+      name: 'view',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

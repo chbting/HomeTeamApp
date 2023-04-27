@@ -51,7 +51,7 @@ class VisitDatePickerWidgetState extends State<VisitDatePickerWidget> {
         padding: const EdgeInsets.only(
             left: 12.0,
             right: 12.0,
-            bottom: StandardStepper.bottomMargin - 4.0),
+            bottom: StandardStepper.buttonBarHeight - 4.0),
         primary: false,
         children: [
           Card(

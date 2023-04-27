@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/bid.dart';
 import 'package:hometeam_client/data/expense.dart';

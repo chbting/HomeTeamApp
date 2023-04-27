@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/address_form.dart';
@@ -45,7 +45,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
         primary: false,
         shrinkWrap: true,
         padding: const EdgeInsets.only(
-            left: 16.0, right: 16.0, bottom: StandardStepper.bottomMargin),
+            left: 16.0, right: 16.0, bottom: StandardStepper.buttonBarHeight),
         children: [
           StandardStepper.getSectionTitle(
               context, S.of(context).property_address,

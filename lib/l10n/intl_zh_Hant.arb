@@ -221,5 +221,7 @@
 	"water_heater": "熱水爐",
 	"stove": "煮食爐",
 	"range_hood": "抽油煙機",
-	"washer_dryer_combo_two_lines": "2合1\n洗衣乾衣機"
+	"washer_dryer_combo_two_lines": "2合1\n洗衣乾衣機",
+	"property_has_been_uploaded": "物業已被上載",
+	"view": "查看"
 }

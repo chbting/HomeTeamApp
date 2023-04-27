@@ -23,9 +23,9 @@ Map<String, dynamic> _$ListingToJson(Listing instance) => <String, dynamic>{
       'id': instance.id,
       'propertyId': instance.propertyId,
       'title': instance.title,
-      'terms': instance.terms,
-      'settings':
-          instance.settings.map((k, e) => MapEntry(_$TermsItemEnumMap[k]!, e)),
+      'terms': instance.terms.toJson(),
+      'settings': instance.settings
+          .map((k, e) => MapEntry(_$TermsItemEnumMap[k]!, e.toJson())),
     };
 
 const _$TermsItemEnumMap = {

@@ -205,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_address": MessageLookupByLibrary.simpleMessage("物業地址"),
         "property_has_been_removed":
             MessageLookupByLibrary.simpleMessage("租盤已從清單中移除"),
+        "property_has_been_uploaded":
+            MessageLookupByLibrary.simpleMessage("物業已被上載"),
         "property_info": MessageLookupByLibrary.simpleMessage("物業資料"),
         "property_visit": MessageLookupByLibrary.simpleMessage("睇樓"),
         "property_visit_agreement": MessageLookupByLibrary.simpleMessage("睇樓紙"),
@@ -275,6 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "undo": MessageLookupByLibrary.simpleMessage("還原"),
         "use_system_settings": MessageLookupByLibrary.simpleMessage("使用系統設定"),
         "verify": MessageLookupByLibrary.simpleMessage("驗證"),
+        "view": MessageLookupByLibrary.simpleMessage("查看"),
         "visited_properties": MessageLookupByLibrary.simpleMessage("已睇樓盤"),
         "voice_search": MessageLookupByLibrary.simpleMessage("語音搜尋"),
         "waiting_for_sms_code_autofill":

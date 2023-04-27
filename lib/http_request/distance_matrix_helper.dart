@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:hometeam_client/configs/keys.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/distance_matrix.dart';
 import 'package:hometeam_client/json_model/listing.dart';

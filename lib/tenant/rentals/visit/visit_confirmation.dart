@@ -18,7 +18,7 @@ class VisitConfirmationWidget extends StatelessWidget {
     return ListView(
       primary: false,
       padding: const EdgeInsets.only(
-          left: 12.0, right: 12.0, bottom: StandardStepper.bottomMargin - 4.0),
+          left: 12.0, right: 12.0, bottom: StandardStepper.buttonBarHeight - 4.0),
       children: [
         Card(
             child: Padding(

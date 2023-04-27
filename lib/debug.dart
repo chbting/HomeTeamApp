@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/listing.dart';

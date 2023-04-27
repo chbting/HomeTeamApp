@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hometeam_client/data/property.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 

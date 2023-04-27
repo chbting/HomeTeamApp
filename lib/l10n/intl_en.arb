@@ -218,5 +218,7 @@
 	"water_heater": "Water heater",
 	"stove": "Stove",
 	"range_hood": "Range hood",
-	"washer_dryer_combo_two_lines": "Washer dryer combo"
+	"washer_dryer_combo_two_lines": "Washer dryer combo",
+	"property_has_been_uploaded": "The property has been uploaded",
+	"view": "View"
 }

@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'listing.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Listing {
   int id;
   int propertyId;

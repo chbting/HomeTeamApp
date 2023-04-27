@@ -34,7 +34,7 @@ class VisitSequencerWidgetState extends State<VisitSequencerWidget> {
     return ReorderableListView.builder(
       // note: ListView has 4.0 internal padding on all sides
       padding: const EdgeInsets.only(
-          left: 4.0, right: 4.0, bottom: StandardStepper.bottomMargin - 4.0),
+          left: 4.0, right: 4.0, bottom: StandardStepper.buttonBarHeight - 4.0),
       primary: false,
       itemCount: widget.data.selectedPath.length,
       itemBuilder: (context, index) {

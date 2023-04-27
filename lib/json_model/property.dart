@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
-import 'package:hometeam_client/data/room.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
+import 'package:hometeam_client/json_model/room.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-//part '../json_model/property.g.dart';
+part 'property.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Property {
   final int id;
-  Address address = Address();
+  Address address;
   int netArea;
   int grossArea;
   int bedroom;
-  int bathroom; // todo 0.5
+  int bathroom;
   int coveredParking;
   int openParking;
-  final Map<int, Room> rooms = {};
+  final Map<int, Room> rooms;
   Map<Appliance, dynamic> appliances;
-  ImageProvider coverImage = const AssetImage(''); //todo problem serializing
 
-  //todo list of images
+  @JsonKey(includeToJson: false, includeFromJson: false) //todo
+  ImageProvider coverImage;
 
   Property(
       {this.id = -1,
@@ -32,8 +32,10 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1,
-      required this.coverImage})
-      : appliances = {};
+      ImageProvider? coverImage})
+      : appliances = {},
+        rooms = {},
+        coverImage = coverImage ?? const AssetImage('');
 
   Property.empty(
       {this.id = -1,
@@ -43,16 +45,19 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1})
-      : appliances = {} {
+      : address = Address(),
+        appliances = {},
+        rooms = {},
+        coverImage = const AssetImage('') {
     for (var appliance in Appliance.values) {
       appliances[appliance] = ApplianceHelper.getDefaultValue(appliance);
     }
   }
 
-// factory Property.fromJson(Map<String, dynamic> json) =>
-//     _$PropertyFromJson(json);
-//
-// Map<String, dynamic> toJson() => _$PropertyToJson(this);
+  factory Property.fromJson(Map<String, dynamic> json) =>
+      _$PropertyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PropertyToJson(this);
 }
 
 class PropertyHelper {

@@ -1,5 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
@@ -109,25 +110,27 @@ class PropertyUploaderState extends State<PropertyUploader> {
   }
 
   void _confirm(BuildContext context) {
-    //setState(() => _submitting = true);
-    var listing = ListingInheritedData.of(context)!.listing;
-    Property property = ListingInheritedData.of(context)!.property;
-    //todo push a property, it should receive an id
-
     debugPrint('submitting');
-    DatabaseReference ref = FirebaseDatabase.instance.ref('property/');
-    debugPrint('${property.toJson()}');
-    ref.set(property.toJson()).onError((error, stackTrace) {
-      debugPrint('error $error');
-    }).then((value) {
-      //todo still fires on error
+    setState(() => _submitting = true);
+    Property property = ListingInheritedData.of(context)!.property;
+    var listing = ListingInheritedData.of(context)!.listing;
+
+    //FirebaseStorage storage = FirebaseStorage.instance.ref('property');
+
+
+    DatabaseReference database =
+        FirebaseDatabase.instance.ref('property/').push();
+    database.set(property.toJson()).then((_) {
+      //debugPrint('uploaded');
+      Navigator.of(context).pop(true);
+    }).catchError((error, stackTrace) {
+      debugPrint('error $error'); //todo
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(S.of(context).property_has_been_uploaded),
+        content: Text(S.of(context).property_upload_error),
         showCloseIcon: true,
         behavior: SnackBarBehavior.floating,
-        dismissDirection: DismissDirection.none, //todo shouldn't need margin unless it's an error (already exited the uploader)
+        dismissDirection: DismissDirection.none,
         margin: const EdgeInsets.only(bottom: StandardStepper.buttonBarHeight),
-        //action: SnackBarAction(label: S.of(context).view, onPressed: ,),
       ));
     }).whenComplete(() => setState(() => _submitting = false));
   }

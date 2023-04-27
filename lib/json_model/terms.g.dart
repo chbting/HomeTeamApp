@@ -7,7 +7,7 @@ part of 'terms.dart';
 // **************************************************************************
 
 Terms _$TermsFromJson(Map<String, dynamic> json) => Terms(
-      propertyId: json['propertyId'] as int,
+      propertyId: json['propertyId'] as String,
       rent: json['rent'] as int?,
       deposit: json['deposit'] as int?,
       earliestStartDate: json['earliestStartDate'] == null

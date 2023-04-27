@@ -7,7 +7,7 @@ part of 'bid.dart';
 // **************************************************************************
 
 Bid _$BidFromJson(Map<String, dynamic> json) => Bid(
-      listingId: json['listingId'] as int,
+      listingId: json['listingId'] as String,
       biddingTerms:
           Terms.fromJson(json['biddingTerms'] as Map<String, dynamic>),
       notes: json['notes'] as String? ?? '',

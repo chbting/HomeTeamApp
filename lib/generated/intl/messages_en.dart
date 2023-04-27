@@ -249,6 +249,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_has_been_uploaded": MessageLookupByLibrary.simpleMessage(
             "The property has been uploaded"),
         "property_info": MessageLookupByLibrary.simpleMessage("Property Info"),
+        "property_upload_error":
+            MessageLookupByLibrary.simpleMessage("Upload property failed"),
         "property_visit": MessageLookupByLibrary.simpleMessage("Visit"),
         "property_visit_agreement":
             MessageLookupByLibrary.simpleMessage("Agreement"),

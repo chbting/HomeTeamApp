@@ -9,7 +9,7 @@ part 'terms.g.dart';
 
 @JsonSerializable()
 class Terms {
-  int propertyId;
+  String propertyId;
   int? rent, deposit;
 
   DateTime? earliestStartDate, latestStartDate; // earliest start date

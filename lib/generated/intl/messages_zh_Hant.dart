@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "property_has_been_uploaded":
             MessageLookupByLibrary.simpleMessage("物業已被上載"),
         "property_info": MessageLookupByLibrary.simpleMessage("物業資料"),
+        "property_upload_error": MessageLookupByLibrary.simpleMessage("未能上載物業"),
         "property_visit": MessageLookupByLibrary.simpleMessage("睇樓"),
         "property_visit_agreement": MessageLookupByLibrary.simpleMessage("睇樓紙"),
         "property_visit_agreement_content": MessageLookupByLibrary.simpleMessage(

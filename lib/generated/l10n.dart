@@ -2259,6 +2259,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Upload property failed`
+  String get property_upload_error {
+    return Intl.message(
+      'Upload property failed',
+      name: 'property_upload_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

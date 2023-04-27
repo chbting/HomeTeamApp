@@ -88,7 +88,7 @@ final List<Address> addresses = [
 
 final List<Property> _sampleProperties = [
   Property(
-      id: 1,
+      id: '1',
       address: addresses[0],
       netArea: 630,
       grossArea: 720,
@@ -96,7 +96,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[0]),
   Property(
-      id: 2,
+      id: '2',
       address: addresses[1],
       netArea: 631,
       grossArea: 721,
@@ -104,7 +104,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[1]),
   Property(
-      id: 3,
+      id: '3',
       address: addresses[2],
       netArea: 520,
       grossArea: 601,
@@ -112,7 +112,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[2]),
   Property(
-      id: 4,
+      id: '4',
       address: addresses[3],
       netArea: 407,
       grossArea: 494,
@@ -120,7 +120,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[3]),
   Property(
-      id: 5,
+      id: '5',
       address: addresses[4],
       netArea: 783,
       grossArea: 906,
@@ -128,7 +128,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[4]),
   Property(
-      id: 6,
+      id: '6',
       address: addresses[5],
       netArea: 592,
       grossArea: 722,
@@ -136,7 +136,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[5]),
   Property(
-      id: 7,
+      id: '7',
       address: addresses[6],
       netArea: 517,
       grossArea: 639,
@@ -144,7 +144,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[6]),
   Property(
-      id: 8,
+      id: '8',
       address: addresses[7],
       netArea: 1068,
       grossArea: 1362,
@@ -152,7 +152,7 @@ final List<Property> _sampleProperties = [
       bathroom: 1,
       coverImage: _sampleCoverImage[7]),
   Property(
-      id: 9,
+      id: '9',
       address: addresses[8],
       netArea: 369,
       grossArea: 500,

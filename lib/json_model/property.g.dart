@@ -7,7 +7,7 @@ part of 'property.dart';
 // **************************************************************************
 
 Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
-      id: json['id'] as int? ?? -1,
+      id: json['id'] as String? ?? '',
       address: Address.fromJson(json['address'] as Map<String, dynamic>),
       netArea: json['netArea'] as int? ?? -1,
       grossArea: json['grossArea'] as int? ?? -1,

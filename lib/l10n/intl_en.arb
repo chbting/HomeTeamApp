@@ -220,5 +220,6 @@
 	"range_hood": "Range hood",
 	"washer_dryer_combo_two_lines": "Washer dryer combo",
 	"property_has_been_uploaded": "The property has been uploaded",
-	"view": "View"
+	"view": "View",
+	"property_upload_error": "Upload property failed"
 }

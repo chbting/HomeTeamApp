@@ -7,7 +7,7 @@ part 'bid.g.dart';
 
 @JsonSerializable()
 class Bid {
-  int listingId;
+  String listingId;
   Tenant tenant;
   Terms biddingTerms;
   String notes;

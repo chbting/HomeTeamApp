@@ -7,14 +7,14 @@ part 'listing.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Listing {
-  int id;
-  int propertyId;
+  String id;
+  String propertyId;
   String title;
   Terms terms;
   Map<TermsItem, TermsItemSettings> settings = {};
 
   Listing({required this.propertyId, required this.title, Terms? terms})
-      : id = propertyId,
+      : id = propertyId, //todo
         terms = terms ?? Terms(propertyId: propertyId) {
     for (var item in TermsItem.values) {
       settings[item] = TermsItemHelper.getDefaultSettings(item);
@@ -28,7 +28,7 @@ class Listing {
 }
 
 class ListingHelper {
-  static Listing getFromId(int id) {
+  static Listing getFromId(String id) {
     //todo temporary solution
     return getSampleListing().firstWhere((listing) => listing.id == id);
   }

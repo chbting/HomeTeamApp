@@ -7,13 +7,13 @@ part of 'listing.dart';
 // **************************************************************************
 
 Listing _$ListingFromJson(Map<String, dynamic> json) => Listing(
-      propertyId: json['propertyId'] as int,
+      propertyId: json['propertyId'] as String,
       title: json['title'] as String,
       terms: json['terms'] == null
           ? null
           : Terms.fromJson(json['terms'] as Map<String, dynamic>),
     )
-      ..id = json['id'] as int
+      ..id = json['id'] as String
       ..settings = (json['settings'] as Map<String, dynamic>).map(
         (k, e) => MapEntry($enumDecode(_$TermsItemEnumMap, k),
             TermsItemSettings.fromJson(e as Map<String, dynamic>)),

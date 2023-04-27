@@ -9,7 +9,7 @@ part 'property.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Property {
-  final int id;
+  final String id;
   Address address;
   int netArea;
   int grossArea;
@@ -24,7 +24,7 @@ class Property {
   ImageProvider coverImage;
 
   Property(
-      {this.id = -1,
+      {this.id = '',
       required this.address,
       this.netArea = -1,
       this.grossArea = -1,
@@ -38,7 +38,7 @@ class Property {
         coverImage = coverImage ?? const AssetImage('');
 
   Property.empty(
-      {this.id = -1,
+      {this.id = '',
       this.netArea = -1,
       this.grossArea = -1,
       this.bedroom = -1,
@@ -61,8 +61,9 @@ class Property {
 }
 
 class PropertyHelper {
-  static Property getFromId(int propertyId) {
+  static Property getFromId(String propertyId) {
     //todo
-    return getSampleProperties()[propertyId - 1];
+    return getSampleProperties()
+        .firstWhere((property) => property.id == propertyId);
   }
 }

@@ -220,5 +220,6 @@
 	"range_hood": "抽油烟机",
 	"washer_dryer_combo_two_lines": "2合1\n洗衣干衣机",
 	"property_has_been_uploaded": "物业已被上载",
-	"view": "查看"
+	"view": "查看",
+	"property_upload_error": "未能上载物业"
 }

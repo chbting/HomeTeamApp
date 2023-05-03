@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/data/room_type.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/room.dart';
-import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_image_wizard.dart';
+import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/theme/theme.dart';
 import 'package:hometeam_client/shared/ui/image_viewer.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -24,123 +28,108 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   Widget build(BuildContext context) {
     _property = ListingInheritedData.of(context)!.property;
 
-    // todo remove unnecessary images (remove bedroom and bathroom images only)
-    if (_isInitializationNeeded()) {
-      _property.rooms.clear();
-      _property.rooms[0] = Room(RoomType.livingDiningRoom);
-      for (int i = 1; i <= _property.bedroom; i++) {
-        _property.rooms[i] = Room(RoomType.bedroom);
-      }
-      for (int j = _property.bedroom + 1;
-          j <= _property.bedroom + _property.bathroom;
-          j++) {
-        _property.rooms[j] = Room(RoomType.bathroom);
-      }
-      _property.rooms[_property.bedroom + _property.bathroom + 1] =
-          Room(RoomType.others);
+    // Initialize the room image map
+    if (_property.rooms.isEmpty) {
+      _property.rooms[RoomType.livingDiningRoom] = [Room()];
+      _property.rooms[RoomType.others] = [Room()];
+      _property.rooms[RoomType.bedroom] =
+          List.generate(_property.bedroom, (index) => Room());
+      _property.rooms[RoomType.bedroom] =
+          List.generate(_property.bathroom, (index) => Room());
+    } else {
+      _updateRoomCountIfNeeded(RoomType.bedroom, _property.bedroom);
+      _updateRoomCountIfNeeded(RoomType.bathroom, _property.bathroom);
     }
 
-    return ListView.builder(
+    int itemCount = 2; // livingDiningRoom and others
+    _property.bedroom > 0 ? itemCount++ : null;
+    _property.bathroom > 0 ? itemCount++ : null;
+
+    return ListView(
         padding: const EdgeInsets.only(
             left: 8.0, right: 8.0, bottom: StandardStepper.buttonBarHeight),
         primary: false,
-        itemCount: _property.rooms.length,
-        itemBuilder: (context, index) {
-          Room room = _property.rooms[index]!;
-          String title = RoomHelper.getName(context, room.type);
-          switch (room.type) {
-            case RoomType.bedroom:
-              if (_property.bedroom > 1) {
-                title += ' $index';
-              }
-              break;
-            case RoomType.bathroom:
-              if (_property.bathroom > 1) {
-                int count = index - _property.bedroom;
-                title += ' $count';
-              }
-              break;
-            default:
-              break;
+        children: [
+          _getRoomSection(context, RoomType.livingDiningRoom),
+          //todo
+          // _getRoomSection(context, RoomType.bedroom),
+          // _getRoomSection(context, RoomType.bathroom),
+          _getRoomSection(context, RoomType.others)
+        ]);
+  }
+
+  /// Generate a new room list for the specified room type if the count changed.
+  /// Preserving previously taken images and removing unnecessary cache images.
+  void _updateRoomCountIfNeeded(RoomType type, int newCount) {
+    List<Room> roomList = _property.rooms[type]!;
+    if (newCount != roomList.length) {
+      if (newCount < roomList.length) {
+        for (var room in roomList) {
+          for (var image in room.images) {
+            image.delete().ignore();
           }
-          // todo allow user to add any number of photos
-          return Card(
-            child: ListTile(
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-              leading: SizedBox(
-                  // Explicitly center the icon only when there are images
-                  height: room.images.isEmpty ? double.infinity : 0.0,
-                  child: Icon(RoomHelper.getIconData(room.type))),
-              title: Text(title),
-              subtitle: room.images.isEmpty
-                  ? Text(S.of(context).photo_required,
-                      style: AppTheme.getListTileBodyTextStyle(context))
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Text(S.of(context).photo_added,
-                                style: AppTheme.getListTileBodyTextStyle(
-                                    context))),
-                        GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    mainAxisSpacing: _gridviewSpacing,
-                                    crossAxisSpacing: _gridviewSpacing),
-                            itemCount: room.images.length,
-                            shrinkWrap: true,
-                            primary: false,
-                            itemBuilder: (context, imageIndex) {
-                              return _getEnlargeableThumbnail(
-                                  context, index, imageIndex);
-                            })
-                      ],
-                    ),
-              trailing: room.images.isEmpty
-                  ? const Icon(Icons.add_circle)
-                  : Icon(Icons.check_circle,
-                      color: Theme.of(context).colorScheme.secondary),
-              onTap: room.images.isEmpty
-                  ? () => _openImageWizard(context, index)
-                  : null,
-            ),
-          );
-        });
-  }
-
-  /// Returns true if the map is empty or bedroom or bathroom count changed
-  bool _isInitializationNeeded() {
-    if (_property.rooms.isEmpty) {
-      return true;
-    }
-    int bedroom = 0;
-    int bathroom = 0;
-    for (var room in _property.rooms.values) {
-      switch (room.type) {
-        case RoomType.bedroom:
-          bedroom++;
-          break;
-        case RoomType.bathroom:
-          bathroom++;
-          break;
-        default:
-          break;
+        }
       }
+      _property.rooms[type] = List.generate(newCount,
+          (index) => index < roomList.length ? roomList[index] : Room());
     }
-    return _property.bedroom != bedroom || _property.bathroom != bathroom;
   }
 
-  void _openImageWizard(BuildContext context, int roomKey) {
+  Widget _getRoomSection(BuildContext context, RoomType type) {
+    List<File> images = _property.rooms[type]![0].images; //todo [0] can't support bedroom and bathroom
+
+    return Card(
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+        leading: SizedBox(
+            // Explicitly center the icon only when there are images
+            height: images.isEmpty ? double.infinity : 0.0,
+            child: Icon(RoomTypeHelper.getIconData(type))),
+        title: Text(RoomTypeHelper.getName(context, type)),
+        subtitle: images.isEmpty
+            ? Text(S.of(context).photo_required,
+                style: AppTheme.getListTileBodyTextStyle(context))
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(S.of(context).photo_added,
+                          style: AppTheme.getListTileBodyTextStyle(context))),
+                  GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: _gridviewSpacing,
+                          crossAxisSpacing: _gridviewSpacing),
+                      itemCount: images.length,
+                      shrinkWrap: true,
+                      primary: false,
+                      itemBuilder: (context, imageIndex) {
+                        return _getEnlargeableThumbnail(
+                            context, type, 0, imageIndex);
+                      })
+                ],
+              ),
+        trailing: images.isEmpty
+            ? const Icon(Icons.add_circle)
+            : Icon(Icons.check_circle,
+                color: Theme.of(context).colorScheme.secondary),
+        onTap: images.isEmpty
+            ? () => _openImageWizard(context, type, 0)
+            : null, //todo 0
+      ),
+    );
+  }
+
+  void _openImageWizard(BuildContext context, RoomType type, int roomIndex) {
     Navigator.of(context)
         .push(MaterialPageRoute(
-            builder: (context) => PropertyImagesWizard(roomKey: roomKey)))
+            builder: (context) => PropertyImagesWizard(type: type)))
         .then((images) {
       if (images != null) {
         setState(() {
-          _property.rooms[roomKey]!.images = images;
+          _property.rooms[type]![roomIndex].images = images;
           //todo RemodelingInheritedData.of(context)!.updateRightButtonState();
         });
       }
@@ -148,15 +137,15 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   }
 
   void _openImageWizardForRetake(
-      BuildContext context, int roomKey, int imageIndex) {
+      BuildContext context, RoomType type, int roomIndex, int imageIndex) {
     Navigator.of(context)
         .push(MaterialPageRoute(
             builder: (context) => PropertyImagesWizard(
-                roomKey: roomKey, imageIndex: imageIndex, retake: true)))
+                type: type, imageIndex: imageIndex, retake: true)))
         .then((images) {
       if (images != null) {
         setState(() {
-          _property.rooms[roomKey]!.images = images;
+          _property.rooms[type]![roomIndex].images[imageIndex] = images;
           //todo RemodelingInheritedData.of(context)!.updateRightButtonState();
         });
       }
@@ -164,8 +153,8 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   }
 
   Widget _getEnlargeableThumbnail(
-      BuildContext context, int roomKey, int imageIndex) {
-    var image = _property.rooms[roomKey]!.images[imageIndex];
+      BuildContext context, RoomType type, int roomIndex, int imageIndex) {
+    File image = _property.rooms[type]![roomIndex].images[imageIndex];
     var heroTag = basename(image.path);
     return Hero(
         tag: heroTag,
@@ -179,7 +168,8 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                     return ImageViewer(heroTag: heroTag, image: image);
                   })).then((retake) {
                     if (retake != null) {
-                      _openImageWizardForRetake(context, roomKey, imageIndex);
+                      _openImageWizardForRetake(
+                          context, type, roomIndex, imageIndex);
                     }
                   });
                 }))));

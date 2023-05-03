@@ -7,16 +7,9 @@ part of 'room.dart';
 // **************************************************************************
 
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
-      $enumDecode(_$RoomTypeEnumMap, json['type']),
+      imageUrls: json['imageUrls'],
     );
 
 Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
-      'type': _$RoomTypeEnumMap[instance.type]!,
+      'imageUrls': instance.imageUrls,
     };
-
-const _$RoomTypeEnumMap = {
-  RoomType.livingDiningRoom: 'livingDiningRoom',
-  RoomType.bedroom: 'bedroom',
-  RoomType.bathroom: 'bathroom',
-  RoomType.others: 'others',
-};

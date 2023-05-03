@@ -1,15 +1,19 @@
+import 'dart:io';
+
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
+import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader_confirmation.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
+import 'package:path/path.dart';
 
 class PropertyUploader extends StatefulWidget {
   const PropertyUploader({Key? key}) : super(key: key);
@@ -55,7 +59,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
     ];
     final pages = [
       PropertyInfoWidget(controller: _propertyInfoWidgetController),
-      const Text('2'), //PropertyImagesWidget(),
+      const PropertyImagesWidget(), //todo make it video base
       LeaseTermsWidget(controller: _leaseTermsWidgetController),
       const Center(child: Text('4')),
       const PropertyUploaderConfirmationWidget()
@@ -115,8 +119,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
     Property property = ListingInheritedData.of(context)!.property;
     var listing = ListingInheritedData.of(context)!.listing;
 
-    //FirebaseStorage storage = FirebaseStorage.instance.ref('property');
-
+    Reference storage = FirebaseStorage.instance.ref('images/property/');
 
     DatabaseReference database =
         FirebaseDatabase.instance.ref('property/').push();
@@ -133,5 +136,28 @@ class PropertyUploaderState extends State<PropertyUploader> {
         margin: const EdgeInsets.only(bottom: StandardStepper.buttonBarHeight),
       ));
     }).whenComplete(() => setState(() => _submitting = false));
+  }
+
+  void sendImages(BuildContext context) async {
+    Map<File, Reference> refMap = {};
+    Reference storage = FirebaseStorage.instance.ref('images/property/');
+
+    Property property = ListingInheritedData.of(context)!.property;
+    // for (var room in property.rooms.values) {
+    //   for (var image in room.images) {
+    //     refMap[image] = storage.child(basename(image.path));
+    //   }
+    // }
+    // todo unique name DateTime.now().milisinceepoch
+    //todo put into directory?
+
+    try {
+      refMap.forEach((image, reference) async {
+        debugPrint('Uploading $image to $reference'); //todo debug line
+        var imageUrl = await reference.putFile(image);
+      });
+    } on FirebaseException catch (e) {
+      debugPrint(e.toString()); //todo notify user upload has failed
+    }
   }
 }

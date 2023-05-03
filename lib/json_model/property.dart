@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
+import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/room.dart';
@@ -17,8 +18,12 @@ class Property {
   int bathroom;
   int coveredParking;
   int openParking;
-  final Map<int, Room> rooms;
+
+  /// Values are either bool or int (for ac)
   Map<Appliance, dynamic> appliances;
+
+  /// Map of rooms, each room containing a list of images(json ignored) and imageUrls
+  Map<RoomType, List<Room>> rooms;
 
   @JsonKey(includeToJson: false, includeFromJson: false) //todo
   ImageProvider coverImage;

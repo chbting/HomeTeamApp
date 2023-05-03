@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/shared/theme/theme.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -13,12 +14,12 @@ import 'package:path/path.dart';
 class PropertyImagesWizard extends StatefulWidget {
   const PropertyImagesWizard(
       {Key? key,
-      required this.roomKey,
+      required this.type,
       this.imageIndex = 0,
       this.retake = false})
       : super(key: key);
 
-  final int roomKey;
+  final RoomType type;
   final int imageIndex;
   final bool retake;
 
@@ -27,7 +28,6 @@ class PropertyImagesWizard extends StatefulWidget {
 }
 
 class PropertyImagesWizardState extends State<PropertyImagesWizard> {
-  bool _bottomButtonEnabled = true;
   final ImagePicker _picker = ImagePicker();
   final StandardStepperController _controller = StandardStepperController();
   final List<File> _imageList = [];
@@ -68,14 +68,12 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
       pages: pages,
       leftButtonLabel: Text(S.of(context).select_from_gallery),
       leftButtonIcon: const Icon(Icons.collections),
-      onLeftButtonPressed: () => _bottomButtonEnabled
-          ? _getImageFromSource(context, ImageSource.gallery)
-          : null,
+      onLeftButtonPressed: () =>
+          _getImageFromSource(context, ImageSource.gallery),
       rightButtonLabel: Text(S.of(context).take_photo),
       rightButtonIcon: const Icon(Icons.camera_alt),
-      onRightButtonPressed: () => _bottomButtonEnabled
-          ? _getImageFromSource(context, ImageSource.camera)
-          : null,
+      onRightButtonPressed: () =>
+          _getImageFromSource(context, ImageSource.camera),
     );
   }
 
@@ -85,7 +83,7 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
         // Standardize image names with enum type and step number
         //todo count
         int count = 1;
-        var imageName = '${widget.roomKey}_$count${extension(image.path)}';
+        var imageName = '${widget.type}_$count${extension(image.path)}';
         FileHelper.moveToCache(
                 file: File(image.path),
                 child: FileHelper.propertyUploaderCache,

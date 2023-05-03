@@ -15,8 +15,16 @@ Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
       bathroom: json['bathroom'] as int? ?? -1,
       coveredParking: json['coveredParking'] as int? ?? -1,
       openParking: json['openParking'] as int? ?? -1,
-    )..appliances = (json['appliances'] as Map<String, dynamic>).map(
+    )
+      ..appliances = (json['appliances'] as Map<String, dynamic>).map(
         (k, e) => MapEntry($enumDecode(_$ApplianceEnumMap, k), e),
+      )
+      ..rooms = (json['rooms'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+            $enumDecode(_$RoomTypeEnumMap, k),
+            (e as List<dynamic>)
+                .map((e) => Room.fromJson(e as Map<String, dynamic>))
+                .toList()),
       );
 
 Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
@@ -30,6 +38,8 @@ Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
       'openParking': instance.openParking,
       'appliances': instance.appliances
           .map((k, e) => MapEntry(_$ApplianceEnumMap[k]!, e)),
+      'rooms': instance.rooms.map((k, e) =>
+          MapEntry(_$RoomTypeEnumMap[k]!, e.map((e) => e.toJson()).toList())),
     };
 
 const _$ApplianceEnumMap = {
@@ -41,4 +51,11 @@ const _$ApplianceEnumMap = {
   Appliance.fridge: 'fridge',
   Appliance.stove: 'stove',
   Appliance.rangeHood: 'rangeHood',
+};
+
+const _$RoomTypeEnumMap = {
+  RoomType.livingDiningRoom: 'livingDiningRoom',
+  RoomType.bedroom: 'bedroom',
+  RoomType.bathroom: 'bathroom',
+  RoomType.others: 'others',
 };

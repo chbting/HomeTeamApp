@@ -18,7 +18,7 @@ class VisitedPropertiesScreen extends StatefulWidget {
 
 class VisitedPropertiesScreenState extends State<VisitedPropertiesScreen> {
   final double _imageSize = 120.0;
-  final List<Listing> _listingInCart = getSampleListing();
+  final List<Listing> _listingInCart = Debug.getSampleListing();
 
   @override
   Widget build(BuildContext context) {

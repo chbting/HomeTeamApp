@@ -37,8 +37,9 @@ class Property {
       this.bathroom = -1,
       this.coveredParking = -1,
       this.openParking = -1,
+      Map<Appliance, dynamic>? appliances,
       ImageProvider? coverImage})
-      : appliances = {},
+      : appliances = appliances ?? {},
         rooms = {},
         coverImage = coverImage ?? const AssetImage('');
 
@@ -68,7 +69,7 @@ class Property {
 class PropertyHelper {
   static Property getFromId(String propertyId) {
     //todo
-    return getSampleProperties()
+    return Debug.getSampleProperties()
         .firstWhere((property) => property.id == propertyId);
   }
 }

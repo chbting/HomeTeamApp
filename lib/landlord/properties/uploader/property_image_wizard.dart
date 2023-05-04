@@ -15,11 +15,13 @@ class PropertyImagesWizard extends StatefulWidget {
   const PropertyImagesWizard(
       {Key? key,
       required this.type,
+      required this.roomIndex,
       this.imageIndex = 0,
       this.retake = false})
       : super(key: key);
 
   final RoomType type;
+  final int roomIndex;
   final int imageIndex;
   final bool retake;
 
@@ -83,15 +85,18 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
         // Standardize image names with enum type and step number
         //todo count
         int count = 1;
-        var imageName = '${widget.type}_$count${extension(image.path)}';
+        var imageName =
+            '${widget.type}_${widget.roomIndex}_$count${extension(image.path)}';
         FileHelper.moveToCache(
                 file: File(image.path),
                 child: FileHelper.propertyUploaderCache,
                 newFileName: imageName)
             .then((newFile) {
           if (widget.retake) {
+            //todo support for imageIndex
             // _imageList.removeAt(widget.imageIndex);
             // _imageList.insert(widget.imageIndex, newFile);
+            _imageList.add(newFile);
             Navigator.of(context).pop(_imageList);
           } else {
             _imageList.add(newFile);

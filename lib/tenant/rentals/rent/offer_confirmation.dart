@@ -28,7 +28,7 @@ class OfferConfirmationScreen extends StatelessWidget {
     Bid bid = ContractBrokerInheritedData.of(context)!.bid;
 
     if (bid.tenant.firstName.isEmpty) {
-      bid.tenant = getSampleClientData();
+      bid.tenant = Debug.getSampleClientData();
     } // todo debug line
     return ListView(
         primary: false,

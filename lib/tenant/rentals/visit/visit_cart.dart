@@ -25,7 +25,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
   //todo show some messages for user to add items if empty
 
   final double _imageSize = 120.0;
-  final List<Listing> _listingInCart = getSampleListing().sublist(3, 9);
+  final List<Listing> _listingInCart = Debug.getSampleListing().sublist(3, 9);
   Map<Listing, Map<Listing, int>> _travelMap =
       {}; // todo use ID instead of objects Map<originId, Map<destinationId, duration>>
   late List<Listing> _currentPath, _optimizedPath;

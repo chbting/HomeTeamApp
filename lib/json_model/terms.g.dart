@@ -30,9 +30,11 @@ Terms _$TermsFromJson(Map<String, dynamic> json) => Terms(
           ? null
           : DateTime.parse(json['earliestTerminationDate'] as String),
       daysNoticeBeforeTermination: json['daysNoticeBeforeTermination'] as int?,
-    )..expenses = (json['expenses'] as Map<String, dynamic>).map(
+    )
+      ..expenses = (json['expenses'] as Map<String, dynamic>).map(
         (k, e) => MapEntry($enumDecode(_$ExpenseEnumMap, k), e as bool),
-      );
+      )
+      ..customTerms = json['customTerms'] as String?;
 
 Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{
       'propertyId': instance.propertyId,
@@ -50,6 +52,7 @@ Map<String, dynamic> _$TermsToJson(Terms instance) => <String, dynamic>{
       'daysNoticeBeforeTermination': instance.daysNoticeBeforeTermination,
       'expenses':
           instance.expenses.map((k, e) => MapEntry(_$ExpenseEnumMap[k]!, e)),
+      'customTerms': instance.customTerms,
     };
 
 const _$LeasePeriodTypeEnumMap = {

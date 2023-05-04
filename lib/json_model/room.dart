@@ -11,7 +11,7 @@ class Room {
 
   List<String> imageUrls;
 
-  Room({images, imageUrls})
+  Room({List<File>? images, List<String>? imageUrls})
       : images = images ?? [],
         imageUrls = imageUrls ?? [];
 

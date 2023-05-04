@@ -16,7 +16,7 @@ class PropertiesScreen extends StatefulWidget {
 class PropertiesScreenState extends State<PropertiesScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  final List<Property> _propertyList = getSampleProperties();
+  final List<Property> _propertyList = Debug.getSampleProperties();
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +36,12 @@ class PropertiesScreenState extends State<PropertiesScreen> {
             icon: const Icon(Icons.add),
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(
+                  .push(MaterialPageRoute<bool>(
                       builder: (context) => ListingInheritedData(
-                          property: Property.empty(),
+                          property: Debug.getSampleProperties()[0],//todo Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
-                if (uploaded) {
+                if (uploaded ?? false) {
                   _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
                     content: Text(S.of(context).property_has_been_uploaded),
                     action: SnackBarAction(

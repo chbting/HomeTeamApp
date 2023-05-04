@@ -30,6 +30,6 @@ class Listing {
 class ListingHelper {
   static Listing getFromId(String id) {
     //todo temporary solution
-    return getSampleListing().firstWhere((listing) => listing.id == id);
+    return Debug.getSampleListing().firstWhere((listing) => listing.id == id);
   }
 }

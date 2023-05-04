@@ -12,7 +12,7 @@ class PropertyUploaderConfirmationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ListingInheritedData.of(context)!.property.address =
-        getSampleProperties()[0].address; //todo
+        Debug.getSampleProperties()[0].address; //todo
     Property property = ListingInheritedData.of(context)!.property;
 
     return ListView(

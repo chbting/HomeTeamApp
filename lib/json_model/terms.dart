@@ -27,6 +27,8 @@ class Terms {
 
   Map<Expense, bool> expenses;
 
+  String? customTerms;
+
   Terms(
       {required this.propertyId,
       this.rent,

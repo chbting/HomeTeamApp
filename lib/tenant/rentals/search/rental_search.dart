@@ -13,7 +13,7 @@ class RentalSearchScreen extends StatefulWidget {
 }
 
 class RentalSearchScreenState extends State<RentalSearchScreen> {
-  final List<Listing> _listings = getSampleListing();
+  final List<Listing> _listings = Debug.getSampleListing();
 
   @override
   Widget build(BuildContext context) {

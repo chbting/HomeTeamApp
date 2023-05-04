@@ -8,7 +8,7 @@ import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/room.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_image_wizard.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
-import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/shared/ui/image_viewer.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:path/path.dart';
@@ -47,7 +47,10 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
 
     return ListView(
         padding: const EdgeInsets.only(
-            left: 8.0, right: 8.0, bottom: StandardStepper.buttonBarHeight),
+            left: 8.0,
+            right: 8.0,
+            top: 8.0,
+            bottom: StandardStepper.buttonBarHeight),
         primary: false,
         children: [
           _getRoomSection(context, RoomType.livingDiningRoom),
@@ -79,6 +82,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   }
 
   Widget _getRoomSection(BuildContext context, RoomType type) {
+    int itemCount = _property.rooms[type]!.length;
     return Card(
       child: ListView.builder(
         padding: EdgeInsets.zero,
@@ -87,48 +91,66 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         itemCount: _property.rooms[type]!.length,
         itemBuilder: (context, index) {
           List<File> images = _property.rooms[type]![index].images;
-          return ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
-            leading: SizedBox(
-                // Explicitly center the icon only when there are images
-                height: images.isEmpty ? double.infinity : 0.0,
-                child: Icon(RoomTypeHelper.getIconData(type))),
-            title: Text(RoomTypeHelper.getName(context, type)),
-            subtitle: images.isEmpty
-                ? Text(S.of(context).photo_required,
-                    style: AppTheme.getListTileBodyTextStyle(context))
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(S.of(context).photo_added,
-                              style:
-                                  AppTheme.getListTileBodyTextStyle(context))),
-                      GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  mainAxisSpacing: _gridviewSpacing,
-                                  crossAxisSpacing: _gridviewSpacing),
-                          itemCount: images.length,
-                          shrinkWrap: true,
-                          primary: false,
-                          itemBuilder: (context, imageIndex) {
-                            return _getEnlargeableThumbnail(
-                                context, type, index, imageIndex);
-                          })
-                    ],
-                  ),
-            trailing: images.isEmpty
-                ? const Icon(Icons.add_circle)
-                : Icon(Icons.check_circle,
-                    color: Theme.of(context).colorScheme.secondary),
-            onTap: images.isEmpty
-                ? () =>
-                    _openImageWizard(context, type, index) //todo 0, skip wizard
-                : null,
+          String title = RoomTypeHelper.getName(context, type);
+          if (type == RoomType.bedroom && _property.bedroom > 1 ||
+              type == RoomType.bathroom && _property.bathroom > 1) {
+            title += ' ${index + 1}';
+          }
+          return Column(
+            children: [
+              ListTile(
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                leading: SizedBox(
+                    // Explicitly center the icon only when there are images
+                    height: images.isEmpty ? double.infinity : 0.0,
+                    child: index == 0
+                        ? Icon(RoomTypeHelper.getIconData(type))
+                        : null),
+                title: Text(title),
+                subtitle: images.isEmpty
+                    ? Text(
+                        type == RoomType.others
+                            ? S.of(context).photo_optional
+                            : S.of(context).photo_required,
+                        style: AppTheme.getListTileBodyTextStyle(context))
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(S.of(context).photo_added,
+                                  style: AppTheme.getListTileBodyTextStyle(
+                                      context))),
+                          GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      mainAxisSpacing: _gridviewSpacing,
+                                      crossAxisSpacing: _gridviewSpacing),
+                              itemCount: images.length,
+                              shrinkWrap: true,
+                              primary: false,
+                              itemBuilder: (context, imageIndex) {
+                                return _getEnlargeableThumbnail(
+                                    context, type, index, imageIndex);
+                              }),
+                        ],
+                      ),
+                trailing: images.isEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.add_circle,
+                            color: Theme.of(context).colorScheme.primary),
+                        onPressed: () => _openImageWizard(context, type, index))
+                    : IconButton(
+                        icon: Icon(Icons.check_circle,
+                            color: Theme.of(context).colorScheme.secondary),
+                        onPressed: null),
+              ),
+              itemCount > 1 && index < itemCount - 1
+                  ? const Divider(indent: AppTheme.listTileLeadingIndent, endIndent: 8.0)
+                  : const SizedBox()
+            ],
           );
         },
       ),

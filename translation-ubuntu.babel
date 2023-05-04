@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.0.3" version="1.3">
+<babeledit_project be_version="4.1.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -3357,6 +3357,30 @@
 					</concept_node>
 					<concept_node>
 						<name>photo_not_required</name>
+						<description/>
+						<comment/>
+						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>photo_optional</name>
 						<description/>
 						<comment/>
 						<default_text/>

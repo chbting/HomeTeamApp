@@ -127,7 +127,7 @@
 	"cameras_not_available": "Cameras are not available",
 	"processing": "Processing",
 	"select_from_gallery": "Select from Gallery",
-	"photo_not_required": "Photo is not required",
+	"photo_not_required": "No photo is required",
 	"photo_required": "Photos are required",
 	"photo_added": "Photos have been added",
 	"add_photos": "Add photos",
@@ -221,5 +221,6 @@
 	"washer_dryer_combo_two_lines": "Washer dryer combo",
 	"property_has_been_uploaded": "The property has been uploaded",
 	"view": "View",
-	"property_upload_error": "Upload property failed"
+	"property_upload_error": "Upload property failed",
+	"photo_optional": "Photos are optional"
 }

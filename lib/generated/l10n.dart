@@ -1320,10 +1320,10 @@ class S {
     );
   }
 
-  /// `Photo is not required`
+  /// `No photo is required`
   String get photo_not_required {
     return Intl.message(
-      'Photo is not required',
+      'No photo is required',
       name: 'photo_not_required',
       desc: '',
       args: [],
@@ -2265,6 +2265,16 @@ class S {
     return Intl.message(
       'Upload property failed',
       name: 'property_upload_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Photos are optional`
+  String get photo_optional {
+    return Intl.message(
+      'Photos are optional',
+      name: 'photo_optional',
       desc: '',
       args: [],
     );

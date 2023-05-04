@@ -5,7 +5,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/terms_item.dart';
-import 'package:hometeam_client/shared/date_picker_form_field.dart';
+import 'package:hometeam_client/shared/ui/date_picker_form_field.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';

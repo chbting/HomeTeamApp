@@ -7,6 +7,7 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/settings/locale_helper.dart';
 import 'package:hometeam_client/settings/radio_list_dialog.dart';
 import 'package:hometeam_client/settings/theme_mode_setting.dart';
+import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -205,7 +206,8 @@ class SettingsScreenState extends State<SettingsScreen> {
 
   static _getSettingsTitle(BuildContext context, String title) {
     return Padding(
-      padding: const EdgeInsets.only(left: 72.0, top: 16.0),
+      padding: const EdgeInsets.only(
+          left: AppTheme.listTileLeadingIndent, top: 16.0),
       child: Text(title,
           style: Theme.of(context)
               .textTheme

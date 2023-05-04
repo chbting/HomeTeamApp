@@ -128,7 +128,7 @@
 	"processing": "處理中",
 	"select_from_gallery": "從相薄選取",
 	"photo_not_required": "無需照片",
-	"photo_required": "需要照片",
+	"photo_required": "需加入照片",
 	"photo_added": "照片已加入",
 	"add_photos": "加入照片",
 	"take_photo": "拍照",
@@ -224,5 +224,6 @@
 	"washer_dryer_combo_two_lines": "2合1\n洗衣乾衣機",
 	"property_has_been_uploaded": "物業已被上載",
 	"view": "查看",
-	"property_upload_error": "未能上載物業"
+	"property_upload_error": "未能上載物業",
+	"photo_optional": "選擇性加入照片"
 }

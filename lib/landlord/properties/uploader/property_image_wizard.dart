@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';

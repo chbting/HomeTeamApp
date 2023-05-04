@@ -222,7 +222,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_added":
             MessageLookupByLibrary.simpleMessage("Photos have been added"),
         "photo_not_required":
-            MessageLookupByLibrary.simpleMessage("Photo is not required"),
+            MessageLookupByLibrary.simpleMessage("No photo is required"),
+        "photo_optional":
+            MessageLookupByLibrary.simpleMessage("Photos are optional"),
         "photo_required":
             MessageLookupByLibrary.simpleMessage("Photos are required"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),

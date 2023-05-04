@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/theme/theme.dart';
 
 class LandlordPropertyListTile extends StatelessWidget {
   const LandlordPropertyListTile({

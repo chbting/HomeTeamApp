@@ -7,7 +7,7 @@ import 'package:hometeam_client/data/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/tenant.dart';
 import 'package:hometeam_client/json_model/terms.dart';
-import 'package:hometeam_client/shared/theme/theme.dart';
+import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
 import 'package:hometeam_client/utils/format.dart';

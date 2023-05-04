@@ -24,6 +24,8 @@ class AppTheme {
   );
   static const bool useMaterial3Themes = true;
 
+  static const double listTileLeadingIndent = 72.0;
+
   // todo define primary, onPrimary, secondary,...
   // todo try to standardize with fromSeed/fromSwatch without sacrificing the current theming
   static ThemeData getDarkTheme() {

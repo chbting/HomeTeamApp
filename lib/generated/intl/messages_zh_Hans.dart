@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dashboard": MessageLookupByLibrary.simpleMessage("仪表板"),
         "date": MessageLookupByLibrary.simpleMessage("日期"),
         "date_time_selected": MessageLookupByLibrary.simpleMessage("己选择"),
+        "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "deposit": MessageLookupByLibrary.simpleMessage("保证金"),
         "dismiss": MessageLookupByLibrary.simpleMessage("隐藏"),
         "district": MessageLookupByLibrary.simpleMessage("地区"),

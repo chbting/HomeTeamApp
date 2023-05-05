@@ -6,7 +6,6 @@ import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/room.dart';
-import 'package:hometeam_client/landlord/properties/uploader/property_image_wizard.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/image_viewer.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -85,12 +84,12 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
     }
   }
 
-  // @override
-  // void initState() {
-  //   debugPrint('init');
-  //   _printFiles().then((value) => debugPrint(value));
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    debugPrint('init');
+    _printFiles().then((value) => debugPrint(value));
+    super.initState();
+  }
 
   Widget _getRoomSection(BuildContext context, RoomType type) {
     int roomCount = _property.rooms[type]!.length;
@@ -141,18 +140,10 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                         icon: Icon(Icons.add_circle,
                             color: Theme.of(context).colorScheme.primary),
                         onPressed: () async {
-                          List<XFile> pickedImages =
+                          List<File> cachedImages =
                               await _openImagePickerDialog(context);
-                          List<File> cachedImages = await _cacheImages(
-                              pickedImages, type, roomCount, roomIndex); // todo maybe it's not a good idea to rename them because the user can rearrange/delete images
-                          setState(() {
-                            _property.rooms[type]![roomIndex].images =
-                                cachedImages;
-                          });
-
-                          // debugPrint('cached');
-                          // String s = await _printFiles();
-                          // debugPrint(s);
+                          setState(() => _property
+                              .rooms[type]![roomIndex].images = cachedImages);
                         })
                     : IconButton(
                         icon: Icon(Icons.check_circle,
@@ -170,25 +161,23 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
     );
   }
 
-  // // todo debug section
-  // Future<String> _printFiles() {
-  //   Completer<String> c = Completer<String>();
-  //   FileHelper.getCacheDirectory().then((dir) {
-  //     FileHelper.dirContents(dir).then((l) {
-  //       String s = '';
-  //       s += 'size: ${l.length}';
-  //       for (var element in l) {
-  //         s += '\n$element';
-  //       }
-  //       c.complete(s);
-  //     });
-  //   });
-  //   return c.future;
-  // }
+  // todo debug section
+  Future<String> _printFiles() {
+    Completer<String> c = Completer<String>();
+    FileHelper.getCacheDirectory().then((dir) {
+      FileHelper.dirContents(dir).then((l) {
+        String s = '';
+        s += 'size: ${l.length}';
+        for (var element in l) {
+          s += '\n$element';
+        }
+        c.complete(s);
+      });
+    });
+    return c.future;
+  }
 
-  //todo don't use globals here?
   Widget _getImageGridView(List<File> images, RoomType type, int roomIndex) {
-    debugPrint('$images');
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
@@ -199,12 +188,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         primary: false,
         itemBuilder: (context, imageIndex) {
           return imageIndex < images.length
-              ? _getEnlargeableThumbnail(
-                  context,
-                  type,
-                  _property.rooms[type]![roomIndex].images[imageIndex],
-                  roomIndex,
-                  imageIndex)
+              ? _getEnlargeableThumbnail(context, images[imageIndex])
               : Container(
                   decoration: BoxDecoration(
                       border: Border.all(
@@ -212,15 +196,9 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                           color: Theme.of(context).colorScheme.secondary)),
                   child: InkWell(
                     onTap: () async {
-                      List<XFile> pickedImages =
+                      List<File> cachedImages =
                           await _openImagePickerDialog(context);
-                      List<File> cachedImages = await _cacheImages(pickedImages,
-                          type, _property.rooms[type]!.length, roomIndex,
-                          startIndex: _property.rooms[type]!.length);
-                      setState(() {
-                        _property.rooms[type]![roomIndex].images
-                            .addAll(cachedImages);
-                      });
+                      setState(() => images.addAll(cachedImages));
                     },
                     child: Icon(Icons.add,
                         size: 32.0,
@@ -230,8 +208,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         });
   }
 
-  Widget _getEnlargeableThumbnail(BuildContext context, RoomType type,
-      File image, int roomIndex, int imageIndex) {
+  Widget _getEnlargeableThumbnail(BuildContext context, File image) {
     var heroTag = basename(image.path);
     return Hero(
         tag: heroTag,
@@ -241,20 +218,25 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                 image: FileImage(image),
                 fit: BoxFit.cover,
                 child: InkWell(onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  Navigator.push(context,
+                      MaterialPageRoute<ImageViewerOption>(builder: (context) {
                     return ImageViewer(heroTag: heroTag, image: image);
-                  })).then((retake) {
-                    //todo skip wizard, should be able to remove picture in the viewer
-                    if (retake != null) {
-                      _openImageWizardForRetake(
-                          context, type, roomIndex, imageIndex);
+                  })).then((imageViewerOption) {
+                    if (imageViewerOption != null) {
+                      switch (imageViewerOption) {
+                        case ImageViewerOption.delete:
+                          //todo delete with snackbar undo
+                          break;
+                        case ImageViewerOption.change:
+                          _openImagePickerDialog(context); //todo
+                          break;
+                      }
                     }
                   });
                 }))));
   }
 
-  Future<List<XFile>> _openImagePickerDialog(BuildContext context) async {
-    List<XFile> images = [];
+  Future<List<File>> _openImagePickerDialog(BuildContext context) async {
     switch (await showDialog<ImageSource>(
         context: context,
         builder: (context) {
@@ -276,73 +258,36 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
             ],
           );
         })) {
+      // todo when user backpressed in a camera section without taking a picture, a placeholder image file is created but show as null for the return value
       case ImageSource.camera:
         XFile? image = await _picker.pickImage(source: ImageSource.camera);
-        if (image != null) {
-          images.add(image);
+        if (image == null) {
+          return [];
+        } else {
+          File imageFile = await FileHelper.moveToCache(
+              file: File(image.path),
+              subDirectory: FileHelper.propertyUploaderCache);
+          return [imageFile];
         }
-        break;
       case ImageSource.gallery:
-        images.addAll(await _picker.pickMultiImage());
-        break;
+        List<XFile> images = await _picker.pickMultiImage();
+        List<File> cachedImages = [];
+        for (var image in images) {
+          String fileExt = extension(image.path);
+          String parentDir = basename(File(image.path).parent.path);
+          String newFilename = '$parentDir$fileExt';
+
+          File cachedImage = await FileHelper.moveToCache(
+              file: File(image.path),
+              subDirectory: FileHelper.propertyUploaderCache,
+              newFileName: newFilename);
+          // Remove the wrapper directory created by the image picker
+          File(image.path).parent.delete(recursive: false).ignore();
+          cachedImages.add(cachedImage);
+        }
+        return cachedImages;
       default:
-        break;
+        return [];
     }
-    return images;
-  }
-
-  /// Move the picked images to the property uploader cache folder and rename
-  /// the files using this convention:
-  /// {RoomType}_{RoomIndex (if any)}_{imageIndex}.{extension}
-  /// The resulting file should by like this: livingDiningRoom_0.jpg,
-  /// bedroom_1.png, bedroom_0_1.png, etc.
-  /// This function also removes the original ImagePicker-cached image (not the
-  /// original outside to app cache folder) and its container folder (gallery-
-  /// picked images only).
-  Future<List<File>> _cacheImages(
-      List<XFile> pickedImages, RoomType type, int roomCount, int roomIndex,
-      {int startIndex = 0}) async {
-    var completer = Completer<List<File>>();
-    List<File> images = [];
-    for (int imageIndex = 0; imageIndex < pickedImages.length; imageIndex++) {
-      String roomIdentifier = roomCount > 1 ? '_$roomIndex' : '';
-      String imageIdentifier = '${imageIndex + startIndex}';
-      String fileExtension = extension(pickedImages[imageIndex].path);
-      var imageName =
-          '${type.name}${roomIdentifier}_$imageIdentifier$fileExtension';
-
-      File newFile = await FileHelper.moveToCache(
-          file: File(pickedImages[imageIndex].path),
-          subDirectory: FileHelper.propertyUploaderCache,
-          newFileName: imageName);
-
-      // Remove the container directory created by the image picker (gallery only)
-      File(pickedImages[imageIndex].path)
-          .parent
-          .delete(recursive: false)
-          .ignore();
-      images.add(newFile);
-    }
-    completer.complete(images);
-    return completer.future;
-  }
-
-  void _openImageWizardForRetake(
-      BuildContext context, RoomType type, int roomIndex, int imageIndex) {
-    Navigator.of(context)
-        .push(MaterialPageRoute<List<File>>(
-            builder: (context) => PropertyImagesWizard(
-                type: type,
-                roomIndex: roomIndex,
-                imageIndex: imageIndex,
-                retake: true)))
-        .then((images) {
-      if (images != null) {
-        setState(() {
-          _property.rooms[type]![roomIndex].images = images;
-          //todo update button state
-        });
-      }
-    });
   }
 }

@@ -222,5 +222,6 @@
 	"property_has_been_uploaded": "物业已被上载",
 	"view": "查看",
 	"property_upload_error": "未能上载物业",
-	"photo_optional": "选择性加入照片"
+	"photo_optional": "选择性加入照片",
+	"delete": "删除"
 }

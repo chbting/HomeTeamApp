@@ -222,5 +222,6 @@
 	"property_has_been_uploaded": "The property has been uploaded",
 	"view": "View",
 	"property_upload_error": "Upload property failed",
-	"photo_optional": "Photos are optional"
+	"photo_optional": "Photos are optional",
+	"delete": "Delete"
 }

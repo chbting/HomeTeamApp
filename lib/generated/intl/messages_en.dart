@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "date_time_selected":
             MessageLookupByLibrary.simpleMessage("Preferred date and time"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "deposit": MessageLookupByLibrary.simpleMessage("Deposit"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
         "district": MessageLookupByLibrary.simpleMessage("District"),

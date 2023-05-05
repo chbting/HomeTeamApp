@@ -22,12 +22,12 @@ class FileHelper {
   static Future<File> moveToCache(
       {required File file, String? subDirectory, String? newFileName}) async {
     var cacheDir = await getCacheDirectory(subDirectory: subDirectory);
-    var newPath = '${cacheDir.path}${Platform.pathSeparator}'
-        '${newFileName ?? basename(file.path)}';
+    var filename = newFileName ?? basename(file.path);
+    var newPath = '${cacheDir.path}${Platform.pathSeparator}$filename';
     return moveFile(file, newPath);
   }
 
-  /// If [child] is not null, clears the specific folder within the cache
+  /// If [child] is not null, clears only the specific folder within the cache
   /// directory
   static Future<FileSystemEntity> clearCache({String? child}) async {
     var cacheDir = await getCacheDirectory(subDirectory: child);
@@ -58,6 +58,7 @@ class FileHelper {
     return fileList;
   }
 
+  /// Returns all contents in the directory, including [Directory] objects
   static Future<List<FileSystemEntity>> dirContents(Directory dir,
       {bool recursive = true}) {
     var files = <FileSystemEntity>[];

@@ -149,7 +149,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
     //   }
     // }
     // todo unique name DateTime.now().milisinceepoch
-    //todo put into directory?
+    //todo put images into the propertyId-named directory
 
     try {
       refMap.forEach((image, reference) async {

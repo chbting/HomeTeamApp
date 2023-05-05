@@ -58,6 +58,7 @@ dependencies:
   firebase_ui_oauth_facebook: ^1.1.0
   google_sign_in: ^6.0.2
   firebase_database: ^10.1.0
+  video_player: ^2.6.1
 
   # 3rd party APIs
   easy_stepper: ^0.5.0

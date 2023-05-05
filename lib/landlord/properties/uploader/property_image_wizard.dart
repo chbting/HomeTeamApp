@@ -87,9 +87,10 @@ class PropertyImagesWizardState extends State<PropertyImagesWizard> {
         int count = 1;
         var imageName =
             '${widget.type}_${widget.roomIndex}_$count${extension(image.path)}';
+        // todo Remove the container directory created by the image picker
         FileHelper.moveToCache(
                 file: File(image.path),
-                child: FileHelper.propertyUploaderCache,
+                subDirectory: FileHelper.propertyUploaderCache,
                 newFileName: imageName)
             .then((newFile) {
           if (widget.retake) {

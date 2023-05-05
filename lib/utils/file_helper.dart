@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -19,8 +20,8 @@ class FileHelper {
   }
 
   static Future<File> moveToCache(
-      {required File file, String? child, String? newFileName}) async {
-    var cacheDir = await getCacheDirectory(child: child);
+      {required File file, String? subDirectory, String? newFileName}) async {
+    var cacheDir = await getCacheDirectory(subDirectory: subDirectory);
     var newPath = '${cacheDir.path}${Platform.pathSeparator}'
         '${newFileName ?? basename(file.path)}';
     return moveFile(file, newPath);
@@ -29,24 +30,25 @@ class FileHelper {
   /// If [child] is not null, clears the specific folder within the cache
   /// directory
   static Future<FileSystemEntity> clearCache({String? child}) async {
-    var cacheDir = await getCacheDirectory(child: child);
+    var cacheDir = await getCacheDirectory(subDirectory: child);
     return cacheDir.delete(recursive: true);
   }
 
-  /// If [child] is not null, returns path of the specific folder in the cache
-  /// directory
-  static Future<Directory> getCacheDirectory({String? child}) async {
+  /// If [subDirectory] is not null, returns path of the specific folder in the
+  /// cache directory
+  static Future<Directory> getCacheDirectory({String? subDirectory}) async {
     var appCacheDir = await getTemporaryDirectory();
     var path = appCacheDir.path;
-    child != null ? path += Platform.pathSeparator + child : null;
+    subDirectory != null ? path += Platform.pathSeparator + subDirectory : null;
     return Directory(path).create();
   }
 
-  /// If [child] is not null, returns list of files within the specific folder
-  /// in the cache directory
-  static Future<List<File>> getCacheFiles({String? child}) async {
-    var cacheDir = await getCacheDirectory(child: child);
-    var fileEntityList = cacheDir.listSync();
+  /// If [subDirectory] is not null, returns list of files within the specific
+  /// folder in the cache directory
+  static Future<List<File>> getCacheFiles(
+      {String? subDirectory, bool recursive = false}) async {
+    var cacheDir = await getCacheDirectory(subDirectory: subDirectory);
+    var fileEntityList = cacheDir.listSync(recursive: recursive);
     var fileList = <File>[];
     for (var entity in fileEntityList) {
       if (entity is File) {
@@ -54,5 +56,16 @@ class FileHelper {
       }
     }
     return fileList;
+  }
+
+  static Future<List<FileSystemEntity>> dirContents(Directory dir,
+      {bool recursive = true}) {
+    var files = <FileSystemEntity>[];
+    var completer = Completer<List<FileSystemEntity>>();
+    var lister = dir.list(recursive: recursive);
+    lister.listen((file) => files.add(file),
+        // should also register onError
+        onDone: () => completer.complete(files));
+    return completer.future;
   }
 }

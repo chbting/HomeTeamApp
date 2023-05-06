@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room_type.dart';
@@ -13,6 +14,7 @@ import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PropertyImagesWidget extends StatefulWidget {
   const PropertyImagesWidget({Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class PropertyImagesWidget extends StatefulWidget {
 class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   final ImagePicker _picker = ImagePicker();
   final _gridviewSpacing = 8.0;
+  Uint8List? _videoThumbnail;
   late Property _property;
 
   @override
@@ -55,7 +58,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
             bottom: StandardStepper.buttonBarHeight),
         primary: false,
         children: [
-          //todo video section
+          _getVideoSection(context),
           _getRoomSection(context, RoomType.livingDiningRoom),
           _property.bedroom > 0
               ? _getRoomSection(context, RoomType.bedroom)
@@ -84,11 +87,52 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
     }
   }
 
-  @override
-  void initState() {
-    debugPrint('init');
-    _printFiles().then((value) => debugPrint(value));
-    super.initState();
+  Widget _getVideoSection(BuildContext context) {
+    return Card(
+      child: ListTile(
+          leading: SizedBox(
+              // Explicitly center the icon only when there are images
+              height: _property.video == null ? double.infinity : 0.0,
+              child: const Icon(Icons.movie_outlined)),
+          title: Text(S.of(context).video),
+          subtitle: _property.video == null
+              ? Text(S.of(context).video_required,
+                  style: AppTheme.getListTileBodyTextStyle(context))
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(S.of(context).video_added,
+                            style: AppTheme.getListTileBodyTextStyle(context))),
+                    // todo use something else to generate the thumbnail, deprecated
+                    _videoThumbnail != null
+                        ? Image.memory(_videoThumbnail!)
+                        : const SizedBox(),
+                  ],
+                ),
+          trailing: _property.video == null
+              ? IconButton(
+                  icon: Icon(Icons.add_circle,
+                      color: Theme.of(context).colorScheme.primary),
+                  onPressed: () async {
+                    File? cachedVideo = await _openVideoPickerDialog(context);
+                    if (cachedVideo != null) {
+                      setState(() {
+                        _property.video = cachedVideo;
+                        _getVideoThumbnail(_property.video!).then((value) {
+                          setState(() {
+                            _videoThumbnail = value;
+                          });
+                        });
+                      });
+                    }
+                  })
+              : IconButton(
+                  icon: Icon(Icons.check_circle,
+                      color: Theme.of(context).colorScheme.secondary),
+                  onPressed: null)),
+    );
   }
 
   Widget _getRoomSection(BuildContext context, RoomType type) {
@@ -162,20 +206,20 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   }
 
   // todo debug section
-  Future<String> _printFiles() {
-    Completer<String> c = Completer<String>();
-    FileHelper.getCacheDirectory().then((dir) {
-      FileHelper.dirContents(dir).then((l) {
-        String s = '';
-        s += 'size: ${l.length}';
-        for (var element in l) {
-          s += '\n$element';
-        }
-        c.complete(s);
-      });
-    });
-    return c.future;
-  }
+  // Future<String> _printFiles() {
+  //   Completer<String> c = Completer<String>();
+  //   FileHelper.getCacheDirectory().then((dir) {
+  //     FileHelper.dirContents(dir).then((l) {
+  //       String s = '';
+  //       s += 'size: ${l.length}';
+  //       for (var element in l) {
+  //         s += '\n$element';
+  //       }
+  //       c.complete(s);
+  //     });
+  //   });
+  //   return c.future;
+  // }
 
   Widget _getImageGridView(List<File> images, RoomType type, int roomIndex) {
     return GridView.builder(
@@ -208,6 +252,10 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         });
   }
 
+  Future<Uint8List?> _getVideoThumbnail(File video) async =>
+      await VideoThumbnail.thumbnailData(
+          video: video.path, maxWidth: 200, maxHeight: 200);
+
   Widget _getEnlargeableThumbnail(BuildContext context, File image) {
     var heroTag = basename(image.path);
     return Hero(
@@ -234,6 +282,60 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                     }
                   });
                 }))));
+  }
+
+  Future<File?> _openVideoPickerDialog(BuildContext context) async {
+    File? video;
+    switch (await showDialog<ImageSource>(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text(S.of(context).add_video),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () => Navigator.of(context).pop(ImageSource.camera),
+                child: ListTile(
+                    leading: const Icon(Icons.videocam),
+                    title: Text(S.of(context).record)),
+              ),
+              SimpleDialogOption(
+                onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
+                child: ListTile(
+                    leading: const Icon(Icons.video_library),
+                    title: Text(S.of(context).select_from_gallery)),
+              ),
+            ],
+          );
+        })) {
+      // todo when user backpressed in a camera section without taking a picture, a placeholder image file is created but show as null for the return value
+      case ImageSource.camera:
+        XFile? videoTaken = await _picker.pickVideo(source: ImageSource.camera);
+        if (videoTaken != null) {
+          video = await FileHelper.moveToCache(
+              file: File(videoTaken.path),
+              subDirectory: FileHelper.propertyUploaderCache);
+        }
+        break;
+      case ImageSource.gallery:
+        XFile? videoPicked =
+            await _picker.pickVideo(source: ImageSource.gallery);
+        if (videoPicked != null) {
+          String fileExt = extension(videoPicked.path);
+          String parentDir = basename(File(videoPicked.path).parent.path);
+          String newFilename = '$parentDir$fileExt';
+
+          video = await FileHelper.moveToCache(
+              file: File(videoPicked.path),
+              subDirectory: FileHelper.propertyUploaderCache,
+              newFileName: newFilename);
+          // Remove the wrapper directory created by the image picker
+          File(videoPicked.path).parent.delete(recursive: false).ignore();
+        }
+        break;
+      default:
+        break;
+    }
+    return video;
   }
 
   Future<List<File>> _openImagePickerDialog(BuildContext context) async {

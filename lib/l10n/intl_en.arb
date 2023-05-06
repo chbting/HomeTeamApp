@@ -223,5 +223,10 @@
 	"view": "View",
 	"property_upload_error": "Upload property failed",
 	"photo_optional": "Photos are optional",
-	"delete": "Delete"
+	"delete": "Delete",
+	"video": "Video",
+	"add_video": "Add a video",
+	"video_required": "Video is required",
+	"video_added": "Video has been added",
+	"record": "Record"
 }

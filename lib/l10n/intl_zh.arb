@@ -223,5 +223,10 @@
 	"view": "查看",
 	"property_upload_error": "未能上载物业",
 	"photo_optional": "选择性加入照片",
-	"delete": "删除"
+	"delete": "删除",
+	"video": "影片",
+	"add_video": "加入影片",
+	"video_required": "需加入影片",
+	"video_added": "影片已加入",
+	"record": "拍摄"
 }

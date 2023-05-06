@@ -2289,6 +2289,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Video`
+  String get video {
+    return Intl.message(
+      'Video',
+      name: 'video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a video`
+  String get add_video {
+    return Intl.message(
+      'Add a video',
+      name: 'add_video',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video is required`
+  String get video_required {
+    return Intl.message(
+      'Video is required',
+      name: 'video_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video has been added`
+  String get video_added {
+    return Intl.message(
+      'Video has been added',
+      name: 'video_added',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Record`
+  String get record {
+    return Intl.message(
+      'Record',
+      name: 'record',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

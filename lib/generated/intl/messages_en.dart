@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
         "add_property": MessageLookupByLibrary.simpleMessage("Add Property"),
+        "add_video": MessageLookupByLibrary.simpleMessage("Add a video"),
         "address_block": MessageLookupByLibrary.simpleMessage("Block"),
         "address_flat": MessageLookupByLibrary.simpleMessage("Flat"),
         "address_floor": MessageLookupByLibrary.simpleMessage("Floor"),
@@ -267,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Sign the property visit agreement with biometric authentication"),
         "reason_sign_rental_contract": MessageLookupByLibrary.simpleMessage(
             "Sign the rental contract with biometric authentication"),
+        "record": MessageLookupByLibrary.simpleMessage("Record"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
         "remove_property_from_cart":
             MessageLookupByLibrary.simpleMessage("Remove"),
@@ -338,6 +340,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_system_settings":
             MessageLookupByLibrary.simpleMessage("Use system settings"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "video": MessageLookupByLibrary.simpleMessage("Video"),
+        "video_added":
+            MessageLookupByLibrary.simpleMessage("Video has been added"),
+        "video_required":
+            MessageLookupByLibrary.simpleMessage("Video is required"),
         "view": MessageLookupByLibrary.simpleMessage("View"),
         "visited_properties":
             MessageLookupByLibrary.simpleMessage("Visited Properties"),

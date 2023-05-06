@@ -18,13 +18,15 @@ Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
       appliances: (json['appliances'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry($enumDecode(_$ApplianceEnumMap, k), e),
       ),
-    )..rooms = (json['rooms'] as Map<String, dynamic>).map(
+    )
+      ..rooms = (json['rooms'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
             $enumDecode(_$RoomTypeEnumMap, k),
             (e as List<dynamic>)
                 .map((e) => Room.fromJson(e as Map<String, dynamic>))
                 .toList()),
-      );
+      )
+      ..videoUrl = json['videoUrl'] as String?;
 
 Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
       'id': instance.id,
@@ -39,6 +41,7 @@ Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
           .map((k, e) => MapEntry(_$ApplianceEnumMap[k]!, e)),
       'rooms': instance.rooms.map((k, e) =>
           MapEntry(_$RoomTypeEnumMap[k]!, e.map((e) => e.toJson()).toList())),
+      'videoUrl': instance.videoUrl,
     };
 
 const _$ApplianceEnumMap = {

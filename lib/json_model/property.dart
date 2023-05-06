@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/data/room_type.dart';
@@ -24,6 +26,11 @@ class Property {
 
   /// Map of rooms, each room containing a list of images(json ignored) and imageUrls
   Map<RoomType, List<Room>> rooms;
+
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  File? video;
+
+  String? videoUrl;
 
   @JsonKey(includeToJson: false, includeFromJson: false) //todo
   ImageProvider coverImage;

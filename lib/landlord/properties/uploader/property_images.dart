@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room_type.dart';
@@ -14,7 +13,7 @@ import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:video_player/video_player.dart';
 
 class PropertyImagesWidget extends StatefulWidget {
   const PropertyImagesWidget({Key? key}) : super(key: key);
@@ -26,12 +25,22 @@ class PropertyImagesWidget extends StatefulWidget {
 class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   final ImagePicker _picker = ImagePicker();
   final _gridviewSpacing = 8.0;
-  Uint8List? _videoThumbnail;
   late Property _property;
+  VideoPlayerController? _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     _property = ListingInheritedData.of(context)!.property;
+    if (_property.video != null) {
+      _initializeVideoController();
+    }
 
     // Initialize the room image map
     if (_property.rooms.isEmpty) {
@@ -105,10 +114,37 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text(S.of(context).video_added,
                             style: AppTheme.getListTileBodyTextStyle(context))),
-                    // todo use something else to generate the thumbnail, deprecated
-                    _videoThumbnail != null
-                        ? Image.memory(_videoThumbnail!)
-                        : const SizedBox(),
+                    GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: _gridviewSpacing,
+                            crossAxisSpacing: _gridviewSpacing),
+                        itemCount: _property.video == null ? 0 : 1,
+                        shrinkWrap: true,
+                        primary: false,
+                        itemBuilder: (context, imageIndex) {//todo title got pushed up, not enough bottom padding
+                          return FutureBuilder(
+                              future: _initializeVideoPlayerFuture,
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return FittedBox(
+                                    fit: BoxFit.cover,
+                                    clipBehavior: Clip.hardEdge,
+                                    child: SizedBox(
+                                      width: _controller!.value.size.width,
+                                      height: _controller!.value.size.height,
+                                      child: AspectRatio(
+                                          aspectRatio:
+                                              _controller!.value.aspectRatio,
+                                          child: VideoPlayer(_controller!)),
+                                    ),
+                                  );
+                                } else {
+                                  return const CircularProgressIndicator(); //todo size
+                                }
+                              });
+                        })
                   ],
                 ),
           trailing: _property.video == null
@@ -120,11 +156,7 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                     if (cachedVideo != null) {
                       setState(() {
                         _property.video = cachedVideo;
-                        _getVideoThumbnail(_property.video!).then((value) {
-                          setState(() {
-                            _videoThumbnail = value;
-                          });
-                        });
+                        _initializeVideoController();
                       });
                     }
                   })
@@ -133,6 +165,11 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                       color: Theme.of(context).colorScheme.secondary),
                   onPressed: null)),
     );
+  }
+
+  void _initializeVideoController() {
+    _controller = VideoPlayerController.file(_property.video!);
+    _initializeVideoPlayerFuture = _controller!.initialize();
   }
 
   Widget _getRoomSection(BuildContext context, RoomType type) {
@@ -205,22 +242,6 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
     );
   }
 
-  // todo debug section
-  // Future<String> _printFiles() {
-  //   Completer<String> c = Completer<String>();
-  //   FileHelper.getCacheDirectory().then((dir) {
-  //     FileHelper.dirContents(dir).then((l) {
-  //       String s = '';
-  //       s += 'size: ${l.length}';
-  //       for (var element in l) {
-  //         s += '\n$element';
-  //       }
-  //       c.complete(s);
-  //     });
-  //   });
-  //   return c.future;
-  // }
-
   Widget _getImageGridView(List<File> images, RoomType type, int roomIndex) {
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -251,10 +272,6 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                 );
         });
   }
-
-  Future<Uint8List?> _getVideoThumbnail(File video) async =>
-      await VideoThumbnail.thumbnailData(
-          video: video.path, maxWidth: 200, maxHeight: 200);
 
   Widget _getEnlargeableThumbnail(BuildContext context, File image) {
     var heroTag = basename(image.path);

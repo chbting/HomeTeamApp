@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
@@ -9,11 +10,12 @@ import 'package:hometeam_client/json_model/room.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/image_viewer.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
+import 'package:hometeam_client/shared/ui/video_viewer.dart';
 import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-import 'package:video_player/video_player.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PropertyImagesWidget extends StatefulWidget {
   const PropertyImagesWidget({Key? key}) : super(key: key);
@@ -26,21 +28,10 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   final ImagePicker _picker = ImagePicker();
   final _gridviewSpacing = 8.0;
   late Property _property;
-  VideoPlayerController? _controller;
-  late Future<void> _initializeVideoPlayerFuture;
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     _property = ListingInheritedData.of(context)!.property;
-    if (_property.video != null) {
-      _initializeVideoController();
-    }
 
     // Initialize the room image map
     if (_property.rooms.isEmpty) {
@@ -98,7 +89,10 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
 
   Widget _getVideoSection(BuildContext context) {
     return Card(
+      // todo hightlighted background color?
       child: ListTile(
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
           leading: SizedBox(
               // Explicitly center the icon only when there are images
               height: _property.video == null ? double.infinity : 0.0,
@@ -122,29 +116,8 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                         itemCount: _property.video == null ? 0 : 1,
                         shrinkWrap: true,
                         primary: false,
-                        itemBuilder: (context, imageIndex) {//todo title got pushed up, not enough bottom padding
-                          return FutureBuilder(
-                              future: _initializeVideoPlayerFuture,
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  return FittedBox(
-                                    fit: BoxFit.cover,
-                                    clipBehavior: Clip.hardEdge,
-                                    child: SizedBox(
-                                      width: _controller!.value.size.width,
-                                      height: _controller!.value.size.height,
-                                      child: AspectRatio(
-                                          aspectRatio:
-                                              _controller!.value.aspectRatio,
-                                          child: VideoPlayer(_controller!)),
-                                    ),
-                                  );
-                                } else {
-                                  return const CircularProgressIndicator(); //todo size
-                                }
-                              });
-                        })
+                        itemBuilder: (context, imageIndex) =>
+                            _getVideoThumbnail(context, _property.video!))
                   ],
                 ),
           trailing: _property.video == null
@@ -154,27 +127,83 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                   onPressed: () async {
                     File? cachedVideo = await _openVideoPickerDialog(context);
                     if (cachedVideo != null) {
-                      setState(() {
-                        _property.video = cachedVideo;
-                        _initializeVideoController();
-                      });
+                      setState(() => _property.video = cachedVideo);
                     }
                   })
-              : IconButton(
-                  icon: Icon(Icons.check_circle,
-                      color: Theme.of(context).colorScheme.secondary),
+              : const IconButton(
+                  icon: Icon(Icons.check_circle, color: Colors.green),
                   onPressed: null)),
     );
   }
 
-  void _initializeVideoController() {
-    _controller = VideoPlayerController.file(_property.video!);
-    _initializeVideoPlayerFuture = _controller!.initialize();
+  Widget _getVideoThumbnail(BuildContext context, File video) {
+    Completer completer = Completer();
+    Uint8List? thumbnail;
+    double? aspectRatio;
+    VideoThumbnail.thumbnailData(
+            video: video.path, imageFormat: ImageFormat.PNG)
+        .then((value) async {
+      thumbnail = value; //todo placeholder image
+      var image = await decodeImageFromList(thumbnail!);
+      aspectRatio = image.width / image.height;
+      completer.complete();
+    });
+
+    return FutureBuilder(
+      future: completer.future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          var heroTag = basename(video.path);
+          onTap() => Navigator.push(context,
+                  MaterialPageRoute<VideoViewerOption>(builder: (context) {
+                return VideoViewer.hero(
+                    heroTag: heroTag,
+                    aspectRatio: aspectRatio,
+                    preview: Image.memory(thumbnail!),//todo
+                    video: _property.video!);
+              })).then((videoViewerOption) {
+                if (videoViewerOption != null) {
+                  switch (videoViewerOption) {
+                    case VideoViewerOption.delete:
+                      //todo delete with snackbar undo
+                      break;
+                    case VideoViewerOption.change:
+                      _openImagePickerDialog(context); //todo
+                      break;
+                  }
+                }
+              });
+          return Hero(
+              tag: heroTag,
+              child: Material(
+                  type: MaterialType.transparency,
+                  child: thumbnail == null
+                      ? InkWell(
+                          onTap: onTap,
+                          child: Container(
+                              color: Theme.of(context).colorScheme.background,
+                              child: const Icon(Icons.close)),
+                        )
+                      : Ink.image(
+                          image: MemoryImage(thumbnail!),
+                          fit: BoxFit.cover,
+                          child: InkWell(onTap: onTap))));
+        } else {
+          return const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: CircularProgressIndicator(
+              strokeWidth: 3.0,
+            ),
+          );
+        }
+      },
+    );
   }
 
   Widget _getRoomSection(BuildContext context, RoomType type) {
     int roomCount = _property.rooms[type]!.length;
     return Card(
+      //todo background depends on finished or not
       child: ListView.builder(
         padding: EdgeInsets.zero,
         primary: false,
@@ -226,9 +255,8 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
                           setState(() => _property
                               .rooms[type]![roomIndex].images = cachedImages);
                         })
-                    : IconButton(
-                        icon: Icon(Icons.check_circle,
-                            color: Theme.of(context).colorScheme.secondary),
+                    : const IconButton(
+                        icon: Icon(Icons.check_circle, color: Colors.green),
                         onPressed: null),
               ),
               roomCount > 1 && roomIndex < roomCount - 1

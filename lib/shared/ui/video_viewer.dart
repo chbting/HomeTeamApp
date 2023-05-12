@@ -44,14 +44,12 @@ class VideoViewer extends StatefulWidget {
 }
 
 class VideoViewerState extends State<VideoViewer> {
-  late Future<void> _initializeFuture;
   late VideoPlayerController _baseController;
   late ChewieController _controller;
 
   @override
   void initState() {
     _baseController = VideoPlayerController.file(widget.video);
-    _initializeFuture = VideoPlayerController.file(widget.video).initialize();
     super.initState();
   }
 
@@ -81,34 +79,27 @@ class VideoViewerState extends State<VideoViewer> {
               icon: const Icon(Icons.delete))
         ],
       )),
-      body: Center(child: _getVideoPlayerBuilder()),
-    );
-  }
-
-  Widget _getVideoPlayerBuilder() {
-    return FutureBuilder(
-      future: _initializeFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return _getVideoPlayer(context);
-        } else {
-          return const SizedBox(
-              width: 48.0, height: 48.0, child: CircularProgressIndicator());
-        }
-      },
+      body: Center(child: _getVideoPlayer(context)),
     );
   }
 
   Widget _getVideoPlayer(BuildContext context) {
-    _controller = ChewieController(
-      videoPlayerController: _baseController,
-      aspectRatio: _baseController.value.size.width /
-          _baseController.value.size.height, //todo check
-      autoPlay: true,
-      looping: false,
-      optionsTranslation: _getOptionsTranslation(context)
+    return FutureBuilder(
+      future: _baseController.initialize(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          _controller = ChewieController(
+              videoPlayerController: _baseController,
+              aspectRatio: _baseController.value.aspectRatio,
+              autoPlay: true,
+              looping: false,
+              optionsTranslation: _getOptionsTranslation(context));
+          return Chewie(controller: _controller);
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
     );
-    return Chewie(controller: _controller);
   }
 
   OptionsTranslation _getOptionsTranslation(BuildContext context) =>
@@ -138,39 +129,18 @@ class _HeroVideoViewer extends VideoViewer {
 
 class _HeroVideoViewerState extends VideoViewerState {
   @override
-  Widget _getVideoPlayerBuilder() {
+  Widget _getVideoPlayer(BuildContext context) {
+    _controller = ChewieController(
+        videoPlayerController: _baseController,
+        aspectRatio: widget.aspectRatio,
+        placeholder: Center(child: widget.preview),
+        autoInitialize: true,
+        autoPlay: true,
+        looping: false,
+        optionsTranslation: _getOptionsTranslation(context));
     return Hero(
       tag: widget.heroTag,
-      child: FutureBuilder(
-        future: _initializeFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            _controller = ChewieController(
-              aspectRatio: widget.aspectRatio,
-              videoPlayerController: _baseController,
-              autoPlay: true,
-              looping: false,
-              optionsTranslation: _getOptionsTranslation(context)//todo text color in light theme
-            );
-            return Chewie(controller: _controller);
-          } else {
-            return AspectRatio(
-              aspectRatio: widget.aspectRatio,
-              child: Stack(
-                children: [
-                  Center(child: widget.preview),
-                  const Center(
-                    child: SizedBox(
-                        width: 48.0,
-                        height: 48.0,
-                        child: CircularProgressIndicator()),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+      child: Chewie(controller: _controller),
     );
   }
 }

@@ -231,5 +231,8 @@
 	"add_video": "加入影片",
 	"video_required": "需加入影片",
 	"video_added": "影片已加入",
-	"record": "拍攝"
+	"record": "拍攝",
+	"video_removed": "影片已移除",
+	"playback_speed": "播放速度",
+	"subtitles": "字幕"
 }

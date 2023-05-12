@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
-/// If the FloatingActionButton is press, this widget will pop [true], the
-/// parent of this widget needs to handle that.
+/// The parent of this widget needs to handle the [VideoViewerOption] being
+/// popped.
 class VideoViewer extends StatefulWidget {
   const VideoViewer({Key? key, required this.video})
       : heroTag = '',
@@ -21,10 +23,10 @@ class VideoViewer extends StatefulWidget {
 
   factory VideoViewer.hero(
           {Key? key,
-          required video,
-          required heroTag,
-          required aspectRatio,
-          required preview}) =>
+          required File video,
+          required String heroTag,
+          required double aspectRatio,
+          required Widget? preview}) =>
       _HeroVideoViewer(
           key: key,
           video: video,
@@ -35,23 +37,27 @@ class VideoViewer extends StatefulWidget {
   final File video;
   final String heroTag;
   final double aspectRatio;
-  final Image? preview;
+  final Widget? preview;
 
   @override
   State<StatefulWidget> createState() => VideoViewerState();
 }
 
 class VideoViewerState extends State<VideoViewer> {
-  late VideoPlayerController _controller;
+  late Future<void> _initializeFuture;
+  late VideoPlayerController _baseController;
+  late ChewieController _controller;
 
   @override
   void initState() {
-    _controller = VideoPlayerController.file(widget.video);
+    _baseController = VideoPlayerController.file(widget.video);
+    _initializeFuture = VideoPlayerController.file(widget.video).initialize();
     super.initState();
   }
 
   @override
   void dispose() {
+    _baseController.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -59,41 +65,32 @@ class VideoViewerState extends State<VideoViewer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-          elevation: 0.0), // todo color
+      appBar: AppBar(),
       bottomNavigationBar: BottomAppBar(
-          color: Colors.transparent,
-          surfaceTintColor: Colors.transparent, //todo not transparent
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              //TextButton.icon(onPressed: (){}, icon: Icon(Icons.change_circle), label: Text(S.of(context).change_photo)),
-              IconButton(
-                  onPressed: () {}, icon: const Icon(Icons.change_circle)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.tune)),
-              IconButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pop<VideoViewerOption>(VideoViewerOption.delete);
-                  },
-                  icon: const Icon(Icons.delete))
-            ],
-          )),
-      body: Center(child: _getVideoPlayer()),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .pop<VideoViewerOption>(VideoViewerOption.change),
+              icon: const Icon(Icons.change_circle)),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.tune)),
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .pop<VideoViewerOption>(VideoViewerOption.delete),
+              icon: const Icon(Icons.delete))
+        ],
+      )),
+      body: Center(child: _getVideoPlayerBuilder()),
     );
   }
 
-  Widget _getVideoPlayer() {
+  Widget _getVideoPlayerBuilder() {
     return FutureBuilder(
-      future: _controller.initialize(),
+      future: _initializeFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return AspectRatio(
-              aspectRatio:
-                  _controller.value.size.width / _controller.value.size.height,
-              child: VideoPlayer(_controller)); //todo autoplay
+          return _getVideoPlayer(context);
         } else {
           return const SizedBox(
               width: 48.0, height: 48.0, child: CircularProgressIndicator());
@@ -101,6 +98,24 @@ class VideoViewerState extends State<VideoViewer> {
       },
     );
   }
+
+  Widget _getVideoPlayer(BuildContext context) {
+    _controller = ChewieController(
+      videoPlayerController: _baseController,
+      aspectRatio: _baseController.value.size.width /
+          _baseController.value.size.height, //todo check
+      autoPlay: true,
+      looping: false,
+      optionsTranslation: _getOptionsTranslation(context)
+    );
+    return Chewie(controller: _controller);
+  }
+
+  OptionsTranslation _getOptionsTranslation(BuildContext context) =>
+      OptionsTranslation(
+          playbackSpeedButtonText: S.of(context).playback_speed,
+          subtitlesButtonText: S.of(context).subtitles,
+          cancelButtonText: S.of(context).cancel);
 }
 
 class _HeroVideoViewer extends VideoViewer {
@@ -123,18 +138,25 @@ class _HeroVideoViewer extends VideoViewer {
 
 class _HeroVideoViewerState extends VideoViewerState {
   @override
-  Widget _getVideoPlayer() {
+  Widget _getVideoPlayerBuilder() {
     return Hero(
       tag: widget.heroTag,
-      child: AspectRatio(
-        aspectRatio: widget.aspectRatio,
-        child: FutureBuilder(
-          future: _controller.initialize(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return VideoPlayer(_controller); //todo autoplay
-            } else {
-              return Stack(
+      child: FutureBuilder(
+        future: _initializeFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            _controller = ChewieController(
+              aspectRatio: widget.aspectRatio,
+              videoPlayerController: _baseController,
+              autoPlay: true,
+              looping: false,
+              optionsTranslation: _getOptionsTranslation(context)//todo text color in light theme
+            );
+            return Chewie(controller: _controller);
+          } else {
+            return AspectRatio(
+              aspectRatio: widget.aspectRatio,
+              child: Stack(
                 children: [
                   Center(child: widget.preview),
                   const Center(
@@ -144,10 +166,10 @@ class _HeroVideoViewerState extends VideoViewerState {
                         child: CircularProgressIndicator()),
                   ),
                 ],
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

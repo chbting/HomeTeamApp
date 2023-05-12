@@ -13,7 +13,6 @@ import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
-import 'package:path/path.dart';
 
 class PropertyUploader extends StatefulWidget {
   const PropertyUploader({Key? key}) : super(key: key);

@@ -61,6 +61,8 @@ class StandardStepper extends StatefulWidget {
 }
 
 class StandardStepperState extends State<StandardStepper> {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
   final PageController _pageController = PageController(initialPage: 0);
   final Duration _transitionDuration = const Duration(milliseconds: 250);
 
@@ -86,50 +88,53 @@ class StandardStepperState extends State<StandardStepper> {
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
-        return Scaffold(
-            appBar:
-                AppBar(title: Text(widget.title), leading: const CloseButton()),
-            body: Stack(children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: EasyStepper(
-                        steps: widget.steps,
-                        activeStep: _activeStep,
-                        borderThickness: 8.0,
-                        padding: const EdgeInsetsDirectional.symmetric(
-                            horizontal: 8.0),
-                        enableStepTapping: false,
-                        showLoadingAnimation: false,
-                        defaultLineColor:
-                            Theme.of(context).colorScheme.onSurface,
-                        finishedStepIconColor:
-                            Theme.of(context).colorScheme.onPrimary,
-                        stepAnimationCurve: Curves.bounceOut,
-                        stepAnimationDuration: _transitionDuration,
-                        onStepReached: (index) =>
-                            setState(() => _activeStep = index)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
-                    child: widget.subtitle,
-                  ),
-                  const Divider(height: 1.0),
-                  Expanded(
-                    child: PageView(
-                      controller: _pageController,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: widget.pages,
+        return ScaffoldMessenger(
+          key: _scaffoldMessengerKey,
+          child: Scaffold(
+              appBar: AppBar(
+                  title: Text(widget.title), leading: const CloseButton()),
+              body: Stack(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: EasyStepper(
+                          steps: widget.steps,
+                          activeStep: _activeStep,
+                          borderThickness: 8.0,
+                          padding: const EdgeInsetsDirectional.symmetric(
+                              horizontal: 8.0),
+                          enableStepTapping: false,
+                          showLoadingAnimation: false,
+                          defaultLineColor:
+                              Theme.of(context).colorScheme.onSurface,
+                          finishedStepIconColor:
+                              Theme.of(context).colorScheme.onPrimary,
+                          stepAnimationCurve: Curves.bounceOut,
+                          stepAnimationDuration: _transitionDuration,
+                          onStepReached: (index) =>
+                              setState(() => _activeStep = index)),
                     ),
-                  ),
-                ],
-              ),
-              Container(
-                  alignment: Alignment.bottomCenter,
-                  child: isKeyboardVisible ? null : _getBottomButtons())
-            ]));
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: widget.subtitle,
+                    ),
+                    const Divider(height: 1.0),
+                    Expanded(
+                      child: PageView(
+                        controller: _pageController,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: widget.pages,
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                    alignment: Alignment.bottomCenter,
+                    child: isKeyboardVisible ? null : _getBottomButtons())
+              ])),
+        );
       },
     );
   }

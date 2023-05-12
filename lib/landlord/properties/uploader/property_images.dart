@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
@@ -89,7 +88,6 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
 
   Widget _getVideoSection(BuildContext context) {
     return Card(
-      // todo hightlighted background color?
       child: ListTile(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
@@ -124,28 +122,36 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
               ? IconButton(
                   icon: Icon(Icons.add_circle,
                       color: Theme.of(context).colorScheme.primary),
-                  onPressed: () async {
-                    File? cachedVideo = await _openVideoPickerDialog(context);
-                    if (cachedVideo != null) {
-                      setState(() => _property.video = cachedVideo);
-                    }
-                  })
+                  onPressed: () => _pickVideo(context)) //todo remove the original
               : const IconButton(
                   icon: Icon(Icons.check_circle, color: Colors.green),
                   onPressed: null)),
     );
   }
 
+  void _pickVideo(BuildContext context) {
+    _openVideoPickerDialog(context).then((cachedVideo) {
+      if (cachedVideo != null) {
+        setState(() => _property.video = cachedVideo);
+      }
+    });
+  }
+
   Widget _getVideoThumbnail(BuildContext context, File video) {
     Completer completer = Completer();
-    Uint8List? thumbnail;
-    double? aspectRatio;
+    Widget? thumbnail;
+    double aspectRatio = 1.0;
     VideoThumbnail.thumbnailData(
             video: video.path, imageFormat: ImageFormat.PNG)
-        .then((value) async {
-      thumbnail = value; //todo placeholder image
-      var image = await decodeImageFromList(thumbnail!);
-      aspectRatio = image.width / image.height;
+        .then((memoryImage) async {
+      if (memoryImage == null) {
+        thumbnail = Container(
+            color: Colors.black, child: const Center(child: Icon(Icons.close)));
+      } else {
+        thumbnail = Image.memory(fit: BoxFit.cover, memoryImage);
+        var image = await decodeImageFromList(memoryImage);
+        aspectRatio = image.width / image.height;
+      }
       completer.complete();
     });
 
@@ -154,40 +160,55 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           var heroTag = basename(video.path);
-          onTap() => Navigator.push(context,
-                  MaterialPageRoute<VideoViewerOption>(builder: (context) {
-                return VideoViewer.hero(
-                    heroTag: heroTag,
-                    aspectRatio: aspectRatio,
-                    preview: Image.memory(thumbnail!),//todo
-                    video: _property.video!);
-              })).then((videoViewerOption) {
-                if (videoViewerOption != null) {
-                  switch (videoViewerOption) {
-                    case VideoViewerOption.delete:
-                      //todo delete with snackbar undo
-                      break;
-                    case VideoViewerOption.change:
-                      _openImagePickerDialog(context); //todo
-                      break;
-                  }
-                }
-              });
           return Hero(
               tag: heroTag,
               child: Material(
                   type: MaterialType.transparency,
-                  child: thumbnail == null
-                      ? InkWell(
-                          onTap: onTap,
-                          child: Container(
-                              color: Theme.of(context).colorScheme.background,
-                              child: const Icon(Icons.close)),
-                        )
-                      : Ink.image(
-                          image: MemoryImage(thumbnail!),
-                          fit: BoxFit.cover,
-                          child: InkWell(onTap: onTap))));
+                  child: InkWell(
+                      onTap: () => Navigator.push(context,
+                              MaterialPageRoute<VideoViewerOption>(
+                                  builder: (context) {
+                            return VideoViewer.hero(
+                                heroTag: heroTag,
+                                aspectRatio: aspectRatio,
+                                preview: thumbnail,
+                                video: video);
+                          })).then((videoViewerOption) {
+                            if (videoViewerOption != null) {
+                              switch (videoViewerOption) {
+                                case VideoViewerOption.delete:
+                                  var videoToBeDeleted = _property.video;
+                                  setState(() => _property.video = null);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                        behavior: SnackBarBehavior.floating,
+                                        margin: const EdgeInsets.only(
+                                            bottom: StandardStepper
+                                                .buttonBarHeight),
+                                        content:
+                                            Text(S.of(context).video_removed),
+                                        action: SnackBarAction(
+                                            label: S.of(context).undo,
+                                            onPressed: () => setState(() =>
+                                                _property.video =
+                                                    videoToBeDeleted)),
+                                      ))
+                                      .closed
+                                      .then((snackBarClosedReason) =>
+                                          snackBarClosedReason ==
+                                                  SnackBarClosedReason.action
+                                              ? null
+                                              : videoToBeDeleted
+                                                  ?.delete()
+                                                  .ignore());
+                                  break;
+                                case VideoViewerOption.change:
+                                  _pickVideo(context);
+                                  break;
+                              }
+                            }
+                          }),
+                      child: thumbnail)));
         } else {
           return const Padding(
             padding: EdgeInsets.all(16.0),
@@ -203,7 +224,6 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
   Widget _getRoomSection(BuildContext context, RoomType type) {
     int roomCount = _property.rooms[type]!.length;
     return Card(
-      //todo background depends on finished or not
       child: ListView.builder(
         padding: EdgeInsets.zero,
         primary: false,

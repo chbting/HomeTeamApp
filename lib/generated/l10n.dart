@@ -2339,6 +2339,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Video removed`
+  String get video_removed {
+    return Intl.message(
+      'Video removed',
+      name: 'video_removed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Playback speed`
+  String get playback_speed {
+    return Intl.message(
+      'Playback speed',
+      name: 'playback_speed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subtitles`
+  String get subtitles {
+    return Intl.message(
+      'Subtitles',
+      name: 'subtitles',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

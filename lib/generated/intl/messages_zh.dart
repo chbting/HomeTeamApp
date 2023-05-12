@@ -193,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_required": MessageLookupByLibrary.simpleMessage("需加入照片"),
         "pick_a_day": MessageLookupByLibrary.simpleMessage("选择日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
+        "playback_speed": MessageLookupByLibrary.simpleMessage("播放速度"),
         "please_enter_password": MessageLookupByLibrary.simpleMessage("请输入密码"),
         "please_manually_enter_sms_code":
             MessageLookupByLibrary.simpleMessage("请手动输入验证码"),
@@ -263,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "stove": MessageLookupByLibrary.simpleMessage("煮食炉"),
         "structure": MessageLookupByLibrary.simpleMessage("结构"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
+        "subtitles": MessageLookupByLibrary.simpleMessage("字幕"),
         "suspended_ceiling": MessageLookupByLibrary.simpleMessage("假天花"),
         "take_photo": MessageLookupByLibrary.simpleMessage("拍照"),
         "tenant": MessageLookupByLibrary.simpleMessage("租客"),
@@ -284,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verify": MessageLookupByLibrary.simpleMessage("验证"),
         "video": MessageLookupByLibrary.simpleMessage("影片"),
         "video_added": MessageLookupByLibrary.simpleMessage("影片已加入"),
+        "video_removed": MessageLookupByLibrary.simpleMessage("影片已移除"),
         "video_required": MessageLookupByLibrary.simpleMessage("需加入影片"),
         "view": MessageLookupByLibrary.simpleMessage("查看"),
         "visited_properties": MessageLookupByLibrary.simpleMessage("已睇楼盘"),

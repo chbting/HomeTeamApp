@@ -228,5 +228,8 @@
 	"add_video": "Add a video",
 	"video_required": "Video is required",
 	"video_added": "Video has been added",
-	"record": "Record"
+	"record": "Record",
+	"video_removed": "Video removed",
+	"playback_speed": "Playback speed",
+	"subtitles": "Subtitles"
 }

@@ -232,6 +232,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("Pick a day"),
         "pick_datetime":
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
+        "playback_speed":
+            MessageLookupByLibrary.simpleMessage("Playback speed"),
         "please_enter_password":
             MessageLookupByLibrary.simpleMessage("Please enter password"),
         "please_manually_enter_sms_code": MessageLookupByLibrary.simpleMessage(
@@ -318,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "stove": MessageLookupByLibrary.simpleMessage("Stove"),
         "structure": MessageLookupByLibrary.simpleMessage("Structure"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "subtitles": MessageLookupByLibrary.simpleMessage("Subtitles"),
         "suspended_ceiling":
             MessageLookupByLibrary.simpleMessage("Suspended Ceiling"),
         "take_photo": MessageLookupByLibrary.simpleMessage("Take photo"),
@@ -343,6 +346,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video": MessageLookupByLibrary.simpleMessage("Video"),
         "video_added":
             MessageLookupByLibrary.simpleMessage("Video has been added"),
+        "video_removed": MessageLookupByLibrary.simpleMessage("Video removed"),
         "video_required":
             MessageLookupByLibrary.simpleMessage("Video is required"),
         "view": MessageLookupByLibrary.simpleMessage("View"),

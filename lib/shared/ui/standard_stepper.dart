@@ -58,11 +58,21 @@ class StandardStepper extends StatefulWidget {
             bottom: bottomPadding ?? verticalPadding),
         child: Text(text, style: Theme.of(context).textTheme.bodyLarge),
       );
+
+  /// Show a SnackBar that doesn't block the button bar
+  static void showSnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      showCloseIcon: true,
+      behavior: SnackBarBehavior.floating,
+      dismissDirection: DismissDirection.none,
+      margin:
+      const EdgeInsets.only(bottom: StandardStepper.buttonBarHeight),
+    ));
+  }
 }
 
 class StandardStepperState extends State<StandardStepper> {
-  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
-      GlobalKey<ScaffoldMessengerState>();
   final PageController _pageController = PageController(initialPage: 0);
   final Duration _transitionDuration = const Duration(milliseconds: 250);
 
@@ -88,53 +98,52 @@ class StandardStepperState extends State<StandardStepper> {
 
     return KeyboardVisibilityBuilder(
       builder: (context, child, isKeyboardVisible) {
-        return ScaffoldMessenger(
-          key: _scaffoldMessengerKey,
-          child: Scaffold(
-              appBar: AppBar(
-                  title: Text(widget.title), leading: const CloseButton()),
-              body: Stack(children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: EasyStepper(
-                          steps: widget.steps,
-                          activeStep: _activeStep,
-                          borderThickness: 8.0,
-                          padding: const EdgeInsetsDirectional.symmetric(
-                              horizontal: 8.0),
-                          enableStepTapping: false,
-                          showLoadingAnimation: false,
-                          defaultLineColor:
-                              Theme.of(context).colorScheme.onSurface,
-                          finishedStepIconColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          stepAnimationCurve: Curves.bounceOut,
-                          stepAnimationDuration: _transitionDuration,
-                          onStepReached: (index) =>
-                              setState(() => _activeStep = index)),
+        return Scaffold(
+            appBar:
+                AppBar(title: Text(widget.title), leading: const CloseButton()),
+            body: Stack(children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: EasyStepper(
+                        steps: widget.steps,
+                        activeStep: _activeStep,
+                        borderThickness: 8.0,
+                        padding: const EdgeInsetsDirectional.symmetric(
+                            horizontal: 8.0),
+                        enableStepTapping: false,
+                        showLoadingAnimation: false,
+                        defaultLineColor:
+                            Theme.of(context).colorScheme.onSurface,
+                        finishedStepIconColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        finishedStepTextColor:
+                            Theme.of(context).colorScheme.primary,
+                        stepAnimationCurve: Curves.bounceOut,
+                        stepAnimationDuration: _transitionDuration,
+                        onStepReached: (index) =>
+                            setState(() => _activeStep = index)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: widget.subtitle,
+                  ),
+                  const Divider(height: 1.0),
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: widget.pages,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: widget.subtitle,
-                    ),
-                    const Divider(height: 1.0),
-                    Expanded(
-                      child: PageView(
-                        controller: _pageController,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: widget.pages,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                    alignment: Alignment.bottomCenter,
-                    child: isKeyboardVisible ? null : _getBottomButtons())
-              ])),
-        );
+                  ),
+                ],
+              ),
+              Container(
+                  alignment: Alignment.bottomCenter,
+                  child: isKeyboardVisible ? null : _getBottomButtons())
+            ]));
       },
     );
   }

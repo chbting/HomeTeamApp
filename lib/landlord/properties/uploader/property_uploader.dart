@@ -13,6 +13,7 @@ import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
+import 'package:path/path.dart';
 
 class PropertyUploader extends StatefulWidget {
   const PropertyUploader({Key? key}) : super(key: key);
@@ -102,7 +103,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
             // }
             break;
           case 4:
-            _submitting ? null : _confirm(context);
+            _submitting ? null : _submit(context);
             break;
           default:
             _controller.nextStep();
@@ -112,48 +113,50 @@ class PropertyUploaderState extends State<PropertyUploader> {
     );
   }
 
-  void _confirm(BuildContext context) {
+  void _submit(BuildContext context) {
     debugPrint('submitting');
     setState(() => _submitting = true);
     Property property = ListingInheritedData.of(context)!.property;
-    var listing = ListingInheritedData.of(context)!.listing;
+    //var listing = ListingInheritedData.of(context)!.listing;
 
-    Reference storage = FirebaseStorage.instance.ref('images/property/');
-
-    DatabaseReference database =
-        FirebaseDatabase.instance.ref('property/').push();
-    database.set(property.toJson()).then((_) {
-      //debugPrint('uploaded');
-      Navigator.of(context).pop(true);
-    }).catchError((error, stackTrace) {
-      debugPrint('error $error'); //todo
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(S.of(context).property_upload_error),
-        showCloseIcon: true,
-        behavior: SnackBarBehavior.floating,
-        dismissDirection: DismissDirection.none,
-        margin: const EdgeInsets.only(bottom: StandardStepper.buttonBarHeight),
-      ));
-    }).whenComplete(() => setState(() => _submitting = false));
+    // Generate property ID
+    DatabaseReference propertyRef =
+        FirebaseDatabase.instance.ref('property/').push(); //todo
+    if (propertyRef.key == null) {
+      setState(() => _submitting = false);
+      StandardStepper.showSnackBar(
+          context, S.of(context).property_upload_error);
+    } else {
+      propertyRef.set(property.toJson()).then((_) {
+        _uploadImages(property, propertyRef.key!); //todo should do notification about image upload
+        Navigator.of(context).pop(true);
+      }).catchError((error, stackTrace) {
+        debugPrint('error $error'); //todo
+        StandardStepper.showSnackBar(
+            context, S.of(context).property_upload_error);
+      }).whenComplete(() => setState(() => _submitting = false));
+    }
   }
 
-  void sendImages(BuildContext context) async {
+  void _uploadImages(Property property, String propertyId) async {
     Map<File, Reference> refMap = {};
-    Reference storage = FirebaseStorage.instance.ref('images/property/');
-
-    Property property = ListingInheritedData.of(context)!.property;
-    // for (var room in property.rooms.values) {
-    //   for (var image in room.images) {
-    //     refMap[image] = storage.child(basename(image.path));
-    //   }
-    // }
+    Reference storage =
+        FirebaseStorage.instance.ref('images/property/$propertyId/');
+    property.rooms.forEach((roomType, roomList) {
+      for (var room in roomList) {
+        for (var image in room.images) {
+          refMap[image] = storage.child(basename(image.path));
+        }
+      }
+    });
     // todo unique name DateTime.now().milisinceepoch
-    //todo put images into the propertyId-named directory
-
+    //todo upload video
     try {
       refMap.forEach((image, reference) async {
         debugPrint('Uploading $image to $reference'); //todo debug line
         var imageUrl = await reference.putFile(image);
+        debugPrint('imageUrl:$imageUrl, path:${imageUrl.ref.fullPath}');
+        // todo save imageUrl to database in sequence
       });
     } on FirebaseException catch (e) {
       debugPrint(e.toString()); //todo notify user upload has failed

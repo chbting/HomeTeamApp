@@ -12,6 +12,7 @@ part 'property.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Property {
+  @JsonKey(includeToJson: false, includeFromJson: false)
   final String id;
   Address address;
   int netArea;

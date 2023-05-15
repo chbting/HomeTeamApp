@@ -41,7 +41,7 @@ dependencies:
   dynamic_color: ^1.6.2
   local_auth: ^2.1.6 # For biometric authentication
   http: ^0.13.5
-  json_annotation: ^4.8.0
+  json_annotation: ^4.8.1
   image_picker: ^0.8.7+5
   path_provider: ^2.0.12
   path: ^1.8.2

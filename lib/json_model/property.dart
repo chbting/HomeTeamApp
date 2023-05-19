@@ -28,10 +28,16 @@ class Property {
   /// Map of rooms, each room containing a list of images(json ignored) and imageUrls
   Map<RoomType, List<Room>> rooms;
 
+  String? videoUrl;
+
+  @JsonKey(includeToJson: false)
+  DateTime? created;
+  @JsonKey(includeToJson: false)
+  DateTime? updated;
+
+  //-- Variables below are for local use only--
   @JsonKey(includeToJson: false, includeFromJson: false)
   File? video;
-
-  String? videoUrl;
 
   @JsonKey(includeToJson: false, includeFromJson: false) //todo
   ImageProvider coverImage;

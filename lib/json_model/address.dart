@@ -7,6 +7,8 @@ part 'address.g.dart';
 @JsonSerializable()
 class Address {
   String flat;
+
+  /// Floor can be alphabetical, e.g. G
   String floor;
   String block;
   String blockDescriptor; // block or tower or 座

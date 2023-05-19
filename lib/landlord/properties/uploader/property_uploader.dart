@@ -127,8 +127,12 @@ class PropertyUploaderState extends State<PropertyUploader> {
       StandardStepper.showSnackBar(
           context, S.of(context).property_upload_error);
     } else {
-      propertyRef.set(property.toJson()).then((_) {
-        _uploadImages(property, propertyRef.key!); //todo should do notification about image upload
+      var propertyJson = property.toJson();
+      propertyJson['created'] = ServerValue.timestamp;
+      propertyJson['updated'] = ServerValue.timestamp;
+      propertyRef.set(propertyJson).then((_) {
+        _uploadImages(property,
+            propertyRef.key!); //todo notification progressBar
         Navigator.of(context).pop(true);
       }).catchError((error, stackTrace) {
         debugPrint('error $error'); //todo
@@ -149,6 +153,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
         }
       }
     });
+    // Upload each photo => save each link to database (better use cloud function)
     // todo unique name DateTime.now().milisinceepoch
     //todo upload video
     try {

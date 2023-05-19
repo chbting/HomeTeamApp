@@ -25,7 +25,13 @@ Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
                 .map((e) => Room.fromJson(e as Map<String, dynamic>))
                 .toList()),
       )
-      ..videoUrl = json['videoUrl'] as String?;
+      ..videoUrl = json['videoUrl'] as String?
+      ..created = json['created'] == null
+          ? null
+          : DateTime.parse(json['created'] as String)
+      ..updated = json['updated'] == null
+          ? null
+          : DateTime.parse(json['updated'] as String);
 
 Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
       'address': instance.address.toJson(),

@@ -6,11 +6,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hometeam_client/auth/auth_info.dart';
 import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
+import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/firebase_options.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/home_screen.dart';
@@ -19,19 +21,15 @@ import 'package:hometeam_client/theme/custom_color.g.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:provider/provider.dart';
 
-late FirebaseApp app;
-bool debug = true;
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  app = await Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // todo emulator
-  if (debug) {
-    await auth.FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
-    FirebaseDatabase.instance.useDatabaseEmulator('localhost', 9000);
+  if (kDebugMode) {
+    await auth.FirebaseAuth.instance.useAuthEmulator(Debug.emulatorIp, 9099);
+    FirebaseDatabase.instance.useDatabaseEmulator(Debug.emulatorIp, 9000);
   }
 
   FirebaseUIAuth.configureProviders([

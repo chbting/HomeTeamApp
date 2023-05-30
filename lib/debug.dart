@@ -8,6 +8,7 @@ import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 
 class Debug {
+  static const emulatorIp = '192.168.0.39';
   static final List<AssetImage> _sampleCoverImage = [
     const AssetImage('assets/demo_images/Greenwood_Terrace_240px.jpg'),
     const AssetImage('assets/demo_images/CentreStage_240px.jpg'),

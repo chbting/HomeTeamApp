@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
@@ -114,25 +115,23 @@ class PropertyUploaderState extends State<PropertyUploader> {
   }
 
   void _submit(BuildContext context) {
-    debugPrint('submitting');
     setState(() => _submitting = true);
     Property property = ListingInheritedData.of(context)!.property;
     //var listing = ListingInheritedData.of(context)!.listing;
 
     // Generate property ID
     DatabaseReference propertyRef =
-        FirebaseDatabase.instance.ref('property/').push(); //todo
+        FirebaseDatabase.instance.ref('property/').push();
     if (propertyRef.key == null) {
       setState(() => _submitting = false);
       StandardStepper.showSnackBar(
           context, S.of(context).property_upload_error);
     } else {
       var propertyJson = property.toJson();
-      propertyJson['created'] = ServerValue.timestamp;
-      propertyJson['updated'] = ServerValue.timestamp;
       propertyRef.set(propertyJson).then((_) {
-        _uploadImages(property,
-            propertyRef.key!); //todo notification progressBar
+        //todo emulator not working
+        _uploadImages(
+            property, propertyRef.key!); //todo notification progressBar
         Navigator.of(context).pop(true);
       }).catchError((error, stackTrace) {
         debugPrint('error $error'); //todo

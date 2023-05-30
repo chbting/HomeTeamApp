@@ -1,6 +1,8 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -17,11 +19,21 @@ import 'package:hometeam_client/theme/custom_color.g.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
 import 'package:provider/provider.dart';
 
+late FirebaseApp app;
+bool debug = true;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+  app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // todo emulator
+  if (debug) {
+    await auth.FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    FirebaseDatabase.instance.useDatabaseEmulator('localhost', 9000);
+  }
+
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
     GoogleProvider(clientId: AuthInfo.googleClientId),
@@ -32,6 +44,7 @@ void main() async {
   ]);
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: 'recaptcha-v3-site-key',
+    androidProvider: AndroidProvider.debug, //todo
   );
   await SharedPreferencesHelper.ensureInitialized();
 

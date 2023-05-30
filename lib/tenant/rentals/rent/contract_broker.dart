@@ -1,8 +1,9 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_adjuster.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';

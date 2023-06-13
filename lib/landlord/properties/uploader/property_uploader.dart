@@ -129,8 +129,6 @@ class PropertyUploaderState extends State<PropertyUploader> {
     } else {
       var propertyJson = property.toJson();
       propertyRef.set(propertyJson).then((_) {
-        //todo emulator not working
-        debugPrint('done');
         _uploadImages(
             property, propertyRef.key!); //todo notification progressBar
         Navigator.of(context).pop(true);

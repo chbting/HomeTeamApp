@@ -7,6 +7,7 @@ import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/room.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:path/path.dart';
 
 part 'property.g.dart';
 
@@ -28,8 +29,6 @@ class Property {
   /// Map of rooms, each room containing a list of images(json ignored) and imageUrls
   Map<RoomType, List<Room>> rooms;
 
-  String? videoUrl;
-
   @JsonKey(includeToJson: false)
   DateTime? created;
   @JsonKey(includeToJson: false)
@@ -38,6 +37,8 @@ class Property {
   //-- Variables below are for local use only--
   @JsonKey(includeToJson: false, includeFromJson: false)
   File? video;
+
+  String? videoName;
 
   @JsonKey(includeToJson: false, includeFromJson: false) //todo
   ImageProvider coverImage;
@@ -77,7 +78,10 @@ class Property {
   factory Property.fromJson(Map<String, dynamic> json) =>
       _$PropertyFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PropertyToJson(this);
+  Map<String, dynamic> toJson() {
+    videoName = video == null ? null : basename(video!.path);
+    return _$PropertyToJson(this);
+  }
 }
 
 class PropertyHelper {

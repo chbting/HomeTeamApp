@@ -7,11 +7,11 @@ part of 'room.dart';
 // **************************************************************************
 
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
-      imageUrls: (json['imageUrls'] as List<dynamic>?)
+      imageNames: (json['imageNames'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
     );
 
 Map<String, dynamic> _$RoomToJson(Room instance) => <String, dynamic>{
-      'imageUrls': instance.imageUrls,
+      'imageNames': instance.imageNames,
     };

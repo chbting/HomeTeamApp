@@ -147,7 +147,6 @@ class PropertyUploaderState extends State<PropertyUploader> {
     property.rooms.forEach((roomType, roomList) {
       for (var room in roomList) {
         for (var image in room.images) {
-          DateTime.now().toIso8601String();
           refMap[image] = storageRef.child(basename(image.path));
         }
       }

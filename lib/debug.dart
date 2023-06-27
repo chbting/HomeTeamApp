@@ -118,6 +118,8 @@ class Debug {
           grossArea: 720,
           bedroom: 2,
           bathroom: 1,
+          coveredParking: 1,
+          openParking: 0,
           coverImage: _sampleCoverImage[0],
           appliances: {
             Appliance.ac : 2,

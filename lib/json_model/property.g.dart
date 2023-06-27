@@ -25,13 +25,13 @@ Property _$PropertyFromJson(Map<String, dynamic> json) => Property(
                 .map((e) => Room.fromJson(e as Map<String, dynamic>))
                 .toList()),
       )
-      ..videoUrl = json['videoUrl'] as String?
       ..created = json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String)
       ..updated = json['updated'] == null
           ? null
-          : DateTime.parse(json['updated'] as String);
+          : DateTime.parse(json['updated'] as String)
+      ..videoName = json['videoName'] as String?;
 
 Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
       'address': instance.address.toJson(),
@@ -45,7 +45,7 @@ Map<String, dynamic> _$PropertyToJson(Property instance) => <String, dynamic>{
           .map((k, e) => MapEntry(_$ApplianceEnumMap[k]!, e)),
       'rooms': instance.rooms.map((k, e) =>
           MapEntry(_$RoomTypeEnumMap[k]!, e.map((e) => e.toJson()).toList())),
-      'videoUrl': instance.videoUrl,
+      'videoName': instance.videoName,
     };
 
 const _$ApplianceEnumMap = {

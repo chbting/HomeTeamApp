@@ -130,7 +130,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
       var propertyJson = property.toJson();
       propertyRef.set(propertyJson).then((_) {
         _uploadImages(
-            property, propertyRef.key!); //todo notification progressBar
+            property, propertyRef.key!); //todo notification progressBar, error handling
         Navigator.of(context).pop(true);
       }).catchError((error, stackTrace) {
         debugPrint('error $error'); //todo
@@ -142,27 +142,27 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
   void _uploadImages(Property property, String propertyId) async {
     Map<File, Reference> refMap = {};
-    Reference storage =
+    Reference storageRef =
         FirebaseStorage.instance.ref('images/property/$propertyId/');
     property.rooms.forEach((roomType, roomList) {
       for (var room in roomList) {
         for (var image in room.images) {
-          refMap[image] = storage.child(basename(image.path));
+          DateTime.now().toIso8601String();
+          refMap[image] = storageRef.child(basename(image.path));
         }
       }
     });
     // Upload each photo => save each link to database (better use cloud function)
-    // todo unique name DateTime.now().milisinceepoch
+
     //todo upload video
     try {
       refMap.forEach((image, reference) async {
         debugPrint('Uploading $image to $reference'); //todo debug line
         var imageUrl = await reference.putFile(image);
         debugPrint('imageUrl:$imageUrl, path:${imageUrl.ref.fullPath}');
-        // todo save imageUrl to database in sequence
       });
     } on FirebaseException catch (e) {
-      debugPrint(e.toString()); //todo notify user upload has failed
+      debugPrint('Has an error: ${e.toString()}'); //todo notify user upload has failed
     }
   }
 }

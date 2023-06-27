@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:uuid/uuid.dart';
 
 class FileHelper {
   static const propertyUploaderCache = 'propertyUploader';
@@ -69,4 +70,8 @@ class FileHelper {
         onDone: () => completer.complete(files));
     return completer.future;
   }
+
+  /// Generate a random Uuid filename
+  static getUuidFilename(String filename) =>
+      '${const Uuid().v4()}${extension(filename)}';
 }

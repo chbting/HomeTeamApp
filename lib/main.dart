@@ -1,8 +1,6 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
@@ -12,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hometeam_client/auth/auth_info.dart';
 import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
-import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/firebase_options.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/home_screen.dart';
@@ -27,10 +24,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if (kDebugMode) {
-    await auth.FirebaseAuth.instance.useAuthEmulator(Debug.emulatorIp, 9099);
-    FirebaseDatabase.instance.useDatabaseEmulator(Debug.emulatorIp, 9000);
-  }
+  // if (kDebugMode) {
+  //   await auth.FirebaseAuth.instance.useAuthEmulator(Debug.emulatorIp, 9099);
+  //   FirebaseDatabase.instance.useDatabaseEmulator(Debug.emulatorIp, 9000);
+  // }
 
   FirebaseUIAuth.configureProviders([
     EmailAuthProvider(),
@@ -41,6 +38,8 @@ void main() async {
     PhoneAuthProvider(),
   ]);
   await FirebaseAppCheck.instance.activate(
+    androidProvider:
+        kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
     webRecaptchaSiteKey: 'recaptcha-v3-site-key',
   );
   await SharedPreferencesHelper.ensureInitialized();

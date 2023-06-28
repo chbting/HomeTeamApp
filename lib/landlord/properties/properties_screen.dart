@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
@@ -19,6 +22,12 @@ class PropertiesScreenState extends State<PropertiesScreen> {
   final List<Property> _propertyList = Debug.getSampleProperties();
 
   @override
+  void initState() {
+    getPropertyList(); //todo watch
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
       key: _scaffoldMessengerKey,
@@ -38,7 +47,8 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               Navigator.of(context)
                   .push(MaterialPageRoute<bool>(
                       builder: (context) => ListingInheritedData(
-                          property: Debug.getSampleProperties()[0],//todo Property.empty(),
+                          property: Debug.getSampleProperties()[0],
+                          //todo Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
                 if (uploaded ?? false) {
@@ -68,5 +78,19 @@ class PropertiesScreenState extends State<PropertiesScreen> {
             },
           )),
     );
+  }
+
+  Future<List<Property>> getPropertyList() async {
+    DataSnapshot snapshot =
+        await FirebaseDatabase.instance.ref('property/').get();
+    List<Property> propertyList = [];
+    if (snapshot.exists) {
+      Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
+      map.forEach((key, value) {
+        Property property = Property.fromJson(key, value);
+        propertyList.add(property);
+      });
+    }
+    return propertyList;
   }
 }

@@ -71,7 +71,7 @@ class FileHelper {
     return completer.future;
   }
 
-  /// Generate a random Uuid filename
+  /// Generate a random uuid filename
   static getUuidFilename(String filename) =>
       '${const Uuid().v4()}${extension(filename)}';
 }

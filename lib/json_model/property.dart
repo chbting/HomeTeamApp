@@ -14,7 +14,7 @@ part 'property.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Property {
   @JsonKey(includeToJson: false, includeFromJson: false)
-  final String id;
+  String id;
   Address address;
   int netArea;
   int grossArea;
@@ -75,7 +75,13 @@ class Property {
     }
   }
 
-  factory Property.fromJson(Map<String, dynamic> json) =>
+  factory Property.fromJson(String id, Map<String, dynamic> json) {
+    Property property = Property._fromJson(json);
+    property.id = id;
+    return property;
+  }
+
+  factory Property._fromJson(Map<String, dynamic> json) =>
       _$PropertyFromJson(json);
 
   Map<String, dynamic> toJson() {

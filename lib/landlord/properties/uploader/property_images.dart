@@ -122,7 +122,8 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
               ? IconButton(
                   icon: Icon(Icons.add_circle,
                       color: Theme.of(context).colorScheme.primary),
-                  onPressed: () => _pickVideo(context)) //todo remove the original
+                  onPressed: () =>
+                      _pickVideo(context)) //todo remove the original
               : const IconButton(
                   icon: Icon(Icons.check_circle, color: Colors.green),
                   onPressed: null)),
@@ -374,25 +375,22 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         })) {
       // todo when user backpressed in a camera section without taking a picture, a placeholder image file is created but show as null for the return value
       case ImageSource.camera:
-        XFile? videoTaken = await _picker.pickVideo(source: ImageSource.camera);
-        if (videoTaken != null) {
+        XFile? savedVideo = await _picker.pickVideo(source: ImageSource.camera);
+        if (savedVideo != null) {
           video = await FileHelper.moveToCache(
-              file: File(videoTaken.path),
-              subDirectory: FileHelper.propertyUploaderCache);
+              file: File(savedVideo.path),
+              subDirectory: FileHelper.propertyUploaderCache,
+              newFileName: FileHelper.getUuidFilename(savedVideo.path));
         }
         break;
       case ImageSource.gallery:
         XFile? videoPicked =
             await _picker.pickVideo(source: ImageSource.gallery);
         if (videoPicked != null) {
-          String fileExt = extension(videoPicked.path);
-          String parentDir = basename(File(videoPicked.path).parent.path);
-          String newFilename = '$parentDir$fileExt';
-
           video = await FileHelper.moveToCache(
               file: File(videoPicked.path),
               subDirectory: FileHelper.propertyUploaderCache,
-              newFileName: newFilename);
+              newFileName: FileHelper.getUuidFilename(videoPicked.path));
           // Remove the wrapper directory created by the image picker
           File(videoPicked.path).parent.delete(recursive: false).ignore();
         }
@@ -433,21 +431,18 @@ class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
         } else {
           File imageFile = await FileHelper.moveToCache(
               file: File(image.path),
-              subDirectory: FileHelper.propertyUploaderCache);
+              subDirectory: FileHelper.propertyUploaderCache,
+              newFileName: FileHelper.getUuidFilename(image.path));
           return [imageFile];
         }
       case ImageSource.gallery:
         List<XFile> images = await _picker.pickMultiImage();
         List<File> cachedImages = [];
         for (var image in images) {
-          String fileExt = extension(image.path);
-          String parentDir = basename(File(image.path).parent.path);
-          String newFilename = '$parentDir$fileExt';
-
           File cachedImage = await FileHelper.moveToCache(
               file: File(image.path),
               subDirectory: FileHelper.propertyUploaderCache,
-              newFileName: newFilename);
+              newFileName: FileHelper.getUuidFilename(image.path));
           // Remove the wrapper directory created by the image picker
           File(image.path).parent.delete(recursive: false).ignore();
           cachedImages.add(cachedImage);

@@ -33,8 +33,8 @@ class Debug {
     13000
   ];
 
-  // todo English sample
-  static final List<Address> addresses = [
+  // todo English sample, 
+  static List<Address> getSampleAddress() => [
     Address(
         addressLine1: '第5座10樓',
         addressLine2: '康翠臺',
@@ -113,7 +113,7 @@ class Debug {
     return [
       Property(
           id: '1',
-          address: addresses[0],
+          address: getSampleAddress()[0],
           netArea: 630,
           grossArea: 720,
           bedroom: 2,
@@ -133,7 +133,7 @@ class Debug {
           }),
       Property(
           id: '2',
-          address: addresses[1],
+          address: getSampleAddress()[1],
           netArea: 631,
           grossArea: 721,
           bedroom: 2,
@@ -151,23 +151,43 @@ class Debug {
           }),
       Property(
           id: '3',
-          address: addresses[2],
+          address: getSampleAddress()[2],
           netArea: 520,
           grossArea: 601,
-          bedroom: 2,
+          bedroom: 1,
           bathroom: 1,
-          coverImage: _sampleCoverImage[2]),
+          coverImage: _sampleCoverImage[2],
+          appliances: {
+            Appliance.ac : 2,
+            Appliance.stove : true,
+            Appliance.fridge : true,
+            Appliance.dryer : false,
+            Appliance.washer : false,
+            Appliance.washerDryerCombo : true,
+            Appliance.waterHeater : true,
+            Appliance.rangeHood : false
+          }),
       Property(
           id: '4',
-          address: addresses[3],
+          address: getSampleAddress()[3],
           netArea: 407,
           grossArea: 494,
-          bedroom: 2,
+          bedroom: 1,
           bathroom: 1,
-          coverImage: _sampleCoverImage[3]),
+          coverImage: _sampleCoverImage[3],
+          appliances: {
+            Appliance.ac : 2,
+            Appliance.stove : true,
+            Appliance.fridge : true,
+            Appliance.dryer : false,
+            Appliance.washer : false,
+            Appliance.washerDryerCombo : true,
+            Appliance.waterHeater : true,
+            Appliance.rangeHood : true
+          }),
       Property(
           id: '5',
-          address: addresses[4],
+          address: getSampleAddress()[4],
           netArea: 783,
           grossArea: 906,
           bedroom: 2,
@@ -175,7 +195,7 @@ class Debug {
           coverImage: _sampleCoverImage[4]),
       Property(
           id: '6',
-          address: addresses[5],
+          address: getSampleAddress()[5],
           netArea: 592,
           grossArea: 722,
           bedroom: 2,
@@ -183,7 +203,7 @@ class Debug {
           coverImage: _sampleCoverImage[5]),
       Property(
           id: '7',
-          address: addresses[6],
+          address: getSampleAddress()[6],
           netArea: 517,
           grossArea: 639,
           bedroom: 2,
@@ -191,7 +211,7 @@ class Debug {
           coverImage: _sampleCoverImage[6]),
       Property(
           id: '8',
-          address: addresses[7],
+          address: getSampleAddress()[7],
           netArea: 1068,
           grossArea: 1362,
           bedroom: 2,
@@ -199,7 +219,7 @@ class Debug {
           coverImage: _sampleCoverImage[7]),
       Property(
           id: '9',
-          address: addresses[8],
+          address: getSampleAddress()[8],
           netArea: 369,
           grossArea: 500,
           bedroom: 2,

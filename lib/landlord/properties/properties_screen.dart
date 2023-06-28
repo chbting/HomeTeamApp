@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
@@ -19,14 +19,6 @@ class PropertiesScreen extends StatefulWidget {
 class PropertiesScreenState extends State<PropertiesScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  List<Property> _propertyList = [];
-
-  @override
-  void initState() {
-    _updatePropertyList(); //todo watch user for properties number changes
-    //_propertyList = Debug.getSampleProperties();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +40,8 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               Navigator.of(context)
                   .push(MaterialPageRoute<bool>(
                       builder: (context) => ListingInheritedData(
-                          property: Debug.getSampleProperties()[1],
-                          //todo Property.empty(),
+                          //property: Debug.getSampleProperties()[3],
+                          property: Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
                 if (uploaded ?? false) {
@@ -65,35 +57,49 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               });
             },
           ),
-          body: ListView.builder(
-            primary: false,
-            itemCount: _propertyList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return LandlordPropertyListTile(
-                property: _propertyList[index],
-                onTap: () {
-                  //todo view property details
-                  debugPrint(_propertyList[index].address.toString());
-                },
-              );
-            },
-          )),
+          body: getPropertyList()),
     );
   }
 
-  void _updatePropertyList() async {
-    DataSnapshot snapshot =
-        await FirebaseDatabase.instance.ref('property/').get();
-    List<Property> propertyList = [];
-    if (snapshot.exists) {
-      Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
-      map.forEach((key, value) {
-        propertyList.add(Property.fromJson(key, value));
+  Widget getPropertyList() => FutureBuilder(
+      future: _getPropertyList(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          List<Property> propertyList = snapshot.data ?? [];
+          return ListView.builder(
+            primary: false,
+            itemCount: propertyList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return LandlordPropertyListTile(
+                property: propertyList[index],
+                onTap: () {
+                  //todo view property details
+                  debugPrint(propertyList[index].address.toString());
+                },
+              );
+            },
+          );
+        } else {
+          return const Center(
+              child: SizedBox(
+                  width: 96.0,
+                  height: 96.0,
+                  child: CircularProgressIndicator()));
+        }
       });
-    }
-    _propertyList = propertyList;
-    if (mounted) {
-      setState(() {});
-    }
+
+  Future<List<Property>> _getPropertyList() {
+    Completer<List<Property>> completer = Completer();
+    FirebaseDatabase.instance.ref('property/').get().then((snapshot) {
+      List<Property> propertyList = [];
+      if (snapshot.exists) {
+        Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
+        map.forEach((key, value) {
+          propertyList.add(Property.fromJson(key, value));
+        });
+      }
+      completer.complete(propertyList);
+    });
+    return completer.future;
   }
 }

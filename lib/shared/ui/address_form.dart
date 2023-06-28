@@ -177,7 +177,7 @@ class AddressFormState extends State<AddressForm> {
         ));
   }
 
-  Widget _getAddressAutocomplete(BuildContext context) {
+  Widget _getAddressAutocomplete(BuildContext context) {//todo not resetting on reset pressed
     return Autocomplete<Address>(
         fieldViewBuilder: (BuildContext context,
             TextEditingController textEditingController,
@@ -265,6 +265,7 @@ class AddressFormState extends State<AddressForm> {
   }
 
   void _reset() {
+    debugPrint('reset address');
     _formKey.currentState!.reset();
     setState(() {
       widget.address.addressLine1 = '';
@@ -272,6 +273,7 @@ class AddressFormState extends State<AddressForm> {
       widget.address.district = '';
       widget.address.region = '';
     });
+    debugPrint('address line 1:${widget.address.addressLine1}');
   }
 
   bool _validate() => _formKey.currentState!

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
@@ -11,8 +10,7 @@ class PropertyUploaderConfirmationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ListingInheritedData.of(context)!.property.address =
-        Debug.getSampleProperties()[0].address; //todo
+    //Listing listing = ListingInheritedData.of(context)!.listing;
     Property property = ListingInheritedData.of(context)!.property;
 
     return ListView(

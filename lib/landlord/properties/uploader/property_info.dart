@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
-import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/address_form.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';

@@ -1,9 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/json_model/property.dart';
+import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/theme/theme.dart';
 
-class LandlordPropertyListTile extends StatelessWidget {
+class LandlordPropertyListTile extends StatefulWidget {
   const LandlordPropertyListTile({
     Key? key,
     required this.property,
@@ -22,9 +25,15 @@ class LandlordPropertyListTile extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
+  State<StatefulWidget> createState() => LandlordPropertyListTileState();
+}
+
+class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
+
+  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
@@ -33,24 +42,21 @@ class LandlordPropertyListTile extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(
                     children: [
-                      // 1. Leading section
-                      leading == null
+                      // 1. widget.leading section
+                      widget.leading == null
                           ? Container()
                           : Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: leading,
+                              child: widget.leading,
                             ),
                       // 2. Image section
                       Padding(
                           padding: const EdgeInsets.only(right: 16.0),
-                          child: Image(
-                              width: imageSize,
-                              height: imageSize,
-                              image: property.coverImage)),
+                          child: _getPreviewImage()),
                       // 3. Info and trailing section
                       Expanded(
                           child: SizedBox(
-                        height: imageSize,
+                        height: widget.imageSize,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,13 +65,14 @@ class LandlordPropertyListTile extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  property.address.addressLine1, //todo
+                                  widget.property.address.addressLine1,
+                                  //todo
                                   style:
                                       Theme.of(context).textTheme.titleMedium!,
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                Text(property.address.district,
+                                Text(widget.property.address.district,
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
                                     maxLines: 1,
@@ -77,7 +84,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                               children: [
                                 Text(
                                     '${S.of(context).area_net_abr}'
-                                    ': ${property.netArea}'
+                                    ': ${widget.property.netArea}'
                                     ' ${S.of(context).sq_ft_abr}',
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
@@ -85,7 +92,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis),
                                 Text(
                                     '${S.of(context).area_gross_abr}'
-                                    ': ${property.grossArea}'
+                                    ': ${widget.property.grossArea}'
                                     ' ${S.of(context).sq_ft_abr}',
                                     style: AppTheme.getListTileBodyTextStyle(
                                         context),
@@ -98,7 +105,7 @@ class LandlordPropertyListTile extends StatelessWidget {
                       )),
                       // 4. trailing buttons and rent
                       SizedBox(
-                        height: imageSize,
+                        height: widget.imageSize,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -106,12 +113,11 @@ class LandlordPropertyListTile extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                trailing ?? Container(),
-                                secondaryTrailing ?? Container(),
+                                widget.trailing ?? Container(),
+                                widget.secondaryTrailing ?? Container(),
                               ],
                             ),
-                            Text(//todo
-                                'Status',
+                            Text('Status', //todo
                                 style: AppTheme.getRentTextStyle(context))
                           ],
                         ),
@@ -122,5 +128,36 @@ class LandlordPropertyListTile extends StatelessWidget {
             ],
           )),
     );
+  }
+
+  Widget _getPreviewImage() => SizedBox(
+        width: widget.imageSize,
+        height: widget.imageSize,
+        child: FutureBuilder(
+            future: getCoverImageURL(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return CachedNetworkImage(
+                    imageUrl: snapshot.data ?? '',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                        child: SizedBox(
+                            width: 60.0,
+                            height: 60.0,
+                            child: CircularProgressIndicator())),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.close));
+              } else {
+                return const SizedBox();
+              }
+            }),
+      );
+
+  Future<String> getCoverImageURL() async {
+    String imageName =
+        widget.property.rooms[RoomType.others]![0].imageNames[0]; //todo
+    Reference imageRef = FirebaseStorage.instance
+        .ref('images/property/${widget.property.id}/$imageName');
+    return imageRef.getDownloadURL();
   }
 }

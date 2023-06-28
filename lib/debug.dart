@@ -138,7 +138,17 @@ class Debug {
           grossArea: 721,
           bedroom: 2,
           bathroom: 1,
-          coverImage: _sampleCoverImage[1]),
+          coverImage: _sampleCoverImage[1],
+          appliances: {
+            Appliance.ac : 3,
+            Appliance.stove : true,
+            Appliance.fridge : false,
+            Appliance.dryer : false,
+            Appliance.washer : false,
+            Appliance.washerDryerCombo : true,
+            Appliance.waterHeater : true,
+            Appliance.rangeHood : true
+          }),
       Property(
           id: '3',
           address: addresses[2],

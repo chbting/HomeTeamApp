@@ -19,11 +19,12 @@ class PropertiesScreen extends StatefulWidget {
 class PropertiesScreenState extends State<PropertiesScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
-  final List<Property> _propertyList = Debug.getSampleProperties();
+  List<Property> _propertyList = [];
 
   @override
   void initState() {
-    getPropertyList(); //todo watch
+    _updatePropertyList(); //todo watch user for properties number changes
+    //_propertyList = Debug.getSampleProperties();
     super.initState();
   }
 
@@ -47,7 +48,7 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               Navigator.of(context)
                   .push(MaterialPageRoute<bool>(
                       builder: (context) => ListingInheritedData(
-                          property: Debug.getSampleProperties()[0],
+                          property: Debug.getSampleProperties()[1],
                           //todo Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
@@ -71,7 +72,7 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               return LandlordPropertyListTile(
                 property: _propertyList[index],
                 onTap: () {
-                  //todo
+                  //todo view property details
                   debugPrint(_propertyList[index].address.toString());
                 },
               );
@@ -80,17 +81,19 @@ class PropertiesScreenState extends State<PropertiesScreen> {
     );
   }
 
-  Future<List<Property>> getPropertyList() async {
+  void _updatePropertyList() async {
     DataSnapshot snapshot =
         await FirebaseDatabase.instance.ref('property/').get();
     List<Property> propertyList = [];
     if (snapshot.exists) {
       Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
       map.forEach((key, value) {
-        Property property = Property.fromJson(key, value);
-        propertyList.add(property);
+        propertyList.add(Property.fromJson(key, value));
       });
     }
-    return propertyList;
+    _propertyList = propertyList;
+    if (mounted) {
+      setState(() {});
+    }
   }
 }

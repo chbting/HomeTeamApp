@@ -98,10 +98,9 @@ class PropertyUploaderState extends State<PropertyUploader> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
-            //todo
-            //if (_propertyInfoWidgetController.validate()) {
-            _controller.nextStep();
-            // }
+            if (_propertyInfoWidgetController.validate()) {
+              _controller.nextStep();
+            }
             break;
           case 4:
             _submitting ? null : _submit(context);
@@ -129,8 +128,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
     } else {
       var propertyJson = property.toJson();
       propertyRef.set(propertyJson).then((_) {
-        _uploadImages(
-            property, propertyRef.key!); //todo notification progressBar, error handling
+        _uploadImages(property,
+            propertyRef.key!); //todo notification progressBar, error handling
         Navigator.of(context).pop(true);
       }).catchError((error, stackTrace) {
         debugPrint('error $error'); //todo
@@ -151,7 +150,6 @@ class PropertyUploaderState extends State<PropertyUploader> {
         }
       }
     });
-    // Upload each photo => save each link to database (better use cloud function)
 
     //todo upload video
     try {
@@ -161,7 +159,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
         debugPrint('imageUrl:$imageUrl, path:${imageUrl.ref.fullPath}');
       });
     } on FirebaseException catch (e) {
-      debugPrint('Has an error: ${e.toString()}'); //todo notify user upload has failed
+      debugPrint(
+          'Has an error: ${e.toString()}'); //todo notify user upload has failed
     }
   }
 }

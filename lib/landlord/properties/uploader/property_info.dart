@@ -67,7 +67,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
       children: [
         StandardStepper.getSectionTitle(context, S.of(context).property_info,
             bottomPadding: 0.0),
-        Row(
+        Row(//todo uneven placement onError
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             StandardUI.getExpandedIntTextFormField(
@@ -139,6 +139,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
                 child: StandardUI.getIntTextFormField(
                     initialValue: _property.appliances[Appliance.ac]!,
                     labelText: S.of(context).ac,
+                    textInputAction: TextInputAction.done,
                     onChanged: (value) =>
                         _property.appliances[Appliance.ac] = value,
                     validator: standardValidator),

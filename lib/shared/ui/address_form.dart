@@ -96,7 +96,8 @@ class AddressFormState extends State<AddressForm> {
             ),
             Row(
               children: [
-                Expanded(flex: 4, child: _getAddressAutocomplete(context)),
+                Expanded(
+                    flex: 4, child: _getAddressAutocompleteFormField(context)),
                 Container(width: 16.0),
                 Expanded(
                     flex: 1,
@@ -177,7 +178,7 @@ class AddressFormState extends State<AddressForm> {
         ));
   }
 
-  Widget _getAddressAutocomplete(BuildContext context) {//todo not resetting on reset pressed
+  Widget _getAddressAutocompleteFormField(BuildContext context) {
     return Autocomplete<Address>(
         fieldViewBuilder: (BuildContext context,
             TextEditingController textEditingController,
@@ -265,17 +266,18 @@ class AddressFormState extends State<AddressForm> {
   }
 
   void _reset() {
-    debugPrint('reset address');
-    _formKey.currentState!.reset();
+    _formKey.currentState!.reset(); //todo if mounted?
+    _addressLine1Controller.clear();
+    _addressLine2Controller.clear();
+    _districtController.clear();
     setState(() {
       widget.address.addressLine1 = '';
       widget.address.addressLine2 = '';
       widget.address.district = '';
       widget.address.region = '';
     });
-    debugPrint('address line 1:${widget.address.addressLine1}');
   }
 
-  bool _validate() => _formKey.currentState!
-      .validate(); //todo currentState is null when user scroll this part of the form off the screen
+  bool _validate() => _formKey.currentState!.validate();
+//todo currentState is null when user scroll this part of the form off the screen
 }

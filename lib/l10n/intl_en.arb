@@ -231,5 +231,6 @@
 	"record": "Record",
 	"video_removed": "Video removed",
 	"playback_speed": "Playback speed",
-	"subtitles": "Subtitles"
+	"subtitles": "Subtitles",
+	"msg_please_fill_in_the_required_information": "Please fill in the required information"
 }

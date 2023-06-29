@@ -192,6 +192,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "The date should be after the earliest start date"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("Invalid phone number"),
+        "msg_please_fill_in_the_required_information":
+            MessageLookupByLibrary.simpleMessage(
+                "Please fill in the required information"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage(
                 "Please input a valid Hong Kong phone number"),

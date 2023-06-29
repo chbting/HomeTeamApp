@@ -214,7 +214,7 @@ class AddressFormState extends State<AddressForm> {
               padding: EdgeInsets.only(left: _iconPadding),
               child: Material(
                 child: SizedBox(
-                  width: _suggestionWidgetWidth, //todo
+                  width: _suggestionWidgetWidth,
                   child: ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -266,11 +266,14 @@ class AddressFormState extends State<AddressForm> {
   }
 
   void _reset() {
-    _formKey.currentState!.reset(); //todo if mounted?
+    _formKey.currentState?.reset();
     _addressLine1Controller.clear();
     _addressLine2Controller.clear();
     _districtController.clear();
     setState(() {
+      widget.address.flat = '';
+      widget.address.floor = '';
+      widget.address.block = '';
       widget.address.addressLine1 = '';
       widget.address.addressLine2 = '';
       widget.address.district = '';
@@ -278,6 +281,6 @@ class AddressFormState extends State<AddressForm> {
     });
   }
 
+  // todo scroll to the first field with an error
   bool _validate() => _formKey.currentState!.validate();
-//todo currentState is null when user scroll this part of the form off the screen
 }

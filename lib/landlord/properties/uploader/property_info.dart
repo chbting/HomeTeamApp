@@ -184,7 +184,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   bool _validate() {
     var addressValidate = _addressFormController.validate();
     var formValidate = _formKey.currentState!.validate();
-    return addressValidate && formValidate;
+    return addressValidate && formValidate;//todo scroll to the first field with an error
   }
 }
 

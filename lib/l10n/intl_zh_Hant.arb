@@ -234,5 +234,6 @@
 	"record": "拍攝",
 	"video_removed": "影片已移除",
 	"playback_speed": "播放速度",
-	"subtitles": "字幕"
+	"subtitles": "字幕",
+	"msg_please_fill_in_the_required_information": "請填寫所須的資料"
 }

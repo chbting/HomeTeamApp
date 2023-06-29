@@ -162,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("日期需在最早起租日之後"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("電話號碼無效"),
+        "msg_please_fill_in_the_required_information":
+            MessageLookupByLibrary.simpleMessage("請填寫所須的資料"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage("請輸入有效的香港電話號碼"),
         "msg_sms_verification_failed":

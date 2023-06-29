@@ -2369,6 +2369,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please fill in the required information`
+  String get msg_please_fill_in_the_required_information {
+    return Intl.message(
+      'Please fill in the required information',
+      name: 'msg_please_fill_in_the_required_information',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -100,6 +100,9 @@ class PropertyUploaderState extends State<PropertyUploader> {
           case 0:
             if (_propertyInfoWidgetController.validate()) {
               _controller.nextStep();
+            } else {
+              StandardStepper.showSnackBar(context,
+                  S.of(context).msg_please_fill_in_the_required_information);
             }
             break;
           case 4:

@@ -14,6 +14,7 @@ import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
+import 'package:hometeam_client/utils/firebase_path.dart';
 import 'package:path/path.dart';
 
 class PropertyUploader extends StatefulWidget {
@@ -123,7 +124,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
     // Generate property ID
     DatabaseReference propertyRef =
-        FirebaseDatabase.instance.ref('property/').push();
+        FirebaseDatabase.instance.ref(FirebasePath.properties).push();
     if (propertyRef.key == null) {
       setState(() => _submitting = false);
       StandardStepper.showSnackBar(
@@ -144,8 +145,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
   void _uploadImages(Property property, String propertyId) async {
     Map<File, Reference> refMap = {};
-    Reference storageRef =
-        FirebaseStorage.instance.ref('images/property/$propertyId/');
+    Reference storageRef = FirebaseStorage.instance
+        .ref(FirebasePath.getPropertyImagesPath(propertyId));
     property.rooms.forEach((roomType, roomList) {
       for (var room in roomList) {
         for (var image in room.images) {

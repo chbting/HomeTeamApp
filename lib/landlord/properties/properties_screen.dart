@@ -3,11 +3,13 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader.dart';
 import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/utils/firebase_path.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -40,11 +42,12 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               Navigator.of(context)
                   .push(MaterialPageRoute<bool>(
                       builder: (context) => ListingInheritedData(
-                          //property: Debug.getSampleProperties()[3],
-                          property: Property.empty(),
+                          property: Debug.getSampleProperties()[1],
+                          //property: Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
                 if (uploaded ?? false) {
+                  setState(() {});//todo wait for thumbnail to be fully processed before loading
                   _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
                     content: Text(S.of(context).property_has_been_uploaded),
                     action: SnackBarAction(
@@ -57,12 +60,12 @@ class PropertiesScreenState extends State<PropertiesScreen> {
               });
             },
           ),
-          body: getPropertyList()),
+          body: _getPropertyList()),
     );
   }
 
-  Widget getPropertyList() => FutureBuilder(
-      future: _getPropertyList(),
+  Widget _getPropertyList() => FutureBuilder(
+      future: _requestProperties(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           List<Property> propertyList = snapshot.data ?? [];
@@ -88,9 +91,12 @@ class PropertiesScreenState extends State<PropertiesScreen> {
         }
       });
 
-  Future<List<Property>> _getPropertyList() {
+  Future<List<Property>> _requestProperties() {
     Completer<List<Property>> completer = Completer();
-    FirebaseDatabase.instance.ref('property/').get().then((snapshot) {
+    FirebaseDatabase.instance
+        .ref(FirebasePath.properties)
+        .get()
+        .then((snapshot) {
       List<Property> propertyList = [];
       if (snapshot.exists) {
         Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));

@@ -5,6 +5,7 @@ import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/theme/theme.dart';
+import 'package:hometeam_client/utils/firebase_path.dart';
 
 class LandlordPropertyListTile extends StatefulWidget {
   const LandlordPropertyListTile({
@@ -29,7 +30,6 @@ class LandlordPropertyListTile extends StatefulWidget {
 }
 
 class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -156,8 +156,8 @@ class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
   Future<String> getCoverImageURL() async {
     String imageName =
         widget.property.rooms[RoomType.others]![0].imageNames[0]; //todo
-    Reference imageRef = FirebaseStorage.instance
-        .ref('images/property/${widget.property.id}/$imageName');
+    Reference imageRef = FirebaseStorage.instance.ref(
+        '${FirebasePath.getPropertyImagesPath(widget.property.id)}/$imageName');
     return imageRef.getDownloadURL();
   }
 }

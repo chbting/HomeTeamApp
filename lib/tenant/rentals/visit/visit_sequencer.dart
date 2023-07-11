@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
-import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
+import 'package:hometeam_client/tenant/rentals/listing_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 
 class VisitSequencerWidget extends StatefulWidget {

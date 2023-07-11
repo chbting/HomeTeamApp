@@ -6,7 +6,7 @@ import 'package:hometeam_client/http_request/distance_matrix_helper.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/theme/theme.dart';
-import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
+import 'package:hometeam_client/tenant/rentals/listing_list_tile.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_data.dart';
 import 'package:hometeam_client/tenant/rentals/visit/visit_scheduler.dart';
 

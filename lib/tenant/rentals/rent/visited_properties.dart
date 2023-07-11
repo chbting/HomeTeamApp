@@ -6,7 +6,7 @@ import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker.dart';
 import 'package:hometeam_client/tenant/rentals/rent/contract_broker_inherited_data.dart';
-import 'package:hometeam_client/tenant/rentals/rental_list_tile.dart';
+import 'package:hometeam_client/tenant/rentals/listing_list_tile.dart';
 
 class VisitedPropertiesScreen extends StatefulWidget {
   const VisitedPropertiesScreen({Key? key}) : super(key: key);

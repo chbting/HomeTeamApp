@@ -33,54 +33,54 @@ class Debug {
     13000
   ];
 
-  // todo English sample, 
+  // todo English sample,
   static List<Address> getSampleAddress() => [
-    Address(
-        addressLine1: '第5座10樓',
-        addressLine2: '康翠臺',
-        district: '柴灣',
-        region: '香港'),
-    Address(
-        addressLine1: '聚賢居第1座35樓',
-        addressLine2: '聚賢居',
-        district: '上環',
-        region: '香港'),
-    Address(
-        addressLine1: '尚翹峰22樓',
-        addressLine2: '尚翹峰',
-        district: '灣仔',
-        region: '香港'),
-    Address(
-        addressLine1: '容龍居20樓C室',
-        addressLine2: '容龍居',
-        district: '屯門',
-        region: '新界'),
-    Address(
-        addressLine1: '景湖居3座',
-        addressLine2: '嘉湖山莊',
-        district: '天水圍',
-        region: '新界'),
-    Address(
-        addressLine1: '海逸豪園2期 玉庭軒10座',
-        addressLine2: '海逸豪園',
-        district: '紅磡',
-        region: '九龍'), //notes: google map inaccuracy for this address
-    Address(
-        addressLine1: '麗港城9座14樓',
-        addressLine2: '麗港城',
-        district: '藍田',
-        region: '九龍'),
-    Address(
-        addressLine1: '珀麗灣1期16座',
-        addressLine2: '珀麗灣',
-        district: '馬灣',
-        region: '新界'),
-    Address(
-        addressLine1: '粉嶺名都富臨閣20樓',
-        addressLine2: '粉嶺名都',
-        district: '粉嶺',
-        region: '新界'),
-  ];
+        Address(
+            addressLine1: '第5座10樓',
+            addressLine2: '康翠臺',
+            district: '柴灣',
+            region: '香港'),
+        Address(
+            addressLine1: '聚賢居第1座35樓',
+            addressLine2: '聚賢居',
+            district: '上環',
+            region: '香港'),
+        Address(
+            addressLine1: '尚翹峰22樓',
+            addressLine2: '尚翹峰',
+            district: '灣仔',
+            region: '香港'),
+        Address(
+            addressLine1: '容龍居20樓C室',
+            addressLine2: '容龍居',
+            district: '屯門',
+            region: '新界'),
+        Address(
+            addressLine1: '景湖居3座',
+            addressLine2: '嘉湖山莊',
+            district: '天水圍',
+            region: '新界'),
+        Address(
+            addressLine1: '海逸豪園2期 玉庭軒10座',
+            addressLine2: '海逸豪園',
+            district: '紅磡',
+            region: '九龍'), //notes: google map inaccuracy for this address
+        Address(
+            addressLine1: '麗港城9座14樓',
+            addressLine2: '麗港城',
+            district: '藍田',
+            region: '九龍'),
+        Address(
+            addressLine1: '珀麗灣1期16座',
+            addressLine2: '珀麗灣',
+            district: '馬灣',
+            region: '新界'),
+        Address(
+            addressLine1: '粉嶺名都富臨閣20樓',
+            addressLine2: '粉嶺名都',
+            district: '粉嶺',
+            region: '新界'),
+      ];
 
   static Tenant getSampleClientData() {
     var chinese = SharedPreferencesHelper.getLocale().languageCode == 'zh';
@@ -94,8 +94,10 @@ class Debug {
     return tenant;
   }
 
-  static List<Listing> getSampleListing() {
-    var properties = getSampleProperties();
+  static List<Listing> getSampleListing() =>
+      propertiesToListings(getSampleProperties());
+
+  static List<Listing> propertiesToListings(List<Property> properties) {
     List<Listing> listings = [];
     for (int i = 0; i < properties.length; i++) {
       listings.add(Listing(
@@ -103,7 +105,7 @@ class Debug {
           propertyId: properties[i].id,
           terms: Terms(
               propertyId: properties[i].id,
-              rent: _rents[i],
+              rent: _rents[i], //todo this is local, will go out of bound
               deposit: _rents[i] * 2)));
     }
     return listings;
@@ -122,14 +124,14 @@ class Debug {
           openParking: 0,
           coverImage: _sampleCoverImage[0],
           appliances: {
-            Appliance.ac : 2,
-            Appliance.stove : true,
-            Appliance.fridge : true,
-            Appliance.dryer : false,
-            Appliance.washer : false,
-            Appliance.washerDryerCombo : true,
-            Appliance.waterHeater : true,
-            Appliance.rangeHood : true
+            Appliance.ac: 2,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
           }),
       Property(
           id: '2',
@@ -139,15 +141,17 @@ class Debug {
           bedroom: 2,
           bathroom: 1,
           coverImage: _sampleCoverImage[1],
+          coveredParking: 1,
+          openParking: 0,
           appliances: {
-            Appliance.ac : 3,
-            Appliance.stove : true,
-            Appliance.fridge : false,
-            Appliance.dryer : false,
-            Appliance.washer : false,
-            Appliance.washerDryerCombo : true,
-            Appliance.waterHeater : true,
-            Appliance.rangeHood : true
+            Appliance.ac: 3,
+            Appliance.stove: true,
+            Appliance.fridge: false,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
           }),
       Property(
           id: '3',
@@ -157,15 +161,17 @@ class Debug {
           bedroom: 1,
           bathroom: 1,
           coverImage: _sampleCoverImage[2],
+          coveredParking: 1,
+          openParking: 0,
           appliances: {
-            Appliance.ac : 2,
-            Appliance.stove : true,
-            Appliance.fridge : true,
-            Appliance.dryer : false,
-            Appliance.washer : false,
-            Appliance.washerDryerCombo : true,
-            Appliance.waterHeater : true,
-            Appliance.rangeHood : false
+            Appliance.ac: 2,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: false
           }),
       Property(
           id: '4',
@@ -175,24 +181,38 @@ class Debug {
           bedroom: 1,
           bathroom: 1,
           coverImage: _sampleCoverImage[3],
+          coveredParking: 0,
+          openParking: 0,
           appliances: {
-            Appliance.ac : 2,
-            Appliance.stove : true,
-            Appliance.fridge : true,
-            Appliance.dryer : false,
-            Appliance.washer : false,
-            Appliance.washerDryerCombo : true,
-            Appliance.waterHeater : true,
-            Appliance.rangeHood : true
+            Appliance.ac: 2,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
           }),
       Property(
           id: '5',
           address: getSampleAddress()[4],
           netArea: 783,
           grossArea: 906,
-          bedroom: 2,
+          bedroom: 3,
           bathroom: 1,
-          coverImage: _sampleCoverImage[4]),
+          coverImage: _sampleCoverImage[4],
+          coveredParking: 1,
+          openParking: 0,
+          appliances: {
+            Appliance.ac: 4,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: true,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
+          }),
       Property(
           id: '6',
           address: getSampleAddress()[5],
@@ -200,7 +220,19 @@ class Debug {
           grossArea: 722,
           bedroom: 2,
           bathroom: 1,
-          coverImage: _sampleCoverImage[5]),
+          coverImage: _sampleCoverImage[5],
+          coveredParking: 0,
+          openParking: 0,
+          appliances: {
+            Appliance.ac: 3,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
+          }),
       Property(
           id: '7',
           address: getSampleAddress()[6],
@@ -208,7 +240,19 @@ class Debug {
           grossArea: 639,
           bedroom: 2,
           bathroom: 1,
-          coverImage: _sampleCoverImage[6]),
+          coverImage: _sampleCoverImage[6],
+          coveredParking: 0,
+          openParking: 0,
+          appliances: {
+            Appliance.ac: 3,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
+          }),
       Property(
           id: '8',
           address: getSampleAddress()[7],
@@ -216,7 +260,19 @@ class Debug {
           grossArea: 1362,
           bedroom: 2,
           bathroom: 1,
-          coverImage: _sampleCoverImage[7]),
+          coverImage: _sampleCoverImage[7],
+          coveredParking: 0,
+          openParking: 0,
+          appliances: {
+            Appliance.ac: 3,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
+          }),
       Property(
           id: '9',
           address: getSampleAddress()[8],
@@ -224,7 +280,19 @@ class Debug {
           grossArea: 500,
           bedroom: 2,
           bathroom: 1,
-          coverImage: _sampleCoverImage[8])
+          coverImage: _sampleCoverImage[8],
+          coveredParking: 0,
+          openParking: 0,
+          appliances: {
+            Appliance.ac: 3,
+            Appliance.stove: true,
+            Appliance.fridge: true,
+            Appliance.dryer: false,
+            Appliance.washer: false,
+            Appliance.washerDryerCombo: true,
+            Appliance.waterHeater: true,
+            Appliance.rangeHood: true
+          })
     ];
   }
 }

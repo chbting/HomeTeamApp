@@ -134,7 +134,7 @@ class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
         width: widget.imageSize,
         height: widget.imageSize,
         child: FutureBuilder(
-            future: getCoverImageURL(),
+            future: _getCoverImageURL(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return CachedNetworkImage(
@@ -153,7 +153,7 @@ class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
             }),
       );
 
-  Future<String> getCoverImageURL() async {
+  Future<String> _getCoverImageURL() async {
     String imageName =
         widget.property.rooms[RoomType.others]![0].imageNames[0]; //todo
     Reference imageRef = FirebaseStorage.instance.ref(

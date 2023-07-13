@@ -5,6 +5,7 @@ import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/format.dart';
 
+//todo create a shared version with rental listing list tile
 class ListingListTile extends StatelessWidget {
   const ListingListTile(
       {Key? key,
@@ -25,7 +26,7 @@ class ListingListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Property property = PropertyHelper.getFromId(listing.propertyId);
+    Property property = PropertyHelper.getFromId(listing.propertyId); //todo this is debug code and causes error when data was pulled from the web
     Widget content = Row(
       children: [
         // 1. Leading section

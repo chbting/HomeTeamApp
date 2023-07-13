@@ -97,6 +97,7 @@ class Debug {
   static List<Listing> getSampleListing() =>
       propertiesToListings(getSampleProperties());
 
+
   static List<Listing> propertiesToListings(List<Property> properties) {
     List<Listing> listings = [];
     for (int i = 0; i < properties.length; i++) {
@@ -105,7 +106,7 @@ class Debug {
           propertyId: properties[i].id,
           terms: Terms(
               propertyId: properties[i].id,
-              rent: _rents[i], //todo this is local, will go out of bound
+              rent: _rents[i], //TODO rents are local data, will go out of bound
               deposit: _rents[i] * 2)));
     }
     return listings;

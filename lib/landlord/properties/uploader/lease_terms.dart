@@ -5,23 +5,22 @@ import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/terms_item.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/date_picker_form_field.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/shared/ui/terms_item_widget.dart';
 
-class LeaseTermsWidget extends StatefulWidget {
-  const LeaseTermsWidget({Key? key, required this.controller})
-      : super(key: key);
+class LeaseTermsPage extends StatefulWidget {
+  const LeaseTermsPage({Key? key, required this.controller}) : super(key: key);
 
   final FormController controller;
 
   @override
-  State<StatefulWidget> createState() => LeaseTermsWidgetState();
+  State<StatefulWidget> createState() => LeaseTermsPageState();
 }
 
-class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
+class LeaseTermsPageState extends State<LeaseTermsPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final double _leadingPadding = 48.0;
   final DateTime _today = DateUtils.dateOnly(DateTime.now());
@@ -41,8 +40,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _listing = ListingInheritedData.of(context)!.listing;
-    _terms = ListingInheritedData.of(context)!.terms;
+    _listing = PropertyUploaderInheritedData.of(context)!.listing;
+    _terms = PropertyUploaderInheritedData.of(context)!.terms;
     return Form(
         key: _formKey,
         child: ListView(
@@ -101,7 +100,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                     labelText: S.of(context).monthly_rent),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return S.of(context).please_put_in_a_valid_amount;
+                    return S.of(context).msg_please_put_in_a_valid_amount;
                   } else {
                     _terms.rent = int.parse(value);
                     return null;
@@ -129,7 +128,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                     labelText: S.of(context).deposit),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return S.of(context).please_put_in_a_valid_amount;
+                    return S.of(context).msg_please_put_in_a_valid_amount;
                   } else {
                     _terms.deposit = int.parse(value);
                     return null;
@@ -169,7 +168,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
               setState(() => _terms.earliestStartDate = dateTime),
           validator: (DateTime? dateTime) {
             return dateTime == null
-                ? S.of(context).please_put_in_a_valid_date
+                ? S.of(context).msg_please_put_in_a_valid_date
                 : null;
           },
         ),
@@ -177,8 +176,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
       ListTile(
         contentPadding: EdgeInsets.zero,
         leading: Checkbox(
-            //todo clear error text before disabling
             value: _latestStartDateEnabled,
+            // todo clear error message before disabling
             onChanged: (value) =>
                 setState(() => _latestStartDateEnabled = value!)),
         title: DatePickerFormField(
@@ -190,7 +189,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           lastDate: _withinOneYearFromToday,
           validator: (DateTime? dateTime) {
             if (dateTime == null) {
-              return S.of(context).please_put_in_a_valid_date;
+              return S.of(context).msg_please_put_in_a_valid_date;
             } else if (_terms.earliestStartDate != null) {
               if (dateTime.isBefore(_terms.earliestStartDate!)) {
                 return S.of(context).msg_input_before_earliest_start;
@@ -234,8 +233,12 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                 border: const OutlineInputBorder(),
                 labelText: S.of(context).lease_length_months),
             validator: (value) {
-              if (value == null || value.isEmpty) {
-                return S.of(context).please_put_in_a_valid_amount;
+              if (_terms.leasePeriodType != LeasePeriodType.specificLength) {
+                return null;
+              } else if (value == null || value.isEmpty) {
+                return S
+                    .of(context)
+                    .msg_please_fill_in_the_required_information;
               } else {
                 _terms.leaseLength = int.parse(value);
                 return null;
@@ -257,8 +260,10 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
           lastDate: _today.copyWith(year: _today.year + 3),
           enabled: _terms.leasePeriodType == LeasePeriodType.specificEndDate,
           validator: (DateTime? dateTime) {
-            if (dateTime == null) {
-              return S.of(context).please_put_in_a_valid_date;
+            if (_terms.leasePeriodType != LeasePeriodType.specificEndDate) {
+              return null;
+            } else if (dateTime == null) {
+              return S.of(context).msg_please_put_in_a_valid_date;
             } else {
               if (_terms.earliestStartDate != null) {
                 if (dateTime.isBefore(_terms.earliestStartDate!)) {
@@ -294,7 +299,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                   labelText: S.of(context).grace_period_days),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return S.of(context).please_put_in_a_valid_amount;
+                  return S.of(context).msg_please_put_in_a_valid_amount;
                 } else {
                   _terms.gracePeriod = int.parse(value);
                   return null;
@@ -338,7 +343,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                 lastDate: _today.copyWith(year: _today.year + 3),
                 validator: (DateTime? dateTime) {
                   if (dateTime == null) {
-                    return S.of(context).please_put_in_a_valid_date;
+                    return S.of(context).msg_please_put_in_a_valid_date;
                   } else {
                     if (_terms.earliestStartDate != null) {
                       if (dateTime.isBefore(_terms.earliestStartDate!)) {
@@ -369,7 +374,7 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
                       helperText: S.of(context).termination_notice_helper_text),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return S.of(context).please_put_in_a_valid_amount;
+                      return S.of(context).msg_please_put_in_a_valid_amount;
                     } else {
                       _terms.gracePeriod = int.parse(value);
                       return null;
@@ -394,7 +399,8 @@ class LeaseTermsWidgetState extends State<LeaseTermsWidget> {
             expense: Expense.furniture, termsItem: TermsItem.furniture),
         const TermsItemCheckBoxListTile(
             expense: Expense.electricalAppliances,
-            termsItem: TermsItem.electricalAppliances),//todo show only if there are appliances
+            termsItem: TermsItem.electricalAppliances),
+        //todo show only if there are appliances
         const TermsItemCheckBoxListTile(
             expense: Expense.water, termsItem: TermsItem.water),
         const TermsItemCheckBoxListTile(

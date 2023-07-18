@@ -97,7 +97,6 @@ class Debug {
   static List<Listing> getSampleListing() =>
       propertiesToListings(getSampleProperties());
 
-
   static List<Listing> propertiesToListings(List<Property> properties) {
     List<Listing> listings = [];
     for (int i = 0; i < properties.length; i++) {
@@ -295,5 +294,20 @@ class Debug {
             Appliance.rangeHood: true
           })
     ];
+  }
+
+  static Terms getSampleTerms() {
+    DateTime now = DateTime.now();
+    return Terms(
+      propertyId: '',
+      rent: 10000,
+      deposit: 20000,
+      earliestStartDate: now,
+      leaseLength: 12,
+      gracePeriod: 7,
+      terminationRight: PartyType.both,
+      earliestTerminationDate: DateTime(now.year + 1, now.month, now.day),
+      daysNoticeBeforeTermination: 30,
+    );
   }
 }

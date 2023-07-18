@@ -147,7 +147,7 @@ class SMSAuthScreenState extends State<SMSAuthScreen> with CodeAutoFill {
                 Text(
                     !_autofillFailed
                         ? S.of(context).waiting_for_sms_code_autofill
-                        : S.of(context).please_manually_enter_sms_code,
+                        : S.of(context).msg_please_manually_enter_sms_code,
                     style: Theme.of(context).textTheme.titleLarge),
                 Visibility(
                     visible: _showProgressIndicator,

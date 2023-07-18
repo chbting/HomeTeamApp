@@ -82,14 +82,13 @@ class DatePickerFormFieldState extends State<DatePickerFormField> {
         },
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (String? value) {
-          if (widget.validator == null) {
+          if (!widget.enabled || widget.validator == null) {
             return null;
           } else {
-            if (value == null) {
+            if (value == null || value.isEmpty) {
               return widget.validator!(null);
             } else {
-              var dateTime = Format.date.parse(value);
-              return widget.validator!(dateTime);
+              return widget.validator!(Format.date.parse(value));
             }
           }
         });

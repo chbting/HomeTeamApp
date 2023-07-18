@@ -192,12 +192,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "The date should be after the earliest start date"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("Invalid phone number"),
+        "msg_please_enter_password":
+            MessageLookupByLibrary.simpleMessage("Please enter password"),
         "msg_please_fill_in_the_required_information":
             MessageLookupByLibrary.simpleMessage(
                 "Please fill in the required information"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage(
                 "Please input a valid Hong Kong phone number"),
+        "msg_please_manually_enter_sms_code":
+            MessageLookupByLibrary.simpleMessage(
+                "Please manually enter the SMS Code"),
+        "msg_please_put_in_a_valid_amount":
+            MessageLookupByLibrary.simpleMessage(
+                "Please put in a valid amount"),
+        "msg_please_put_in_a_valid_date":
+            MessageLookupByLibrary.simpleMessage("Please put in a valid date"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("SMS Verification failed"),
         "msg_voice_search_unavailable":
@@ -237,14 +247,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
         "playback_speed":
             MessageLookupByLibrary.simpleMessage("Playback speed"),
-        "please_enter_password":
-            MessageLookupByLibrary.simpleMessage("Please enter password"),
-        "please_manually_enter_sms_code": MessageLookupByLibrary.simpleMessage(
-            "Please manually enter the SMS Code"),
-        "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
-            "Please put in a valid amount"),
-        "please_put_in_a_valid_date":
-            MessageLookupByLibrary.simpleMessage("Please put in a valid date"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "properties": MessageLookupByLibrary.simpleMessage("Properties"),

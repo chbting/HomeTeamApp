@@ -4,7 +4,7 @@ import 'package:hometeam_client/data/expense.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/terms.dart';
 import 'package:hometeam_client/json_model/terms_item.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 
 class TermsItemWidget extends StatefulWidget {
   const TermsItemWidget(
@@ -67,8 +67,8 @@ class TermsItemCheckBoxListTile extends StatefulWidget {
 class TermsItemCheckBoxListTileState extends State<TermsItemCheckBoxListTile> {
   @override
   Widget build(BuildContext context) {
-    Listing listing = ListingInheritedData.of(context)!.listing;
-    Terms terms = ListingInheritedData.of(context)!.terms;
+    Listing listing = PropertyUploaderInheritedData.of(context)!.listing;
+    Terms terms = PropertyUploaderInheritedData.of(context)!.terms;
     return TermsItemWidget(
       termsItemSettings: listing.settings[widget.termsItem]!,
       child: CheckboxListTile(

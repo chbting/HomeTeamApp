@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/address_form.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/shared/ui/standard_ui.dart';
 
-class PropertyInfoWidget extends StatefulWidget {
-  const PropertyInfoWidget({Key? key, required this.controller})
+class PropertyInfoPage extends StatefulWidget {
+  const PropertyInfoPage({Key? key, required this.controller})
       : super(key: key);
 
-  final PropertyInfoWidgetController controller;
+  final PropertyInfoPageController controller;
 
   @override
-  State<StatefulWidget> createState() => PropertyInfoWidgetState();
+  State<StatefulWidget> createState() => PropertyInfoPageState();
 }
 
-class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
+class PropertyInfoPageState extends State<PropertyInfoPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormController _addressFormController = FormController();
   final appliancesWithBoolValue = ApplianceHelper.valuesWithBoolValue();
@@ -34,7 +34,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    _property = ListingInheritedData.of(context)!.property;
+    _property = PropertyUploaderInheritedData.of(context)!.property;
     standardValidator = (value) => (value == null || value.isEmpty)
         ? S.of(context).msg_info_required
         : null;
@@ -188,7 +188,7 @@ class PropertyInfoWidgetState extends State<PropertyInfoWidget> {
   }
 }
 
-class PropertyInfoWidgetController {
+class PropertyInfoPageController {
   late void Function() resetForm;
   late bool Function() validate;
 }

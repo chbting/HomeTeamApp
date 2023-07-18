@@ -26,7 +26,7 @@ class ListingListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Property property = PropertyHelper.getFromId(listing.propertyId); //todo this is debug code and causes error when data was pulled from the web
+    Property property = PropertyHelper.getFromId(listing.propertyId);
     Widget content = Row(
       children: [
         // 1. Leading section

@@ -5,12 +5,13 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader_confirmation.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
@@ -31,9 +32,9 @@ class PropertyUploader extends StatefulWidget {
 
 class PropertyUploaderState extends State<PropertyUploader> {
   final StandardStepperController _controller = StandardStepperController();
-  final PropertyInfoWidgetController _propertyInfoWidgetController =
-      PropertyInfoWidgetController();
-  final FormController _leaseTermsWidgetController = FormController();
+  final PropertyInfoPageController _propertyInfoPageController =
+      PropertyInfoPageController();
+  final FormController _leaseTermsPageController = FormController();
   int _activeStep = 0;
   bool _submitting = false;
 
@@ -60,11 +61,11 @@ class PropertyUploaderState extends State<PropertyUploader> {
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
-      PropertyInfoWidget(controller: _propertyInfoWidgetController),
-      const PropertyImagesWidget(), //todo make it video base
-      LeaseTermsWidget(controller: _leaseTermsWidgetController),
+      PropertyInfoPage(controller: _propertyInfoPageController),
+      const PropertyImagesPage(), //todo make it video base
+      LeaseTermsPage(controller: _leaseTermsPageController),
       const Center(child: Text('4')),
-      const PropertyUploaderConfirmationWidget()
+      const PropertyUploaderConfirmationPage()
     ];
 
     return StandardStepper(
@@ -80,7 +81,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
           Text(_activeStep == 0 ? S.of(context).reset : S.of(context).back),
       onLeftButtonPressed: () {
         _activeStep == 0
-            ? _propertyInfoWidgetController.resetForm()
+            ? _propertyInfoPageController.resetForm()
             : _controller.previousStep();
       },
       rightButtonIcon: _activeStep == steps.length - 1
@@ -99,7 +100,15 @@ class PropertyUploaderState extends State<PropertyUploader> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 0:
-            if (_propertyInfoWidgetController.validate()) {
+            if (_propertyInfoPageController.validate()) {
+              _controller.nextStep();
+            } else {
+              StandardStepper.showSnackBar(context,
+                  S.of(context).msg_please_fill_in_the_required_information);
+            }
+            break;
+          case 2:
+            if (_leaseTermsPageController.validate()) {
               _controller.nextStep();
             } else {
               StandardStepper.showSnackBar(context,
@@ -119,8 +128,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
   void _submit(BuildContext context) {
     setState(() => _submitting = true);
-    Property property = ListingInheritedData.of(context)!.property;
-    //var listing = ListingInheritedData.of(context)!.listing;
+    Property property = PropertyUploaderInheritedData.of(context)!.property;
+    Listing listing = PropertyUploaderInheritedData.of(context)!.listing;
 
     // Generate property ID
     DatabaseReference propertyRef =

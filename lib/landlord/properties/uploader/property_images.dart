@@ -6,7 +6,7 @@ import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/json_model/room.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/image_viewer.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/shared/ui/video_viewer.dart';
@@ -16,21 +16,21 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-class PropertyImagesWidget extends StatefulWidget {
-  const PropertyImagesWidget({Key? key}) : super(key: key);
+class PropertyImagesPage extends StatefulWidget {
+  const PropertyImagesPage({Key? key}) : super(key: key);
 
   @override
-  State<PropertyImagesWidget> createState() => PropertyImagesWidgetState();
+  State<PropertyImagesPage> createState() => PropertyImagesPageState();
 }
 
-class PropertyImagesWidgetState extends State<PropertyImagesWidget> {
+class PropertyImagesPageState extends State<PropertyImagesPage> {
   final ImagePicker _picker = ImagePicker();
   final _gridviewSpacing = 8.0;
   late Property _property;
 
   @override
   Widget build(BuildContext context) {
-    _property = ListingInheritedData.of(context)!.property;
+    _property = PropertyUploaderInheritedData.of(context)!.property;
 
     // Initialize the room image map
     if (_property.rooms.isEmpty) {

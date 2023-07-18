@@ -89,7 +89,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
             title: Text(S.of(context).property_address,
                 style: AppTheme.getCardTitleTextStyle(context)),
             subtitle: Text(
-              '${PropertyHelper.getFromId(_bid.biddingTerms.propertyId).address}',
+              '${PropertyHelper.getFromIdDebug(_bid.biddingTerms.propertyId).address}',
               style: AppTheme.getCardBodyTextStyle(context),
             ),
             isThreeLine: true, //todo address format
@@ -115,7 +115,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return S.of(context).please_put_in_a_valid_amount;
+                          return S.of(context).msg_please_put_in_a_valid_amount;
                         } else {
                           _bid.biddingTerms.rent = int.parse(value);
                           return null;
@@ -134,7 +134,7 @@ class ContractAdjusterScreenState extends State<ContractAdjusterScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return S.of(context).please_put_in_a_valid_amount;
+                          return S.of(context).msg_please_put_in_a_valid_amount;
                         } else {
                           _bid.biddingTerms.deposit = int.parse(value);
                           return null;

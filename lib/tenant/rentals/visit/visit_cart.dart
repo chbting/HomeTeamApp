@@ -53,7 +53,7 @@ class VisitCartScreenState extends State<VisitCartScreen> {
                       });
                       List<Address> addresses = _listingInCart
                           .map((listing) =>
-                              PropertyHelper.getFromId(listing.propertyId)
+                              PropertyHelper.getFromIdDebug(listing.propertyId)
                                   .address)
                           .toList();
                       DistanceMatrixHelper.getMatrix(addresses)

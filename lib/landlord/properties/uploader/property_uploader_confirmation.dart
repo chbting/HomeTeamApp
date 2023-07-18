@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_card.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 
-class PropertyUploaderConfirmationWidget extends StatelessWidget {
-  const PropertyUploaderConfirmationWidget({super.key});
+class PropertyUploaderConfirmationPage extends StatelessWidget {
+  const PropertyUploaderConfirmationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     //Listing listing = ListingInheritedData.of(context)!.listing;
-    Property property = ListingInheritedData.of(context)!.property;
+    Property property = PropertyUploaderInheritedData.of(context)!.property;
 
     return ListView(
       primary: false,

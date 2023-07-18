@@ -143,7 +143,7 @@ class ContractBrokerScreenState extends State<ContractBrokerScreen> {
     var propertyId =
         ContractBrokerInheritedData.of(context)!.bid.biddingTerms.propertyId;
     var listingId = propertyId;
-    var address = PropertyHelper.getFromId(propertyId).address;
+    var address = PropertyHelper.getFromIdDebug(propertyId).address;
 
     debugPrint('submitting');
     DatabaseReference ref = FirebaseDatabase.instance.ref('offer/$listingId/');

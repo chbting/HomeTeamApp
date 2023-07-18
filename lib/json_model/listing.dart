@@ -14,7 +14,7 @@ class Listing {
   Map<TermsItem, TermsItemSettings> settings = {};
 
   Listing({required this.propertyId, required this.title, Terms? terms})
-      : id = propertyId, //todo
+      : id = propertyId, //todo mark as placeholder id
         terms = terms ?? Terms(propertyId: propertyId) {
     for (var item in TermsItem.values) {
       settings[item] = TermsItemHelper.getDefaultSettings(item);

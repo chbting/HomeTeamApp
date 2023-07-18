@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/landlord/properties/landlord_property_list_tile.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader.dart';
-import 'package:hometeam_client/shared/listing_inherited_data.dart';
-import 'package:hometeam_client/utils/firebase_path.dart';
+import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 
 class PropertiesScreen extends StatefulWidget {
   const PropertiesScreen({Key? key}) : super(key: key);
@@ -41,13 +36,14 @@ class PropertiesScreenState extends State<PropertiesScreen> {
             onPressed: () {
               Navigator.of(context)
                   .push(MaterialPageRoute<bool>(
-                      builder: (context) => ListingInheritedData(
+                      builder: (context) => PropertyUploaderInheritedData.debug( //todo
                           property: Debug.getSampleProperties()[1],
-                          //property: Property.empty(),
+                          //todo property: Property.empty(),
                           child: const PropertyUploader())))
                   .then((uploaded) {
                 if (uploaded ?? false) {
-                  setState(() {});//todo wait for thumbnail to be fully processed before loading
+                  setState(
+                      () {}); //todo wait for thumbnail to be fully processed before loading
                   _scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
                     content: Text(S.of(context).property_has_been_uploaded),
                     action: SnackBarAction(
@@ -65,19 +61,19 @@ class PropertiesScreenState extends State<PropertiesScreen> {
   }
 
   Widget _getPropertyList() => FutureBuilder(
-      future: _requestProperties(),
+      future: PropertyHelper.updateCache(), //todo not updateCache here, but pulled the properties owned by this user
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          List<Property> propertyList = snapshot.data ?? [];
           return ListView.builder(
             primary: false,
-            itemCount: propertyList.length,
+            itemCount: PropertyHelper.cachedProperties.length,
             itemBuilder: (BuildContext context, int index) {
               return LandlordPropertyListTile(
-                property: propertyList[index],
+                property: PropertyHelper.cachedProperties[index],
                 onTap: () {
                   //todo view property details
-                  debugPrint(propertyList[index].address.toString());
+                  debugPrint(PropertyHelper.cachedProperties[index].address
+                      .toString());
                 },
               );
             },
@@ -90,22 +86,4 @@ class PropertiesScreenState extends State<PropertiesScreen> {
                   child: CircularProgressIndicator()));
         }
       });
-
-  Future<List<Property>> _requestProperties() {
-    Completer<List<Property>> completer = Completer();
-    FirebaseDatabase.instance
-        .ref(FirebasePath.properties)
-        .get()
-        .then((snapshot) {
-      List<Property> propertyList = [];
-      if (snapshot.exists) {
-        Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
-        map.forEach((key, value) {
-          propertyList.add(Property.fromJson(key, value));
-        });
-      }
-      completer.complete(propertyList);
-    });
-    return completer.future;
-  }
 }

@@ -1,11 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/debug.dart';
 import 'package:hometeam_client/json_model/address.dart';
 import 'package:hometeam_client/json_model/room.dart';
+import 'package:hometeam_client/utils/firebase_path.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:path/path.dart';
 
@@ -91,8 +95,34 @@ class Property {
 }
 
 class PropertyHelper {
+  static List<Property> cachedProperties = [];
+
+  static Future<void> updateCache() {
+    Completer<void> completer = Completer();
+    FirebaseDatabase.instance
+        .ref(FirebasePath.properties)
+        .get()
+        .then((snapshot) {
+      List<Property> propertyList = [];
+      if (snapshot.exists) {
+        Map<String, dynamic> map = jsonDecode(jsonEncode(snapshot.value));
+        map.forEach((key, value) {
+          propertyList.add(Property.fromJson(key, value));
+        });
+      }
+      cachedProperties = propertyList;
+      completer.complete();
+    });
+    return completer.future;
+  }
+
   static Property getFromId(String propertyId) {
-    //todo
+    debugPrint('id:$propertyId');
+    return cachedProperties.firstWhere((property) => property.id == propertyId); //todo
+  }
+
+  //todo remove
+  static Property getFromIdDebug(String propertyId) {
     return Debug.getSampleProperties()
         .firstWhere((property) => property.id == propertyId);
   }

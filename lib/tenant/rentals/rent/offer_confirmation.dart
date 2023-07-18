@@ -46,7 +46,7 @@ class OfferConfirmationScreen extends StatelessWidget {
               title: Text(S.of(context).property_address,
                   style: AppTheme.getCardTitleTextStyle(context)),
               subtitle: Text(
-                '${PropertyHelper.getFromId(bid.biddingTerms.propertyId).address}',
+                '${PropertyHelper.getFromIdDebug(bid.biddingTerms.propertyId).address}',
                 style: AppTheme.getCardBodyTextStyle(context),
               ),
               isThreeLine: true, //todo address format

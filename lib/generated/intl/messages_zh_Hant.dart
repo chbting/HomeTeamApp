@@ -162,10 +162,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("日期需在最早起租日之後"),
         "msg_invalid_phone_number":
             MessageLookupByLibrary.simpleMessage("電話號碼無效"),
+        "msg_please_enter_password":
+            MessageLookupByLibrary.simpleMessage("請輸入密碼"),
         "msg_please_fill_in_the_required_information":
             MessageLookupByLibrary.simpleMessage("請填寫所須的資料"),
         "msg_please_input_valid_phone_number":
             MessageLookupByLibrary.simpleMessage("請輸入有效的香港電話號碼"),
+        "msg_please_manually_enter_sms_code":
+            MessageLookupByLibrary.simpleMessage("請手動輸入驗證碼"),
+        "msg_please_put_in_a_valid_amount":
+            MessageLookupByLibrary.simpleMessage("請輸入有效的金額"),
+        "msg_please_put_in_a_valid_date":
+            MessageLookupByLibrary.simpleMessage("請輸入有效的日期"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("短信驗証失敗"),
         "msg_voice_search_unavailable":
@@ -196,13 +204,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("選擇日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("選擇日期和時間"),
         "playback_speed": MessageLookupByLibrary.simpleMessage("播放速度"),
-        "please_enter_password": MessageLookupByLibrary.simpleMessage("請輸入密碼"),
-        "please_manually_enter_sms_code":
-            MessageLookupByLibrary.simpleMessage("請手動輸入驗證碼"),
-        "please_put_in_a_valid_amount":
-            MessageLookupByLibrary.simpleMessage("請輸入有效的金額"),
-        "please_put_in_a_valid_date":
-            MessageLookupByLibrary.simpleMessage("請輸入有效的日期"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
         "processing": MessageLookupByLibrary.simpleMessage("處理中"),
         "properties": MessageLookupByLibrary.simpleMessage("物業"),

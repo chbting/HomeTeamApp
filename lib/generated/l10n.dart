@@ -910,16 +910,6 @@ class S {
     );
   }
 
-  /// `Please put in a valid amount`
-  String get please_put_in_a_valid_amount {
-    return Intl.message(
-      'Please put in a valid amount',
-      name: 'please_put_in_a_valid_amount',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Invalid date`
   String get invalid_date {
     return Intl.message(
@@ -1490,16 +1480,6 @@ class S {
     );
   }
 
-  /// `Please manually enter the SMS Code`
-  String get please_manually_enter_sms_code {
-    return Intl.message(
-      'Please manually enter the SMS Code',
-      name: 'please_manually_enter_sms_code',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Continue with Facebook`
   String get continue_with_facebook {
     return Intl.message(
@@ -1555,16 +1535,6 @@ class S {
     return Intl.message(
       'Sign in with the following method',
       name: 'sign_in_with_the_following_method',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please enter password`
-  String get please_enter_password {
-    return Intl.message(
-      'Please enter password',
-      name: 'please_enter_password',
       desc: '',
       args: [],
     );
@@ -2090,16 +2060,6 @@ class S {
     );
   }
 
-  /// `Please put in a valid date`
-  String get please_put_in_a_valid_date {
-    return Intl.message(
-      'Please put in a valid date',
-      name: 'please_put_in_a_valid_date',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `The date should be after the earliest start date`
   String get msg_input_before_earliest_start {
     return Intl.message(
@@ -2375,6 +2335,46 @@ class S {
     return Intl.message(
       'Please fill in the required information',
       name: 'msg_please_fill_in_the_required_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter password`
+  String get msg_please_enter_password {
+    return Intl.message(
+      'Please enter password',
+      name: 'msg_please_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please manually enter the SMS Code`
+  String get msg_please_manually_enter_sms_code {
+    return Intl.message(
+      'Please manually enter the SMS Code',
+      name: 'msg_please_manually_enter_sms_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please put in a valid date`
+  String get msg_please_put_in_a_valid_date {
+    return Intl.message(
+      'Please put in a valid date',
+      name: 'msg_please_put_in_a_valid_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please put in a valid amount`
+  String get msg_please_put_in_a_valid_amount {
+    return Intl.message(
+      'Please put in a valid amount',
+      name: 'msg_please_put_in_a_valid_amount',
       desc: '',
       args: [],
     );

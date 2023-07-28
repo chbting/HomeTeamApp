@@ -126,33 +126,49 @@ class PropertyUploaderState extends State<PropertyUploader> {
     );
   }
 
-  void _submit(BuildContext context) {
+  void _submit(BuildContext context) async {
     setState(() => _submitting = true);
     Property property = PropertyUploaderInheritedData.of(context)!.property;
     Listing listing = PropertyUploaderInheritedData.of(context)!.listing;
 
-    // Generate property ID
+    // Generate property & listing IDs
     DatabaseReference propertyRef =
         FirebaseDatabase.instance.ref(FirebasePath.properties).push();
-    if (propertyRef.key == null) {
+    DatabaseReference listingRef =
+        FirebaseDatabase.instance.ref(FirebasePath.listings).push();
+
+    if (propertyRef.key == null || listingRef.key == null) {
       setState(() => _submitting = false);
       StandardStepper.showSnackBar(
           context, S.of(context).property_upload_error);
     } else {
       var propertyJson = property.toJson();
-      propertyRef.set(propertyJson).then((_) {
-        _uploadImages(property,
-            propertyRef.key!); //todo notification progressBar, error handling
+      var listingJson = listing.toJson();
+
+      await propertyRef.set(propertyJson).catchError(
+          (error, stackTrace) => _onUploadError(context, error, stackTrace));
+
+      await listingRef.set(listingJson).catchError(
+          (error, stackTrace) => _onUploadError(context, error, stackTrace));
+
+      //todo notification progressBar
+      _uploadImages(property, propertyRef.key!);
+
+      if (mounted) {
+        setState(() => _submitting = false);
         Navigator.of(context).pop(true);
-      }).catchError((error, stackTrace) {
-        debugPrint('error $error'); //todo
-        StandardStepper.showSnackBar(
-            context, S.of(context).property_upload_error);
-      }).whenComplete(() => setState(() => _submitting = false));
+      }
     }
   }
 
-  void _uploadImages(Property property, String propertyId) async {
+  void _onUploadError(
+      BuildContext context, dynamic error, StackTrace stackTrace) {
+    debugPrint('error $error'); //todo
+    StandardStepper.showSnackBar(context, S.of(context).property_upload_error);
+    setState(() => _submitting = false);
+  }
+
+  void _uploadImages(Property property, String propertyId) {
     Map<File, Reference> refMap = {};
     Reference storageRef = FirebaseStorage.instance
         .ref(FirebasePath.getPropertyImagesPath(propertyId));

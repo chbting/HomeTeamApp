@@ -7,6 +7,7 @@ import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hometeam_client/auth/auth_info.dart';
 import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
@@ -44,8 +45,62 @@ void main() async {
   );
   await SharedPreferencesHelper.ensureInitialized();
 
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+  DarwinInitializationSettings initializationSettingsDarwin =
+      DarwinInitializationSettings(
+          onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+          notificationCategories: [
+        DarwinNotificationCategory(
+          'demoCategory',
+          actions: <DarwinNotificationAction>[
+            DarwinNotificationAction.plain('id_1', 'Action 1'),
+            DarwinNotificationAction.plain(
+              'id_2',
+              'Action 2',
+              options: <DarwinNotificationActionOption>{
+                DarwinNotificationActionOption.destructive,
+              },
+            ),
+            DarwinNotificationAction.plain(
+              'id_3',
+              'Action 3',
+              options: <DarwinNotificationActionOption>{
+                DarwinNotificationActionOption.foreground,
+              },
+            ),
+          ],
+          options: <DarwinNotificationCategoryOption>{
+            DarwinNotificationCategoryOption.hiddenPreviewShowTitle,
+          },
+        )
+      ]);
+  InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin);
+  await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+      onDidReceiveNotificationResponse: notificationTapBackground);
+
   runApp(ChangeNotifierProvider.value(
       value: SharedPreferencesHelper.changeNotifier, child: const BaseApp()));
+}
+
+void onDidReceiveLocalNotification(
+    int id, String? title, String? body, String? payload) async {
+  // display a dialog with the notification details, tap ok to go to another page
+  debugPrint('onDidReceiveLocalNotification!');
+}
+
+@pragma('vm:entry-point')
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  // handle action
+  debugPrint('notification tapped');
+  final String? payload = notificationResponse.payload;
+  if (notificationResponse.payload != null) {
+    debugPrint('notification payload: $payload');
+  }
 }
 
 class BaseApp extends StatelessWidget {

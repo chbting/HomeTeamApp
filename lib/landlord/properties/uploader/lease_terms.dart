@@ -29,6 +29,8 @@ class LeaseTermsPageState extends State<LeaseTermsPage> {
   late Listing _listing;
   late Terms _terms;
 
+  bool _enabled = false;
+
   @override
   void initState() {
     widget.controller.reset = _reset;

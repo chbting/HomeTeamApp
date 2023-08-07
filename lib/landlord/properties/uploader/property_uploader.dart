@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:easy_stepper/easy_stepper.dart';
@@ -145,14 +146,15 @@ class PropertyUploaderState extends State<PropertyUploader> {
       var propertyJson = property.toJson();
       var listingJson = listing.toJson();
 
-      await propertyRef.set(propertyJson).catchError(
-          (error, stackTrace) => _onUploadError(context, error, stackTrace));
-
-      await listingRef.set(listingJson).catchError(
-          (error, stackTrace) => _onUploadError(context, error, stackTrace));
-
-      //todo notification progressBar
-      _uploadImages(property, propertyRef.key!);
+      try {
+        // todo upload to a provisional table instead
+        await propertyRef.set(propertyJson);
+        await listingRef.set(listingJson);
+        await _uploadImages(property, propertyRef.key!);
+      } on FirebaseException catch (e) {
+        _onUploadError(context, e);
+        return;
+      }
 
       if (mounted) {
         setState(() => _submitting = false);
@@ -161,17 +163,19 @@ class PropertyUploaderState extends State<PropertyUploader> {
     }
   }
 
-  void _onUploadError(
-      BuildContext context, dynamic error, StackTrace stackTrace) {
-    debugPrint('error $error'); //todo
+  void _onUploadError(BuildContext context, dynamic error) {
+    debugPrint('_onUploadError $error'); //todo
     StandardStepper.showSnackBar(context, S.of(context).property_upload_error);
     setState(() => _submitting = false);
   }
 
-  void _uploadImages(Property property, String propertyId) {
+  Future<void> _uploadImages(Property property, String propertyId) {
+    Completer<void> completer = Completer();
     Map<File, Reference> refMap = {};
     Reference storageRef = FirebaseStorage.instance
         .ref(FirebasePath.getPropertyImagesPath(propertyId));
+
+    // Get a reference for every image to be uploaded
     property.rooms.forEach((roomType, roomList) {
       for (var room in roomList) {
         for (var image in room.images) {
@@ -179,17 +183,17 @@ class PropertyUploaderState extends State<PropertyUploader> {
         }
       }
     });
-
     //todo upload video
-    try {
-      refMap.forEach((image, reference) async {
-        debugPrint('Uploading $image to $reference'); //todo debug line
-        var imageUrl = await reference.putFile(image);
-        debugPrint('imageUrl:$imageUrl, path:${imageUrl.ref.fullPath}');
+    int count = 0;
+    refMap.forEach((image, reference) {
+      reference.putFile(image).then((_) {
+        count++;
+        debugPrint('uploaded image $count of ${refMap.length}');
+        count == refMap.length ? completer.complete() : null;
+      }).catchError((e) {
+        debugPrint('Has an error: ${e.toString()}'); //todo how to handle a single image/multiple images upload failure?
       });
-    } on FirebaseException catch (e) {
-      debugPrint(
-          'Has an error: ${e.toString()}'); //todo notify user upload has failed
-    }
+    });
+    return completer.future;
   }
 }

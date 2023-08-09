@@ -2379,6 +2379,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Uploading media`
+  String get uploading_media {
+    return Intl.message(
+      'Uploading media',
+      name: 'uploading_media',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

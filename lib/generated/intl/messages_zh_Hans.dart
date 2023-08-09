@@ -285,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("称谓"),
         "total": MessageLookupByLibrary.simpleMessage("总计"),
         "undo": MessageLookupByLibrary.simpleMessage("还原"),
+        "uploading_media": MessageLookupByLibrary.simpleMessage("上传媒体中"),
         "use_system_settings": MessageLookupByLibrary.simpleMessage("使用系统设定"),
         "verify": MessageLookupByLibrary.simpleMessage("验证"),
         "video": MessageLookupByLibrary.simpleMessage("影片"),

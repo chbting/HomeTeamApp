@@ -235,5 +235,6 @@
 	"msg_please_enter_password": "請輸入密碼",
 	"msg_please_manually_enter_sms_code": "請手動輸入驗證碼",
 	"msg_please_put_in_a_valid_date": "請輸入有效的日期",
-	"msg_please_put_in_a_valid_amount": "請輸入有效的金額"
+	"msg_please_put_in_a_valid_amount": "請輸入有效的金額",
+	"uploading_media": "上傳媒體中"
 }

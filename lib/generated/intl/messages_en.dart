@@ -345,6 +345,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("Title"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
+        "uploading_media":
+            MessageLookupByLibrary.simpleMessage("Uploading media"),
         "use_system_settings":
             MessageLookupByLibrary.simpleMessage("Use system settings"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

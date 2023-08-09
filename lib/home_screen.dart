@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hometeam_client/contracts/contracts.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/landlord/contracts_landlord.dart';
 import 'package:hometeam_client/landlord/dashboard_screen.dart';
 import 'package:hometeam_client/landlord/properties/properties_screen.dart';
+import 'package:hometeam_client/local_notification_service.dart';
 import 'package:hometeam_client/settings/settings.dart';
 import 'package:hometeam_client/tenant/rentals/rentals_screen.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
@@ -29,6 +32,17 @@ class HomeScreenState extends State<HomeScreen> {
   ];
   int _selectedIndex = 0;
   bool _onSettingPage = false;
+
+  @override
+  void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      LocalNotificationService.notificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestPermission();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

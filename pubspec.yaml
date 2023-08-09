@@ -36,7 +36,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
-  intl: ^0.18.0 # For language localizations
+  intl: any # For language localizations
   shared_preferences: ^2.1.0
   dynamic_color: ^1.6.2
   local_auth: ^2.1.6 # For biometric authentication

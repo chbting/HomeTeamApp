@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<babeledit_project be_version="4.1.0" version="1.3">
+<babeledit_project be_version="5.0.0" version="1.3">
 	<!--
 
     BabelEdit project file
@@ -23,7 +23,6 @@
 						<name>ac</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -47,7 +46,6 @@
 						<name>accept_or_offer</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -71,7 +69,6 @@
 						<name>account_found</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -95,7 +92,6 @@
 						<name>add_photos</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -119,7 +115,6 @@
 						<name>add_property</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -143,7 +138,6 @@
 						<name>add_video</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -167,7 +161,6 @@
 						<name>address_block</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -191,7 +184,6 @@
 						<name>address_flat</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -215,7 +207,6 @@
 						<name>address_floor</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -239,7 +230,6 @@
 						<name>address_line1_helper</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -263,7 +253,6 @@
 						<name>address_line1_label</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -287,7 +276,6 @@
 						<name>address_line2_helper</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -311,7 +299,6 @@
 						<name>address_line2_label</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -335,7 +322,6 @@
 						<name>afternoon</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -359,7 +345,6 @@
 						<name>am</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -383,7 +368,6 @@
 						<name>app_settings</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -407,7 +391,6 @@
 						<name>area_gross</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -431,7 +414,6 @@
 						<name>area_gross_abr</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -455,7 +437,6 @@
 						<name>area_net</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -479,7 +460,6 @@
 						<name>area_net_abr</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -503,7 +483,6 @@
 						<name>area_sq_ft</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -527,7 +506,6 @@
 						<name>back</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -551,7 +529,6 @@
 						<name>bathroom</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -575,7 +552,6 @@
 						<name>bedroom</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -599,7 +575,6 @@
 						<name>bill_electricity</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -623,7 +598,6 @@
 						<name>bill_gas</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -647,7 +621,6 @@
 						<name>bill_management</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -671,7 +644,6 @@
 						<name>bill_rates</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -695,7 +667,6 @@
 						<name>bill_water</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -719,7 +690,6 @@
 						<name>biometric_authentication_failed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -743,7 +713,6 @@
 						<name>biometric_authentication_unavailable</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -767,7 +736,6 @@
 						<name>biometric_authentication_unavailable_agreement</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -791,7 +759,6 @@
 						<name>both_party</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -815,7 +782,6 @@
 						<name>cameras_not_available</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -839,7 +805,6 @@
 						<name>cancel</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -863,7 +828,6 @@
 						<name>cantonese</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -887,7 +851,6 @@
 						<name>change_photo</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -911,7 +874,6 @@
 						<name>choose_language</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -935,7 +897,6 @@
 						<name>choose_the_route</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -959,7 +920,6 @@
 						<name>confirm</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -983,7 +943,6 @@
 						<name>confirm_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1007,7 +966,6 @@
 						<name>confirm_remodeling</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1031,7 +989,6 @@
 						<name>contact_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1055,7 +1012,6 @@
 						<name>contact_person</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1079,7 +1035,6 @@
 						<name>continue_with_email</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1103,7 +1058,6 @@
 						<name>continue_with_facebook</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1127,7 +1081,6 @@
 						<name>continue_with_google</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1151,7 +1104,6 @@
 						<name>continue_with_sms</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1175,7 +1127,6 @@
 						<name>contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1199,7 +1150,6 @@
 						<name>contract_status</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1223,7 +1173,6 @@
 						<name>contracts</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1247,7 +1196,6 @@
 						<name>count</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1271,7 +1219,6 @@
 						<name>covered_parking</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1295,7 +1242,6 @@
 						<name>create_a_free_account</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1319,7 +1265,6 @@
 						<name>create_listing</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1343,7 +1288,6 @@
 						<name>darkMode</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1367,7 +1311,6 @@
 						<name>dashboard</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1391,7 +1334,6 @@
 						<name>date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1415,7 +1357,6 @@
 						<name>date_time_selected</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1439,7 +1380,6 @@
 						<name>delete</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1463,7 +1403,6 @@
 						<name>deposit</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1487,7 +1426,6 @@
 						<name>dismiss</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1511,7 +1449,6 @@
 						<name>district</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1535,7 +1472,6 @@
 						<name>dryer</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1559,7 +1495,6 @@
 						<name>earliest_termination_day</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1583,7 +1518,6 @@
 						<name>early_termination_right</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1607,7 +1541,6 @@
 						<name>electrical_appliances</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1631,7 +1564,6 @@
 						<name>end_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1655,7 +1587,6 @@
 						<name>english_voice_input</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1679,7 +1610,6 @@
 						<name>estimate</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1703,7 +1633,6 @@
 						<name>estimated_duration</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1727,7 +1656,6 @@
 						<name>expenses_paid_by_the_landlord_except</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1751,7 +1679,6 @@
 						<name>find_properties</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1775,7 +1702,6 @@
 						<name>first_name</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1799,7 +1725,6 @@
 						<name>fixture</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1823,7 +1748,6 @@
 						<name>fridge</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1847,7 +1771,6 @@
 						<name>furniture</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1871,7 +1794,6 @@
 						<name>general_settings</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1895,7 +1817,6 @@
 						<name>grace_period_days</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1919,7 +1840,6 @@
 						<name>hong_kong</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1943,7 +1863,6 @@
 						<name>hong_kong_number_only</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1967,7 +1886,6 @@
 						<name>hour</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -1991,7 +1909,6 @@
 						<name>hours</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2015,7 +1932,6 @@
 						<name>id_card_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2039,7 +1955,6 @@
 						<name>invalid_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2063,7 +1978,6 @@
 						<name>kowloon</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2087,7 +2001,6 @@
 						<name>landlord</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2111,7 +2024,6 @@
 						<name>landlord_accept_offer</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2135,7 +2047,6 @@
 						<name>landlord_mode</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2159,7 +2070,6 @@
 						<name>landlord_sign_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2183,7 +2093,6 @@
 						<name>language</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2207,7 +2116,6 @@
 						<name>last_name</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2231,7 +2139,6 @@
 						<name>latest_additions</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2255,7 +2162,6 @@
 						<name>lease_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2279,7 +2185,6 @@
 						<name>lease_earliest_start_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2303,7 +2208,6 @@
 						<name>lease_earliest_start_date_helper_text</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2327,7 +2231,6 @@
 						<name>lease_end_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2351,7 +2254,6 @@
 						<name>lease_latest_start_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2375,7 +2277,6 @@
 						<name>lease_length_months</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2399,7 +2300,6 @@
 						<name>lease_period</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2423,7 +2323,6 @@
 						<name>lease_terms</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2447,7 +2346,6 @@
 						<name>living_dining_room</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2471,7 +2369,6 @@
 						<name>mailing_address</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2495,7 +2392,6 @@
 						<name>mandarin</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2519,7 +2415,6 @@
 						<name>minute</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2543,7 +2438,6 @@
 						<name>minutes</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2567,7 +2461,6 @@
 						<name>miss</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2591,7 +2484,6 @@
 						<name>month</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2615,7 +2507,6 @@
 						<name>monthly_rent</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2639,7 +2530,6 @@
 						<name>morning</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2663,7 +2553,6 @@
 						<name>mr</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2687,7 +2576,6 @@
 						<name>mrs</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2711,7 +2599,6 @@
 						<name>ms</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2735,7 +2622,6 @@
 						<name>msg_cannot_recognize_speech</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2759,7 +2645,6 @@
 						<name>msg_cannot_sign_in</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2783,7 +2668,6 @@
 						<name>msg_failed_to_generate_visit_path</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2807,7 +2691,6 @@
 						<name>msg_info_required</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2831,7 +2714,6 @@
 						<name>msg_input_before_earliest_start</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2855,7 +2737,6 @@
 						<name>msg_invalid_phone_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2879,7 +2760,6 @@
 						<name>msg_please_enter_password</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2903,7 +2783,6 @@
 						<name>msg_please_fill_in_the_required_information</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2927,7 +2806,6 @@
 						<name>msg_please_input_valid_phone_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2951,7 +2829,6 @@
 						<name>msg_please_manually_enter_sms_code</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2975,7 +2852,6 @@
 						<name>msg_please_put_in_a_valid_amount</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -2999,7 +2875,6 @@
 						<name>msg_please_put_in_a_valid_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3023,7 +2898,6 @@
 						<name>msg_sms_verification_failed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3047,7 +2921,6 @@
 						<name>msg_voice_search_unavailable</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3071,7 +2944,6 @@
 						<name>name</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3095,7 +2967,6 @@
 						<name>negotiable</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3119,7 +2990,6 @@
 						<name>negotiate_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3143,7 +3013,6 @@
 						<name>new_territories</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3167,7 +3036,6 @@
 						<name>next</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3191,7 +3059,6 @@
 						<name>next_option</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3215,7 +3082,6 @@
 						<name>not_signed_in</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3239,7 +3105,6 @@
 						<name>notes</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3263,7 +3128,6 @@
 						<name>number_of_rooms</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3287,7 +3151,6 @@
 						<name>offered</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3311,7 +3174,6 @@
 						<name>ok</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3335,7 +3197,6 @@
 						<name>open_parking</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3359,7 +3220,6 @@
 						<name>or</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3383,7 +3243,6 @@
 						<name>or_create_a_free_account</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3407,7 +3266,6 @@
 						<name>original</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3431,7 +3289,6 @@
 						<name>others</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3455,7 +3312,6 @@
 						<name>owner</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3479,7 +3335,6 @@
 						<name>phone_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3503,7 +3358,6 @@
 						<name>photo_added</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3527,7 +3381,6 @@
 						<name>photo_not_required</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3551,7 +3404,6 @@
 						<name>photo_optional</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3575,7 +3427,6 @@
 						<name>photo_required</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3599,7 +3450,6 @@
 						<name>pick_a_day</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3623,7 +3473,6 @@
 						<name>pick_datetime</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3647,7 +3496,6 @@
 						<name>playback_speed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3671,7 +3519,6 @@
 						<name>pm</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3695,7 +3542,6 @@
 						<name>processing</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3719,7 +3565,6 @@
 						<name>properties</name>
 						<description/>
 						<comment>找租盤</comment>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3743,7 +3588,6 @@
 						<name>properties_visited_last_thirty_days</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3767,7 +3611,6 @@
 						<name>property_address</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3791,7 +3634,6 @@
 						<name>property_has_been_removed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3815,7 +3657,6 @@
 						<name>property_has_been_uploaded</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3839,7 +3680,6 @@
 						<name>property_info</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3863,7 +3703,6 @@
 						<name>property_upload_error</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3887,7 +3726,6 @@
 						<name>property_visit</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3911,7 +3749,6 @@
 						<name>property_visit_agreement</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3935,7 +3772,6 @@
 						<name>property_visit_agreement_content</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3959,7 +3795,6 @@
 						<name>property_visit_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -3983,7 +3818,6 @@
 						<name>range_hood</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4007,7 +3841,6 @@
 						<name>reason_sign_property_visit_agreement</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4031,7 +3864,6 @@
 						<name>reason_sign_rental_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4055,7 +3887,6 @@
 						<name>record</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4079,7 +3910,6 @@
 						<name>region</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4103,7 +3933,6 @@
 						<name>remove_property_from_cart</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4127,7 +3956,6 @@
 						<name>rent</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4151,7 +3979,6 @@
 						<name>rent_properties</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4175,7 +4002,6 @@
 						<name>rentals</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4199,7 +4025,6 @@
 						<name>reset</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4223,7 +4048,6 @@
 						<name>review_before_submission</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4247,7 +4071,6 @@
 						<name>save</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4271,7 +4094,6 @@
 						<name>save_for_later</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4295,7 +4117,6 @@
 						<name>schedule</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4319,7 +4140,6 @@
 						<name>schedule_remodeling</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4343,7 +4163,6 @@
 						<name>schedule_visit</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4367,7 +4186,6 @@
 						<name>scrape_old_paint</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4391,7 +4209,6 @@
 						<name>scrape_old_paint_no</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4415,7 +4232,6 @@
 						<name>scrape_old_paint_yes</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4439,7 +4255,6 @@
 						<name>search_properties_hint</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4463,7 +4278,6 @@
 						<name>select_from_gallery</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4487,7 +4301,6 @@
 						<name>send_sms_code</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4511,7 +4324,6 @@
 						<name>setting_off</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4535,7 +4347,6 @@
 						<name>setting_on</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4559,7 +4370,6 @@
 						<name>settings</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4583,7 +4393,6 @@
 						<name>show_to_tenant_two_lines</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4607,7 +4416,6 @@
 						<name>sign</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4631,7 +4439,6 @@
 						<name>sign_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4655,7 +4462,6 @@
 						<name>sign_in</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4679,7 +4485,6 @@
 						<name>sign_in_with_the_following_method</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4703,7 +4508,6 @@
 						<name>sign_on_site</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4727,7 +4531,6 @@
 						<name>sign_out</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4751,7 +4554,6 @@
 						<name>signed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4775,7 +4577,6 @@
 						<name>skip</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4799,7 +4600,6 @@
 						<name>sq_ft</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4823,7 +4623,6 @@
 						<name>sq_ft_abr</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4847,7 +4646,6 @@
 						<name>start_date</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4871,7 +4669,6 @@
 						<name>stove</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4895,7 +4692,6 @@
 						<name>structure</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4919,7 +4715,6 @@
 						<name>submit</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4943,7 +4738,6 @@
 						<name>subtitles</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4967,7 +4761,6 @@
 						<name>suspended_ceiling</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -4991,7 +4784,6 @@
 						<name>take_photo</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5015,7 +4807,6 @@
 						<name>tenant</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5039,7 +4830,6 @@
 						<name>tenant_info</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5063,7 +4853,6 @@
 						<name>tenant_paid_fees_colon</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5087,7 +4876,6 @@
 						<name>tenant_pays_the_following</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5111,7 +4899,6 @@
 						<name>tenant_sign_contract</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5135,7 +4922,6 @@
 						<name>termination_notice_days</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5159,7 +4945,6 @@
 						<name>termination_notice_helper_text</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5183,7 +4968,6 @@
 						<name>time</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5207,7 +4991,6 @@
 						<name>title</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5231,7 +5014,6 @@
 						<name>total</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5255,7 +5037,29 @@
 						<name>undo</name>
 						<description/>
 						<comment/>
-						<default_text/>
+						<translations>
+							<translation>
+								<language>en-US</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHS</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CHT</language>
+								<approved>false</approved>
+							</translation>
+							<translation>
+								<language>zh-CN</language>
+								<approved>false</approved>
+							</translation>
+						</translations>
+					</concept_node>
+					<concept_node>
+						<name>uploading_media</name>
+						<description/>
+						<comment/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5279,7 +5083,6 @@
 						<name>use_system_settings</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5303,7 +5106,6 @@
 						<name>verify</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5327,7 +5129,6 @@
 						<name>video</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5351,7 +5152,6 @@
 						<name>video_added</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5375,7 +5175,6 @@
 						<name>video_removed</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5399,7 +5198,6 @@
 						<name>video_required</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5423,7 +5221,6 @@
 						<name>view</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5447,7 +5244,6 @@
 						<name>visited_properties</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5471,7 +5267,6 @@
 						<name>voice_search</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5495,7 +5290,6 @@
 						<name>waiting_for_sms_code_autofill</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5519,7 +5313,6 @@
 						<name>washer</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5543,7 +5336,6 @@
 						<name>washer_dryer_combo_two_lines</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5567,7 +5359,6 @@
 						<name>water_heater</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>
@@ -5591,7 +5382,6 @@
 						<name>what_is_your_phone_number</name>
 						<description/>
 						<comment/>
-						<default_text/>
 						<translations>
 							<translation>
 								<language>en-US</language>

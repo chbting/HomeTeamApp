@@ -232,5 +232,6 @@
 	"msg_please_enter_password": "请输入密码",
 	"msg_please_manually_enter_sms_code": "请手动输入验证码",
 	"msg_please_put_in_a_valid_date": "请输入有效的日期",
-	"msg_please_put_in_a_valid_amount": "请输入有效的金额"
+	"msg_please_put_in_a_valid_amount": "请输入有效的金额",
+	"uploading_media": "上传媒体中"
 }

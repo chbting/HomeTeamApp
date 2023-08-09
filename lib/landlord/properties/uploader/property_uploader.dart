@@ -5,6 +5,7 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/listing.dart';
 import 'package:hometeam_client/json_model/property.dart';
@@ -12,6 +13,7 @@ import 'package:hometeam_client/landlord/properties/uploader/lease_terms.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_images.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_info.dart';
 import 'package:hometeam_client/landlord/properties/uploader/property_uploader_confirmation.dart';
+import 'package:hometeam_client/local_notification_service.dart';
 import 'package:hometeam_client/shared/property_uploader_inherited_data.dart';
 import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
@@ -148,9 +150,35 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
       try {
         // todo upload to a provisional table instead
-        await propertyRef.set(propertyJson);
-        await listingRef.set(listingJson);
-        await _uploadImages(property, propertyRef.key!);
+        // await propertyRef.set(propertyJson);
+        // await listingRef.set(listingJson);
+
+        int i = 0;
+        Future.delayed(const Duration(milliseconds: 500), () async {
+          i++;
+          debugPrint('$i');
+        });
+
+
+        AndroidFlutterLocalNotificationsPlugin().deleteNotificationChannel(LocalNotificationService.channelId);
+        AndroidNotificationDetails androidNotificationDetails =
+            AndroidNotificationDetails(LocalNotificationService.channelId,
+                LocalNotificationService.channelName,
+                channelDescription: LocalNotificationService.channelDescription,
+                showProgress: true,
+                maxProgress: 10, //todo
+                progress: i,
+                playSound: false,
+                enableVibration: false,
+                ongoing: true,
+                autoCancel: false,
+                ticker: 'ticker');
+        NotificationDetails notificationDetails =
+            NotificationDetails(android: androidNotificationDetails);
+        await LocalNotificationService.notificationsPlugin.show(
+            0, S.of(context).uploading_media, null, notificationDetails);
+
+        // await _uploadImages(property, propertyRef.key!);
       } on FirebaseException catch (e) {
         _onUploadError(context, e);
         return;
@@ -191,7 +219,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
         debugPrint('uploaded image $count of ${refMap.length}');
         count == refMap.length ? completer.complete() : null;
       }).catchError((e) {
-        debugPrint('Has an error: ${e.toString()}'); //todo how to handle a single image/multiple images upload failure?
+        debugPrint(
+            'Has an error: ${e.toString()}'); //todo how to handle a single image/multiple images upload failure?
       });
     });
     return completer.future;

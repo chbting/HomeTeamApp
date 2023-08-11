@@ -165,6 +165,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
             AndroidNotificationDetails(LocalNotificationService.channelId,
                 LocalNotificationService.channelName,
                 channelDescription: LocalNotificationService.channelDescription,
+                icon: '@drawable/ic_upload',
                 showProgress: true,
                 maxProgress: 10, //todo
                 progress: i,
@@ -172,6 +173,7 @@ class PropertyUploaderState extends State<PropertyUploader> {
                 enableVibration: false,
                 ongoing: true,
                 autoCancel: false,
+                actions: [AndroidNotificationAction('0',S.of(context).cancel)],
                 ticker: 'ticker');
         NotificationDetails notificationDetails =
             NotificationDetails(android: androidNotificationDetails);

@@ -150,15 +150,8 @@ class PropertyUploaderState extends State<PropertyUploader> {
 
       try {
         // todo upload to a provisional table instead
-        // await propertyRef.set(propertyJson);
-        // await listingRef.set(listingJson);
-
-        int i = 0;
-        Future.delayed(const Duration(milliseconds: 500), () async {
-          i++;
-          debugPrint('$i');
-        });
-
+        await propertyRef.set(propertyJson);
+        await listingRef.set(listingJson);
 
         AndroidFlutterLocalNotificationsPlugin().deleteNotificationChannel(LocalNotificationService.channelId);
         AndroidNotificationDetails androidNotificationDetails =
@@ -167,20 +160,21 @@ class PropertyUploaderState extends State<PropertyUploader> {
                 channelDescription: LocalNotificationService.channelDescription,
                 icon: '@drawable/ic_upload',
                 showProgress: true,
-                maxProgress: 10, //todo
-                progress: i,
+                maxProgress: 10,
+                progress: 0, //todo unimplemented
                 playSound: false,
                 enableVibration: false,
                 ongoing: true,
                 autoCancel: false,
                 actions: [AndroidNotificationAction('0',S.of(context).cancel)],
                 ticker: 'ticker');
+
         NotificationDetails notificationDetails =
             NotificationDetails(android: androidNotificationDetails);
         await LocalNotificationService.notificationsPlugin.show(
             0, S.of(context).uploading_media, null, notificationDetails);
 
-        // await _uploadImages(property, propertyRef.key!);
+        await _uploadImages(property, propertyRef.key!);
       } on FirebaseException catch (e) {
         _onUploadError(context, e);
         return;

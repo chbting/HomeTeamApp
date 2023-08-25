@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:intl/intl.dart';
-// import 'package:tner_client/generated/l10n.dart';
-// import 'package:tner_client/ui/collapsable_expansion_tile.dart';
-// import 'package:tner_client/ui/theme.dart';
+// import 'package:hometeam_client/generated/l10n.dart';
+// import 'package:hometeam_client/ui/collapsable_expansion_tile.dart';
+// import 'package:hometeam_client/theme/theme.dart';
 // import 'package:tner_client/utils/format.dart';
 // import 'package:tner_client/utils/shared_preferences_helper.dart';
 //

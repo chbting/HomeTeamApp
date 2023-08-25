@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ac": MessageLookupByLibrary.simpleMessage("空调"),
+        "ac_window_type": MessageLookupByLibrary.simpleMessage("空调 (窗口式)"),
         "accept_or_offer": MessageLookupByLibrary.simpleMessage("接受/更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帐户"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),
@@ -118,6 +119,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("小时"),
         "hours": MessageLookupByLibrary.simpleMessage("小时"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("身份证号码"),
+        "imaging_instruction_ac_1":
+            MessageLookupByLibrary.simpleMessage("现有空调的正面特写"),
+        "imaging_instruction_ac_2":
+            MessageLookupByLibrary.simpleMessage("空调所在的牆身"),
+        "imaging_instruction_ac_3":
+            MessageLookupByLibrary.simpleMessage("空调所在的房间"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("日期无效"),
         "kowloon": MessageLookupByLibrary.simpleMessage("九龙"),
         "landlord": MessageLookupByLibrary.simpleMessage("业主"),
@@ -174,6 +181,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入有效的金额"),
         "msg_please_put_in_a_valid_date":
             MessageLookupByLibrary.simpleMessage("请输入有效的日期"),
+        "msg_select_remodeling_item":
+            MessageLookupByLibrary.simpleMessage("选择装修项目"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("短信验证失败"),
         "msg_voice_search_unavailable":
@@ -196,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "original": MessageLookupByLibrary.simpleMessage("原定"),
         "others": MessageLookupByLibrary.simpleMessage("其他"),
         "owner": MessageLookupByLibrary.simpleMessage("业主"),
+        "painting": MessageLookupByLibrary.simpleMessage("油漆"),
+        "pest_control": MessageLookupByLibrary.simpleMessage("灭虫"),
         "phone_number": MessageLookupByLibrary.simpleMessage("电话号码"),
         "photo_added": MessageLookupByLibrary.simpleMessage("照片已加入"),
         "photo_not_required": MessageLookupByLibrary.simpleMessage("无需照片"),
@@ -228,6 +239,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("使用生物认证签署租约"),
         "record": MessageLookupByLibrary.simpleMessage("拍摄"),
         "region": MessageLookupByLibrary.simpleMessage("地域"),
+        "remodeling_address": MessageLookupByLibrary.simpleMessage("装修地址"),
+        "remodeling_address_and_contacts":
+            MessageLookupByLibrary.simpleMessage("装修地址与联络人"),
+        "remodeling_options": MessageLookupByLibrary.simpleMessage("装修选项"),
+        "remodeling_status": MessageLookupByLibrary.simpleMessage("装修进程"),
+        "removals": MessageLookupByLibrary.simpleMessage("清拆"),
         "remove_property_from_cart": MessageLookupByLibrary.simpleMessage("移除"),
         "rent": MessageLookupByLibrary.simpleMessage("租金"),
         "rent_properties": MessageLookupByLibrary.simpleMessage("租房"),
@@ -283,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("退租前需多少天通知"),
         "time": MessageLookupByLibrary.simpleMessage("时间"),
         "title": MessageLookupByLibrary.simpleMessage("称谓"),
+        "toilet_replacement": MessageLookupByLibrary.simpleMessage("更换坐厕"),
         "total": MessageLookupByLibrary.simpleMessage("总计"),
         "undo": MessageLookupByLibrary.simpleMessage("还原"),
         "uploading_media": MessageLookupByLibrary.simpleMessage("上传媒体中"),
@@ -297,6 +315,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("语音搜寻"),
         "waiting_for_sms_code_autofill":
             MessageLookupByLibrary.simpleMessage("等待自动填写验证码"),
+        "wallcoverings": MessageLookupByLibrary.simpleMessage("壁紙"),
         "washer": MessageLookupByLibrary.simpleMessage("洗衣机"),
         "washer_dryer_combo_two_lines":
             MessageLookupByLibrary.simpleMessage("2合1\n洗衣干衣机"),

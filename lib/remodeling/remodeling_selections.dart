@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 import 'remodeling_types.dart';
 import 'scheduling/remodeling_inherited_data.dart';

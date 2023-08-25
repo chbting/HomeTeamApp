@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ac": MessageLookupByLibrary.simpleMessage("AC"),
+        "ac_window_type":
+            MessageLookupByLibrary.simpleMessage("AC (window type)"),
         "accept_or_offer": MessageLookupByLibrary.simpleMessage("Accept/Offer"),
         "account_found": MessageLookupByLibrary.simpleMessage("Account found"),
         "add_photos": MessageLookupByLibrary.simpleMessage("Add photos"),
@@ -139,6 +141,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "hour": MessageLookupByLibrary.simpleMessage("hr"),
         "hours": MessageLookupByLibrary.simpleMessage("hrs"),
         "id_card_number": MessageLookupByLibrary.simpleMessage("ID card no."),
+        "imaging_instruction_ac_1": MessageLookupByLibrary.simpleMessage(
+            "A front closeup of the current AC unit"),
+        "imaging_instruction_ac_2": MessageLookupByLibrary.simpleMessage(
+            "The wall on which the AC unit will be installed"),
+        "imaging_instruction_ac_3": MessageLookupByLibrary.simpleMessage(
+            "The room where the AC unit will be installed"),
         "invalid_date": MessageLookupByLibrary.simpleMessage("Invalid date"),
         "kowloon": MessageLookupByLibrary.simpleMessage("Kowloon"),
         "landlord": MessageLookupByLibrary.simpleMessage("Landlord"),
@@ -208,6 +216,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please put in a valid amount"),
         "msg_please_put_in_a_valid_date":
             MessageLookupByLibrary.simpleMessage("Please put in a valid date"),
+        "msg_select_remodeling_item":
+            MessageLookupByLibrary.simpleMessage("Select remodeling items"),
         "msg_sms_verification_failed":
             MessageLookupByLibrary.simpleMessage("SMS Verification failed"),
         "msg_voice_search_unavailable":
@@ -233,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "original": MessageLookupByLibrary.simpleMessage("Original"),
         "others": MessageLookupByLibrary.simpleMessage("Others"),
         "owner": MessageLookupByLibrary.simpleMessage("Owner"),
+        "painting": MessageLookupByLibrary.simpleMessage("Painting"),
+        "pest_control": MessageLookupByLibrary.simpleMessage("Pest Control"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "photo_added":
             MessageLookupByLibrary.simpleMessage("Photos have been added"),
@@ -277,6 +289,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sign the rental contract with biometric authentication"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
+        "remodeling_address":
+            MessageLookupByLibrary.simpleMessage("Remodeling address"),
+        "remodeling_address_and_contacts": MessageLookupByLibrary.simpleMessage(
+            "Remodeling address and contact"),
+        "remodeling_options":
+            MessageLookupByLibrary.simpleMessage("Remodeling options"),
+        "remodeling_status":
+            MessageLookupByLibrary.simpleMessage("Remodeling status"),
+        "removals": MessageLookupByLibrary.simpleMessage("Removals"),
         "remove_property_from_cart":
             MessageLookupByLibrary.simpleMessage("Remove"),
         "rent": MessageLookupByLibrary.simpleMessage("Rent"),
@@ -343,6 +364,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Days notice before termination"),
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "title": MessageLookupByLibrary.simpleMessage("Title"),
+        "toilet_replacement":
+            MessageLookupByLibrary.simpleMessage("Toilet replacement"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "undo": MessageLookupByLibrary.simpleMessage("Undo"),
         "uploading_media":
@@ -362,6 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "voice_search": MessageLookupByLibrary.simpleMessage("Voice Search"),
         "waiting_for_sms_code_autofill": MessageLookupByLibrary.simpleMessage(
             "Waiting for SMS code autofill"),
+        "wallcoverings": MessageLookupByLibrary.simpleMessage("Wallcoverings"),
         "washer": MessageLookupByLibrary.simpleMessage("Washer"),
         "washer_dryer_combo_two_lines":
             MessageLookupByLibrary.simpleMessage("Washer dryer combo"),

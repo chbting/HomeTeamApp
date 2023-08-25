@@ -233,5 +233,19 @@
 	"msg_please_manually_enter_sms_code": "请手动输入验证码",
 	"msg_please_put_in_a_valid_date": "请输入有效的日期",
 	"msg_please_put_in_a_valid_amount": "请输入有效的金额",
-	"uploading_media": "上传媒体中"
+	"uploading_media": "上传媒体中",
+	"remodeling_options": "装修选项",
+	"remodeling_address": "装修地址",
+	"painting": "油漆",
+	"wallcoverings": "壁紙",
+	"ac_window_type": "空调 (窗口式)",
+	"removals": "清拆",
+	"toilet_replacement": "更换坐厕",
+	"pest_control": "灭虫",
+	"imaging_instruction_ac_1": "现有空调的正面特写",
+	"imaging_instruction_ac_2": "空调所在的牆身",
+	"imaging_instruction_ac_3": "空调所在的房间",
+	"remodeling_status": "装修进程",
+	"msg_select_remodeling_item": "选择装修项目",
+	"remodeling_address_and_contacts": "装修地址与联络人"
 }

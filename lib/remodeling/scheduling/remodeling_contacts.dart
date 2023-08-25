@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/address_form.dart';
-import 'package:tner_client/ui/contact_person_form.dart';
-import 'package:tner_client/ui/theme.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/shared/ui/address_form.dart';
+import 'package:hometeam_client/theme/theme.dart';
 
 import 'remodeling_inherited_data.dart';
 import 'remodeling_order.dart';

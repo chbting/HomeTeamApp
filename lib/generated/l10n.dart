@@ -2389,6 +2389,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Remodeling options`
+  String get remodeling_options {
+    return Intl.message(
+      'Remodeling options',
+      name: 'remodeling_options',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remodeling address`
+  String get remodeling_address {
+    return Intl.message(
+      'Remodeling address',
+      name: 'remodeling_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Painting`
+  String get painting {
+    return Intl.message(
+      'Painting',
+      name: 'painting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wallcoverings`
+  String get wallcoverings {
+    return Intl.message(
+      'Wallcoverings',
+      name: 'wallcoverings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AC (window type)`
+  String get ac_window_type {
+    return Intl.message(
+      'AC (window type)',
+      name: 'ac_window_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removals`
+  String get removals {
+    return Intl.message(
+      'Removals',
+      name: 'removals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Toilet replacement`
+  String get toilet_replacement {
+    return Intl.message(
+      'Toilet replacement',
+      name: 'toilet_replacement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pest Control`
+  String get pest_control {
+    return Intl.message(
+      'Pest Control',
+      name: 'pest_control',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A front closeup of the current AC unit`
+  String get imaging_instruction_ac_1 {
+    return Intl.message(
+      'A front closeup of the current AC unit',
+      name: 'imaging_instruction_ac_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The wall on which the AC unit will be installed`
+  String get imaging_instruction_ac_2 {
+    return Intl.message(
+      'The wall on which the AC unit will be installed',
+      name: 'imaging_instruction_ac_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The room where the AC unit will be installed`
+  String get imaging_instruction_ac_3 {
+    return Intl.message(
+      'The room where the AC unit will be installed',
+      name: 'imaging_instruction_ac_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remodeling status`
+  String get remodeling_status {
+    return Intl.message(
+      'Remodeling status',
+      name: 'remodeling_status',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select remodeling items`
+  String get msg_select_remodeling_item {
+    return Intl.message(
+      'Select remodeling items',
+      name: 'msg_select_remodeling_item',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remodeling address and contact`
+  String get remodeling_address_and_contacts {
+    return Intl.message(
+      'Remodeling address and contact',
+      name: 'remodeling_address_and_contacts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

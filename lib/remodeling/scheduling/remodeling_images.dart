@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/theme/theme.dart';
 import 'package:path/path.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/theme.dart';
 
 import '../remodeling_types.dart';
 import 'imaging/remodeling_image_viewer.dart';

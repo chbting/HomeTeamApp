@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 class RemodelingImageViewer extends StatelessWidget {
   const RemodelingImageViewer(

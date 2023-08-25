@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/assets/custom_icons_icons.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/assets/custom_icons_icons.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 enum RemodelingType {
   painting,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tner_client/generated/l10n.dart';
+import 'package:hometeam_client/generated/l10n.dart';
 
 class RemodelingStatusScreen extends StatefulWidget {
   const RemodelingStatusScreen({Key? key}) : super(key: key);

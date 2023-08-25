@@ -233,5 +233,19 @@
 	"msg_please_manually_enter_sms_code": "Please manually enter the SMS Code",
 	"msg_please_put_in_a_valid_date": "Please put in a valid date",
 	"msg_please_put_in_a_valid_amount": "Please put in a valid amount",
-	"uploading_media": "Uploading media"
+	"uploading_media": "Uploading media",
+	"remodeling_options": "Remodeling options",
+	"remodeling_address": "Remodeling address",
+	"painting": "Painting",
+	"wallcoverings": "Wallcoverings",
+	"ac_window_type": "AC (window type)",
+	"removals": "Removals",
+	"toilet_replacement": "Toilet replacement",
+	"pest_control": "Pest Control",
+	"imaging_instruction_ac_1": "A front closeup of the current AC unit",
+	"imaging_instruction_ac_2": "The wall on which the AC unit will be installed",
+	"imaging_instruction_ac_3": "The room where the AC unit will be installed",
+	"remodeling_status": "Remodeling status",
+	"msg_select_remodeling_item": "Select remodeling items",
+	"remodeling_address_and_contacts": "Remodeling address and contact"
 }

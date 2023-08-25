@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/theme/theme.dart';
+import 'package:hometeam_client/utils/file_helper.dart';
+import 'package:hometeam_client/utils/keyboard_visibility_builder.dart';
 import 'package:path/path.dart';
-import 'package:tner_client/generated/l10n.dart';
-import 'package:tner_client/ui/custom_im_stepper/first_stepper/icon_stepper.dart';
-import 'package:tner_client/ui/theme.dart';
-import 'package:tner_client/utils/file_helper.dart';
-import 'package:tner_client/utils/keyboard_visibility_builder.dart';
 
 import 'remodeling_confirmation.dart';
 import 'remodeling_contacts.dart';

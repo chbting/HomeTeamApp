@@ -247,5 +247,6 @@
 	"imaging_instruction_ac_3": "The room where the AC unit will be installed",
 	"remodeling_status": "Remodeling status",
 	"msg_select_remodeling_item": "Select remodeling items",
-	"remodeling_address_and_contacts": "Remodeling address and contact"
+	"remodeling_address_and_contacts": "Remodeling address and contact",
+	"remodeling": "Remodeling"
 }

@@ -239,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("使用生物认证签署租约"),
         "record": MessageLookupByLibrary.simpleMessage("拍摄"),
         "region": MessageLookupByLibrary.simpleMessage("地域"),
+        "remodeling": MessageLookupByLibrary.simpleMessage("装修"),
         "remodeling_address": MessageLookupByLibrary.simpleMessage("装修地址"),
         "remodeling_address_and_contacts":
             MessageLookupByLibrary.simpleMessage("装修地址与联络人"),

@@ -247,5 +247,6 @@
 	"imaging_instruction_ac_3": "空调所在的房间",
 	"remodeling_status": "装修进程",
 	"msg_select_remodeling_item": "选择装修项目",
-	"remodeling_address_and_contacts": "装修地址与联络人"
+	"remodeling_address_and_contacts": "装修地址与联络人",
+	"remodeling": "装修"
 }

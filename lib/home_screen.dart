@@ -7,6 +7,7 @@ import 'package:hometeam_client/landlord/contracts_landlord.dart';
 import 'package:hometeam_client/landlord/dashboard_screen.dart';
 import 'package:hometeam_client/landlord/properties/properties_screen.dart';
 import 'package:hometeam_client/local_notification_service.dart';
+import 'package:hometeam_client/remodeling/remodeling_screen.dart';
 import 'package:hometeam_client/settings/settings.dart';
 import 'package:hometeam_client/tenant/rentals/rentals_screen.dart';
 import 'package:hometeam_client/utils/shared_preferences_helper.dart';
@@ -23,7 +24,8 @@ class HomeScreenState extends State<HomeScreen> {
     const DashboardScreen(),
     const PropertiesScreen(),
     const LandlordContractsScreen(),
-    const SettingsScreen()
+    const SettingsScreen(),
+    const RemodelingScreen()
   ];
   final _tenantWidgets = <Widget>[
     const RentalsScreen(),
@@ -65,6 +67,11 @@ class HomeScreenState extends State<HomeScreen> {
           icon: const Icon(Icons.description_outlined),
           selectedIcon: const Icon(Icons.description),
           label: S.of(context).contracts,
+        ),
+        NavigationDestination(
+          icon: const Icon(Icons.handyman_outlined),
+          selectedIcon: const Icon(Icons.handyman),
+          label: S.of(context).remodeling,
         ),
         NavigationDestination(
           icon: const Icon(Icons.settings_outlined),

@@ -289,6 +289,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sign the rental contract with biometric authentication"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "region": MessageLookupByLibrary.simpleMessage("Region"),
+        "remodeling": MessageLookupByLibrary.simpleMessage("Remodeling"),
         "remodeling_address":
             MessageLookupByLibrary.simpleMessage("Remodeling address"),
         "remodeling_address_and_contacts": MessageLookupByLibrary.simpleMessage(

@@ -250,5 +250,6 @@
 	"imaging_instruction_ac_3": "冷氣機所在的房間",
 	"remodeling_status": "裝修進程",
 	"msg_select_remodeling_item": "選擇裝修項目",
-	"remodeling_address_and_contacts": "裝修地址與聯絡人"
+	"remodeling_address_and_contacts": "裝修地址與聯絡人",
+	"remodeling": "裝修"
 }

@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 
 class FileHelper {
   static const propertyUploaderCache = 'propertyUploader';
+  static const remodelingCache = 'remodeling';
 
   static Future<File> moveFile(File sourceFile, String newPath) async {
     try {

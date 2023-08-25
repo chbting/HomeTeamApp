@@ -4,15 +4,13 @@ import 'package:easy_stepper/easy_stepper.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_confirmation.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_contacts.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_images.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_options.dart';
 import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:path/path.dart';
-
-import 'remodeling_confirmation.dart';
-import 'remodeling_contacts.dart';
-import 'remodeling_images.dart';
-import 'remodeling_inherited_data.dart';
-import 'remodeling_options.dart';
 
 class RemodelingScheduler extends StatefulWidget {
   const RemodelingScheduler({Key? key}) : super(key: key);
@@ -89,7 +87,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
       onRightButtonPressed: () {
         switch (_activeStep) {
           case 4:
-            _submitting ? null : null; //_submit(context);
+            _submitting ? null : sendOrder();
             break;
           default:
             _controller.nextStep();
@@ -122,6 +120,7 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
   }
 
   void sendOrder() async {
+    setState(() => _submitting = true);
     // 1. Send JSON order
 
     // 2. Send order images to cloud
@@ -146,6 +145,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
       });
     } on FirebaseException catch (e) {
       debugPrint(e.toString()); //todo notify user upload has failed
+    } finally {
+      setState(() => _submitting = false);
     }
   }
 }

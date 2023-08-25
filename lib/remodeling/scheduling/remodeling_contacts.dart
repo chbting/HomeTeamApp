@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/shared/ui/address_form.dart';
+import 'package:hometeam_client/shared/ui/contact_person_form.dart';
+import 'package:hometeam_client/shared/ui/form_controller.dart';
 import 'package:hometeam_client/theme/theme.dart';
 
 import 'remodeling_inherited_data.dart';
@@ -18,10 +20,9 @@ class RemodelingContactsWidget extends StatefulWidget {
 class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     with AutomaticKeepAliveClientMixin {
   late RemodelingOrder _data;
+  final FormController _addressFormController = FormController();
   final GlobalKey<ContactPersonFormState> _contactPersonFormKey =
       GlobalKey<ContactPersonFormState>();
-  final GlobalKey<AddressFormState> _addressFormKey =
-      GlobalKey<AddressFormState>();
 
   @override
   bool get wantKeepAlive => true;
@@ -59,7 +60,9 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
                     S.of(context).remodeling_address,
                     style: AppTheme.getCardTitleTextStyle(context),
                   )),
-              AddressForm(key: _addressFormKey, data: _data.client)
+              AddressForm(
+                  address: _data.client.address,
+                  controller: _addressFormController)
             ],
           )),
         ))
@@ -73,7 +76,7 @@ class RemodelingContactsWidgetState extends State<RemodelingContactsWidget>
     // must be called separately
     bool contactPersonFormValidated =
         _contactPersonFormKey.currentState!.validate();
-    bool addressFormValidated = _addressFormKey.currentState!.validate();
+    bool addressFormValidated = _addressFormController.validate();
     return contactPersonFormValidated && addressFormValidated;
   }
 }

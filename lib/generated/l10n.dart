@@ -2539,6 +2539,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Please put in a valid amount`
+  String get please_put_in_a_valid_amount {
+    return Intl.message(
+      'Please put in a valid amount',
+      name: 'please_put_in_a_valid_amount',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

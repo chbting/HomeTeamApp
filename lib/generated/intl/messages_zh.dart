@@ -215,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_day": MessageLookupByLibrary.simpleMessage("选择日期"),
         "pick_datetime": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
         "playback_speed": MessageLookupByLibrary.simpleMessage("播放速度"),
+        "please_put_in_a_valid_amount":
+            MessageLookupByLibrary.simpleMessage("请输入正确的数量"),
         "pm": MessageLookupByLibrary.simpleMessage("下午"),
         "processing": MessageLookupByLibrary.simpleMessage("处理中"),
         "properties": MessageLookupByLibrary.simpleMessage("物业"),

@@ -259,6 +259,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pick the date and time"),
         "playback_speed":
             MessageLookupByLibrary.simpleMessage("Playback speed"),
+        "please_put_in_a_valid_amount": MessageLookupByLibrary.simpleMessage(
+            "Please put in a valid amount"),
         "pm": MessageLookupByLibrary.simpleMessage("PM"),
         "processing": MessageLookupByLibrary.simpleMessage("Processing"),
         "properties": MessageLookupByLibrary.simpleMessage("Properties"),

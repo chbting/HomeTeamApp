@@ -248,5 +248,6 @@
 	"remodeling_status": "装修进程",
 	"msg_select_remodeling_item": "选择装修项目",
 	"remodeling_address_and_contacts": "装修地址与联络人",
-	"remodeling": "装修"
+	"remodeling": "装修",
+	"please_put_in_a_valid_amount": "请输入正确的数量"
 }

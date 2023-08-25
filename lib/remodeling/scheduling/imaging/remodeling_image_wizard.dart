@@ -1,14 +1,14 @@
 import 'dart:io';
 
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/remodeling/remodeling_types.dart';
-import 'package:hometeam_client/shared/ui/two_button_bar.dart';
+import 'package:hometeam_client/shared/ui/standard_stepper.dart';
 import 'package:hometeam_client/theme/theme.dart';
 import 'package:hometeam_client/utils/file_helper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
-
 
 /// if [retake] is true, returns after taking the picture indicated by
 /// initialIndex
@@ -31,12 +31,12 @@ class RemodelingImageWizard extends StatefulWidget {
 }
 
 class RemodelingImageWizardState extends State<RemodelingImageWizard> {
-  bool _bottomButtonEnabled = true;
+  final StandardStepperController _controller = StandardStepperController();
   final ImagePicker _picker = ImagePicker();
   final List<File> _imageList = [];
   late List<ImagingInstruction> _instructionList;
+  int _activeStep = 0;
   late int _activeIndex;
-  late PageController _pageController;
 
   @override
   void initState() {
@@ -47,7 +47,6 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
     if (widget.imageList != null) {
       _imageList.addAll(widget.imageList!);
     }
-    _pageController = PageController(initialPage: widget.initialIndex);
     super.initState();
   }
 
@@ -56,92 +55,50 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
     _instructionList =
         RemodelingTypeHelper.getImagingInstructions(widget.type, context);
 
-    return Scaffold(
-        appBar: AppBar(
-            leading: IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => Navigator.of(context).pop()),
-            title: Text(widget.retake
-                ? S.of(context).change_photo
-                : S.of(context).add_photos)),
-        body: Stack(children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              widget.retake
-                  ? const SizedBox()
-                  : CustomNumberStepper(
-                      numbers: List<int>.generate(
-                          _instructionList.length, (i) => i + 1),
-                      numberStyle: TextStyle(
-                          color: Theme.of(context).colorScheme.onSecondary),
-                      activeStep: _activeIndex,
-                      activeStepBorderWidth: 2.0,
-                      activeStepBorderPadding: 5.0,
-                      activeStepColor: Theme.of(context).colorScheme.secondary,
-                      enableNextPreviousButtons: false,
-                      enableStepTapping: false,
-                      showIsStepCompleted: true,
-                      stepRadius: 20.0,
-                      lineColor: Theme.of(context).colorScheme.onSurface,
-                      onStepReached: (index) {
-                        setState(() {
-                          _activeIndex = index;
-                        });
-                      },
-                    ),
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
-                            child: Text(
-                              _instructionList[index].description,
-                              style: AppTheme.getTitleLargeTextStyle(context),
-                            ),
-                          ),
-                          Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child:
-                                  Image(image: _instructionList[index].image)),
-                        ]);
-                  },
-                ),
-              ),
-            ],
+    // todo
+    final steps = [
+      EasyStep(
+          icon: const Icon(Icons.apartment),
+          title: _instructionList[0].description),
+      EasyStep(
+          icon: const Icon(Icons.camera_alt),
+          title: _instructionList[1].description),
+      EasyStep(
+          icon: const Icon(Icons.edit_note),
+          title: _instructionList[2].description),
+    ];
+    final pages = [
+      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Text(
+            _instructionList[0].description,
+            style: AppTheme.getTitleLargeTextStyle(context),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: TwoButtonBar(
-                leftButtonLabel: Text(S.of(context).select_from_gallery),
-                leftButtonIcon: const Icon(Icons.collections),
-                onLeftButtonPressed: () => _bottomButtonEnabled
-                    ? _getImageFromSource(context, ImageSource.gallery)
-                    : null,
-                rightButtonLabel: Text(S.of(context).take_photo),
-                rightButtonIcon: const Icon(Icons.camera_alt),
-                onRightButtonPressed: () => _bottomButtonEnabled
-                    ? _getImageFromSource(context, ImageSource.camera)
-                    : null),
-          )
-        ]));
-  }
+        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Image(image: _instructionList[0].image)),
+      ])
+    ];
 
-  void _nextStep() {
-    setState(() {
-      _bottomButtonEnabled = false;
-    });
-    _pageController
-        .nextPage(
-            duration: const Duration(milliseconds: 500), curve: Curves.easeIn)
-        .whenComplete(() => _bottomButtonEnabled = true);
+    return StandardStepper(
+      controller: _controller,
+      title:
+          widget.retake ? S.of(context).change_photo : S.of(context).add_photos,
+      steps: steps,
+      pages: pages,
+      onActiveStepChanged: (activeStep) =>
+          setState(() => _activeStep = activeStep),
+      leftButtonLabel: Text(S.of(context).select_from_gallery),
+      leftButtonIcon: const Icon(Icons.collections),
+      onLeftButtonPressed: () =>
+          _getImageFromSource(context, ImageSource.gallery),
+      rightButtonLabel: Text(S.of(context).take_photo),
+      rightButtonIcon: const Icon(Icons.camera_alt),
+      onRightButtonPressed: () =>
+          _getImageFromSource(context, ImageSource.camera),
+    );
   }
 
   void _getImageFromSource(BuildContext context, ImageSource source) {
@@ -153,7 +110,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
             '${widget.type.name}_${_activeIndex + 1}${extension(image.path)}';
         FileHelper.moveToCache(
                 file: File(image.path),
-                child: FileHelper.remodelingCache,
+                subDirectory: FileHelper.remodelingCache,
                 newFileName: imageName)
             .then((newFile) {
           if (widget.retake) {
@@ -166,7 +123,9 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
             if (_activeIndex == _instructionList.length) {
               Navigator.of(context).pop(_imageList);
             } else {
-              _nextStep();
+              setState(() {
+                _activeStep++; //todo test (originally: _nextStep();)
+              });
             }
           }
         });

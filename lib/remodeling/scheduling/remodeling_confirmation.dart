@@ -41,10 +41,10 @@ class RemodelingConfirmationWidget extends StatelessWidget {
               subtitle: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Text(
-                      '${info.client.addressLine1}'
-                      '\n${info.client.addressLine2}'
-                      '\n${info.client.district}'
-                      '\n${info.client.region}',
+                      '${info.client.address.addressLine1}'
+                      '\n${info.client.address.addressLine2}'
+                      '\n${info.client.address.district}'
+                      '\n${info.client.address.region}',
                       style: AppTheme.getCardBodyTextStyle(context)))),
         )),
         Card(

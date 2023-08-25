@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hometeam_client/generated/l10n.dart';
-
-import '../remodeling_types.dart';
-import 'remodeling_inherited_data.dart';
-import 'remodeling_order.dart';
-import 'remodeling_pricing.dart';
-import 'remodeling_scheduler.dart';
+import 'package:hometeam_client/remodeling/remodeling_types.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_inherited_data.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_order.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_pricing.dart';
+import 'package:hometeam_client/remodeling/scheduling/remodeling_scheduler.dart';
+import 'package:hometeam_client/shared/ui/custom_stepper.dart' as custom;
 
 class RemodelingOptionsWidget extends StatefulWidget {
   const RemodelingOptionsWidget({Key? key}) : super(key: key);

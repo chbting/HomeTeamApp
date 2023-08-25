@@ -251,5 +251,6 @@
 	"remodeling_status": "裝修進程",
 	"msg_select_remodeling_item": "選擇裝修項目",
 	"remodeling_address_and_contacts": "裝修地址與聯絡人",
-	"remodeling": "裝修"
+	"remodeling": "裝修",
+	"please_put_in_a_valid_amount": "請輸入正確的數量"
 }

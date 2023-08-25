@@ -248,5 +248,6 @@
 	"remodeling_status": "Remodeling status",
 	"msg_select_remodeling_item": "Select remodeling items",
 	"remodeling_address_and_contacts": "Remodeling address and contact",
-	"remodeling": "Remodeling"
+	"remodeling": "Remodeling",
+	"please_put_in_a_valid_amount": "Please put in a valid amount"
 }

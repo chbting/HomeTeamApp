@@ -31,11 +31,9 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
   int _activeStep = 0;
   bool _submitting = false;
 
-
   @override
   Widget build(BuildContext context) {
     // TODO backPressed dialog to confirm exiting
-
     final steps = [
       EasyStep(
           icon: const Icon(Icons.apartment),
@@ -43,10 +41,8 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
       EasyStep(
           icon: const Icon(Icons.camera_alt), title: S.of(context).add_photos),
       EasyStep(
-          icon: const Icon(Icons.edit_note), title: S.of(context).lease_terms),
-      EasyStep(
-          icon: const Icon(Icons.format_list_bulleted_add),
-          title: S.of(context).create_listing),
+          icon: const Icon(Icons.contact_phone),
+          title: S.of(context).remodeling_address_and_contacts),
       EasyStep(icon: const Icon(Icons.check), title: S.of(context).confirm),
     ];
     final pages = [
@@ -102,21 +98,6 @@ class RemodelingSchedulerState extends State<RemodelingScheduler> {
     //todo this may not run if user swipe close the app
     FileHelper.clearCache(child: FileHelper.remodelingCache);
     super.dispose();
-  }
-
-  String _getStepTitle(BuildContext context, int stepNumber) {
-    switch (stepNumber) {
-      case 0:
-        return S.of(context).remodeling_options;
-      case 1:
-        return S.of(context).add_photos;
-      case 2:
-        return S.of(context).remodeling_address_and_contacts;
-      case 3:
-        return S.of(context).confirm;
-      default:
-        return '';
-    }
   }
 
   void sendOrder() async {

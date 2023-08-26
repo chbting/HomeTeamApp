@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "ac": MessageLookupByLibrary.simpleMessage("冷氣機"),
-        "ac_window_type": MessageLookupByLibrary.simpleMessage("冷氣 (窗口式)調"),
+        "ac_window_type": MessageLookupByLibrary.simpleMessage("冷氣 (窗口式)"),
         "accept_or_offer": MessageLookupByLibrary.simpleMessage("接受/更改"),
         "account_found": MessageLookupByLibrary.simpleMessage("已有帳戶"),
         "add_photos": MessageLookupByLibrary.simpleMessage("加入照片"),

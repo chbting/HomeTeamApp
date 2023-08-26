@@ -24,8 +24,8 @@ class HomeScreenState extends State<HomeScreen> {
     const DashboardScreen(),
     const PropertiesScreen(),
     const LandlordContractsScreen(),
-    const SettingsScreen(),
-    const RemodelingScreen()
+    const RemodelingScreen(),
+    const SettingsScreen()
   ];
   final _tenantWidgets = <Widget>[
     const RentalsScreen(),

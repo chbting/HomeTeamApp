@@ -35,7 +35,6 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
   final ImagePicker _picker = ImagePicker();
   final List<File> _imageList = [];
   late List<ImagingInstruction> _instructionList;
-  int _activeStep = 0;
   late int _activeIndex;
 
   @override
@@ -55,32 +54,32 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
     _instructionList =
         RemodelingTypeHelper.getImagingInstructions(widget.type, context);
 
-    // todo
-    final steps = [
-      EasyStep(
-          icon: const Icon(Icons.apartment),
-          title: _instructionList[0].description),
-      EasyStep(
-          icon: const Icon(Icons.camera_alt),
-          title: _instructionList[1].description),
-      EasyStep(
-          icon: const Icon(Icons.edit_note),
-          title: _instructionList[2].description),
-    ];
-    final pages = [
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    List<EasyStep> steps = [];
+    List<Widget> pages = [];
+    for (int i = 0; i < _instructionList.length; i++) {
+      var imagingInstruction = _instructionList[i];
+      steps.add(EasyStep(
+          customStep: Text('${i + 1}',
+              style: AppTheme.getTitleLargeTextStyle(context)?.copyWith(
+                  color: _activeIndex > i
+                      ? Theme.of(context).colorScheme.onPrimary
+                      : _activeIndex == i
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurface)),
+          title: ''));
+      pages.add(Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: Text(
-            _instructionList[0].description,
+            imagingInstruction.description,
             style: AppTheme.getTitleLargeTextStyle(context),
           ),
         ),
         Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Image(image: _instructionList[0].image)),
-      ])
-    ];
+            child: Image(image: imagingInstruction.image)),
+      ]));
+    }
 
     return StandardStepper(
       controller: _controller,
@@ -89,7 +88,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
       steps: steps,
       pages: pages,
       onActiveStepChanged: (activeStep) =>
-          setState(() => _activeStep = activeStep),
+          setState(() => _activeIndex = activeStep),
       leftButtonLabel: Text(S.of(context).select_from_gallery),
       leftButtonIcon: const Icon(Icons.collections),
       onLeftButtonPressed: () =>
@@ -123,9 +122,7 @@ class RemodelingImageWizardState extends State<RemodelingImageWizard> {
             if (_activeIndex == _instructionList.length) {
               Navigator.of(context).pop(_imageList);
             } else {
-              setState(() {
-                _activeStep++; //todo test (originally: _nextStep();)
-              });
+              _controller.nextStep();
             }
           }
         });

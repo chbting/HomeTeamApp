@@ -17,7 +17,7 @@ Client getSampleClientData() {
   client.lastName = '陳';
   client.title = '先生';
   client.idCardNumber = 'A0123456(7)';
-  client.phoneNumber = '1234-5678';
+  client.phoneNumber = '12345678';
   client.email = 'demo@email.com';
   client.address.addressLine1 = '1座2樓C室';
   client.address.addressLine2 = '雅佳花園';

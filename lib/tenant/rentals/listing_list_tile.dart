@@ -39,10 +39,7 @@ class ListingListTile extends StatelessWidget {
         // 2. Image section
         Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: Image(
-                width: imageSize,
-                height: imageSize,
-                image: property.coverImage)),
+            child: PropertyHelper.getPreviewImage(property, imageSize)),
         // 3. Info and trailing section
         Expanded(
             child: SizedBox(

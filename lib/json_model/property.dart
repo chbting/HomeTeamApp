@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hometeam_client/data/appliance.dart';
 import 'package:hometeam_client/data/room_type.dart';
@@ -118,12 +120,44 @@ class PropertyHelper {
 
   static Property getFromId(String propertyId) {
     debugPrint('id:$propertyId');
-    return cachedProperties.firstWhere((property) => property.id == propertyId); //todo
+    return cachedProperties
+        .firstWhere((property) => property.id == propertyId); //todo
   }
 
   //todo remove
   static Property getFromIdDebug(String propertyId) {
     return Debug.getSampleProperties()
         .firstWhere((property) => property.id == propertyId);
+  }
+
+  static Widget getPreviewImage(Property property, double imageSize) =>
+      SizedBox(
+        width: imageSize,
+        height: imageSize,
+        child: FutureBuilder(
+            future: _getCoverImageURL(property),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return CachedNetworkImage(
+                    imageUrl: snapshot.data ?? '',
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                        child: SizedBox(
+                            width: 60.0,
+                            height: 60.0,
+                            child: CircularProgressIndicator())),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.close));
+              } else {
+                return const SizedBox();
+              }
+            }),
+      );
+
+  static Future<String> _getCoverImageURL(Property property) async {
+    String imageName = property.rooms[RoomType.others]![0].imageNames[0]; //todo
+    Reference imageRef = FirebaseStorage.instance
+        .ref('${FirebasePath.getPropertyImagesPath(property.id)}/$imageName');
+    return imageRef.getDownloadURL();
   }
 }

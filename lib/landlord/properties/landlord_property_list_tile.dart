@@ -1,11 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:hometeam_client/data/room_type.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/json_model/property.dart';
 import 'package:hometeam_client/theme/theme.dart';
-import 'package:hometeam_client/utils/firebase_path.dart';
 
 class LandlordPropertyListTile extends StatefulWidget {
   const LandlordPropertyListTile({
@@ -52,7 +48,8 @@ class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
                       // 2. Image section
                       Padding(
                           padding: const EdgeInsets.only(right: 16.0),
-                          child: _getPreviewImage()),
+                          child: PropertyHelper.getPreviewImage(
+                              widget.property, widget.imageSize)),
                       // 3. Info and trailing section
                       Expanded(
                           child: SizedBox(
@@ -128,36 +125,5 @@ class LandlordPropertyListTileState extends State<LandlordPropertyListTile> {
             ],
           )),
     );
-  }
-
-  Widget _getPreviewImage() => SizedBox(
-        width: widget.imageSize,
-        height: widget.imageSize,
-        child: FutureBuilder(
-            future: _getCoverImageURL(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return CachedNetworkImage(
-                    imageUrl: snapshot.data ?? '',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                        child: SizedBox(
-                            width: 60.0,
-                            height: 60.0,
-                            child: CircularProgressIndicator())),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.close));
-              } else {
-                return const SizedBox();
-              }
-            }),
-      );
-
-  Future<String> _getCoverImageURL() async {
-    String imageName =
-        widget.property.rooms[RoomType.others]![0].imageNames[0]; //todo
-    Reference imageRef = FirebaseStorage.instance.ref(
-        '${FirebasePath.getPropertyImagesPath(widget.property.id)}/$imageName');
-    return imageRef.getDownloadURL();
   }
 }

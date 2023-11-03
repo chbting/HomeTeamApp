@@ -2,6 +2,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_localizations/firebase_ui_localizations.dart';
 import 'package:firebase_ui_oauth_facebook/firebase_ui_oauth_facebook.dart';
 import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 import 'package:flutter/foundation.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hometeam_client/auth/auth_info.dart';
-import 'package:hometeam_client/auth/firebase_ui_localizations/localizations_overrides.dart';
 import 'package:hometeam_client/firebase_options.dart';
 import 'package:hometeam_client/generated/l10n.dart';
 import 'package:hometeam_client/home_screen.dart';
@@ -81,7 +81,7 @@ class BaseApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-            FirebaseUIAuthLocalizationsOverrides.delegate,
+            FirebaseUILocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
           theme: ThemeData(
